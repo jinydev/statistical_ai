@@ -4,17 +4,27 @@ title: "index"
 ---
 
 # Data Sets Used in Labs and Exercises
+
 # 랩 및 실습 문제에 사용된 데이터 세트
 
 In this textbook, we illustrate statistical learning methods using applications from marketing, finance, biology, and other areas.
+
 우리는 이 기본 지침 교과서의 전체 내용에 걸쳐 마케팅 시장 분야, 다각적 금융의 세계, 신비한 생물학적 영역, 기타 여러 분야에서의 다채로운 응용 애플리케이션의 실례를 사용하여 통계 도구와 학습 기법 및 적용 방식에 대해 다뤄 볼 것입니다.
+
 The `ISLP` package contains a number of data sets that are required in order to perform the labs and exercises associated with this book.
+
 그리고 우리가 자체적으로 심혈을 기울여 다같이 준비한 `ISLP` 고유 제공 패키지에는 이 기술 서적과 깊게 연관된 수많은 랩 연습과 및 각 장의 실습 문제들을 원만하게 제대로 수행하기 위해 반드시 요구되고 사용해야 하는 수의 무수한 양질의 다양한 종류의 실증 데이터 세트가 포진해 포함되어 있습니다.
+
 One other data set is part of the base R distribution (the `USArrests` data), and we show how to access it from Python in Section 12.5.1.
+
 또 다른 한 종류의 약간 독특한 유형의 하나의 특정 데이터 세트는 과거부터 사용된 기초 R 내장 배포판의 아주 유명한 한 구성 부분인 (정확히는 `USArrests` 데이터) 인데, 우리는 12.5.1 섹션에 위치한 내용 서술을 통하여 친절하게 Python 상에서 이를 원활하고 순조롭게 어떻게 파이썬 내부로 접속하여 불러들여 엑세스 할 수 있는지 방법을 세밀히 보여주고 일러 줍니다.
+
 Table 1.1 contains a summary of the data sets required to perform the labs and exercises.
+
 바로 아래 제시되는 테이블 표 1.1은 제공될 랩과 각종 연습의 실습을 수행하는 데 필요한 다채로운 데이터 세트의 간추린 핵심 요약 설명을 포함합니다.
+
 A couple of these data sets are also available as text files on the book website, for use in Chapter 2.
+
 여러분이 참고하실 수 있도록, 이러한 데이터 세트 중 가장 유용한 핵심적인 두어 개 정도는 추가적으로 특별히 따로 선별하여 2장에서 즉시 곧바로 활용하고 사용하실 수 있도록 지정 공식 서적용 지원 웹사이트를 통해서 텍스트 파일(text files) 다운로드 형태로도 제공될 수 있게끔 언제든 이용의 기능이 열려 있습니다.
 
 | Name | Description | 이름 | 설명 |
@@ -42,4 +52,5 @@ A couple of these data sets are also available as text files on the book website
 | `Weekly` | 1,089 weekly stock market returns for 21 years. | `Weekly` | 수십 년이란 가장 오랜 장기간 범위인 전체 총합 무려 21년 범위에 길고 긴 다년 측정 기간을 온전히 내내 아우르는 총합 1,089주의 합계에 해당하는 한 개 주단위를 기준 단위 척도 삼은 미국 주식 금융 시장 내 매주(주간, weekly) 전체의 수집된 주간 단위 평균 시장 투자 환원 수익률(returns) 정보 분석 세부 요약. |
 
 **TABLE 1.1.** *A list of data sets needed to perform the labs and exercises in this textbook. All data sets are available in the ISLP package, with the exception of USArrests, which is part of the base R distribution, but accessible from Python.*
+
 **표 1.1.** *이 주요 학습 지침 교재에 편성된 방대한 각 챕터별 다양한 랩 과정의 모든 필수 실습과 여러 연습 문제들을 온전히 완전히 빠짐없이 수행하는 데 반드시 요구되는 갖가지 핵심 필수 제공 데이터 세트들에 관한 일목요연한 정리 요약 종합 도표 기본 요약 전체 목록 정보 표입니다.*  *단, 유일한 한 가지 예외로써 본문의 Python 기초 기반 기본 제공 액세스 접속 연결 환경의 수단이 추가로 포함 마련된 과거 태생적 출신의 기초 오리지널 base R 기초 기반 오리지널 과거 원본 배포 내장 배포판 중 주요한 핵심적 구성품 부속의 일원으로 제공되는 USArrests를 유일한 단 한 개의 예외 사례로 제외하고, 기타 나머지의 모든 다종다양한 학습을 위해 마련된 일체의 일괄된 데이터 세트 일체들은 모두 예외 없이 언제 어디서건 우리의 ISLP 고유 패키지 환경 내에서 전부 즉시 사용하고 꺼내 활용할 수 있는 가용성을 기본 보장 제공하고 있습니다.*

@@ -3,9 +3,16 @@ layout: default
 title: "index"
 ---
 
-# _2.1.1 Why Estimate f ?_ 
+# 2.1.1 Why Estimate f ?
+# 2.1.1 왜 f를 추정해야 하는가?
 
-There are two main reasons that we may wish to estimate _f_ : _prediction_ and _inference_ . We discuss each in turn. 
+There are two main reasons that we may wish to estimate _f_ : _prediction_ and _inference_ .
+
+우리가 목적 함수 _f_ 를 온전히 추정하고자 하는 이유는 흔히 크게 두 가지 메인 범주로 요약됩니다: 바로 그것은 정확성에 초점을 맞춘 예측(prediction) 및 데이터 원인 파악을 위한 추론(inference)입니다.
+
+We discuss each in turn.
+
+이제부터 우리는 이 각각의 구체적 사항들에 관해 순차적인 논의를 펼쳐 나가겠습니다.
 
 ---
 
