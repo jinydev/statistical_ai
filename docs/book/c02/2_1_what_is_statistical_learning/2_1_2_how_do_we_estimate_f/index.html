@@ -503,13 +503,60 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="212-how-do-we-estimate-f-"><em>2.1.2 How Do We Estimate f ?</em></h1>
+            <h1 id="212-how-do-we-estimate-f-">2.1.2 How Do We Estimate f ?</h1>
+<h1 id="212-어떻게-f를-추정하는가">2.1.2 어떻게 f를 추정하는가?</h1>
 
-<p>Throughout this book, we explore many linear and non-linear approaches for estimating <em>f</em> . However, these methods generally share certain characteristics. We provide an overview of these shared characteristics in this section. We will always assume that we have observed a set of <em>n</em> different data points. For example in Figure 2.2 we observed <em>n</em> = 30 data points. These observations are called the <em>training data</em> because we will use these training observations to train, or teach, our method how to estimate <em>f</em> . Let <em>xij</em> data represent the value of the <em>j</em> th predictor, or input, for observation <em>i</em> , where <em>i</em> = 1 <em>,</em> 2 <em>, . . . , n</em> and <em>j</em> = 1 <em>,</em> 2 <em>, . . . , p</em> . Correspondingly, let <em>yi</em> represent the response variable for the <em>i</em> th observation. Then our training data consist of <em>{</em> ( <em>x</em> 1 <em>, y</em> 1) <em>,</em> ( <em>x</em> 2 <em>, y</em> 2) <em>, . . . ,</em> ( <em>xn, yn</em> ) <em>}</em> where <em>xi</em> = ( <em>xi</em> 1 <em>, xi</em> 2 <em>, . . . , xip</em> ) <em>[T]</em> .</p>
+<p>Throughout this book, we explore many linear and non-linear approaches for estimating <em>f</em> .</p>
 
-<p>Our goal is to apply a statistical learning method to the training data in order to estimate the unknown function <em>f</em> . In other words, we want to find a function <em>f</em>[ˆ] such that <em>Y ≈ f</em>[ˆ] ( <em>X</em> ) for any observation ( <em>X, Y</em> ). Broadly speaking, most statistical learning methods for this task can be characterized as either <em>parametric</em> or <em>non-parametric</em> . We now briefly discuss these parametric two types of approaches.</p>
+<p>이 책 전반에 걸쳐 우리는 <em>f</em> 를 추정하기 위한 다양한 선형 및 비선형 접근 방식을 탐구합니다.</p>
 
-<p>nonparametric</p>
+<p>However, these methods generally share certain characteristics.</p>
+
+<p>그러나 일반적으로 이러한 방법들은 몇 가지 핵심적인 특정 특성을 서로 공유합니다.</p>
+
+<p>We provide an overview of these shared characteristics in this section.</p>
+
+<p>이 섹션에서는 이렇게 공유되는 특성들에 대한 개요를 자세히 제공합니다.</p>
+
+<p>We will always assume that we have observed a set of <em>n</em> different data points.</p>
+
+<p>우리는 항상 <em>n</em> 개의 서로 다른 데이터 요소 관측치 세트를 이미 관찰하고 확보했다고 가정할 것입니다.</p>
+
+<p>For example in Figure 2.2 we observed <em>n</em> = 30 data points.</p>
+
+<p>대표적인 예로, 이전 그림 2.2에서 우리는 총 <em>n</em> = 30개의 데이터 포인트를 정확히 관찰했습니다.</p>
+
+<p>These observations are called the <em>training data</em> because we will use these training observations to train, or teach, our method how to estimate <em>f</em> .</p>
+
+<p>이러한 관찰 집합은 우리가 미래에 함수 <em>f</em> 를 어떻게 추정해야 하는지 그 방법을 시스템에 훈련하거나 가르치기 위해(teach) 사용하는 요소이므로 이들을 <em>훈련 데이터(training data)</em> 라고 부릅니다.</p>
+
+<p>Let $x_{ij}$ represent the value of the <em>j</em> th predictor, or input, for observation <em>i</em> , where <em>i</em> = 1 <em>,</em> 2 <em>, . . . , n</em> and <em>j</em> = 1 <em>,</em> 2 <em>, . . . , p</em> .</p>
+
+<p>이제 $x_{ij}$ 를 관측치 번호 <em>i</em> 에 대한 훈련 구성 요소 중 <em>j</em> 번째 대응하는 예측 변수 또는 입력의 값이라 정립합시다, 이때 요소 <em>i</em> = 1 <em>,</em> 2 <em>, . . . , n</em> 이고 <em>j</em> = 1 <em>,</em> 2 <em>, . . . , p</em> 입니다.</p>
+
+<p>Correspondingly, let $y_i$ represent the response variable for the <em>i</em> th observation.</p>
+
+<p>여기에 상응하여 구조적으로 $y_i$ 로 하여금 <em>i</em> 번째 관측치 관찰 요인에 대응하는 측정 결과치 응답 변수를 나타내게 합시다.</p>
+
+<p>Then our training data consist of ${(x_1, y_1), (x_2, y_2), . . . , (x_n, y_n)}$ where $x_i = (x_{i1}, x_{i2}, . . . , x_{ip})^T$.</p>
+
+<p>그러면 궁극적인 우리의 전체 훈련 데이터 모델 형태 구조는 ${(x_1, y_1), (x_2, y_2), . . . , (x_n, y_n)}$ 로 복합되어 구성되며 여기서 내부 입력 모형 $x_i = (x_{i1}, x_{i2}, . . . , x_{ip})^T$ 가 됩니다.</p>
+
+<p>Our goal is to apply a statistical learning method to the training data in order to estimate the unknown function <em>f</em> .</p>
+
+<p>분석 구조의 우리의 명확한 목표는 그 형태가 아직 파악되지 않은 미지의 함수 <em>f</em> 를 거꾸로 추적해 추정하기 위해 주어진 모형 훈련 데이터들에 가장 알맞은 특권 통계 학습 기술 방법론을 직접 적용하는 것입니다.</p>
+
+<p>In other words, we want to find a function $\hat{f}$ such that $Y \approx \hat{f}(X)$ for any observation $(X, Y)$.</p>
+
+<p>다른 관점의 말로 다시 요약하면, 우리는 확보된 임의의 모든 $(X, Y)$ 에 대한 다중 관측치 형태 모형에 대하여, 이 결과 <em>Y</em> 값 쌍들이 도달치 $Y \approx \hat{f}(X)$ 형태 공식 구조 결과를 도출하여 이루는 가장 근접한 근사 함수 모델 $\hat{f}$ 을 도출해 내어 찾고자 합니다.</p>
+
+<p>Broadly speaking, most statistical learning methods for this task can be characterized as either <em>parametric</em> or <em>non-parametric</em> .</p>
+
+<p>넓은 분석 관점에서 분류하여 말하자면, 이러한 추론 고안 목표 탐색 과제를 수행하는 현존하는 거의 대다수의 통계적 학습의 많은 기법 등 방법론은 두 가지 커다란 특징 갈래 축인 <em>모수적(parametric)</em> 또는 <em>비모수적(non-parametric)</em> 기법 중 한 형태로 크게 특징지어 나눌 수 있습니다.</p>
+
+<p>We now briefly discuss these two types of approaches.</p>
+
+<p>이제 우리는 이 양극을 띠는 두 가지 주요 유형적인 접근 방식의 본질에 대해 각각 간략하게 논의를 전개하겠습니다.</p>
 
 <hr />
 

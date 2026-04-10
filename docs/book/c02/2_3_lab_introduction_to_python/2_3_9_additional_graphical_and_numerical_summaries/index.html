@@ -504,8 +504,11 @@
 
         <div class="bd-content ps-lg-4">
             <h1 id="239-additional-graphical-and-numerical-summaries"><em>2.3.9 Additional Graphical and Numerical Summaries</em></h1>
+<h1 id="239-추가적인-그래픽-및-수치-요약-additional-graphical-and-numerical-summaries">2.3.9 추가적인 그래픽 및 수치 요약 (Additional Graphical and Numerical Summaries)</h1>
 
 <p>We can use the <code class="language-plaintext highlighter-rouge">ax.plot()</code> or <code class="language-plaintext highlighter-rouge">ax.scatter()</code> functions to display the quantitative variables. However, simply typing the variable names will produce an error message, because <code class="language-plaintext highlighter-rouge">Python</code> does not know to look in the <code class="language-plaintext highlighter-rouge">Auto</code> data set for those variables.</p>
+
+<p>우리는 양적 변수들을 화면에 그래프로 시각화하기 위해 <code class="language-plaintext highlighter-rouge">ax.plot()</code> 이나 <code class="language-plaintext highlighter-rouge">ax.scatter()</code> 함수를 직접 사용할 수 있습니다. 그러나 단순히 변수 이름만 입력하게 되면 곧장 에러 메시지가 발생할 텐데, 왜냐하면 <code class="language-plaintext highlighter-rouge">Python</code> 시스템 자체는 해당 변수들을 찾기 위해 <code class="language-plaintext highlighter-rouge">Auto</code> 데이터 세트 내부를 스스로 들여다봐야 한다는 사실을 알지 못하기 때문입니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">101</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
           <span class="n">ax</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">horsepower</span><span class="p">,</span> <span class="n">mpg</span><span class="p">,</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">);</span>
@@ -514,11 +517,15 @@
 
 <p>We can address this by accessing the columns directly:</p>
 
+<p>우리는 데이터 세트 내부의 특정 열에 직접 접근 지시함으로써 이 문제를 해결할 수 있습니다:</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">102</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
           <span class="n">ax</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">horsepower</span><span class="sh">'</span><span class="p">],</span> <span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">],</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>Alternatively, we can use the <code class="language-plaintext highlighter-rouge">plot()</code> method with the call <code class="language-plaintext highlighter-rouge">Auto.plot()</code>. Using this method, the variables can be accessed by name. The plot methods of a data frame return a familiar object: an axes. We can use it to update the plot as we did previously:</p>
+
+<p>대안으로서, 우리는 <code class="language-plaintext highlighter-rouge">Auto.plot()</code> 처럼 직접 호출하는 방식의 통합 <code class="language-plaintext highlighter-rouge">plot()</code> 메서드를 사용할 수도 있습니다. 이 메서드를 통하면 안에 포함된 변수 이름만으로 수치에 접근할 수 있게 됩니다. 데이터 프레임 전용 <code class="language-plaintext highlighter-rouge">plot</code> 메서드들은 우리에게 이미 무척 친숙한 특정 객체를 반환하는데: 그것은 바로 축(axes)입니다. 우리는 앞서 그랬듯 이를 활용해 그래프 그림을 다양하게 업데이트할 수 있습니다:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">103</span><span class="p">]:</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">Auto</span><span class="p">.</span><span class="n">plot</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="sh">'</span><span class="s">horsepower</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">)</span>
           <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">'</span><span class="s">Horsepower vs. MPG</span><span class="sh">'</span><span class="p">);</span>
@@ -526,11 +533,15 @@
 
 <p>If we want to save the figure that contains a given axes, we can find the relevant figure by accessing the <code class="language-plaintext highlighter-rouge">figure</code> attribute:</p>
 
+<p>만일 주어진 축(axes) 정보가 담긴 이 그림 객체를 파일로 저장하고 싶다면, 축의 내장 <code class="language-plaintext highlighter-rouge">figure</code> 속성에 직접 접근함으로써 해당 전체 그림을 획득할 수 있습니다:</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">104</span><span class="p">]:</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">ax</span><span class="p">.</span><span class="n">figure</span>
           <span class="n">fig</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">'</span><span class="s">horsepower_mpg.png</span><span class="sh">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>We can further instruct the data frame to plot to a particular axes object. In this case the corresponding <code class="language-plaintext highlighter-rouge">plot()</code> method will return the modified axes we passed in as an argument. Note that when we request a one-dimensional grid of plots, the object <code class="language-plaintext highlighter-rouge">axes</code> is similarly one-dimensional. We place our scatter plot in the middle plot of a row of three plots within a figure.</p>
+
+<p>나아가 우리는 데이터 프레임이 아예 특정한 기존 축(axes) 객체 위에 직접 그림을 그리도록 세부 지시할 수도 있습니다. 이런 경우 해당 <code class="language-plaintext highlighter-rouge">plot()</code> 메서드는 애초에 우리가 인수로 전달했던 바로 그 축 객체를, 변경된 상태 그대로 다시 반환하게 됩니다. 우리가 하나의 큰 그림 판 내부에 플롯들로 이루어진 1차원 그리드를 요청 생성할 때, 객체 <code class="language-plaintext highlighter-rouge">axes</code> 역시도 동일하게 1차원 배열 형태를 띈다는 사실을 유의하십시오. 아래 코드에서는 내부 행렬 그림 중 세 번째 공간들로 이루어진 1열 3행 구획에서 가장 정중앙 위치에 산점도를 배치합니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">105</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
           <span class="n">Auto</span><span class="p">.</span><span class="n">plot</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="sh">'</span><span class="s">horsepower</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
@@ -538,7 +549,11 @@
 
 <p>Note also that the columns of a data frame can be accessed as attributes: try typing in <code class="language-plaintext highlighter-rouge">Auto.horsepower</code>.</p>
 
+<p>참고로 데이터 프레임의 열(columns) 역시도 내부 속성(attributes) 형식으로 접근 가능합니다: 지금 당장 콘솔에 <code class="language-plaintext highlighter-rouge">Auto.horsepower</code> 라고 입력해 보십시오.</p>
+
 <p>We now consider the <code class="language-plaintext highlighter-rouge">cylinders</code> variable. Typing in <code class="language-plaintext highlighter-rouge">Auto.cylinders.dtype</code> reveals that it is being treated as a quantitative variable. However, since there is only a small number of possible values for this variable, we may wish to treat it as qualitative. Below, we replace the <code class="language-plaintext highlighter-rouge">cylinders</code> column with a categorical version of <code class="language-plaintext highlighter-rouge">Auto.cylinders</code>. The function <code class="language-plaintext highlighter-rouge">pd.Series()</code> owes its name to the fact that <code class="language-plaintext highlighter-rouge">pandas</code> is often used in time series applications.</p>
+
+<p>이제 우리는 또 다른 내부 변수인 <code class="language-plaintext highlighter-rouge">cylinders</code> 를 다룹니다. 콘솔에 <code class="language-plaintext highlighter-rouge">Auto.cylinders.dtype</code> 을 입력해 보면 현재 시스템이 이를 양적(quantitative) 변수로 취급하고 있음이 드러납니다. 그러나 이 변수가 가질 수 있는 값의 종류 수가 실상 매우 적기 때문에, 우리는 이를 차라리 질적(qualitative) 변수로 관리 취급하고 싶을 수 있습니다. 아래 코드에서 우리는, 기존 <code class="language-plaintext highlighter-rouge">cylinders</code> 열 전체를 다시 질적 범주형 특성으로 구성한 <code class="language-plaintext highlighter-rouge">Auto.cylinders</code> 의 새로운 대체 버전으로 전면 교체합니다. 여기서 사용된 <code class="language-plaintext highlighter-rouge">pd.Series()</code> 라는 함수의 이름 자체는, 실제 <code class="language-plaintext highlighter-rouge">pandas</code> 패키지가 실무에서 시계열(time series) 데이터 애플리케이션 작업에 고질적으로 잦게 쓰인다는 기여 사실에서 빚어져 비롯되었습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">106</span><span class="p">]:</span> <span class="n">Auto</span><span class="p">.</span><span class="n">cylinders</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">(</span><span class="n">Auto</span><span class="p">.</span><span class="n">cylinders</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="sh">'</span><span class="s">category</span><span class="sh">'</span><span class="p">)</span>
           <span class="n">Auto</span><span class="p">.</span><span class="n">cylinders</span><span class="p">.</span><span class="n">dtype</span>
@@ -546,11 +561,15 @@
 
 <p>Now that <code class="language-plaintext highlighter-rouge">cylinders</code> is qualitative, we can display it using the <code class="language-plaintext highlighter-rouge">boxplot()</code> method.</p>
 
+<p>이제 <code class="language-plaintext highlighter-rouge">cylinders</code> 변수가 질적(qualitative) 속성 형태를 띠게 되었으므로, 우리는 전용 <code class="language-plaintext highlighter-rouge">boxplot()</code> 메서드를 사용해 데이터를 상자 수염 그림으로 표현할 수 있습니다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">107</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
           <span class="n">Auto</span><span class="p">.</span><span class="nf">boxplot</span><span class="p">(</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="sh">'</span><span class="s">cylinders</span><span class="sh">'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">hist()</code> method can be used to plot a <em>histogram</em>.</p>
+
+<p>메서드 구분인 <code class="language-plaintext highlighter-rouge">hist()</code> 구문을 사용하면 특정 데이터에 대한 <em>히스토그램(histogram)</em> 을 그릴 수 있습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">108</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
           <span class="n">Auto</span><span class="p">.</span><span class="nf">hist</span><span class="p">(</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
@@ -558,16 +577,22 @@
 
 <p>The color of the bars and the number of bins can be changed:</p>
 
+<p>지정된 막대의 고유 색상이나 수량 구간별 막대 수용통(bins)의 개수는 얼마든지 바꿀 수 있습니다:</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">109</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
           <span class="n">Auto</span><span class="p">.</span><span class="nf">hist</span><span class="p">(</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">red</span><span class="sh">'</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>See <code class="language-plaintext highlighter-rouge">Auto.hist?</code> for more plotting options. We can use the <code class="language-plaintext highlighter-rouge">pd.plotting.scatter_matrix()</code> function to create a <em>scatterplot matrix</em> to visualize all of the pairwise relationships between the columns in a data frame.</p>
 
+<p>추가적인 시각화 플로팅 옵션이 더 필요하다면 콘솔에 <code class="language-plaintext highlighter-rouge">Auto.hist?</code> 를 검색 참조하십시오. 또한 파이썬 내장 <code class="language-plaintext highlighter-rouge">pd.plotting.scatter_matrix()</code> 함수를 사용하면 하나의 거대한 <em>산점도 행렬(scatterplot matrix)</em> 모양을 생성하여, 전체 데이터 프레임 내에 위치한 내부 열(columns)들의 가능한 모든 상호 쌍(pairwise) 변수 관계들을 종합 시각화할 수 있습니다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">110</span><span class="p">]:</span> <span class="n">pd</span><span class="p">.</span><span class="n">plotting</span><span class="p">.</span><span class="nf">scatter_matrix</span><span class="p">(</span><span class="n">Auto</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>We can also produce scatterplots for a subset of the variables.</p>
+
+<p>혹은, 전체가 아닌 부분 변수들의 특정 하위 모집단 집합에 대해서만 산점도를 개별 산출할 수도 있습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">111</span><span class="p">]:</span> <span class="n">pd</span><span class="p">.</span><span class="n">plotting</span><span class="p">.</span><span class="nf">scatter_matrix</span><span class="p">(</span><span class="n">Auto</span><span class="p">[[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">,</span>
                                            <span class="sh">'</span><span class="s">displacement</span><span class="sh">'</span><span class="p">,</span>
@@ -576,16 +601,29 @@
 
 <p>The <code class="language-plaintext highlighter-rouge">describe()</code> method produces a numerical summary of each column in a data frame.</p>
 
+<p>통계 함수 <code class="language-plaintext highlighter-rouge">describe()</code> 메서드를 호출 적용하면 해당 변수 데이터 프레임 안의 각 모든 열에 대해 의미 있는 전체 수치적 요약 결과물을 산출 작성해 줍니다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">112</span><span class="p">]:</span> <span class="n">Auto</span><span class="p">[[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">]].</span><span class="nf">describe</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>We can also produce a summary of just a single column.</p>
+
+<p>필요하다면, 오직 단일 단독 열에 대해서만 관련 요약본을 출력할 수도 있습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">113</span><span class="p">]:</span> <span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">cylinders</span><span class="sh">'</span><span class="p">].</span><span class="nf">describe</span><span class="p">()</span>
           <span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">].</span><span class="nf">describe</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>To exit <code class="language-plaintext highlighter-rouge">Jupyter</code>, select <code class="language-plaintext highlighter-rouge">File / Close and Halt</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Jupyter</code> 노트북 환경을 완전히 종료하려면 상단 메뉴 창에서 <code class="language-plaintext highlighter-rouge">File / Close and Halt</code> 조작을 선택하십시오.</p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<p>현재 2.3.9 단원 소속 문서입니다.
+<a href="../">상위 경로(Lab: Introduction to Python)로 돌아가기</a></p>
 
 
             <!-- 구글 애드센스 출력 -->

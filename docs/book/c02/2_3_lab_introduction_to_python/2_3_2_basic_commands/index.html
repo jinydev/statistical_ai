@@ -503,11 +503,16 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="232-basic-commands"><em>2.3.2 Basic Commands</em></h1>
+            <h1 id="232-basic-commands">2.3.2 Basic Commands</h1>
+<h1 id="232-기본-명령어basic-commands">2.3.2 기본 명령어(Basic Commands)</h1>
 
 <p>In this lab, we will introduce some simple <code class="language-plaintext highlighter-rouge">Python</code> commands. For more resources about <code class="language-plaintext highlighter-rouge">Python</code> in general, readers may want to consult the tutorial at <code class="language-plaintext highlighter-rouge">docs.python.org/3/tutorial/</code>.</p>
 
+<p>이번 실습에서는 몇 가지 단순한 <code class="language-plaintext highlighter-rouge">Python</code> 명령어를 다룹니다. <code class="language-plaintext highlighter-rouge">Python</code> 언어 전반에 대한 자세한 정보가 필요한 독자는 <code class="language-plaintext highlighter-rouge">docs.python.org/3/tutorial/</code> 경로의 튜토리얼을 참고하십시오.</p>
+
 <p>Like most programming languages, <code class="language-plaintext highlighter-rouge">Python</code> uses <em>functions</em> to perform operations. To run a function called <code class="language-plaintext highlighter-rouge">fun</code>, we type <code class="language-plaintext highlighter-rouge">fun(input1, input2)</code>, where the inputs (or <em>arguments</em>) <code class="language-plaintext highlighter-rouge">input1</code> and <code class="language-plaintext highlighter-rouge">input2</code> tell <code class="language-plaintext highlighter-rouge">Python</code> how to run the function. A function can have any number of inputs. For example, the <code class="language-plaintext highlighter-rouge">print()</code> function outputs a text representation of all of its arguments to the console.</p>
+
+<p>여느 대다수 프로그래밍 언어와 마찬가지로, <code class="language-plaintext highlighter-rouge">Python</code> 은 연산을 수행하기 위해 <em>함수(function)</em> 를 사용합니다. 만약 <code class="language-plaintext highlighter-rouge">fun</code> 이라는 함수를 실행하려면 <code class="language-plaintext highlighter-rouge">fun(input1, input2)</code> 라고 입력합니다. 여기서 입력값(또는 <em>인수(argument)</em>)인 <code class="language-plaintext highlighter-rouge">input1</code> 과 <code class="language-plaintext highlighter-rouge">input2</code> 는 <code class="language-plaintext highlighter-rouge">Python</code> 에게 함수를 실행하는 방법을 알려주는 역할을 합니다. 함수는 여러 개의 입력 인수를 얼마든지 받을 수 있습니다. 예를 들어, <code class="language-plaintext highlighter-rouge">print()</code> 함수는 함수에 전달된 모든 인수들의 텍스트 표현을 묶어 화면 콘솔에 출력해 보여 줍니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">fit a model with</span><span class="sh">'</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="sh">'</span><span class="s">variables</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">fit</span> <span class="n">a</span> <span class="n">model</span> <span class="k">with</span> <span class="mi">11</span> <span class="n">variables</span>
@@ -515,10 +520,14 @@
 
 <p>The following command will provide information about the <code class="language-plaintext highlighter-rouge">print()</code> function.</p>
 
+<p>다음에 제시하는 명령을 실행하면 <code class="language-plaintext highlighter-rouge">print()</code> 함수에 대한 정보를 제공합니다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">print</span><span class="err">?</span>
 </code></pre></div></div>
 
 <p>Adding two integers in <code class="language-plaintext highlighter-rouge">Python</code> is pretty intuitive.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Python</code>에서 두 정수를 더하는 것은 꽤 직관적입니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="mi">8</span>
@@ -526,13 +535,19 @@
 
 <p>In <code class="language-plaintext highlighter-rouge">Python</code>, textual data is handled using <em>strings</em>. For instance, <code class="language-plaintext highlighter-rouge">"hello"</code> and <code class="language-plaintext highlighter-rouge">'hello'</code> are strings. We can concatenate them using the addition <code class="language-plaintext highlighter-rouge">+</code> symbol.</p>
 
+<p><code class="language-plaintext highlighter-rouge">Python</code>에서 텍스트 데이터는 <em>문자열(strings)</em> 을 사용하여 처리됩니다. 예를 들어, <code class="language-plaintext highlighter-rouge">"hello"</code> 와 <code class="language-plaintext highlighter-rouge">'hello'</code> 기표는 모두 문자열입니다. 덧셈 기호인 <code class="language-plaintext highlighter-rouge">+</code> 를 사용하여 이들을 하나로 결합할 수 있습니다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span> <span class="o">+</span> <span class="sh">"</span><span class="s"> </span><span class="sh">"</span> <span class="o">+</span> <span class="sh">"</span><span class="s">world</span><span class="sh">"</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="sh">'</span><span class="s">hello world</span><span class="sh">'</span>
 </code></pre></div></div>
 
 <p>A string is actually a type of <em>sequence</em>: this is a generic term for an ordered list. The three most important types of sequences are lists, tuples, and strings. We introduce lists now.</p>
 
+<p>문자열은 사실 <em>시퀀스(sequence)</em> 의 한 종류입니다. 시퀀스란 순서가 있는 목록을 뜻하는 포괄적인 용어입니다. 시퀀스의 가장 중요한 세 가지 유형은 리스트(list), 튜플(tuple), 그리고 문자열(string)입니다. 우리는 여기서 곧바로 리스트 형태를 먼저 소개합니다.</p>
+
 <p>The following command instructs <code class="language-plaintext highlighter-rouge">Python</code> to join together the numbers 3, 4, and 5, and to save them as a <em>list</em> named <code class="language-plaintext highlighter-rouge">x</code>. When we type <code class="language-plaintext highlighter-rouge">x</code>, it gives us back the list.</p>
+
+<p>다음 명령어는 <code class="language-plaintext highlighter-rouge">Python</code> 에게 숫자 3, 4, 5를 하나로 결합하고, 이어진 결괏값을 <code class="language-plaintext highlighter-rouge">x</code> 라는 이름의 <em>리스트(list)</em> 구조 안에 저장하라고 지시합니다. 이후 단순히 <code class="language-plaintext highlighter-rouge">x</code> 를 입력하면, 해당 리스트 내부를 다시 돌려줍니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
         <span class="n">x</span>
@@ -541,7 +556,11 @@
 
 <p>Note that we used the brackets <code class="language-plaintext highlighter-rouge">[]</code> to construct this list.</p>
 
+<p>이러한 리스트를 작성 구축할 때 우리가 시스템 대괄호 기호인 <code class="language-plaintext highlighter-rouge">[]</code> 를 사용했음에 주목하십시오.</p>
+
 <p>We will often want to add two sets of numbers together. It is reasonable to try the following code, though it will not produce the desired results.</p>
+
+<p>우리는 종종 각기 다른 두 수치 집합의 무리를 하나의 숫자로 더하고 싶을 때가 있습니다. 아래의 코드를 시도해 보는 건 꽤 논리적이고 합리적인 시도지만, 안타깝게도 우리가 바라던 덧셈 산술 결과를 이끌지는 않습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
         <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
@@ -550,7 +569,18 @@
 
 <p>The result may appear slightly counterintuitive: why did <code class="language-plaintext highlighter-rouge">Python</code> not add the entries of the lists element-by-element? In <code class="language-plaintext highlighter-rouge">Python</code>, lists hold <em>arbitrary</em> objects, and are added using <em>concatenation</em>. In fact, concatenation is the behavior that we saw earlier when we entered <code class="language-plaintext highlighter-rouge">"hello" + " " + "world"</code>.</p>
 
+<p>이 결과 화면은 사람의 직관과 약간 어긋나는 반직관적인 모습으로 보일 수 있습니다: 어째서 <code class="language-plaintext highlighter-rouge">Python</code> 은 이 리스트 요소 항목들을 서로 각 위치에 맞춰 원소 대 원소 더하기 산술로 처리하지 않았을까요? 그 이유는 <code class="language-plaintext highlighter-rouge">Python</code> 체제 내에서 리스트 변수가 매우 광범위한 <em>임의의(arbitrary)</em> 객체들까지 자유롭게 담을 수 있도록 설계되었으며, 이에 따라 덧셈 기호가 단순 숫자 덧셈이 아니라 구조적 나열인 <em>연결 병합(concatenation)</em> 양식으로 사용되기 때문입니다. 사실, 이러한 병합 연결 원리 기반의 동작은 우리가 이전에 앞서 타이핑했던 <code class="language-plaintext highlighter-rouge">"hello" + " " + "world"</code> 문자열 코드 구문에서도 이미 동일하게 관찰했던 것과 같습니다.</p>
+
 <p>This example reflects the fact that <code class="language-plaintext highlighter-rouge">Python</code> is a general-purpose programming language. Much of <code class="language-plaintext highlighter-rouge">Python</code>’s data-specific functionality comes from other packages, notably <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">pandas</code>. In the next section, we will introduce the <code class="language-plaintext highlighter-rouge">numpy</code> package. See <code class="language-plaintext highlighter-rouge">docs.scipy.org/doc/numpy/user/quickstart.html</code> for more information about <code class="language-plaintext highlighter-rouge">numpy</code>.</p>
+
+<p>이러한 단편적인 한 가지 예시는 <code class="language-plaintext highlighter-rouge">Python</code> 이 단지 수학 연산에만 국한되지 않는 범용성 일반 목적 프로세스 언어라는 사실을 그대로 반영합니다. 그러므로 <code class="language-plaintext highlighter-rouge">Python</code> 체계가 갖는 대다수 깊은 데이터 분석 중심의 특화 기능들은 별도의 다른 외부 시스템 패키지, 그 가운데서도 특히 양대 산맥인 <code class="language-plaintext highlighter-rouge">numpy</code> 그리고 <code class="language-plaintext highlighter-rouge">pandas</code> 모듈을 통해 전폭적으로 지원 조달됩니다. 이어질 다음 실습 섹션에서는 이 분석 도구 중 하나인 <code class="language-plaintext highlighter-rouge">numpy</code> 패키지를 도입해 소개할 것입니다. <code class="language-plaintext highlighter-rouge">numpy</code> 패키지에 대한 더 풍성한 상세 정보와 기초 훈련 지표는 관련 웹 경로인 <code class="language-plaintext highlighter-rouge">docs.scipy.org/doc/numpy/user/quickstart.html</code> 문서를 참조해 주십시오.</p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<p>현재 2.3.2 단원 소속 문서입니다.
+<a href="../">상위 경로(Lab: Introduction to Python)로 돌아가기</a></p>
 
 
             <!-- 구글 애드센스 출력 -->
