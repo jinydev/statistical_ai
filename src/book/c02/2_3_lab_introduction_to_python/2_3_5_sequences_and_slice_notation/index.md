@@ -1,0 +1,38 @@
+---
+layout: default
+title: "index"
+---
+
+# _2.3.5 Sequences and Slice Notation_
+
+As seen above, the function `np.linspace()` can be used to create a sequence of numbers.
+
+```python
+In [52]: seq1 = np.linspace(0, 10, 11)
+         seq1
+Out[52]: array([ 0.,  1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.,  9., 10.])
+```
+
+The function `np.arange()` returns a sequence of numbers spaced out by `step`. If `step` is not specified, then a default value of 1 is used. Let’s create a sequence that starts at 0 and ends at 10.
+
+```python
+In [53]: seq2 = np.arange(0, 10)
+         seq2
+Out[53]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```
+
+Why isn’t 10 output above? This has to do with _slice_ notation in `Python`. Slice notation is used to index sequences such as lists, tuples and arrays. Suppose we want to retrieve the fourth through sixth (inclusive) entries of a string. We obtain a slice of the string using the indexing notation `[3:6]`.
+
+```python
+In [54]: "hello world"[3:6]
+Out[54]: 'lo '
+```
+
+In the code block above, the notation `3:6` is shorthand for `slice(3, 6)` when used inside `[]`.
+
+```python
+In [55]: "hello world"[slice(3, 6)]
+Out[55]: 'lo '
+```
+
+You might have expected `slice(3, 6)` to output the fourth through seventh characters in the text string (recalling that `Python` begins its indexing at zero), but instead it output the fourth through sixth. This also explains why the earlier `np.arange(0, 10)` command output only the integers from 0 to 9. See the documentation `slice?` for useful options in creating slices.

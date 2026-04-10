@@ -1,0 +1,29 @@
+main:
+  - title: Home
+    url: /
+  - title: "01. Introduction"
+    url: /book/c01/
+  - title: "02. Statistical Learning"
+    url: /book/c02/
+  - title: "03. Linear Regression"
+    url: /book/c03/
+  - title: "04. Classification"
+    url: /book/c04/
+  - title: "05. Resampling Methods"
+    url: /book/c05/
+  - title: "06. Linear Model Selection"
+    url: /book/c06/
+  - title: "07. Moving Beyond Linearity"
+    url: /book/c07/
+  - title: "08. Tree-Based Methods"
+    url: /book/c08/
+  - title: "09. Support Vector Machines"
+    url: /book/c09/
+  - title: "10. Deep Learning"
+    url: /book/c10/
+  - title: "11. Survival Analysis"
+    url: /book/c11/
+  - title: "12. Unsupervised Learning"
+    url: /book/c12/
+  - title: "13. Multiple Testing"
+    url: /book/c13/

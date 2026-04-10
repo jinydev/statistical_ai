@@ -1,0 +1,51 @@
+title: "통계적 학습 (Statistical Learning)"
+description: "파이썬으로 배우는 통계적 학습 입문"
+author: "Hojin"
+# theme: minimal-mistakes-jekyll # Removed
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-gist
+
+# Theme Settings
+# minimal_mistakes_skin: "default" # Removed
+
+# Navigation
+nav_sort: 'priorities'
+
+# Build Settings
+destination: docs
+source: src
+url: "https://statistical.jiny.dev"
+baseurl: ""
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "docs"
+
+# Sass 설정
+sass:
+  load_paths:
+    - _sass
+
+# GitHub Pages 호환성을 위한 설정
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - .github/
+  - .git/
+  - README.md
+  - package.json
+  - package-lock.json
