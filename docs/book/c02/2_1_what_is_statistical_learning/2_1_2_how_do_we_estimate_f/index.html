@@ -503,13 +503,61 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="212-how-do-we-estimate-f-"><em>2.1.2 How Do We Estimate f ?</em></h1>
+            <h1 id="212-how-do-we-estimate-f">2.1.2 How Do We Estimate <em>f</em>?</h1>
 
-<p>Throughout this book, we explore many linear and non-linear approaches for estimating <em>f</em> . However, these methods generally share certain characteristics. We provide an overview of these shared characteristics in this section. We will always assume that we have observed a set of <em>n</em> different data points. For example in Figure 2.2 we observed <em>n</em> = 30 data points. These observations are called the <em>training data</em> because we will use these training observations to train, or teach, our method how to estimate <em>f</em> . Let <em>xij</em> data represent the value of the <em>j</em> th predictor, or input, for observation <em>i</em> , where <em>i</em> = 1 <em>,</em> 2 <em>, . . . , n</em> and <em>j</em> = 1 <em>,</em> 2 <em>, . . . , p</em> . Correspondingly, let <em>yi</em> represent the response variable for the <em>i</em> th observation. Then our training data consist of <em>{</em> ( <em>x</em> 1 <em>, y</em> 1) <em>,</em> ( <em>x</em> 2 <em>, y</em> 2) <em>, . . . ,</em> ( <em>xn, yn</em> ) <em>}</em> where <em>xi</em> = ( <em>xi</em> 1 <em>, xi</em> 2 <em>, . . . , xip</em> ) <em>[T]</em> .</p>
+<h1 id="212-우리는-어떻게-f-를-측정하는가">2.1.2 우리는 어떻게 <em>f</em> 를 측정하는가?</h1>
 
-<p>Our goal is to apply a statistical learning method to the training data in order to estimate the unknown function <em>f</em> . In other words, we want to find a function <em>f</em>[ˆ] such that <em>Y ≈ f</em>[ˆ] ( <em>X</em> ) for any observation ( <em>X, Y</em> ). Broadly speaking, most statistical learning methods for this task can be characterized as either <em>parametric</em> or <em>non-parametric</em> . We now briefly discuss these parametric two types of approaches.</p>
+<p>Throughout this book, we explore many linear and non-linear approaches for estimating <em>f</em>.</p>
 
-<p>nonparametric</p>
+<p>이 책 전반에 걸쳐서, 우리는 <em>f</em> 를 측정하기 위한 많은 선형 및 비선형 접근법들을 탐구합니다.</p>
+
+<p>However, these methods generally share certain characteristics.</p>
+
+<p>그러나 이러한 방식들은 일반적으로 특정한 특징들을 공유합니다.</p>
+
+<p>We provide an overview of these shared characteristics in this section.</p>
+
+<p>우리는 이 섹션에서 이러한 공유된 특징들의 개요를 제공합니다.</p>
+
+<p>We will always assume that we have observed a set of <em>n</em> different data points.</p>
+
+<p>우리는 항상 <em>n</em> 개의 다른 데이터 포인트 세트를 관측했다고 가정할 것입니다.</p>
+
+<p>For example in Figure 2.2 we observed <em>n</em> = 30 data points.</p>
+
+<p>예를 들어 그림 2.2에서 우리는 <em>n</em> = 30 개의 데이터 포인트를 관측했습니다.</p>
+
+<p>These observations are called the <em>training data</em> because we will use these training observations to train, or teach, our method how to estimate <em>f</em>.</p>
+
+<p>우리는 이 관측된 데이터들을 사용하여 우리의 방법에게 <em>f</em> 를 측정하는 방법을 훈련시키거나 가르칠 것이기 때문에 이러한 관찰 대상들은 <em>훈련 데이터(training data)</em> 라고 부릅니다.</p>
+
+<p>Let $x_{ij}$ represent the value of the <em>j</em> th predictor, or input, for observation <em>i</em>, where $i = 1, 2, \dots, n$ and $j = 1, 2, \dots, p$.</p>
+
+<p>$x_{ij}$ 를 관측치 <em>i</em> 에 대한 <em>j</em> 번째 예측 변수나 입력의 값이라고 합시다. 여기서 $i = 1, 2, \dots, n$ 이고 $j = 1, 2, \dots, p$ 입니다.</p>
+
+<p>Correspondingly, let $y_i$ represent the response variable for the <em>i</em> th observation.</p>
+
+<p>대응하여, $y_i$ 를 <em>i</em> 번째 관측치에 대한 반응 변수라고 합시다.</p>
+
+<p>Then our training data consist of ${(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)}$ where $x_i = (x_{i1}, x_{i2}, \dots, x_{ip})^T$.</p>
+
+<p>그러면 우리의 훈련 데이터는 ${(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)}$ 로 구성되며, 여기서 $x_i = (x_{i1}, x_{i2}, \dots, x_{ip})^T$ 입니다.</p>
+
+<p>Our goal is to apply a statistical learning method to the training data in order to estimate the unknown function <em>f</em>.</p>
+
+<p>우리의 목표는 미지의 함수인 <em>f</em> 를 추정하기 위해 훈련 데이터에 통계적 학습 기법을 적용하는 것입니다.</p>
+
+<p>In other words, we want to find a function $\hat{f}$ such that $Y \approx \hat{f}(X)$ for any observation $(X, Y)$.</p>
+
+<p>다시 말해서, 우리는 임의의 관측값 $(X, Y)$ 에 대하여 $Y \approx \hat{f}(X)$ 가 되는 함수 $\hat{f}$ 를 찾기를 원합니다.</p>
+
+<p>Broadly speaking, most statistical learning methods for this task can be characterized as either <em>parametric</em> or <em>non-parametric</em>.</p>
+
+<p>크게 말해, 이 작업을 위한 대부분의 통계적 학습 방법들은 <em>모수적(parametric)</em> 이거나 <em>비모수적(non-parametric)</em> 인 것으로 특징지어질 수 있습니다.</p>
+
+<p>We now briefly discuss these two types of approaches.</p>
+
+<p>우리는 이제 이 두 가지 유형의 접근법에 대해 간략히 논의할 것입니다.</p>
 
 <hr />
 

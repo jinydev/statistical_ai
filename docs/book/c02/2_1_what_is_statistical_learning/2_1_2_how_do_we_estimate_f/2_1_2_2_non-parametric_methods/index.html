@@ -515,23 +515,103 @@
         <div class="bd-content ps-lg-4">
             <h1 id="non-parametric-methods">Non-Parametric Methods</h1>
 
+<h1 id="비모수적-방법론">비모수적 방법론</h1>
+
 <p><img src="./img/Image_019.png" alt="Figure 2.5" /></p>
 
 <p><strong>FIGURE 2.5.</strong> <em>A smooth thin-plate spline fit to the</em> <code class="language-plaintext highlighter-rouge">Income</code> <em>data from Figure 2.3 is shown in yellow; the observations are displayed in red. Splines are discussed in Chapter 7.</em></p>
 
-<p>Non-parametric methods do not make explicit assumptions about the functional form of <em>f</em> . Instead they seek an estimate of <em>f</em> that gets as close to the data points as possible without being too rough or wiggly. Such approaches can have a major advantage over parametric approaches: by avoiding the assumption of a particular functional form for <em>f</em> , they have the potential to accurately fit a wider range of possible shapes for <em>f</em> . Any parametric approach brings with it the possibility that the functional form used to estimate <em>f</em> is very different from the true <em>f</em> , in which case the resulting model will not fit the data well. In contrast, non-parametric approaches completely avoid this danger, since essentially no assumption about the form of <em>f</em> is made. But non-parametric approaches do suffer from a major disadvantage: since they do not reduce the problem of estimating <em>f</em> to a small number of parameters, a very large number of observations (far more than is typically needed for a parametric approach) is required in order to obtain an accurate estimate for <em>f</em> .</p>
+<p><strong>그림 2.5.</strong> <em>그림 2.3의</em> <code class="language-plaintext highlighter-rouge">Income</code> <em>데이터에 맞춰진 부드러운 얇은 판 스플라인(thin-plate spline) 적합이 노란색으로 보여집니다; 관측치들은 빨간색으로 표시됩니다. 스플라인은 7장에서 논의됩니다.</em></p>
 
-<p>An example of a non-parametric approach to fitting the <code class="language-plaintext highlighter-rouge">Income</code> data is shown in Figure 2.5. A <em>thin-plate spline</em> is used to estimate <em>f</em> . This ap- thin-plate proach does not impose any pre-specified model on <em>f</em> . It instead attempts spline</p>
+<p>Non-parametric methods do not make explicit assumptions about the functional form of <em>f</em>.</p>
 
-<p>2.1 What Is Statistical Learning?</p>
+<p>비모수적 방법들은 <em>f</em> 의 함수적 형태에 대해 명시적인 가정을 하지 않습니다.</p>
+
+<p>Instead they seek an estimate of <em>f</em> that gets as close to the data points as possible without being too rough or wiggly.</p>
+
+<p>대신 그들은 너무 거칠거나 구불거리지 않으면서 가능한 한 데이터 점들에 가깝게 가는 <em>f</em> 의 추정치를 찾습니다.</p>
+
+<p>Such approaches can have a major advantage over parametric approaches: by avoiding the assumption of a particular functional form for <em>f</em>, they have the potential to accurately fit a wider range of possible shapes for <em>f</em>.</p>
+
+<p>이러한 접근법들은 모수적 방법들에 비해 한 가지 주요 이점을 가질 수 있습니다: <em>f</em> 에 대한 특정한 함수 형태의 가정을 피함으로써 그들은 <em>f</em> 의 다양히 더 넓은 범위의 가능한 모양들을 정확히 적합시킬 잠재력을 가집니다.</p>
+
+<p>Any parametric approach brings with it the possibility that the functional form used to estimate <em>f</em> is very different from the true <em>f</em>, in which case the resulting model will not fit the data well.</p>
+
+<p>어떠한 모수적 접근법이든 <em>f</em> 를 추정하기 위해 사용된 함수 형태가 진짜 <em>f</em> 와 매우 다를 수 있다는 가능성을 가져오며 이 경우 결과 모델은 데이터에 잘 적합되지 않을 것입니다.</p>
+
+<p>In contrast, non-parametric approaches completely avoid this danger, since essentially no assumption about the form of <em>f</em> is made.</p>
+
+<p>이와 대조적으로 비모수적 접근법들은 <em>f</em> 의 형태에 대해 본질적으로 어떠한 가정도 하지 않으므로 이러한 위험을 완전히 피합니다.</p>
+
+<p>But non-parametric approaches do suffer from a major disadvantage: since they do not reduce the problem of estimating <em>f</em> to a small number of parameters, a very large number of observations (far more than is typically needed for a parametric approach) is required in order to obtain an accurate estimate for <em>f</em>.</p>
+
+<p>하지만 비모수적 접근법들은 한 가지 주요한 단점을 겪습니다: 그들은 <em>f</em> 의 추정 문제를 소수의 파라미터들로 줄이지 않기 때문에, <em>f</em> 의 정확한 추정치를 얻기 위해서는 (모수적 접근법에서 전형적으로 요구되는 것보다 훨씬 많은) 아주 방대한 수의 관측치들이 요구됩니다.</p>
+
+<p>An example of a non-parametric approach to fitting the <code class="language-plaintext highlighter-rouge">Income</code> data is shown in Figure 2.5.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Income</code> 데이터를 적합시키는 비모수적 접근법의 예시가 그림 2.5에 보여집니다.</p>
+
+<p>A <em>thin-plate spline</em> is used to estimate <em>f</em>.</p>
+
+<p><em>얇은 판 스플라인(thin-plate spline)</em> 이 <em>f</em> 를 추정하기 위해 사용됩니다.</p>
+
+<p>This approach does not impose any pre-specified model on <em>f</em>.</p>
+
+<p>이 접근법은 <em>f</em> 에 어떤 사전 지정된 모델도 부과하지 않습니다.</p>
+
+<p>It instead attempts to produce an estimate for <em>f</em> that is as close as possible to the observed data, subject to the fit—that is, the yellow surface in Figure 2.5—being <em>smooth</em>.</p>
+
+<p>그 대신 적합—그림 2.5의 노란색 표면—이 <em>부드러운(smooth)</em> 지에 종속된 상태로 그것은 관측된 데이터에 가능한 한 가까운 <em>f</em> 에 대한 추정치를 만들려 시도합니다.</p>
 
 <p><img src="./img/Image_020.png" alt="Figure 2.6" /></p>
 
 <p><strong>FIGURE 2.6.</strong> <em>A rough thin-plate spline fit to the</em> <code class="language-plaintext highlighter-rouge">Income</code> <em>data from Figure 2.3. This fit makes zero errors on the training data.</em></p>
 
-<p>to produce an estimate for <em>f</em> that is as close as possible to the observed data, subject to the fit—that is, the yellow surface in Figure 2.5—being <em>smooth</em> . In this case, the non-parametric fit has produced a remarkably accurate estimate of the true <em>f</em> shown in Figure 2.3. In order to fit a thin-plate spline, the data analyst must select a level of smoothness. Figure 2.6 shows the same thin-plate spline fit using a lower level of smoothness, allowing for a rougher fit. The resulting estimate fits the observed data perfectly! However, the spline fit shown in Figure 2.6 is far more variable than the true function <em>f</em> , from Figure 2.3. This is an example of overfitting the data, which we discussed previously. It is an undesirable situation because the fit obtained will not yield accurate estimates of the response on new observations that were not part of the original training data set. We discuss methods for choosing the <em>correct</em> amount of smoothness in Chapter 5. Splines are discussed in Chapter 7.</p>
+<p><strong>그림 2.6.</strong> <em>그림 2.3의</em> <code class="language-plaintext highlighter-rouge">Income</code> <em>데이터에 맞춘 거친 얇은 판 스플라인 적합. 이 적합은 훈련 데이터에서 오차를 0으로 만듭니다.</em></p>
 
-<p>As we have seen, there are advantages and disadvantages to parametric and non-parametric methods for statistical learning. We explore both types of methods throughout this book.</p>
+<p>In this case, the non-parametric fit has produced a remarkably accurate estimate of the true <em>f</em> shown in Figure 2.3.</p>
+
+<p>이 경우 비모수적 적합은 그림 2.3에 묘사된 진정한 <em>f</em> 에 대해 놀랍도록 정확한 추정치를 산출해 냈습니다.</p>
+
+<p>In order to fit a thin-plate spline, the data analyst must select a level of smoothness.</p>
+
+<p>얇은 판 스플라인을 적합시키려면 데이터 분석가는 매끄러움의 수준을 선택해야 합니다.</p>
+
+<p>Figure 2.6 shows the same thin-plate spline fit using a lower level of smoothness, allowing for a rougher fit.</p>
+
+<p>그림 2.6은 거친 적합을 허용하면서 더 낮은 강도의 매끄러움을 사용하는 같은 얇은 판 스플라인 적합을 보여줍니다.</p>
+
+<p>The resulting estimate fits the observed data perfectly!</p>
+
+<p>결과적인 이 추정 모델은 관측 데이터들에 완벽하게 맞습니다!</p>
+
+<p>However, the spline fit shown in Figure 2.6 is far more variable than the true function <em>f</em>, from Figure 2.3.</p>
+
+<p>하지만 그림 2.6에 지정된 스플라인 적합은 그림 2.3으로부터의 진짜 함수 <em>f</em> 보다 훨씬 더 가변적입니다.</p>
+
+<p>This is an example of overfitting the data, which we discussed previously.</p>
+
+<p>이것은 우리가 이전에 논의했던 데이터의 과적합에 대한 예제입니다.</p>
+
+<p>It is an undesirable situation because the fit obtained will not yield accurate estimates of the response on new observations that were not part of the original training data set.</p>
+
+<p>얻어진 그 해당 적합이 본래 훈련 데이터 세트의 일부가 아니던 새 관측 지표들에 대해서 해당 응답의 정확한 추정치들을 산출해 내지 못할 것이기 때문에 이것은 바람직하지 않은 경우입니다.</p>
+
+<p>We discuss methods for choosing the <em>correct</em> amount of smoothness in Chapter 5.</p>
+
+<p>우리는 측정 상의 <em>올바른</em> 매끄러움 양을 선택하기 위한 방법들을 5장에서 논의합니다.</p>
+
+<p>Splines are discussed in Chapter 7.</p>
+
+<p>스플라인들은 7장에서 논의됩니다.</p>
+
+<p>As we have seen, there are advantages and disadvantages to parametric and non-parametric methods for statistical learning.</p>
+
+<p>우리가 보았듯이 통계적 학습의 모수적 및 비모수적 방법에는 장점과 단점이 존재합니다.</p>
+
+<p>We explore both types of methods throughout this book.</p>
+
+<p>우리는 이 책 전체를 통하여 이 두 가지 유형의 방법을 모두 탐구합니다.</p>
 
 
             <!-- 구글 애드센스 출력 -->

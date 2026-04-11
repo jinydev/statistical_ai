@@ -505,9 +505,31 @@
         <div class="bd-content ps-lg-4">
             <h1 id="232-basic-commands"><em>2.3.2 Basic Commands</em></h1>
 
-<p>In this lab, we will introduce some simple <code class="language-plaintext highlighter-rouge">Python</code> commands. For more resources about <code class="language-plaintext highlighter-rouge">Python</code> in general, readers may want to consult the tutorial at <code class="language-plaintext highlighter-rouge">docs.python.org/3/tutorial/</code>.</p>
+<h1 id="232-기본-명령어"><em>2.3.2 기본 명령어</em></h1>
 
-<p>Like most programming languages, <code class="language-plaintext highlighter-rouge">Python</code> uses <em>functions</em> to perform operations. To run a function called <code class="language-plaintext highlighter-rouge">fun</code>, we type <code class="language-plaintext highlighter-rouge">fun(input1, input2)</code>, where the inputs (or <em>arguments</em>) <code class="language-plaintext highlighter-rouge">input1</code> and <code class="language-plaintext highlighter-rouge">input2</code> tell <code class="language-plaintext highlighter-rouge">Python</code> how to run the function. A function can have any number of inputs. For example, the <code class="language-plaintext highlighter-rouge">print()</code> function outputs a text representation of all of its arguments to the console.</p>
+<p>In this lab, we will introduce some simple <code class="language-plaintext highlighter-rouge">Python</code> commands.</p>
+
+<p>이 실습에서, 우리는 약간의 단순한 <code class="language-plaintext highlighter-rouge">Python</code> 명령어들을 도입해 소개할 것입니다.</p>
+
+<p>For more resources about <code class="language-plaintext highlighter-rouge">Python</code> in general, readers may want to consult the tutorial at <code class="language-plaintext highlighter-rouge">docs.python.org/3/tutorial/</code>.</p>
+
+<p>일반적인 <code class="language-plaintext highlighter-rouge">Python</code>에 관한 더 많은 자료 자원들을 살펴 확인하기 위해서, 독자 여러분은 <code class="language-plaintext highlighter-rouge">docs.python.org/3/tutorial/</code> 도달 위치에 제공 분포된 튜토리얼을 곁들여 참고하고자 원할지도 모릅니다.</p>
+
+<p>Like most programming languages, <code class="language-plaintext highlighter-rouge">Python</code> uses <em>functions</em> to perform operations.</p>
+
+<p>대부분의 프로그래밍 언어들처럼, <code class="language-plaintext highlighter-rouge">Python</code>은 조작 연산들을 동작 수행하기 위해 여러 <em>함수들(functions)</em> 을 기용 사용합니다.</p>
+
+<p>To run a function called <code class="language-plaintext highlighter-rouge">fun</code>, we type <code class="language-plaintext highlighter-rouge">fun(input1, input2)</code>, where the inputs (or <em>arguments</em>) <code class="language-plaintext highlighter-rouge">input1</code> and <code class="language-plaintext highlighter-rouge">input2</code> tell <code class="language-plaintext highlighter-rouge">Python</code> how to run the function.</p>
+
+<p><code class="language-plaintext highlighter-rouge">fun</code>이라 호출 지정 명명된 함수 단위 하나를 실행 활성화 구동시키기 위해, 단연 우리는 키보드 텍스트 <code class="language-plaintext highlighter-rouge">fun(input1, input2)</code>를 조작하여 입력 결합 타이핑하며, 이곳에서 입력값들 (또는 부가적 명칭인 <em>인자들(arguments)</em>) 즉 이 <code class="language-plaintext highlighter-rouge">input1</code>과 <code class="language-plaintext highlighter-rouge">input2</code>는 어김없이 <code class="language-plaintext highlighter-rouge">Python</code>에게 어찌 당 함수를 단연 실행시킬지 지시 도출해 말해 줍니다.</p>
+
+<p>A function can have any number of inputs.</p>
+
+<p>하나의 함수 모델 구획 구조는 그 단연 임의의 개수의 입력값들을 항시 지녀 가질 수 있습니다.</p>
+
+<p>For example, the <code class="language-plaintext highlighter-rouge">print()</code> function outputs a text representation of all of its arguments to the console.</p>
+
+<p>예를 들어, 그 거론된 <code class="language-plaintext highlighter-rouge">print()</code> 생성 함수는 자신에게 배정된 모든 인자 속성들의 텍스트 기반 표현을 결과로써 콘솔 화면으로 출력해 내게 됩니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">fit a model with</span><span class="sh">'</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="sh">'</span><span class="s">variables</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">fit</span> <span class="n">a</span> <span class="n">model</span> <span class="k">with</span> <span class="mi">11</span> <span class="n">variables</span>
@@ -515,24 +537,54 @@
 
 <p>The following command will provide information about the <code class="language-plaintext highlighter-rouge">print()</code> function.</p>
 
+<p>제시되어 따르는 다음 명령어 구역은 <code class="language-plaintext highlighter-rouge">print()</code> 함수 구조 단위에 연관된 부연 정보를 나타내 지원 제공할 것입니다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">print</span><span class="err">?</span>
 </code></pre></div></div>
 
 <p>Adding two integers in <code class="language-plaintext highlighter-rouge">Python</code> is pretty intuitive.</p>
 
+<p>단연 <code class="language-plaintext highlighter-rouge">Python</code> 언어 구조 내부에서 두 개의 숫자 정수들을 합해 더하는 과정은 아주 눈에 띄게 직관적입니다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="mi">8</span>
 </code></pre></div></div>
 
-<p>In <code class="language-plaintext highlighter-rouge">Python</code>, textual data is handled using <em>strings</em>. For instance, <code class="language-plaintext highlighter-rouge">"hello"</code> and <code class="language-plaintext highlighter-rouge">'hello'</code> are strings. We can concatenate them using the addition <code class="language-plaintext highlighter-rouge">+</code> symbol.</p>
+<p>In <code class="language-plaintext highlighter-rouge">Python</code>, textual data is handled using <em>strings</em>.</p>
+
+<p>해당 <code class="language-plaintext highlighter-rouge">Python</code> 구조 안에서, 다수 텍스트 기반 데이터 형질은 늘 <em>문자열들(strings)</em> 단위 구획들을 사용하여 제어되고 조작 도달 다루어집니다.</p>
+
+<p>For instance, <code class="language-plaintext highlighter-rouge">"hello"</code> and <code class="language-plaintext highlighter-rouge">'hello'</code> are strings.</p>
+
+<p>예를 한 가지 들어 보자면, <code class="language-plaintext highlighter-rouge">"hello"</code> 형상과 <code class="language-plaintext highlighter-rouge">'hello'</code> 지문 쌍 구획은 모두 함께 문자열들입니다.</p>
+
+<p>We can concatenate them using the addition <code class="language-plaintext highlighter-rouge">+</code> symbol.</p>
+
+<p>우리는 이들을 더하기 합 연산용 <code class="language-plaintext highlighter-rouge">+</code> 심볼 기호를 동원 사용하여 함께 한 덩이로 이음 연쇄시킬 수 있습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="sh">"</span><span class="s">hello</span><span class="sh">"</span> <span class="o">+</span> <span class="sh">"</span><span class="s"> </span><span class="sh">"</span> <span class="o">+</span> <span class="sh">"</span><span class="s">world</span><span class="sh">"</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="sh">'</span><span class="s">hello world</span><span class="sh">'</span>
 </code></pre></div></div>
 
-<p>A string is actually a type of <em>sequence</em>: this is a generic term for an ordered list. The three most important types of sequences are lists, tuples, and strings. We introduce lists now.</p>
+<p>A string is actually a type of <em>sequence</em>: this is a generic term for an ordered list.</p>
 
-<p>The following command instructs <code class="language-plaintext highlighter-rouge">Python</code> to join together the numbers 3, 4, and 5, and to save them as a <em>list</em> named <code class="language-plaintext highlighter-rouge">x</code>. When we type <code class="language-plaintext highlighter-rouge">x</code>, it gives us back the list.</p>
+<p>결과적으로 하나의 문자열 덩이는 사실상 곧 한 유형적 부류의 <em>시퀀스(sequence)</em> 에 단언 속합니다: 왜냐하면 이것은 배열된 질서 순서를 갖는 정렬된 리스트 목차를 위하여 존재하는 하나의 일반화된 포괄 지칭 용어이기 따름입니다.</p>
+
+<p>The three most important types of sequences are lists, tuples, and strings.</p>
+
+<p>전반적 구조 시퀀스의 세 가지 가장 두루 중요한 주력 속성 타입들은 곧 리스트들, 튜플들, 그리고 거론 문자열들입니다.</p>
+
+<p>We introduce lists now.</p>
+
+<p>우리는 이제 저 리스트 구조들를 소개에 올립니다.</p>
+
+<p>The following command instructs <code class="language-plaintext highlighter-rouge">Python</code> to join together the numbers 3, 4, and 5, and to save them as a <em>list</em> named <code class="language-plaintext highlighter-rouge">x</code>.</p>
+
+<p>뒤 번에 따를 이 다음 명령어 조작 규칙은 단언 <code class="language-plaintext highlighter-rouge">Python</code> 콘솔로 하여금 숫자들 3, 4, 그리고 5를 함께 나란 결합시키도록, 그리고 나란한 그것들을 <code class="language-plaintext highlighter-rouge">x</code>라는 지명 이름 지어진 단독 <em>리스트(list)</em> 구조체로 저장 확보시키도록 일동 지시 내립니다.</p>
+
+<p>When we type <code class="language-plaintext highlighter-rouge">x</code>, it gives us back the list.</p>
+
+<p>우리가 문자 구문 <code class="language-plaintext highlighter-rouge">x</code>를 조작 기입 타이핑할 때, 이것 조치 실행 본연은 우리에게 저 본원적 리스트 전체 배열을 획득 반환해 넘겨 돌려줍니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
         <span class="n">x</span>
@@ -541,16 +593,48 @@
 
 <p>Note that we used the brackets <code class="language-plaintext highlighter-rouge">[]</code> to construct this list.</p>
 
-<p>We will often want to add two sets of numbers together. It is reasonable to try the following code, though it will not produce the desired results.</p>
+<p>이 도출 리스트를 구동 생성 형성 축 조립하기 위한 수단으로써 우리가 대괄호 형태들 조각 <code class="language-plaintext highlighter-rouge">[]</code> 을 이용해 일체 동반 사용했음에 주의로 유의하십시오.</p>
+
+<p>We will often want to add two sets of numbers together.</p>
+
+<p>우리들은 심심찮게 때때로 종종 숫자들로 수결 묶인 두 개의 결집 세트 집합들을 나란 고이 함께 도두 집결 더하기를 단연금 원할 시점이 오게 될 것입니다.</p>
+
+<p>It is reasonable to try the following code, though it will not produce the desired results.</p>
+
+<p>비록 그러한 행위 도출 결과 결실이 감히 기대 소망했던 온상 결과들을 일률 생산 구축해 내지 아예 않을지라도, 그래도 다음 제시 코드를 작히 직접 고스란히 시도 투사 해보는 행위는 일선 합리적 판단 행위에 속합니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
         <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
 </code></pre></div></div>
 
-<p>The result may appear slightly counterintuitive: why did <code class="language-plaintext highlighter-rouge">Python</code> not add the entries of the lists element-by-element? In <code class="language-plaintext highlighter-rouge">Python</code>, lists hold <em>arbitrary</em> objects, and are added using <em>concatenation</em>. In fact, concatenation is the behavior that we saw earlier when we entered <code class="language-plaintext highlighter-rouge">"hello" + " " + "world"</code>.</p>
+<p>The result may appear slightly counterintuitive: why did <code class="language-plaintext highlighter-rouge">Python</code> not add the entries of the lists element-by-element?</p>
 
-<p>This example reflects the fact that <code class="language-plaintext highlighter-rouge">Python</code> is a general-purpose programming language. Much of <code class="language-plaintext highlighter-rouge">Python</code>’s data-specific functionality comes from other packages, notably <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">pandas</code>. In the next section, we will introduce the <code class="language-plaintext highlighter-rouge">numpy</code> package. See <code class="language-plaintext highlighter-rouge">docs.scipy.org/doc/numpy/user/quickstart.html</code> for more information about <code class="language-plaintext highlighter-rouge">numpy</code>.</p>
+<p>얻은 소산 결과는 아마도 단면 약간 직관적 상식 이면의 역상 구도로서 직관에 상당히 반하여 출현되어 보일지도 당면 모릅니다: 그 왜 어찌하여 <code class="language-plaintext highlighter-rouge">Python</code> 언어 지표 체계는 두 당 리스트들의 기입 요소 항목들을 항시 낱낱이 각 항목 상호 요소-대-요소로 합해 더하지 않았을까요?</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">Python</code>, lists hold <em>arbitrary</em> objects, and are added using <em>concatenation</em>.</p>
+
+<p>상기 언어 규약 <code class="language-plaintext highlighter-rouge">Python</code> 규칙상 안에서, 이 리스트 규합 덩이들은 온갖 다수 <em>임의의(arbitrary)</em> 임의적 속성 객체들을 그 자체 무던히 쥐고 포함 지니며, 그러다 즉 나아가 이 이들은 <em>연립 연쇄 단위 구조(concatenation)</em> 연산 규합 방법을 적용 동원 사용하여 결집 되어 부가 더해집니다.</p>
+
+<p>In fact, concatenation is the behavior that we saw earlier when we entered <code class="language-plaintext highlighter-rouge">"hello" + " " + "world"</code>.</p>
+
+<p>사실, 이 일컫는 단원 연쇄 연결은 일찍이 당초 우리가 <code class="language-plaintext highlighter-rouge">"hello" + " " + "world"</code> 거론 구문을 여실히 직접 타건 조작해 단면 입력했을 시기에 우리가 일전 시야 목격했던 바로 그 행위 구조 특성과 일치합니다.</p>
+
+<p>This example reflects the fact that <code class="language-plaintext highlighter-rouge">Python</code> is a general-purpose programming language.</p>
+
+<p>이 단일 한 실전 예제는 바로 거론되는 저 <code class="language-plaintext highlighter-rouge">Python</code> 자체가 통상 보편적 활용의 일반-목적적(general-purpose) 범주에 속한 다-방면 프로그래밍 언어 체제라는 기저의 진면 사실을 시사 투영 일격에 반영합니다.</p>
+
+<p>Much of <code class="language-plaintext highlighter-rouge">Python</code>’s data-specific functionality comes from other packages, notably <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">pandas</code>.</p>
+
+<p>대거 상기 <code class="language-plaintext highlighter-rouge">Python</code>의 다루는 일면 데이터-특정적 지향 기능성들의 다반수 수많은 여간 대부분은 필시 다른 외부 유입된 타 패키지들, 특히 그 가운데 눈에 무척 띄게 두드러지는 <code class="language-plaintext highlighter-rouge">numpy</code> 및 <code class="language-plaintext highlighter-rouge">pandas</code> 라이브러리들로부터 근거 추출되어 제공 옵니다.</p>
+
+<p>In the next section, we will introduce the <code class="language-plaintext highlighter-rouge">numpy</code> package.</p>
+
+<p>다음 이어 따라 도래할 섹션 단락에서, 우리는 주축인 <code class="language-plaintext highlighter-rouge">numpy</code> 패키지를 도입해 훌쩍 소개할 것입니다.</p>
+
+<p>See <code class="language-plaintext highlighter-rouge">docs.scipy.org/doc/numpy/user/quickstart.html</code> for more information about <code class="language-plaintext highlighter-rouge">numpy</code>.</p>
+
+<p>저 당면 <code class="language-plaintext highlighter-rouge">numpy</code> 기술에 관한 획득 가능한 부가 정보로서 한층 더 많은 여유 지식 차원 정보들을 소망 원하신다면 부디 <code class="language-plaintext highlighter-rouge">docs.scipy.org/doc/numpy/user/quickstart.html</code> 열람 위치를 관조 보십시오.</p>
 
 
             <!-- 구글 애드센스 출력 -->

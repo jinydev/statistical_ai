@@ -505,21 +505,53 @@
         <div class="bd-content ps-lg-4">
             <h1 id="235-sequences-and-slice-notation"><em>2.3.5 Sequences and Slice Notation</em></h1>
 
+<h1 id="235-시퀀스들과-슬라이스-표기법"><em>2.3.5 시퀀스들과 슬라이스 표기법</em></h1>
+
 <p>As seen above, the function <code class="language-plaintext highlighter-rouge">np.linspace()</code> can be used to create a sequence of numbers.</p>
+
+<p>위에서 보이듯, 함수 <code class="language-plaintext highlighter-rouge">np.linspace()</code> 는 숫자들의 시퀀스 하나를 생성하기 위해 사용될 수 있습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">52</span><span class="p">]:</span> <span class="n">seq1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
          <span class="n">seq1</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">52</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">,</span>  <span class="mf">3.</span><span class="p">,</span>  <span class="mf">4.</span><span class="p">,</span>  <span class="mf">5.</span><span class="p">,</span>  <span class="mf">6.</span><span class="p">,</span>  <span class="mf">7.</span><span class="p">,</span>  <span class="mf">8.</span><span class="p">,</span>  <span class="mf">9.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">])</span>
 </code></pre></div></div>
 
-<p>The function <code class="language-plaintext highlighter-rouge">np.arange()</code> returns a sequence of numbers spaced out by <code class="language-plaintext highlighter-rouge">step</code>. If <code class="language-plaintext highlighter-rouge">step</code> is not specified, then a default value of 1 is used. Let’s create a sequence that starts at 0 and ends at 10.</p>
+<p>The function <code class="language-plaintext highlighter-rouge">np.arange()</code> returns a sequence of numbers spaced out by <code class="language-plaintext highlighter-rouge">step</code>.</p>
+
+<p>함수 <code class="language-plaintext highlighter-rouge">np.arange()</code> 는 <code class="language-plaintext highlighter-rouge">step</code> 간격으로 떨어진 숫자들의 시퀀스 하나를 반환합니다.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">step</code> is not specified, then a default value of 1 is used.</p>
+
+<p>만약 <code class="language-plaintext highlighter-rouge">step</code> 이 명시되지 않으면, 1이라는 기본값이 사용됩니다.</p>
+
+<p>Let’s create a sequence that starts at 0 and ends at 10.</p>
+
+<p>0에서 시작하고 10에서 끝나는 하나의 시퀀스를 생성해 봅시다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">53</span><span class="p">]:</span> <span class="n">seq2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
          <span class="n">seq2</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">53</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
 </code></pre></div></div>
 
-<p>Why isn’t 10 output above? This has to do with <em>slice</em> notation in <code class="language-plaintext highlighter-rouge">Python</code>. Slice notation is used to index sequences such as lists, tuples and arrays. Suppose we want to retrieve the fourth through sixth (inclusive) entries of a string. We obtain a slice of the string using the indexing notation <code class="language-plaintext highlighter-rouge">[3:6]</code>.</p>
+<p>Why isn’t 10 output above?</p>
+
+<p>왜 위에서 10이 출력되지 않습니까?</p>
+
+<p>This has to do with <em>slice</em> notation in <code class="language-plaintext highlighter-rouge">Python</code>.</p>
+
+<p>이것은 <code class="language-plaintext highlighter-rouge">Python</code> 안의 <em>슬라이스(slice)</em> 표기법과 연관이 있습니다.</p>
+
+<p>Slice notation is used to index sequences such as lists, tuples and arrays.</p>
+
+<p>슬라이스 표기법은 리스트들, 튜플들, 그리고 배열들과 같은 시퀀스들을 인덱스하기 위해 사용됩니다.</p>
+
+<p>Suppose we want to retrieve the fourth through sixth (inclusive) entries of a string.</p>
+
+<p>우리가 한 문자열의 네 번째부터 여섯 번째까지의 (스스로를 포함하는) 항목들을 반환받기를 원한다고 가정해 봅시다.</p>
+
+<p>We obtain a slice of the string using the indexing notation <code class="language-plaintext highlighter-rouge">[3:6]</code>.</p>
+
+<p>우리는 인덱싱 표기 <code class="language-plaintext highlighter-rouge">[3:6]</code> 을 사용하여 해당 문자열의 한 슬라이스를 획득합니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">54</span><span class="p">]:</span> <span class="sh">"</span><span class="s">hello world</span><span class="sh">"</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">54</span><span class="p">]:</span> <span class="sh">'</span><span class="s">lo </span><span class="sh">'</span>
@@ -527,11 +559,23 @@
 
 <p>In the code block above, the notation <code class="language-plaintext highlighter-rouge">3:6</code> is shorthand for <code class="language-plaintext highlighter-rouge">slice(3, 6)</code> when used inside <code class="language-plaintext highlighter-rouge">[]</code>.</p>
 
+<p>위 코드 블록 안에서, 표기 <code class="language-plaintext highlighter-rouge">3:6</code> 은 <code class="language-plaintext highlighter-rouge">[]</code> 안에서 사용될 때 <code class="language-plaintext highlighter-rouge">slice(3, 6)</code> 에 대한 축약형입니다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">55</span><span class="p">]:</span> <span class="sh">"</span><span class="s">hello world</span><span class="sh">"</span><span class="p">[</span><span class="nf">slice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">55</span><span class="p">]:</span> <span class="sh">'</span><span class="s">lo </span><span class="sh">'</span>
 </code></pre></div></div>
 
-<p>You might have expected <code class="language-plaintext highlighter-rouge">slice(3, 6)</code> to output the fourth through seventh characters in the text string (recalling that <code class="language-plaintext highlighter-rouge">Python</code> begins its indexing at zero), but instead it output the fourth through sixth. This also explains why the earlier <code class="language-plaintext highlighter-rouge">np.arange(0, 10)</code> command output only the integers from 0 to 9. See the documentation <code class="language-plaintext highlighter-rouge">slice?</code> for useful options in creating slices.</p>
+<p>You might have expected <code class="language-plaintext highlighter-rouge">slice(3, 6)</code> to output the fourth through seventh characters in the text string (recalling that <code class="language-plaintext highlighter-rouge">Python</code> begins its indexing at zero), but instead it output the fourth through sixth.</p>
+
+<p>여러분은 <code class="language-plaintext highlighter-rouge">slice(3, 6)</code> 이 텍스트 문자열 내의 네 번째부터 일곱 번째 단면 문자들까지 내내 부단 출력하길 여과 없이 단연 예상했을 당면 수가 있습니다 (<code class="language-plaintext highlighter-rouge">Python</code> 이 숫자 0에서부터 그것의 그 인덱싱을 당면 시작함을 분명 일관 상기 관조하며), 그러나 역상 대신에 그것은 네 번째부터 무결 이내 오직 여섯 번째까지만을 지표 일체 출력 도출했습니다.</p>
+
+<p>This also explains why the earlier <code class="language-plaintext highlighter-rouge">np.arange(0, 10)</code> command output only the integers from 0 to 9.</p>
+
+<p>이것은 덧붙여 또한 어떻게 단연코 앞선 무단 <code class="language-plaintext highlighter-rouge">np.arange(0, 10)</code> 지표 명령 조작 단락이 오직 단위 0 에서 필경 종결 9 까지의 무결 정수들만을 전방 제한 일렬 출력 산출 도치했는지 지표 그 연유를 말끔 설명 부연합니다.</p>
+
+<p>See the documentation <code class="language-plaintext highlighter-rouge">slice?</code> for useful options in creating slices.</p>
+
+<p>다수 슬라이스들을 거듭 생성 축조함에 있어 다분 거론 유용한 당 옵션들을 단연 알기 위해 단초 <code class="language-plaintext highlighter-rouge">slice?</code> 매뉴얼 속 문서를 찾아 필시 확인 보십시오.</p>
 
 
             <!-- 구글 애드센스 출력 -->

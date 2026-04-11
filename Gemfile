@@ -11,3 +11,4 @@ group :jekyll_plugins do
   gem "jekyll-gist"
 end
 
+gem "json", "2.9.1"
