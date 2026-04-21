@@ -8,10 +8,13 @@ title: "trans2"
 > 💡 **학습 팁:** 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 [📖 파이썬 랩(Lab) 해설판보기](./trans2.html)를 추천합니다! (직역본은 [📖 직역본 보기](./trans1.html) 메뉴를 활용하세요!)
 
 # 4.3.4 Multiple Logistic Regression
-# 4.3.4 다중 로지스틱 회귀 (단서를 한데 모아 터뜨리는 예측의 마법)
+# 4.3.4. 다중 로지스틱 회귀 (변수들의 앙상블과 배신)
 
-We now consider the problem of predicting a binary response using multiple predictors. By analogy with the extension from simple to multiple linear regression in Chapter 3, we can generalize (4.4) as follows:
-자, 우리는 이제 하나가 아닌 **'다수의 복수 예측 변수들(여러 가지 단서들)'** 을 한꺼번에 긁어모아 사용하여 예스/노 이진 형태의 타깃 응답 확률을 예측 돌파해 내는 막강한 연합 작전 문제를 고려 모색합니다. 과거 교실 3장에서 밋밋한 '단순' 선형 회귀 1차선을 웅장한 다차원의 '다중' 선형 회귀 판으로 무모하게 확장시켰던 그 수학적 테크닉 방식에 자연스레 빗대어 유추해 보건대, 우린 여기서도 로지스틱 확률의 근간인 저 (4.4) 모델 수식을 여지없이 다음과 같이 여러 개의 예측 변수 덩어리 전차들로 확연히 벌크업 일반화시킬 단연코 무구 수학 공식을 짤 수 있습니다:
+We now consider the problem of predicting a binary response using multiple predictors.
+단일 무기를 넘어, 이제 우리는 여러 개의 복수 예측 변수 단서들을 다발로 엮어 쏘아 올려 이진 정답(Yes or No)을 예측해 내는 차원의 문제를 논의합니다.
+
+By analogy with the extension from simple to multiple linear regression in Chapter 3, we can generalize (4.4) as follows:
+마치 3장 시절, 단순 선형 회귀가 여러 기울기를 얹으며 다중 선형 회귀로 자연스레 몸집을 불리며 진화했던 것과 똑같은 스텝으로 비유($X_1$, $X_2$...$X_p$)해 보건대, 식을 이렇게 화려하게 일반화할 수 있습니다:
 
 $$
 \log\left( \frac{p(X)}{1 - p(X)} \right) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p \quad (4.6)
@@ -22,45 +25,100 @@ p(X) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1 + e^{\beta_0 + \
 $$
 
 Just as in Section 4.3.2, we use the maximum likelihood method to estimate $\beta_0, \beta_1, \dots, \beta_p$.
-앞서 고단 전장인 4.3.2 섹션에서 단일 변수 가중치를 타진 진행했던 것과 소름 돋게 완벽히 동일한 전개 원리로, 이 웅장한 다중 식판에서도 거대한 예측 가중치 부대들 $\beta_0, \beta_1, \dots, \beta_p$ 를 무자비하게 단번에 피팅 적중 추정해 조율하기 위해 똑같이 **최대 우도법(Maximum Likelihood Method)** 추적 엔진을 폭주시켜 씁니다.
+길어봤자 원리는 같습니다. 앞전 4.3.2 섹션에서 써먹었던 위대한 그 무기, 최대 우도법(Maximum Likelihood Method) 기계에 데이터를 넣고 돌려서 $\beta_0, \beta_1, \dots, \beta_p$ 파라미터 추정치들을 우수수 뽑아냅니다.
 
-Table 4.3 shows the coefficient estimates for a logistic regression model that uses `balance` , `income` (in thousands of dollars), and `student` status to predict probability of `default`. There is a surprising result here. The _p_-values associated with `balance` and the dummy variable for `student` status are very small, indicating that each of these variables is associated with the probability of `default`.
-가동 결과인 표 4.3은 신용카드 빚 잔고(`balance`) 정보, 개인 연간 소득(`income`, 수치 1당 천 달러 단위 압축), 그리고 학생 여부 더미 신분표(`student`) 이 3개의 막강한 단서들을 한꺼번에 도가니에 모두 때려 부어 사용하여 타깃의 파산 체납 확률(`default`)을 복합 전면 예측 조준해 파생 도출한 대형 '다중 로지스틱 회귀 모델' 군의 회귀 계수 조종 파츠 추정 성적 점수표를 적나라 보여줍니다. 그런데 잠깐, **여기서 아주 뒷통수를 치는 환장할 놀라운 충격 결과 이변**이 반전 나타납니다. 일단, 잔고 파츠와 학생 여부 더미 변수 두 양쪽 진영에 각각 꼬리표 달린 _p_-값 심판 점수들이 모두 0에 수렴하도록 극도로 코딱지만큼 작게 박혀 터져서, 이 주요 핵심 변수 단서들 각각이 독자적으로 필시 파산 도주 확률에 치명타로 공진 영향을 미치고 있다는 무적 연관성을 기히 확고히 정당 입증해 짚어냅니다.
+Table 4.3 shows the coefficient estimates for a logistic regression model that uses `balance` , `income` (in thousands of dollars), and `student` status to predict probability of `default`.
+결과표 4.3은 신용카드 빚 잔고(`balance`) 정보, (천 달러 단위로 압축된) 연간 수입(`income`), 그리고 대상이 불우한 `student` (학생) 신분인지 상태를 모두 한꺼번에 버무려 구동시킨 다중 로지스틱 회귀 모형의 계수 점수표를 적나라하게 보여줍니다.
 
-However, the coefficient for the dummy variable is negative, indicating that students are less likely to default than nonstudents. In contrast, the coefficient for the dummy variable is positive in Table 4.2. How is it possible for student status to be associated with an _increase_ in probability of default in Table 4.2 and a _decrease_ in probability of default in Table 4.3?
-그러나 도무지 더 충격 놀라운 사실 점은, 표 한가운데 찍힌 저 학생 감별사 더미 변수의 가중 조타 계수 좌표 기호가 무려 마이너스 음수(-) 부호로 역전 찍혀 있다는 그 처참 황당한 사실 조각이며, 이는 우리 선입견과 달리 오히려 돈 버는 일반인보다 가난한 학생 층이 도리어 파산 부채고를 덜 일으키고 더 정직할 파생 기조 억제가 강하게 성립됨을 무단 가리킵니다. 앞선 단락 홀로 등장했던 표 4.2에서의 단일 더미 변수 가산 계수는 엄연한 양수(+) 가중 파쇄 폭탄의 기저 역할 증폭 폭주 범인이었는데 이것과 표리부동 완전히 정면 충돌 역설의 상반 구도를 칩니다. 대체 학생 지표 신분이라는 꼬리표와 파산 절벽 확률 간 그 둘 관계 양상이, 단일 변수 혼자만 뛰놀던 표 4.2 판에서는 분명 파산 확률을 폭발시키는 펌핑 '증가(+)' 요인이었다가, 여타 다른 변수 정보들과 전장 묶인 다중 변수 무장 부대 전장 상태인 이 표 4.3 판국 단상에 오면서 파산 확률을 도리어 깎아 먹는 방어선 '감소(-)' 라는 음수 저지 방향 반전으로 갑자기 180도 뒤집혀 역전당하는 이 미친 극강의 모순 모멘텀이 도대체 단연 이 차가운 수리적 조작 모형 세계에서 단연 어찌 공산 성립 도출될 모순 수 있습니까?
+There is a surprising result here.
+그런데 이 표를 들여다보면 아주 통수 치는 반전 결과가 숨어 있습니다.
 
-The left-hand panel of Figure 4.3 provides a graphical illustration of this apparent paradox. The orange and blue solid lines show the average default rates for students and non-students, respectively, as a function of credit card balance. The negative coefficient for `student` in the multiple logistic regression indicates that _for a fixed value of_ `balance` _and_ `income`, a student is less likely to default than a non-student. Indeed, we observe from the left-hand panel of Figure 4.3 that the student default rate is at or below that of the non-student default rate for every value of `balance`. But the horizontal broken lines near the base of the plot, which show the default rates for students and non-students averaged over all values of `balance` and `income`, suggest the opposite effect: the overall student default rate is higher than the non-student default rate. Consequently, there is a positive coefficient for `student` in the single variable logistic regression output shown in Table 4.2.
-그림 4.3의 뷰어 좌측면 왼쪽 대면 패널 캔버스는 이 기막히고 묘연 명백해 보이는 역설 국면의 모순 수수께끼를 통계적 확증으로 단칼에 설명 파투해 줄 매우 훌륭한 시각 힌트 통찰 그래픽 곡선을 단연 제출 제공합니다. 긋어진 도표 안의 주황색과 파란색 S 형태 실선 곡선들은 변수인 깔린 신용카드 잔고 액수 비용 층위 지지에 따른 각각 학생 그룹과 일반 직장 비학생 집단 전체 구간의 각각 부위별 조달 파산 비율 기점 평균 궤적 분포치 라인을 단면 극명 묘사합니다. 우락부락 다발로 묶은 다중 로지스틱 타진 회귀 단상 모델 부대 내부 전장에서 강제 도출된 저 부정적인 수리 음수(-) 모델 학생 더미 가점 가중치는, 통장 잔고 통계와 개인별 수입 정보가 단지 굴곡 변수가 아니라 완벽히 똑같은 수치 양상으로 수치 **'고정(fixed)'되어 있다는 강력 조건하**에서는, 단연코 통상 학생이 일반 성인 직장인보다 신용 체납 불량 폭탄이 돌출 터질 위험 파산 가능성 한계 버팀목이 대조군 양 편 대비 훠씬 상대적으로 버팀목 면역 떨어짐을 튼튼 의미합니다. 참으로 시각 눈 부시게 그러하게도, 왼쪽 그림 4.3 패널 차트 곡선 판국에서 저 주황 불꽃 학생 파산 궤적 상승 실선 줄기가 그림 모든 X축 밑단 전조 잔고 투척 지점 내내 일반인 파란 궤적 차트선을 위로 뚫지 단락 못하고 시종 역전 밑바닥 발바닥 그늘 밑에서만 깔려 종속 기립 부속 움직이는 궤적의 양면을 단연 압도 볼 수 있습니다. 그러나! 그래프 바닥 하단에 그냥 수평 일자로 기계처럼 직선 그어진 점선 수맥(모든 잔고나 수입 분포를 무식 뭉뚱그려 학생 vs 일반인 오직 통으로 단락 대치 비교 평균 잡은 비율 수치) 체납률 평균 가로선은, 방금 우리 눈을 부신 정반대의 비참한 무마 참상 상황 팩트를 돌발 조차 역 시사합니다: 압도 거대적으로 쳐올려진 저 전체적인 학생 계층 평균 그 체납률 가로 점선 대는, 일반인 타깃 계층 체납 평균 궤적 호조 점선 높이 선보다 무식 단단히 훨씬 더 상공 높게 찍혀 돌출 안착 고안 됩니다. 그렇기 때문에 이 비참한 결단 척도 팩트는, 단순히 수입이고 뭐고 딴 변수 조건 통제를 싹 다 묵살해버린 채 오직 학생/일반인 하나의 통 양갈 스위치만 쳐다보고 무식하게 관찰 타진 돌렸던 과거 전단지 표 4.2 의 '단일' 회귀 장부 산출 조차에서는 학생 층 펌핑 양수(+) 증가 폭 계수 표가 미련 계산 기표 찍혔던 단연코 처절 이유인 것입니다.
+The _p_-values associated with `balance` and the dummy variable for `student` status are very small, indicating that each of these variables is associated with the probability of `default`.
+일단 잔고 변수와 학생 더미 변수 항목 양쪽에 뜬 심판 점수 _p_-값은 무섭도록 작게 찍혔습니다. 즉, 잔고든 학생 여부든 둘 다 불길한 체납 확률에 통계적으로 강한 영향을 끼치는 진짜 단서임은 자명합니다.
 
-The right-hand panel of Figure 4.3 provides an explanation for this discrepancy. The variables `student` and `balance` are correlated. Students tend to hold higher levels of debt, which is in turn associated with higher probability of default. In other words, students are more likely to have large credit card balances, which, as we know from the left-hand panel of Figure 4.3, tend to be associated with high default rates. Thus, even though an individual student with a given credit card balance will tend to have a lower probability of default than a non-student with the same credit card balance, the fact that students on the whole tend to have higher credit card balances means that overall, students tend to default at a higher rate than non-students.
-그림 4.3 세트의 전면 우측면 오른쪽 기둥 패널 박스는 대체 현실에서 왜 이런 거지 같은 괴리 통계 착오 불일치 역설 수치가 터져 연동 생기는지 무마 그 내막 미지 마침내 심층 설명을 조치 내어 놓습니다. 그 잔인한 비밀은 불행하게도 학적 학생(`student`) 변수 꼬리표와 부채 통장 잔고(`balance`) 지표량 변수가 통계적으로 사실 서로 아주 끈끈 지독하게 상호 의존 기표 연관되어 얽혀 있다는 슬픈 대전제 팩트 인구 사실 구석에 단연 있습니다. 가난히 허덕이는 학생 계층은 태생적으로 이자 무서운 줄 모르고 일반인보다 엄청나게 단연 수위 극악 높은 악성 부채금액 카드 빚의 대늪에 깊이 빠져 점거 빚 허덕이는 탕진 경향 분포가 막대 거대 대칭하며, 이 막무가내 빛 풍선 축적이 결국 확률 구역상 가장 높은 치명 낭떠러지 타격 체납 파산 추락 스택 확률로 꼬리에 돌려 꼬리를 연쇄 무는 악성 연관 수맥 고리를 짓게 귀결됩니다. 다른 직언 즉 다시 말해 통계, 돈벌 능력이 전무 구태 무능력자인 불쌍한 학생 그룹 부대집단이 애초 신용 악성 빚 카드 잔여 잔고를 일반 성인 근로자 층에 대비 비해 무자비 배가 폭발 거대하게 부풀려 끌어안고 다닐 근본 전장 타깃 발생 확률 구조 자체가 훨씬 높으며, 그 고 위험도 쌓인 압도 빚 잔고 덩어리 시한폭탄 수량이 결국 앞선 그림 지표 분석처럼 파산 도주 불씨 폭탄을 터뜨리는 직결 진앙 유발 촉발탄 단연 됩니다. 그렇기 때문에 총망라 이 비참한 통계 지상 현상은 우리에게 무서운 극과 극 이중 논파 지표 결론을 시사 조율 단락 내주게 됩니다: "만일 여기 어떤 가난한 학생이 돈 버는 일반인 직장인과 완벽히 1대1로 **'동일한 초고액 치명 금액의 엄청난 빚 잔액 잔고 바벨'**을 동등하게 등에 고정 짊어지고 구태 처해 벼랑에 놓여 있다면, 정작 기이하게도 그 일반인 직장인 어른 녀석 쪽이 학생보다 한계 체력(소득 대비 버팀목 생계 등)이 더 무마 후달려서 먼저 훨씬 크게 파산에 전폭 짓눌러 도달 부러진다"라는 소름 돋는 다중 로지스틱 통찰(학생 층 억제 음수 계수 조력) 관측선과 동시에, "그러나 역 시점 사실 거시 집단 체급 평균 타진을 통으로 무식 묶어내면 냉혹 현실 통계 판에서는 대다수 멍청 학생들이 애초 방패 없이 저 턱없는 무지막지한 초 위험 고도 마진 잔고 늪에 스스로 진입 진창 빠지는 조난 평균 빈도 타격 진입률 포석 이가, 벌이 있는 일반인 척도 구역보다 압도 퍼센트 무식 무리하게 훨씬 웅장 높기 기표 때문에, 이런 변수를 배제 통으로 퉁쳐 단순 계산해버리면 그냥 '학생 그룹 무리가 전체적으로 파산율 파괴 수치가 미친 듯이 전반 더 높다'는 치명 처참 단면" 의 슬픈 현실 모순 사이 이중의 냉동 결론 차동 결괏값을 던져 통념 도출 내주게 단락 됩니다.
+However, the coefficient for the dummy variable is negative, indicating that students are less likely to default than nonstudents.
+하지만 충격적이게도 표에서 `student` 학생 더미 변수에 붙은 $\beta$ 계수가 '마이너스(-)' 음수로 책정되었습니다! 이건 뭐죠? "오히려 학생 그룹이 일반 비학생들보다 부채 체납을 훨씬 덜 내고 모범적으로 생활한다"는 역방향의 결과를 대놓고 가리키고 있습니다.
 
-This is an important distinction for a credit card company that is trying to determine to whom they should offer credit. A student is riskier than a non-student if no information about the student’s credit card balance is available. However, that student is less risky than a non-student _with the same credit card balance_!
-이런 소름 돋는 데이터 이면 착시 분간은 결국 카드빚 마진을 뚫어 이득 당겨주려는 악덕 신용 대부 발급 업체 관측 팀에게, 도대체 누구 타깃을 포섭해 대출 카드 발급 총량을 승인 발급 찍어 내줘야 가장 안전한지 핵심 통제 생사 여부 결정지을 엄청나게 가장 타격 중요한 통찰 식별 감별 차동 기준 국면이 분수령 단연 됩니다! 만일, 카드 신청 접수 그 한심한 대학 학생의 뒷배를 캘 신용 거래 카드 부채 이력 '잔고' 장부 정보 장부가 완전히 블라인드 처리 기표되어 획득 가려져 숨겨 있는 안개 상태 조건이라면? 무조건 닥치고 단연 일반인 신청자보다 그냥 그 학생 가입자를 도주 위험 전초 분자로 간주 포석 위험 리스크 차단 발급 지표 차단 거절시켜 도려 끊어내는 게 훨씬 기형 타당 나을 정도로 불리 단연 학생 리스크 압박이 큽니다. 하지만 오싹한 역전 반전! 만약 그 불쌍한 학생 가입자가 투서 들이민 부채 장부표 내역 증빙이, **"신용카드 서류에 완벽 동급 동일하게 무식한 액수의 악성 대출 잔여 잔고 카드 빚 수맥을 한가득 등에 가오 이고 신청하는 바로 옆 창구의 어떤 일반인 아저씨 신청 가입자"와 동일 조건 선상 무단 동일 카드 빚 평행선 금액 잔고(with the same credit card balance)** 타이틀 링 위에서 맞붙여 비교 조치 된다면? 이 다중 변수 통찰 모형에서는 기이하게도 오히려! 그 동일 액수 빚을 무모하게 끌어안은 직장인 아저씨 쪽을 카드 파산 도망 전초 배 쨀 가망 거절 타깃 치부 리스크로 간주 거부 지표 선별하는게 훠씬 대출 심사 안전 도망 위기 위험 폭탄에서 벗어나 생존 탈피 방어하는 역학 우위 통계 진리 길이 단연 됩니다!
+In contrast, the coefficient for the dummy variable is positive in Table 4.2.
+잠깐만요, 혼란스럽습니다. 불과 한 장 전 단일 회귀만 돌렸던 표 4.2에서는 분명히 학생 더미 계수가 '플러스(+)' 양수였지 않습니까? (즉 "학생들이 더 파산한다!" 였죠.)
 
-This simple example illustrates the dangers and subtleties associated with performing regressions involving only a single predictor when other predictors may also be relevant. As in the linear regression setting, the results obtained using one predictor may be quite different from those obtained using multiple predictors, especially when there is correlation among the predictors. In general, the phenomenon seen in Figure 4.3 is known as _confounding_.
-이 심플 단순하고 극한 극적인 반전 참상 예제 데이터 모형은 여러 개의 배후 중추적인 통계 변수 조작자들이 다닥다닥 서로 뒤에서 치명적으로 은밀 얽혀 야합 장난 질 구축 관련되어 있는 현실적 데이터 현장 상황에서, 무지 막지 딸랑 바보 단 하나뿐인 일차원 편향 예측 판별기 무기만을 달랑 끼워 놓고 거시 확률 회귀선 긋기 돌리기 시뮬레이션 시도를 무력 강행했을 찌 단연 엄청나게 초래 변질 유발될 통계 모순의 치명적인 편향 위험 함정성과, 그 은밀 기형 차동 미묘한 배후 변수 통제 간 해석상 결과 전폭 차이 역전 모순을 완전히 깡그리 아주 적나라 투명하게 거론 묘사해 표명 냅니다. 기존 선행 구단 선형 회귀 1차 환경판에서 겪었던 매한가지 처참 굴레로, 오로지 이편 달랑 단일 하나 변수 나사만 편식 가지고 투과 돌려 도출된 미적분 해석 결과 수치는, 만일 이 음침 예측 투사 변수 단서들끼리 그들 뒷구멍 생태계 서로 간에 치명 깊게 상관관계(correlation) 뭉치 짬짜미 커넥션 구성을 띠고 연동 엮여있을 배후 때, 숨겨진 다중 스펙 예측 병기들을 모조 한꺼번에 죄다 스택 때려 박아 우도 넣고 구동 돌려 섞여 나온 진실 다차원 산출물 타진 결과 세트와는 자못 그 해석과 결 단방 차위가 가치관 아예 180도 통계 지표 역전되는 아주 딴판 다른 방향 지시 결과 조치물을 무모 초래 결탁할 치명 수 단연 있습니다. 통계 역사적으로 일반적으로, 그림 4.3 차트 착시선망 그림과 단연토 찰떡같이 엮인 이런 모순적인 변수 등락 착시 역전 현상을 우리 통계 범주 학회 용어로 저명히 **교란 현상(Confounding)** 모순 역학 효과라고 공식 기표 칭하며 단절 극도로 주의 기록 단속 명명 합니다.
+How is it possible for student status to be associated with an _increase_ in probability of default in Table 4.2 and a _decrease_ in probability of default in Table 4.3?
+도대체 어떻게 같은 데이터를 쓰는데도 어떤 때는 학생 신분이 체납 확률의 **증가(+ 증가)** 였다고 삿대질을 하고(표 4.2), 다중 변수를 묶었답시고 갑자기 표 4.3에서는 파산 확률을 억제하는 **감소(- 감소)** 요인이라고 180도 표변해 모순된 말을 뱉어내는 버그가 터진 걸까요?
 
-By substituting estimates for the regression coefficients from Table 4.3 into (4.7), we can make predictions. For example, a student with a credit card balance of $1,500 and an income of $40,000 has an estimated probability of default of
-자 막판 최종 전투입니다. 표 4.3 판국에 도출 완료 포진된 모든 승리 다중 추정 계수들을 (4.7) 번의 회귀 S 곡선 다중 마법 확률 투척 식에 모조 쏟아부어 대입 연산 시킴으로써 우리는 가공 예측 점성 계산 기계 머신을 가동 풀 돌립니다. 예를 들어 봅시다. 아찔한 신용카드 부채 빚 잔여 액수가 악성 잔고에 자그마치 **\$1,500** 치 가 처참 목줄 찍혀있고 1년 등단 연 소득이 무려 **\$40,000** 거물급 장부에 화려 빛나는 어느 훌륭한 '학적 **대학생(student=1)**' 당사자 지목 타깃 한 명에 대한 기형 추정 최종 파산 도주 예측 파열 확률은 이와 같이 계산 타격 됩니다:
+The left-hand panel of Figure 4.3 provides a graphical illustration of this apparent paradox.
+그림 4.3의 영리한 왼쪽 패널 도화지가 이 미치고 팔짝 뛸 명백한 모순 역설을 깔끔하게 해명하는 통찰 그래픽을 펼쳐 줍니다.
+
+The orange and blue solid lines show the average default rates for students and non-students, respectively, as a function of credit card balance.
+그림 속 X축으로 뻗어간 그 무서운 신용 카드 잔고 금액 게이지에 따라 학생(주황색)과 일반인(파란색) 집단이 각각 내뿜는 파산 비율 흐름이 두 줄기의 실선으로 그려져 있습니다.
+
+The negative coefficient for `student` in the multiple logistic regression indicates that _for a fixed value of_ `balance` _and_ `income`, a student is less likely to default than a non-student.
+사실 다중 로지스틱 표에서 떴던 학생 계수의 음수 표기는 "다른 변수들의 개입 통제"라는 전제 조건이 붙습니다. 즉, 잔고 게이지와 소득 게이지를 어느 **특정 지점에 강제로 묶어 고정(fixed value)** 시키고 놓고 경쟁을 붙이면, 놀랍게도 같은 빚더미 악재 속에서는 학생이 일반인 아저씨들보다 오히려 파산 압박을 견디고 버텨낼 확률 기강이 낫다는 뜻입니다.
+
+Indeed, we observe from the left-hand panel of Figure 4.3 that the student default rate is at or below that of the non-student default rate for every value of `balance`.
+그림을 유심히 뜯어보면 참말임이 입증됩니다. 왼쪽 패널에서 X축 잔고를 아무 위치에서나 칼로 수직 틈을 썰어 비교해 봐도, 늘 주황색(학생 파산 실선)이 파란선(일반인 파산선)보다 밑에 짓눌려(안전하게 방어되어) 위치하고 있음을 명백하게 관찰할 수 있습니다.
+
+But the horizontal broken lines near the base of the plot, which show the default rates for students and non-students averaged over all values of `balance` and `income`, suggest the opposite effect: the overall student default rate is higher than the non-student default rate.
+그러나! 그래프 도화지 가장 바닥 쪽 허공에 평행하게 쭉 그어진 불길한 수평 점선 두 줄기(이건 X축 잔고 스펙트럼 따위를 고려 안 하고 그냥 학생 인구 전체를 뭉뚱그려 통계로 내버린 멍청한 평균 체납률 선)를 보면, 상황이 역전됩니다. 압도적으로 전체적인 학생 파산율 선이 일반인 선보다 더 상단 위험구역에 찍힙니다. 
+
+Consequently, there is a positive coefficient for `student` in the single variable logistic regression output shown in Table 4.2.
+그렇기 때문에, 잔고(`balance`) 정보 통제 따위를 싹 무시해 버리고 오직 `student`라는 단일 변수 변인 딱 하나만 넣고 돌린 표 4.2의 가짜 성적표에서는 뭉뚱그려진 참사가 벌어져 "학생이 더 끔찍하게 파산한다(+ 양수)"는 우스꽝스러운 기만 결과가 떴던 것입니다.
+
+The right-hand panel of Figure 4.3 provides an explanation for this discrepancy.
+오른쪽 패널로 넘어오면 왜 집단이 뭉뚱그려지면 저 꼴이 나는지 이 미친 불일치의 진상을 확실히 해명해 보여줍니다.
+
+The variables `student` and `balance` are correlated.
+이 비극의 원인은 사실 `student` 신분이라는 변수 자체가 불행하게도 잔고 부채 `balance` 변수 지표와 어마어마하게 뒤에서 상호 간의 강한 상관 상관관계(Correlated)로 오염되어 밀착되어 있다는 점입니다.
+
+Students tend to hold higher levels of debt, which is in turn associated with higher probability of default.
+태생적으로 돈 없는 학생들은 필연적으로 무지막지하게 높은 대출 부채 빚의 늪에 빠져 축적하는 경향이 짙으며, 결국 이 산더미같이 쌓인 빚고리가 연달아 파멸의 파산 터닝 확률로 도미노처럼 무너져 내리는 겁니다.
+
+In other words, students are more likely to have large credit card balances, which, as we know from the left-hand panel of Figure 4.3, tend to be associated with high default rates.
+다시 말해 요약하자면, 학생이란 집단 자체가 거대한 카드 대출금의 화약고를 등에 지고 살 가능성이 농후하고 팽배하며, 우리가 이미 왼쪽 그림에서 뼈저리게 목격했듯 바로 그 '압도적 고잔고 위치 게이지'가 종국엔 그들의 체납 폭탄 스위치를 당겨버립니다.
+
+Thus, even though an individual student with a given credit card balance will tend to have a lower probability of default than a non-student with the same credit card balance, the fact that students on the whole tend to have higher credit card balances means that overall, students tend to default at a higher rate than non-students.
+따라서 이 딜레마를 정리하면: "**동일선상의 카드 부채 잔고**를 짊어맨 한 개인 단위 경쟁으로 비교하면 학생이 일반 성인 직장인보다 파산 회피 방어력이 월등히 뛰어나지만, 안타깝게도 **전체 학생 청년 군집체**로 무리지어 놓고 평균을 내버리면 이들 대다수가 태생적으로 살인적인 대출 고잔고 포지션 위치를 점유당한 상태이기 때문에, 결국 나라 전체적으로는 통계상 학생이 평균 체납을 훨씬 더 빈번하게 저지르는 집단으로 표변해버린다" 라는 착시적 의미가 풀리게 됩니다.
+
+This is an important distinction for a credit card company that is trying to determine to whom they should offer credit.
+이 짜릿한 진실 분별력은, 눈 먼 카드 신청자 고객들 중에서 누구 목에 신용카드를 발급 통과시켜 쥐어줄 것 인지를 판가름하려는 눈치 싸움 대부 신용카드 회사에게는 그야말로 비즈니스의 목줄을 좌우할 어마어마하게 중요한 통찰적 구분입니다.
+
+A student is riskier than a non-student if no information about the student’s credit card balance is available.
+만약 심사관 입장에서 신청 학생의 뒷배경인 '통장 잔고 부채' 장붓빛 내역을 전혀 열람할 길이 없는 장님 상태라면, 그 학생을 덥석 받아주는 건 아무 직장인이나 골라 받는 것보다 훨씬 더 파멸을 초래할 위험합니다.
+
+However, that student is less risky than a non-student _with the same credit card balance_!
+하지만 번뜩이는 통찰로 상황을 틀어보자면, 그 대학생 손님이 **"자신과 완전히 똑같은 조건의 엄청난 빚 잔고를 안고 있는 어떤 직장인 경쟁자"** 와 심사대 책상에서 붙는다면, 통계학적으로 그 불우한 직장인 쪽을 가차 없이 날려버리고 학생 고객에 투자하는 게 자산 포트폴리오를 구하는 체납 리스크 축소의 묘수라는 겁니다!
+
+This simple example illustrates the dangers and subtleties associated with performing regressions involving only a single predictor when other predictors may also be relevant.
+이 소름 돋게 심플하면서도 치명적인 일화는, 복잡한 현실에서 여러 다른 변수 조력자들이 범행에 심오하게 가담하고 있을 때, 그저 단순하게 눈에 보이는 허술한 단일 예측 단서 하나만 툭 던져놓고 회귀 분석을 돌려버렸을 때 벌어질 대 참사와 그로 인한 잘못된 정책 결정의 끔찍한 오해석 위험성을 낱낱이 파헤쳐 묘사해 줍니다.
+
+As in the linear regression setting, the results obtained using one predictor may be quite different from those obtained using multiple predictors, especially when there is correlation among the predictors.
+3장 선형 회귀 모래사장에서 뛰어놀 때와 똑같이 자명하게, 멍청하게 한 개의 무기(예측 변수)만 단독으로 투입해 얻은 오염된 시야 정보는 다수의 변수를 모두 결합해 도출한 삼차원 다중 시야 결론과 180도 통수 반대 방향의 결과를 내뿜을 수 있기 때문에, 유독 변수들끼리 보이지 않는 끈끈한 결탁 상관관계(Correlation)가 존재할 경우 특히 분석가는 모니터 앞에서 정신줄을 바짝 잡고 극도로 예민하게 행동해야 합니다.
+
+In general, the phenomenon seen in Figure 4.3 is known as _confounding_.
+이처럼 통계 분석가들의 뒤통수를 치며 어둠 속에서 그래프 선들을 교묘하게 뒤틀어버리는 4.3 그림 속의 숨겨진 보스 착시 현상을, 우리 통계학자들 세계에서는 **교란(Confounding)** 이라는 불명예스러운 저주 타이틀 명칭으로 호명합니다.
+
+By substituting estimates for the regression coefficients from Table 4.3 into (4.7), we can make predictions.
+교란의 안개를 걷어내고 표 4.3에서 구해낸 정직한 다중 회귀 계수들을 대규모(4.7) 공식 방정식 세트에 무자비하게 욱여넣어 대입함(substituting)으로써, 우리는 이제야 진짜 공정한 실전 예측 사격을 뽑아낼 수 있습니다.
+
+For example, a student with a credit card balance of $1,500 and an income of $40,000 has an estimated probability of default of
+예를 들어, 통장에 빚 잔고가 \$1,500 정도 쌓여있지만 연 소득 벌이가 \$40,000 에 매달린 가여운 한 학생의 추정 파산 폭발 게이지는 다음과 같습니다:
 
 $$
 \hat{p}(X) = \frac{e^{-10.869 + 0.00574 \times 1500 + 0.003 \times 40 - 0.6468 \times 1}}{1 + e^{-10.869 + 0.00574 \times 1500 + 0.003 \times 40 - 0.6468 \times 1}} = 0.058
 $$
 
 A non-student with the same balance and income has an estimated probability of default of
-반면 기표 저 위 훌륭 거대 대학생 당사자와 한도 토씨 완벽히 등가 **"동일한" 대출 통장 잔고 악성 빚 수량**을 등짐 똑같이 치명 달고 있고 부가 스펙 **똑같은 연수입 액 돈**을 통 벌어들이는 조건일반 직장인 자격 일반 무적 아저씨 (**student=0**) 의 추정 체납 파산 도태 확률은 역으로 무려 두 배 퍼센트 상치로 무마 더 높게 산입 극상 상승 관측 찍힙니다:
+반면 그 잘난 비학생 어른 직장인이 위 훌륭한 대학생과 완벽히 저울처럼 잔고 빚과 연봉을 똑같이 달고 있다면? 놀랍게도 그 비학생 도전자 어른의 파산 터닝 추정 확률은 이렇게 뒤집힙니다:
 
 $$
 \hat{p}(X) = \frac{e^{-10.869 + 0.00574 \times 1500 + 0.003 \times 40 - 0.6468 \times 0}}{1 + e^{-10.869 + 0.00574 \times 1500 + 0.003 \times 40 - 0.6468 \times 0}} = 0.105
 $$
+(약 두 배 가량 더 체납 파산에 취약함을 보여줍니다!)
 
 (Here we multiply the `income` coefficient estimate from Table 4.3 by 40, rather than by 40,000, because in that table the model was fit with `income` measured in units of $1,000.)
-(여기서 미세 오류 투기 주의할 스펙 깨알 점! 위 확률 연산 수식 기표 대입에 연간 소득 억 치수를 넣고 계산 조율할 때 우린 날것 \$40,000 공 갯수를 다 우겨 집어넣지 무작정 않고 심플 앞 '40' 조각 축소 단위만 톡 넣었습니다. 그 수사 이유는 기조 원본 표 4.3 추산 데이터 체급 보정이구 애초에 시작 판국부터 '1천 달러' 묶음 단위를 최소 베이스 기준으로 공을 떼고 단위 압축 스케일 세팅되어 축소 모델 피팅 되었기 수순 전단 때문입니다. 지표 단면 혼동 금물!)
+(주의: 수식 공식 대입 연산 과정에서 우리는 촌스럽게 40,000이라는 원본 수치를 통째 곱하지 않고 표 4.3 계수에 날렵하게 숫자 40만 슬그머니 곱해줍니다. 그 비밀은 애당초 그 거대한 모형 표의 솥단지 크기가 세팅될 때 수입 데이터 자체가 1,000달러 단위로 압축 변환 적용되었기 때문입니다!)
 
 This is the document for this topic.
-이 파트는 이 단막 다중 다차원 확률 조항 예측 로지스틱 산출 주제를 직관 체감 체감 논단 수단 교란 확인 위해 단연 무적 구축 기술 수반 거진 적재된 찰떡 요약 해설 첨부본 모순 단락 조 문서 양식입니다.
+이 파트는 이 단막 주제를 위해 기술 적재된 요약 문서입니다.
 
 ---
 

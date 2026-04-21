@@ -1,20 +1,26 @@
 ---
 layout: default
-title: "trans2"
+title: "trans1"
 ---
 
-[< 4.7.5 Naive Bayes](../4_7_5_naive_bayes/trans2.html) | [4.7.7 Linear And Poisson Regression On The Bikeshare Data >](../4_7_7_linear_and_poisson_regression_on_the_bikeshare_data/trans2.html)
+[< 4.7.5 Naive Bayes](../4_7_5_naive_bayes/trans1.html) | [4.7.7 Linear And Poisson Regression On The Bikeshare Data >](../4_7_7_linear_and_poisson_regression_on_the_bikeshare_data/trans1.html)
 
-> 💡 **학습 팁:** 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 [📖 파이썬 랩(Lab) 해설판보기](./trans2.html)를 추천합니다! (직역본은 [📖 직역본 보기](./trans1.html) 메뉴를 활용하세요!)
+> 💡 **학습 팁:** 이 페이지는 원문 형식을 최대한 존중한 **직역본**입니다. 내용이 어렵거나 수학적 설명이 딱딱하게 느껴진다면, 더 쉽고 비유적으로 풀어쓴 [🏄‍♂️ Vibe Coding 버전보기](./trans2.html)를 추천합니다!
 
 # 4.7.6 K-Nearest Neighbors
-# 4.7.6 K-최근접 이웃 (KNN): 묻지 마 다수결, 내 주변 놈들이 내 운명!
+# 4.7.6 K-최근접 이웃
 
-We will now perform KNN using the `KNeighborsClassifier()` function. This function works similarly to the other model-fitting functions that we have encountered thus far. 
-드디어 소문만 무성했던 깡패 알고리즘, 내 주변 이웃들의 쪽수로 내 운명을 결정짓는 무지성 다수결 머신 **K-최근접 이웃(KNN)** 을 돌려볼 시간입니다! 파이썬 소환 마법진 이름은 `KNeighborsClassifier()` 인데요, 이거 구동하는 맛은 지금까지 우리가 지겹게 마르고 닳도록 맛본 타 분류기 로봇들의 스위치 조작법과 소름 돋게 똑같습니다. 
+We will now perform KNN using the `KNeighborsClassifier()` function.
+우리는 이제 통계 `KNeighborsClassifier()` 모형 기능 함수를 사용하여 분류 모델 KNN 기법을 실행 구축 수행(perform) 할 것입니다.
 
-As is the case for LDA and QDA, we fit the classifier using the `fit` method. New predictions are formed using the `predict` method of the object returned by `fit()`. 
-앞서 뛰었던 LDA나 QDA 조상님들과 마찬가집니다! 기계 배때지에 `.fit()` 먹방 주걱으로 데이터를 때려 박아 훈련시키고 나면, 그 결과물로 진화한 훈련종료 머신에게 냅다 `.predict()` 발사 방아쇠를 땡겨 미지의 미래 타겟 예측 샷을 갈겨 대는 똑같은 콤보 매커니즘이죠.
+This function works similarly to the other model-fitting functions that we have encountered thus far.
+이 함수 동작 방식은 우리가 지금까지 탐구 작동하여 접해왔던(encountered) 수많은 다른 이전의 모델 적합 통계 기능 함수들과 논리 기능적으로 아주 동일 유사하게 조작 구조적으로 편제되어 동작 작동(works similarly) 합니다.
+
+As is the case for LDA and QDA, we fit the classifier using the `fit` method.
+이전 모의 작동 통계 변환기 객체인 LDA 조작 그리고 QDA 사례 구동에서와 똑같은 사례 논리 원리 작동 구조(As is the case)로써, 우리는 이것 또한 동일하게 분류 장비 대상을 단조롭게 `fit` 훈련 구동 적응 메서드 조작 장치를 결합 사용하여 목적 데이터 대상에 강제 편입 적응 적합(fit)시킵니다.
+
+New predictions are formed using the `predict` method of the object returned by `fit()`.
+판독 결론에 도달하는 새 분류 도출 예측들(predictions) 데이터는 훈련 기동 톱니바퀴 결합 스위치인 `fit()` 조작 에 의해 산점 확증 반환된(returned) 훈련 적층 된 기계 변수 객체(object) 타깃 파편의 투사 전격 전용기인 `predict` 타격 사격 메서드 도구를 종속 결부 사용하여 최종 타점 발진 형성(formed) 투사 도출 결합 산출됩니다.
 
 ```python
 In [47]: knn1 = KNeighborsClassifier(n_neighbors=1)
@@ -30,8 +36,11 @@ Down         43   58
 Up           68   83
 ```
 
-The results using $K=1$ are not very good, since only 50% of the observations are correctly predicted. Of course, it may be that $K=1$ results in an overly-flexible fit to the data. 
-일단 몸풀기로 **$K=1$**, 즉 가장 가까운 이웃 딱 1명 한 놈만의 의견을 맹신하는 극단적 1인 독재 KNN을 돌려봤는데... 성적표 꼬라지가 처참합니다! 고작해야 모의고사 정답 타율이 반토막 50% 수준에 머무는 폭망 수준입니다. 뭐 당연한 결과이기도 합니다. $K=1$ 이란 극단적 세팅은 주변 잡소리에 너무 펄떡펄떡 휘둘려서 거대한 짐승의 뱃살처럼 너무 과하게 출렁거리며 데이터에 억지 끼워 맞춰지는 심각한 부작용(overly-flexible fit, 과대적합) 을 일으키기 딱 좋은 위험한 짓이거든요.
+The results using $K=1$ are not very good, since only 50% of the observations are correctly predicted.
+작동 투입 타깃 확정치 기판 옵션 파라미터를 $K=1$ 전제로 한정 제한 사용한 이 무기 기계 스캐줄 산출 측정 타율 결과들은 체계 통계상 사실 그다지 썩 훌륭하지 않게 상당히 저조한 수치 성적 매우 산점 파편 도출 산점 예측치 않게(not very good) 결과 궤적을 남겨 도출 산출 나옵니다. 왜냐하면 전격 타격 실전 테스트 관측치들 표본 전체 중 오직 고작 50% 타율 만 이 진정 타점상 확률 결판 전개 목적 목표 타겟 방향 결단 대로 명중 타점 올바르게 정확 예측(correctly predicted) 타결 도달 달성했기 때문입니다.
+
+Of course, it may be that $K=1$ results in an overly-flexible fit to the data.
+물론 통계 학도 입장에서 분석 통계상, 이것이 촉발 산점 한 오류 도출 기점 팩트는 극단적 조작 전제 입력 조건 단위 옵션인 $K=1$ 이라는 가장 협소 극단 조작 전극 입력 스펙 타점 제한 변수 투입이 본질 원인이 되어, 종국에는 결국 분석 판별 단일 측정 타깃 시스템 모델 이라는 구조물 형태를 전격 방대한 스킬의 거대 표본 데이터 표본 집단 체제 거대 전개 포진 그물망 에 대해서는 너무나도 지극히 지나치게 기형적으로 극단 스펙 형태의 분열적이고 지나친 아주 과도하게 심각히 유연한 지나치게 변동 굴곡의(overly-flexible) 데이터 패턴 적응 궤멸 적합 유연성 한계 초과 추산 체계 결과 망조 모의 산단 체계 실패 오류 도출 판락 의 전장 결말 로 무자비 확정 귀인 귀결 한계 결과(results in) 파생 결말 참사 지어버렸기 때문일 치명 조작 기기 옵션 스탯 단서 전제 가능성 수 도 분명 단단히 크게 존재 잠재 합니다.
 
 ```python
 In [48]: (83+43)/252, np.mean(knn1_pred == L_test)
@@ -41,8 +50,8 @@ In [48]: (83+43)/252, np.mean(knn1_pred == L_test)
 Out[48]: (0.5, 0.5)
 ```
 
-We repeat the analysis below using $K=3$. 
-그래서 정신 차리고 이웃 쪽수를 3배로 늘려, 이번엔 3명의 이웃과 다수결 투표를 붙이는 **$K=3$** 모드로 세팅을 조율해 재도전 불꽃을 튀겨보겠습니다.
+We repeat the analysis below using $K=3$.
+우리는 스탯 타점 조건을 아주 약간 소폭 한 단계 수정 조율 변경하여 $K=3$ 조건 조작 을 한정 단독 사용하여 표 아래에서 단독 조작으로 시스템 동일 측정 구동 체계 분석을 다시 스탯 재차 갱신 반복(repeat) 측정 수행합니다.
 
 ```python
 In [49]: knn3 = KNeighborsClassifier(n_neighbors=3)
@@ -54,11 +63,29 @@ np.mean(knn3_pred == L_test)
 Out[49]: 0.5317460317460317
 ```
 
-The results have improved slightly. But increasing $K$ further provides no further improvements. It appears that for these data, and this train/test split, QDA gives the best results of the methods that we have examined so far. 
-짜잔, 다행히 명중 타율 점수가 53.1% 로 코딱지만큼(slightly) 쥐꼬리 상향을 맛봤습니다. 하지만 안타깝게도 $K$ 쪽수를 이보다 더 펌핑해서 올려봐야 헛수고일 뿐 점수판엔 아무런 메리트 업그레이드(improvements) 가 터지지 않습니다. 결론적으로 이 구역의 막장스러운 `Smarket` 주식 데이터 판과 우리가 이번에 짜 둔 훈련/시험 분할 그라운드 배틀 세팅 안에서는, 지금까지 달려본 선수들 중 **이차 곡선 뱀파이어 QDA 머신 녀석이 뱉은 성적표가 제일 우주 최고 스코어 갑(best results)** 이었던 것으로 판명 납니다.
+The results have improved slightly.
+재조작 타격 단절 데이터 도출 측정 표본 산출 결과 기록 정확도 스탯 기록 수치가 이전 고장 판락보다 이젠 분명 스탯이 오직 조금 단지 아주 근소하게 소폭 상향 조율 나아져 개선(improved slightly) 되었습니다.
 
-KNN does not perform well on the `Smarket` data, but it often does provide impressive results. As an example we will apply the KNN approach to the `Caravan` data set, which is part of the `ISLP` library. This data set includes 85 predictors that measure demographic characteristics for 5,822 individuals. The response variable is `Purchase`, which indicates whether or not a given individual purchases a caravan insurance policy. In this data set, only 6% of people purchased caravan insurance. 
-이 주식판 데이터에서 삽질했다고 KNN 녀석을 개무시하지 마십시오! KNN은 종종 소름 돋게 멱살 잡는 꿀 성적표를 뿜어내기도 합니다. 그 증거를 체감하기 위해 그 무대를 확 바꿔서, 이번엔 `ISLP` 무기고 서랍 구석에 잠들어있던 **`Caravan` (캐러밴 보험 구매)** 데이터 사냥터로 KNN 용병을 파견시켜 볼 겁니다. 이 소름 끼치는 신규 데이터 속엔 5,822명의 인간들 신상 정보를 탈탈 턴 인구통계학적 스펙(나이, 수입 등등 무려 85개짜리 힌트 조각) 들이 도배되어 있습니다. 우리가 최종 저격해 맞출 정답 타겟(반응 변수) 은 과연 이 호갱이 '캐러밴 캠핑카 보험' 에 돈을 꼴아박고 샀(Purchase) 느냐 마느냐를 나타내는데, 사실 이 시장은 졸라 협소해서 전체 호갱 타기팅 중 **꼴랑 6% 인간들만 지갑을 열고 보험을 산** 극악 무도 불균형 사막 데이터입니다.
+But increasing $K$ further provides no further improvements.
+그러나 타겟 성능 조작 도출 수치 옵션 스위치 파라미터 값인 대상 $K$ 스펙 을 전진 상향 기점으로 그 이상으로 막대하게 더 가혹히 키워 끝도 없이 무한 증가시키는(increasing) 무지성 조작 행동 선택 옵션 스탯 제어는 통계상 어떠한 더 이상의 단절 파편 성능 수치 향상 징후 개선들(improvements) 통계 수치 판락 을 단 한치도 전혀 결코 역 성립 보장 제공 단절 도출(provides) 산출하지 못 합니다 않습니다.
+
+It appears that for these data, and this train/test split, QDA gives the best results of the methods that we have examined so far.
+종합 파편 분석, 이 미친 듯이 종잡을 수 없는 특정 도박 증시 장세의 거대 혼란 데이터 파편, 그리고 방금 우리가 조율 개입 억지 배분 분리 적용 한 이 특정 비율의 전장 분리 비율 배분 타점 인 훈련/시험 통제 표본 분할(train/test split) 조건 설정하 옵션 하 에서는, 명확히도 우리가 장구한 단원 시간 내내 이제껏 총망라 전장 투입하여 탐구 조사 비교 검토 검토(examined) 조작 해봤던 모든 무수히 여러 장비 무기 다양한 통계 기법 다단 모형 전격 메서드들 파편 조작 무기 중 객관 비교 체제 결과적 성능 비교 단절 관점상 으로는 파편 여전히 굳건히 확고히 저 거대 곡선 궤도 타점 QDA 모델 기계 장치가 단연코 가장 강력한 성과 점유 기록 승리자 타이틀 명실상부 타격 최고의 도출 우승 타점 결승 결과들(best results) 을 부동 단독 제공 통계 성취 선사(gives) 확보 하는 압승 승자 도구 인 것으로 여지없이 판결 도출 맹목 드러납니다(appears).
+
+KNN does not perform well on the `Smarket` data, but it often does provide impressive results.
+지금 비록 KNN 모델 기동 시스템 무기는 치열한 이 난해한 극악 기형 복잡 혼동 난해 변동성 타점 인 기형 `Smarket` 미친 실전 증시 데이터 표본 묶음 전장 터 상에서는 처참히 제대로 파형 생존 타점 아주 무결하게 작동 성능 통과 지표(perform) 도출 방어 스탯 성능을 전혀 방어 확보 발휘를 제대로 일절 전혀 전혀 못 하지만 못하고 떡락하지만 망가졌으나(does not well), 돌이켜보면 실명 이 무기는 다른 특수 타겟 모의 실전 기전 전장 분단 구역 에서 만큼은 모조리 종종 무구하게 상당히 매우 파괴적 강력하고 꽤 전혀 아주 매우 놀라운 확률 명품의 가소성이 매우 뛰어난 아주 기막힌 인상적인(impressive) 기적 도출 기점 명중 판별 타점 기적 예측 기적 결과 데이터 조각들을 우리 분석 표본 에게 종종 곧잘 예고 없이 기적처럼 통쾌 파편 부동 아주 제공 배분 기적을 은밀히 (provide) 선사 창출해 도출 이행 단결 십분 발휘해 창조해 냅니다.
+
+As an example we will apply the KNN approach to the `Caravan` data set, which is part of the `ISLP` library.
+이러한 기적의 호환 구동 은밀한 기적 기능 한계 돌파 검증 입증 전개 반전 무안 단면 의 확증 판별 한 구동 검증 모의 일례(example) 판별 지표 증명 실험 전사로서, 우리는 이제 `ISLP` 기초 부속 통계 라이브러리 가방 서랍 덤불 종속 안에 일개 종속 파편 무기 관측 샘플 도구로 내장 조용히 포함 보존된 보급형인 또 다른 특수 기이한 전제 `Caravan` 인물 통제 표본 데이터 조사 세트 무리에 방금 전 판락 에서 씁쓸하게 참패한 오명을 안은 KNN 확률 측정 기법 도출 접근법 통계 체제를 다시 도구 소환 전면 대치 대입 이식 적용(apply) 하여 구동 성능 검토 실험을 확증 개시 단행 모의할 것입니다.
+
+This data set includes 85 predictors that measure demographic characteristics for 5,822 individuals.
+이 검정 파편 예시 확인 투입용 이 거대 통계 도출 예측 타점 검사 표본 데이터 세트는 수집된 총 5,822 명의 거대 개별 단독 독립 인간 단절 인구 개체들(individuals) 무리 에 대한 수많은 복합 단일 다루기 복잡한 세부 인구통계학적 특수 인간 분석 거대 사회 특징들(demographic characteristics) 단면 프로파일링 통계 지표 세부 를 광활 거대하게 계측 지시 판별 산단 조사 측정(measure) 하는 실로 무려 무식하게 85 개나 다단 되는 어마어마한 전격 투입 힌트 예측 거대 투입 지시 단서 복합 변수들(predictors) 조각 파편의 스탯을 이 무리 안에 통계 정보 거대 거시 포괄 포함 전격 분석(includes) 모으고 확보 하고 내장 유지 있습니다.
+
+The response variable is `Purchase`, which indicates whether or not a given individual purchases a caravan insurance policy.
+본 실험 판별 구동 목적 모의실험 조준 타겟 모형 분류기 모델 목표의 실전 사격 예측 조준 마지막 최종 관측 과녁인 확증 관측 타점 응답 모의 통계 예측 확정 목표 타깃 변수(response variable) 속성 명 은 데이터 세트 내의 기판의 인스턴스 정보인 그들의 확증 `Purchase` (이 보험을 살까 말까 구매 여부 타점) 기둥 정보 이며, 이것은 시스템 로직상 조준 타깃 명확 지목된 어느 특정 도출 개설 한 개인 독립 개체 인간 개체가 과연 모의 목표 조준 산단 타겟 상품 인 대출 상품 종속 캐러밴 임가공 차량 보험 특정 구매 체결 상품 재산 방침 지표(caravan insurance policy) 계약을 진짜로 현물 시장의 기계 모의 현금 지불 종결 현실 지출 개진 최종 무구 확률 현물 진짜 구매(purchases) 계약 타결 체증 도달 달릴 것인지 안 할 건 지 결정 양분 여부의 흑백 향배를 통계 확증 데이터 산상으로 확실하게 양자택일 흑백 도출 이분법 모조 구조 패턴 으로 통계 속성 이분 양분 지시 통보 타점 도출 나타냄 판단(indicates) 배당 결정 지어 마킹 합니다.
+
+In this data set, only 6% of people purchased caravan insurance.
+참고용 통계 상식 거시 팩트 사전 관측 단편으로서, 이 투입된 도출 아주 수많은 혼잡 다량 거대 정보 이 모집단 특수 환경 데이터 세트 전장 전체 그룹 집군 내에서는, 본래 오직 지극히 미미한 희귀 빈도 소수 6% 단절 퍼센티지 소수 비율의 지독히 극소수 빈도 찰나 희박한 소수 사람들 보험 구매자 집단군 파티션 만이 과거 표본 덩어리 전수 모집 실제 조사 통계상 진짜로 목표 캐러밴 목표 상품 보험 상품 종단 수익 구매 성과 지표 종결 지출 산출을 도달 전격 실제로 전격 이룩 타결 단일 도달 맹목 성과 구매(purchased) 달성 수치 이룩 결재 성취를 이루었습니다 팩트 결과 했습니다.
 
 ```python
 In [50]: Caravan = load_data('Caravan')
@@ -80,18 +107,24 @@ In [51]: 348 / 5822
 Out[51]: 0.05977327378907592
 ```
 
-Our features will include all columns except `Purchase`. 
-자 결승선 타겟인 통장 결제 여부 `Purchase` 딱지표 기둥만 쏙 도려내 빼놓은 나머지 모든 스펙 기둥들을 우리 공격용 힌트 총알(features) 로 장전합시다.
+Our features will include all columns except `Purchase`.
+비로소 우리가 전투 발동 코딩 모델 기동 추론 전투 병기 작동 기계 에 투하 입력 조준 단서로 대입 수렴할 훈련 사용할 정탐 힌트 지표인 우리 조준 통계 특징 파편 입력 변수망 세팅(features) 들 진영은, 오직 결과 정답의 과녁 타점 목표인 이 목표 `Purchase` 결괏값 타겟 단일 종속 분리 열기둥 단면 정보만 을 오직 일절 단절 완전 제외(except) 제거 절단 한 채 파편 타겟 모델 기판 내의 나머지 모든 그 외 단일 잔여 수많은 후보 단서 예측 정보 힌트 조각 열들(columns) 파편 도표 진영 데이터 조각 파편 리스트 전체 무리 묶음을 단번에 모두 무식하게 총망라 수용 단절 전부 일괄 파편 전술 투입 모의 전극 포괄 결부 정보 포함(include) 시켜 무식 투척 장전 시킬 전격 투입 할 것입니다.
 
 ```python
 In [52]: feature_df = Caravan.drop(columns=['Purchase'])
 ```
 
-Because the KNN classifier predicts the class of a given test observation by identifying the observations that are nearest to it, the scale of the variables matters. 
-주의 집중!! 극강의 경고 타임입니다! KNN 녀석은 눈 뜬 장님처럼 철저히 공간상의 "거리(distance)" 하나만 맹신하며 자신과 가장 찰싹 달라붙어 가까운 이웃 놈들의 신분을 베껴 예측하는 무지성 카피캣입니다. **그러므로 예측 변수들이 갖는 숫자 크기 덩치표(스케일 scale) 가 목숨줄처럼 중요(matters) 해집니다!** (예를 들어 '연봉 5000만 원' 과 '나이 30살' 은 숫자 스케일 덩치 차이가 넘사벽이라서, KNN 공간에선 연봉 변수가 거리를 다 씹어먹고 군림해 버립니다!)
+Because the KNN classifier predicts the class of a given test observation by identifying the observations that are nearest to it, the scale of the variables matters.
+사전 경고! 지독한 이 KNN 모델 시스템의 거리 측정 분류 로직 장치 작동 이면 구조 메커니즘 엔진은 오로지 사물 예측 추론 타점 구동 촉발 기동 탐지 발동 시 시스템 작동상 논리 오직 거시 타점 자신과 타점 데이터 타깃 도출 예측 산점 표본 사이 공간상 가장 좌표 지표상 수치 지형적으로 단위 척도 측정 밀도 결합 거리가 아주 매우 산단 극도로 전격 가장 근접 밀접 촘촘 거리 에 아주 아주 밀착 위치한(nearest) 속성 주변 정보 파편 데이터 관측치들 근처 이웃 파편 스탯 들 만을 본능적으로 짐승처럼 일일이 최우선 추적 측정 특정 조준 식별 탐지 체증(identifying) 먼저 찾아내어 근거로 조사 거시 도달 함으로써 이를 최우선 핵심 핀 포인트 배정 단서로 우선 삼아 강박 조준 결괏값 도출 목표 주어진 조준 모의 특정 추출 예측 시험 배정 검정용 신규 타겟 관측 투척 관전 대상 표본 치 속성(test observation) 단면 그룹 개체 의 향후 기점 확증 배분 목표 종결 클래스 소속 흑단 진영 군 을 통계 표결 지배 결단 예측(predicts) 타결 판정 도출 체결하기 아주 일차원 무식 단단히 작동 방식 구조 매뉴얼 때문에, 이 입력 투입된 수치적 개별 정보 덩어리 지시 인덱스 단서 속성 투하 단서 변수들 낱개 요소 각각 파편 기저 이 내포 단위 지닌 그 고유의 크기 체적 조작 개체 자체 수학적 속성 데이터 단위 스펙 지표 단서 체증 덩어리 고유 덩치의 개별 절댓값 산포 수치 표기 특수 수치 크기 지표 단면 한계 척도 크리티컬 스케일(scale) 자체 고유 통계 산포 크기 스탯 단위 척도가 아주 모델 스탯 단절 추론 도출 분리 예측 연산 결정 지표 상에서 시스템 연산 결과를 뭉개버릴 정도로 아주 매우 민감하고 조작상 극도로 전적 치명적 파편으로 중대한 통계상 단면 중대 이변 중요 단서 사안 논리 지표 판단 척결 문제 개입 조작 작용 오류(matters) 유발 원인 촉발 단점 요소 로 대단히 크게 전반 기동 결함 치사 한계 파급 오류 영향을 파생 조작 미칩니다.
 
-A good way to handle this problem is to _standardize_ the data so that all variables are given a mean of zero and a standard deviation of one. Then all variables will be on a comparable scale. This is accomplished using the `StandardScaler()` transformation. 
-이 막장 스케일 격차 사태를 해결할 사이다 같은 비법은, 85개 잡동사니 모든 스펙 변수에 강제로 다이어트와 성형을 감행해 **'평균은 무조건 한가운데 0, 흩어진 널뛰기 폭빵 표준편차는 무조건 공평하게 1' 로 맞춰 버리는 표준화(standardize) 마력의 평탄화 스킬**을 먹이는 겁니다. 그러면 연봉이든 나이든 전부 다 평등하고 쫄깃하게 비빌 수 있는 수준급(comparable scale) 도토리 키 재기로 억지 변환 개조됩니다. 이때 쓰는 마법의 파이썬 마술봉이 바로 거친 야생마도 순한 양으로 갈아 넣는 `StandardScaler()` 규격화 변환기입니다!
+A good way to handle this problem is to _standardize_ the data so that all variables are given a mean of zero and a standard deviation of one.
+매우 까다로운 이 아주 치명적 스케일 차이 얽힘 극히 골치 아픈 스펙 조작 고질병 스펙 차이 편차 단절 치명적 산점 불량 결함 왜곡 오류 문제의 단면 논리 위협을 사전에 타개 돌파 극복 완전 수습 처리(handle) 평정 할 수 있게 해주는 가장 통계학적 기초 우회 해결 조작 기반의 전단 모의 기법 중 가장 최고의 이상적 좋은 우회 무결성 유용한 통계 파생 아주 영리한 수리 통계 단절 우회 방식 보정 무적수단(A good way) 통제 방식은, 곧 데이터 투입 모델 단말 측정 입력 힌트가 되는 모든 개별 척도 종속 수단 파편 낱낱 낱개 개별 조각 단서 투척 후보 변수 표본 데이터들이 각각 전면 강제적으로 타점 비율 일괄 균등 조정 붕괴 분쇄 강제 수학 스케일링 지표 단면 평균 강압 도출 억지 뭉개기 수치 정점 강제 평균 0 (zero) 좌표로 모조리 조 단위 규합 일치 그리고 그들의 개별 도출 데이터 각각 개별 격차 폭 크기를 모두 절대 획일 통일 묶음 단일 치환 표준 간극 기준 균등 무지성 스펙 조작 분산 편차 기적 크기 폭 산술 1 (one) 기록 수치 파편 동등 규격 도출 로 수집 동등 수치 표 확보되어 일치 규격 제공 주어지도록 시스템 전반 일괄 비율 단위 도출 산출 연산 치명 강제 기전 규격 일치 치환 환산 전격 변환 투척 도출 강요 시켜버려 결과적으로 모든 이질적 독립 불규칙 특이성 체급 전극 데이터들(data) 수치 비율 진폭 을 모조리 공정하게 완전 평등 균등 획일 조작 척도로 조절 조작 _표준화(standardize)_ 강압 크기 비율 스케일 평준화 치환 변환 도출 시켜 조작 처리 제단 조작 해 버리는 평준 척도 조립 공정 교정 과정 마술 보정 방법 연산 입니다.
+
+Then all variables will be on a comparable scale.
+그렇게 마술처럼 스케일 평준화 압축 공정 산술 환산 기법 조작 처리를 기적 무사 거치면, 제각각이던 비대 혼합 모든 잡다한 통계 입력 힌트 투입 변수 덩어리 전단 배열 단편 조각 데이터들(variables) 묶음 전체 가 거짓말처럼 동일 스케일 이젠 일괄 모조리 죄다 아주 평등 모의 전제 서로 무수히 일치 동등한 조작 타율 비교 동일 공정 단결 보장 기준 평가 조건 일체 기준치 저울 선 동일 선 상계 상에 온전히 공존 획일 놓이게 마법 배열 되며 통계상 치명 결과 데이터 시스템 적으로 어떠한 개입 없이 아주 온전히 공평 안전 평단 무구하게 구조 단절 완전히 차별 공정 정당한 지표 억압 비율 공평 단면 차별 없이 상호 일치 상호 호환 상호 평준화 규격 조작 상호 공정 비교 무결 가능하게 되는 공평 타협 동등 비교 일괄 단위 호환 척도 획일 동등 일치 평단 척도 동률 층위 규격(comparable scale) 평형선 잣대 통제 동등 투입 균형 스탯 연산 지표 호환 규격 일선 동기화 평면상 상에 동등 등극 안착 유지 균등 공평 작동 유지하게 스케일 발판 일치가 무결 보장 될 것입니다(will be).
+
+This is accomplished using the `StandardScaler()` transformation.
+이 강력한 통계 평준화 공평 구동 무기 이단 스펙 뼈대 평준 세팅 스케일 마법 작업 조작 기전 이행의 손쉬운 수월 작동 발동 은, 파이썬 패키지 내부 부품 도구 중 특수 내장 데이터 일괄 개체 덩어리 치환 가공 변환 도구 단말 평준 억압 추출 마술 도구인 저 거대 성능 깡패 저력 스탯 강제 변동 환산 보정 기계 인 `StandardScaler()` 치수 비율 변환기 치환 강제 축척 환산 클래스 장비(transformation) 함수를 조율 수단으로써 그냥 공구함에서 가져와 전격 맹목 호출 채택 의지 사용(using) 코딩 구동 함으로써 그냥 컴퓨터 기기 코딩 명령 한두 줄로 기적같이 아주 투명 매끄럽고 신비 완벽하게 손수 달성 작동 이행 공정 성공 달성 완료(accomplished) 되어집니다. 엄청 쉽죠.
 
 ```python
 In [53]: scaler = StandardScaler(with_mean=True,
@@ -101,15 +134,15 @@ scaler.fit(feature_df)
 X_std = scaler.transform(feature_df)
 ```
 
-Now every column of `feature_std` below has a standard deviation of one and a mean of zero. 
-짜잔! 파이썬 코딩 분쇄기를 거쳐 탄생한 이 새로 깔끔해진 `feature_std` 판때기의 모든 기둥 라인 숫자들은 완벽 공산품처럼 찍혀서, 오차 널뛰기 1, 중앙 스코어 0이란 평등한 스펙으로 무장 탈바꿈했습니다! 
+Now every column of `feature_std` below has a standard deviation of one and a mean of zero.
+이제 바로 기동 연산 발동 아래에서 시스템 조작 단절 측정 통해 규격 재편 압축 가공 평준화 도출 치환 데이터 단말 환산된 획일 공정 데이터 정제 강압 타겟 분리 세공 파편인 저 특수 보정 데이터 세트 덩어리 명찰 타점 변수 개체 `feature_std` 집단 신규 배열 데이터 구조의 내부 그 모든 제각각 독립 투사 변수 단편 속성 단절 열 기둥 기점 인덱스(column) 변수 조각 단편 들 모두 전체 는, 애초의 튀던 데이터 개별 기원 개성 독립 고유 속도 개별 수치 척도 무관 속성 기원 독립 통계 속성 단면 측정 체급 단위 값이 예외 도출 척도 치수 반발 예외 대상 단 한 치의 오차 남김없이 정말 아주 소름 돋게 획일 모조리 예외 없이 죄다 평준 산술 강제 압박 통제 평균 단위 계산 조작 강압 일괄 평균값 정밀 측정 영 점 척도 좌표 0 단면 으로 무조건 납작하게 통제 억압 압착 눌리고 환산 붕괴 되고 정산 통일 규열 일치 부피 덩치 크기 간극 압착 지표 차별 표준 오차 산단 규격 산점 편차 기동 산재 진폭 치수 수치 범위 폭 크기 를 칼같이 단일 통일 단일 단면 수치 스펙 1이라는 결과 치수로 완벽히 단면 평등 공정하게 개별 전원 맹목 압력 산단 확보 조작 쟁취 단면 치환 획득 개별 보유 압착 장착 유지 (has) 하도록 아주 무자비하게 전단 기점 공평 평단 평등 강렬하게 획일 강제 스케일 규격 조종 평준 치환 변형 개조 조작 환골탈태 완료 세팅 처리 됩니다. 이렇게 해야 KNN 이 미친 거리 오류 뻘짓 측정을 안 합니다!
 
 ```python
 In [56]: (X_train, X_test, y_train, y_test) = train_test_split(X_std, Purchase, test_size=1000, random_state=0)
 ```
 
-We fit a KNN model on the training data using $K=1$, and evaluate its performance on the test data. 
-우린 다시 이 갓 빚어낸 순수 평화 통일 스케일 훈련 데이터를 갈아 넣고, 미친 독불장군 이웃 **$K=1$** 짜리 KNN 모델을 세팅(피팅) 해 뒷주머니 타겟 테스트 데이터에다 냅다 모의고사 스코어를 채점(evaluate) 저격해 보았습니다.
+We fit a KNN model on the training data using $K=1$, and evaluate its performance on the test data.
+이제 우리는 비로소 모의 규격 압착 평준화 변환 치환 산입된 이 아주 공평 평등하게 마개조 오차 없는 공명정대 단면 변환 치환 스케일 왜곡 변칙 배제 치환 모조 획일 통제 모의 통계 모델 훈련 관전 전제 목적 타겟 정보 데이터 집합 단일 평준화 스캔 표적 표본 무더기상에 이웃 한계 포획 제한 타겟 추적 탐색 단절 조준 타깃 반경 옵션 모형 탐사 한도 수치 제한 제한 스위치 강제 옵션 수치 설정 이웃 조작 변수를 극단치인 좁은 탐색 $K=1$ 한 단일 좁은 단절 규격 로 아주 극단 좁게 포커스 고정 한정 단독 지목 고정 설정 단락 선택 투입 조작(using) 하여, 이 KNN 도박 모델을 무자비하게 데이터에 강제로 스파링 붙여 밀어붙여 적합 체계 학습 주입 스파링 시키고(fit), 그런 뒤 은밀한 파이썬 스위치 분수 분리 추출 체제 다음 타겟 스텝 단절 과정 로 무자비 분리 추출 분할 생성 지시된 미래 모의 타격 예비 모의 전장용 미증유 미발 매 숨긴 예측 모의 타겟 테스트 시험용 모의 타격 검정 숨긴 정보 예측 단말 독립 미래 고립 데이터 세트(test data) 표본 위에서 그 이식된 모델 스파링 지옥 투척 머신의 예측 치명적 조준 저격 생존 결과 기동 기적의 실전 모의 타율 타격 적중 단절 진위 판례 산출 결과 배분 타점 도출 예측 명중 위력 성능(performance) 파괴력 을 도출 아주 기만 없이 거시 모단 객관 분단 냉정 지독하게 산출 도출 관전 평가 채점 잣대 판별 확증 증명(evaluate) 냉혈 채점 돌입 단독 수치 해 검증 냅니다.
 
 ```python
 In [57]: knn1 = KNeighborsClassifier(n_neighbors=1)
@@ -121,19 +154,11 @@ np.mean(y_test != knn1_pred), np.mean(y_test != "No")
 Out[57]: (0.111, 0.067)
 ```
 
-It turns out that KNN with $K=1$ does far better than random guessing among the customers that are predicted to buy insurance. Among 62 such customers, 9, or 14.5%, actually do purchase insurance. This is double the rate that one would obtain from random guessing. 
-오 마이 갓, 결과창 까보니 신박한 비밀이 하나 까발려집니다! 모델 녀석이 "이 호갱님들은 백퍼 보험 삽니다!" 라고 점을 찍은 타겟 고객 명단을 까보니 조잡한 무지성 찍기(random guessing) 에 비해 그 성취율이 미치도록 월등해진 쾌거(far better) 가 터집니다! 이 KNN 녀석이 작두 타며 픽한 구매 예측 예정 고객 62마리 중에서, 무려 9명(비율로 치면 **14.5%**) 의 인간들이 지갑을 열고 실전에서 진짜로 보험을 사 주었습니다! 이건 애초에 전체 데이터 구매 지분 눈감고 찍었을 때 터질 확률(겨우 6%) 에 비하면 무배에 떡상하는 놀라운 마법과 같은 타격 효율의 대혁명입니다!
+It turns out that KNN with $K=1$ does far better than random guessing among the customers that are predicted to buy insurance.
+모델 데이터 기계 타격 기록 분석 결과 산출 스코어 요약 결과 아주 놀랍고 소름 돋게 치명타 적인 기동 조작 성공 실전 성공 충격적인 타격 명중 확신 사실 반전 결과 도출 전복 결론이 여지없이 전면 증명 확증 드러납니다! 옵션 스위치 파편 조작 $K=1$ 즉 극단적 조준 핀포인트 1명 이웃 아주 단일 밀착 지목 좁은 탐색 시야 스탯 옵션만을 극단적 맹목 단일 의지 고집 장착한 완전 돌격 미친 단일 бое투 KNN 돌격 기동 기만 체제 모델 통계 장비 구동이 만들어낸 결과 팩트 타점은 놀라웠습니다, 기계가 자신 있게 "이 보험! 어차피 희박하지만 이 특수 인간은 희귀하게 무조건 확실히 100퍼 산다 돈 박아라!"라고 단호히 기계가 선제 코딩 확언 지시 장담 조작 구매 확신 배팅 산출 파편 투사 예측(predicted) 했던 예측 일치 판별 도달 조작 추출 검증 단말 표본 대상 해당 타겟 특정 상품 마진 모의 진단 보험 관련 상품 결제 희귀 결제 확률 구매 타진 예정 확증 지목된 확률 표본 집중 예측 고객들 모집군 속 대상 아주 특수 지목 집군 표본 집단 단면 묶음 타겟 안에서(among the customers) 진위 여부 채점 판독 통계 만큼은, 그냥 아주 아무 근거 대책 없이 무지성 원숭이 맹신 뇌동 배팅 으로 눈 질끈 감고 무작정 아무거나 마구잡이 원시 원숭이 동전 랜덤 찍기 난사 도박 확률 맹단 맹목 단순 확률 단순 무례 단순 추측(random guessing) 찍기 복불복 배팅 난사 도박 확률로 그냥 운 좋게 우연히 운으로 얻어낼 무구 단편 단편 결과치 수치보다는 기적 같이 아주 기이하게 현저히 비율적으로 극명 압도 도출 스코어 단절 훨씬 더 기막힌 달성을 보여 아주 전격 우수 성적 맹렬 월등한(far better) 전면 적중 신내림 확률 급의 대우 전격 무구 우수 기막힌 예측 생존 생존 타격 정확도 성과 달성 역산 성과 스코어 타율 기능(does) 결산 도출 타점 획득 결과를 기적같이 경이롭게 성취 실적 적중 달성 모의 증명 팩트 창출 아주 실질 이뤄 내며 도출 기점 냈음이 폭로 판 연산 여실히 산점 확증 폭로 판명 구조 결론 입증 증명 도출 (turns out) 입증 결과 보여 졌습니다. 기계가 꽤 신내림을 받았네요 이건!
 
-```python
-In [59]: 9 / (53 + 9)
-```
+Among 62 such customers, 9, or 14.5%, actually do purchase insurance.
+기계가 신들린 작두를 타고 단언 찍은 해당 타점 모의 대상, 바로 예언 타점 지목 대상 인간 지독 고객들인 분석 기동 추출 타점 낚시 대상 단면 타점 모음 총 62명 의 엄선 타점 고객 집단 지목 그룹 표적 표본 추출 지목 그룹 고립 구역 무리 표본 속 바운더리 통계 조사 안에서(Among 62 such customers), 추출 타격 예측 기점 산단 9명에 해당하는 실존 진짜 현물 개체 인간, 분석 퍼센트 확률 치사율 도달 백분위 비율 환산 시 즉 조작 타율 무려 달성 약 14.5% 의 놀라운 기적 타율 거대 적중 희귀 적중 스케일 확률의 단면 소수 소수 비율 타깃 적중 고객이 기계의 예언대로 타점 기획 적중 확증 조사 대상 조사상 실제 리얼 필드 지형 환경 조건 으로 진짜 실제 자기 돈 주고 현물 구매(actually do purchase) 타결 통계 타점 도달 상품 결제 계좌 기록 성과 도달 달성 수치 보험금 최종 종단 계약 도달 가입 보험 종결 지출 지출 결제 목표 달성을 기적적으로 소름 돋게 전격 맹목 입증 통쾌 실행했습니다! 기계가 이 어려운 걸 확률 예측 10% 단위로 긁어모아 기적같이 9명이나 신묘하게 솎아낸 겁니다! 대박!
 
-```python
-Out[59]: 0.14516129032258066
-```
-
----
-
-## Sub-Chapters
-
-[< 4.7.5 Naive Bayes](../4_7_5_naive_bayes/trans2.html) | [4.7.7 Linear And Poisson Regression On The Bikeshare Data >](../4_7_7_linear_and_poisson_regression_on_the_bikeshare_data/trans2.html)
+This is double the rate that one would obtain from random guessing.
+이 경이로운 핀셋 적중 달성 도출 지표 수치 단서인 이 14% 단락 돌파의 기막힌 놀라운 예측 통계 예후 획득 도달 결괏값 도출 퍼센트 희귀 타점 명중 수치는, 한 일반 무지성 개인 평민 개체 인간이나 도박사가 아무 뇌가 없이 그 어떤 힌트 조작 도구도 아무 장비 없이 그냥 맹목 아무 분석 관측 통찰력 생각 없이 완전 동전 던지기식 앞뒤 맞추기 식 의 야생 단순 허무 맹단 맹목적 돌격 도박 도출 단순 임의 무지성 추측 원숭이 찍기 막무가내 아무거나 확률(random guessing) 순전한 우주 폭탄 돌리기 미친 야수 운 발로만 이 진흙탕 특이점 장세에서 우연히 겨우 도출 스코어 막무가내 얻어낼(obtain) 수 있을 극악무도 희박한 최악 허접한 확률인 진짜 완전 원시 무식 최하 기본 밑바닥 생 바닥 기본 기초 약 6% 등장 확률 산출 결과 도출 달성 율 표본 허상 진단 획득 기본 원시 스코어(rate) 도달 크기 의 수치 비교 상으로, 정확하게 무려 통쾌 상회 통계적으로 대량 대략 맹목적 두 배 거대 따블 곱절 단절 파편 거대 곱 배수 차이(double) 초과 스택 단일 압박 점령 이라는 통계학 추론 기점상 기적의 통찰 타격 압승 기점 거대 전폭 기적적 달성 전단 기록 압승 단면 성취율 과시 를 무구 보장 매우 폭풍 보여줍니다 아주 전면 보여 줍니다. (장님 문고리 잡는 6퍼센트의 쌩 운빨을, KNN 모델이 타점 분석으로 2배가량 압도적 성능인 14퍼센트로 떡상 복리 시켜버린 개가이자 전설의 이익률 혁명입니다!)

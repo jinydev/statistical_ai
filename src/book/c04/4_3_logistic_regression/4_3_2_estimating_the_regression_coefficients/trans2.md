@@ -8,35 +8,80 @@ title: "trans2"
 > 💡 **학습 팁:** 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 [📖 파이썬 랩(Lab) 해설판보기](./trans2.html)를 추천합니다! (직역본은 [📖 직역본 보기](./trans1.html) 메뉴를 활용하세요!)
 
 # 4.3.2 Estimating the Regression Coefficients
-# 4.3.2 회귀 계수 추정 (정답에 가장 가까운 최후의 곡선 찾기)
+# 4.3.2. 회귀 계수 추정 (정답 찾아 맞추기 게임)
 
-The coefficients $\beta_0$ and $\beta_1$ in (4.2) are unknown, and must be estimated based on the available training data. In Chapter 3, we used the least squares approach to estimate the unknown linear regression coefficients. Although we could use (non-linear) least squares to fit the model (4.4), the more general method of _maximum likelihood_ is preferred, since it has better statistical properties.
-지옥의 S자 방정식 수식 (4.2) 배 안에서 암약하는 핵심 참모 계수 $\beta_0$ 와 $\beta_1$ 은 우리가 당장 알 길이 없는 암흑 속의 미지의 값이며, 우리는 우리 손에 쥐어진 가용한 훈련수사 데이터를 샅샅이 파고 바탕 삼아 이 녀석들 좌표를 찍어 맞춰야(추정해야) 합니다. 자, 위대한 3단원을 돌아보면 우리는 선형 회귀 1차선 뼈대의 미지수를 딱 맞추기 위해 '최소 제곱법' 이라는 망치를 시원하게 썼습니다. 비록 여기서도 무식하게 (비선형) 최소 제곱법 망치를 휘둘러 저 (4.4) 모형 틀에 꾸역꾸역 욱여넣을 순 있겠지만, 여기 확률의 세계에서는 **최대 우도 추정법(Maximum Likelihood Estimation)** 이라는 더 고상하고 보편 타당한 수학적 진단 방식이 훨씬 훌륭한 통계적 속성을 담보하기 때문에 이 마법의 방법을 단연 강력 선호하게 됩니다.
+The coefficients $\beta_0$ and $\beta_1$ in (4.2) are unknown, and must be estimated based on the available training data.
+아까 보았던 거대한 로지스틱 함수 식 (4.2)의 동력원인 계수 $\beta_0$ 번과 $\beta_1$ 번은, 현재 우리가 정체를 완전히 알 수 없는 미지의 블랙박스 값이며 어떻게든 오로지 주어진 훈련 데이터를 요리조리 분석하여 역으로 찾아내(추정해) 맞춰야만 하는 과제입니다.
+
+In Chapter 3, we used the least squares approach to estimate the unknown linear regression coefficients.
+지난 3장 시절, 우리는 직선의 선형 회귀에 숨어있던 범인 계수를 추적하기 위해 '최소 제곱법'이라는 오차 줄이기 마법 기술을 사용했었습니다.
+
+Although we could use (non-linear) least squares to fit the model (4.4), the more general method of _maximum likelihood_ is preferred, since it has better statistical properties.
+여기 곡선의 세계(4.4)에서도 (비선형) 최소 제곱법을 억지로 우겨넣어 빙빙 돌릴 순 있겠지만 통계학자들은 단연코 기각합니다. 대신 **최대 우도법(maximum likelihood)** 이라는 훨씬 더 범용적이고 우아한 통계적 방어력을 지닌 대체 기법을 무기로 삼아 선호하는 편입니다.
 
 The basic intuition behind using maximum likelihood to fit a logistic regression model is as follows: we seek estimates for $\beta_0$ and $\beta_1$ such that the predicted probability $\hat{p}(x_i)$ of default for each individual, using (4.2), corresponds as closely as possible to the individual's observed default status.
-로지스틱 회귀 뱀 모델을 찍어 누르기 위해 저 '최대 우도' 마법 단자를 동원하는 가장 본질적인 기본 직관은 심플하게 이렇습니다: 우리가 (4.2)번 식의 고문관 기계를 통과시켜 뱉어낸 각각의 개인별 징벌(파산 예측) 확률 타깃 스펙인 $\hat{p}(x_i)$ 가, 지금 우리 눈앞에 적나라하게 놓인 그 사람의 '진짜 파산 현행 관측 상태(Yes or No)'에 최대한 소름 돋게 완벽히 들러붙어 밀착 일치하도록 이끌어 줄 쌍두마차 계수 $\beta_0$ 와 $\beta_1$ 추정치 조타수를 갈망하며 찾는 것입니다.
+이 거창한 '최대 우도법'을 로지스틱 회귀에 끼워 맞추는 뒤편의 기본 아이디어 직관은 아주 상식적이고 심플합니다: 우리는 $\beta_0$ 와 $\beta_1$ 퍼즐 조각을 찾을 때, 식 (4.2)를 통해 내놓은 수학적 예측 파산 확률 $\hat{p}(x_i)$ 가, 내 눈앞에 앉은 그 환자의 진짜 파산 여부 상태 (관측값) 와 영혼의 단짝처럼 최고로 완벽하게 딱 달라붙도록 만들 궁리를 하는 겁니다.
 
 In other words, we try to find $\hat{\beta}_0$ and $\hat{\beta}_1$ such that plugging these estimates into the model for $p(X)$, given in (4.2), yields a number close to one for all individuals who defaulted, and a number close to zero for all individuals who did not.
-다시 말해 우리 임무는, 저 무시무시한 (4.2) 식의 배때기인 확률 $p(X)$ 에 이 조타수 추정치들을 강제로 쑤셔 넣었을 때 기계가, 실제로 대금을 떼먹고 도망친(defaulted) 불량 녀석들에게는 1(100%) 에 육박하는 사형 선고 확률 숫자를 아주 통쾌하게 뱉어내고, 반면 착실히 돈을 갚은 선량한 시민 녀석들에게는 0(0%) 에 수렴하는 안심 숫자를 무조건 뱉어내게 만드는, 그야말로 모델의 완벽한 튜닝 다이얼 값인 $\hat{\beta}_0$ 과 $\hat{\beta}_1$ 을 집요하게 찾아내려고 시도하는 과정인 셈입니다.
+즉 대놓고 말해서, 이 추정치 퍼즐 조각들을 (4.2) 모형 기계 $p(X)$ 에 무더기로 쑤셔 넣었을 때, 진짜로 파산 늪에 빠진 우울한 고객들에게는 "1(100%)"에 미친 듯 가깝게 숫자를 토해내고, 멀쩡하게 빚을 잘 갚은 평화로운 사람들에겐 "0(0%)"에 바닥을 기게 숫자를 뱉어내게 만드는, 그 마법의 황금비율 $\hat{\beta}_0$ 과 $\hat{\beta}_1$ 을 기어코 샅샅이 뒤져 찾아내고자 시도하는 것입니다.
 
 This intuition can be formalized using a mathematical equation called a _likelihood function_:
-이러한 우리의 원초적 체포 심리 직관은, 곧바로 통계학의 자존심이자 **'우도 함수(Likelihood Function)'** 라 거창하게 불리는 다음 단조 수식 공식을 통해 아주 매끄럽게 공식화 치환될 수 있습니다:
+이 상식적인 직관 욕심은, 두통을 유발하는 **우도 함수(likelihood function)** 라는 다음과 같은 수식 기호를 통해 엄숙하게 공식화됩니다:
 
 $$
 \ell(\beta_0, \beta_1) = \prod_{i: y_i=1} p(x_i) \prod_{i^{\prime}: y_{i^{\prime}}=0} (1 - p(x_{i^{\prime}})) \quad (4.5)
 $$
 
-The estimates $\hat{\beta}_0$ and $\hat{\beta}_1$ are chosen to _maximize_ this likelihood function. Maximum likelihood is a very general approach that is used to fit many of the non-linear models that we examine throughout this book. In the linear regression setting, the least squares approach is in fact a special case of maximum likelihood. The mathematical details of maximum likelihood are beyond the scope of this book. However, in general, logistic regression and other models can be easily fit using statistical software such as `R` or `Python`, and so we do not need to concern ourselves with the details of the maximum likelihood fitting procedure.
-이 다이얼 추정치 수위인 $\hat{\beta}_0$ 과 $\hat{\beta}_1$ 조종타는 이 우도(Likelihood) 함수의 판정 최종 결괏값을 그야말로 **가장 무지막지하게 제일 꼭대기로 끌어올리게(최대화, Maximize)** 만들도록 까다롭게 맞춤 선택됩니다. 최대 우도 추정 기법은 이 교재 전체 전반에 걸쳐 우리가 집요하게 까고 조사하게 될 수많은 비선형 구불구불 모델들을 피팅하고 맞출 때 전천후 전술로 쓰이는 마스터키식 매우 일반적인 접근법입니다. 팩트폭격 하자면, 돌이켜봤던 선형 회귀에서 그렇게 사랑했던 과거 최소 제곱법 방식 조차도, 따지고 한 꺼풀 벗겨보면 실은 이 방대한 최대 우도 철학의 아주 미미한 특수한 편린의 형태 케이스일 뿐이었습니다. 저 우도 함수(Likelihood) 속에 숨은 복잡무쌍 극한 미적분 유도 수학 디테일 전개표는 다행히 이 친절한 책의 난이도 범위를 안전히 벗어납니다. 다행스럽게도 참 고맙게, 로지스틱 회귀를 비롯한 제반 다른 모델들은 최신 파이썬(`Python`)이나 `R` 같은 똑똑한 노예 통계 코딩 소프트웨어 엔진으로 1초 만에 순식간에 강력 적합 피팅 시킬 수단이 있으므로, 우리 인간이 저 무서운 내막인 최대 최소 미분 적합 산출 절차 조각들에 나날이 손수 직접 매달려 골치 아프게 끙끙 앓으며 고민할 하등의 공산 필요가 단연 없습니다.
+The estimates $\hat{\beta}_0$ and $\hat{\beta}_1$ are chosen to _maximize_ this likelihood function.
+우리의 주인공 예측 추정치 모자 $\hat{\beta}_0$ 과 $\hat{\beta}_1$ 은, 오로지 이 거대한 우도 함수의 총결산 수치를 우주 끝까지 멱살 잡고 끌어올려 **최대화(maximize)** 시켜버리는 챔피언 값으로 채택 결정됩니다.
 
-Table 4.1 shows the coefficient estimates and related information that result from fitting a logistic regression model on the `Default` data in order to predict the probability of `default = Yes` using `balance` . We see that $\hat{\beta}_1 = 0.0055$; this indicates that an increase in `balance` is associated with an increase in the probability of `default`. To be precise, a one-unit increase in `balance` is associated with an increase in the log odds of `default` by 0.0055 units.
-자, 표 4.1 리포트는 오직 '통장 잔여 빚 잔고(`balance`) 하나'만 무기로 기용해 사용하여 `default=Yes` 배 쨀 확률을 예측해 찌르기 위한, 피 튀기는 로지스틱 모형 피팅(fitting) 적합 작전을 강행 돌린 후 얻어낸 핵심 계수 조종사 추정치들과 주변 관련 정보가 조율된 최종 작전 성적표입니다. 우리는 여기서 마침내 $\hat{\beta}_1 = 0.0055$ 임을 발견해 봅니다; 이것은 카드 거치 잔고 액수 수위가 점진 진격 늘어나면 그에 따라 빌런이 될 파산할 확률 척도도 덩달아 상승 동승 한다는 직관적 뜻을 내포 가리킵니다. 미시적으로 더 정확히 말하자면, 잔고 빚이 1 달러(단위) 찔끔 더 늘어날 때마다 파산 절명의 **'로그 오즈(Log-odds)'** 지표 값이 가차 없이 딱 0.0055 단위 덩이만큼 무던히 가중 늘어나 가산된다는 오싹한 뜻과 100% 대응합니다.
+Maximum likelihood is a very general approach that is used to fit many of the non-linear models that we examine throughout this book.
+최대 우도 추정법은 이 책 내내 우리를 괴롭힐 숱하게 등장하는 수많은 비선형 굴곡진 모델들을 냅다 데이터에 피팅해버릴 때 전천후로 쓰이는 매우 일반적인 국밥 같은 접근법입니다.
 
-Many aspects of the logistic regression output shown in Table 4.1 are similar to the linear regression output of Chapter 3. For example, we can measure the accuracy of the coefficient estimates by computing their standard errors. The _z_-statistic in Table 4.1 plays the same role as the _t_-statistic in the linear regression output. For instance, the _z_-statistic associated with $\beta_1$ is equal to $\hat{\beta}_1 / \text{SE}(\hat{\beta}_1)$, and so a large (absolute) value of the _z_-statistic indicates evidence against the null hypothesis $H_0 : \beta_1 = 0$. This null hypothesis implies that the probability of `default` does not depend on `balance` . Since the _p_-value associated with `balance` in Table 4.1 is tiny, we can reject $H_0$. In other words, we conclude that there is indeed an association between `balance` and probability of `default`. The estimated intercept in Table 4.1 is typically not of interest; its main purpose is to adjust the average fitted probabilities to the proportion of ones in the data (in this case, the overall default rate).
-여기 표 4.1 전면부에 표시 출력된 로지스틱 회귀 성적 결과표의 다수 많은 측면 단면들을 살며시 들여다보면, 놀랍게도 과거 3장 선형 회귀 직선의 결과 성적표 문법과 굉장히 구조가 유사 데칼코마니 한 측면이 꽤 많습니다. 예를 들면, 우린 그때처럼 여기서도 각 조종사들의 표준 오차 게이지(SE)를 따로 계산해서 이 조각 추정치들이 요동 널뛰는 정확도를 타진 측정 평가할 수 똑같이 있었습니다. 눈에 띄는 특히 표 4.1 하단에 기표된 **z-통계량(z-statistic)** 이수 심판관은, 옛날 3장 직선 회귀 경기장에서 호각을 불었던 그 유명한 _t_-통계량(_t_-statistic) 심판과 완벽히 1대1 똑같은 권위 역할 역학을 이 구장에서도 자행 수행합니다. 예를 들면, $\beta_1$ 계수에 꼬리표 붙은 _z_-통계량 성적은 단순히 구한 $\hat{\beta}_1$ 을 자기 자신의 지분 흔들림인 $\text{SE}(\hat{\beta}_1)$ 로 거듭 나눈 몫 점수이며, 이 (음수 떼고 본 절댓값) z-심판 점수가 엄청 거대 뻥튀기하다는 명백한 조짐은 자명하게 "빚 잔고 액수 따위와 파산 여부는 1도 아무 관련 엮이지 없다!"고 박박 속 편히 억지를 부리는 기존 귀무 가설 단면인 $H_0: \beta_1 = 0$ 주장을 걷어차고 강력 구태 기각할 확고한 반박 스모킹 건 근거가 단연 불쑥 됨을 지표 뜻합니다. 여기 표 4.1 성적에서 `balance` 파츠에 배정 뜬 _p_-값 표찰이 다행히도 먼지 코딱지만큼 형편없이 극소 작게 떴기 때문에, 우리는 승리의 깃발을 꽂고 당당하게 그 바보 같은 $H_0$ 를 전면 기각해 묻을 수 사정 있습니다. 즉 환호 반증해, 잔여 빚 잔고와 파산 도주 확률 표적 사이에는 인간적으로 빼도 박도 핑계 못하는 치명 선명한 끈끈한 연관 관계성이 진짜 확실히 단단 존재한다고 쐐기를 박고 종결 결론 내릴 수 자축 있습니다. 기표 하단 표 4.1의 첫머리 절편(Intercept) 추정치 초기 수치 자체는 보통 우리는 그리 쓸모 애지 관심 두는 사안 관심사가 대체로 결단코 아닙니다; 녀석의 절편 메인 기저 목적은 그저 그 전반의 평균 추합 피팅 곡선 확률들 전체 수위 곡점을 우리 데이터 풀 전체 집단이 지닌 최초 1번 타겟 발생 비율 몫(여기선 10,000명 중 약 3% 수준인 전체 평균 파산율 현황)과 모조리 강제 균형을 맞추어 영점 높낮이를 조작 튜닝하는 부품 기어 역할만 순전히 묵묵히 수행 타진할 뿐입니다.
+In the linear regression setting, the least squares approach is in fact a special case of maximum likelihood.
+비밀을 폭로하자면, 3장 선형 회귀 동네에서 썼던 그 잘난 최소 제곱법조차도, 사실 알고 보면 이 거대한 '최대 우도법'의 아주 쪼그만 하위 특별 케이스(special case) 잔가지 하나에 불과합니다.
+
+The mathematical details of maximum likelihood are beyond the scope of this book.
+하지만 안심하십시오. 이 최대 우도를 손으로 직접 미적분해 갈라치는 끔찍한 수학적 세부 증명은, 다행히도 이 교재가 감당할 한계 범위를 아득히 벗어납니다.
+
+However, in general, logistic regression and other models can be easily fit using statistical software such as `R` or `Python`, and so we do not need to concern ourselves with the details of the maximum likelihood fitting procedure.
+요즘 세상에선 로지스틱 회귀든 머신러닝 모델이든 `R`이나 `Python(파이썬)` 같은 천재적인 통계 소프트웨어에 데이터만 던져주면 명령어 한 줄로 1초 만에 내부적으로 손쉽게 돌아가 피팅되기 때문에, 우리는 굳이 뒷단의 최대 우도 수학 연산 적합 절차에 지레 겁먹고 속을 끓일 하등의 염려 필요가 없습니다.
+
+Table 4.1 shows the coefficient estimates and related information that result from fitting a logistic regression model on the `Default` data in order to predict the probability of `default = Yes` using `balance` .
+표 4.1의 성적표는 지갑 잔고(`balance`) 정보만을 가지고 불길한 파산 `default = Yes` 확률을 예측하려는 목적으로 `Default` 모의 데이터에 로지스틱 모형을 신나게 돌려본 뒤 얻어낸 최종 계수 결괏값 추정치 및 그 주변 신상 통계 정보들을 줄줄이 보여줍니다.
+
+We see that $\hat{\beta}_1 = 0.0055$; this indicates that an increase in `balance` is associated with an increase in the probability of `default`.
+여기서 $\hat{\beta}_1 = 0.0055$ 로 떴습니다. 양수죠? 즉, 내 통장 빚 잔고(`balance`)가 한 푼 두 푼 늘어날수록 통계학적으로 얄짤없이 파산(`default`) 확률도 가파르게 증가하는 죽음의 늪 양상과 연관되어 있음을 덤덤히 지시해 줍니다. 
+
+To be precise, a one-unit increase in `balance` is associated with an increase in the log odds of `default` by 0.0055 units.
+수식적으로 현미경을 들이대서 극도로 정확히 꼬집자면, 잔고가 1달러 1단위 증가할 때 우리의 파산 확률 자체가 오르는 게 아니라 파산의 **로그 오즈(log odds)** 지수가 0.0055 단위 치수만큼 스멀스멀 늘어나는 기계 메커니즘과 연동된다는 뜻입니다.
+
+Many aspects of the logistic regression output shown in Table 4.1 are similar to the linear regression output of Chapter 3.
+놀랍게도 표 4.1에 출력된 로지스틱 패널 표의 상당수 검증 항목 지표들은, 과거 3장에서 줄기차게 봤던 친숙한 선형 회귀 성적표 아웃풋 모양새와 거의 판박이처럼 유사합니다.
+
+For example, we can measure the accuracy of the coefficient estimates by computing their standard errors.
+예를 들면, 추정치 옆에 껌딱지처럼 늘 붙어 다니는 표준 오차(SE)를 측정 계산해서, 이 계수 수치가 얼마나 믿을만한지 흔들림 정확도를 가늠해 보는 짓도 그대로 할 수 있습니다.
+
+The _z_-statistic in Table 4.1 plays the same role as the _t_-statistic in the linear regression output.
+표 4.1 중간에 떡 하니 박혀있는 **z-통계량(z-statistic)** 은, 선형 회귀 출력표에서 심판관 역할을 했던 **t-통계량(t-statistic)** 과 완벽히 영혼의 투톱 쌍둥이 역할을 수행합니다.
+
+For instance, the _z_-statistic associated with $\beta_1$ is equal to $\hat{\beta}_1 / \text{SE}(\hat{\beta}_1)$, and so a large (absolute) value of the _z_-statistic indicates evidence against the null hypothesis $H_0 : \beta_1 = 0$.
+단순하게 $\beta_1$ 에 붙어있는 z-통계량 심판 점수는 자기 값 나누기 표준오차 $\hat{\beta}_1 / \text{SE}(\hat{\beta}_1)$ 를 투박하게 한 수치이며, 이게 (부호를 떼고 절댓값으로 봐도) 무지무지하게 거대한 값이라는 것은, 속 터지는 억지 주장인 귀무 가설 $H_0 : \beta_1 = 0$ (즉 "잔고랑 파산은 아무 상관없다!"는 헛소리)을 가차 없이 산산조각 낼 강력 발언 증거가 된다는 걸 뜻합니다.
+
+This null hypothesis implies that the probability of `default` does not depend on `balance` .
+(이 답답한 귀무 가설 녀석의 속뜻은 파산(`default`) 확률이 지갑(`balance`) 두께 따위에는 전혀 1도 의존하지 않는다고 우기는 것입니다).
+
+Since the _p_-value associated with `balance` in Table 4.1 is tiny, we can reject $H_0$.
+다행히도 표 4.1에서 `balance` 에 뜬 *p*-값이 소수점 한참 아래인 코딱지만큼(tiny) 매우 무시무시하게 작게 떴기 때문에, 우리는 속 시원히 이 망상가 $H_0$ 를 발로 차서 기각(reject)해 버릴 수 있습니다.
+
+In other words, we conclude that there is indeed an association between `balance` and probability of `default`.
+속되게 한 줄로 요약하면, 통장 빚 잔고 지표(`balance`)와 파산 멸망(`default`) 확률 간에는 변명의 여지 없는 실제 연관 관계가 단단히 결속되어 있다는 결론 도장에 마침내 쾅 쐐기를 박는 순간입니다.
+
+The estimated intercept in Table 4.1 is typically not of interest; its main purpose is to adjust the average fitted probabilities to the proportion of ones in the data (in this case, the overall default rate).
+추가로, 표 상단에 박힌 추정된 절편(intercept) 상수 수치 자체는 보통 과학자들의 이목과 관심 밖 찌꺼기 영역입니다. 요 녀석의 존재 이유는 그저 데이터를 쫙 펼쳤을 때 예측 모델의 한가운데 평균 적합도를 진짜 원본 데이터 내 파산자 전체 퍼센티지(여기서는 전체 고객 3% 파산율 기초 기준점) 비율과 엇비슷하게 영점 튜닝 사격하여 끼워 맞추는 조정 용도일 뿐입니다.
 
 This is the document for this topic.
-이 파트는 이 단막 계수 산정 주제를 지표 논단 위해 구축 기술 거진 적재된 요약 해설본 조 문서 양식입니다.
+이것은 폭발적인 주제에 대한 문서입니다.
 
 ---
 

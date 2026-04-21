@@ -3,31 +3,40 @@ layout: default
 title: "trans2"
 ---
 
-[< 4.7.2 Logistic Regression](../trans2.html) | [4.7.3 Linear Discriminant Analysis >](../../4_7_3_linear_discriminant_analysis/trans2.html)
+[< 4.7.2 Logistic Regression](../index.html) | [4.7.3 Linear Discriminant Analysis >](../../4_7_3_linear_discriminant_analysis/trans2.html)
 
-> 💡 **학습 팁:** 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 [📖 파이썬 랩(Lab) 해설판보기](./trans2.html)를 추천합니다! (직역본은 [📖 직역본 보기](./trans1.html) 메뉴를 활용하세요!)
+> 💡 **학습 팁:** 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 **[📖 Vibe Coding 해설본]** 모델입니다! (원문이 궁금하다면 [📖 직역본 보기](./trans1.html) 메뉴를 활용하세요!)
 
 # **`In [8]:`** `results.params` 
 
-|**`Out[8]:`**|`intercept`|`-0.126000`|
+| **`Out[8]:`** | `intercept` (조준점) | `-0.126000` |
 |---|---|---|
-||`Lag1`|`-0.073074`|
-||`Lag2`|`-0.042301`|
-||`Lag3`|`0.011085`|
-||`Lag4`|`0.009359`|
-||`Lag5`|`0.010313`|
-||`Volume`|`0.135441`|
-||`dtype: float64`||
+| | `Lag1` (어제의 피바람) | `-0.073074` |
+| | `Lag2` (그제의 광기) | `-0.042301` |
+| | `Lag3` | `0.011085` |
+| | `Lag4` | `0.009359` |
+| | `Lag5` | `0.010313` |
+| | `Volume` (어제 거래량 덩치)| `0.135441` |
+| | `dtype: float64` | |
 
-Likewise we can use the `pvalues` attribute to access the _p_-values for the coefficients (not shown). 
-이와 똑같은 야매 해킹 스킬로, 엑기스 계수 파편들인 `params` 대신 아예 그 계수들의 통계적 목숨 신용등급인 _p_-value 수치들만 쏙 빼먹고 싶다면 `pvalues` 속성을 때려 박으면 됩니다. (너무 뻔해서 화면엔 생략했습니다). 
+Likewise we can use the `pvalues` attribute to access the _p_-values for the coefficients (not shown).
+이와 똑같은 꼼수 원리로, 만약 우리가 가중치 점수가 아니라 "이 힌트가 진짜인지 가짜인지 판별해 주는 거짓말 탐지기 확률(p-value)" 수치만 쏙! 빼내고 싶다면, 방금 전 `.params` 대신 이번엔 `.pvalues` 라는 속성 버튼을 똑딱 눌러주면 됩니다. (코드가 너무 길어져서 위 표기에는 생략했습니다.)
 
 ```python
 In [9]: results.pvalues
 ```
 
-The `predict()` method of `results` can be used to predict the probability that the market will go up, given values of the predictors. This method returns predictions on the probability scale. If no data set is supplied to the `predict()` function, then the probabilities are computed for the training data that was used to fit the logistic regression model. Here we have printed only the first ten probabilities.
-자, 이제 피팅을 마친 결과물 `results` 깡통에다가 `predict()` 라는 살벌한 미래 예언 마법 주문을 스킬로 꽂아 넣으면, 컴퓨터가 알아서 과연 "내일 시장 호가가 상승 폭발(Up) 할 것인가?" 에 대한 배팅 확률 결과를 도출해 냅니다. 이 도구는 기본적으로 0부터 1 사이를 요동치는 '당첨 로또 확률 도수(probability scale)' 모드로 숫자를 뱉어냅니다. 만약 `predict()` 함수 부품 안에다 "새로운 내일의 $X$ 데이터" 를 우겨 넣지 않고 그냥 무식하게 뻥 빈 괄호로 때리면, 모델은 훈련하며 씹어 먹었던 과거 자신이 학습용으로 썼던 오리지널 훈련용 과거 데이터들을 그대로 재활용해 자기 확신성 확률 채점으로 뱉어버립니다. 맛보기로 딱 앞쪽 주가 10일 치의 떡상 확률 예측 스코어들만 출력해 보았습니다.
+The `predict()` method of `results` can be used to predict the probability that the market will go up, given values of the predictors.
+자, 기계 학습 훈련이 다 끝났다면 이 `results` 로켓 엔진에 달린 궁극의 발사 버튼, **`predict()` 메서드**를 누를 차례입니다. 이 버튼을 누르면 우리가 챙겨둔 탄환 힌트(예측 변수들)를 기계가 집어삼킨 다음, "음... 오늘 주식 시장이 위로 솟구쳐 오를 확률은 말이야..." 라며 기막힌 상승 확률 예측 점수를 토해냅니다.
+
+This method returns predictions on the probability scale.
+물론 로지스틱 기계답게 다짜고짜 "오른다!(Up)" "내린다!(Down)" 문자를 던지는 성격 급한 짓은 안 합니다. 대신 아주 냉정하게 `0.8(80%)`, `0.3(30%)` 같은 확률 스케일 스코어로 예언 퍼센티지를 쏴줍니다.
+
+If no data set is supplied to the `predict()` function, then the probabilities are computed for the training data that was used to fit the logistic regression model.
+그런데 주의할 점! 이 `predict()` 입구 구멍에다가 '미래에 쓸 새로운 데이터'를 안 넣어주고 그냥 뻥 비워둔 채 발사 버튼을 누르면 이 기계는 대체 어떻게 할까요? 멍청하게도 얘가 예전에 훈련할 때 이미 씹고 뜯고 맛봤던 **그 기존의 훈련 데이터(과거 기출문제)를 꺼내서 자기 자신의 실력을 셀프 확인**하는 확률 점검 예측을 시작합니다. 
+
+Here we have printed only the first ten probabilities.
+일단 그렇게 기출문제 점검으로 얻어낸 확률 스코어들 중, 기계가 뱉어낸 맨 처음 파편 10개만 슬쩍 먼저 출력해서 구경해 보겠습니다.
 
 ```python
 In [10]: probs = results.predict()
@@ -39,29 +48,44 @@ Out[10]: array([0.5070841, 0.4814679, 0.4811388, 0.5152223, 0.5107812,
                 0.5069565, 0.4926509, 0.5092292, 0.5176135, 0.4888378])
 ```
 
-In order to make a prediction as to whether the market will go up or down on a particular day, we must convert these predicted probabilities into class labels, `Up` or `Down`. The following two commands create a vector of class predictions based on whether the predicted probability of a market increase is greater than or less than 0.5. 
-하지만 결국 우리가 손에 쥐어야 할 진짜 대박 과실은 저런 애매모호한 0.507 같은 확률 숫자가 아니라, 그래서 "오늘 살까(`Up`) 팔까(`Down`)?" 를 결정짓는 확실한 이분법 막도장 지시 레이블(Class Label)입니다. 이걸 쟁취하기 위해, 다음의 단 2줄짜리 파이썬 칼날 명령어 코딩으로 우리는 저 흐리멍덩한 확률 게이지가 **"50% (0.5) 반반 무 많이" 커트라인** 위를 아슬아슬하게 넘겼느냐, 아니면 밑으로 꺼졌느냐를 기계적으로 판단하여 강제로 `Up` 과 `Down` 이란 과녁 문자 벡터판으로 변환 수술을 갈겨버립니다. 
+In order to make a prediction as to whether the market will go up or down on a particular day, we must convert these predicted probabilities into class labels, `Up` or `Down`.
+보이시나요? 저렇게 `0.507...`, `0.481...` 식으로 확률만 던져주면 도박장에선 배팅을 내릴 수가 없습니다. 따라서 우리는 저 모호한 확률 수치 고깃덩어리들을 **진짜 올라갈 팀(`Up`)** 인지 아니면 떡락할 **내려갈 팀(`Down`)** 인지 명확한 흑백 문자 클래스 라벨(label) 이름표로 강제 변환, 도축 작업을 무자비하게 해줘야만 합니다!
+
+The following two commands create a vector of class predictions based on whether the predicted probability of a market increase is greater than or less than 0.5.
+아래 두 줄의 코드가 바로 그 도축 작업입니다. 쿨하게 **0.5 (50% 활률)** 을 커트라인 임계점(컷오프) 무기로 설정해서, 확률 스코어가 이 데스라인을 넘으면 "넌 상승(Up) 팀!" 이라고 낙인을 박아버리고, 넘지 못하고 찌그러지면 "넌 하락(Down) 팀!" 이라고 잔혹하게 이분법 라벨 도장을 팡팡 찍어 흑백 벡터 수레를 만드는 거죠. 
 
 ```python
-In [11]: labels = np.array(['Down']*1250)
-labels[probs > 0.5] = "Up"
+In [11]: labels = np.array(['Down']*1250) # 우선 1,250개 밑장 빼고 전부 다 쫄아서 하락(Down) 도장으로 1차 초벌 낙인!
+labels[probs > 0.5] = "Up" # 확률 스코어 0.5 넘는 놈들 머리 끄덩이만 잡아서 상승(Up) 합격 명패로 바꿔치기 강제 수정!
 ```
 
-The `confusion_table()` function from the `ISLP` package summarizes these predictions, showing how many observations were correctly or incorrectly classified. The `confusion_table()` function takes as first argument the predicted labels, and second argument the true labels.
-자 이제 진짜 잔인한 채점 시간입니다. 우리가 방금 전 `ISLP` 특급 보급품 무기고에서 쌔벼온 `confusion_table()` (혼동 행렬표) 심판 함수를 작동시키면, 그동안 우리 모델이 얼마나 헛발질을 하고 얼마나 뒷걸음질 치다 쥐를 잡았는지(올바른 분류와 틀린 분류 횟수)를 낱낱이 표로 박제해 요약해 줍니다. 이 `confusion_table()` 심판관 녀석은 첫 번째 입력 아가리에 "기계가 예측한 팻말" 을 물리고, 두 번째 투입구엔 세상에 숨길 수 없는 진짜 정답인 "해딩 날 주가의 찐 성적 팻말" 을 집어넣어 구동시킵니다.
+The `confusion_table()` function from the `ISLP` package summarizes these predictions, showing how many observations were correctly or incorrectly classified.
+이 잔혹한 심사의 끝에 남은 건 기계의 예측 결과가 원래 정답과 진짜 얼마나 팩트로 맞아떨어졌나 채점을 해보는 겁니다. `ISLP` 공구함에서 가져온 **`confusion_table()` (혼동 행렬 폭로판)** 기능이 이 채점을 대신해 줍니다. 이 녀석이 바로, 이 깡패 기계가 몇 건이나 똥볼을 찼는지(오류), 혹은 몇 건이나 신들린 듯 정답을 맞혔는지 그 성적표를 한 장의 요약표 칠판에 적나라하게 폭로시켜 줍니다.
+
+The `confusion_table()` function takes as first argument the predicted labels, and second argument the true labels.
+선생님이 이 `confusion_table()` 폭로판 채점기를 돌릴 때 넣어야 할 규칙은 간단합니다: 첫 번째 넣을 놈은 기계가 찍어 제출한 짝퉁 답안지(predicted labels), 그리고 두 번째로 넣을 놈은 진짜 숨겨둔 황금 팩트 정답지(true labels)입니다.
 
 ```python
 In [12]: confusion_table(labels, Smarket.Direction)
 ```
 
-|**`Out[12]:`**|`Truth`|`Down`|`Up`|
+| **`Out[12]:`** | `Truth` (진짜 정답 팩트) | `Down` | `Up` |
 |---|---|---|---|
-||`Predicted`|||
-||`Down`|`145`|`141`|
-||`Up`|`457`|`507`|
+| | `Predicted` (기계가 낸 짝퉁 예측) | | |
+| | `Down` (기계가 예측) | `145` (정답 일치!) | `141` |
+| | `Up` (기계가 예측) | `457` | `507` (정답 일치!) |
 
-The diagonal elements of the confusion matrix indicate correct predictions, while the off-diagonals represent incorrect predictions. Hence our model correctly predicted that the market would go up on 507 days and that it would go down on 145 days, for a total of 507 + 145 = 652 correct predictions. The `np.mean()` function can be used to compute the fraction of days for which the prediction was correct. In this case, logistic regression correctly predicted the movement of the market 52.2% of the time. 
-출력된 এই 기괴한 '혼동 행렬(confusion matrix)' 십자가 표의 한가운데 대각선 조각 숫자들이 바로 "야호 빙고! 정답!" 을 외치는 극강의 승리 횟수 타점이며, 가장자리 대각선 바깥(off-diagonals) 에 널린 지뢰 숫자들은 예측이 삐끗해서 빗나가 헛발 폭망한 횟수 타격 오답을 의미합니다. 결론적으로 우리 로지스틱 확률 머신은, 주식이 떡상(`Up`) 할 거란걸 507일 날짜 동안 정확히 저격 예측했고, 주식이 나락(`Down`) 으로 갈 거란 걸 145일 날짜 동안 귀신같이 때려 맞춰서, 도합 **507 + 145 = 총 652번의 정답 홈런 타격**을 쳐냈습니다! 이 복잡한 타율 계산을 파이썬 깡패 무기 `np.mean()` 함수에 맡기면 자기가 알아서 정답 명중률 게이지를 분수율로 산출 뻥튀기해 줍니다. 결과적으로 까보니, 이 대단하신 로지스틱 회귀 모델의 족집게 확률 점수는 시장 방향을 찍어 맞춘 역대 승률 타율 **절반을 아주 쥐꼬리만큼 넘긴 52.2%** 의 승률 적중 파워를 내뿜었습니다. 
+The diagonal elements of the confusion matrix indicate correct predictions, while the off-diagonals represent incorrect predictions.
+짜잔! 폭로판이 떴습니다. 이 네모난 칠판 한가운데를 비스듬히 가로지르는 대각선(diagonal) 자리에 박힌 숫자 `145`와 `507`은 기계가 정답 팩트와 완벽히 찰떡궁합으로 맞아떨어진 영광의 **축배(정답 타점)** 를 의미합니다. 반대로 대각선 밖으로 삐져나간 찌그러진 구석의 쓰레기 숫자(`141`, `457`)들은 기계가 똥볼을 거하게 차버린 슬픈 **오류 삽질** 횟수를 나타내죠.
+
+Hence our model correctly predicted that the market would go up on 507 days and that it would go down on 145 days, for a total of 507 + 145 = 652 correct predictions.
+고로 이 폭로판 성적을 읽어볼까요? 우리의 깡패 로지스틱 기계는 "음, 507번은 시장이 뛸 것이고, 145번은 시장이 꼬라박을 거야!"라고 쪽집게같이 맞췄다는 뜻입니다. 합쳐서 총 507 + 145 = 652 번이라는 나름 영광스러운 신들린 촉의 과제를 당당히 올바르게 맞춰 도출 달성했습니다!
+
+The `np.mean()` function can be used to compute the fraction of days for which the prediction was correct.
+이 귀찮은 더하기 덧셈을 코드 한방에 퍼센티지(클래스 분류 정확률 확률 점수) 체계로 날려버리고 싶다면, 파이썬 넘파이 공구 중 아주 유용한 **`np.mean()` (평균 내라!) 함수** 톱니를 사용하면 단숨에 정답 점유 분수 비율 타점 수치를 뿜어냅니다.
+
+In this case, logistic regression correctly predicted the movement of the market 52.2% of the time.
+그렇게 굴려본 결과, 우리의 로지스틱 회귀 기계는 수많은 1250번의 도박 시간 중 약 절반에 해당하는 **52.2% 의 시간** 동안 도박장 주식 시장의 상하 화살표 움직임 방향 정답 확률 타깃을 귀신같이 올바르게 맞춰 냈습니다. 오호? 선방했는데요?
 
 ```python
 In [13]: (507+145)/1250, np.mean(labels == Smarket.Direction)
@@ -69,42 +93,69 @@ In [13]: (507+145)/1250, np.mean(labels == Smarket.Direction)
 
 # **`Out[13]:`** `(0.5216, 0.5216)` 
 
-At first glance, it appears that the logistic regression model is working a little better than random guessing. However, this result is misleading because we trained and tested the model on the same set of 1,250 observations. In other words, 100 − 52.2 = 47.8% is the _training_ error rate. As we have seen previously, the training error rate is often overly optimistic — it tends to underestimate the test error rate. In order to better assess the accuracy of the logistic regression model in this setting, we can fit the model using part of the data, and then examine how well it predicts the _held out_ data. 
-언뜻 속아 넘어가기 쉬운 겉모습! "오? 아무것도 모르고 눈감고 50% 확률 동전 던지기로 찍는 것보단 52.2% 니까 모델 스킬 쓰길 훨씬 낫네 ㅋ" 라고 혹해서 기뻐할지 모릅니다. 하지만 명심하십시오! 이것은 통계판의 끔찍한 조작 환상 극의 기만(misleading) 함정 거미줄 늪입니다!! 왜냐고요? 우린 방금 전 이 모델 멍청이에게 **시험문제(1,250개 과거치)를 갖다 바치며 가르친(Train) 뒤, 평가할 때(Test) 놀랍게도 같은 시험문제를 그대로 또 던져줘서 오픈북 컨닝**을 시켰기 때문입니다! 다시 말하자면 지금 계산된 100 - 52.2 = 47.8% 오답률 불량 지표 수치는 실전 야생 모의고사인 테스트 폭망 점수가 아니라, 답안지 다 외운 연습장 **'훈련(Training)' 오차율 점수**에 불과합니다. 우리가 전에도 뼈저리게 뒤통수 맞았듯 겪었지만, 이 연습장 훈련 에러 점수는 항상 우릴 꼬시기 위해 세상 편한 장밋빛 초-긍정 낙관 망상에 빠진 뻥카 수치일 뿐입니다 — 늘 진짜로 겪게 될 야생 수능 당일 실전인 "테스트 에러율(Test Error)" 거탑의 매운맛 난이도를 아주 한참 깎아내려 무시하고 과소평가(underestimate) 하는 교활한 사기꾼 치부 경향이 있죠. 우린 이제 이런 사기극을 뒤집어엎고, 진짜 피비린내 나는 주식판 세팅에서 모델 실력을 멱살 잡고 털기 위해! 과감하게 주어진 데이터의 생살을 찢어 발라 훈련용 일부분으로만 빡세게 공부 세팅 피팅 시킨 뒤, 모델이 태어나 단 한 번도 본 적 없는 철저히 창고에 감춰둔 뒷주머니 비밀 무기 데이터(held out) 를 시험지로 던져줘 얼마나 기가 막히게 내일의 미래를 예언하는지 그 실전 야생 적중력 타격 감각 성능을 시험 극렬 테스트할 것입니다! 
+At first glance, it appears that the logistic regression model is working a little better than random guessing.
+오호? 이 겉보기 숫자(At first glance) 스코어 점수 52.2%만 얼핏 보고 있자니, 우리의 위대한 로지스틱 기계가 그냥 눈 감고 원숭이가 동전 50:50 반반 던지는 무식한 찍기 추측 확률(random guessing) 보다는 미세하긴 하지만 어쨌건 2.2%나 약간은 더 돈을 잘 따는 천재 작동 메커니즘인 것처럼 우리 눈을 속이며 대견해 보입니다.
 
-To implement this strategy, we first create a Boolean vector corresponding to the observations from 2001 through 2004. We then use this vector to create a held out data set of observations from 2005.
-이 악랄한 살 떨리는 실전 테스트 분리 찢기 전략을 수행 구현하기 위해, 우린 파이썬 코딩 흑마법을 써서 우선 2001년 초부터 2004년 연말 구역까지의 훈련 전용 과거 잡동사니 일자 기록 조각들만 쏙쏙 타겟 추출하는 스위치 제어 불리언(Boolean `True/False`) 기폭장치 벡터를 빚어냅니다. 그런 다음, 이 스위치 조작 벡터 방패를 방패막이 분단 트리거로 역 이용 발동시켜서, 기계가 결코 곁눈질할 수 없었던 최신 따끈따끈한 **2005년 미래판 신상 데이터 파편들**만을 싹 긁어 분리 보류 인양 격리(held out)하여 모의고사용 살육 시험대 데이터 장치판 타격 진입 세팅을 준비 조작해 구축해 무장시켜 버립니다.
+However, this result is misleading because we trained and tested the model on the same set of 1,250 observations.
+**하지만, 정신 차리세요! 이건 엄청난 함정이자 사기극(misleading)입니다!** 왜냐하면 우린 엄청난 금기를 깼거든요. 우리는 아까 이 깡패 기계한테 1,250개의 '과거 기출문제 정답지 데이터'를 주면서 똑같이 훈련(trained) 시켜놓고선, 시험 칠 때도 뻔뻔하게 그 자신이 이미 달달 외워본 똑! 같! 은! 1,250개의 중복 데이터 세트 문제지 관측치를 내밀고서 셀프 시험판 채점 테스트(tested)를 돌려 우려먹었기 때문입니다!
+
+In other words, 100 − 52.2 = 47.8% is the _training_ error rate.
+다시 말해, 저기서 얻은 자랑스러운 52.2% 정답률의 이면에 도출된 통계 분석 에러 오답 확률치 인 100 − 52.2 = 47.8% 쓰레기 점수는, 진짜 야생에서 통할 실전 생존 팩트 에러율이 아니라 단지 지 혼자 공부하고 치른 방구석 챔피언 결과물, **훈련(training) 오차율** 에 불과하다는 끔찍한 실태 전제입니다 반복 조립 통계.
+
+As we have seen previously, the training error rate is often overly optimistic — it tends to underestimate the test error rate.
+우리가 이론 병법서 2장에서 수없이 귀에 못이 박이게 이론으로 배웠던 바와 똑같이, 훈련지 방구석에서 지 혼자 풀어낸 저 단일 반복 훈련 오차율 점수는 데이터 속성 메커니즘 특성상 종종 지 주제를 모르고 지나치게 과도하게 나르시시즘에 빠져 터무니없는 비정상 낙관적인(overly optimistic) 오만경향을 띱니다 — 그 쓰레기 스코어 점수 결과 지표 구조는 대개 우리가 찐으로 목숨을 걸어야 할 실전 테스트 시험 검정 지표 오차율(test error rate) 을 수치적으로 심각하게 얕잡아보고 기만해서 낮잡아 과소평가(underestimate) 하는 근본적 불량 편향 한계 기저 구도를 지니어 갖습니다.
+
+In order to better assess the accuracy of the logistic regression model in this setting, we can fit the model using part of the data, and then examine how well it predicts the _held out_ data.
+그럼 어쩌라고요? 그래서 우리는 지금의 이 불량 작동 테스트 설정 세팅 환경 안에서 도출된 이 기계 모델의 판별 스코어 오차 정확도 허상을 까부수고 단연코 더 제대로 칼같이 잘 조립 성능 평가하기 위해 절단 수술을 감행할 것입니다. 바로 우리는 우리가 쥐고 있는 전체 데이터를 칼로 쪼개어 일부만 잘라 던져줘서 훈련 모델을 적합(fit)시키고 적응 적합을 완료 시키고, 그런 다음 녀석은 평생 한 번도 보지 못한, 우리가 몰래 장롱에 **남겨 숨겨둔 순수(held out) 찐 실전 시험 데이터**를 이놈 얼굴에 투척해 얼마나 그것을 소름 돋게 잘 맞추고 유지 예측하는지 진짜 그 본 성능 밑바닥을 냉정하게 검토 검사 검증 실험할 수 있는 모의 테스트 실험법 구축이 필수입니다.
+
+To implement this strategy, we first create a Boolean vector corresponding to the observations from 2001 through 2004.
+이 분리 검증 전략을 엄수 단행 구현 수행하기 위해, 우리는 이 주식 시장 시간표 상에서 제일 먼저 2001년부터 2004년 기간 과거 훈련용 시계에 해당하는 데이터 관측치에 1:1로만 작동 판별되어 대응하는 부울(Boolean) True/False 논리 벡터 거름망을 먼저 계산하여 날조 생성 짜 맞춥니다.
+
+We then use this vector to create a held out data set of observations from 2005.
+우리는 그다음에 그 생성한 논리 기반 체계 인계선인 이 기준 벡터를 이용하여 2005년 미래 정답의 해당하는 관측치들의 순수하게 숨겨 유지된 '따로 실전 테스트용 남겨 둔(held out)' 미래 가상 데이터 세트를 분리 선별 창출 생성 모의실험 세팅 분리 도출 해 냅니다.
 
 ```python
-In [14]: train = (Smarket.Year < 2005)
-Smarket_train = Smarket.loc[train]
-Smarket_test = Smarket.loc[~train]
+In [14]: train = (Smarket.Year < 2005) # 2004년 이전 옛날 데이터만 True로 쾅쾅 낙인찍는 부울망 걸쇠 생성!
+Smarket_train = Smarket.loc[train] # True로 찍힌 놈들만 쓸어 담아서 훈련소 캠프(train)로 직행!
+Smarket_test = Smarket.loc[~train] # 이건 반대! 물결표(~) 기호로 2005년 미래 관측치만 싹 쓸어 담아서 지옥의 시험장(test)으로 격리 이송!
 Smarket_test.shape
 ```
 
 # **`Out[14]:`** `(252, 9)` 
 
-The object `train` is a boolean array, since its elements are `True` and `False`. Therefore, `Smarket.loc[~train]` yields a subset of the rows of the data frame of the stock market data containing only the observations for which `train` is `False`. The output above indicates that there are 252 such observations. 
-방금 선언해 조작한 `train` 객체판 덩이는 조각 속살이 온통 오직 예/아니오 두 편 가르기 표식 `True(참)` 랑 `False(거짓)` 꼬리표 딱지로만 뒤집어 씌워진 스위치 불리언 지뢰 배열판입니다. 따라서 저기 판다스 킬러 인덱싱 `Smarket.loc[~train]` 물결 `~` 부정 폭탄 무기 꺾기 조작은 곧, "그 기조 조건이 `train` 이 절대 뒤집어진 완전 개방구 `False(아니다)` 에 결박 타격 기표되는 나머지 찌꺼기 몫" 이란 기상천외 반전 스위치 색출 추출을 선언 폭발 타격하며, 결과적으로 Smarket 몸통 구조에서 순전히 시험대에 오를 불쌍한 영혼 파편들만 잔인 조작 추출 찢어서 새로운 쪼그라든 부분집합 데이터 표 덩이를 짜 맞추어 발 굴 조 진 무마 창설하게 됩니다. 맨 마지막 위 뱉어진 무 조작 전리품 크기 수치를 보면 그 잔혹 발탁 모의고사 타깃 시험지 타깃 관측치 희생양 머릿수 몫이 **정확히 252 마리 개수** 분량만큼 남아 도 열해 진 배치 대기 탑재 전열 포진되어 있음을 지표 선 폭 타격 증명합니다. 
+The object `train` is a boolean array, since its elements are `True` and `False`.
+저 방금 코드에서 지정 생성한 통계 객체 `train` 이란 놈은, 그 거름망 배열 안의 구성 요소들이 온통 1과 0 인 `True` 와 `False` 데이터들로만 도배되어 있기 때문에, 이 녀석의 정체는 파이썬에서 흔히 쓰는 부울 배열(boolean array) 체계형 그물망 자료형입니다.
 
-We now fit a logistic regression model using only the subset of the observations that correspond to dates before 2005. We then obtain predicted probabilities of the stock market going up for each of the days in our test set — that is, for the days in 2005. 
-자, 이제 피의 훈련장이다! 우린 모델녀석의 머슬 메모리에 오직 딱 **2005년 이전에 발생했던 먼지 쌓인 옛날 과거 훈련 일지 파편** 쪼가리 데이터 부분집합 만을 가혹하게 먹여 단련 훈련 강제 주입 주입 억지 훈련 시켜 버립니다 (피팅 fit). 그리고 나선 그 훈련 뽕에 취한 기계에게 드디어 칼을 쥐여주고 우리가 뒷주머니에 꽁꽁 훔쳐 모셔 숨겨둔 "테스트 전장 전장 세트판", 즉 미증유의 영역 **2005년 미래 타겟** 일자 하나하나를 표적으로 "내일 오를 거 같냐?"(확률) 예측 스코어를 무자비 단 전 폭 갈겨 타 투 투 하 방 터 무 찍어 뽑아 내 발사 강 제 획득 착수 진단 폭 취를 구 형 감 행 합니다 .
+Therefore, `Smarket.loc[~train]` yields a subset of the rows of the data frame of the stock market data containing only the observations for which `train` is `False`.
+따라서, 그물을 반대로 뒤집어 연산한 코드 연산된 결과물인 `Smarket.loc[~train]` 은 논리 분류 기준 거름망 `train` 에서 탈락해 `False` 낙인이 찍힌, 즉 2005년 이후에 터진 그 최신 미래 테스트 관측치들만을 따로 알뜰하게 추출해 모아 포함 구축하는 오리지널 주식 시장 데이터 프레임의 분리 파편적인 해당 행 부분 집합(subset) 행 그룹 단위 객체 들을 최종적으로 산출 생산 출산 분리 시켜 냅니다.
+
+The output above indicates that there are 252 such observations.
+위에 표기된 산출 결과의 스펙 출력물 지표 값은 파편 이 이러한 분리되어 추출 도출된 2005년 실전 테스트 관측치들이 총 252개라는 방대한 양으로 존재 유지 발현함을 여지없이 나타냅니다 수치 보여 줍니다.
+
+We now fit a logistic regression model using only the subset of the observations that correspond to dates before 2005.
+우리는 이제 실전 시험 준비 돌입! 오직 이 모든 데이터 속에서 정답 시험지를 버리고 2005년 **전 과거 날짜** 시간표에 정확히 해당하는 자료 관측치들의 이 훈련용 파편 부분 집합(subset) 지식 만을 기계 뇌 속에 주입 사용 장전하여 로지스틱 회귀 기계 모형을 시험 스파링 훈련 적합을 강제로 무자비하게 뺑뺑이 시킵니다 적응 시 적합!
+
+We then obtain predicted probabilities of the stock market going up for each of the days in our test set — that is, for the days in 2005.
+그런 다음 훈련이 끝난 기계 놈을 끌고 와서 우리는 우리의 지옥의 시험 검정 세팅 세트(test set) — 즉, 얘가 한 번도 본 적 없는 **미래 2005년의 일자 날짜**— 의 각 시계열 시간 날 요일 날에 대한 관측 단서를 주고 주식 시장이 지표가 오를 예측 상향 확률값 예언값 들을 최종 마지막으로 확보 수집 산출해 시험장 테스트 결과물 판별 획득해 내어 결과를 얻어 빼냅니다!
 
 ```python
-In [15]: X_train, X_test = X.loc[train], X.loc[~train]
-y_train, y_test = y.loc[train], y.loc[~train]
+In [15]: X_train, X_test = X.loc[train], X.loc[~train] # 탄환(X)들도 과거 훈련/미래 정답으로 쪼개기
+y_train, y_test = y.loc[train], y.loc[~train] # 과녁(y)들도 훈련/미래 실전용으로 쪼개버리기!
 glm_train = sm.GLM(y_train,
                    X_train,
-                   family=sm.families.Binomial())
-results = glm_train.fit()
-probs = results.predict(exog=X_test)
+                   family=sm.families.Binomial()) # 로지스틱 기동!
+results = glm_train.fit() # 이번엔 모든 데이터가 아니라 'X_train(과거)' 만 던져줘서 스파링 훈련 돌림!!!
+probs = results.predict(exog=X_test) # 스파링 끝난 기계한테 'X_test(미래의 2005년 데이터)' 를 던져서 실전 시험 평가 사격 발동 도출!!
 ```
 
 Notice that we have trained and tested our model on two completely separate data sets: training was performed using only the dates before 2005, and testing was performed using only the dates in 2005.
-소름 돋는 분리 조작 기술력을 다시 한번 주목 각인 기 상 타 관 찰 돌 립 하십 시오: 지금 이 순간 우리는 불쌍한 로봇 기계 머신을 **두 줄기 완전히 평행 우주처럼 철저히 동 떨 어 지 고 차 단 찢 기 폐 쇄 단 절 무결 전 단 된 분리 데이터 벽 영 역 공간 덩 어 리들 구 형 지 형 세트 판** 에서 훈련 피를 뽑고 실전을 갈궜습니다! 즉, 땀 흘린 도장 '훈련 무 대' 는 오직 무 조 전 2005년 문턱 이 십 전 파 편 과 거 력 옛 흔 적 사료 만 갈아 먹였고 반면 수능 모 의 고 사 심판 결계 "테 스트 타격 평가 도 마 형 장" 은 기계가 단 한 줄도 맛볼 여 지 수 결 무 차 부 무 허 참 당 무결 못 했 던 무 상 청 정 구 조 **잔혹 실 전 미래 2005년 년 도 일 바 파편 무기** 표 적 일 들 로만 기 무결 수 구 형 덮 타 단 조 타 집 결 지 단 전 참 돌 조 발 무 마 갈 통 수 타 격 포 단 구 돌 폭 도 막 구 기 형 정 차 형 동 타 부 전 집 구 시 무단 켰 답 통 니다!
+우리가 이 시점에서 조립에서 절대 망각하지 말고 명확히 필히 주목해야만 할 경악스런 차이점 하나는 우리가 지금 우리가 기른 로지스틱 예측 모델을 완전히 물과 기름처럼 서로 분열되고 독립적으로 나뉘어 교집합 분리된 두 개의 개별 독집 분리 데이터 세트들 상에서 모델을 각각 격리하여 훈련(trained)시키고 그것을 분리 실전 테스트(tested)했다는 매우 통계적 의미가 큰 유의미한 시사적 사실 팩트 구동입니다: 모형 훈련 육성 조립은 완전히 오직 2005년도 시간표 이전의 과거 날짜 방구석 관측 자료 데이터 지식만을 토대로 통하여 사용하여 전산 구축 수행되었고, 그리고 기능 실전 시험 판별 적중률 테스트는 정반대로 얘가 눈곱만큼 도 아예 본 적도 없는 오직 온전히 2005년 시간표 내의 한정 분리 독립된 신규 날짜 관측 자료 데이터들만을 기반 무기 사용하여 도출 실험 실행 모의 판별 테스트 수행되었습니다.
 
-Finally, we compare the predictions for 2005 to the actual movements of the market over that time period. We will first store the test and training labels (recall `y_test` is binary).
-드디어 숨 막히는 마지막 채점의 장! 우린 저 기계 놈이 미친 듯 내뱉은 **눈먼 2005년도 떡상 예측 스코어**들과, 실제로 그 해 거대한 시장 판 덩어리가 피도 눈물도 없이 어떻게 널 뛰고 발작해 미쳐 돌아 움직였는지 '그 잔혹한 실제 진또배기 움직임 운명(실제 정답)' 의 방향 곡선을 도마 위에 올려두고 처절 압 살 단 도 마 비교 피 튀 채점 결 과 폭 검 거 검증 을 관 전 거 전 결 수행 타 격 결 단 파 차 겠 구 수 발 습 다! 이 피 검사 형 전 작업 피 튀 교 조 사전 워밍업 예 비 로, 우리는 일단 시험판과 훈련판 과녁 표식 과 녁 정답 진 과녁판 표식 레 이블 판때기들을 창 고 안 구 통 무 도 창 고 로 임시 전 분 전 편 압 보 조 저장 수 기 갈 수 결 단 차 장 전 투 보 부 기 킵 해 다 거 조 모 두 조 포 겠 포 발 다 (아 참, 저기 정 답 타 깃 `y_test` 는 0 아 님 1 지 통 쪼 갈 무 거 부 전 타 쪼 개 던 저 거 거 단 극 단 적 이진(binary) 모 듈 총 전 포 발 로 구성 돼 도 투 전 장 단 포 파 되 전 있다는 사실 참 진 동 기 단 관 차 상 하 도 비 참 전 차 단 기 부 차 십 조 시 동 오 보).
+Finally, we compare the predictions for 2005 to the actual movements of the market over that time period.
+마침내 수확의 대미 결말로 도래, 우리는 오만방자한 기계가 뱉은 2005년 미래 데이터의 모형 실전 테스트 예측값 타점들을 해당 지정 시간 기간 전체 구간 동안 세상에 발동 벌어진 모의 세계 예측 주식 시장 동향 장세 데이터 팩트 상황판의 실제 진짜 황금 답안지 정답 움직임 팩트 변동 지표들과 수치적으로 결합 융합 비교 심문 채점을 실행 돌입합니다!
+
+We will first store the test and training labels (recall `y_test` is binary).
+우리는 표 산출 출력 제일 먼저 과정 으로서 지정 융합 분류 훈련용 과 그 에 상응하는 테스트 결과 오리지널 황금 비교 판별 정답 라벨들을 단편 저장 그릇에 따로 스코어 할 것입니다 (지시 변수 `y_test` 자체가 `Up/Down` 두 종류 값인 이진 데이터 산출물(binary)임 속성 이었다는 사실을 환기 구조적 회상하십시오).
 
 ```python
 In [16]: D = Smarket.Direction
@@ -112,79 +163,117 @@ L_train, L_test = D.loc[train], D.loc[~train]
 ```
 
 Now we threshold the fitted probability at 50% to form our predicted labels.
-이제 드디어 컴퓨터가 애매모호하게 소수점으로 뱉싸지른 저 훈련 피팅 잔류 **예측 '확률(probability)' 조각 숫자** 무더기 더미 들 위 에 다 가, 잔인한 단 두 동 강 토막 절 단 결 단 선 극악 커트라인 **임계점(threshold) 작두 칼날 지표율 반반 50% 폭격 무 잣대 선** 을 시 퍼 렇게 번 쩍 갈 폭 기 꽂 기 위 전 수 꽂 아 투 차 무결 발 탕 박 터 내려 찢 꽂 구 분 찍 보 구 무 다 결 정 타 어 넣 단 치 고, 최종적으로 이 쪽 "Up(떡상) 이냐 저쪽 "Down(나락) 이냐" 를 멱살 단 단 낙 전 찢 무 결 통 명 명 구 지 어 갈라 버린 **"궁 극 기 조 명 포 진 압 참 포 구 예측 징 지 팻 말 레이블 딱 치(predicted labels)" 무 조 성 차 성 배 구 형 조 집 구 제 단 위 치 지 형 타 극 결 동 창 립 구 축 형 배 조 자 수 거** 할 모 보 셋 돌 치 참 지 겠 습 치 파 다 니다.
+이제 우리는 우리의 치열했던 실전 훈련 파편 완성된 예측 라벨 결과물을 정답 채점지에 쓸 수 있는 언어로 확립 통계 형성 조립하기 위해, 기계에서 산출 반환된 적중 적합 확률값을 앞서 했던 똑같은 방식인 50%를 커트라인 고정된 마지노선 흑백 임계치(threshold)로 설정 산정 절단 낙인찍습니다!
 
 ```python
 In [17]: labels = np.array(['Down']*252)
-labels[probs > 0.5] = 'Up'
-confusion_table(labels, L_test)
+labels[probs > 0.5] = 'Up'  # 확률 0.5가 넘은 시험 답안지만 Up으로 예언 강제 판별 정답 교체 처리!
+confusion_table(labels, L_test) # 채점표 발동 발사!!
 ```
 
 ```python
-Out[17]: Truth      Down  Up
-Predicted
+Out[17]: Truth      Down  Up  (이거 정답지)
+Predicted (이건 기계가 낸 시험답안지)
 Down         77    97
 Up           34    44
 ```
 
 The test accuracy is about 48% while the error rate is about 52%.
-야생 전투 실전 모의고사 수능 채점 결과, 승리 **테스트 적중 정확도(test accuracy)** 점수는 겨우 발 기 무 보 참 꼴 랑 찢 **약 48%** 선에서 짐 싸 추락 돌 다 나 락 부 구 단 참 결 고, 틀 려 먹 고 빗나가 오발 폭발 무 기 치 오 전 오 참 차 조 헛 치 결 나 폭 타 수 지 참 오 차 낸 삽 질 에러 오 답 율 폭 발 에 러 점 수 모 오 형(error rate) 기 참 수 는 **빌 어 발 무 참 차 비 무 단 단 대 략 절 반 이 상 비 치 참 약 52%** 의 비 부 수 타 부 참 전 무 지 진 무결 전 구 극 나 형 막 구 단 모 조 수 를 찍 나 지 구 모 내 참 참 터 발 구 뿜 었 지 진 습 부 다 단 니 냐 모 차 전다.
-
-The `!=` notation means _not equal to_, and so the last command computes the test set error rate. The results are rather disappointing: the test error rate is 52%, which is worse than random guessing! Of course this result is not all that surprising, given that one would not generally expect to be able to use previous days’ returns to predict future market performance. (After all, if it were possible to do so, then the authors of this book would be out striking it rich rather than writing a statistics textbook.)
-방금 윗 파이썬 코드에서 쓰인 `!=` 특수 기호는 **_결코 똑같지 않다(not equal to)! 틀렸다!_** 란 의미의 판정을 내립니다. 따라서 맨 마지막 시점의 명령줄은 이 모의고사(테스트 세트)가 얼마나 개판이었는지, 즉 오답을 낸 삑사리인 **에러율(error rate)** 을 뼈아프게 계산해 냅니다. 그 결과는 그야말로 처참하고 실망스럽습니다: 모의고사 폭구 오답률은 무려 **52%** 로, 이것은 아무 생각 없이 눈감고 50 대 50 동전 던지기로 찍는 무작위 찍기(random guessing) 방식보다도 훨씬 더 멍청한 바닥을 치는 성적입니다! 물론, 어제그제 주식 수익률 나부랭이 데이터 따위를 가지고 감히 내일의 거대한 주식 시장 떡상/떡락 방향성을 다 꿰뚫어 볼 수 있다고 거만하게 기대하는 것 자체가 미친 짓이므로, 이런 참담한 폭망 결과가 통계학적으로 그리 놀라운 일도 아닙니다. (솔직히 말해, 만약 그 옛날 주식 데이터 쪼가리로 미래의 황금 주가를 백발백중 족집게처럼 때려 맞추는 게 진짜 가능했다면, 이 책의 저자 양반들도 골치 아프게 통계학 교과서나 쓰고 앉아있지 않고 진작에 월스트리트 쌍끌이로 떼돈을 쓸어 담아 갑부가 되어 날아갔을 것입니다!)
-
-We recall that the logistic regression model had very underwhelming _p_-values associated with all of the predictors. Using predictors that have no relationship with the response tends to cause a deterioration in the test error rate, and so removing such predictors may in turn yield an improvement. Below we refit the logistic regression using just `Lag1` and `Lag2`, which seemed to have the highest predictive power in the original model.
-정신을 챙기고 뼈 아픈 반성 타임을 가져봅시다! 아까 저 위쪽에서 우리가 간과했던 팩트 진실 하나를 서늘하게 끄집어 회상(recall) 해 봅시다. 그 잘났던 로지스틱 회귀 모델 머신이 왜 똥볼을 찼을까요? 당연합니다! 처음 모델 훈련 때 장착했던 힌트 부품(예측 변수)들이 몽땅 다 하나같이 **터무니없이 불량한 _p_-value(p-값) 계급장**을 달고 있었음을 우린 직시했습니다. 어차피 정답 과녁(반응 변수)과 실질적인 상관관계의 생명줄이 하나도 없는 이런 잡동사니 쓰레기 힌트 예측 변수들까지 좋다고 박박 긁어모아 기계에 쑤셔 넣으면, 그 노이즈 간섭 때문에 실전 모의고사 테스트 에러율이 미친 듯이 박살 나고 오염되어 저하(deterioration) 되는 끔찍한 부작용 병목 현상만 유발할 뿐입니다. 따라서 아예 이런 불량 파츠 변수들을 과감히 칼날로 도려내 제거해 버리는 것이 종종 모델의 컨디션을 확 끌어올려 성능 향상의 대박 결과(improvement) 를 낳습니다. 그리하여 바로 아래 파이썬 코드에서는, 그나마 아까 첫 번째 잡동사니 원본 모델에서 눈곱만큼이라도 제일 예측력 파워가 높아 보였던 에이스 후보 `Lag1` 과 `Lag2`, 단 두 놈의 정예 멤버만 차출해서 로지스틱 회귀 머신을 가볍고 날카롭게 다시 피팅 세팅(refit) 해 볼 것입니다.
+충격적인 진짜 시험 성적! 혼동 판별 채점 폭로판이 보여주는 기계의 진짜 실전 시험 테스트 결과 판별 영광스러운 정확도 타점은 겨우 **약 48% 참담한 수준**이며, 반면 시험을 거하게 망쳐버린 역산출 오류 똥볼 오답률은 오답률 약 52% 로 오만방자하게 달합니다.
 
 ```python
-In [19]: model = MS(['Lag1', 'Lag2']).fit(Smarket)
-X = model.transform(Smarket)
-X_train, X_test = X.loc[train], X.loc[~train]
-glm_train = sm.GLM(y_train,
-                   X_train,
-                   family=sm.families.Binomial())
-results = glm_train.fit()
-probs = results.predict(exog=X_test)
-labels = np.array(['Down']*252)
-labels[probs > 0.5] = 'Up'
-confusion_table(labels, L_test)
+In [18]: np.mean(labels == L_test), np.mean(labels != L_test)
 ```
 
 ```python
-Out[19]: Truth      Down  Up
-Predicted
+Out[18]: (0.4802, 0.5198)
+```
+
+The `!=` notation means _not equal to_, and so the last command computes the test set error rate.
+설명 참견: 여기서 `!=` 이 기괴한 파이썬 표기 부호 표시는 **같지 않다, 즉 짝퉁 틀렸어!(not equal to)**를 직관 의미하며, 그래서 저 위 코드 블록 안의 저 마지막 명령줄 `np.mean` 판별 체계 코드는 바로 기계가 틀려버린 오답 횟수의 평균, 즉 시험 오류 테스트 세트 오차 오답률 을 단숨 파악 집계 산출 도출 평균 연산 계산합니다!
+
+The results are rather disappointing: the test error rate is 52%, which is worse than random guessing!
+이 테스트 산출 획득 결과들은 그야말로 오히려 꽤 눈물이 날 만큼 실망스럽습니다(disappointing): 치열하게 쪼개서 계산된 실전 지옥의 테스트 오답 오류율이 52% 절반을 초과해 버리는데, 이 끔찍한 오답 조작 수치는 차라리 머리 비우고 눈 감고 아무렇게나 단순히 두꺼비집 동전 던지기의 **원숭이 무작위 찍기 추측(random guessing)으로 나오는 아주 원초적인 동전 확률 50% 우연 도박 결과값보다 조차도 수치상 그 뻘쭘 확률 성능이 통계 파악 도출 결과 상 무참히 더 나쁩니다 등신(worse)!** 쓰레기라는 뜻이죠!
+
+Of course this result is not all that surprising, given that one would not generally expect to be able to use previous days’ returns to predict future market performance.
+물론 통계 현실 상식 도박판 주식의 세계가 늘 그렇듯, 만약 특정 도박꾼 개인이 무모하게 단순히 차트의 흘러 지나간 거품 과거나 어제 전날들의 일일 증시 과거 상승 하락 변동 수익률 수치만을 모조리 집어다 긁어모아 전적으로 모조리 무기 인양 의존 사용해서 이 지독하고 도무지 변덕스럽고 파악 불가 예측 엇나가는 변덕쟁이 한 치 앞도 분간 모를 미래의 복잡한 요물 주식 시장 짐승 변동 차트 미래 수익 변동 성과를 마스터하여 단번에 얌전하게 콕 도출 예측해 낼 수 있을 것이라고 도저히 대개 기대하진 상상도 기만조차 안 할 것이라는 상식을 합당하게 고려 전제해 보면, এই 무참하게 짓밟혀 산산이 부서진 데이터 실패의 처참한 깡통 결과가 그리 크게 다 모두 충격적이거나 소름 돋게 전례 없이 유별나게 놀라운 대참사 수준 결과 통계는 결코 아닙니다.
+
+(After all, if it were possible to do so, then the authors of this book would be out striking it rich rather than writing a statistics textbook.)
+(결국 까놓고 따져보면 상식적으로 만약 진짜로 그런 타임머신 어긋난 도박 부자 행위들이 데이터 쪼가리 함수 코딩 따위 나부랭이로 실제로 백발백중 가능하게 세상만사 존재했다면, 빌어먹을 이 똑똑하신 척 대단한 통계학 교재의 저술 나부랭이 저작 교수 저자 양반들은 이런 답답하고 구질구질한 연구실 방구석에서 지루한 이딴 통계학 교재나 기술 종이나 타이핑 작성 집필하고 앉아 있기보다는, 그 시간에 진즉에 이미 컴퓨터 기동 프로그램 조작해서 밖 길거리 금융 월가 증권가에 나아가 주식 도박 코인 장판에서 조 단위로 쓸어 담아 큰돈을 벌고 요트 타며 떼돈을 번 무적의 졸부 벼락 대박 억만장자 부자(striking it rich)가 편하게 되어있었을 것입니다. 현실이 말해주죠.)
+
+We recall that the logistic regression model had very underwhelming _p_-values associated with all of the predictors.
+우리는 여기서 이 처참한 실패 결과 패인을 따져보며, 아까 앞 단원 표에서 이 야심 차게 산출된 로지스틱 회귀 모델 기판이 그 내부 부품 예측 투입 후보 변수들 목록 모두와 지지고 볶고 통찰력 연계 없이 너무나도 단순히 허접하게 엮여서 거의 쓰레기 급의 아주 초라하고 나약한 한심한 수준치(underwhelming)의 낮은 의미 없는 바닥 치는 확률 신뢰도 _p_-값 도출 데이터 점수 통계 조각들을 안타깝게 우글우글 가졌었다는 처참한 첫 오류 팩트 훈련 조립 부품 하자 사실을 슬프고 씁쓸하게 다시 복기하여 환기 떠올립니다(recall).
+
+Using predictors that have no relationship with the response tends to cause a deterioration in the test error rate, and so removing such predictors may in turn yield an improvement.
+통계 예측 모델 엔진 기판 회로 설계 조립 과정 속에서 정작 자기가 타격해야 할 타깃 과녁 응답 방향 목표 반응 도출 지표 움직임 모형 방향 계산 과정과 유의미한 아무런 연관 끈 연계성 논리도, 아예 하등 수학적 의미 관계도 아예 존재하지 않는 노이즈 쓰레기 불량 맹탕 데이터 예측 부품 변수들을 버젓이 구동 주입 연료 재료로 억지로 구겨 끼워 넣고 사용하는 헛된 강행 무지성 훈련 주입 행위 작동 체계는 곧 결과적으로 기계 자체의 전체 테스트 오차율 분석 결과 조립 점수의 심각한 총체적 질적인 붕괴 오염 타락 기능 지표 하락 악화 맹종 오차 붕괴(deterioration) 치명 결함을 가중 심각하게 유발 야기 확장 초래하는 고질적 최악 나쁜 주요 악영향 질환 원인이 되며 증폭시킵니다. 따라서 이런 고물 논리에 따라 역발상 지표로 그러한 뇌동매매 무관 연계 불필요한 독성 쓰레기 불량 잡음 노이즈 교란 오염 과잉 예측 부품 파편 변수 덩어리들을 기판에서 싹 다 뽑아버려 추출 단절 제거하면 차례적으로 이번엔 오히려 기계 본연 결괏값의 불량이 도리어 상쇄 반대로 덜어지며 결과 회로 점수들의 득점 지표 성능 항샹 이라는 타점 전폭적 향상 진보(improvement) 스탯 상승 기적을 재점화 긍정 역 도출 개선 산출해 낼 수도 있는 법입니다.
+
+Below we refit the logistic regression using just `Lag1` and `Lag2`, which seemed to have the highest predictive power in the original model.
+아래에서 우리는 아까 보았던 저 절망의 파편 본래 오리지널 무기 기본 모델 그 불량 부품 무더기 성적표 안에서 그나마 유일하게 썩은 무더기 속에서 상대적으로 가장 타당한 그나마 눈곱만큼 나은 스코어, 즉 가장 지대한 독보적 기여도의 높은 기능 연산 정밀 생존 타격 예측력 잠재성(predictive power)을 작게나마 가진 예측 최고 득점 유망주 지표인 것으로 간주 분석 추정 보였던 `Lag1` 그리고 `Lag2` 딱 요 2개 부품 알짜 지표들 조각 소스 단서 데이터 파편 기판 만을 알뜰하게 조합 단독 엄선 모의 사용하여 전면 재편 축소 분리 모델링으로 다시 한번 로지스틱 회귀 로켓 엔진을 대대적 축소 조립 재점화 다지기 재적합 구동(refit) 할 것입니다.
+
+```python
+In [19]: model = MS(['Lag1', 'Lag2']).fit(Smarket) # 쓰레기 힌트 싹 버리고 제일 그나마 똑똑한 Lag1, Lag2 두 놈만 도면에 장착!
+X = model.transform(Smarket) 
+X_train, X_test = X.loc[train], X.loc[~train] # 똑같이 훈련용, 시험용으로 쪼개고
+glm_train = sm.GLM(y_train,
+                   X_train,
+                   family=sm.families.Binomial())
+results = glm_train.fit() # 가벼워진 몸집으로 다시 뺑뺑이 재훈련 적중 발진!!
+probs = results.predict(exog=X_test) # 미래 시험지로 재평가 타격!!
+labels = np.array(['Down']*252)
+labels[probs > 0.5] = 'Up'
+confusion_table(labels, L_test) # 성적 폭로판 재발동! 두구두구!
+```
+
+```python
+Out[19]: Truth      Down  Up  (정답)
+Predicted (두 개의 부품으로 다시 치른 시험답안지 기계 예측)
 Down         35    35
 Up           76   106
 ```
 
 Let’s evaluate the overall accuracy as well as the accuracy within the days when logistic regression predicts an increase.
-과연 이번엔 로봇이 좀 쓸만해졌을까요? 로지스틱 회귀가 시장 상승세에 올라타 "가즈아, 오를 거다 떡상!" 을 예측한 날들의 핀포인트 적중도 명중률은 물론이고, 이런저런 것 다 합친 판 전체의 총 종합 명중 정확도 스펙(overall accuracy)까지 모조리 계산기로 탈탈 털어 해부 평가 폭격을 갈겨보겠습니다.
+과연 잡다한 쓰레기를 버리고 날렵해진 우리 기계의 성적은 어떨까요? 우리가 얻은 재시험 전체 결과 데이터상의 전반적 전체 총칭 포괄 적중 명중 판별 정확도(overall accuracy), 그리고 한 걸음 더 나아가 좀 더 깊이 로지스틱 회귀 모형 기계가 꽤 독단 단독적으로 확신에 차 오직 주식 시장 자체 차트의 폭발적 기상 상승(increase) 징후 만을 찍어 상승 타점 예측한 콕 집은 발생 날짜 기간 일수 내에서의 오직 그 기간만의 부분 특화 분리 독립 상승 국소 단위 적중률 예측 특수 특정 정확도 수치를 명확히 함께 모두 동시에 수치 계산 산술 평가 검증 전개 도출해 봅시다.
 
 ```python
-In [20]: (35+106)/252, 106/(106+76)
+In [20]: (35+106)/252, 106/(106+76) # (대각선 합 / 전체 시험 문제 수) = 전체 정확도, (Up 찍어서 진짜 Up 맞춘 수 / 기계가 Up이라고 찍은 총수) = 분리 상승 전용 정확도
 ```
 
 ```python
 Out[20]: (0.5595, 0.5824)
 ```
 
-Now the results appear to be a little better: 56% of the daily movements have been correctly predicted. Hence, in terms of overall error rate, the logistic regression method is no better than the naive approach. However, the confusion matrix shows that on days when logistic regression predicts an increase in the market, it has a 58% accuracy rate. This suggests a possible trading strategy of buying on days when the model predicts an increasing market, and avoiding trades on days when a decrease is predicted.
-오호라, 드디어 피를 깎는 다이어트(변수 제거)의 쾌감! 결과가 전보다 약간 살아난 듯 보입니다! 매일 요동치는 야생 주가 널뛰기 무브먼트의 **약 56%** 나 되는 흐름을 기계 녀석이 올바르게 요격 예측해 잡아냈습니다. 하지만 잠깐, 이 판 전체의 총합 오답 에러율(overall error rate) 관점이라는 싸늘한 잣대로 다시 쑤셔보면, 56% 승률은 그저 반반 무 많이 찍기나 다름없는 뇌 빼기 동전 던지기식 나이브(naive) 전략보다 그닥 압도적으로 더 위대하다고 칭송할 수준은 결코 못 됩니다. 그러나! 우리의 채점판 표인 혼동 행렬(confusion matrix) 속살을 살짝 파헤쳐 보면 아주 구미가 당기는 기가 막힌 통계 하나가 숨어 있습니다: **로지스틱 회귀 머신이 "오늘은 무조건 주식 시장이 떡상(increase) 한다!" 라고 신호를 뿜어낸 날짜들만 쏙쏙 골라서 채점해 보면, 그 적중 명중률이 무려 58% 까지 솟구친다는 꿀 팩트가 발굴됩니다.** 이것은 우리에게 아주 짜릿하고 달콤한 작전 지시, 즉 "모델 녀석이 오를 거라고 신호를 깜빡이는 날에만 영혼을 끌어모아 베팅(buying) 해 매수하고, 이 자식이 떨어질 거라고 경고하는 찝찝한 날엔 주식 매매 거래를 싹 중단하고 관망 도피 피신하라!" 라는 승률 58% 짜리 실전 야생 트레이딩 전투 전략(trading strategy)을 강력히 속삭이며 설계 시사해 줍니다.
+Now the results appear to be a little better: 56% of the daily movements have been correctly predicted.
+이제 테스트 재도전 산출 결과 데이터 수치가 이전에 깡통 차던 48% 악몽에 비해서는 약간 극적인 기사회생 갱생 아주 조금 다소 꽤나 나아 호전 개선된 도출 양상 인스피레이션 스코어 진단 향상으로 보입니다: 전체 기동 총망라 분석 산술 일별 하루하루 주식 시장 변동 일일 오르락내리락 파동 움직임 방향 전개 방향성의 평균 대략 절반을 훌쩍 넘는 약 56% 체계 생존 확률 전조 확률이 요번엔 거짓 상실 오류 헛발질 없이 아주 기특하게 판정 도출 올바르게 무사히 안착 예측 도달 확인 증명되었습니다.
 
-Suppose that we want to predict the returns associated with particular values of `Lag1` and `Lag2`. We want to predict `Direction` on a day when `Lag1` and `Lag2` equal 1.2 and 1.1, respectively, and on a day when they equal 1.5 and -0.8. We do this using the `predict()` function.
-이 기고만장해진 확률 머신에게 마지막 극한 킬러 테스트 상상 퀘스트를 하나 줘볼까요? 만약 우리가 특정 수치로 기이하게 비틀어 맞춘 `Lag1` 및 `Lag2` 의 가상의 돌연변이 수치 상황에서 터져 나올 수익 반응 타율을 조준 예측하고 싶다고 상상(Suppose) 해 보십시오. 구체적 작전 상황 세팅! 우리는 두 가지 완전히 다른 날의 미래 운명 방향(`Direction`)을 꿰뚫고 싶습니다: 하루는 어제(`Lag1`) 1.2%, 엊그제(`Lag2`) 1.1% 씩 양일 모두 상승 펌핑을 친 불장 훈훈한 날이고, 또 다른 날은 어젠 무려 1.5% 급등했지만 엊그젠 -0.8% 로 처박혀 널뛰기 발작을 한 기괴한 날입니다. 우리는 다시 한번 우리의 영특한 수정 구슬 도구인 `predict()` 예언 함수 마법을 소환 구동하여 이 두 가상 상황의 미래 스코어를 뽑아냅니다.
+Hence, in terms of overall error rate, the logistic regression method is no better than the naive approach.
+분석의 총괄 종합 전산망 수치상 (전체 모형의 치명타 오차율 점수 지표 파악 측면에서 구조 파악) 덜어내 볼 때, 이 쓰레기를 치운 날렵한 로지스틱 회귀 회로 방법 기법의 단일 기계 모델의 종합 산출 판정 성능 승률 베팅 성공 도출 확률은 극단적으로 표현하면 원숭이가 동전 굴려 찍는 원시적 본능 무지성 단순 나이브(naive) 무도 맹신 돌격 맹목 도박 접근법 확률인 50 찍기 모의 추측 확률 스코어 시스템 판별 무구 보다는 통계적으로 계산해 보면 지표상 여전히 그다지 썩 판도를 뒤집게 가시적으로 우월 대단히 월등 나아 초월해 이기고 우승해 보이는 혁신적 큰 무결성 스텝 도달 신뢰 등급업 성능 압살의 거대한 진보 진척 수준 격차 혁신 차이는 아닙니다. 그냥 약간 더 운이 좋았다 정도.
+
+However, the confusion matrix shows that on days when logistic regression predicts an increase in the market, it has a 58% accuracy rate.
+그럼에도 불구하고 이 표의 특이상황 기이 지표, 즉 혼동 행렬 결괏값 폭로 도표의 세부 분석 체계가 여실히 극명 보여주듯이 맹점 발견 포인트는, 오직 로지스틱 시스템 두뇌 기계 회로 파악 모형이 아주 기계적으로 확고하게 해당 특정 당일 주식 요주의 판세 시장 도박장의 극적인 국지적 한정 변동 장세인 '상승 곡선 화살표(increase)' 반발 지표 단일 방향만을 콕 하나로 단일 특정 집어 상승 예측을 특정 상황 발동해 베팅 찍어낸 아주 특이 특정 상황 발동 환경의 도출 구역 지정 요일 특정 날짜 제한(days) 들 내에서 만큼 이란 특정 전제 조건 한에서는, 이 로켓 로지스틱 회귀 모의 모형은 절반의 동전 치기를 가뿐히 비웃으며 극적으로 약 무려 대략 대거 58% 신들린 수준의 특권 국지 상승 예측 적중 신뢰 확률 단일 정확도 타점 달성 승률 비율 달성 수치 우월 도달 성적 점수를 신묘하게도 달성 구축 기록해 발휘 방출하여 우리에게 그 위력 지문을 놀랍게도 부분 보여줍니다.
+
+This suggests a possible trading strategy of buying on days when the model predicts an increasing market, and avoiding trades on days when a decrease is predicted.
+이 기계 분석 극적 발견 국소 데이터 수치 기반 도출 시사 지표는, 영악한 트레이더에게 만약 어떤 매매 운용 주체 대상이 이 특정 모형 장세가 예측 모델 통계 예측 점쟁이 로봇이 상향 불기둥(increasing market) 시장 예측 발동 환경 조건을 시그널 알릴 시 강력 발생 타점 특정 발동 날들에만 용감하게 맹신하여 시장 해당 주식 재고 현물 보유 자산 종목 몰빵 재산을 풀배수 풀매수 진입(buying) 하여 과감히 오름차순 도박 배팅을 긁어먹고! 그리고 그 외 그 반작용 파멸 우려 이면 반대로 하향 하락 곡선 붕괴 수치 짐작 떨어질 시그널 절망의 하락 늪이 도출 예상 예측 특정 징후 발현 장이 예상 세팅되는 우울 폭격 무너지는 파멸 단층의 모든 하락 예측 기동 오류 날들에는 미련 없이 패를 던지고 모조리 매매 접근 회피하여 아무것도 안 하고 놀면서 현금 관전 자재 보류 관망 쉼 포지션만 영리하게 안전 도피 지대 유지 관망 영위하는 (avoiding trades) 특정 기계 시그널 의존 기반 얌체 매매 베팅 규칙 스탑 투기 거래 타점 공략 전략(trading strategy) 형성 시스템 창출 모의 전술 기동 기능 발동 확정 성립 아이디어 기초 지식 실현 이득 가능성 수익 전략 성립 신봉 구사 단서 승률 배팅 가능성을 꽤 솔깃하게 확실하고 치명적으로 긍정 시사 이면 지시 가능성 확률 파편을 아주 은밀히 뒷받침 무언적 제공 공조 도출 제시합니다.
+
+Suppose that we want to predict the returns associated with particular values of `Lag1` and `Lag2`.
+마지막 유희. 한번 더 상상을 확장 가정하여, 만약 우리가 애초에 특정한 지표 수치 단서인 이 짱짱한 예측 부품 `Lag1` 과 그리고 `Lag2` 두 시계열 무적 무기 단서 값들과 끈끈히 역학 연결되어 파생하는 관련된 특정 결과 후행 목표 방향 지표 확률 상승 수익률 변환(returns) 단절 의 특정 목표 모의 계산 파악 산출 결과를 강제로 예측 렌더링 주입 모델 입력 조작하여 내가 원하는 파편 값에 해당하는 그 수치를 최종 도출해 알아내고 싶다고 억지 지정 꼬집어 상상 세팅 상정 기만 가정해 봅시다.
+
+We want to predict `Direction` on a day when `Lag1` and `Lag2` equal 1.2 and 1.1, respectively, and on a day when they equal 1.5 and -0.8.
+우리는 두 가지 날을 상상합니다. 하나는 최근 목표 선행 단서 변수 `Lag1` 과 이어서 `Lag2` 값 지표 점수 기판이 차례대로 순차 쌍을 이뤄 각각 따로따로 동일하게 특수 쌍 구조로 강제 수치 산술 1.2 상승 스탯 그리고 이어서 연속 1.1 결괏값 계수 스탯과 완전 대응 매치 매칭하는 동일 기상 부합하는 특정 조작 일자의 한 개의 날(장세)과, 두 번째 세팅으로 동일 작동 조건의 완전히 반대 구성 조합 쌍 배틀 점수 지표로서 각각 단서 배열이 산술 수식 1.5 지표 단기 고 상승폭 결괏값 상승 기록 과 그 뒤를 이어 하루 지나 무참히 뒤통수 꺾인 무너지는 대칭 -0.8 떡락 단절 점수 결과 단절 붕괴 점수 판 판락과 완벽 동일하게 짝패를 이뤄 완전 동일 세트 일치 하강 부합 일치 연속 작용 작동 조건하는 또 다른 두 번째 발동 발생 가정 특수 모의 관전 상상 날짜 데이터 시험 요건을 모델에 임의 지표 강제 지시 주입 쑤셔 넣어 지정 대치 인계 입력 강요 설정하여, 그 조작된 상황 모의 속 가상의 반응 판결 결과 판도 모형 주가 상승 장세 `Direction` 이 미친 듯 상승할지 도적 파멸 하락할지 도출 발현 여부를 기계 고유 논리적으로 판독하여 판별 억지 강제 예측 확률 지시 명령 발동 기동 확인해 그 값을 토해 얻어 뽑아내고 싶습니다.
+
+We do this using the `predict()` function.
+우리는 아주 간단하게 통계 모델 기계의 본질 내부 로켓 구조 스위치 트리거 인 파이썬 머신 러닝 `predict()` 단조 강력 추론 반환 함수 구문 발사 수식 을 그대로 발사 도달 스위치 온 활용 호출 사용 조작하여 이 강요 무적 모의 단타 계산 목적 판결 타점 목표 변수 투입 산술 연산 예측 판별 사격 결과치 추출을 최종 반박 불가 강제 강압 도출 지표 추출 작동 계산 명령 수행 계산 강행 도출 완수 성과 강행 처리 수행 마감 짓습니다.
 
 ```python
 In [21]: newdata = pd.DataFrame({'Lag1':[1.2, 1.5],
-'Lag2':[1.1, -0.8]});
-newX = model.transform(newdata)
-results.predict(newX)
+'Lag2':[1.1, -0.8]}); # 내가 만든 내 멋대로 억지 가짜 상상 주가 날짜 2개 만들기
+newX = model.transform(newdata) 
+results.predict(newX) # 기계야, 이 상상의 날에 주식이 오를 확률은 몇이냐?! 발사!
 ```
 
 ```python
 Out[21]:
-0    0.4791
-1    0.4961
+0    0.4791 # 첫 번째 날은 47% 확률로 오르네요. (떡락각!)
+1    0.4961 # 두 번째 날은 49% 확률로 오르네요. (이것도 떡락각!)
 dtype: float64
 ```
 
@@ -192,4 +281,4 @@ dtype: float64
 
 ## Sub-Chapters
 
-[< 4.7.2 Logistic Regression](../trans2.html) | [4.7.3 Linear Discriminant Analysis >](../../4_7_3_linear_discriminant_analysis/trans2.html)
+[< 4.7.2 Logistic Regression](../index.html) | [4.7.3 Linear Discriminant Analysis >](../../4_7_3_linear_discriminant_analysis/trans2.html)

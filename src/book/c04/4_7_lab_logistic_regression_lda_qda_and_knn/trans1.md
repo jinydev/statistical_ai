@@ -8,7 +8,7 @@ title: "trans1"
 > 💡 **학습 팁:** 이 페이지는 원문 형식을 최대한 존중한 **직역본**입니다. 내용이 어렵거나 수학적 설명이 딱딱하게 느껴진다면, 더 쉽고 비유적으로 풀어쓴 [🏄‍♂️ Vibe Coding 버전보기](./trans2.html)를 추천합니다!
 
 # 4.7 Lab: Logistic Regression, LDA, QDA, and KNN 
-# 4.7 랩: 로지스틱 회귀, LDA, QDA, 그리고 KNN
+# 4.7 실습: 로지스틱 회귀, LDA, QDA, 그리고 KNN
 
 ---
 

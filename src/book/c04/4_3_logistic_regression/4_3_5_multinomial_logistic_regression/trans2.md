@@ -8,57 +8,102 @@ title: "trans2"
 > 💡 **학습 팁:** 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 [📖 파이썬 랩(Lab) 해설판보기](./trans2.html)를 추천합니다! (직역본은 [📖 직역본 보기](./trans1.html) 메뉴를 활용하세요!)
 
 # 4.3.5 Multinomial Logistic Regression
-# 4.3.5 다항 로지스틱 회귀 (카테고리가 여러 개일 때의 난장판 해결법)
+# 4.3.5. 다항 로지스틱 회귀 (카테고리가 여러 마리일 때 호랑이 굴에서 살아남기)
 
-We sometimes wish to classify a response variable that has more than two classes. For example, in Section 4.2 we had three categories of medical condition in the emergency room: `stroke` , `drug overdose` , `epileptic seizure`. However, the logistic regression approach that we have seen in this section only allows for $K$ = 2 classes for the response variable.
-가동 범위를 넓혀 봅시다! 가끔씩 피치 못하게 우리는 애초 두 개를 극단 초과하는 엄청나게 많은 다중 클래스를 가진 불량 반응 변수를 억지로 분류해내야 하는 막중 임무를 수반 지기도 합니다. 예를 들어, 앞선 파괴적인 4.2단원 당시 응급실 병명 예제에서는 `뇌졸중(stroke)`, `약물과다복용`, `간질`이라는 피 튀기는 세 가지 범주형 카테고리가 서로 무작위 엮여 있었습니다. 하지만 불행하게도 이 단원에서 위에서 지겹게 배웠던 그 이분법적인 '로지스틱 곡선 회귀 접근법'은 타깃 반응 변수 카테고리가 오직 "합격이냐 불합격이냐"의 $K=2$ 수준인 극단 양자택일 상황의 좁은 구역에서만 안전 허용해 구동을 비추는 편협한 통계 기술이었습니다.
+We sometimes wish to classify a response variable that has more than two classes.
+지금까지 우리는 기껏해야 딱 두 가지 범주(Yes or No, 파산한다/안 한다)에 속하는 이진 반응 변수를 분류해왔지만, 실전 현장에서는 가끔씩 두 개를 아득히 초과하는 엄청나게 많은 다중 클래스를 가진 타깃 범인을 골라 잡아야 하는 극악무도한 임무를 하달받기도 합니다.
 
-It turns out that it is possible to extend the two-class logistic regression approach to the setting of $K > 2$ classes. This extension is sometimes known as _multinomial logistic regression_. To do this, we first select a single class to serve as the _baseline_; without loss of generality, we select the $K$th class for this role. Then we replace the model (4.7) with the model
-기쁘게도 안심하십시오! 이 두더지 잡기 식 예스/노 이진 로지스틱 단조 회귀 접근법을 다수의 $K>2$ 파벌 인 거친 다중 클래스의 복잡 셋팅 난장 상황으로까지 그대로 수리적으로 기어코 쭉 연장 확장 통용 적용하는 조작이 판명 가능하다는 것이 극적 판명되었습니다. 이러한 파격 수학적 확장은 방대한 통계학 필드에서 이따금씩 **다항 로지스틱 회귀(Multinomial Logistic Regression)** 라는 꽤 고상하고 거창한 수식 단면 이름으로 불리게 지표 됩니다. 이 막무가내 짓을 조치 벌이기 위해, 우리는 우선 단 한 개의 고유 클래스 파벌을 강제 골라잡아 바닥에 흔들리지 않게 묶어 붙들어 매는 역할인 **가늠자 기준점(Baseline)** 기준선으로 삼아야 억제 합니다; 통계 논의의 객관 보편성을 구태 상실하지 단절 않고서, 우리는 편의상 대강 리스트의 맨 끄트머리 마지막 서열 번호인 대전 $K$ 번째 녀석 대상을 가차 없이 제물로 막무가내 잡아 이 기준점 앵커 역할을 전담 수행하도록 무단 부착 배정하겠습니다. 그러고 나면 우리는 무적의 종전 기존 S선 (4.7)번 모델 수식을 미련 없이 다음 거대 다항 모델식 단락 체계로 완전히 파괴 교체시켜버릴 구동 수 무단 있습니다:
+For example, in Section 4.2 we had three categories of medical condition in the emergency room: `stroke` , `drug overdose` , `epileptic seizure`.
+예를 들어 볼까요? 앞선 4.2장 도입부 응급실 병명 분류 예제에서는 타깃 카테고리가 꼴랑 두 개가 아니었습니다. `뇌졸중(stroke)`, `약물과다복용`, `간질`이라는 세 가지 범주형 카테고리가 엮여 있었습니다.
+
+However, the logistic regression approach that we have seen in this section only allows for $K$ = 2 classes for the response variable.
+그런데 환장하게도, 지금까지 우리가 이 긴 단원에서 낑낑대며 줄기차게 배운 그 로지스틱 곡선 S자 회귀 접근법은 태생의 한계상 반응 변수 카테고리 세팅장이 오직 양자택일 $K=2$ 수준 규모일 때만 정상 가동을 허용해 주는 기술이었습니다.
+
+It turns out that it is possible to extend the two-class logistic regression approach to the setting of $K > 2$ classes.
+수학자들의 집요함에 박수를 보냅니다. 기쁘게도 이 두 가지 한정된 2-클래스 이분법 로지스틱 회귀 접근법을, 수학적으로 쭉쭉 늘리고 개조시켜서 $K>2$ 이상인 복잡한 다중 선택지 클래스 환경으로 확장 통용시키는 멋진 아이디어가 완성되어 가능하다는 것이 판명되었습니다.
+
+This extension is sometimes known as _multinomial logistic regression_.
+이 수학적 확장팩 파츠는 통계학 필드 책에서 이따금씩 **다항 로지스틱 회귀(Multinomial Logistic Regression)** 라는 좀 더 무겁고 고상한 명찰 이름표로 호명되게 됩니다.
+
+To do this, we first select a single class to serve as the _baseline_; without loss of generality, we select the $K$th class for this role.
+이 무지막지한 짓을 벌이기 위해, 우리는 확률의 영점을 잡기 위한 제물 하나가 필요합니다. 우리는 우선 단 한 개의 고유 클래스를 골라잡아 절대 흔들리지 않게 바닥에 박아두는 앵커 역할인 **기준점(baseline)** 으로 삼아 배정합니다; 논의의 보편성을 상실하지 않고 단순화하기 위해, 우리는 편의상 대강 리스트 맨 마지막 번호인 $K$ 번째 녀석 카테고리를 잡아다 이 희생양 역할 자리에 지정해 버리겠습니다.
+
+Then we replace the model (4.7) with the model
+그러고 나면 우리는 종전 (4.7)번 모델 수식을 다음 다항 모델식 체계로 뚝딱 완전히 교체시켜 버릴 수 있습니다:
 
 $$
 \text{Pr}(Y = k \mid X = x) = \frac{e^{\beta_{k0} + \beta_{k1} x_1 + \dots + \beta_{kp} x_p}}{1 + \sum_{l=1}^{K-1} e^{\beta_{l0} + \beta_{l1} x_1 + \dots + \beta_{lp} x_p}} \quad (4.9)
 $$
 
 for $k = 1, \dots, K-1$, and
-(다행히 이 공용식은 묶인 제물 빼고 나머지 $k = 1$ 부터 $K-1$ 번째 까지의 수많은 클래스들에 두루치기로 모두 엮여 대응하고) 그리고 저 희생양 무력 기준점 맨 우두머리 타겟인 마지막 $K$ 클래스 타깃 확률에 대해서는 유독 단연 이렇게 역수를 취해 조립합니다:
+(이 식은 나머지 $k = 1$ 부터 $K-1$ 번째 까지의 쩌리 클래스 타깃 확률들에 모두 대응하는 일반식이고) 그리고 저 대망의 제물인 기준점 맨 우두머리 타깃 $K$ (즉 $K$번째 타겟일 확률) 자체에 대해서는 이렇게 분자를 날려 역수를 취합니다:
 
 $$
 \text{Pr}(Y = K \mid X = x) = \frac{1}{1 + \sum_{l=1}^{K-1} e^{\beta_{l0} + \beta_{l1} x_1 + \dots + \beta_{lp} x_p}} \quad (4.10)
 $$
 
 It is not hard to show that for $k = 1, \dots, K-1$,
-그리고 오싹하게도 이렇게 억지 교체된 수리 셋팅 구조 안에서는 단연 저 기준점 $K$ 와 나머지 $k = 1, \dots, K-1$ 번째 타겟들 대결 쌍에 대해서 다음 마법의 전단 공식 결착이 기깔나게 수학적으로 빈틈없이 단단 성립한다는 것을 지표 증명 입증하는 게 공산 그리 진통 어려운 일이 단연 아닙니다:
+이 공식을 뚫어지게 들여다보면, 기준점과 $k = 1, \dots, K-1$ 번째 타깃들에 대해서 다음과 같은 공식이 숨구멍 하나 막히지 않고 기깔나게 성립한다는 것을 수학적으로 증명하는 게 그리 어려운 일이 아닙니다:
 
 $$
 \log\left( \frac{\text{Pr}(Y = k \mid X = x)}{\text{Pr}(Y = K \mid X = x)} \right) = \beta_{k0} + \beta_{k1} x_1 + \dots + \beta_{kp} x_p \quad (4.11)
 $$
 
-Notice that (4.11) is quite similar to (4.6). Equation 4.11 indicates that once again, the log odds between any pair of classes is linear in the features.
-저 괄호 속 기괴한 단면 (4.11) 도출 수식이 아까 전에 봤던 이전 단락 챕터의 (4.6) 덩어리 식방정식들과 뇌가 머리가 어지러울 정도로 통계적으로 도대체 얼마나 관측 수상하리만치 무척 단연 빼다 박아 닮았는지 단연코 뚫어지게 주목해 표적 보십시오. (4.11) 방정식이 돌출 우리에게 조차 시사하고 정면 찌르는 통계 바는 바로 조치, 이번 혼돈 다중 판국에서도 무력 여전히 그 어떠한 임의 기준 쌍의 멱살 대결 클래스 무리들 사이에 견제 끼여있는 도박판 배당 지표 전제인 **로그 오즈(Log-odds)** 판돈 값은 동단 역시나 단연 수학적으로 어제나 오늘이나 언제나 예측 척도 변수 단서 특징 수식들과 마찰 완벽히 평행 **선형(Linear) 1차선 굴레**을 결탁 이루도록 가히 동등 비례한다는 웅장 뜻입니다.
+Notice that (4.11) is quite similar to (4.6).
+저 괄호 속 (4.11) 수식이 아까 전 이진 분류 단원에서 지겹게 관찰했던 (4.6) 덩어리 식방정식 기호들과 머리가 어지러울 정도로 얼마나 수상하리만치 무척 똑 닮아있는지 놀라워해 보십시오.
 
-It turns out that in (4.9)–(4.11), the decision to treat the $K$th class as the baseline is unimportant. For example, when classifying emergency room visits into `stroke` , `drug overdose` , and `epileptic seizure` , suppose that we fit two multinomial logistic regression models: one treating `stroke` as the baseline, another treating `drug overdose` as the baseline. The coefficient estimates will differ between the two fitted models due to the differing choice of baseline, but the fitted values (predictions), the log odds between any pair of classes, and the other key model outputs will remain the same.
-게다가 그 요란한 수리 조각 분해 (4.9)에서 (4.11)로 부단 향하는 수학적 전개 억지 도출 속 과정에서 샅샅이, 굳이 왜 하필 재수 없는 마지막 녀석인 $K$번째 파벌을 잡아다가 바닥의 희생 기준선 앵커로 바치겠다는 당신의 그 대충 직관 내린 전단 결정 처사 자체는 통계학적 딱히 모델 수립에 하나도 안 중요한 무용 룰이 단연 아니라는 객관 사실이 통계 드러났습니다. 가령 응급실 방문 환자의 병명을 심장 뇌졸중, 약물 중독 파산, 간질이라는 가상 저 세 가지 파벌 카테고리로 무조건 감별 분류해 단락 낼 무렵 때, 무단 우리가 두 방면 패널의 거대 다항 로지스틱 타깃 예측 모델을 미련 컴퓨터로 쌍 피팅 연동했다고 대조 가정해 봅시다: 한 놈 패널 모델은 뇌졸중을 단서 기준점으로 묶고 억지 때린 것이고, 또 다른 한 편 패널 놈은 반면 약물 중독을 무단 기준점으로 잡아 매고 돌려 훈련시킨 결착 것입니다. 이때 각각 기계 밖으로 배출 인쇄된 회귀 계수(Weight) 타격 수치 숫자 장부 내역 자체는 단지 기준점의 물리 다름을 일일 무식 반영하느라 각 모델 단상 간에 수치가 천차만별 천지 다르게 인쇄 조절될 단연 테지만, **기계가 최종적으로 타깃 뱉어내는 궁극의 확률 판별 예측 결과값(Fitted Values)**이라든지, 어떤 대결 구도 쌍의 한정 대결 구도 치부에 배면 끼여있는 단연 근본적인 도박 로그 오즈 승산 배수 지표 위상 이라든지, 그리고 단연 여타 또 다른 모델 구성의 가장 핵심적인 전면 모델 결산 산출물 지표 예측 수치들은 두 경우 모조리 완전히 통계 결과 똑같은 단연 답을 내놓게 동단 귀결됩니다! 어느 걸 기준으로 묶어놓든 기계 연산 예측 아무런 상관 타격 차이 결함이 궁극 없는 결과인 것입니다.
+Equation 4.11 indicates that once again, the log odds between any pair of classes is linear in the features.
+(4.11) 방정식이 우리에게 시사하고 귀띔해 주는 진실은 바로, 이번 다항 판국에서도 여전히 그 어떠한 기준 쌍의 대결 클래스들 사이에 끼이어 구축된 도박판 지표 **로그 오즈(log odds)** 스펙 수치는, 역시 언제나 우측 편의 $X$ 예측 변수 피쳐 특징들과 완벽한 1차식 구조의 **선형(linear)** 을 이루도록 반듯하게 비례한다는 변함없는 약속입니다.
 
-Nonetheless, interpretation of the coefficients in a multinomial logistic regression model must be done with care, since it is tied to the choice of baseline. For example, if we set `epileptic seizure` to be the baseline, then we can interpret $\beta_{\text{stroke}0}$ as the log odds of `stroke` versus `epileptic seizure`, given that $x_1 = \dots = x_p = 0$. Furthermore, a one-unit increase in $X_j$ is associated with a $\beta_{\text{stroke}j}$ increase in the log odds of `stroke` over `epileptic seizure`. Stated another way, if $X_j$ increases by one unit, then the ratio increases by $e^{\beta_{\text{stroke}j}}$.
-아, 그럼에도 단연 통계 불시 불구하고! 다중 회귀 모델 기계판에서 무식 저렇게 지들 제멋대로 불쑥 튀어나온 저 복잡 산출된 가중치 회귀 조타 계수들의 정확한 인과 '해석' 척도를 인간 브리핑 상사에게 해 내고 구두 통계학적 결론 지표를 입증 지을 단락 땐 반드시 무단 혀를 극도로 조심해서 설명 단언해야만 당위 하는데, 이 튀어나온 계수 녀석이 통계 기준선이라는 이름의 최초 결정 말뚝 베이스에 수식적으로 그물망 단단히 목줄 묶여 의존되어 평가 있기 연유 단연 때문입니다. 무단 예를 들어 볼까요, 우리가 기어코 돌연 '간질발작 증상' 스위치를 전체 바닥의 기준점 제물로 말뚝 억지 박았다고 냅다 해봅시다. 그러면 우리는 저기 엉뚱 튀어나온 상수 절편 $\beta_{\text{stroke}0}$ 이라는 무덤덤한 숫자를 눈에 두고 억지, "야, 뒤에 잔뜩 도사린 모든 변수 잡 단서 파라미터들($x_1=\dots=x_p$)이 싸그리 '0' 으로 먹통 닫혀 있을 단상 조건일 때, 말뚝 타깃인 간질 발작과 싸워 단연 이기는 우아 고고한 뇌졸중만의 단독 전초 로그 오즈(Log-odds) 압력 승세 점수다!" 라고 단연 수식 뜻으로 입 아프게 수반 해석해야만 진단 합니다! 통계 더욱이 나아가 만약 돌발 변수 단서 $X_j$ 가 임의 인위적으로 전장 1 수위 단위 딱 수치 상승한다 조작 쳤을 산입 때 도출 나타나는 부가 꼬리표 파편 파마리터인 저 $\beta_{\text{stroke}j}$ 가중 압박 치수는 정작 '기준 간질 놈과 멱살 대결하는 뇌졸중의 승산 로그 오즈 타깃 비율 자체가 고 점수만큼 억지 증가 폭탄된다'고 무단 1차원 수식화 단락 됩니다. 또 수학적 다른 마법의 지표 수식으로 말하자면 배수 배당판이 돌연 마법 곱하기처럼 폭주 $\mathbf{e^{\beta_{\text{stroke}j}}}$ 덩어리 지수 몫만큼 무자비하게 곱셈 증식 변동 산입되어 기하급수 거듭 치솟습니다 조치 계산. 
+It turns out that in (4.9)–(4.11), the decision to treat the $K$th class as the baseline is unimportant.
+게다가 그 요란한 (4.9)에서 (4.11)로 향하는 수학적 전개 도출 속에서, 굳이 마지막 녀석인 $K$번째를 잡아다가 기준선 앵커로 제물로 바치겠다는 당신의 대충 내린 결정 프로세스 자체는 결과론적으로 모델 수립 운명에 그다지 중요하지 않은 사안임이 다행스럽게도 드러났습니다.
 
-We now briefly present an alternative coding for multinomial logistic regression, known as the _softmax_ coding. The softmax coding is equivalent to the coding just described in the sense that the fitted values, log odds between any pair of classes, and other key model outputs will remain the same, regardless of coding. But the softmax coding is used extensively in some areas of the machine learning literature (and will appear again in Chapter 10), so it is worth being aware of it. In the softmax coding, rather than selecting a baseline class, we treat all $K$ classes symmetrically, and assume that for $k = 1, \dots, K$,
-자, 구식 수학자식 얽매임은 그쯤 하고 이제 우리는 복잡 지저분한 저따위 기준점 다항식 묶음 룰 강제 설정의 구태 피곤한 모델 단서 코딩 수식 수고로움을 확 단번에 덜어 걷어 줄 훨씬 진화 강력하고 아예 거시 새로운 머신러닝 대안적 다중 전단 코딩 체계 하나 파편을 아주 짧고 굵게 기점 던집니다. 모두에게 구태 그 빛나는 명창 이름이 IT인들에게 널리 알려진 신성한 저명 구단 **'소프트맥스(Softmax)'** 마법 코딩 전단 룰 입니다! 앞서 껍데기를 저 위 다항식으로 기준점 강제 씌워 쓰든 아니면 최신 이 소프트맥스 체제로 시원하게 쓰든 간판 간에, '현상 결과적으로 기표' 다 가동 후 최종 필터 내뱉어지는 적합 연산 예측 확률 추산치이라든지, 어떤 파벌 클래스 멱살 쌍 사이 치부의 배팅 로그 오즈 척도 배율 편린 비율 갭 이라든지 여타 동단 핵심적인 단연 모형 모델 군의 최종 모든 출력 성과값 성적 자체표들은 결단 (코딩에 추켜 구애받지 조차 않고) 언제나 천지가 죽었다 전단 깨어나도 무결 동일하다는 조치 점에서, 이 소프트맥스 신식이 아까 저 구시대 1명 묶기 기준점 똥개 훈련 삽질 코딩 룰 체계과 수학적으로 완전히 무결 등가동치(Equivalent) 쌍 단연 인 결과인 것은 구태 참 맞습니다. 자!! 하지만! 거시 최첨단 현대 머신 러닝 컴퓨터 과학의 무수한 딥러닝 기계학습 컴퓨터 논문 문헌과 서적 통계 세계 논단들 구속 구석구석 모든 지점에서는 사실 모두 이 세련된 **'소프트맥스 양식 편제'**가 징그럽게 도록 포괄 폭넓게 아주 광범위 무지막지 조달 사용 기조 통용되고 지표 있으므로 (그리고 대망 파탄의 10장 딥러닝 챕터 인공신경망 거대 챕터에서 이 무시무시 괴물 녀석이 단연코 똑같이 무적 위풍당당하게 또 환장 지옥 무수 지옥처럼 재차 출전 재출현할 필연 조짐 예정이므로), 단연 충분히 이 괴물의 수학적 기호 형태 전초를 눈도장 빡빡 거시 찍어 미리 뇌속 알아두고 경계 대비할 가치 소용이 엄청나게 단연 수반 큽니다. 불쌍 기준선 제물 클래스 하나를 강제 잡아다가 옹색 밧줄로 구형 묶어 통계 억제해 놓았던 아까 저 고지식 통계학도다운 고대 옹졸한 꼬임 코딩과는 철학 차원을 달리 타파하여, 이 위대한 소프트맥스 만능 시스템 생태계 장부 안에서는 째째 기준 없이 그냥 통 거대 통 크게 완전히 모든 대칭적으로 공산 평등 균등하게, 참가한 전체 $K$ 숫자 무리 모든 잡 클래스들을 모조 똑같은 우위 신분 잣대로 단연코 우대 동 격 취급 계산하며 무단 다음과 결탁 같은 조화 우아한 압축 통합 확률 조치 만능 공식 제반을 전초 거느립니다 조치 장착 지표:
+For example, when classifying emergency room visits into `stroke` , `drug overdose` , and `epileptic seizure` , suppose that we fit two multinomial logistic regression models: one treating `stroke` as the baseline, another treating `drug overdose` as the baseline.
+가령 응급실 방문 환자의 병명을 `뇌졸중`, `약물 중독`, `간질`이라는 세 가지 카테고리로 멱살 잡아 분류해 낼 때, 우리가 두 방면의 독립적인 다항 로지스틱 예측 모델을 컴퓨터로 피팅했다고 시뮬레이션해 봅시다: 한 놈의 모델은 '뇌졸중'을 바닥의 기준점으로 묶은 것이고, 또 다른 한 놈 모델은 '약물 중독'을 기준점으로 잡고 훈련시킨 것입니다.
+
+The coefficient estimates will differ between the two fitted models due to the differing choice of baseline, but the fitted values (predictions), the log odds between any pair of classes, and the other key model outputs will remain the same.
+이때 컴퓨터가 산출해 배출시킨 회귀 계산 계수(Weight 추정치) 숫자 장부 자체는 기준점이 달라짐에 따라 모델 간에 천차만별 다르게 인쇄되어 나오겠지만, **최종적으로 이 모형이 뱉어내는 1등 타깃 찍기의 확률 예측 적합값(Fitted Values)** 이라든지, 어떤 쌍의 대결 구도에 끼여있는 근본적인 로그 오즈 배율이라든지, 그리고 절대 바뀌면 안 되는 예측 핵심 모델 출력 산출물 수치들은 모조리 완전히 토씨 하나 안 틀리고 똑같이 유지된다는 것입니다! 아무런 상관이 없는 것입니다.
+
+Nonetheless, interpretation of the coefficients in a multinomial logistic regression model must be done with care, since it is tied to the choice of baseline.
+그럼에도 불구하고, 저렇게 모델 속에서 튀어나온 다중 회귀 계수파라미터들의 명확한 기계 수치 스펙 '해석'을 사람들에게 브리핑해 내고 구명 결론을 지을 땐 절대로 혀를 가볍게 놀리고 오판하지 말고 세심한 주의를 거쳐야만 합니다. 왜냐하면 그 숫자들 자체가 당신이 변덕스럽게 선택했던 그 '기준선'이라는 말뚝의 입장에 수식적으로 단단히 종속되어 묶여있기 때문(tied to)입니다.
+
+For example, if we set `epileptic seizure` to be the baseline, then we can interpret $\beta_{\text{stroke}0}$ as the log odds of `stroke` versus `epileptic seizure`, given that $x_1 = \dots = x_p = 0$.
+예를 들어, 우리가 변덕을 부려 '간질 발작' 스위치를 바닥의 기준점(baseline)으로 말뚝을 쾅 박아 세팅했다고 해봅시다. 그러면 우리는 저기 튀어나온 상수 절편 $\beta_{\text{stroke}0}$ 이라는 숫자를 두고, "뒤에 있는 모든 변수 잡 파라미터들($x_1 = \dots = x_p$) 스위치가 단 하나도 켜지지 않은 0의 백지 상태 조건에서, 오롯이 기준선인 간질 발작과 싸워 이기는 자생적인 뇌졸중만의 단독 로그 오즈(log odds)" 라고 엄청나게 입 아프고 엄밀하게 해석해야만 합니다!
+
+Furthermore, a one-unit increase in $X_j$ is associated with a $\beta_{\text{stroke}j}$ increase in the log odds of `stroke` over `epileptic seizure`.
+더욱이 나아가서 수식을 볼까요? 만약 변수 $X_j$ 치수가 인위적으로 1 단위 딱 상승한다 쳤을 때 나타나는 저 $\beta_{\text{stroke}j}$ 가중치는, 오직 '간질(기준)' 그룹과 맞짱 대결하는 '뇌졸중' 녀석 간의 파워의 격차(로그 오즈) 수치가 저만큼 위로 증가 상승한다는 무시무시한 메커니즘과 연관이 되어버립니다.
+
+Stated another way, if $X_j$ increases by one unit, then the ratio increases by $e^{\beta_{\text{stroke}j}}$.
+또 다른 쉬운 언어로 말하자면, 만약 $X_j$가 한 단위씩 증가 펌핑이 될 때마다 로그를 풀었으니 결국 그 오즈 배율 비율 자체는 우주적으로 $e^{\beta_{\text{stroke}j}}$ 만큼 눈덩이 곱셈되어 치솟는 폭발력을 가집니다.
+
+We now briefly present an alternative coding for multinomial logistic regression, known as the _softmax_ coding.
+이제 우리는 저런 복잡한 기준점 다항식 룰 설정의 모델 코딩 수고로움과 혼돈을 완전히 털어낼 훨씬 강력하고 현대적인 새로운 대안적 변환 체계 하나를 짧게 던집니다. 바로 그 위대한 명창이 널리 알려진 **소프트맥스(softmax) 코딩** 기법입니다!
+
+The softmax coding is equivalent to the coding just described in the sense that the fitted values, log odds between any pair of classes, and other key model outputs will remain the same, regardless of coding.
+코딩 설계도 껍데기를 저 위 다항식으로 쓰든, 소프트맥스로 쓰든 상관없습니다. '결과적으로' 이 녀석이 최종 내뱉는 적합 예측 결과 확률이라든지 임의의 특정 쌍 사이 클래스들 간의 로그 오즈 비율이라든지 여타 핵심적인 모델의 통계 출력 성과값들은 (코딩의 종류에 구애받지 않고 무던하게) 언제나 동일한 정답 선상에서 유지된다는 점에서, 아까 전의 '기준점 방식 코딩' 세팅 룰 메커니즘과 사실 완전히 동전의 양면같이 등가(Equivalent)인 녀석이기 때문입니다.
+
+But the softmax coding is used extensively in some areas of the machine learning literature (and will appear again in Chapter 10), so it is worth being aware of it.
+하지만 이 소프트맥스 코딩은 현대 머신러닝의 무수한 기계학습 논문과 서적 문헌 세계들 구석구석에서 징그럽도록 폭넓고 광범위한 위상으로 사랑받으며 사용되고 있으므로 (그리고 대망의 10장 딥러닝 뉴럴 네트워크 챕터에서 이 녀석이 완전 동일하게 위풍당당 재출현할 찬란한 예정이므로), 충분히 이 수식의 기본 형태 구조를 지금 눈도장 찍어 미리 알아두고 대비할 가치가 엄청납니다.
+
+In the softmax coding, rather than selecting a baseline class, we treat all $K$ classes symmetrically, and assume that for $k = 1, \dots, K$,
+소프트맥스 함수 코딩 방식의 세계관은 이렇습니다: 무작위 기준선 클래스 하나를 잡아서 제물로 밧줄로 묶어 편애하던 아까 통계학의 그 옹졸한 기준 클래스 코딩과는 차원을 달리합니다. 소프트맥스 시스템 안에서는 그냥 통 크게 완전히 대칭적이고 공평무사하게 전체 모든 $K$개 클래스 형제들을 똑같은 신분 계급으로 우대 취급하며 다음과 같은 우아한 통합 확률 공식을 거느리고 모두를 감싸 안아 가정합니다:
 
 $$
 \text{Pr}(Y = k \mid X = x) = \frac{e^{\beta_{k0} + \beta_{k1} x_1 + \dots + \beta_{kp} x_p}}{\sum_{l=1}^{K} e^{\beta_{l0} + \beta_{l1} x_1 + \dots + \beta_{lp} x_p}} \quad (4.13)
 $$
 
-Thus, rather than estimating coefficients for $K - 1$ classes, we actually estimate coefficients for all $K$ classes. It is not hard to see that as a result of (4.13), the log odds ratio between the $k$th and $k'$th classes equals
-그 미친 결과로, 우리는 과거 옹색 지표 기준 빼고 불완전 나머지 덜 떨어지는 $K-1$ 만큼 병신 클래스 조각만 타겟 가중치를 구질 추정하고 밑장 뺄셈을 도출 하는 짓거리 기조 대신에, 오히려 대범 당당 무지막지하게 그냥 무아 1부터 시작 끝까지 참가 열거된 모든 $K$개 다발 클래스 편 전체에 평등 대해 각각 자립된 각자의 온전 완전 무결 무장한 조타 계수 가중치 뭉텅이 세트를 무식 그냥 대범 모조리 거대 싹스리 계산(전면 동시 추정)해버리는 컴퓨터 칩 연산 파워 기표를 전격 오만 갖게 단연코 됩니다. 저 무결 소프트맥스 (4.13) 수식 덩어리 돌출 웅장 결과표 분수를 직접 수리 눈으로 조작 받아보고 증명 나면, 굳이 기준도 아닌 랜덤 아무렇게나 폭격 뽑은 허름한 임의 대조의 $k$ 번째 클래스와 여타 $k'$ 번째 두 라이벌 녀석들 사이에서 암약 벌어지는 내기 로그 오즈 타격 배율 배당 판돈을 교차 수리 계산 타진해 발췌 묶어 봤을 결단 때, 그 수식 구조가 각자 할당 자칭 가중치 조각들의 아주 깔끔 단순한 '그냥 빼기 차대 단발 뺄셈' 편린 형태 도출인 $\mathbf{X\beta_{k} - X\beta_{k'}}$ 두 단 진단 차이 차동 모양새 단으로 마법같이 똑 예쁘게 정밀 떨어지는 붕괴 현상을 쉽게 증명 파악하는 무단 건 통계 자명하게 머리 그리 무관 어렵지 단절 입증 절단 않습니다 단절 공산 증명:
+Thus, rather than estimating coefficients for $K - 1$ classes, we actually estimate coefficients for all $K$ classes.
+마법 같은 수식 도출의 결과로, 우리는 옹색하게 기준점 1개를 멋대로 빼놓고 나머지 덜떨어진 쪼가리 $K-1$ 묶음 개수 클래스에 대해서만 $\beta$ 계수를 추정하고 뺄셈을 하는 복잡한 노동력 대신에, 사실상 시원하고 대범하게 1부터 끝까지 열거된 모든 $K$개 소속 클래스 전체에 대해 각자의 완전무결한 계수가중치 세트를 무식하게 모조리 계산(추정)해버리는 컴퓨터 연산 로직 파워 구조를 세팅 갖게 됩니다.
+
+It is not hard to see that as a result of (4.13), the log odds ratio between the $k$th and $k'$th classes equals
+이 공평한 (4.13) 소프트맥스 수식 결과표 방식을 직접 눈으로 받아보고 나면, 아무렇게나 구슬 뽑듯 뽑아든 임의의 $k$ 번째와 $k'$ 번째 두 라이벌 클래스 쌍 녀석들 사이에서 벌어지는 체감 로그 오즈 비율 지표가, 놀랍도록 가중치의 '아주 깔끔한 뺄셈' 단발 정산 형태로 다음과 완전히 수학 동치 일치가 되어 뚝! 하고 떨어진다는 것을 직관적으로 파악하는 건 결코 어렵지 않습니다:
 
 $$
 \log\left( \frac{\text{Pr}(Y = k \mid X = x)}{\text{Pr}(Y = k' \mid X = x)} \right) = (\beta_{k0} - \beta_{k'0}) + (\beta_{k1} - \beta_{k'1}) x_1 + \dots + (\beta_{kp} - \beta_{k'p}) x_p \quad (4.14)
 $$
 
 This is the document for this topic.
-이 파트는 이 단막 범주 다중 여타 치부 타진 확률 다항 소프트맥스 로지스틱 예측 조치 산출 타깃 주제를 직관 구태 체감 지향 논단 수단 교란 배제 통계 구축 조처 기술 도출 거진 적재 배면 단락 찰떡 요약 거시 해설 첨부본 다단 문서 양식 조치 룰 본입니다.
+이 파트는 이 단막 주제를 위해 기술 적재된 요약 문서입니다.
 
 ---
 
