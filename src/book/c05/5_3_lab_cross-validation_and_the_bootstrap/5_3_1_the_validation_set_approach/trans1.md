@@ -3,14 +3,23 @@ layout: default
 title: "trans1"
 ---
 
-# 5.3.1 The Validation Set Approach
-# 5.3.1 검증 세트 접근법
+# _5.3.1 The Validation Set Approach_ 
+# _5.3.1 검증 세트 접근법_
 
 We explore the use of the validation set approach in order to estimate the test error rates that result from fitting various linear models on the `Auto` data set. 
-우리는 `Auto` 데이터 세트 상에 여러 선형 모델들을 적합(fitting) 시켜 본 결과로 나타나는 테스트 에러율(error rates) 추정 목적으로 검증 세트 접근법(validation set approach)의 사용을 탐구할 것입니다.
+우리는 `Auto` 기종 데이터 세트 전경 위에다 무수히 다채로운 종파의 여러 선형 모델들을 적합시킨 결과로서 빚어진 테스트 오차율을 타진 가늠해 추정하기 위한 목적의 일환으로 검증 세트 접근법(validation set approach)의 실사용 과정을 탐구 실습해 본다.
 
-We use the function `train_test_split()` to split the data into training and validation sets. As there are 392 observations, we split into two equal sets of size 196 using the argument `test_size=196` . It is generally a good idea to set a random seed when performing operations like this that contain an element of randomness, so that the results obtained can be reproduced precisely at a later time. We set the random seed of the splitter with the argument `random_state=0` . 
-우리는 데이터를 훈련(training) 및 검증(validation) 세트 진영으로 각각 분할 분산시키기 위해 함수 `train_test_split()` 을 활용합니다. 총 표본 관측 단위가 392개이기 때문에, 함수 인자 `test_size=196` 을 투입 사용하여 정확하게 크기가 같은 196개짜리 집합 세트 둘로 양분시킬 방침입니다. 통상적으로 볼 때 이처럼 특정 무작위성(randomness) 요소 작용이 깃든 연산 조작을 가동시킬 땐, 나중 추후 어느 시점이든 과거 획득된 산출 결과물들을 다시 한 치의 오차 없이 정밀하게 역산 복제 재현(reproduced precisely) 해 낼 요량으로 무작위 시드(random seed) 값을 설정 지정해 두는 편이 여러모로 권장될 법한 좋은 발상입니다. 본 장에서 우리는 인자 매개 변수 지정항인 `random_state=0` 값을 박아서 해당 분할 연산 기계(splitter)의 난수 생성 시드값을 고정 배치해 둡니다.
+We use the function `train_test_split()` to split the data into training and validation sets.
+우리는 `train_test_split()` 이란 이름의 내장 함수를 전격 기용 사용함으로써 원본 데이터를 훈련 세트와 검증 세트라는 이분된 덩어리로 쪼개어 분할 타진한다.
+
+As there are 392 observations, we split into two equal sets of size 196 using the argument `test_size=196` .
+원체 도합 392명에 달하는 총체 관측치 개체 인구수가 존재하기 까닭에, 우리는 `test_size=196` 이라는 인자(argument) 옵션 명령어를 세팅 투입 사용함으로써 해당 무리를 정확히 인구수 196명을 지닌 두 개의 동등한 덩치 세트들로 반으로 쪼개 분할한다.
+
+It is generally a good idea to set a random seed when performing operations like this that contain an element of randomness, so that the results obtained can be reproduced precisely at a later time.
+이렇듯 난수 무작위성(randomness) 의 여건 요소를 내포 수반하는 일련의 조작 연산 작업들을 우리가 앞장서 이행 수행할 당시엔 번번이 무작위 시드(random seed) 값을 미리 수동으로 엄격 고정 세팅해 두는 편이 통상적으로 몹시 현명한 바람직 우량 아이디어 발상인데; 이는 그리 조치해 둬야 비로소 차후 언젠가 미지의 훗날 시간에 가서도 이전에 획득 도출 산출되었던 그 수확 결과물 궤적들이 당당히 단 번호 어김없이 고스란히 오차 없이 정밀하게 완벽 재현(reproduced precisely) 가동 재생될 수 있기 때문이다.
+
+We set the random seed of the splitter with the argument `random_state=0` . 
+우리는 `random_state=0` 이라는 제약 인자 명령어를 건네주어, 저 분할기(splitter) 기계 장치가 쓸 난수 시드를 세팅 고정 조율해 설정한다.
 
 ```python
 In [3]: Auto = load_data('Auto')
@@ -20,7 +29,7 @@ In [3]: Auto = load_data('Auto')
 ```
 
 Now we can fit a linear regression using only the observations corresponding to the training set `Auto_train` . 
-자 이제 우리는 훈련 세트인 `Auto_train` 항목에 직통으로 상응(corresponding to) 기속되는 해당 관측 자료 표본 군집만을 떼어 사용하면서 그것을 재료로 하여 단일 선형 회귀 모형(linear regression) 픽업 적합화를 실행 돌려볼 수 있습니다.
+이제 우리는 오직 저 훈련 세트로 발탁된 `Auto_train` 집단에 상응 속하는 관측치 덩어리 인구들만 편파적으로 치사하게 오롯이 기용 사용함으로써 전폭 선형 회귀 무대를 적합 장착 가동시킬 수 있다.
 
 ```python
 In [4]: hp_mm = MS(['horsepower'])
@@ -30,8 +39,11 @@ In [4]: hp_mm = MS(['horsepower'])
         results = model.fit()
 ```
 
-We now use the `predict()` method of `results` evaluated on the model matrix for this model created using the validation data set. We also calculate the validation MSE of our model. 
-다음으로 이어 진행할 부분은, 저리 조성시킨 검증 판독 데이터 세트를 기반 활용해 아까 빚어두었던 모델 매트릭스 행렬(model matrix) 판 위에서 `results` 모형 객체의 예측 구동체(method) `predict()` 를 활용해 값을 계산 산출(evaluated) 시키는 행위입니다. 그와 병행하여 나란히 우리는 해당 판독 모형 구동체에서 드러날 검증판 MSE 치수까지 연산 계산 타진(calculate)할 것입니다.
+We now use the `predict()` method of `results` evaluated on the model matrix for this model created using the validation data set.
+우리는 이제 방금 그 도출물 `results` 장치 안에 들어 있는 `predict()` 내장 메서드 도구를 발탁 사용함으로써; 저 검증 데이터 세트 조작을 사용 기용해 탄생 창조 조립시켜 구동한 당해 검증 모델 행렬판 위에서 평가 도출된 산물 궤적을 뿜어낸다.
+
+We also calculate the validation MSE of our model. 
+우리는 또한 나아가 당당히 우리 모델이 거둔 해당 검증 MSE 점수 지표를 이윽고 연산 산출 가늠 계산해 낸다.
 
 ```python
 In [5]: X_valid = hp_mm.transform(Auto_valid)
@@ -44,11 +56,14 @@ In [5]: X_valid = hp_mm.transform(Auto_valid)
 Out[5]: 23.6166
 ```
 
-Hence our estimate for the validation MSE of the linear regression fit is $23.62$. 
-그리하여 종국적으로 이룩 달성해 낸 선형 회귀 편제상의 검증판 MSE 추정 결과수치는 약 $23.62$ 로 산출됩니다.
+Hence our estimate for the validation MSE of the linear regression fit is 23 _._ 62. 
+그리하여 이 선형 회귀 적합 라인의 검증 MSE 스코어 지수를 겨냥한 우리의 자체 추산 추정 역산 볼륨 숫자는 23.62 수위로 귀결 산출된다.
 
-We can also estimate the validation error for higher-degree polynomial regressions. We first provide a function `evalMSE()` that takes a model string as well as a training and test set and returns the MSE on the test set. 
-우리는 비단 저것에 그치는 수준이 아니라 더 높은 차수로 전개되는 복잡 다단한 고차다항 곡선형 회귀(higher-degree polynomial regressions) 방정식 모형 체계를 타깃 겨냥해 검증 오차값 측정 추산을 타진 감행해 볼 수 있습니다. 우선, 이런 행위를 개시하기 위해 우리는 함수 `evalMSE()` 를 먼저 제안 마련해 주는데, 해당 이 함수 객체 도구는 기초 연습 훈련조 및 최종 테스터 검사조 데이터 조합은 물론 당해 표적 모델 문자열 식별자를 투입 수용(takes) 처리해서 테스터 평가 조 내에 머무르고 있는 해당 MSE 값을 반환 대처(returns) 배출해 줄 것입니다.
+We can also estimate the validation error for higher-degree polynomial regressions.
+우린 어김없이 더 나아가 한 차원 더 고차원 굴곡 승수의 다항 회귀들(higher-degree polynomial regressions) 에 부과되는 저 검증 파장 에러율 수치 역시 거푸 예측 추정 헤아려 계산 평가해 낼 수 있다.
+
+We first provide a function `evalMSE()` that takes a model string as well as a training and test set and returns the MSE on the test set. 
+이를 위해 우리는 우선 기착 `evalMSE()` 이라 명명한 하나의 사용자 지원 우회 함수 툴을 사전 구축 제공해 주는데; 이 장치 팩은 훈련 및 테스트 세트 양 구역 덩어리뿐 아니라 덩달아 당해 모델 문자열 끈(model string) 속성 인자를 집어삼키고 취하여(takes) 연산한 뒤, 테스트 세트 경기장에서 치른 이 무기의 MSE 결과 타율 점수표를 온전히 돌려주는(returns) 기능을 한다.
 
 ```python
 In [6]: def evalMSE(terms,
@@ -65,8 +80,11 @@ In [6]: def evalMSE(terms,
             return np.mean((y_test - test_pred)**2)
 ```
 
-Let’s use this function to estimate the validation MSE using linear, quadratic and cubic fits. We use the `enumerate()` function here, which gives both the values and indices of objects as one iterates over a for loop. 
-자, 방금 마련 구성한 본 구동 기믹 함수 체계를 이끌고 1단 직선 선형(linear), 곡선 2단 이차식(quadratic), 나아가 물결 3단 3차원 입체식 곡선형 결합 계통(cubic)의 모델 피팅 절차를 사용해 일련의 파생적 검증 MSE 측정 산출 목표물 추산을 개시해 내봅시다. 과정 중에서 파이썬의 `enumerate()` 내장 함수를 호출 사용 동원시킬 터인데, 해당 함수 기믹은 가동 구동루프 `for loop` 뺑뺑이 전개 과정상에서 객체의 본연적 값과 개별 인덱스를 순차 상호 병행 지급해(gives both the values and indices) 순환 출력 구동을 조장합니다.
+Let’s use this function to estimate the validation MSE using linear, quadratic and cubic fits.
+자 그럼 방금 건져 구축해 낸 저 해당 지원 함수를 적극 갖다 써먹음으로써 선형(linear), 1차식 선, 2차(quadratic) 그리고 3차(cubic) 굴곡 적합 장비 라인들을 각각 덧대었을 때 빚어지는 상응 검증 MSE 점수 폭들을 모조리 연산 추정 가늠 평가해 보자.
+
+We use the `enumerate()` function here, which gives both the values and indices of objects as one iterates over a for loop. 
+우리는 이 전면 과정 한복판에서 기꺼이 `enumerate()` 함수 장치를 호출해 동원 써먹는데, 이는 어떠한 사용자가 어떤 for 구문 반복문 루프(loop) 궤적을 타고 한 바퀴씩 무리 객체를 순회(iterates)할 때마다 그 내부 객체의 알맹이 핵심 값(values) 들과 그에 상응하는 위치 번호 인덱스(indices) 목차 두 가지를 사이좋게 보따리 동시 병합 구비 제공(gives both) 해주는 기능 수단이다.
 
 ```python
 In [7]: MSE = np.zeros(3)
@@ -82,8 +100,11 @@ In [7]: MSE = np.zeros(3)
 Out[7]: array([23.62, 18.76, 18.80])
 ```
 
-These error rates are $23.62, 18.76$, and $18.80$, respectively. If we choose a different training/validation split instead, then we can expect somewhat different errors on the validation set. 
-이렇게 하여 판독 도출 결과 배출된 에러 지분 확률 지표는 개별 순차 각각(respectively) $23.62, 18.76$ 그리고 $18.80$ 로 기록 추산 검정됩니다. 만의 하나라도 만일 본 훈련조/검증조 스플릿 쪼개기 도출 편제 결정을 아까와 다르게 채택 취할 시, 우리는 아마 다소간 격차 수준이 어긋나는 상이한 검증상 오류(different errors) 지표를 조우 도출 맞이할(expect) 수 있습니다.
+These error rates are 23 _._ 62 _,_ 18 _._ 76, and 18 _._ 80, respectively.
+기껏 토해 도출된 이들의 에러율 성적 지표는 각기 23.62, 18.76, 그리고 18.80 등락으로 산출 귀결된다.
+
+If we choose a different training/validation split instead, then we can expect somewhat different errors on the validation set. 
+만약 우리가 방금의 방식 대신, 애초에 전혀 다른 번호표의 무작위 훈련/검증 분할 조작 쪼개기를 선택해 치렀더라면; 응당 우리는 그 검증 세트 위에서 거둔 에러 타율 점수가 분명 방금 보았던 것과는 다소 다른 수위 조작 널뛰기 수치 다른 파장을 얻을 것임(different errors) 을 쉽게 통감 예측 짐작 기대(expect) 할 수 있다.
 
 ```python
 In [8]: Auto_train, Auto_valid = train_test_split(Auto,
@@ -102,8 +123,8 @@ In [8]: Auto_train, Auto_valid = train_test_split(Auto,
 Out[8]: array([20.76, 16.95, 16.97])
 ```
 
-Using this split of the observations into a training set and a validation set, we find that the validation set error rates for the models with linear, quadratic, and cubic terms are $20.76, 16.95$, and $16.97$, respectively. 
-실 관측물 타겟 대상을 훈련/검증 조로 조립 분쇄 쪼개 분할한 이번 상이(split) 변별 판도를 활용 전개해 측량한 작금의 새로운 결과물 토대 안에서 우리는 순수 선형 1차 모델부터 2차 함수 결합 모델 곡선, 최종 3차 요소를 반영 품은 모형에 뒤따르는 관련 검정조 에러 오류의 스코어가 개별 지표로서 $20.76, 16.95$, 및 $16.97$ 순차 배열 지표를 품은 채 산출 도출 파악됨(find)을 인지하게 되었습니다.
+Using this split of the observations into a training set and a validation set, we find that the validation set error rates for the models with linear, quadratic, and cubic terms are 20 _._ 76, 16 _._ 95, and 16 _._ 97, respectively. 
+관측치 인구 무리를 훈련 및 검증 세트로 두 동강 낸 바로 이 신생 분할(split) 버전을 덧대 적용한 결과; 기어이 우린 선형, 2차, 그리고 3차 곡률 항(terms) 을 각기 장착한 모델 부대원들이 각자 거둔 검증 세트 에러율 성적표가 기실 대충 20.76, 16.95, 16.97 수위로 쏠려 각기 안착 산출 결론 났음을 이윽고 인지 도래 목도 발견(find) 하게 된다.
 
 These results are consistent with our previous findings: a model that predicts `mpg` using a quadratic function of `horsepower` performs better than a model that involves only a linear function of `horsepower` , and there is no evidence of an improvement in using a cubic function of `horsepower` . 
-이러한 연달아 도출 획득된 기록의 산출 분석 결론들은 기왕 이전까지 우리가 도달 성취 파악(previous findings) 해냈던 일체의 지식 지점들과도 명쾌하게 일관된 결(consistent with)을 유지 방증합니다: 즉 단순히 구태의연한 순수 단절된 `horsepower` 변수의 선형 곡선 형태만을 운용 품은 추론 지표보다는 오히려 적정 둥근 2차 방정식 함수 `horsepower` 형을 토대로 하여 `mpg` 기록 달성을 예측 산출 타진해낸 모델이 필연코 나은 폼의 기록 평가수행 능률(performs better) 강점을 표출 뿜어냄과 아울러, 반면 이보다 오히려 과다 전개된 3차 방증 꼬불 함수 편제 기조 `horsepower` 모델 도입 차용상에서는 딱히 유의미하고 확연하게 기록 증진(improvement) 요소가 뒷받침 입증 발견되었다고 표정 할 만한 어떠한 증거력(no evidence) 요건조차 적발되지 않았다는 사실 말입니다.
+이들 목도 성과 현장 도출물 결과들은 이윽고 다름 아니라 과거 우리가 줄곧 부르짖어 찾아 깨우친 기존 발견 사실(previous findings) 지표들과 무척 일맥상통 일치(consistent) 부합하는데; 즉 오직 멍청히 단조로운 `horsepower` 선형 1차 직선 한 줄기 항만 투여 장착한 무기 모델 따위보다야, `horsepower` 스펙 변수에 2차 굽은 곡면 (quadratic) 함수 옵션 포진을 장착해 넣고 `mpg` 연비 점수를 쏘아 맞힌 모델 무기가 훨씬 더 탁월 위력 정교한 우위 성능 우수 방어망 수행(performs better) 파장 위력을 보장 발휘했음을 증명하며; 나아가 거기서 더 욕심을 키워 3차(cubic) 삼제곱 함수 옵션 따위를 무식 구태여 욱여 밀어 부착 탑재해 차용해 써먹는 데에서는 단 일체의 일말 향상 점수 이점 증거 개연성(evidence of an improvement) 기미 나발 따위 흔적 효용조차 당최 도래 수반 포착 존재하지 아니함을 또다시 연신 당당 무사 증명 천명 지어 확인시켜 안겨준다.

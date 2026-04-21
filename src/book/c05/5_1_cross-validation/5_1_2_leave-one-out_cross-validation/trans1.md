@@ -3,36 +3,81 @@ layout: default
 title: "trans1"
 ---
 
-# 5.1.2 Leave-One-Out Cross-Validation
-# 5.1.2 단일 관측치 제외 교차 검증 (LOOCV)
+# _5.1.2 Leave-One-Out Cross-Validation_ 
+# _5.1.2 단일 관측치 제외 교차 검증 (LOOCV)_
 
 _Leave-one-out cross-validation_ (LOOCV) is closely related to the validation set approach of Section 5.1.1, but it attempts to address that method’s drawbacks. 
-_단일 관측치 제외 교차 검증(Leave-one-out cross-validation, LOOCV)_ 은 Section 5.1.1의 검증 세트 접근법과 밀접하게 관련되어 있지만, 해당 방법의 단점(drawbacks)을 해결(address)하려고 시도합니다.
+_단일 관측치 제외 교차 검증(Leave-one-out cross-validation, LOOCV)_ 은 앞선 5.1.1 절의 검증 세트 접근법과 매우 밀접한 관련이 있지만, 해당 기법이 지녔던 결함들을 해결하고자 시도한다.
 
-Like the validation set approach, LOOCV involves splitting the set of observations into two parts. However, instead of creating two subsets of comparable size, a single observation $(x_1, y_1)$ is used for the validation set, and the remaining observations $\{(x_2, y_2), \dots, (x_n, y_n)\}$ make up the training set. The statistical learning method is fit on the $n - 1$ training observations, and a prediction $\hat{y}_1$ is made for the excluded observation, using its value $x_1$. Since $(x_1, y_1)$ was not used in the fitting process, $\text{MSE}_1 = (y_1 - \hat{y}_1)^2$ provides an approximately unbiased estimate for the test error. But even though $\text{MSE}_1$ is unbiased for the test error, it is a poor estimate because it is highly variable, since it is based upon a single observation $(x_1, y_1)$. 
-검증 세트 접근법과 마찬가지로 LOOCV는 관측치 세트를 두 부분으로 나누는 것을 포함합니다. 그러나 비슷한 크기의 두 하위 집합(subsets)을 생성하는 대신, 단일 관측치 $(x_1, y_1)$ 이 검증 세트로 사용되고 나머지 관측치 $\{(x_2, y_2), \dots, (x_n, y_n)\}$ 가 훈련 세트를 구성(make up)합니다. 통계적 학습 방법은 $n - 1$ 개의 훈련 관측치에 피팅되고, 해당 $x_1$ 값을 사용하여 제외된 관측치에 대한 예측 $\hat{y}_1$ 이 만들어집니다. $(x_1, y_1)$ 은 피팅 과정에서 사용되지 않았기 때문에, $\text{MSE}_1 = (y_1 - \hat{y}_1)^2$ 는 테스트 에러에 대해 근사적으로 편향되지 않은(approximately unbiased) 추정치를 제공합니다. 그러나 $\text{MSE}_1$ 이 테스트 에러에 대해 편향되지 않았음에도 불구하고, 이는 단일 관측치 $(x_1, y_1)$ 에 기반하기 때문에 변동성이 매우 커서 열악한(poor) 추정치입니다.
+Like the validation set approach, LOOCV involves splitting the set of observations into two parts.
+검증 세트 접근법과 마찬가지로, LOOCV 역시 관측치 세트를 두 부분으로 쪼개는 과정을 수반한다.
 
-We can repeat the procedure by selecting $(x_2, y_2)$ for the validation data, training the statistical learning procedure on the $n - 1$ observations $\{(x_1, y_1), (x_3, y_3), \dots, (x_n, y_n)\}$, and computing $\text{MSE}_2 = (y_2 - \hat{y}_2)^2$. Repeating this approach $n$ times produces $n$ squared errors, $\text{MSE}_1, \dots, \text{MSE}_n$. The LOOCV estimate for the test MSE is the average of these $n$ test error estimates: 
-우리는 검증 데이터를 위해 $(x_2, y_2)$ 를 선택하고 통계 학습 절차를 $n - 1$ 개의 관측치 $\{(x_1, y_1), (x_3, y_3), \dots, (x_n, y_n)\}$ 에 대해 훈련한 다음 $\text{MSE}_2 = (y_2 - \hat{y}_2)^2$ 를 계산함으로써 절차를 반복할 수 있습니다. 이 접근법을 $n$ 번 반복하면 $n$ 개의 제곱 오차 $\text{MSE}_1, \dots, \text{MSE}_n$ 가 산출됩니다. 테스트 MSE에 대한 LOOCV 추정치는 다음의 $n$ 개 테스트 에러 추정치들의 평균(average)입니다.
+However, instead of creating two subsets of comparable size, a single observation ( _x_ 1 _, y_ 1) is used for the validation set, and the remaining observations _{_ ( _x_ 2 _, y_ 2) _, . . . ,_ ( _xn, yn_ ) _}_ make up the training set.
+하지만 비슷한 덩치의 두 부분집합을 생성하는 대신, 단 하나의 관측치 ( _x_ 1 _, y_ 1) 만이 검증 세트로 사용되며 여타 나머지 관측치들 _{_ ( _x_ 2 _, y_ 2) _, . . . ,_ ( _xn, yn_ ) _}_ 이 훈련 세트를 구성하게 된다.
+
+The statistical learning method is fit on the _n −_ 1 training observations, and a prediction _y_ ˆ1 is made for the excluded observation, using its value _x_ 1.
+통계적 학습 방법은 ওই _n −_ 1 개의 훈련 관측치 위에서 적합(fit)되며, 이후 배제되었던 단일 관측치가 지닌 _x_ 1 값을 사용하여 이에 대한 예측값 _y_ ˆ1 을 산출해 낸다.
+
+Since ( _x_ 1 _, y_ 1) was not used in the fitting process, $\text{MSE}_1$ = ( _y_ 1 _− y_ ˆ1)[2] provides an approximately unbiased estimate for the test error.
+적합 과정 내내 ( _x_ 1 _, y_ 1) 은 일절 사용조차 되지 않았으므로, $\text{MSE}_1$ = ( _y_ 1 _− y_ ˆ1)[2] 수식은 시험 오차에 대한 대략적인 불편(unbiased) 추정치를 제공하게 된다.
+
+But even though $\text{MSE}_1$ is unbiased for the test error, it is a poor estimate because it is highly variable, since it is based upon a single observation ( _x_ 1 _, y_ 1). 
+그러나 설령 $\text{MSE}_1$ 이 시험 오차에 대해 편향되지 않은 값이라 할지라도, 이는 단 한 개의 관측치 ( _x_ 1 _, y_ 1) 에만 전적으로 기반하고 있기에 극도로 높은 변동성을 지니며 결과적으로 몹시 조악한 추정치일 수밖에 없다.
+
+We can repeat the procedure by selecting ( _x_ 2 _, y_ 2) for the validation data, training the statistical learning procedure on the _n −_ 1 observations ˆ _{_ ( _x_ 1 _, y_ 1) _,_ ( _x_ 3 _, y_ 3) _, . . . ,_ ( _xn, yn_ ) _}_ , and computing $\text{MSE}_2$ = ( _y_ 2 _−y_ 2)[2] .
+우리는 이어 두 번째 관측치 ( _x_ 2 _, y_ 2) 를 검증 데이터로 따로 선별하고, 통계적 학습 절차를 나머지 _n −_ 1 개의 관측치 ˆ _{_ ( _x_ 1 _, y_ 1) _,_ ( _x_ 3 _, y_ 3) _, . . . ,_ ( _xn, yn_ ) _}_ 에 훈련시킨 뒤, $\text{MSE}_2$ = ( _y_ 2 _−y_ 2)[2] 공식을 연산함으로써 이 과정을 똑같이 반복할 수 있다.
+
+Repeating this approach _n_ times produces _n_ squared errors, $\text{MSE}_1$ _, . . . ,_ MSE _n_ .
+이러한 과정을 총 _n_ 번 반복하면 $\text{MSE}_1$ 부터 MSE _n_ 에 이르는 총 _n_ 개의 제곱 오차들이 생산된다.
+
+The LOOCV estimate for the test MSE is the average of these _n_ test error estimates: 
+결과적으로 테스트 MSE를 구하기 위한 LOOCV 추정치는 이들 _n_ 개의 시험 오차 추정치들을 모두 합산하여 산출한 평균값이다:
 
 $$
 \text{CV}_{(n)} = \frac{1}{n} \sum_{i=1}^n \text{MSE}_i \quad (5.1)
 $$
 
 **FIGURE 5.3.** _A schematic display of LOOCV. A set of n data points is repeatedly split into a training set (shown in blue) containing all but one observation, and a validation set that contains only that observation (shown in beige). The test error is then estimated by averaging the n resulting MSEs. The first training set contains all but observation 1, the second training set contains all but observation 2, and so forth._ 
-**FIGURE 5.3.** _LOOCV의 도식적 표시. n개의 데이터 포인트 세트가 관측치 하나를 제외한 전부를 포함하는 훈련 세트(파란색으로 표시)와 해당 관측치 단 1개만 포함하는 검증 세트(베이지색으로 표시)로 반복적으로 분할됩니다. 그런 다음 도출된 n개의 MSE를 평균화하여 테스트 에러를 추정합니다. 첫 번째 훈련 세트에는 관측치 1을 제외한 전부가 포함되고, 두 번째 훈련 세트에는 관측치 2를 제외한 전부가 포함되는 식입니다._
+**FIGURE 5.3.** _LOOCV의 도식적 표현. n개의 데이터 포인트로 이루어진 세트는 단 하나의 관측치만을 제외한 전체를 포함하는 훈련 세트(파란색으로 표시)와 오직 그 제외된 관측치 단 하나만을 포함하는 검증 세트(베이지색으로 표시)로 거듭 반복 분할된다. 이후, 테스트 오차는 결과로 나온 n개의 MSE들을 평균 내어 추정된다. 첫 번째 훈련 세트는 1번 관측치를 제외한 모든 값을 포함하며, 두 번째 훈련 세트는 2번 관측치를 제외한 모든 값을 포함하고, 이런 식으로 계속 이어진다._ 
 
 A schematic of the LOOCV approach is illustrated in Figure 5.3. 
-LOOCV 접근성에 대한 개략도(schematic)는 Figure 5.3에 예시되어 있습니다.
+이러한 LOOCV 접근법의 도해는 그림 5.3에 예시로 설명되어 있다.
 
-LOOCV has a couple of major advantages over the validation set approach. First, it has far less bias. In LOOCV, we repeatedly fit the statistical learning method using training sets that contain $n - 1$ observations, almost as many as are in the entire data set. This is in contrast to the validation set approach, in which the training set is typically around half the size of the original data set. Consequently, the LOOCV approach tends not to overestimate the test error rate as much as the validation set approach does. Second, in contrast to the validation approach which will yield different results when applied repeatedly due to randomness in the training/validation set splits, performing LOOCV multiple times will always yield the same results: there is no randomness in the training/validation set splits. 
-LOOCV는 검증 세트 접근법에 비해 몇 가지 주요한 이점(major advantages)을 가지고 있습니다. 첫째, 편향(bias)이 훨씬 적습니다. LOOCV에서 우리는 전체 데이터 세트에 들어있는 것과 거의 동일한 수인 $n-1$ 개의 관측치를 포함하는 훈련 세트를 사용하여 통계적 학습 방법을 반복적으로 Пи팅합니다. 이는 훈련 세트가 일반적으로 원본 데이터 세트 크기의 절반 정도인 검증 세트 접근 방식과는 대조적입니다. 결과적으로(Consequently) LOOCV 접근법은 검증 세트 접근법만큼 테스트 에러율을 과대평가(overestimate)하지 않는 경향이 있습니다. 둘째, 훈련/검증 세트 분할의 무작위성(randomness)으로 인해 반복적으로 적용될 때 각기 다른 결과를 산출하는 검증 접근법과 달리, LOOCV를 여러 번 수행하는 것은 항상 동일한 결과를 산출할 것입니다. 훈련/검증 세트 분할에 무작위성이 존재하지 않기 때문입니다.
+LOOCV has a couple of major advantages over the validation set approach.
+LOOCV는 고전적인 검증 세트 접근법 체계에 비해 몇 가지 강력한 이점들을 취하고 있다.
 
-We used LOOCV on the `Auto` data set in order to obtain an estimate of the test set MSE that results from fitting a linear regression model to predict `mpg` using polynomial functions of `horsepower` . The results are shown in the left-hand panel of Figure 5.4. 
-우리는 `horsepower` 의 다항 함수(polynomial functions)를 사용하여 `mpg` 를 예측하는 선형 회귀 모델을 피팅한 결과로 나타나는 테스트 세트 MSE 추정치를 획득하고자 `Auto` 데이터 세트에 LOOCV를 사용했습니다. 그 결과는 Figure 5.4의 왼쪽 패널에 나타나 있습니다.
+First, it has far less bias.
+첫째, 훨씬 더 적은 편향(bias)을 지닌다.
 
-LOOCV has the potential to be expensive to implement, since the model has to be fit $n$ times. This can be very time consuming if $n$ is large, and if each individual model is slow to fit. With least squares linear or polynomial regression, an amazing shortcut makes the cost of LOOCV the same as that of a single model fit! The following formula holds: 
-모델이 $n$ 번 피팅되어야만 하므로 LOOCV는 구현하는 데 비용이 많이 들(expensive) 가능성(potential)을 지니고 있습니다. $n$ 이 크고 개별 모델을 피팅하는 데 속도가 느리다면, 이는 시간이 매우 많이 소모될(time consuming) 수 있습니다. 최소 제곱 선형 또는 다항 회귀의 경우라면, 놀라운 지름길(shortcut)이 LOOCV의 비용을 단일 모델 핏의 비용과 동일하게 만들어줍니다! 다음 공식(formula)이 성립(holds)합니다:
+In LOOCV, we repeatedly fit the statistical learning method using training sets that contain _n −_ 1 observations, almost as many as are in the entire data set.
+LOOCV 안에서, 우리는 전체 데이터 세트의 수량과 거의 맘먹는 무려 _n −_ 1 개의 관측치들을 포함하는 훈련 세트를 사용하여 통계적 학습 방법을 거듭 반복적으로 적합시킨다.
+
+This is in contrast to the validation set approach, in which the training set is typically around half the size of the original data set.
+이는 훈련 세트가 통상적으로 원본 전체 데이터 세트 덩치의 약 절반 즈음에 불과했던 앞선 검증 세트 접근법과는 극명한 대조를 이룬다.
+
+Consequently, the LOOCV approach tends not to overestimate the test error rate as much as the validation set approach does.
+결과적으로, LOOCV 방안은 검증 세트 접근법이 저질렀던 것만큼 무지막지하게 시험 오차율 값을 과대평가(overestimate) 하려는 경향성을 띠지 않게 된다.
+
+Second, in contrast to the validation approach which will yield different results when applied repeatedly due to randomness in the training/validation set splits, performing LOOCV multiple times will always yield the same results: there is no randomness in the training/validation set splits. 
+둘째, 훈련/검증 세트를 쪼개는 분할 과정 속의 무작위성 때문에 거듭 반복 실행할 때마다 매번 다채로운 엇갈린 결과들을 토해내던 검증 접근법 체계와는 전혀 대조적으로, LOOCV는 아무리 여러 번 수행하더라도 늘 완벽하게 똑같은 결과를 산출해 낸다: 훈련/검증 세트를 분할하는 조작 속에 어떠한 무작위성(randomness) 도 개입되지 않기 때문이다.
+
+We used LOOCV on the `Auto` data set in order to obtain an estimate of the test set MSE that results from fitting a linear regression model to predict `mpg` using polynomial functions of `horsepower` .
+우리는 `horsepower` 의 다항 함수들을 척도로 기용하여 `mpg` 를 예측하려 선형 회귀 모델을 적합시킨 결과 도출된 테스트 세트 MSE의 추정치를 획득할 목적으로 `Auto` 데이터 세트 위에 LOOCV를 돌려보았다.
+
+The results are shown in the left-hand panel of Figure 5.4. 
+그 결과가 그림 5.4의 왼쪽 패널 지면에 공시되어 있다.
+
+LOOCV has the potential to be expensive to implement, since the model has to be fit _n_ times.
+다만 LOOCV는 모델 자체를 필연적으로 _n_ 번이나 무수히 훈련(fit)해야 하명 연유로 인해 구현 과정이 몹시 비싸고(expensive) 무거워질 잠재적 가능성 또한 지니고 있다.
+
+This can be very time consuming if _n_ is large, and if each individual model is slow to fit.
+만약 구성 인원수 _n_ 이 지극히 거대하고, 각급 개별 모델들을 적합시키는 데 걸리는 시간마저 느리다면 이는 실로 심각한 시간 낭비(time consuming) 이 될 수 있다.
+
+With least squares linear or polynomial regression, an amazing shortcut makes the cost of LOOCV the same as that of a single model fit!
+그러나 최소 제곱 선형 회귀 혹은 다항 회귀 방식과 결부된다면, 아주 경이로운 연산 지름길(shortcut) 공식 덕에 LOOCV를 돌리는 비용 총합이 맹랑하게도 단 한 번의 모델 적합 비용과 똑같아지는 마법이 일어난다!
+
+The following formula holds: 
+바로 다음 역학 공식이 성립한다:
 
 $$
 \text{CV}_{(n)} = \frac{1}{n} \sum_{i=1}^n \left( \frac{y_i - \hat{y}_i}{1 - h_i} \right)^2 \quad (5.2)
@@ -41,10 +86,25 @@ $$
 ![Figure 5.4](./img/5_4.png)
 
 **FIGURE 5.4.** _Cross-validation was used on the_ `Auto` _data set in order to estimate the test error that results from predicting_ `mpg` _using polynomial functions of_ `horsepower` _._ Left: _The LOOCV error curve._ Right: 10 _-fold CV was run nine separate times, each with a different random split of the data into ten parts. The figure shows the nine slightly different CV error curves._ 
-**FIGURE 5.4.** _`horsepower` 의 다항 함수들을 사용하여 `mpg` 를 예측한 결과로 나타나는 테스트 에러를 추정하기 위해 `Auto` 데이터 세트에 교차 검증이 사용되었습니다._ 왼쪽: _LOOCV 에러 곡선._ 오른쪽: _데이터를 각기 다른 10개의 부분으로 무작위 분할하는 방식으로 10-겹 CV를 별도로 9번 실행했습니다. 이 그림은 약간씩 다른 9개의 CV 에러 곡선을 보여줍니다._
+**FIGURE 5.4.** _`horsepower`의 다항 함수를 사용하여 `mpg`를 예측할 때 발생하는 테스트 오차를 추정하기 위해 `Auto` 데이터 세트에 교차 검증이 사용되었다._ 좌측 패널: _LOOCV 에러 곡선._ 우측 패널: _데이터를 10개의 부분으로 무작위로 다르게 분할하는 과정을 각각 적용하여 10-폴드(fold) CV를 분리된 9차례로 실행했다. 이 그림은 살짝씩 다르게 엇갈려 나타난 9개의 CV 에러 곡선들을 보여준다._
 
-where $\hat{y}_i$ is the $i$th fitted value from the original least squares fit, and $h_i$ is the leverage defined in (3.37) on page 105. This is like the ordinary MSE, except the $i$th residual is divided by $1 - h_i$. The leverage lies between $1/n$ and $1$, and reflects the amount that an observation influences its own fit. Hence the residuals for high-leverage points are inflated in this formula by exactly the right amount for this equality to hold. 
-여기서 $\hat{y}_i$ 는 원본 최소 제곱 적합(least squares fit)으로부터 도출된 $i$번째 피팅된 값이며, $h_i$ 는 105페이지의 (3.37)에 정의된 레버리지(leverage)입니다. 이는 $i$번째 잔차가 $1 - h_i$ 로 나뉜다는 점을 제외하면 일반적인 MSE와 같습니다. 레버리지는 $1/n$ 과 $1$ 사이에 위치하며(lies between), 관측치가 자기 자신의 피팅에 영향(influences)을 미치는 정도(amount)를 반영(reflects)합니다. 그러므로 고-레버리지 포인트(high-leverage points)를 위한 잔차들은 이 등식(equality)이 성립할 수 있도록 당해 공식 내에서 정확히 알맞은 양만큼 부풀려집니다(inflated).
+where _y_ ˆ _i_ is the _i_ th fitted value from the original least squares fit, and _hi_ is the leverage defined in (3.37) on page 105.[1]
+이 수식에서 _y_ ˆ _i_ 는 원본의 최소 제곱 적합으로부터 도출된 _i_ 번째의 적합값이며, _hi_ 는 105 페이지의 (3.37) 단락에서 정의된 바 있는 레버리지(leverage) 지표다.[1]
 
-LOOCV is a very general method, and can be used with any kind of predictive modeling. For example we could use it with logistic regression or linear discriminant analysis, or any of the methods discussed in later chapters. The magic formula (5.2) does not hold in general, in which case the model has to be refit $n$ times. 
-LOOCV는 아주 일반적인(general) 방법이며, 어떤 종류의 예측 모델링(predictive modeling)과도 사용될 수 있습니다. 예를 들어 그것을 로지스틱 회귀분석, 선형 판별 분석 또는 차후 장(chapters)에서 논의될 어떤 방법들과도 사용할 수 있습니다. 마법 공식(magic formula) (5.2)는 범용적으로(in general) 성립하지는 않으며, 그럴 경우(in which case) 해당 모델은 $n$ 번 재적합(refit) 되어야만 합니다.
+This is like the ordinary MSE, except the _i_ th residual is divided by 1 _− hi_ .
+이 공식은 단지 _i_ 번째 잔차가 1 _− hi_ 로 나누어진다는 사실 딱 하나만을 제외하면 여타 평범한 일반 MSE 공식과 거의 유사하다.
+
+The leverage lies between 1 _/n_ and 1, and reflects the amount that an observation influences its own fit.
+이 레버리지는 1 _/n_ 과 1 사이 구간에 둥지를 터 머무르며, 하나의 특정 관측치가 자기 자신의 초기 적합 라인 결과에 얼마나 많은 권력을 행사하고 영향(influences) 을 끼치는지를 가시적으로 반영해 준다.
+
+Hence the residuals for high-leverage points are inflated in this formula by exactly the right amount for this equality to hold. 
+그러한 이유로 높은 레버리지를 보유한 관여 척도 포인트들의 잔차들은 바로 이 항등식이 성립할 수 있도록 아주 영리하게 정확히 알맞은 수준의 비율만큼 이 방정식 내에서 팽창(inflated) 되어 부풀려 조율된다.
+
+LOOCV is a very general method, and can be used with any kind of predictive modeling.
+LOOCV는 무척이나 범용적인 방법론이며, 그 어떠한 등급 종류의 예측 모델링 파훼 작업에서도 널리 사용될 범용성을 지닌다.
+
+For example we could use it with logistic regression or linear discriminant analysis, or any of the methods discussed in later chapters.
+예를 들자면 우리는 이를 로지스틱 회귀나 선형 판별 분석 기법 등에 접목할 수도 있고, 혹은 차후 전개될 다른 장들에서 깊이 다뤄질 어떠한 기법들과도 호환시킬 수 있다.
+
+The magic formula (5.2) does not hold in general, in which case the model has to be refit _n_ times. 
+다만 저 마법 같은 (5.2) 연산 단축 방정식은 다른 여타 모델들에선 일반적으로 보편 성립하지는 아니하며, 이런 케이스 맥락의 경우라면 어쩔 도리 없이 우리는 필연적으로 그 모델을 고스란히 _n_ 번이나 다시 적합(refit)시켜 고생해야만 한다.

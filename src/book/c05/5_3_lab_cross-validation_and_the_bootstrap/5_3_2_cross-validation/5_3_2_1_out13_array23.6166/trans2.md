@@ -3,10 +3,10 @@ layout: default
 title: "trans2"
 ---
 
-# `Out[13]:` `array([23.6166])`
+# **`Out[13]:`** `array([23.6166])` 
 
 One can estimate the variability in the test error by running the following: 
-오답률 23점 찍히는 거 보셨죠? 그럼 이번엔 똑똑한 해커답게 아래 코드를 복붙해서 돌려보세요. 아까 귀가 닳도록 들은 그놈의 지옥 같은 주사위 널뛰기, 즉 모의고사 오답 점수의 '가변성(variability) 요동' 이 대체 어느 정도인지 숫자로 직접 견적을 뽑아볼 수 있습니다!
+"내 무기가 쏘는 에러 점수가 지금 한 번만 요행으로 잘 나온 게 아니라, 진짜 믿을 만하게 덜 요동치는 기복 없는 스펙인가?" 그 징그러운 예측 '요동폭(variability)' 의 민낯을 알고 싶다면, 그저 무지성으로 아래 코드를 긁어다 실행(running) 시켜버리면 그만입니다:
 
 ```python
 In [14]: validation = ShuffleSplit(n_splits=10,

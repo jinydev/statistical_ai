@@ -3,38 +3,47 @@ layout: default
 title: "trans2"
 ---
 
-# Conceptual
-# 머리 쥐어뜯는 개념 훈련장 (개념 문제)
+# _Conceptual_ 
+# _개념 퀘스트: 두뇌 풀가동_
 
-1. Using basic statistical properties of the variance, as well as singlevariable calculus, derive (5.6). In other words, prove that $\alpha$ given by (5.6) does indeed minimize $\text{Var}(\alpha X + (1 - \alpha) Y)$. 
-1. 통계학 짬바와 대학교 1학년 때 배운 1변수 미적분(singlevariable calculus) 공력을 탈탈 털어서, 아까 그 전설의 투자 황금비율 공식 (5.6)의 뼈대를 직접 유도(derive) 해보세요. 쉽게 말해(In other words), (5.6) 공식에서 튀어나온 $\alpha$ 란 괴물의 정체가, 정말로 "내 투자금 쪼개기 변동폭 $\text{Var}(\alpha X + (1 - \alpha) Y)$" 을 가장 쪼그라들게(최소화 minimize) 해주는 찐 마스터키가 맞는지 수학적으로 팩폭 증명(prove) 해보라는 뜻입니다.
+1. Using basic statistical properties of the variance, as well as singlevariable calculus, derive (5.6). In other words, prove that _α_ given by (5.6) does indeed minimize Var( _αX_ + (1 _− α_ ) _Y_ ). 
+1. 대학 1학년 때 배운 '단일 변수 미적분학' 나부랭이랑 통계학 기초 분산(variance) 공식들을 싹 다 긁어모아서, 옛날에 배웠던 그 포트폴리오 (5.6) 공식을 직접 빈 종이에 유도(derive) 해 보십쇼. 돌려 말해서, 저 수식에서 튀어나온 $α$ 혼종 템트리 황금 비율이, 진짜로 내 통장 잔고의 미친 요동(Var) 폭 $\text{Var}( αX + (1 − α) Y )$ 을 가장 바닥으로 짓눌러 갈아버리는(minimize) 최강 방어막 방패가 맞긴 한 건지! 손으로 직접 수식을 써가며 팩트 논증(prove) 을 갈겨 보란 소립니다.
 
-2. We will now derive the probability that a given observation is part of a bootstrap sample. Suppose that we obtain a bootstrap sample from a set of $n$ observations. 
-2. 부트스트랩 돌릴 때, "재수 옴 붙어서 내 번호가 한 번도 안 뽑힐 확률(probability)" 에 대해 수학적 확률론으로 각 잡고 털어보겠습니다. 우리가 총 병력 $n$ 마리로 이뤄진 원본 데이터 부대에서 딱 한 부대의 부트스트랩 용병 샘플들을 추첨(obtain) 한다고 뇌피셜 가정을 돌려몹시다(Suppose). 
+2. We will now derive the probability that a given observation is part of a bootstrap sample. Suppose that we obtain a bootstrap sample from a set of _n_ observations. 
+2. 자, 부트스트랩 사기 뺑뺑이를 돌릴 때, "과연 내가 저 가짜 복제본 무더기 속으로 다시 징집돼 뽑혀 들어갈 확률이 몇이나 될까?" 하는 생존 확률의 극한을 파헤쳐(derive) 봅시다. 인구수 $n$ 명인 마을에서 부트스트랩 인공 명부를 딱 한 장 찢어 뽑아 냈다고 가정해 보죠(Suppose).
 
-   - (a) What is the probability that the first bootstrap observation is _not_ the $j$th observation from the original sample? Justify your answer. 
-   - (a) 추첨통에 손을 넣어 첫 번째 용병(first bootstrap observation) 을 딱 뽑았는데, 앗뿔싸! 이놈이 내 타겟 $j$번 병사가 **아닐(not)** 확률은 얼마일까요? 정답을 외치고 왜 그런지 입 털어보세요(Justify).
+   - (a) What is the probability that the first bootstrap observation is _not_ the _j_ th observation from the original sample? Justify your answer. 
+   - (a) 그 새로 만든 짝퉁 장부의 '맨 첫 번째 빈칸'에, 하필 원본 마을의 $j$ 번째 주민이 운 나쁘게 **'안'** 뽑히고( _not_ ) 미끄러질 확률은 몇 %일까요? 당신의 기적의 수학 논리를 대보십쇼(Justify).
 
-   - (b) What is the probability that the second bootstrap observation is _not_ the $j$th observation from the original sample? 
-   - (b) 그럼 두 번째 추첨에서 뽑힌 용병마저 내 타겟 $j$번 녀석을 아슬아슬하게 **피해 갈(not)** 빗나감 확률은 또 어떻게 바뀔까요?
+   - (b) What is the probability that the second bootstrap observation is _not_ the _j_ th observation from the original sample? 
+   - (b) 그럼 또 두 번째 빈칸을 채울 때, 저 불쌍한 $j$ 번째 주민이 연달아 **'안'** 뽑히고( _not_ ) 벤치에 머무를 확률은? (힌트: 부트스트랩은 복원 뺑뺑이라 항아리가 안 비워집니다!)
 
-   - (c) Argue that the probability that the $j$th observation is _not_ in the bootstrap sample is $(1 - 1/n)^n$. 
-   - (c) 추첨이 다 끝난 뒤 부트스트랩 명단표 전체를 훑어봐도 그 타겟 $j$번 병사가 **단 한 놈도 안 끼어 있을(not in)** 멸망 확률이, 수학적으로 절묘하게 $(1 - 1/n)^n$ 공식 모델로 굳어진다는 썰을 논리적으로 반박 불가하게 입증(Argue) 해보세요.
+   - (c) Argue that the probability that the _j_ th observation is _not_ in the bootstrap sample is (1 _−_ 1 _/n_ ) _^n_ . 
+   - (c) 결국 $n$ 번 다 뽑을 동안 그 $j$ 번째 주민이 끝끝내 단 한 번도 뽑히지 못하고 왕따 당할( _not_ in) 지독히도 재수 없는 최종 확률이 얄짤없이 $(1 − 1 /n)^n$ 가 된다는 것을 박박 우겨서 증명(Argue) 해 내십쇼.
 
-   - (d) When $n = 5$, what is the probability that the $j$th observation is in the bootstrap sample? 
-   - (d) 자, 병력 수가 꼴랑 5마리($n=5$) 인 시골 부대라고 칩시다. 뺑뺑이 돌렸을 때 내 타겟 $j$번 병사가 부트스트랩 용병 명단에 무사히 턱걸이 **합류(in)** 해 있을 확률은 몆 %?
+   - (d) When _n_ = 5, what is the probability that the _j_ th observation is in the bootstrap sample? 
+   - (d) 마을 인구가 고작 5명($n=5$) 이면, 쟤가 최소 한 번이라도 부트스트랩 장부에 무사히 탑승해 생존할 턱걸이 확률은 몇 나옵니까?
 
-   - (e) When $n = 100$, what is the probability that the $j$th observation is in the bootstrap sample? 
-   - (e) 스케일을 키워 병력이 100마리($n=100$) 라면? 타겟 $j$번 녀석이 용병 명단에 **들어가 있을(in)** 생존 확률은 얼마일까요?
+   - (e) When _n_ = 100, what is the probability that the _j_ th observation is in the bootstrap sample? 
+   - (e) 인구가 100명($n=100$) 으로 좀 바글대면, 쟤가 가짜 짝퉁 장부에 살아남을 확률은?
 
-   - (f) When $n = 10,000$, what is the probability that the $j$th observation is in the bootstrap sample? 
-   - (f) 병력이 1만 마리 군단($n=10,000$) 급으로 뻥튀기 된다면? 내 타겟 $j$번 병사가 최소 명단 한 칸이라도 차지할 **생존(in)** 티켓 확률률은 어디로 수렴할까요?
+   - (f) When _n_ = 10 _,_ 000, what is the probability that the _j_ th observation is in the bootstrap sample? 
+   - (f) 인구가 확 늘어서 1만 명($n=10,000$) 의 대도시가 되면, 쟤의 생존 확률은 어디로 수렴합니까?
 
-   - (g) Create a plot that displays, for each integer value of $n$ from 1 to 100,000, the probability that the $j$th observation is in the bootstrap sample. Comment on what you observe. 
-   - (g) 코딩 타임! 병력 $n$ 숫자를 1명부터 십만 명 대군(1 to 100,000) 까지 미친 듯이 늘려가면서, 타겟 $j$번 병사가 명단에 포섭될 확률이 어떻게 널뛰다가 안착하는지 추적하는 멋진 시각화 차트 곡선(plot) 을 하나 뽑아주세요(Create). 그리고 차트를 보고 느낀 바(what you observe) 를 찐따처럼 속으로 삼키지 말고 거침없이 평론(Comment) 해보세요.
+   - (g) Create a plot that displays, for each integer value of _n_ from 1 to 100 _,_ 000, the probability that the _j_ th observation is in the bootstrap sample. Comment on what you observe. 
+   - (g) 인구수 $n$ 볼륨을 1명부터 무려 10만 명까지 조금씩 올려가며, 그때마다 계산되는 이 왕따 생존 확률 궤적 곡선을 예쁜 그래프(plot) 로 시각화해서 찍어 눌러보십쇼(Create). 그리고 그 그래프가 어디 묘한 숫자로 수렴해 가는 꼴을 자기 눈으로 똑똑히 관전(observe) 하고 감상평을 한 줄 달아보십쇼(Comment).
 
-   - (h) We will now investigate numerically the probability that a bootstrap sample of size $n = 100$ contains the $j$th observation. Here $j = 4$. We first create an array `store` with values that will subsequently be overwritten using the function `np.empty()`. We then repeatedly create bootstrap samples, and each time we record whether or not the fifth observation is contained in the bootstrap sample. 
-   - (h) 이번엔 $n=100$ 짜리 훈련소에서 부트스트랩 뺑뺑이를 돌렸을 때, 내 타겟 병사가 명단에 스폰(contains) 될 진짜 체감 확률을 파이썬 숫자의 힘(numerically) 으로 탈탈 심문(investigate) 해봅시다. 타겟은 불길한 $j=4$ (5번째 녀석) 로 잡죠(Here). 맨 처음, `np.empty()` 공구로 나중에 1만 번의 뺑뺑이 전적 스코어 기록을 덮어써서(overwritten) 기록할 빈 껍데기 전광판 배열 `store` 를 하나 세팅(create) 합니다. 그리고 뺑뺑이 매크로를 돌리면서 부트스트랩 훈련소에 불쌍한 5번째 녀석이 스폰됐는지 낙오됐는지 생사 여부(whether or not) 를 매번 끈질기게 기입(record) 하는 겁니다.
+   - (h) We will now investigate numerically the probability that a bootstrap sample of size _n_ = 100 contains the _j_ th observation.
+   - (h) 수학 공식만 끄적거리니 감이 안 오죠? 이제 파이썬 노가다 컴퓨터의 힘을 빌려 무식한 전산 수치 연산(numerically) 으로, 저 "100명($n=100$) 마을에서 짝퉁 장부 만들 때 내가 뽑힐 확률" 이 진짜 그 숫자로 수렴하는지 강제로 압수수색(investigate) 을 때려버리겠습니다.
+
+Here _j_ = 4.
+우리 타깃 실험 쥐는 4번 등번호(파이썬으론 5번째 놈) 로 고정합시다 ($j = 4$).
+
+We first create an array `store` with values that will subsequently be overwritten using the function `np.empty()` .
+우선 파이썬의 허공 창조 스킬인 `np.empty()` 를 써서, 앞으로 매크로 돌릴 때마다 나온 결괏값 빈 조각들을 쓰레기처럼 덧씌워 담아댈(overwritten) 거대한 빈 상자 깡통 배열 `store` 를 하나 세워둡니다(create).
+
+We then repeatedly create bootstrap samples, and each time we record whether or not the fifth observation is contained in the bootstrap sample. 
+그러곤 10,000번 반복 뺑이 매크로를 돌리면서, 그 10,000개의 부트스트랩 평행우주 장부 속마다 저 불쌍한 5번째 관측치 놈팽이가 단 한 번이라도 살아서 기어들어 왔는지(contained in) 아님 왕따 당했는지만을 냉혹하게 추적 채록 기록(record) 해댑니다.
 
 ```python
 rng = np.random.default_rng(10)
@@ -45,22 +54,25 @@ np.mean(store)
 ```
 
 Comment on the results obtained. 
-기계가 뱉어낸 이 참혹한(?) 생난리 증명 투사 산출 확률 스코어 결괏값(the results) 을 보고, 입을 벌린 채 코멘트 평가 타격(Comment on) 을 한 줄 날려주세요.
+터미널에서 뱉어준 궤적 결괏값(results obtained) 을 보고, 아까 수학으로 풀던 거랑 똑 떨어지는지 충격 먹고 논평(Comment on) 해 보십쇼.
 
-3. We now review $k$-fold cross-validation. 
-3. 자 분위기 돌려서 우리의 영원한 친구, $k$-폴드 교차 검증에 대해 썰(review) 을 풀어보시죠.
+3. We now review _k_ -fold cross-validation. 
+3. 자 거듭 이제 징글징글한 $k$-폴드 교차 검증 퀘스트를 한번 싹 정리 리뷰(review) 때려봅시다.
 
-   - (a) Explain how $k$-fold cross-validation is implemented. 
-   - (a) $k$-폴드 검증 이 조각내기 작전 장치가, 컴파일 환경 실전 내부에서 도대체 어떤 기믹 기절 순서(how) 로 칼질되고 가동 조립 세팅(implemented) 되는 건지 그 스토리를 낱낱이 썰로 풀어 설명(Explain) 하세요.
+   - (a) Explain how _k_ -fold cross-validation is implemented. 
+   - (a) 친구를 붙잡고 설명한다 치고, 저 $k$-폴드 교차 검증의 찢고 돌리는 그 난도질 뺑뺑이 메커니즘 엔진이 어떻게 실제로 굴러가는지(implemented) 썰을 풀어보십쇼(Explain).
 
-   - (b) What are the advantages and disadvantages of $k$-fold crossvalidation relative to: 
-   - (b) 아래 후보들과 나란히 세워놓고 맞짱 대결(relative to) 비교를 떴을 때, 우리 $k$-폴드 기술의 갓갓 장점(advantages) 과 개망 핵폐기물급 약점 단점(disadvantages) 은 부위별로 각각 무엇(What are) 일까요?
+   - (b) What are the advantages and disadvantages of _k_ -fold crossvalidation relative to: 
+   - (b) 아래에 나오는 오합지졸 병신 방법들이랑(relative to) 일대일 막고라를 떴을 때, 우리의 짱짱맨 $k$-폴드가 가지는 사기적인 템빨 강점(advantages) 이나, 아님 의외로 발목 잡히는 구린 단점(disadvantages) 이 뭐가 있는지 까발려 보십쇼:
 
       - i. The validation set approach? 
-      - (i) 허접한 오리지널 구닥다리 방식 (단칼 검증 방식, Validation set approach) 과 떴을 땐 뭐가 좋고 구립니까?
+      - i. 가성비 최고 멍청이 '검증 세트 반반 무 많이 구닥다리 방식(validation set approach)' 이랑 비교하면요? 
 
       - ii. LOOCV? 
-      - (ii) 극악의 노가다 머신 방식 (LOOCV 체제) 랑 피터지게 싸울 땐 또 어떤 약점과 강점이 드러나나요?
+      - ii. 내 컴퓨터 램을 비명 지르게 하는 미친 $n$ 번 루핑의 사이코패스 병기, '리브-원-아웃 뺑뺑이 방식(LOOCV)' 이랑 비교하면요? 
 
-4. Suppose that we use some statistical learning method to make a prediction for the response $Y$ for a particular value of the predictor $X$. Carefully describe how we might estimate the standard deviation of our prediction. 
-4. 우리가 뭔가 뽕이 차오르는 최첨단 통계 로봇(statistical learning method) 을 하나 임대해 왔다고 상상해 봅시다(Suppose). 이 로봇을 갈궈서, 특정 관측 스펙 $X$ 를 꽂아 넣었을 때 뱉어낼 내일 주가 타겟 $Y$ 의 예언 견적서 찌라시(prediction) 를 만들었다고 치는 겁니다(to make). 자 집중! 로봇이 뱉어낸 이 "예언 찌라시치" 자체가 띠고 있는 불안불안한 '널뛰기 한계 변동 오차폭 편위(standard deviation)' 요동 게이지를, 과연 우리는 어떠한 마법 코딩 작전 조작 기술 루트 기조(how) 를 타파해 견적 환산 검측(estimate) 해낼 수 있을까요? 그 비밀 방법론을 은밀하고 고도 세심하게(Carefully) 적발 투사 서술 전개 묘사 브리핑 기술 입증 나열(describe) 해 보십시오.
+4. Suppose that we use some statistical learning method to make a prediction for the response _Y_ for a particular value of the predictor _X_ .
+4. 상상해 보십쇼. 우리가 어찌어찌 쥐어짜 낸 어떤 기똥찬 통계 머신 템트리(기계 모델) 를 써서; 입력 옵션 $X$ 에 뭔가 그럴듯한 수치 총알 하나를 턱 넣고 타겟 $Y$ 의 궤도 결점 점수를 기막히게 맞혀보는(make a prediction) 도박을 건다고 칩시다(Suppose).
+
+Carefully describe how we might estimate the standard deviation of our prediction. 
+근데 여기서 불안감 엄습! "내가 쏜 예측 총알이 얼마나 미친 듯이 오르락내리락 옆으로 조준경이 튈까?" 하는 그 공포의 요동 폭, '표준 편차(standard deviation)' 궤적을 대체 어떤 꼼수 편법(부트스트랩 같은 구제 구명줄) 으로 파생 발굴 가늠 타진(estimate) 해 낼 수 있을까요? 아주 디테일하고 조심스럽게(Carefully) 작전 계획을 짜서 브리핑(describe) 해 보십쇼.

@@ -3,17 +3,38 @@ layout: default
 title: "trans1"
 ---
 
-# 5.3.2 Cross-Validation
-# 5.3.2 교차 검증
+# _5.3.2 Cross-Validation_ 
+# _5.3.2 교차 검증_
 
-In theory, the cross-validation estimate can be computed for any generalized linear model. In practice, however, the simplest way to cross-validate in Python is to use `sklearn`, which has a different interface or API than `statsmodels`, the code we have been using to fit GLMs. 
-이론론적으론(In theory) 교차 검증의 예측 지표는 일반화 선형 모델(generalized linear model, GLM) 범주의 그 어떤 포맷에 대해서든 무리 없이 셈 연산이 수행 계산될 수 있습니다. 그러나 현실 실무 진영(In practice)에서 파이썬을 기반으로 삼아 교차 테스트를 진행하는 가장 단순 명쾌한 수단은 `sklearn` 을 가져다 채용하는 일인데, 이 소프트웨어는 우리가 그동안 GLMs 체계를 끼워 맞추기(fit) 위해 통상 사용 고수해오던 `statsmodels` 패키지와는 상이한 이질적 인터페이스 체계, 즉 별도의 API를 보유 내재하고 있습니다.
+In theory, the cross-validation estimate can be computed for any generalized linear model.
+이론상으로 따져볼 때, 앞서 배운 교차 검증 추정치는 사실 그 어떠한 일반화 선형 모델(generalized linear model, GLM) 무기 라인업을 상대로도 언제든 연산 계산 산출될 수 있다.
 
-This is a problem which often confronts data scientists: “I have a function to do task _A_, and need to feed it into something that performs task _B_, so that I can compute $B(A(D))$, where _D_ is my data.” When _A_ and _B_ don’t naturally speak to each other, this requires the use of a _wrapper_ . In the `ISLP` package, we provide a wrapper, `sklearn_sm()`, that enables us to easily use the cross-validation tools of `sklearn` with models fit by `statsmodels`. The class `sklearn_sm()` has as its first argument a model from `statsmodels`. It can take two additional optional arguments: `model_str` which can be used to specify a formula, and `model_args` which should be a dictionary of additional arguments used when fitting the model. For example, to fit a logistic regression model we have to specify a `family` argument. This is passed as `model_args={'family':sm.families.Binomial()}` . 
-이 지점이 곧 예로부터 숱한 데이터 과학자 실무진이 흔히 마주 직면하는(confronts) 딜레마성 문제입니다: "나는 우선 미션 _A_ 를 도맡아 구동 처리하는 기능 함수를 보유 중이고, 이걸 이내 또 다른 선행 분리 미션 _A_ 를 수행 구동시킨 파생 물질 안에 부어 넣어 투입(feed)해야 하는 상황인데, 이는 최종적으로 본인의 기초 소재 데이터 _D_ 를 기반으로 궁극의 연쇄 함수상 $B(A(D))$ 의 셈 결과값을 뽑아 계산(compute) 할 목적 때문이라네." 여기서 막상 도구 _A_ 진영과 도구 _B_ 양 진영 체계가 서로 맞물려 자연스런 상호 통신 회화(speak to each other) 호환 기작을 못 일으키고 엇박자를 낼 때, 이는 결국 우리에게 껍데기 외장 연결 코드인 이른바 래퍼(_wrapper_) 의 조달 사용을 종용 요구(requires)하게 만듭니다. 우리는 `ISLP` 패키지 구성 안무의 일환으로 한 가지 자체 래퍼 도구인 `sklearn_sm()` 을 제공 지급(provide)하고 있으며, 이것의 작동 능률 체계는 우리가 `statsmodels` 으로 피팅시켜 짠 회귀 모델들을 별 무리 없이 `sklearn` 내부 교차 검증 검사 도구들과 부드럽게 병합 연계시켜 운용(use)하는 걸 손쉽게 가능 토록 지원(enables)합니다. 이 부류 식별 클래스 객체 단위인 `sklearn_sm()` 은 내부의 첫 관문적 인자(first argument) 요소로서 통상 `statsmodels` 출신의 모델 코어를 지명 접수합니다. 추가적으로 이것은 보조 편의 선택 조율 인자 2개를 선택 수용(take)할 능역이 존재하는데: 곧 전개 형성 수식(formula)을 콕 집어 명시 지목할(specify) 때 등용 활용되는 `model_str` 과, 또 한편으론 타깃 모델의 훈련 구동 적합화를 시도 단행할 요량 시에만 임시적 편의 도모차 요구 투입되는 추가(additional) 보충성 인수들의 사전 묶음 자료형(dictionary) 기구여야만 하는, 저 이른바 `model_args` 가 바로 그것입니다. 일례를 들자면(For example), 한 로지스틱 예측함 모델 계통을 온전히 구동 피팅 맞추기 위해, 우리들은 불가피하게 `family` 라는 이름의 세부 지정항 단위체를 반드시 고정해 명시해야(specify) 할 처절한 소요성이 제기됩니다. 이 현안 처리는 코드상에서 `model_args={'family':sm.families.Binomial()}` 패키지 구성을 투과 관통(passed)시키는 방식 문법으로 성사 도달됩니다.
+In practice, however, the simplest way to cross-validate in Python is to use `sklearn` , which has a different interface or API than `statsmodels` , the code we have been using to fit GLMs. 
+그러나 실무 현장 속 실질 구조상으로, 파이썬(Python) 환경 구역 내에서 교차 검증을 가동시키는 가장 직관적이고 심플한 방안책은 다름 아닌 머신러닝 라이브러리인 `sklearn` 을 활용 기용해 써먹는 것인데; 다만 이는 그간 우리가 GLM 기반 모델들을 장착 적합해 오던 익숙한 기본 코드 패키지 묶음인 `statsmodels` 툴의 체제와는 그 구조나 인터페이스, 혹은 API 취급 기조가 완전히 이질적으로 판이하게 다르다는 애로사항이 존재한다.
+
+This is a problem which often confronts data scientists: “I have a function to do task _A_ , and need to feed it into something that performs task _B_ , so that I can compute _B_ ( _A_ ( _D_ )), where _D_ is my data.”
+이 괴리 양상은 필드 전선 위에서 데이터 과학자들이 유독 왕왕 마주치며 씨름 대면 충돌하게(confronts) 되는 매우 전형적인 호환성 고충 문제 중 하나이다: “즉, 나한테 _A_ 란 임무 과제를 처리하는 함수 장치가 하나 수중에 있고, 이를 억지로 _B_ 란 과제를 물고 처리하는 다른 요건 장치 기계 부속 아가리 속으로 집어넣어 먹여야만, 그걸 통해 마침내 _B_ ( _A_ ( _D_ )) 구조의 연산 결괏값을 뽑아 계산해 낼 수 있다 치자 (물론 여기서 _D_ 는 내가 쥐고 있는 기본 데이터 덩어리다).”
+
+When _A_ and _B_ don’t naturally speak to each other, this requires the use of a _wrapper_ .
+만약 저 장치 부품인 _A_ 와 무기 부속 _B_ 녀석들 둘 시스템끼리 유기적으로 매끄럽게 자연스러운 언어 소통(speak to each other) 을 도통 인식해 내지 못할 적이면, 이는 필연적으로 중간 매개 어댑터 통역사 역할을 해줄 이른바 _래퍼(wrapper)_ 클래수 함수의 필수 도입을 요구하게 이른다.
+
+In the `ISLP` package, we provide a wrapper, `sklearn_sm()` , that enables us to easily use the cross-validation tools of `sklearn` with models fit by `statsmodels` .
+본 저서에 편입된 자체 학습 지원 모듈인 `ISLP` 패키지 군단 내에서, 우리는 학습자들에게 `sklearn_sm()` 이라는 이름의 이 래퍼(wrapper) 모듈을 무상 제공하고 있는데, 이는 우리로 하여금 고전적인 `statsmodels` 툴로 적합된 모델 무형 자산들에도 곧장 최신 `sklearn` 체제의 막강한 교차 검증 도구들을 아주 유들유들 손쉽게 연동 혼용 사용(use) 하도록 매끄럽게 지원 허가 가능(enables) 케 해준다.
+
+The class `sklearn_sm()` has as its first argument a model from `statsmodels` .
+이 `sklearn_sm()` 래퍼 클래스는 그 가장 앞선 첫 번째 도입 인자(argument) 파라미터 값으로 다름 아닌 고전 `statsmodels` 진영 출신의 분류 모델 객체를 직접 취해 넘겨받는다.
+
+It can take two additional optional arguments: `model_str` which can be used to specify a formula, and `model_args` which should be a dictionary of additional arguments used when fitting the model.
+나아가 이는 자의적 부수적으로 두 가지 옵셔널 추가 인자 성분을 임의 편입 취할(take) 수 있는데: 하나는 특정 함수 방정식 형태(formula) 를 기재 지정 세팅 지시해 서술할 당시 기용될 수 있는 속성인 `model_str` 이고, 다른 하나는 필시 응당 당해 해당 모델 무기를 훈련 적합 적재(fitting) 시킬 타이밍에 요구되는 부수적인 추가 인자 스펙 세팅 옵션들을 지닌 딕셔너리(dictionary) 맵 매개체 집합 속성 인자 `model_args` 이다.
+
+For example, to fit a logistic regression model we have to specify a `family` argument.
+가령 예시 격으로, 우리가 혹간 로지스틱 회귀 모델을 구동 적합시켜 보고자 할 요량이라면 우리는 무조건적으로 고정 함수 옵션 장치인 `family` 인자 지정 잣대를 어김없이 기입 세팅 지시(specify) 해 주어야 마땅하다.
+
+This is passed as `model_args={'family':sm.families.Binomial()}` . 
+이러한 부가적 파라미터 옵션 스펙은 곧장 파이썬 매핑 구조인 `model_args={'family':sm.families.Binomial()}` 딕셔너리 지시 사항 체제 수식으로서 매끄럽게 위임 하달 통과(passed) 입력된다.
 
 Here is our wrapper in action: 
-아래 보이는 시뮬레이션 장면이 해당 우리 래퍼의 구체적 운용 작용(in action) 현장입니다:
+아래 코드는 이 래퍼 장치가 실제 현장에서 어떻게 호환 연동 기동 작전 수행(in action) 도무되는지를 시연한다:
 
 ```python
 In [9]: hp_model = sklearn_sm(sm.OLS,
@@ -32,4 +53,6 @@ In [9]: hp_model = sklearn_sm(sm.OLS,
 ## Sub-Chapters (하위 목차)
 
 ### 다중 분석 결과 지표 (Jupyter Notebook Output)
-* [문서로 이동하기](./5_3_2_1_out14_23.8022_1.4218/trans1.html)
+* [문서로 이동하기](./5_3_2_1_out14_23.8022_1.4218/)
+
+각각의 쪼개진 폴드 조각별로 반환되는 로스 에러 값 배열들을 확인하고, 왜 편차가 존재하고 어떻게 평균내는 코드가 짜이는지 체감합니다.

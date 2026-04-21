@@ -3,14 +3,23 @@ layout: default
 title: "trans2"
 ---
 
-# 5.3.1 The Validation Set Approach
-# 5.3.1 도박판의 시작: 검증 세트 반반 무 많이! (Validation Set)
+# _5.3.1 The Validation Set Approach_ 
+# _5.3.1 반반 무 많이: 검증 세트 접근법_
 
 We explore the use of the validation set approach in order to estimate the test error rates that result from fitting various linear models on the `Auto` data set. 
-자, 대망의 첫 번째 미션! 옛날 챕터에서 그토록 맘대로 선을 긋고 놀았던 `Auto` 장난감 데이터를 꺼내와서, 이 무식하지만 직관적인 반반 쪼개기 시스템(검증 세트 접근법) 으로 실전 수능 오차율(test error rates) 견적을 어떻게 뽑아내는지 손맛을 느껴보겠습니다.
+이번 판에서는 `Auto` 자동차 데이터 세트를 구장 삼아, 우리가 그토록 비웃었던 그 원시적인 반반 쪼개기 수법(검증 세트 접근법)을 직접 코드로 굴려보고 얘가 토해내는 실전 오차율의 민낯을 구경해 봅니다.
 
-We use the function `train_test_split()` to split the data into training and validation sets. As there are 392 observations, we split into two equal sets of size 196 using the argument `test_size=196` . It is generally a good idea to set a random seed when performing operations like this that contain an element of randomness, so that the results obtained can be reproduced precisely at a later time. We set the random seed of the splitter with the argument `random_state=0` . 
-데이터를 훈련소파와 모의고사파로 반갈죽 내기 위해 쓰이는 궁극의 사이킷런 도마 칼! `train_test_split()` 함수를 소환합니다. 우리한테 차가 딱 392대 있으니까요, 공평하게 196대씩 두 덩어리(two equal sets)로 썰어달라고 `test_size=196` 조건을 달아줍니다. 여기서 꿀팁 하나! 이건 눈감고 제비뽑기를 돌리는 무작위 로직(randomness) 이라서, 친구랑 똑같이 코딩해도 결과가 매번 틀어지면 피곤하겠죠? 나중에 밤새워 코딩하다 에러 터졌을 때 "아씨 그때 그 결과 안 나오잖아!" 하고 머리 뜯기 싫으면, 룰렛의 뽑기 난수 조작 시드(random seed) 를 고정해 두는 게 정신 건강에 이롭습니다. 고로 `random_state=0`이라는 주사위 고정 주문을 박아두고 출발합니다.
+We use the function `train_test_split()` to split the data into training and validation sets.
+파이썬 머신러닝계의 국민 톱(saw) 무기인 `train_test_split()` 함수를 써서, 우리는 무자비하게 원본 데이터를 '훈련용 병력'과 '시험용 마루타(검증 세트)' 두 동강으로 갈라버릴 겁니다.
+
+As there are 392 observations, we split into two equal sets of size 196 using the argument `test_size=196` .
+여긴 자동차 관측치가 392대 있으니까, 저기 `test_size=196` 이라는 인자를 무기 옵션으로 박아 넣으면 정확히 196대씩 공평하게 반반 쪼개지는 피 튀기는 분단이 일어납니다.
+
+It is generally a good idea to set a random seed when performing operations like this that contain an element of randomness, so that the results obtained can be reproduced precisely at a later time.
+근데 통계 바닥에서 이렇게 로또(무작위성) 굴리듯 데이터를 랜덤으로 쪼갤 땐, 내가 뽑은 번호를 어딘가에 박제(random seed) 해두는 게 목숨을 부지하는 현명한 멘탈 보호법입니다. 그래야 훗날 내일모레 교수님 앞에서 똑같은 코드를 돌렸을 때 어제랑 똑같은 성적표가 기적처럼 재현(reproduced precisely) 되며 살아남을 수 있거든요.
+
+We set the random seed of the splitter with the argument `random_state=0` . 
+우린 쫄보니까 저 쪼개기 함수에 `random_state=0` 값을 박아서 난수표 추첨 시드를 꽉 고정해 버립니다.
 
 ```python
 In [3]: Auto = load_data('Auto')
@@ -20,7 +29,7 @@ In [3]: Auto = load_data('Auto')
 ```
 
 Now we can fit a linear regression using only the observations corresponding to the training set `Auto_train` . 
-방금 칼질로 예쁘게 `Auto_train` (훈련소 입소자) 이란 데이터 보따리가 생겼죠? 자원방비 절반의 병력만 데리고 곧장 뼈대 앙상한 '선형 회귀' 예측 기계를 헬스장(fit) 에 굴려봅니다.
+드디어 이제 저 반 토막 난 불쌍한 196명의 훈련 부대 `Auto_train` 애들만 갈아 넣고 채찍질해서 '선형 회귀' 예측 모델을 장착시킬 시간입니다.
 
 ```python
 In [4]: hp_mm = MS(['horsepower'])
@@ -30,8 +39,11 @@ In [4]: hp_mm = MS(['horsepower'])
         results = model.fit()
 ```
 
-We now use the `predict()` method of `results` evaluated on the model matrix for this model created using the validation data set. We also calculate the validation MSE of our model. 
-운동 끝났으면 이제 써먹어 봐야죠! 훈련소에서 근육 키운 이 모델(`results`) 에게 `predict()` 스킬을 조준해라 명령한 뒤, 아까 뒤로 몰래 숨겨뒀던 싱싱한 검증용 데이터(`Auto_valid`) 표적들을 던져줍니다. 그리고 녀석이 얼마나 헛스윙을 질렀는지, 얄짤없는 오차 제곱합(MSE) 계산기를 뚜드려 채점(calculate) 해봅니다.
+We now use the `predict()` method of `results` evaluated on the model matrix for this model created using the validation data set.
+총알 장전 끝났으니, 저 모델 결과 묶음(`results`) 에 붙어 있는 사격 버튼인 `predict()` 스킬을 뽑아 듭니다. 과녁은 당연히 아까 따로 감옥에 빼놨던 생판 남인 '검증 데이터 세트' 녀석들이죠!
+
+We also calculate the validation MSE of our model. 
+그놈들을 쏴 맞힌 뒤, 과녁에서 얼마나 처참히 빗나갔는지 그 삑사리 점수인 검증 MSE 오차 성적을 잔인하게 계산해 폭로해 봅니다.
 
 ```python
 In [5]: X_valid = hp_mm.transform(Auto_valid)
@@ -44,11 +56,14 @@ In [5]: X_valid = hp_mm.transform(Auto_valid)
 Out[5]: 23.6166
 ```
 
-Hence our estimate for the validation MSE of the linear regression fit is $23.62$. 
-삑! 영수증 나왔습니다. 1차선 일자 몽둥이(선형) 모델의 첫 모의고사 오답 점수(MSE) 는 소숫점 떼고 쿨하게 **23.62** 를 기록했습니다!
+Hence our estimate for the validation MSE of the linear regression fit is 23 _._ 62. 
+자! 결국 직선 하나(선형 회귀) 찍 하고 갖다 댔을 때 튀어나온 이 모델의 실전 오차 방어율 점수는 대충 23.62 정도로 뜨네요.
 
-We can also estimate the validation error for higher-degree polynomial regressions. We first provide a function `evalMSE()` that takes a model string as well as a training and test set and returns the MSE on the test set. 
-직선 몽둥이 성적을 받으니 욕심이 생깁니다. 이번엔 모델의 허리를 부드럽게 꺾어버리는 고차 다항식(higher-degree polynomial) 기어들을 물리고 똑같은 테스트를 달리면 성적이 어떻게 떡상/떡락할까 몹시 궁금하죠. 이 노가다를 매번 손으로 칠 순 없으니, 아예 파이썬 자동 자판기 함수 하나를 뚝딱 만듭니다(provide a function). 이 자판기 `evalMSE()` 는 우리가 훈련세트, 시험세트, 그리고 구동할 함수 스타일을 자판기 구멍(인자)에 부어 넣으면(takes) 척척 알아서 모델 펌핑하고 정답 맞히고 오답 삥땅 점수 MSE 를 동전 반환구로 뱉어내는(returns) 아주 충실한 노예입니다.
+We can also estimate the validation error for higher-degree polynomial regressions.
+물론 우린 저 조잡한 직선 말고, 유연성을 한껏 먹여 곡률을 뿜어내는 '고차원 다항 회귀' 장비들도 똑같이 실전 에러 점수를 가늠해 볼 수 있습니다.
+
+We first provide a function `evalMSE()` that takes a model string as well as a training and test set and returns the MSE on the test set. 
+계속 똑같은 짓 하기 귀찮으니 헬퍼 함수 `evalMSE()` 하나를 뚝딱 만들죠. 이 무기는 "어떤 모델 옵션을 장착할래?", "어느 부대로 훈련할래?", "과녁은 누구야?" 라는 지시를 삼킨(takes) 다음, 알아서 총 쏘고 에러율 MSE 성적표 한 장을 딱 뱉어내는(returns) 아주 충직한 매크로 시종장입니다.
 
 ```python
 In [6]: def evalMSE(terms,
@@ -65,8 +80,11 @@ In [6]: def evalMSE(terms,
             return np.mean((y_test - test_pred)**2)
 ```
 
-Let’s use this function to estimate the validation MSE using linear, quadratic and cubic fits. We use the `enumerate()` function here, which gives both the values and indices of objects as one iterates over a for loop. 
-자, 노예 자판기도 만들었으니 바로 실전 투입! 1단 직선(linear), 2단계 U자 커브(quadratic), 3단 꼬불이파(cubic) 기어를 순서대로 물려가며 에러 타율을 모조리 뽑아봅시다. 파이썬 문법 짬바 살짝 얹어서 `enumerate()` 란 마법 주문을 쓸 건데, `for` 문 뺑뺑이를 돌 때마다 "야 이거 1번째 곡선 점수야~ 2번째 곡선 점수야~" 귀찮게 번호표 인덱스랑 실제 값이랑 센스 있게 1+1 세트로 던져주는(gives both the values and indices) 아~주 편한 코딩 스킬입니다.
+Let’s use this function to estimate the validation MSE using linear, quadratic and cubic fits.
+자, 이 시종장 함수에다가 직선(선형), U자 곡선(2차), S자 뱀파이어 곡선(3차) 세 가지 무기 지시를 내리며 연속 사격을 시켜서 각각의 에러율 성적들을 비교 관찰해 보겠습니다.
+
+We use the `enumerate()` function here, which gives both the values and indices of objects as one iterates over a for loop. 
+이 뺑뺑이를 돌릴 때 파이썬의 깨알 치트키 함수 `enumerate()` 를 섞어 쓸 건데; 이 놈은 반복문을 돌며 순회(iterates) 할 때마다 "지금 몇 번째 턴입니다!" 하는 인덱스 번호표랑 "이번 턴 옵션 알맹이!" 를 양손에 달달하게 함께 쥐여주는(gives both) 친절한 함수죠.
 
 ```python
 In [7]: MSE = np.zeros(3)
@@ -82,8 +100,11 @@ In [7]: MSE = np.zeros(3)
 Out[7]: array([23.62, 18.76, 18.80])
 ```
 
-These error rates are $23.62, 18.76$, and $18.80$, respectively. If we choose a different training/validation split instead, then we can expect somewhat different errors on the validation set. 
-계기판의 스코어 보시죠! 순번대로 **23.62, 18.76, 18.80** 을 터뜨렸습니다. 오! 2차 곡선에서 점수가 확 좋아졌네요! 근데 아까 이론 시간에 배웠던 그 악몽의 가변성 폭주 현상 기억나시나요? 만약 우리가 아까 처음 위에서 칼박 맞춰 자른 제비뽑기 시드를 버리고 "제비뽑기를 아예 처음부터 완전 딴판인 뽑기판으로 다시 시작해 보면(different split) 어떨까?" 라는 호기심이 일 겁니다. 당연히 그때는 테스트 에러 영수증 액수가 또 요동치며 달라질 거라고(expect somewhat different) 감각상 예상해야 합니다.
+These error rates are 23 _._ 62 _,_ 18 _._ 76, and 18 _._ 80, respectively.
+타다당! 토해낸 타격 에러 점수가 차례대로 23.62, 18.76, 18.80이 떴습니다.
+
+If we choose a different training/validation split instead, then we can expect somewhat different errors on the validation set. 
+그런데 이론 시간(5.1.1) 에 우리가 뭐라 씹었죠? 맞습니다. "이 무식한 검증 세트 쪼개기는 로또 운이 너무 심하다!" 다시 말해, 만약 우리가 아까 데이터를 처음 둘로 반갈죽 낼 때 전혀 다른 난수 시드표를 써서 애들을 다르게 쪼갰다면? 당연히 이 에러 점수들도 방금 본 거랑은 영 딴판인 수치들로 널뛸 게 안 봐도 비디오입니다.
 
 ```python
 In [8]: Auto_train, Auto_valid = train_test_split(Auto,
@@ -102,8 +123,10 @@ In [8]: Auto_train, Auto_valid = train_test_split(Auto,
 Out[8]: array([20.76, 16.95, 16.97])
 ```
 
-Using this split of the observations into a training set and a validation set, we find that the validation set error rates for the models with linear, quadratic, and cubic terms are $20.76, 16.95$, and $16.97$, respectively. 
-보이십니까? `random_state=3` 으로 룰렛 판을 갈아엎고 애들 진영을 바꿨더니, 똑같은 1, 2, 3차 모델을 돌렸음에도 불구하고 성적표 액수가 **20.76, 16.95, 16.97** 로 아까랑 확 비틀려 찍혔습니다(find)! 이게 바로 그 악명 높던 단순 검증법의 주사위 널뛰기 병크입니다.
+Using this split of the observations into a training set and a validation set, we find that the validation set error rates for the models with linear, quadratic, and cubic terms are 20 _._ 76, 16 _._ 95, and 16 _._ 97, respectively. 
+난수 번호표(`random_state=3`) 를 바꾼 뒤 다시 반갈죽내서 위 장비를 싹 돌려보았더니? 헐, 선형-2차-3차 공격무기들이 도출해 낸 에러 점수가 돌연 20.76, 16.95, 그리고 16.97로 훅 꺾여버린 완전히 딴 무대 상황임을 발견하게 됩니다. 이래서 반반 치킨은 위험합니다!
 
 These results are consistent with our previous findings: a model that predicts `mpg` using a quadratic function of `horsepower` performs better than a model that involves only a linear function of `horsepower` , and there is no evidence of an improvement in using a cubic function of `horsepower` . 
-물론 널뛰기를 한 스코어 액수 자체가 출렁거렸을지언정, 뼈 때리는 기본 성질 팩트만은 저번 이론에서 까발려졌던 통찰(previous findings) 과 단전부터 일치(consistent with) 합니다! 그 일치점이 뭐냐? 연비 타겟 추론에 있어서 뻣뻣한 1차선 마력 몽둥이(linear) 보단 확실히 U자로 부드럽게 꺾인 2차 커브(quadratic) 엔진이 기록 상승(performs better) 강점을 시원하게 뿜어낸다는 것! 그러나 뇌절해서 구불거리는 3차 오버 엔진(cubic) 까지 끌어들여 봤자 성적표 향상의 낌새를 눈곱만큼도 발견할 증거력(no evidence) 이 없다는 그 소름 돋는 두 가지 절대명제 말입니다!
+그래도 뭐, 저 두 번의 삽질 결과 모두가 입 모아 소리치는 확실한 진리 하나는 있습니다.
+1. 멍청하게 직진만 하는 선형 총알보단, 2차 함수(quadratic) 폭탄을 박아 넣은 무통장 모델이 확실히 에러를 처절하게 박살 내며 훨씬 더 우월한 방어선 성능(performs better) 을 갖췄다.
+2. 하지만 여기서 욕심 좀 더 내서 3차 함수(cubic) 빔 옵션까지 쓸데없이 달아봐야? 코딱지만 한 요행은커녕 에러 점수가 쥐꼬리만큼도 더 개선되지 않는다는 **과적합 삽질의 절벽 한계(no evidence of an improvement)** 만 징그럽게 확인시켜 줍니다.
