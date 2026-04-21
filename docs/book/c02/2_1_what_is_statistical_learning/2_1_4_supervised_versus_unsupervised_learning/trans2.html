@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_1_what_is_statistical_learning/2_1_4_supervised_versus_unsupervised_learning/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c02/2_1_what_is_statistical_learning/2_1_4_supervised_versus_unsupervised_learning/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_1_what_is_statistical_learning/2_1_4_supervised_versus_unsupervised_learning/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c02/2_1_what_is_statistical_learning/2_1_4_supervised_versus_unsupervised_learning/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/">02. Statistical Learning</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_1_what_is_statistical_learning/">2 1 what is statistical learning</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_1_what_is_statistical_learning/2_1_4_supervised_versus_unsupervised_learning/">2 1 4 supervised versus unsupervised learning</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../2_1_3_the_trade-off_between_prediction_accuracy_and_model_interpretability/trans2.html">&lt; 2.1.3 The Trade-Off Between Prediction Accuracy And Model Interpretability</a></td>
+      <td><a href="../2_1_5_regression_versus_classification_problems/trans2.html">2.1.5 Regression Versus Classification Problems &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 조금 더 쉽고 재미있게 공부하고 싶으신가요? 이 페이지는 중학생도 이해할 수 있는 친절한 ‘쉬운 해설판’입니다! 영어 원문을 문장 단위로 꼼꼼하게 번역한 느낌을 원하신다면 <a href="./trans1.html">📖 직역본 보기</a> 메뉴를 활용하세요!</p>
+</blockquote>
+
+<h1 id="214-supervised-versus-unsupervised-learning">2.1.4 Supervised Versus Unsupervised Learning</h1>
+<h1 id="214-지도-학습-대-비지도-학습-과외-선생님이-있는-방과-없는-방">2.1.4 지도 학습 대 비지도 학습 (과외 선생님이 있는 방과 없는 방)</h1>
+
+<p>Most statistical learning problems fall into one of two categories: <em>supervised</em> or <em>unsupervised</em>.
+세상 모든 인공지능과 통계학 문제들의 99%는 딱 두 개의 방으로 강제 배정됩니다. 바로 정답을 알려주는 과외 선생님이 있는 <strong>지도(Supervised) 방</strong>과, 정답 없이 애들끼리 방치되는 <strong>비지도(Unsupervised) 방</strong>이죠.</p>
+
+<p>The examples that we have discussed so far in this chapter all fall into the supervised learning domain.
+우리가 지금까지 앞선 목차에서 침 튀기며 떠들었던 그 수많은 예시들(광고비로 매출 맞추기 등)은 싹 다 과외 선생님이 있는 온실 속 ‘지도 학습’ 영역의 이야기였습니다.</p>
+
+<p>For each observation of the predictor measurement(s) $x_i$, $i = 1, \dots, n$ there is an associated response measurement $y_i$.
+지도 학습 방의 특징은 아주 명확합니다. 우리가 가진 각 아저씨들의 힌트 데이터 모음($x_i$)마다, 꼬리표처럼 “이 아저씨의 진짜 월급은 이거야!” 하는 확실한 짝꿍 정답지($y_i$)가 항상 찰싹 달라붙어 매칭되어 있거든요.</p>
+
+<p>We wish to fit a model that relates the response to the predictors, with the aim of accurately predicting the response for future observations (prediction) or better understanding the relationship between the response and the predictors (inference).
+선생님이 정답지를 뻔히 쥐고 있으니까, 우리는 그저 힌트(예측 변수)와 정답(응답)을 잇는 공식을 어떻게든 끼워 맞춰서(적합), 미래에 들어올 모의고사 점수를 잘 찍거나(예측), 둘 사이가 대체 무슨 끈끈한 관계인지 속셈을 파헤치는(추론) 아주 명확한 목표를 향해 달릴 수 있습니다.</p>
+
+<p>Many classical statistical learning methods such as linear regression and <em>logistic regression</em> (Chapter 4), as well as more modern approaches such as GAM, boosting, and support vector machines, operate in the supervised learning domain.
+고전의 명작 선형 회귀나 <strong>로지스틱 회귀</strong>(4장) 같은 틀딱 무기들부터, GAM, 부스팅, 서포트 벡터 머신 같은 최첨단 삐까뻔쩍한 현대식 무기들까지 거의 다 이 따뜻한 ‘지도 학습’ 방구석 치고받는 세계관에서 작동합니다.</p>
+
+<p>The vast majority of this book is devoted to this setting.
+사실 여러분이 들고 계신 이 두꺼운 책 내용의 9할 이상이 다 이 지도 학습 판에서 벌어지는 일들을 다루고 있습니다.</p>
+
+<p>By contrast, unsupervised learning describes the somewhat more challenging situation in which for every observation $i = 1, \dots, n$, we observe a vector of measurements $x_i$ but no associated response $y_i$.
+이와 지독하게 대조적으로, <strong>‘비지도(Unsupervised) 학습’</strong> 방은 아주 극강의 헬난이도 상황을 묘사합니다. 여기선 1번 아저씨부터 $n$번 아저씨까지 힌트($x_i$)는 잔뜩 끌어모았는데, 그 누구도 진짜 정답($y_i$)이 뭔지 전혀 알려주지 않고 싹 다 백지로 날아가 버린 상태입니다!</p>
+
+<p>It is not possible to fit a linear regression model, since there is no response variable to predict.
+정답지가 아예 증발했으니 맞출 타겟조차 없는 셈입니다. 타겟이 없는데 어떻게 선형 회귀로 선을 그어 맞추겠어요? 아예 시도조차 불가능합니다!</p>
+
+<p>In this setting, we are in some sense working blind; the situation is referred to as <em>unsupervised</em> because we lack a response variable that can supervise our analysis.
+이런 끔찍한 설정에서 통계학자들은 그야말로 눈에 안대를 차고 장님처럼 더듬거리는 꼴입니다. 우리의 삽질(분석)을 옆에서 “야, 그게 정답이잖아!” 하고 채점해줄(지도해줄) 정답 변수 선생님이 없기 때문에, 우리는 이걸 슬프게도 <strong>‘지도받지 못하는(비지도)’</strong> 버려진 상황이라고 부릅니다.</p>
+
+<p>What sort of statistical analysis is possible?
+아니, 정답도 없는데 대체 무슨 얼어 죽을 통계 분석을 하겠다는 거죠?</p>
+
+<p>We can seek to understand the relationships between the variables or between the observations.
+비록 정답을 맞춰서 상금을 타낼 순 없지만, 우리는 대신 방바닥에 뿌려진 데이터 점(관측치)들끼리 옹기종기 어떻게 모여있는지, 혹은 힌트 변수들끼리 어떻게 짝짜꿍이 맞는지 그 <strong>은밀한 관계망(패턴) 자체를 훔쳐보는 것</strong>에 집착하게 됩니다.</p>
+
+<p>One statistical learning tool that we may use in this setting is <em>cluster analysis</em>, or clustering.
+이런 암흑의 방에서 우리가 손전등처럼 쓰는 가장 대표적인 도구가 바로 비슷한 놈들끼리 묶어서 패거리를 갈라버리는 <strong>‘군집 분석(Cluster analysis)’</strong> (혹은 클러스터링) 기법입니다.</p>
+
+<p>The goal of cluster analysis is to ascertain, on the basis of $x_1, \dots, x_n$, whether the observations fall into relatively distinct groups.
+클러스터링의 최고 목표는 힌트 데이터들($x_1, \dots, x_n$)을 이리저리 째려보고 냄새를 맡아서, “어라? 이거 점들끼리 끼리끼리 모여서 몇 개의 뚜렷한 파벌(그룹)을 만들고 있네?” 라는 걸 눈치채는 겁니다.</p>
+
+<p>For example, in a market segmentation study we might observe multiple characteristics (variables) for potential customers, such as zip code, family income, and shopping habits.
+예를 하나 들어볼까요? 대형 마트 사장님이 동네 잠재 고객들을 탈탈 털어서 우편번호(사는 동네), 집구석 재산 규모, 마트에서 주로 뭘 담는지 쇼핑 취향 등등(다양한 힌트 변수들)을 쫙 스캔했다고 칩시다.</p>
+
+<p>We might believe that the customers fall into different groups, such as big spenders versus low spenders.
+사장님은 분명 “우리 동네 손님들은 한 번 오면 돈을 쓸어 담는 VIP 부자 파벌과, 100원짜리 콩나물만 깎는 짠돌이 파벌로 확 갈릴 거야!”라고 굳게 믿고 있을 겁니다.</p>
+
+<p>If the information about each customer’s spending patterns were available, then a supervised analysis would be possible.
+물론 각 손님 이마에 “나 한 달에 100만 원 쓰는 부자야!”라고 정답(소비 패턴 금액)이 떡하니 적혀있었다면, 그냥 아까 파트에서 배운 지도 분석 방으로 끌고 가서 모델을 돌리면 끝났겠죠.</p>
+
+<p>However, this information is not available—that is, we do not know whether each potential customer is a big spender or not.
+하지만 현실은 늘 거지 같습니다! 그 VIP 정답표(정보)가 마트 컴퓨터에 저장이 안 되어 있는 겁니다. 즉, 저 손님이 돈을 팍팍 쓰는 VIP인지 거지인지 우리는 도통 정답을 알 길이 없습니다.</p>
+
+<p>In this setting, we can try to cluster the customers on the basis of the variables measured, in order to identify distinct groups of potential customers.
+그래서 이 비지도 세팅의 마트 사장님은 정답 맞추기를 포기하고, 대신 힌트 변수들만 믹서기에 넣고 <strong>클러스터링(비슷한 놈 묶기)</strong> 을 시도합니다. “사는 동네도 비슷하고 쇼핑 품목도 비슷한 놈들끼리 일단 파벌을 지어서 묶어보자!” 하고 잠재 고객들을 찢어놓는 거죠.</p>
+
+<p>Identifying such groups can be of interest because it might be that the groups differ with respect to some property of interest, such as spending habits.
+이렇게 꾸역꾸역 찾아낸 패거리(그룹)를 분석하는 건 꽤나 쏠쏠합니다. 왜냐하면 그렇게 묶인 그룹들이 까보면 실제로 짠돌이파/부자파 같은 ‘돈 쓰는 습관(관심 속성)’을 기준으로 기가 막히게 갈라져 있을 확률이 아주 높거든요!</p>
+
+<p><img src="./img/Image_022.png" alt="Figure 2.8" /></p>
+
+<p><strong>FIGURE 2.8.</strong> <em>A clustering data set involving three groups. Each group is shown using a different colored symbol. Left: The three groups are well-separated. In this setting, a clustering approach should successfully identify the three groups. Right: There is some overlap among the groups. Now the clustering task is more challenging.</em></p>
+
+<p><strong>그림 2.8.</strong> <em>비슷한 놈들끼리 뭉치는 클러스터링 예제입니다. 각 패거리(그룹)를 다른 색깔로 칠해봤죠. 왼쪽 도화지를 보세요. 파벌 3개가 너무나도 뚜렷하게 멀찍이 떨어져 있죠? 이런 개꿀 환경에선 클러스터링 기계가 식은 죽 먹기로 세 그룹을 아주 정확하게 찾아냅니다. 반면 오른쪽 도화지는? 점들이 가운데서 서로 치고받으며 오버랩(중첩) 되어 섞여있죠. 이젠 기계도 파벌을 찢어놓기 위해 머리가 깨지기 시작(까다로운 헬난이도) 합니다.</em></p>
+
+<p>Figure 2.8 provides a simple illustration of the clustering problem.
+그림 2.8은 방금 설명한 끼리끼리 뭉치는 ‘클러스터링(군집화)’ 문제가 어떻게 생겨 먹었는지 유치원생 눈높이로 보여주는 그림입니다.</p>
+
+<p>We have plotted 150 observations with measurements on two variables, $X_1$ and $X_2$.
+도화지 위에 점이 150개나 찍혀있는데, 이 녀석들은 가로($X_1$)랑 세로($X_2$) 딱 두 가지 힌트만 가진 관측치들입니다.</p>
+
+<p>Each observation corresponds to one of three distinct groups.
+사실 이 150명의 점들은 출신 성분에 따라 정확히 3개의 파벌(뚜렷한 그룹) 중 하나에 속박되어 있습니다.</p>
+
+<p>For illustrative purposes, we have plotted the members of each group using different colors and symbols.
+독자 여러분이 구경하기 편하라고(설명 목적) 조물주인 우리는 각 파벌 애들의 색깔과 모양(기호)을 빨녹파로 예쁘게 칠해놨습니다.</p>
+
+<p>However, in practice the group memberships are unknown, and the goal is to determine the group to which each observation belongs.
+하지만! 진짜 불쌍한 현실의 분석가들 모니터엔 색깔 따윈 없습니다. 소름 돋게 전부 시커먼 먹물 점으로 보이죠(소속을 모름). 그래서 이 찍혀있는 시커먼 점들을 요리조리 따져서 <strong>“너는 파란색 파벌 소속이구나!” 하고 멤버십 소속을 때려 맞추는 게 클러스터링의 최종 미션</strong>입니다.</p>
+
+<p>In the left-hand panel of Figure 2.8, this is a relatively easy task because the groups are well-separated.
+그림 2.8의 왼쪽 예시는 워낙 자기들끼리 삼삼오오 거리를 두고 떨어져 있어서, 눈 감고 찍어도 그룹을 분리해 낼 수 있는 허접한 과제입니다.</p>
+
+<p>By contrast, the right-hand panel illustrates a more challenging setting in which there is some overlap between the groups.
+그와 반대로 오른쪽 예시는 헬파티가 열렸습니다. 색깔 모르는 시커먼 놈들이 국경선 근처에서 막 뒤엉켜(중첩되어) 있어서, 누가 어느 팀 소속인지 경계선을 긋기가 극도로 빡센 세팅을 보여주고 있죠.</p>
+
+<p>A clustering method could not be expected to assign all of the overlapping points to their correct group (blue, green, or orange).
+솔직히 저렇게 중간에 끼어서 박 터지게 겹치는 애들은, 아무리 인공지능 클러스터링 할아버지가 와도 100% 정답(파랑, 초록, 주황) 팀으로 완벽하게 골라낼 거라고 결코 기대할 수 없습니다.</p>
+
+<p>In the examples shown in Figure 2.8, there are only two variables, and so one can simply visually inspect the scatterplots of the observations in order to identify clusters.
+사실 그림 2.8 예제는 힌트가 꼴랑 두 개($X_1, X_2$)라서 모니터에 평면(산점도)으로 직접 스윽 그려놓고, 사람 눈알 성능(시각적 조사)만으로도 “어 저기 뭉쳐있네!” 하고 쉽게 패거리를 찾아낼 수 있었습니다.</p>
+
+<p>However, in practice, we often encounter data sets that contain many more than two variables.
+하지만, 우리네 지옥 같은 현업 프로젝트에선 힌트 2개가 뭡니까? 변수가 수십 개, 수천 개나 드글드글한 끔찍한 데이터셋들을 밥 먹듯이 만나게 됩니다.</p>
+
+<p>In this case, we cannot easily plot the observations.
+이러면 우리는 공간의 차원이 폭발해버리기 때문에 더 이상 허공에 점을 찍어(도식화) 눈으로 확인할 수가 없게 됩니다. 눈알은 3차원까지만 볼 수 있으니까요!</p>
+
+<p>For instance, if there are <em>p</em> variables in our data set, then $p(p - 1) / 2$ distinct scatterplots can be made, and visual inspection is simply not a viable way to identify clusters.
+예를 들어 힌트(변수)가 $p$ 개나 모여있다면, 인간이 눈으로 일일이 확인하려면 두 개씩 짝지어서 그린 도화지 세트 결합표를 무려 $p(p - 1) / 2$ 장이나 만들어야 눈알이 빠지도록 봐야 합니다. 애초에 말도 안 되는 쓸데없는 삽질(실행 불가능)이죠!</p>
+
+<p>For this reason, automated clustering methods are important.
+이런 한심한 육체노동과 한계 때문에, 사람이 자면 알아서 고차원의 힌트들을 수백 차원으로 휘젓고 다니며 점들의 파벌을 갈라주는 <strong>자동화 클러스터링(기계 학습)</strong> 기술이 빛을 발하며 그토록 중요한 겁니다.</p>
+
+<p>We discuss clustering and other unsupervised learning approaches in Chapter 12.
+이 멋진 클러스터링과 정답 없는 암흑 방(비지도 학습)에서 생존하는 법은, 저~기 먼 미래인 <strong>12장</strong>에서 거하게 다루겠습니다.</p>
+
+<p>Many problems fall naturally into the supervised or unsupervised learning paradigms.
+자, 이처럼 세상의 문제들은 웬만하면 과외 선생이 있는 ‘지도형’과 없는 ‘비지도형’ 두 패러다임 중 하나에 얌전하게 자기 발로 찾아가서 안착합니다.</p>
+
+<p>However, sometimes the question of whether an analysis should be considered supervised or unsupervised is less clear-cut.
+하지만 아주 짜증나게도 가끔 세상엔 “이게 과외 선생님이 있는 거야, 반쯤 나간 거야?” 하고 구분이 아주 무자비하게 애매모호한(칼로 무 자르듯 안 나눠지는) 변종 문제 상황도 불쑥불쑥 튀어나옵니다.</p>
+
+<p>For instance, suppose that we have a set of <em>n</em> observations.
+예를 들어볼게요. 우리가 또 기가 막히게 조사를 해서 <em>n</em> 명 아저씨의 관측치 데이터를 장부에 빼곡히 모아왔다고 칩시다.</p>
+
+<p>For <em>m</em> of the observations, where $m &lt; n$, we have both predictor measurements and a response measurement.
+장부를 펼쳐보니, 전체 <em>n</em> 줄 중에서 운 좋은 일부 <em>m</em> 명의 아저씨들은 힌트(예측 변수 측정치)도 있고, 귀중한 정답지(응답 측정치)도 예쁘게 세트로 채워져 있습니다. 와! 이건 전형적인 지도 학습 데이터죠!</p>
+
+<p>For the remaining $n - m$ observations, we have predictor measurements but no response measurement.
+근데 젠장! 나머지 잔챙이 찌꺼기 아저씨들($n - m$ 명) 줄을 보니까, 피 검사지(힌트) 결과만 있고 정답(쇼크사 여부, 응답 측정치) 칸은 모조리 빵꾸가 나서 백지상태입니다. 이건 또 비지도 학습 데이터잖아요?</p>
+
+<p>Such a scenario can arise if the predictors can be measured relatively cheaply but the corresponding responses are much more expensive to collect.
+대체 왜 이런 미친 장부가 나오냐고요? 현장에선 이게 국룰입니다. 피검사 힌트(예측 변수)를 뽑는 건 동네 의원에서 만원이면 끝나서 상대적으로 헐값에 왕창 긁을 수 있죠. 근데 진짜 정답인 쇼크 부작용 여부는 무려 사람 목숨을 걸거나 수백만 원짜리 정밀 검사 기계에 집어넣어 구해야 하니까 너무 비싸서 몇 명밖에 돈을 못 지불(수집)한 겁니다.</p>
+
+<p>We refer to this setting as a <em>semi-supervised learning</em> problem.
+결국 절반은 정답이 있고, 절반은 정답이 없는 이 괴상망측한 짬짜면 같은 반반 무 많이 세팅을 폼나게 전문 용어로 <strong>‘반지도 학습(Semi-supervised learning)’</strong> 문제라고 부릅니다.</p>
+
+<p>In this setting, we wish to use a statistical learning method that can incorporate the <em>m</em> observations for which response measurements are available as well as the $n - m$ observations for which they are not.
+지도냐 비지도냐 사이에서 줄타기하는 이 야비한 판에서는, 정답이 있는 <em>m</em> 명의 모범생 데이터와 정답을 잃어버린 불쌍한 $n - m$ 명의 문제아 데이터를 기계 안에 꾹꾹 욱여넣고 <strong>“니들 어떻게든 짬뽕으로 합쳐져서 답을 하나 토해내 봐라!”</strong> 하고 통계 기법에게 빌게 되죠.</p>
+
+<p>Although this is an interesting topic, it is beyond the scope of this book.
+이 반반 무 많이(반지도) 시스템이 돌아가는 꼴은 솔직히 피가 끓게 재밌는 연구 주제이긴 합니다. 하지만… 억울하게도 이 얄팍한 입문용 교과서의 난이도 선(범위)을 아득히 뛰어넘어 버리기 때문에 우린 여기까지만 하고 눈물을 머금고 쿨하게 패스하겠습니다!</p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../2_1_3_the_trade-off_between_prediction_accuracy_and_model_interpretability/trans2.html">&lt; 2.1.3 The Trade-Off Between Prediction Accuracy And Model Interpretability</a></td>
+      <td><a href="../2_1_5_regression_versus_classification_problems/trans2.html">2.1.5 Regression Versus Classification Problems &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

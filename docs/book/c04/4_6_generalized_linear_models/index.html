@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -493,38 +492,47 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="46-generalized-linear-models">4.6 Generalized Linear Models</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../4_5_a_comparison_of_classification_methods/4_5_2_an_empirical_comparison/index.html">&lt; 4.5.2 An Empirical Comparison</a></td>
+      <td><a href="4_6_1_linear_regression_on_the_bikeshare_data/index.html">4.6.1 Linear Regression On The Bikeshare Data &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>In Chapter 3, we assumed that the response $Y$is quantitative, and explored the use of least squares linear regression to predict $Y$. Thus far in this chapter, we have instead assumed that $Y$is qualitative. However, we may sometimes be faced with situations in which $Y$is neither qualitative nor quantitative, and so neither linear regression from Chapter 3 nor the classification approaches covered in this chapter is applicable.</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>As a concrete example, we consider the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set. The response is <code class="language-plaintext highlighter-rouge">bikers</code> , the number of hourly users of a bike sharing program in Washington, DC. This response value is neither qualitative nor quantitative: instead, it takes on non-negative integer values, or <em>counts</em> . We will consider counts predicting <code class="language-plaintext highlighter-rouge">bikers</code> using the covariates <code class="language-plaintext highlighter-rouge">mnth</code> (month of the year), <code class="language-plaintext highlighter-rouge">hr</code> (hour of the day, from 0 to 23), <code class="language-plaintext highlighter-rouge">workingday</code> (an indicator variable that equals 1 if it is neither a weekend nor a holiday), <code class="language-plaintext highlighter-rouge">temp</code> (the normalized temperature, in Celsius), and <code class="language-plaintext highlighter-rouge">weathersit</code> (a qualitative variable that takes on one of four possible values: clear; misty or cloudy; light rain or light snow; or heavy rain or heavy snow.)</p>
+<h1 id="46-generalized-linear-models">4.6 Generalized Linear Models</h1>
 
-<p>In the analyses that follow, we will treat <code class="language-plaintext highlighter-rouge">mnth</code> , <code class="language-plaintext highlighter-rouge">hr</code> , and <code class="language-plaintext highlighter-rouge">weathersit</code> as qualitative variables.</p>
+<p>In Chapter 3, we assumed that the response $Y$ is quantitative, and explored the use of least squares linear regression to predict $Y$. Thus far in this chapter, we have instead assumed that $Y$ is qualitative. However, we may sometimes be faced with situations in which $Y$ is neither qualitative nor quantitative, and so neither linear regression from Chapter 3 nor the classification approaches covered in this chapter is applicable.</p>
+
+<p>As a concrete example, we consider the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set. The response is <code class="language-plaintext highlighter-rouge">bikers</code>, the number of hourly users of a bike sharing program in Washington, DC. This response value is neither qualitative nor quantitative: instead, it takes on non-negative integer values, or <em>counts</em>. We will consider predicting <code class="language-plaintext highlighter-rouge">bikers</code> using the covariates <code class="language-plaintext highlighter-rouge">mnth</code> (month of the year), <code class="language-plaintext highlighter-rouge">hr</code> (hour of the day, from 0 to 23), <code class="language-plaintext highlighter-rouge">workingday</code> (an indicator variable that equals 1 if it is neither a weekend nor a holiday), <code class="language-plaintext highlighter-rouge">temp</code> (the normalized temperature, in Celsius), and <code class="language-plaintext highlighter-rouge">weathersit</code> (a qualitative variable that takes on one of four possible values: clear; misty or cloudy; light rain or light snow; or heavy rain or heavy snow.)</p>
+
+<p>In the analyses that follow, we will treat <code class="language-plaintext highlighter-rouge">mnth</code>, <code class="language-plaintext highlighter-rouge">hr</code>, and <code class="language-plaintext highlighter-rouge">weathersit</code> as qualitative variables.</p>
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<h3 id="461-linear-regression-on-the-bikeshare-data">4.6.1 Linear Regression on the Bikeshare Data</h3>
 
-<h3 id="461-linear-regression-on-the-bikeshare-data-자전거-대여-데이터에서의-선형-회귀-적용">4.6.1 Linear Regression on the Bikeshare Data (자전거 대여 데이터에서의 선형 회귀 적용)</h3>
-<ul>
-  <li><a href="./4_6_1_linear_regression_on_the_bikeshare_data/">문서로 이동하기</a></li>
-</ul>
+<h3 id="462-poisson-regression-on-the-bikeshare-data">4.6.2 Poisson Regression on the Bikeshare Data</h3>
 
-<p>카운트(음수가 불가능한 건수 데이터) 성질을 갖는 대여량에 일반 선형 회귀를 돌렸을 때 발생하는 음수 예측 등 불합리한 점을 확인합니다.</p>
+<h3 id="463-generalized-linear-models-in-greater-generality">4.6.3 Generalized Linear Models in Greater Generality</h3>
 
-<h3 id="462-poisson-regression-on-the-bikeshare-data-자전거-대여-데이터에서의-포아송-회귀-적용">4.6.2 Poisson Regression on the Bikeshare Data (자전거 대여 데이터에서의 포아송 회귀 적용)</h3>
-<ul>
-  <li><a href="./4_6_2_poisson_regression_on_the_bikeshare_data/">문서로 이동하기</a></li>
-</ul>
+<hr />
 
-<p>카운트 데이터의 속성에 알맞게 부합하는 분포인 포아송(Poisson) 회귀 모델을 적용, 로그 링크 함수를 사용해 효과적인 성능을 얻습니다.</p>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<h3 id="463-generalized-linear-models-in-greater-generality-보다-넓은-범주의-glm-일반화-규칙">4.6.3 Generalized Linear Models in Greater Generality (보다 넓은 범주의 GLM 일반화 규칙)</h3>
-<ul>
-  <li><a href="./4_6_3_generalized_linear_models_in_greater_generality/">문서로 이동하기</a></li>
-</ul>
-
-<p>응답 패턴 군집(Exponential family) 개념을 통해 포아송, 이항 회귀, 정규 회귀 등이 결국 매개 변수만 다른 통일된 GLM 형식임을 증명합니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_5_a_comparison_of_classification_methods/4_5_2_an_empirical_comparison/index.html">&lt; 4.5.2 An Empirical Comparison</a></td>
+      <td><a href="4_6_1_linear_regression_on_the_bikeshare_data/index.html">4.6.1 Linear Regression On The Bikeshare Data &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

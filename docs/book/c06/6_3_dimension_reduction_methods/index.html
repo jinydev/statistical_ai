@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -495,7 +494,7 @@
         <div class="bd-content ps-lg-4">
             <h1 id="63-dimension-reduction-methods">6.3 Dimension Reduction Methods</h1>
 
-<p>The methods that we have discussed so far in this chapter have controlled variance in two different ways, either by using a subset of the original variables, or by shrinking their coefficients toward zero. All of these methods are defined using the original predictors, <em>X</em> 1 <em>, X</em> 2 <em>, . . . , Xp</em> . We now explore a class of approaches that <em>transform</em> the predictors and then fit a least squares model using the transformed variables. We will refer to these techniques as <em>dimension reduction</em> methods.</p>
+<p>The methods that we have discussed so far in this chapter have controlled variance in two different ways, either by using a subset of the original variables, or by shrinking their coefficients toward zero. All of these methods are defined using the original predictors, , X_2, \ldots, X_p$. We now explore a class of approaches that <em>transform</em> the predictors and then fit a least squares model using the transformed variables. We will refer to these techniques as <em>dimension reduction</em> methods.</p>
 
 \[Z_m = \sum_{j=1}^p \phi_{jm} X_j\]
 
@@ -505,7 +504,7 @@
 
 \[y_i = \theta_0 + \sum_{m=1}^M \theta_m z_{im} + \epsilon_i \quad (6.17)\]
 
-<p>using least squares. Note that in (6.17), the regression coefficients are given by <em>θ</em> 0 <em>, θ</em> 1 <em>, . . . , θM</em> . If the constants <em>φ</em> 1 <em>m, φ</em> 2 <em>m, . . . , φpm</em> are chosen wisely, then such dimension reduction approaches can often outperform least squares regression. In other words, fitting (6.17) using least squares can lead to better results than fitting (6.1) using least squares.</p>
+<p>using least squares. Note that in (6.17), the regression coefficients are given by $	heta_0, 	heta_1, \ldots, 	heta_M$. If the constants $\phi_{1m}, \phi_{2m}, \ldots, \phi_{pm}$ are chosen wisely, then such dimension reduction approaches can often outperform least squares regression. In other words, fitting (6.17) using least squares can lead to better results than fitting (6.1) using least squares.</p>
 
 <p>The term <em>dimension reduction</em> comes from the fact that this approach reduces the problem of estimating the <em>p</em> +1 coefficients <em>β</em> 0 <em>, β</em> 1 <em>, . . . , βp</em> to the</p>
 
@@ -529,9 +528,9 @@
 
 \[\beta_j = \sum_{m=1}^M \theta_m \phi_{jm}\]
 
-<p>Hence (6.17) can be thought of as a special case of the original linear regression model given by (6.1). Dimension reduction serves to constrain the estimated <em>βj</em> coefficients, since now they must take the form (6.18). This constraint on the form of the coefficients has the potential to bias the coefficient estimates. However, in situations where <em>p</em> is large relative to <em>n</em> , selecting a value of <em>M ≪ p</em> can significantly reduce the variance of the fitted coefficients. If <em>M</em> = <em>p</em> , and all the <em>Zm</em> are linearly independent, then (6.18) poses no constraints. In this case, no dimension reduction occurs, and so fitting (6.17) is equivalent to performing least squares on the original <em>p</em> predictors.</p>
+<p>Hence (6.17) can be thought of as a special case of the original linear regression model given by (6.1). Dimension reduction serves to constrain the estimated $eta_j$ coefficients, since now they must take the form (6.18). This constraint on the form of the coefficients has the potential to bias the coefficient estimates. However, in situations where $ is large relative to $, selecting a value of  \ll p$ can significantly reduce the variance of the fitted coefficients. If  = p$, and all the $ are linearly independent, then (6.18) poses no constraints. In this case, no dimension reduction occurs, and so fitting (6.17) is equivalent to performing least squares on the original $ predictors.</p>
 
-<p>All dimension reduction methods work in two steps. First, the transformed predictors <em>Z</em> 1 <em>, Z</em> 2 <em>, . . . , ZM</em> are obtained. Second, the model is fit using these <em>M</em> predictors. However, the choice of <em>Z</em> 1 <em>, Z</em> 2 <em>, . . . , ZM</em> , or equivalently, the selection of the <em>φjm</em> ’s, can be achieved in different ways. In this chapter, we will consider two approaches for this task: <em>principal components</em> and <em>partial least squares</em> .</p>
+<p>All dimension reduction methods work in two steps. First, the transformed predictors , Z_2, \ldots, Z_M$ are obtained. Second, the model is fit using these $ predictors. However, the choice of , Z_2, \ldots, Z_M$, or equivalently, the selection of the $\phi_{jm}$’s, can be achieved in different ways. In this chapter, we will consider two approaches for this task: <em>principal components</em> and <em>partial least squares</em> .</p>
 
 <hr />
 

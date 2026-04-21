@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c01/1_3_this_book/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c01/1_3_this_book/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c01/1_3_this_book/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c01/1_3_this_book/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c01/">01. Introduction</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c01/1_3_this_book/">1 3 this book</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../1_2_a_brief_history_of_statistical_learning/trans2.html">&lt; 1.2 A Brief History Of Statistical Learning</a></td>
+      <td><a href="../1_4_who_should_read_this_book/trans2.html">1.4 Who Should Read This Book &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 조금 더 쉽고 재미있게 공부하고 싶으신가요? 이 페이지는 중학생도 이해할 수 있는 친절한 ‘쉬운 해설판’입니다! 영어 원문을 문장 단위로 꼼꼼하게 번역한 느낌을 원하신다면 <a href="./trans1.html">📖 직역본 보기</a> 메뉴를 활용하세요!</p>
+</blockquote>
+
+<h1 id="this-book">This Book</h1>
+<h1 id="이-책에-대하여-도대체-우리가-이걸-왜-썼을까">이 책에 대하여 (도대체 우리가 이걸 왜 썼을까?)</h1>
+
+<p><em>The Elements of Statistical Learning</em> (ESL) by Hastie, Tibshirani, and Friedman was first published in 2001.
+수포자들에겐 악몽 그 자체인 전설적인 바이블, Hastie, Tibshirani, Friedman 세 천재 할아버지들이 쓴 <em>‘통계적 학습의 요소(ESL)’</em> 라는 끔찍하게 두꺼운 벽돌 책이 2001년에 찬란하게 세상에 강림했습니다.</p>
+
+<p>Since that time, it has become an important reference on the fundamentals of statistical machine learning.
+그때부터 이 벽돌(ESL)은 통계적 기계 학습의 파라오 같은 존재(기초를 다루는 가장 중요한 참고 문헌)로 군림해 왔습니다.</p>
+
+<p>Its success derives from its comprehensive and detailed treatment of many important topics in statistical learning, as well as the fact that (relative to many upper-level statistics textbooks) it is accessible to a wide audience.
+이 벽돌이 그렇게 대박을 친 이유는요, 통계판의 굵직한 주제들을 그야말로 영혼까지 탈탈 터는 백과사전 급(포괄적이고 상세하게 다룸)이었기 때문도 있지만, 사실 (그 당시 외계어로 쓰인 다른 꼰대 대학원 교재들에 비하면) 그나마 ‘인간의 언어’로 쓰여 있어서 꽤 많은 일반인(넓은 독자층)들이 범접할 수 있었기 때문입니다.</p>
+
+<p>However, the greatest factor behind the success of ESL has been its topical nature.
+하지만 입에 발린 소리 빼고, ESL 책이 진짜 전 세계를 휩쓴 가장 결정적인 대박 요인은 바로 그 책이 가졌던 ‘기가 막힌 타이밍과 화제성’ 이었습니다.</p>
+
+<p>At the time of its publication, interest in the field of statistical learning was starting to explode.
+책을 똭! 출판하고 났더니, 때마침 전 세계적으로 “이게 바로 미래 기술이다!” 하면서 ‘통계적 학습’ 분야에 대한 광기가 그야말로 미친 듯이 폭발(explode)하고 있던 시기였거든요.</p>
+
+<p>ESL provided one of the first accessible and comprehensive introductions to the topic.
+타이밍 오지죠? 그 당시엔 이 미친 주제를 다루는 제대로 된 책이 없었는데, ESL이 최초로 총대 메고 “옛다! 여기 종합판(포괄적인 입문서) 있다!” 하고 던져준 겁니다.</p>
+
+<p>Since ESL was first published, the field of statistical learning has continued to flourish.
+그 벽돌책이 세상에 던져진 이후로, 이 통계적 기계 학습 바닥은 그야말로 잭과 콩나무마냥 미친 듯이 번창하며 떡상해왔습니다.</p>
+
+<p>The field’s expansion has taken two forms.
+이 바닥이 몸집을 불리는 방식엔 뚜렷하게 두 가지 형태(투 트랙)가 있었습니다.</p>
+
+<p>The most obvious growth has involved the development of new and improved statistical learning approaches aimed at answering a range of scientific questions across a number of fields.
+가장 뻔하고 당연한 첫 번째 성장은 뭡니까? 천재 학자들이 맨날 골방에 틀어박혀서 수식 깎으면서, 세상 온갖 복잡한 과학 미스터리들을 풀어보겠답시고 새롭고 삐까뻔쩍하게 진보된 통계 기법들을 마구잡이로 찍어낸(개발한) 겁니다.</p>
+
+<p>However, the field of statistical learning has also expanded its audience.
+그런데 말입니다… 이 바닥의 진짜 무서운 확장은 따로 있었습니다. 바로 이 학문을 뜯어먹는 <strong>‘손님들(독자층)’</strong> 의 머릿수와 족보가 엄청나게 넓어지고 다양해졌다는 겁니다!</p>
+
+<p>In the 1990s, increases in computational power generated a surge of interest in the field from non-statisticians who were eager to use cutting-edge statistical tools to analyze their data.
+1990년대, 드디어 우리들의 똥컴들이 탈태환골하며 연산 파워(CPU)가 미친 듯이 좋아지자마자, 평생 수학이랑은 담쌓고 살던 <strong>‘비통계학자’</strong> 들(생물학자, 경제학자 등등)이 눈이 뒤집혀서 “야! 나도 저 최첨단 로봇(통계 도구) 가져와서 내 병원 데이터 한 번 분석해 볼래!!” 하고 광기의 러시가 시작된 거죠.</p>
+
+<p>Unfortunately, the highly technical nature of these approaches meant that the user community remained primarily restricted to experts in statistics, computer science, and related fields with the training (and time) to understand and implement them.
+하지만 안타깝게도 현실은 시궁창이었습니다. 저 최첨단 로봇들을 부리는 조종법(고도로 기술적인 특성)이 수포자들에게는 완전 토 나오는 외계어였거든요. 결국 이 꿀잼 도구들을 만지작거릴 수 있는 사람들은 고된 수학 훈련을 견디고 이걸 코딩으로 구현할 여유도 있는 찐 통계충, 컴공 변태(전문가들)들 그들만의 폐쇄된 클럽으로 남아있을 수밖에 없었습니다.</p>
+
+<p>In recent years, new and improved software packages have significantly eased the implementation burden for many statistical learning methods.
+그런데 요 몇 년 사이에 기적이 일어났죠! 딸깍 한 번이면 지 알아서 복잡한 수학을 다 씹어 먹고 결과를 뱉어내는 킹갓 친절한 소프트웨어 패키지들이 쏟아지면서, 그 토 나오던 코딩 노가다(구현의 부담)가 기적처럼 싹 다 날아가 버린 겁니다!</p>
+
+<p>At the same time, there has been growing recognition across a number of fields, from business to health care to genetics to the social sciences and beyond, that statistical learning is a powerful tool with important practical applications.
+게다가 동시에 장사꾼(비즈니스), 의사 쓰앵님(건강 관리), DNA 파는 학자(유전학), 심지어 사람 연구하는 문과생(사회 과학)들까지 온 동네방네서 “와! 통계적 학습 이거 엑셀 대신 쓰니까 돈도 벌고 실무에 갖다 붙이기에 완전 개쩌는 도구구나!” 하는 진리의 깨달음(인식)이 바이러스처럼 퍼지기 시작했습니다.</p>
+
+<p>As a result, the field has moved from one of primarily academic interest to a mainstream discipline, with an enormous potential audience.
+그 결과, 옛날엔 대학 노교수님들 끼리 모여서 헛기침이나 하던 학문적 뒷방(관심사)에서, 이제는 지나가는 동네 꼬마도 딥러닝 딥러닝 거리는 어마무시한 스케일의 <strong>‘우주 대 주류 학문(메인스트림)’</strong> 으로 군림하게 되었습니다.</p>
+
+<p>This trend will surely continue with the increasing availability of enormous quantities of data and the software to analyze it.
+하늘에서 끝도 없이 눈덩이처럼 쏟아지는 빅데이터 폭탄과, 그걸 딸깍질로 분석하게 해 주는 미친 소프트웨어들 덕분에 이 떡상 폭주 기관차 추세는 누구도 막을 수 없게 되었습니다.</p>
+
+<p>The purpose of <em>An Introduction to Statistical Learning</em> (ISL) is to facilitate the transition of statistical learning from an academic to a mainstream field.
+자, 그래서 드디어 본론입니다! 우리가 이 책 <strong><em>‘통계적 학습 입문(ISL)’</em></strong> 을 쓴 진짜 흑심(목적)은 바로 이겁니다! 통계적 학습이라는 이 꿀잼 놀이공원을 저 대학 산꼭대기(학계)에서 질질 끌고 내려와서, 저잣거리 민간인들 누구나 즐길 수 있는 안방 주류 세계로 아주 스무스하게 연결해 주는 ‘다리(transition)’ 역할을 하겠다는 겁니다!</p>
+
+<p>ISL is not intended to replace ESL, which is a far more comprehensive text both in terms of the number of approaches considered and the depth to which they are explored.
+오해는 하지 마세요. 우리가 쓴 이 착한 ISL 책은 절대 그 전설의 벽돌책 ESL을 쓰레기통에 처넣고 대체하려고 쓴 게 아닙니다. 사실 그 벽돌책은 우주에 존재하는 온갖 잡다한 공식들과 머리털 빠지는 깊이를 모두 다루는 넘사벽 그 자체(훨씬 포괄적인 텍스트)거든요.</p>
+
+<p>We consider ESL to be an important companion for professionals (with graduate degrees in statistics, machine learning, or related fields) who need to understand the technical details behind statistical learning approaches.
+그러니까 그 벽돌책 ESL은 피 터지는 수학 공식(기술적 세부 사항) 하나하나를 다 씹어 먹고 논문 써서 졸업해야 하는 ‘찐 전문가들(통계/인공지능 대학원생 노예들)’을 위한 성경책(동반자)으로 고스란히 모셔두는 게 맞습니다.</p>
+
+<p>However, the community of users of statistical learning techniques has expanded to include individuals with a wider range of interests and backgrounds.
+하지만 시대가 바뀌었습니다! 이제 통계 무기를 쓰려는 손님들은 수포자 문과생부터 회사 팀장님들까지 그 취향과 배경 출신이 정말 동묘 벼룩시장판 급으로 스펙트럼이 넓어졌단 말입니다!</p>
+
+<p>Therefore, there is a place for a less technical and more accessible version of ESL.
+그러니 이제 이 바닥에서도 너무 수식에 집착하지 않고(기술적 내용 덜어내고) 마우스 딸깍질로도 꿀을 빨 수 있는 <strong>‘ESL의 순한 맛, 다이어트 치팅 버전’</strong> 이 절실히 필요한 빈자리가 뚫려버린 겁니다!</p>
+
+<p>In teaching these topics over the years, we have discovered that they are of interest to master’s and PhD students in fields as disparate as business administration, biology, and computer science, as well as to quantitatively-oriented upper-division undergraduates.
+우리가 교수 생활 수년간 칠판에다 분필 튀기며 이걸 가르치다 보니 깜짝 놀란 사실이 있습니다. 이 머리 아픈 주제를 통계과 애들만 듣는 게 아니라 경영학과 타자기부터, 개구리 배 가르는 생물학과 애들, 코딩 치는 컴공은 물론이고, 심지어 계산기 좀 두드린다는 핏덩이 학부 고학년 애들까지 눈을 반짝이며 침을 질질 흘리는(관심 있어 하는) 걸 발견했다는 거죠!</p>
+
+<p>It is important for this diverse group to be able to understand the models, intuitions, and strengths and weaknesses of the various approaches.
+네, 압니다! 완전 근본 없는 짬뽕 같은 다양한 출신들이지만, 이들도 온갖 로봇(접근 방식)들이 각각 무슨 철학(모델, 직관)으로 움직이고, 어디 가서 털리면 안 되는지(장단점) 그 맥락을 뼈저리게 이해하는 건 현생을 살기 위해 꼭 필요하고 중요한 일입니다!</p>
+
+<p>But for this audience, many of the technical details behind statistical learning methods, such as optimization algorithms and theoretical properties, are not of primary interest.
+다만 이 광활한 일반 청중들에게 솔직히 까놓고 물어보면, 그 로봇 안에 들어간 수백 줄짜리 미분 방정식 톱니바퀴(최적화 알고리즘)나 우주 진리 같은 ‘이론적 속성’ 따위는 1도 안 궁금하고 하등 쓸모없는 쓰레기(기피 대상)라는 겁니다.</p>
+
+<p>We believe that these students do not need a deep understanding of these aspects in order to become informed users of the various methodologies, and in order to contribute to their chosen fields through the use of statistical learning tools.
+그래서 우리 저자들은 확신합니다! 이들이 각자 자기 회사나 병원에 가서 저 통계 무기들을 간지나게 휘두르면서(도구 사용) 에이스로 공헌하기 위해 굳이 저런 쓸데없는 수학 방어구 따위를 피 터지게 파고들며(깊이 이해) 시간 낭비할 필요는 “전혀, 1도 없다!”라고 말입니다.</p>
+
+<p>ISL is based on the following four premises.
+그래서 우리들의 갓띵작 ISL은 다음의 네 가지 피의 서약(전제) 위에서 탄생했습니다.</p>
+
+<ol>
+  <li>Many statistical learning methods are relevant and useful in a wide range of academic and non-academic disciplines, beyond just the statistical sciences.
+서약 1. <strong>“이 좋은 걸 통계쟁이들만 꿀 빨게 둘 순 없다!”</strong> 통계 기법들은 책상머리 학계를 넘어서 시장 바닥 피 튀기는 온갖 잡다한 비학문적 실무 동네까지 약방의 감초처럼 미치도록 유용하게 쓰일 곳이 널렸습니다.</li>
+</ol>
+
+<p>We believe that many contemporary statistical learning procedures should, and will, become as widely available and used as is currently the case for classical methods such as linear regression.
+우리는 확언합니다! 요즘 나온 삐까뻔쩍한 현대 로봇(통계 학습 절차)들 역시, 옛날 고리타분한 선형 회귀 꼰대 엑셀 함수처럼 대한민국 국민 누구나 김치 썰듯 자유분방하게 썰어대는 ‘국민 필수 교양품’이 무조건 될 것이고, 반드시 그래야만 한다고요!</p>
+
+<p>As a result, rather than attempting to consider every possible approach (an impossible task), we have concentrated on presenting the methods that we believe are most widely applicable.
+결과적으로, 세상에 떠도는 수만 가지 로봇을 하나도 빠짐없이 백과사전으로 다 욱여넣으려는 미친 뻘짓(불가능한 과제)은 과감히 집어치웠습니다. 대신 우리가 픽한 “이거 하나는 실전에서 미치도록 써먹겠다!” 싶은 초특급 우량 갓성비 기법들만 액기스로 모아서 집중 폭격(제시) 하기로 결단했습니다.</p>
+
+<ol>
+  <li>Statistical learning should not be viewed as a series of black boxes.
+서약 2. <strong>“통계는 마법의 요술 상자(블랙박스)가 아니다!”</strong> 제발 데이터만 쑤셔 넣으면 아브라카다브라 정답이 튀어나오는 요술 램프로 취급하며 환상에 빠지지 마세요.</li>
+</ol>
+
+<p>No single approach will perform well in all possible applications.
+당신이 병에 걸렸을 때 먹는 만병통치약이 없듯, 이 세상의 우주 만물 모든 문제를 완벽하게 풀어재끼는 단 한 명의 절대 로봇(접근법)은 우주 어디에도 존재하지 않습니다!</p>
+
+<p>Without understanding all of the cogs inside the box, or the interaction between those cogs, it is impossible to select the best box.
+그러니까 그 요술 상자 안에 쥐새끼만 한 톱니바퀴들이 수식을 어떻게 갈아먹고 서로 치고 박는지(상호작용) 대충이라도 냄새(이해)를 못 맡으면, 당신의 데이터에 딱 맞는 운명의 짝꿍 상자(최적의 옵션)를 골라잡는 건 씹덕 망상(불가능)에 불과합니다.</p>
+
+<p>Hence, we have attempted to carefully describe the model, intuition, assumptions, and trade-offs behind each of the methods that we consider.
+뼈 때리는 충고를 받들어, 우리 저자들은 각 무기(기법)가 탄생한 철학, 로봇의 한계(가정), 그리고 “이걸 얻으면 저걸 버려라!” 하는 피도 눈물도 없는 등가교환의 법칙(트레이드오프)을 미치도록 친절하고 조심스럽게(수식 없이) 까발려 설명하려 발악했습니다.</p>
+
+<ol>
+  <li>While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!
+서약 3. <strong>“시계는 볼 줄 알면 그만이지, 시계 부품을 깎아서 만들 필요는 없다!”</strong> 로봇팔이 물건을 나르는 앨리스인 건 알고 써야 하지만, 당신이 직접 쇳물 녹여서 로봇을 조립해야 하는 엔지녀(현장 요원)가 될 필요는 절대(네버!) 없다는 겁니다!</li>
+</ol>
+
+<p>Thus, we have minimized discussion of technical details related to fitting procedures and theoretical properties.
+그래서 이 친절한 저자들은 당신이 읽다가 찢어버리고 싶어 할 “파라미터 최적화 적합 과정” 따위의 고문 기구(기술적 세부 사항과 이론적 특징)들에 대한 입 털기(논의)를 가위질로 싹둑싹둑 최소화했습니다.</p>
+
+<p>We assume that the reader is comfortable with basic mathematical concepts, but we do not assume a graduate degree in the mathematical sciences.
+물론 독자 여러분이 초등학교 덧셈 뺄셈이나 기초 팩트 폭행(기본 수학 개념) 정도는 코파며 넘길 수준이라 믿겠지만, 그렇다고 당신 코털에 “나 수학 대학원 졸업장 있소!” 하고 명찰이 박혀있다고 가정하는 미친 짓(무리수)은 두지 않습니다.</p>
+
+<p>For instance, we have almost completely avoided the use of matrix algebra, and it is possible to understand the entire book without a detailed knowledge of matrices and vectors.
+예를 하나 들어줄까요? 수포자들의 PTSD 발작 버튼인 그 망할 <strong>‘행렬과 백터 계산’</strong> 을 우리는 이 책에서 거의 백신 맞은 사람처럼 소름 끼치게 완벽히 따돌렸습니다. 고로 당신은 엑셀 표(행렬) 나부랭이 디테일을 1도 몰라도 이 두꺼운 책의 끝판왕 마왕까지 거뜬히 이해하며 클리어할 수 있는 파티를 맵핑한 겁니다!</p>
+
+<ol>
+  <li>We presume that the reader is interested in applying statistical learning methods to real-world problems.
+서약 4. <strong>“어차피 당신의 최종 목적은 현실에서 이걸로 돈을 벌고 써먹는 것이다!”</strong> 우리는 독자 여러분이 교양 쌓으려고 이 책을 읽는 게 아니라, 세상 밖의 진짜 자기 밥그릇(현실 문제)에 이 마법(방법론)을 당장 꽂아 넣고 싶어 환장해 있다고 강력히 가정(간주)합니다.</li>
+</ol>
+
+<p>In order to facilitate this, as well as to motivate the techniques discussed, we have devoted a section within each chapter to computer labs.
+우리의 뇌피셜을 현실로 만들어 드리고, 또 “아씨, 이거 배워서 어따 써?” 하는 불만(동기 부여 하락)을 막고자, 모든 챕터 끄트머리에 오아시스처럼 직접 키보드를 타닥타닥 두들길 수 있는 짜릿한 ‘컴퓨터 실습(Labs) 놀이터’를 통째로 헌납했습니다.</p>
+
+<p>In each lab, we walk the reader through a realistic application of the methods considered in that chapter.
+이 실습 놀이터에 입장하시면, 방금 전 침 흘리며 배운 이론 무기들을 가지고 현실판 마약 카르텔이나 주식 데이터 뺨치는 꿀잼 실전 문제(응용)에다 진짜 코드를 박아보며 당신의 손을 잡고 에스코트(설명)해 드립니다.</p>
+
+<p>When we have taught this material in our courses, we have allocated roughly one-third of classroom time to working through the labs, and we have found them to be extremely useful.
+라떼는 말입니다… 저자들이 실제 학교에서 애들을 가르칠 때도 아예 수업 시간의 한 33%(3분의 1)를 이 실습 코딩 놀이에 통째로 꼴아박았는데, 애들 눈망울이 돌아오는 걸 보며 “와, 이게 진짜 개꿀이구나!(극적인 유용성)”를 몸소 체감했습니다.</p>
+
+<p>Many of the less computationally-oriented students who were initially intimidated by the labs got the hang of things over the course of the quarter or semester.
+처음엔 검은 화면만 보면 멀미를 일으키며 덜덜 떨던 심약한 문과 감성 컴맹 학생들조차도, 한 학기를 굴려보니 막판엔 자기네가 콧노래 부르며 로봇을 돌리는 경지(숙달)에 오르는 기적을 보여주었거든요.</p>
+
+<p>This book originally appeared (2013, second edition 2021) with computer labs written in the R language.
+사실 이 갓띵작 ISL의 초판(2013년)과 두 번째 개정판(2021년) 실습 놀이터는 죄다 통계충들의 전유물 방언인 <strong>‘R 언어’</strong> 로 떡칠이 되어있었습니다.</p>
+
+<p>Since then, there has been increasing demand for Python implementations of the important techniques in statistical learning.
+하지만 세상 참 빠르죠? 딥러닝 광풍이 불면서 온 세상이 “됐고, 이걸 범용 파이썬(Python)으로 당장 가져와라!”며 바야흐로 파이썬 구현 폭동(거대한 수요 증가)이 일어나기 시작했습니다.</p>
+
+<p>Consequently, this version has labs in Python.
+이런 민초들의 반란을 겸허히 수용하여, 짠! 지금 여러분이 쥐고 있는 이 최신 버전 책은 실습 놀이터를 싹 다 전면 <strong>‘파이썬(Python)’</strong> 으로 갈아엎은 버전입니다!</p>
+
+<p>There are a rapidly growing number of Python packages available, and by examination of the imports at the beginning of each lab, readers will see that we have carefully selected and used the most appropriate.
+파이썬 바닥엔 하루에도 수백 개씩 코드 패키지 쓰레기들이 양산되며 돌아다니고 있는데, 독자분들이 매번 실습장 문을 열 때마다(import 문 확인) 저희가 얼마나 뼈를 깎는 고민으로 가장 우량하고 세련된 패키지만(최적의 구현) 쏙쏙 뽑아 대령했는지 그 눈물겨운 정성을 눈치채게 될 겁니다.</p>
+
+<p>We have also supplied some additional code and functionality in our package <code class="language-plaintext highlighter-rouge">ISLP</code>.
+심지어 기존 패키지로 안 돌아가는 꼬인 문제들은 저희 저자진이 밥도 굶어가며 손수 깎고 빚어낸 맞춤형 사제 패키지 모듈 <strong><code class="language-plaintext highlighter-rouge">ISLP</code></strong> 까지 얹어서 풀 서비스로 공양(공급)해 올립니다.</p>
+
+<p>However, the labs in ISL are self-contained, and can be skipped if the reader wishes to use a different software package or does not wish to apply the methods discussed to real-world problems.
+물론, 난 독고다이라 “다 필요 없고 내 맘대로 다른 프로그램(R이나 엑셀) 쓸 거다!” 하거나, 아님 “현실 적용 1도 관심 없고 난 이론만 먹을 거다!” 하는 별종 씹선비 독자가 있다면? 쿨하게 파이썬 실습(Labs) 부분은 죄다 스킵하고 페이지를 넘기셔도 됩니다. 어차피 이 녀석들은 독립 섬(self-contained) 같이 짜여있어서 책 뼈대는 유지되거든요! 안녕히 가세요!</p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../1_2_a_brief_history_of_statistical_learning/trans2.html">&lt; 1.2 A Brief History Of Statistical Learning</a></td>
+      <td><a href="../1_4_who_should_read_this_book/trans2.html">1.4 Who Should Read This Book &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

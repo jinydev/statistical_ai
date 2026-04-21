@@ -7,36 +7,31 @@ title: "index"
 
 In this lab we implement many of the techniques discussed in this chapter. We import some of our libraries at this top level. 
 
-```
-In [1]:importnumpyasnp
-importpandasaspd
-frommatplotlib.pyplotimportsubplots
-fromstatsmodels.apiimportOLS
-importsklearn.model_selectionasskm
-importsklearn.linear_modelasskl
-fromsklearn.preprocessingimportStandardScaler
-fromISLPimportload_data
-fromISLP.modelsimportModelSpecasMS
-fromfunctoolsimportpartial
+```python
+In [1]: import numpy as np
+import pandas as pd
+from matplotlib.pyplot import subplots
+from statsmodels.api import OLS
+import sklearn.model_selection as skm
+import sklearn.linear_model as skl
+from sklearn.preprocessing import StandardScaler
+from ISLP import load_data
+from ISLP.models import ModelSpec as MS
+from functools import partial
 ```
 
 We again collect the new imports needed for this lab. 
 
-```
-In [2]:fromsklearn.pipelineimportPipeline
-fromsklearn.decompositionimportPCA
-```
-
-268 6. Linear Model Selection and Regularization 
-
-```
-fromsklearn.cross_decompositionimportPLSRegression
-fromISLP.modelsimport\
-(Stepwise,
-sklearn_selected ,
-sklearn_selection_path)
-!pipinstalll0bnb
-froml0bnbimportfit_path
+```python
+In [2]: from sklearn.pipeline import Pipeline
+from sklearn.decomposition import PCA
+from sklearn.cross_decomposition import PLSRegression
+from ISLP.models import \
+    (Stepwise,
+     sklearn_selected,
+     sklearn_selection_path)
+!pip install l0bnb
+from l0bnb import fit_path
 ```
 
 We have installed the package `l0bnb` on the fly. Note the escaped `!pip install` — this is run as a separate system command. 

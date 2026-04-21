@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,102 +502,115 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="473-linear-discriminant-analysis"><em>4.7.3 Linear Discriminant Analysis</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_2_logistic_regression/4_7_2_1_in_8_results.params/index.html">&lt; 4.7.2.1 In 8 Results.Params</a></td>
+      <td><a href="4_7_3_1_out31_true/index.html">4.7.3.1 Out31 True &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>We begin by performing LDA on the <code class="language-plaintext highlighter-rouge">Smarket</code> data, using the function <code class="language-plaintext highlighter-rouge">LinearDiscriminantAnalysis()</code> , which we have abbreviated <code class="language-plaintext highlighter-rouge">LDA()</code> . We fit <code class="language-plaintext highlighter-rouge">Linear</code> the model using only the observations before 2005.</p>
+<h1 id="473-linear-discriminant-analysis"><em>4.7.3 Linear Discriminant Analysis</em></h1>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Discriminant
-Analysis()
+<p>We begin by performing LDA on the <code class="language-plaintext highlighter-rouge">Smarket</code> data, using the function <code class="language-plaintext highlighter-rouge">LinearDiscriminantAnalysis()</code>, which we have abbreviated <code class="language-plaintext highlighter-rouge">LDA()</code>. We fit the model using only the observations before 2005.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="n">lda</span> <span class="o">=</span> <span class="nc">LDA</span><span class="p">(</span><span class="n">store_covariance</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [22]:lda=LDA(store_covariance=True)
+<p>Since the <code class="language-plaintext highlighter-rouge">LDA</code> estimator automatically adds an intercept, we should remove the column corresponding to the intercept in both <code class="language-plaintext highlighter-rouge">X_train</code> and <code class="language-plaintext highlighter-rouge">X_test</code>. We can also directly use the labels rather than the Boolean vectors <code class="language-plaintext highlighter-rouge">y_train</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="p">[</span><span class="n">M</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">intercept</span><span class="sh">'</span><span class="p">])</span> <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="p">[</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">]]</span>
+<span class="n">lda</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">L_train</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Since the <code class="language-plaintext highlighter-rouge">LDA</code> estimator automatically adds an intercept, we should remove the column corresponding to the intercept in both <code class="language-plaintext highlighter-rouge">X_train</code> and <code class="language-plaintext highlighter-rouge">X_test</code> . We can also directly use the labels rather than the Boolean vectors <code class="language-plaintext highlighter-rouge">y_train</code> .</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [23]:X_train,X_test=[M.drop(columns=['intercept'])
-forMin[X_train,X_test]]
-lda.fit(X_train,L_train)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="nc">LinearDiscriminantAnalysis</span><span class="p">(</span><span class="n">store_covariance</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[23]:LinearDiscriminantAnalysis(store_covariance=True)
+<p>Here we have used the list comprehensions introduced in Section 3.6.4. Looking at our first line above, we see that the right-hand side is a list of length two. This is because the code <code class="language-plaintext highlighter-rouge">for M in [X_train, X_test]</code> iterates over a list of length two. While here we loop over a list, the list comprehension method works when looping over any iterable object. We then apply the <code class="language-plaintext highlighter-rouge">drop()</code> method to each element in the iteration, collecting the result in a list. The left-hand side tells <code class="language-plaintext highlighter-rouge">Python</code> to unpack this list of length two, assigning its elements to the variables <code class="language-plaintext highlighter-rouge">X_train</code> and <code class="language-plaintext highlighter-rouge">X_test</code>. Of course, this overwrites the previous values of <code class="language-plaintext highlighter-rouge">X_train</code> and <code class="language-plaintext highlighter-rouge">X_test</code>.</p>
+
+<p>Having fit the model, we can extract the means in the two classes with the <code class="language-plaintext highlighter-rouge">means_</code> attribute. These are the average of each predictor within each class, and are used by LDA as estimates of $\mu_k$. These suggest that there is a tendency for the previous 2 days’ returns to be negative on days when the market increases, and a tendency for the previous days’ returns to be positive on days when the market declines.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="n">lda</span><span class="p">.</span><span class="n">means_</span>
 </code></pre></div></div>
 
-<p>Here we have used the list comprehensions introduced in Section 3.6.4. Looking at our first line above, we see that the right-hand side is a list of length two. This is because the code <code class="language-plaintext highlighter-rouge">for M in [X_train, X_test]</code> iterates over a list of length two. While here we loop over a list, the list comprehension method works when looping over any iterable object. We then apply the <code class="language-plaintext highlighter-rouge">drop()</code> method to each element in the iteration, collecting the result <code class="language-plaintext highlighter-rouge">.drop()</code> in a list. The left-hand side tells <code class="language-plaintext highlighter-rouge">Python</code> to unpack this list of length two, assigning its elements to the variables <code class="language-plaintext highlighter-rouge">X_train</code> and <code class="language-plaintext highlighter-rouge">X_test</code> . Of course, this overwrites the previous values of <code class="language-plaintext highlighter-rouge">X_train</code> and <code class="language-plaintext highlighter-rouge">X_test</code> .</p>
-
-<p>Having fit the model, we can extract the means in the two classes with the <code class="language-plaintext highlighter-rouge">means_</code> attribute. These are the average of each predictor within each class, and are used by LDA as estimates of <em>µk</em> . These suggest that there is a tendency for the previous 2 days’ returns to be negative on days when the market increases, and a tendency for the previous days’ returns to be positive on days when the market declines.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [24]:lda.means_
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[24]:array([[0.04,0.03],
-[-0.04,-0.03]])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mf">0.0426</span><span class="p">,</span>  <span class="mf">0.0338</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mf">0.0395</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0313</span><span class="p">]])</span>
 </code></pre></div></div>
 
 <p>The estimated prior probabilities are stored in the <code class="language-plaintext highlighter-rouge">priors_</code> attribute. The package <code class="language-plaintext highlighter-rouge">sklearn</code> typically uses this trailing <code class="language-plaintext highlighter-rouge">_</code> to denote a quantity estimated when using the <code class="language-plaintext highlighter-rouge">fit()</code> method. We can be sure of which entry corresponds to which label by looking at the <code class="language-plaintext highlighter-rouge">classes_</code> attribute.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [25]:lda.classes_
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="n">lda</span><span class="p">.</span><span class="n">classes_</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[25]:array(['Down','Up'],dtype='&lt;U4')
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="sh">'</span><span class="s">Down</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Up</span><span class="sh">'</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="sh">'</span><span class="s">&lt;U4</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>180 4. Classification</p>
+<p>The LDA output indicates that $\hat{\pi}<em>{Down} = 0.492$ and $\hat{\pi}</em>{Up} = 0.508$.</p>
 
-<p>The LDA output indicates that <em>π</em> ˆDown = 0 <em>.</em> 492 and <em>π</em> ˆUp = 0 <em>.</em> 508.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [26]:lda.priors_
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">lda</span><span class="p">.</span><span class="n">priors_</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[26]:array([0.492,0.508])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="mf">0.49198397</span><span class="p">,</span> <span class="mf">0.50801603</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>The linear discriminant vectors can be found in the <code class="language-plaintext highlighter-rouge">scalings_</code> attribute:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [27]:lda.scalings_
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">27</span><span class="p">]:</span> <span class="n">lda</span><span class="p">.</span><span class="n">scalings_</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[27]:array([[-0.642],
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">27</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.64201906</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mf">0.51352928</span><span class="p">]])</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[-0.513]])
-</code></pre></div></div>
+<p>These values provide the linear combination of <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code> that are used to form the LDA decision rule. In other words, these are the multipliers of the elements of $X = x$ in (4.24). If $-0.642 	imes Lag1 - 0.513 	imes Lag2$ is large, then the LDA classifier will predict a market increase, and if it is small, then the LDA classifier will predict a market decline.</p>
 
-<p>These values provide the linear combination of <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code> that are used to form the LDA decision rule. In other words, these are the multipliers of the elements of $X$= <em>x</em> in (4.24). If <em>−</em> 0 <em>.</em> 64 <em>×</em> Lag1 <em>−</em> 0 <em>.</em> 51 <em>×</em> Lag2 is large, then the LDA classifier will predict a market increase, and if it is small, then the LDA classifier will predict a market decline.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [28]:lda_pred=lda.predict(X_test)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="n">lda_pred</span> <span class="o">=</span> <span class="n">lda</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>As we observed in our comparison of classification methods (Section 4.5), the LDA and logistic regression predictions are almost identical.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [29]:confusion_table(lda_pred,L_test)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="nf">confusion_table</span><span class="p">(</span><span class="n">lda_pred</span><span class="p">,</span> <span class="n">L_test</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><strong><code class="language-plaintext highlighter-rouge">Out[29]:</code></strong> <code class="language-plaintext highlighter-rouge">Truth Down Up Predicted Down 35 35 Up 76 106</code> We can also estimate the probability of each class for each training set. Applying a 50% threshold to the posterior probabilities ing in class one allows us to recreate the predictions contained in <strong><code class="language-plaintext highlighter-rouge">In [30]:</code></strong> <code class="language-plaintext highlighter-rouge">lda_prob = lda.predict_proba(X_test) np.all( np.where(lda_prob[:,1] &gt;= 0.5, 'Up','Down') == lda_pred )</code></p>
-
-<p>We can also estimate the probability of each class for each point in a training set. Applying a 50% threshold to the posterior probabilities of being in class one allows us to recreate the predictions contained in <code class="language-plaintext highlighter-rouge">lda_pred</code> .</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[30]:True
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="n">Truth</span>      <span class="n">Down</span>   <span class="n">Up</span>
+<span class="n">Predicted</span>            
+<span class="n">Down</span>         <span class="mi">35</span>   <span class="mi">35</span>
+<span class="n">Up</span>           <span class="mi">76</span>  <span class="mi">106</span>
 </code></pre></div></div>
 
-<p>Above, we used the <code class="language-plaintext highlighter-rouge">np.where()</code> function that creates an array with value <code class="language-plaintext highlighter-rouge">np.where() 'Up'</code> for indices where the second column of <code class="language-plaintext highlighter-rouge">lda_prob</code> (the estimated posterior probability of <code class="language-plaintext highlighter-rouge">'Up'</code> ) is greater than 0.5. For problems with more than two classes the labels are chosen as the class whose posterior probability is highest:</p>
+<p>We can also estimate the probability of each class for each point in a training set. Applying a 50% threshold to the posterior probabilities of being in class one allows us to recreate the predictions contained in <code class="language-plaintext highlighter-rouge">lda_pred</code>.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [31]:np.all(
-[lda.classes_[i]foriinnp.argmax(lda_prob,1)]==
-lda_pred
-)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="n">lda_prob</span> <span class="o">=</span> <span class="n">lda</span><span class="p">.</span><span class="nf">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">np</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span>
+    <span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">lda_prob</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="sh">'</span><span class="s">Up</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">Down</span><span class="sh">'</span><span class="p">)</span> <span class="o">==</span> <span class="n">lda_pred</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<p>Above, we used the <code class="language-plaintext highlighter-rouge">np.where()</code> function that creates an array with value <code class="language-plaintext highlighter-rouge">'Up'</code> for indices where the second column of <code class="language-plaintext highlighter-rouge">lda_prob</code> (the estimated posterior probability of <code class="language-plaintext highlighter-rouge">'Up'</code>) is greater than 0.5. For problems with more than two classes the labels are chosen as the class whose posterior probability is highest:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">31</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">lda</span><span class="p">.</span><span class="n">classes_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="nf">argmax</span><span class="p">(</span><span class="n">lda_prob</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">==</span> <span class="n">lda_pred</span>
+<span class="p">)</span>
 </code></pre></div></div>
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<hr />
 
-<h3 id="사전-확률-점검-jupyter-notebook-output">사전 확률 점검 (Jupyter Notebook Output)</h3>
-<ul>
-  <li><a href="./4_7_3_1_out31_true/">문서로 이동하기</a></li>
-</ul>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p>LDA 실행 후 도출된 집단 사전 확률 및 로직이 타당한지 간단한 불 값(True/False) 출력 테스트를 점검합니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_2_logistic_regression/4_7_2_1_in_8_results.params/index.html">&lt; 4.7.2.1 In 8 Results.Params</a></td>
+      <td><a href="4_7_3_1_out31_true/index.html">4.7.3.1 Out31 True &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

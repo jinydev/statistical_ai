@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -517,19 +516,19 @@
 
 <p>We will apply the forward-selection approach to the <code class="language-plaintext highlighter-rouge">Hitters</code> data. We wish to predict a baseball player’s <code class="language-plaintext highlighter-rouge">Salary</code> on the basis of various statistics associated with performance in the previous year.</p>
 
-<p>First of all, we note that the <code class="language-plaintext highlighter-rouge">Salary</code> variable is missing for some of the players. The <code class="language-plaintext highlighter-rouge">np.isnan()</code> function can be used to identify the missing ob- <code class="language-plaintext highlighter-rouge">np.isnan()</code> servations. It returns an array of the same shape as the input vector, with a <code class="language-plaintext highlighter-rouge">True</code> for any elements that are missing, and a <code class="language-plaintext highlighter-rouge">False</code> for non-missing elements. The <code class="language-plaintext highlighter-rouge">sum()</code> method can then be used to count all of the missing <code class="language-plaintext highlighter-rouge">sum()</code> elements.</p>
+<p>First of all, we note that the <code class="language-plaintext highlighter-rouge">Salary</code> variable is missing for some of the players. The <code class="language-plaintext highlighter-rouge">np.isnan()</code> function can be used to identify the missing observations. It returns an array of the same shape as the input vector, with a <code class="language-plaintext highlighter-rouge">True</code> for any elements that are missing, and a <code class="language-plaintext highlighter-rouge">False</code> for non-missing elements. The <code class="language-plaintext highlighter-rouge">sum()</code> method can then be used to count all of the missing elements.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [3]:Hitters=load_data('Hitters')
-np.isnan(Hitters['Salary']).sum()
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">Hitters</span> <span class="o">=</span> <span class="nf">load_data</span><span class="p">(</span><span class="sh">'</span><span class="s">Hitters</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">np</span><span class="p">.</span><span class="nf">isnan</span><span class="p">(</span><span class="n">Hitters</span><span class="p">[</span><span class="sh">'</span><span class="s">Salary</span><span class="sh">'</span><span class="p">]).</span><span class="nf">sum</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[3]:59
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[3]: 59
 </code></pre></div></div>
 
 <p>We see that <code class="language-plaintext highlighter-rouge">Salary</code> is missing for 59 players. The <code class="language-plaintext highlighter-rouge">dropna()</code> method of data frames removes all of the rows that have missing values in any variable (by default — see <code class="language-plaintext highlighter-rouge">Hitters.dropna?</code> ).</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [4]:Hitters=Hitters.dropna();
-Hitters.shape
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">Hitters</span> <span class="o">=</span> <span class="n">Hitters</span><span class="p">.</span><span class="nf">dropna</span><span class="p">()</span>
+<span class="n">Hitters</span><span class="p">.</span><span class="n">shape</span>
 </code></pre></div></div>
 
 

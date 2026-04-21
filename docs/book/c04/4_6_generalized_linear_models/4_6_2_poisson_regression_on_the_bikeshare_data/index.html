@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,123 +502,62 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="462-poisson-regression-on-the-bikeshare-data"><em>4.6.2 Poisson Regression on the Bikeshare Data</em></h1>
-
-<p>To overcome the inadequacies of linear regression for analyzing the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set, we will make use of an alternative approach, called <em>Poisson regression</em> . Before we can talk about Poisson regression, we must first in- Poisson troduce the <em>Poisson distribution</em> .</p>
-
-<p>regression Poisson distribution</p>
-
-<p>Suppose that a random variable $Y$takes on nonnegative integer values, i.e. <em>Y ∈{</em> 0 <em>,</em> 1 <em>,</em> 2 <em>, . . .}</em> . If $Y$ follows the Poisson distribution, then</p>
-
-\[ext{Pr}(Y = k) = 
-rac{e^{-\lambda} \lambda^k}{k!} \quad 	ext{for } k = 0, 1, 2, \dots \quad (4.35)\]
-
-<p>170 4. Classification</p>
-
-<p>Here, <em>λ &gt;</em> 0 is the expected value of $Y$, i.e. E( $Y$). It turns out that <em>λ</em> also equals the variance of $Y$, i.e. <em>λ</em> = E( $Y$) = Var( $Y$). This means that if $Y$follows the Poisson distribution, then the larger the mean of $Y$, the larger its variance. (In (4.35), the notation $k$ !, pronounced “k factorial”, is defined as $k$ ! = <em>k ×</em> ( <em>k −</em> 1) <em>×</em> ( <em>k −</em> 2) <em>× . . . ×</em> 3 <em>×</em> 2 <em>×</em> 1.)</p>
-
-<p>The Poisson distribution is typically used to model <em>counts</em> ; this is a natural choice for a number of reasons, including the fact that counts, like the Poisson distribution, take on nonnegative integer values. To see how we might use the Poisson distribution in practice, let $Y$denote the number of users of the bike sharing program during a particular hour of the day, under a particular set of weather conditions, and during a particular month of the year. We might model $Y$as a Poisson distribution with mean E( $Y$) = <em>λ</em> = 5. This means that the probability of no users during this particular hour is Pr( $Y=$ 0) = <em>e[−]</em> 0![5] 5[0] = <em>e[−]</em>[5] = 0 <em>.</em> 0067 (where 0! = 1 by convention). The probability that there is exactly one user is Pr( $Y=$ 1) = <em>e[−]</em> 1![5] 5[1] = 5 <em>e[−]</em>[5] = 0 <em>.</em> 034, the probability of two users is Pr( $Y=$ 2) = <em>[e][−]</em> 2![5][5][2] = 0 <em>.</em> 084, and so on. Of course, in reality, we expect the mean number of users of the bike sharing program, <em>λ</em> = E( $Y$), to vary as a function of the hour of the day, the month of the year, the weather conditions, and so forth. So rather than modeling the number of bikers, $Y$, as a Poisson distribution with a fixed mean value like <em>λ</em> = 5, we would like to allow the mean to vary as a function of the covariates. In particular, we consider the following model for the mean <em>λ</em> = E( $Y$), which we now write as <em>λ</em> ( $X_1$ <em>, . . . , Xp</em> ) to emphasize that it is a function of the covariates $X_1, \dots, X_p$:</p>
-
-\[\lambda(X_1, \dots, X_p) = e^{eta_0 + eta_1 X_1 + \dots + eta_p X_p} \quad (4.36)\]
-
-<p>or equivalently</p>
-
-\[\log(\lambda(X_1, \dots, X_p)) = eta_0 + eta_1 X_1 + \dots + eta_p X_p \quad (4.37)\]
-
-<p>Here, <em>β</em> 0 <em>, β</em> 1 <em>, . . . , βp</em> are parameters to be estimated. Together, (4.35) and (4.36) define the Poisson regression model. Notice that in (4.36), we take the <em>log</em> of <em>λ</em> ( $X_1$ <em>, . . . , Xp</em> ) to be linear in $X_1$ <em>, . . . , Xp</em> , rather than having <em>λ</em> ( $X_1$ <em>, . . . , Xp</em> ) itself be linear in $X_1$ <em>, . . . , Xp</em> ; this ensures that <em>λ</em> ( $X_1$ <em>, . . . , Xp</em> ) takes on nonnegative values for all values of the covariates.</p>
-
-<p>To estimate the coefficients <em>β</em> 0 <em>, β</em> 1 <em>, . . . , βp</em> , we use the same maximum likelihood approach that we adopted for logistic regression in Section 4.3.2. Specifically, given <em>n</em> independent observations from the Poisson regression model, the likelihood takes the form</p>
-
-\[\ell(eta_0, eta_1, \dots, eta_p) = \prod_{i=1}^n 
-rac{e^{-\lambda(x_i)} \lambda(x_i)^{y_i}}{y_i!} \quad (4.38)\]
-
-<p>where <em>λ</em> ( <em>xi</em> ) = <em>e[β]</em>[0][+] <em>[β]</em>[1] <em>[x][i]</em>[1][+] <em>[···]</em>[+] <em>[β][p][x][ip]</em> , due to (4.37). We estimate the coefficients that maximize the likelihood <em>ℓ</em> ( <em>β</em> 0 <em>, β</em> 1 <em>, . . . , βp</em> ), i.e. that make the observed data as likely as possible.</p>
-
-<p>We now fit a Poisson regression model to the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set. The results are shown in Table 4.11 and Figure 4.15. Qualitatively, the results are similar to those from linear regression in Section 4.6.1. We again see that bike usage is highest in the spring and fall and during rush hour,</p>
-
-<p>4.6 Generalized Linear Models 171</p>
-
-<table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th>Coefcient Std. error</th>
-      <th>Coefcient Std. error</th>
-      <th><em>z</em>-statistic</th>
-      <th><em>p</em>-value</th>
-    </tr>
-  </thead>
+            <table>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">Intercept</code></td>
-      <td>4.12</td>
-      <td>0.01</td>
-      <td>683.96</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">workingday</code></td>
-      <td>0.01</td>
-      <td>0.00</td>
-      <td>7.5</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">temp</code></td>
-      <td>0.79</td>
-      <td>0.01</td>
-      <td>68.43</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">weathersit[cloudy/misty]</code></td>
-      <td>-0.08</td>
-      <td>0.00</td>
-      <td>-34.53</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">weathersit[light rain/snow]</code></td>
-      <td>-0.58</td>
-      <td>0.00</td>
-      <td>-141.91</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">weathersit[heavy rain/snow]</code></td>
-      <td>-0.93</td>
-      <td>0.17</td>
-      <td>-5.55</td>
-      <td>0.00</td>
+      <td><a href="../4_6_1_linear_regression_on_the_bikeshare_data/index.html">&lt; 4.6.1 Linear Regression On The Bikeshare Data</a></td>
+      <td><a href="../4_6_3_generalized_linear_models_in_greater_generality/index.html">4.6.3 Generalized Linear Models In Greater Generality &gt;</a></td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>TABLE 4.11.</strong> <em>Results for a Poisson regression model fit to predict</em> <code class="language-plaintext highlighter-rouge">bikers</code> <em>in the</em> <code class="language-plaintext highlighter-rouge">Bikeshare</code> <em>data. The predictors</em> <code class="language-plaintext highlighter-rouge">mnth</code> <em>and</em> <code class="language-plaintext highlighter-rouge">hr</code> <em>are omitted from this table due to space constraints, and can be seen in Figure 4.15. For the qualitative variable</em> <code class="language-plaintext highlighter-rouge">weathersit</code> <em>, the baseline corresponds to clear skies.</em></p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p><img src="./img/4_15.png" alt="Figure 4.15" /></p>
+<h1 id="462-poisson-regression-on-the-bikeshare-data">4.6.2 Poisson Regression on the Bikeshare Data</h1>
 
-<p><strong>FIGURE 4.15.</strong> <em>A Poisson regression model was fit to predict</em> <code class="language-plaintext highlighter-rouge">bikers</code> <em>in the</em> <code class="language-plaintext highlighter-rouge">Bikeshare</code> <em>data set.</em> Left: <em>The coefficients associated with the month of the year. Bike usage is highest in the spring and fall, and lowest in the winter.</em> Right: <em>The coefficients associated with the hour of the day. Bike usage is highest during peak commute times, and lowest overnight.</em></p>
+<p>To overcome the inadequacies of linear regression for analyzing the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set, we will make use of an alternative approach, called <em>Poisson regression</em>. Before we can talk about Poisson regression, we must first introduce the <em>Poisson distribution</em>.</p>
 
-<p>and lowest during the winter and in the early morning hours. Moreover, bike usage increases as the temperature increases, and decreases as the weather worsens. Interestingly, the coefficient associated with <code class="language-plaintext highlighter-rouge">workingday</code> is statistically significant under the Poisson regression model, but not under the linear regression model.</p>
+<p>Suppose that a random variable $Y$ takes on nonnegative integer values, i.e. $Y \in {0, 1, 2, \dots}$. If $Y$ follows the Poisson distribution, then</p>
+
+\[\text{Pr}(Y = k) = \frac{e^{-\lambda} \lambda^k}{k!} \quad \text{for } k = 0, 1, 2, \dots \quad (4.35)\]
+
+<p>Here, $\lambda &gt; 0$ is the expected value of $Y$, i.e. $E(Y)$. It turns out that $\lambda$ also equals the variance of $Y$, i.e. $\lambda = E(Y) = \text{Var}(Y)$. This means that if $Y$ follows the Poisson distribution, then the larger the mean of $Y$, the larger its variance.</p>
+
+<p>The Poisson distribution is typically used to model <em>counts</em>; this is a natural choice for a number of reasons, including the fact that counts, like the Poisson distribution, take on nonnegative integer values. Rather than modeling the number of bikers, $Y$, as a Poisson distribution with a fixed mean value like $\lambda = 5$, we would like to allow the mean to vary as a function of the covariates. In particular, we consider the following model for the mean $\lambda = E(Y)$:</p>
+
+\[\lambda(X_1, \dots, X_p) = e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p} \quad (4.36)\]
+
+<p>or equivalently</p>
+
+\[\log(\lambda(X_1, \dots, X_p)) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p \quad (4.37)\]
+
+<p>Here, $\beta_0, \beta_1, \dots, \beta_p$ are parameters to be estimated. Together, (4.35) and (4.36) define the Poisson regression model. Notice that in (4.36), we take the <em>log</em> of $\lambda(X_1, \dots, X_p)$ to be linear in $X_1, \dots, X_p$; this ensures that $\lambda(X_1, \dots, X_p)$ takes on nonnegative values for all values of the covariates.</p>
+
+<p>To estimate the coefficients $\beta_0, \beta_1, \dots, \beta_p$, we use the same maximum likelihood approach that we adopted for logistic regression in Section 4.3.2. We estimate the coefficients that make the observed data as likely as possible.</p>
+
+<p>We now fit a Poisson regression model to the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set. Qualitatively, the results are similar to those from linear regression in Section 4.6.1. We again see that bike usage is highest in the spring and fall and during rush hour, and lowest during the winter and in the early morning hours.</p>
 
 <p>Some important distinctions between the Poisson regression model and the linear regression model are as follows:</p>
-
 <ul>
-  <li><em>Interpretation:</em> To interpret the coefficients in the Poisson regression model, we must pay close attention to (4.37), which states that an increase in <em>Xj</em> by one unit is associated with a change in E( $Y$) = <em>λ</em> by a factor of exp( <em>βj</em> ). For example, a change in weather from clear to cloudy skies is associated with a change in mean bike usage by a factor of exp( <em>−</em> 0 <em>.</em> 08) = 0 <em>.</em> 923, i.e. on average, only 92.3% as many people will use bikes when it is cloudy relative to when it is clear. If the weather worsens further and it begins to rain, then the mean bike usage will further change by a factor of exp( <em>−</em> 0 <em>.</em> 5) = 0 <em>.</em> 607, i.e. on average only 60.7% as many people will use bikes when it is rainy relative to when it is cloudy.</li>
+  <li><em>Interpretation:</em> To interpret the coefficients in the Poisson regression model, we must pay close attention to (4.37), which states that an increase in $X_j$ by one unit is associated with a change in $E(Y) = \lambda$ by a factor of $\exp(\beta_j)$. For example, a change in weather from clear to cloudy skies is associated with a change in mean bike usage by a factor of $\exp(-0.08) = 0.923$, i.e. on average, only 92.3% as many people will use bikes when it is cloudy relative to when it is clear.</li>
+  <li><em>Mean-variance relationship:</em> As mentioned earlier, under the Poisson model, $\lambda = E(Y) = \text{Var}(Y)$. Thus, by modeling bike usage with a Poisson regression, we implicitly assume that mean bike usage in a given hour equals the variance of bike usage during that hour. Thus, the Poisson regression model is able to handle the mean-variance relationship seen in the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data in a way that the linear regression model is not.</li>
+  <li><em>nonnegative fitted values:</em> There are no negative predictions using the Poisson regression model. This is because the Poisson model itself only allows for nonnegative values.</li>
 </ul>
 
-<p>172 4. Classification</p>
+<hr />
 
-<ul>
-  <li><em>Mean-variance relationship:</em> As mentioned earlier, under the Poisson model, <em>λ</em> = E( $Y$) = Var( $Y$). Thus, by modeling bike usage with a Poisson regression, we implicitly assume that mean bike usage in a given hour equals the variance of bike usage during that hour. By contrast, under a linear regression model, the variance of bike usage always takes on a constant value. Recall from Figure 4.14 that in the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data, when biking conditions are favorable, both the mean <em>and</em> the variance in bike usage are much higher than when conditions are unfavorable. Thus, the Poisson regression model is able to handle the mean-variance relationship seen in the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data in a way that the linear regression model is not.[5]</li>
-</ul>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p>overdispersion</p>
-
-<ul>
-  <li><em>nonnegative fitted values:</em> There are no negative predictions using the Poisson regression model. This is because the Poisson model itself only allows for nonnegative values; see (4.35). By contrast, when we fit a linear regression model to the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set, almost 10% of the predictions were negative.</li>
-</ul>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_6_1_linear_regression_on_the_bikeshare_data/index.html">&lt; 4.6.1 Linear Regression On The Bikeshare Data</a></td>
+      <td><a href="../4_6_3_generalized_linear_models_in_greater_generality/index.html">4.6.3 Generalized Linear Models In Greater Generality &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

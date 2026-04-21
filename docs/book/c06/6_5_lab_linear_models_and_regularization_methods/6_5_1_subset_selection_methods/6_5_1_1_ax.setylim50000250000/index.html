@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -542,7 +541,7 @@ skm.cross_
 val_predict()
 </code></pre></div></div>
 
-<p>At each model along the path, we compute the $\text{MSE}$ in each of the crossvalidation folds. These we will average to get the mean MSE, and can also use the individual values to compute a crude estimate of the standard error of the mean.[9] Hence we must know the test indices for each cross-validation split. This can be found by using the <code class="language-plaintext highlighter-rouge">split()</code> method of <code class="language-plaintext highlighter-rouge">kfold</code> . Because we fixed the random state above, whenever we split any array with the same number of rows as <em>Y</em> we recover the same training and test indices, though we simply ignore the training indices below.</p>
+<p>At each model along the path, we compute the $\text{MSE}$ in each of the crossvalidation folds. These we will average to get the mean MSE, and can also use the individual values to compute a crude estimate of the standard error of the mean.<sup id="fnref:9"><a href="#fn:9" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> Hence we must know the test indices for each cross-validation split. This can be found by using the <code class="language-plaintext highlighter-rouge">split()</code> method of <code class="language-plaintext highlighter-rouge">kfold</code> . Because we fixed the random state above, whenever we split any array with the same number of rows as Y we recover the same training and test indices, though we simply ignore the training indices below.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [15]:cv_mse=[]
 fortrain_idx,test_idxinkfold.split(Y):
@@ -554,10 +553,6 @@ cv_mse.shape
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[15]:(20,5)
 </code></pre></div></div>
-
-<blockquote>
-  <p>9The estimate is crude because the five error estimates are based on overlapping training sets, and hence are not independent.</p>
-</blockquote>
 
 <p>272 6. Linear Model Selection and Regularization</p>
 
@@ -640,6 +635,13 @@ max_nonzeros=X.shape[1])
 </code></pre></div></div>
 
 <p>In the example above, we see that at the fourth step in the path, we have two nonzero coefficients in <code class="language-plaintext highlighter-rouge">'B'</code> , corresponding to the value 0 <em>.</em> 114 for the penalty parameter <code class="language-plaintext highlighter-rouge">lambda_0</code> . We could make predictions using this sequence of fits on a validation set as a function of <code class="language-plaintext highlighter-rouge">lambda_0</code> , or with more work using cross-validation.</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:9">
+      <p>The estimate is crude because the five error estimates are based on overlapping training sets, and hence are not independent. <a href="#fnref:9" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
 
             <!-- 구글 애드센스 출력 -->

@@ -5,7 +5,7 @@ title: "index"
 
 # 6.3 Dimension Reduction Methods 
 
-The methods that we have discussed so far in this chapter have controlled variance in two different ways, either by using a subset of the original variables, or by shrinking their coefficients toward zero. All of these methods are defined using the original predictors, _X_ 1 _, X_ 2 _, . . . , Xp_ . We now explore a class of approaches that _transform_ the predictors and then fit a least squares model using the transformed variables. We will refer to these techniques as _dimension reduction_ methods. 
+The methods that we have discussed so far in this chapter have controlled variance in two different ways, either by using a subset of the original variables, or by shrinking their coefficients toward zero. All of these methods are defined using the original predictors, , X_2, \ldots, X_p$. We now explore a class of approaches that _transform_ the predictors and then fit a least squares model using the transformed variables. We will refer to these techniques as _dimension reduction_ methods. 
 
 $$
 Z_m = \sum_{j=1}^p \phi_{jm} X_j
@@ -19,7 +19,7 @@ $$
 y_i = \theta_0 + \sum_{m=1}^M \theta_m z_{im} + \epsilon_i \quad (6.17)
 $$
 
-using least squares. Note that in (6.17), the regression coefficients are given by _θ_ 0 _, θ_ 1 _, . . . , θM_ . If the constants _φ_ 1 _m, φ_ 2 _m, . . . , φpm_ are chosen wisely, then such dimension reduction approaches can often outperform least squares regression. In other words, fitting (6.17) using least squares can lead to better results than fitting (6.1) using least squares. 
+using least squares. Note that in (6.17), the regression coefficients are given by $	heta_0, 	heta_1, \ldots, 	heta_M$. If the constants $\phi_{1m}, \phi_{2m}, \ldots, \phi_{pm}$ are chosen wisely, then such dimension reduction approaches can often outperform least squares regression. In other words, fitting (6.17) using least squares can lead to better results than fitting (6.1) using least squares. 
 
 The term _dimension reduction_ comes from the fact that this approach reduces the problem of estimating the _p_ +1 coefficients _β_ 0 _, β_ 1 _, . . . , βp_ to the 
 
@@ -45,9 +45,9 @@ $$
 \beta_j = \sum_{m=1}^M \theta_m \phi_{jm}
 $$
 
-Hence (6.17) can be thought of as a special case of the original linear regression model given by (6.1). Dimension reduction serves to constrain the estimated _βj_ coefficients, since now they must take the form (6.18). This constraint on the form of the coefficients has the potential to bias the coefficient estimates. However, in situations where _p_ is large relative to _n_ , selecting a value of _M ≪ p_ can significantly reduce the variance of the fitted coefficients. If _M_ = _p_ , and all the _Zm_ are linearly independent, then (6.18) poses no constraints. In this case, no dimension reduction occurs, and so fitting (6.17) is equivalent to performing least squares on the original _p_ predictors. 
+Hence (6.17) can be thought of as a special case of the original linear regression model given by (6.1). Dimension reduction serves to constrain the estimated $eta_j$ coefficients, since now they must take the form (6.18). This constraint on the form of the coefficients has the potential to bias the coefficient estimates. However, in situations where $ is large relative to $, selecting a value of  \ll p$ can significantly reduce the variance of the fitted coefficients. If  = p$, and all the $ are linearly independent, then (6.18) poses no constraints. In this case, no dimension reduction occurs, and so fitting (6.17) is equivalent to performing least squares on the original $ predictors. 
 
-All dimension reduction methods work in two steps. First, the transformed predictors _Z_ 1 _, Z_ 2 _, . . . , ZM_ are obtained. Second, the model is fit using these _M_ predictors. However, the choice of _Z_ 1 _, Z_ 2 _, . . . , ZM_ , or equivalently, the selection of the _φjm_ ’s, can be achieved in different ways. In this chapter, we will consider two approaches for this task: _principal components_ and _partial least squares_ . 
+All dimension reduction methods work in two steps. First, the transformed predictors , Z_2, \ldots, Z_M$ are obtained. Second, the model is fit using these $ predictors. However, the choice of , Z_2, \ldots, Z_M$, or equivalently, the selection of the $\phi_{jm}$'s, can be achieved in different ways. In this chapter, we will consider two approaches for this task: _principal components_ and _partial least squares_ . 
 
 ---
 

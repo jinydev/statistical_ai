@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c06/45_y_x/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c06/45_y_x/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c06/45_y_x/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c06/45_y_x/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/">06. Linear Model Selection</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/45_y_x/">45 y x</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="y--xbeta--epsilon">$Y = X\beta + \epsilon$,</h1>
+<h1 id="y--xbeta--epsilon-1">$Y = X\beta + \epsilon$,</h1>
+
+<p>where $\beta$ has some elements that are exactly equal to zero. 
+여기서 파라미터 계수 $\beta$ 는 그 성분 요소 수치들(elements) 중 일부가 완벽하고 정확하게 완전한 ‘0’ 제로 수치와 부합 일치(exactly equal to zero)하는 부분 공간들을 보유 가지고(has) 있습니다.</p>
+
+<ul>
+  <li>(b) Split your data set into a training set containing 100 observations and a test set containing 900 observations.</li>
+  <li>
+    <p>(b) 여러분의 전체 관측 데이터 세트를 100개의 관측치 개수를 소유 포괄 수반하는(containing) 훈련 데이터 세트(training set)와, 900개의 넉넉한 관측치 수량을 통째 포괄 포함 담지하는(containing) 나머지 테스트 데이터 세트(test set) 두 그룹으로 물리적 분할 분리 조치(Split) 하십시오.</p>
+  </li>
+  <li>(c) Perform best subset selection on the training set, and plot the training set $\text{MSE}$ associated with the best model of each size.</li>
+  <li>
+    <p>(c) 분리해 둔 당해 훈련 데이터 세트 풀 안쪽(on the training set) 국면 속에서 고전 절차인 최적 부분집합 선택(best subset selection) 알고리즘 방식들을 온전히 단행 구동 발동 수행(Perform) 시키고, 그런 다음 산출된 각 변수 모형의 치수 크기 사이즈 체급(each size) 갈래별로 각각 산출 매칭 연결된(associated with) 최고 으뜸 최적의 우수 예측 모델을 기반으로 삼아, 앞선 훈련 세트 생태의 결과 $\text{MSE}$ (평균 제곱 오차 지표) 추이를 점철 도면 차트로 도식 구현 출력(plot) 해보십시오.</p>
+  </li>
+  <li>(d) Plot the test set $\text{MSE}$ associated with the best model of each size.</li>
+  <li>
+    <p>(d) 마찬가지로, 이번에는 동일 각 모델 치수별 크기별 최고 우수 등급 모델 지표에 전격 매칭 고정 부여 부합 결합 연동(associated with) 지어진, 그 거대 테스트 잔류 세트 환경의 예측 $\text{MSE}$ 결괏값 추이 플롯 표면을 렌더링 시각 도식화(Plot) 하십시오.</p>
+  </li>
+  <li>(e) For which model size does the test set $\text{MSE}$ take on its minimum value? Comment on your results. If it takes on its minimum value for a model containing only an intercept or a model containing all of the features, then play around with the way that you are generating the data in (a) until you come up with a scenario in which the test set $\text{MSE}$ is minimized for an intermediate model size.</li>
+  <li>
+    <p>(e) 어느 정도 규모와 덩치 갯수의 모델 크기(model size) 세팅에서 그 테스트 세트 예측 검증 $\text{MSE}$ 지표가 가장 낮고 작디 작은 최소 절대 최저 에러 바닥 임계 수치값 결론(minimum value) 단계 국면을 이끌어 취하며(take on) 돌파 도달합니까? 여러분이 도출해 낸 이 결괏값 결과 추이 양상(results)들에 대해 의견 코멘트 해석을 논평 부연 기재(Comment on) 하십시오. 혹여라도 만약, 고작 절편 변수 상수항 껍데기 하나 만을 부실히 단독 대동 포함하거나(containing only an intercept) 반대로 앞선 모델 속 전체 모든 특징 군집 피처(all of the features)들을 깡그리 몽땅 다 무식하게 쓸어 포함 흡수시켜 버린 극단적인 모델 뼈대 진영 자체에서 상기 그 최저 에러 예측 최솟값(minimum value) 스코어 실적을 산출 취하게(takes on) 되는 발생 에러 역전 현상이 벌어진다면, 그렇다면 그 후단 테스트 검증 세트의 결과 $\text{MSE}$ 값이 비로소 극단이 아닌 다소 중립적인 중간 매개 수준 합리적 크기의 체급 모델 단위 구조(an intermediate model size) 하에서 가장 타당하고 절제 축소된 최소 효율 스코어(minimized)를 내는 이상적 합당 시나리오 포맷 설정 국면 형태(scenario)에 여러분들이 다행히 마침내 도달 착수 부합 봉착(come up with) 할 수 있을 그때 시점(until)까지, 초기 문제 문항 (a)번 영역에서 여러분이 애초 관측치 데이터를 이끌어 생산 제조 발현 조립(generating) 했었던 그 내부 생성 데이터 공식 메커니즘 방식 패턴 장치 계수 수식 과정 양상(way)들을 여러 방면으로 요리조리 주물러 다르게 실험 시도 변형 세팅 조작 이행(play around with) 재 조정해 보십시오.</p>
+  </li>
+  <li>(f) How does the model at which the test set $\text{MSE}$ is minimized compare to the true model used to generate the data? Comment on the coefficient values.</li>
+  <li>
+    <p>(f) 테스트 세트 결과 검증 $\text{MSE}$ 에러 지점을 가장 낮게 바닥으로 최저 최소화 탕감(minimized) 해주었던(at which) 최적 산출 모델의 자태는, 앞서 초기 원래 데이터군을 인위적으로 탄생 배태 발현 생성 조립 생산(generate) 해내기 위해 여러분들이 애초 사용 매설(used to) 이입했던 저 진실 진성 뼈대 정답 참 본연 원래 기본 모델(true model) 구조체와 견주어 비교(compare) 해 보았을 때 과연 어떠한 유사 부합 양태로 매칭 대조 진단 평가 판단(How does) 됩니까? 각 계수 $\beta$ 파라미터 배정 산정 수치 척도 타점 스펙값(coefficient values)들 성분에 관해 여러분들의 정밀 심층 코멘트 해설을 표명 논평 부가(Comment on) 기입 제시하십시오.</p>
+  </li>
+  <li>(g) Create a plot displaying $\sqrt{\sum_{j=1}^p (\beta_j - \hat{\beta}_j^r)^2}$ for a range of values of $r$, where $\hat{\beta}_j^r$ is the $j$th coefficient estimate for the best model containing $r$ coefficients. Comment on what you observe. How does this compare to the test $\text{MSE}$ plot from (d)?</li>
+  <li>(g) 단일 범위 국면이 아닌 여러 일련의 튜닝 범위 나열 나열된 궤도 범위 폭의 이행 편차 변수(a range of values) $r$ 요소들에 대하여, 해당 $\sqrt{\sum_{j=1}^p (\beta_j - \hat{\beta}_j^r)^2}$ 산식 포맷 공식 산출 에러 지표값을 모니터 시각 지면에 디스플레이 도식 시연 표시 표출 묘사(displaying)해 주는 하나의 플롯 차트(a plot) 지계를 직접 작도 설계 구축 생성 조립 구현 생성(Create) 하십시오. 단, 이 조건문 수식에서 통용되는 국지적 기호 명명 $\hat{\beta}_j^r$ 수치 포맷체는, 정.확.히 $r$ 개의 유효 계수 부피 수량들을 대거 통괄 보유 개입 포함(containing) 하는 각 당해 최고 부문 성능 우수 등급 모델 포맷(for the best model)을 위해 산정 도출 도달 식별 환산된 $j$번째 (the $j$th) 개별 계수 추정 타점 척도 예측 수치값(coefficient estimate)을 정확히 지칭 뜻합니다. 출력된 표면상에서 여러분 모니터 상 통과 관찰 목도 식별 식별 진단 확인(observe) 하신 바 내용 징후 사실(what)에 대해 상세 부연 지적 부기 논평 조명 서술 코멘트 설명 해설을 추가 기명(Comment on) 하십시오. 상기 현상들의 진단 조짐 자태는 앞선 문항 (d) 블록 상에서 출력 도출 묘사 건져 잉태 얻어낸 바 있는 테스트 $\text{MSE}$ 추세 플롯과 어떤 역학 구조 구도 양상 비교 대조 우위 진단 여부 판도(How does this compare) 양상을 띠며 직조 대응 매칭 대비(compare) 됩니까?</li>
+</ul>
+
+<ol>
+  <li>We will now try to predict per capita crime rate in the <code class="language-plaintext highlighter-rouge">Boston</code> data set.</li>
+  <li>자, 우리들은 이제 드디어 매우 유명한 <code class="language-plaintext highlighter-rouge">Boston</code> 주택가 데이터 관측 세트 환경 내부에서 일 인당 범죄 발생률 게이지 지표 점수 척도 표면(per capita crime rate) 수치를 진정 표적 예측 조준 타진 가늠 도출 탐색(predict) 코자 과감히 전진 시도 돌입 전개 착수 감행 이행(try to)을 펼칠 것입니다.</li>
+</ol>
+
+<ul>
+  <li>(a) Try out some of the regression methods explored in this chapter, such as best subset selection, the lasso, ridge regression, and PCR. Present and discuss results for the approaches that you consider.</li>
+  <li>
+    <p>(a) 이 당해 6장 챕터 궤적 영역 내에서 깊이 심도 있게 전역 고찰 탐구 진단 정밀 도출 섭렵 파헤 살펴 탐색 모색(explored) 해본 역사가 있는 주요 중요 핵심 주력 회귀 해결 단면 모델 방법 기전 작전 접근 채널 수리 기법 방식 툴 장치(regression methods) 녀석들 중 그 주요 일부분 소수 선택 발탁 녀석들(some of), 즉 예를 들어 가령 예컨대 비견 참작 들어보자면(such as) 최적 부분집합 선택(best subset selection) 파트라던가, 라쏘 페널티 장치(the lasso), 릿지 통제 회귀선법(ridge regression), 그리고 주성분 투과 회귀 기반(PCR) 등등의 일부 부류 모델 부대원들을 적극 시범 검증 기동 시험 가용 실험 트라이 테스트 사용 발휘 감행 타진 투사 확인 적용 타진(Try out) 시도해 구동해 보십시오. 여러분들 측에서 이리저리 다각적 고찰 신중 판단 설계 사료 안목 취사 조작 고려 감안 검토 선별 픽업 결정 구상 투입 고려 검토(consider) 해본 그 개별 매개 방법 접근 툴 방법론 수단 절차 공조 엔진 전략 체계 파벌(approaches) 들과 연계된 개별 매칭 후단 성능 예측 실적 통계값 결과 실체물 평가 결괏값들(results)을 일일이 제안 지면 제시 돌출 보고 표방 진설 공개 노출 표명 제시(Present) 할 것이며, 나아가 이 결과를 토대로 심오한 논평 논파 쟁점 담론 논의 해석 부연 비교 검토 토론 담의 토의 담화 서술(discuss) 단계를 추가 전개 하십시오.</p>
+  </li>
+  <li>(b) Propose a model (or set of models) that seem to perform well on this data set, and justify your answer. Make sure that you are evaluating model performance using validation set error, crossvalidation, or some other reasonable alternative, as opposed to using training error.</li>
+  <li>
+    <p>(b) 상기 이 특정 난해 실전 데이터 세트(on this data set) 환경 판도 상에서 유독 매우 견고 영리 출중 뛰어 무난 우수 매끄 강력 탁월 월등 훌륭 유능 기특 온건히도 뛰어난 발군의 예측 성능 타점 발휘 진도 결과 기능 성과 구사(perform well) 퍼포먼스를 내며 제대로 먹혀 들어가는 양상 기조 단면 동향 사태 여력 짐작 가망 양태 국면 현상 기조 현상(seem to)을 띠는 한 단일 강력 최우수 모델, 혹은 여러 묶음 병합 군단 세트 다수의 강력 모델 진영 조합체 그룹 진영 단락 등(or set of models)이라도 전면 진단 제시 추천 발의 투척 제안 단언 제의 제안(Propose) 제시해 부르십시오. 그리곤 왜 그런 선택 지정 발탁 지목 결론(answer) 타점에 도달 안착하게 되었는지에 대한 타당한 본연 당위 합리 정당 논리 근거 입증 해명 변호 사유를 조명 변호 이유 논거 제시 입증 타당 증빙 조명 정당화(justify) 하십시오. 반드시 명심 필히 유념 단호 결단 기필 자각 이행 명심 유념 자각 필히 확인 확실 당부 확고히 명심(Make sure) 해야 할 대전제 율법 조건 한계(that)로는, 섣부르게도 저급한 훈련 전용 모델 에러 오차율(using training error) 스펙만을 맹신 추종 활용 단일 지목 의존 융합 탑재(using) 하는 그 어리석고 멍청 위험한 단방향 단순 구식 지표 방식 편향 굴곡 의존 조작과는 참으로 매우 상이 극단 모순 전복 철두 전면 반대 상존 대치 정반대 대조 배치 정반대의(as opposed to) 기조 철칙 방면으로써, 여러분들의 모델 객체 타석 평가 잣대는 철두철미한 독립 검증 세트 환경상의 예측 오차 결과(validation set error), 혹은 기민한 다각 크로스 교차 검증 통과 수치망(cross-validation), 나아가 아니면 혹은 또 다른 어떤 그 무엇이든 간에 논리 기반 합리 이치 지당 타당 상응 건실 합당 상응 지당 합당한(reasonable) 강력 대체 우회 방편 교체 체체 우회 노선 채널 대안 지표 진영 결단 방법 대안책 수단 평가 방식(alternative) 채널들을 적극 구동 병합 활용 의존 동원 도용 기용 채용 지득 부려 사용(using) 부림으로써, 모델 본연의 궁극 예측 잠재 퍼포먼스 기력 능력 타진 실력 성과 성능 위용 역량 성능 지표(model performance) 체급들을 객관 평가 검증 계산 타협 계측 평가 측정 판정(evaluating) 해내고 매겨 도출하고 있어야만 한다는 중요한 룰을 지켜야만 합니다.</p>
+  </li>
+  <li>(c) Does your chosen model involve all of the features in the data set? Why or why not?</li>
+  <li>(c) 결국 최종장 국면에 이르러 위풍 등극 여러분이 직접 지목 픽업 채택 간택 발탁 지정(chosen) 추려낸 그 최후 막강 우수 모델(your chosen model)의 내부 구조 생태계 뼈대 안에는, 과연 저 초기 오리지널 전역 데이터 세트 그룹 전장에 흩어져 나열 기입 존재했던 전체 일체 깡그리 일동 전부 모든 온통 모두 각양 전부 전역 모든(all of) 특징 세력 정보 컬럼 특성 피처 변수 대상물 관측 컬럼 예측 변수 인자 특징들(features)의 파편 개체수 모두가 일체 잔류 전부 온전히 대동 편입 삽입 동반 결부 포용 포함 관통 소지 결탁 내포 유지 전부 동반 함유 보유 내장 망라 결속 합류 수반 포함(involve) 합류되어 수렴 이주 정착 포진해 담겨 안착해 존재합니까? 만일 전면 포함되었다면 왜 그렇다고(Why) 보십니까? 혹은 반대로 일부가 유실 삭감 배제 증발 탈락 수축 제거 제외 삭제 축출 단락 축소되어 그렇지 못하게 차단 거부 축출(why not) 도달 결정 삭감 되었다면 대체 또 그 연유 발로 이유는 무엇입니까?</li>
+</ul>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,61 +502,66 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="441-linear-discriminant-analysis-for-p--1"><em>4.4.1 Linear Discriminant Analysis for p</em> = 1</h1>
-
-<p>For now, assume that <em>p</em> = 1—that is, we have only one predictor. We would like to obtain an estimate for <em>fk</em> ( <em>x</em> ) that we can plug into (4.15) in order to estimate <em>pk</em> ( <em>x</em> ). We will then classify an observation to the class for which <em>pk</em> ( <em>x</em> ) is greatest. To estimate <em>fk</em> ( <em>x</em> ), we will first make some assumptions about its form.</p>
-
-<p>In particular, we assume that <em>fk</em> ( <em>x</em> ) is <em>normal</em> or <em>Gaussian</em> . In the one- normal dimensional setting, the normal density takes the form</p>
-
-<p>where <em>µk</em> and <em>σk</em>[2][are][the][mean][and][variance][parameters][for][the] <em>[k]</em>[th][class.] For now, let us further assume that <em>σ</em> 1[2][=] <em>[ · · ·]</em>[ =] <em>[ σ] K</em>[2][: that is, there is a shared] variance term across all $K$ classes, which for simplicity we can denote by <em>σ</em>[2] . Plugging (4.16) into (4.15), we find that</p>
-
-<p>(Note that in (4.17), <em>πk</em> denotes the prior probability that an observation belongs to the $k$ th class, not to be confused with <em>π ≈</em> 3 <em>.</em> 14159, the mathematical constant.) The Bayes classifier[2] involves assigning an observation</p>
-
-<blockquote>
-  <p>2Recall that the <em>Bayes classifier</em> assigns an observation to the class for which <em>pk</em> ( <em>x</em> ) is largest. This is different from <em>Bayes’ theorem</em> in (4.15), which allows us to manipulate conditional distributions.</p>
-</blockquote>
-
-<p>148 4. Classification</p>
-
-<p><img src="./img/4_4.png" alt="Figure 4.4" /></p>
-
-<p><strong>FIGURE 4.4.</strong> Left: <em>Two one-dimensional normal density functions are shown. The dashed vertical line represents the Bayes decision boundary.</em> Right: <em>20 observations were drawn from each of the two classes, and are shown as histograms. The Bayes decision boundary is again shown as a dashed vertical line. The solid vertical line represents the LDA decision boundary estimated from the training data.</em></p>
-
-<p>$X$= <em>x</em> to the class for which (4.17) is largest. Taking the log of (4.17) and rearranging the terms, it is not hard to show[3] that this is equivalent to assigning the observation to the class for which</p>
-
-<p>is largest. For instance, if $K$ = 2 and <em>π</em> 1 = <em>π</em> 2, then the Bayes classifier assigns an observation to class 1 if 2 <em>x</em> ( <em>µ</em> 1 <em>− µ</em> 2) <em>&gt; µ</em>[2] 1 <em>[−][µ]</em>[2] 2[,][and][to][class] 2 otherwise. The Bayes decision boundary is the point for which <em>δ</em> 1( <em>x</em> ) = <em>δ</em> 2( <em>x</em> ); one can show that this amounts to</p>
-
-<p>An example is shown in the left-hand panel of Figure 4.4. The two normal density functions that are displayed, <em>f</em> 1( <em>x</em> ) and <em>f</em> 2( <em>x</em> ), represent two distinct classes. The mean and variance parameters for the two density functions are <em>µ</em> 1 = <em>−</em> 1 <em>.</em> 25, <em>µ</em> 2 = 1 <em>.</em> 25, and <em>σ</em> 1[2][=] <em>[σ]</em> 2[2][=][1][.][The][two][densities][overlap,] and so given that $X$= <em>x</em> , there is some uncertainty about the class to which the observation belongs. If we assume that an observation is equally likely to come from either class—that is, <em>π</em> 1 = <em>π</em> 2 = 0 <em>.</em> 5—then by inspection of (4.19), we see that the Bayes classifier assigns the observation to class 1 if <em>x &lt;</em> 0 and class 2 otherwise. Note that in this case, we can compute the Bayes classifier because we know that $X$is drawn from a Gaussian distribution within each class, and we know all of the parameters involved. In a real-life situation, we are not able to calculate the Bayes classifier.</p>
-
-<p>In practice, even if we are quite certain of our assumption that $X$is drawn from a Gaussian distribution within each class, to apply the Bayes classifier we still have to estimate the parameters <em>µ</em> 1 <em>, . . . , µK</em> , <em>π</em> 1 <em>, . . . , πK</em> , and <em>σ</em>[2] . The <em>linear discriminant analysis</em> (LDA) method approximates the linear Bayes classifier by plugging estimates for <em>πk</em> , <em>µk</em> , and <em>σ</em>[2] into (4.18). In</p>
-
-<p>discriminant analysis</p>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4.4 Generative Models For Classification</a></td>
+      <td><a href="../4_4_2_linear_discriminant_analysis_for_p_1/index.html">4.4.2 Linear Discriminant Analysis For P 1 &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <blockquote>
-  <p>3See Exercise 2 at the end of this chapter.</p>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
 </blockquote>
 
-<p>4.4 Generative Models for Classification 149</p>
+<h1 id="441-linear-discriminant-analysis-for-p--1">4.4.1 Linear Discriminant Analysis for p = 1</h1>
 
-<p>particular, the following estimates are used:</p>
+<p>For now, assume that $p = 1$—that is, we have only one predictor. We would like to obtain an estimate for $f_k(x)$ that we can plug into (4.15) in order to estimate $p_k(x)$. We will then classify an observation to the class for which $p_k(x)$ is greatest. To estimate $f_k(x)$, we will first make some assumptions about its form.</p>
 
-<p>where <em>n</em> is the total number of training observations, and <em>nk</em> is the number of training observations in the $k$ th class. The estimate for <em>µk</em> is simply the average of all the training observations from the $k$ th class, while <em>σ</em> ˆ[2] can be seen as a weighted average of the sample variances for each of the $K$ classes. Sometimes we have knowledge of the class membership probabilities <em>π</em> 1 <em>, . . . , πK</em> , which can be used directly. In the absence of any additional information, LDA estimates <em>πk</em> using the proportion of the training observations that belong to the $k$ th class. In other words,</p>
+<p>In particular, we assume that $f_k(x)$ is <em>normal</em> or <em>Gaussian</em>. In the one-dimensional setting, the normal density takes the form</p>
 
-<p>The LDA classifier plugs the estimates given in (4.20) and (4.21) into (4.18), and assigns an observation $X$= <em>x</em> to the class for which</p>
+\[f_k(x) = \frac{1}{\sqrt{2 \pi} \sigma_k} \exp \left( -\frac{1}{2 \sigma_k^2} (x - \mu_k)^2 \right) \quad (4.16)\]
 
-<p>is largest. The word <em>linear</em> in the classifier’s name stems from the fact that the <em>discriminant functions δ</em>[ˆ] $k$ ( <em>x</em> ) in (4.22) are linear functions of <em>x</em> (as discriminant opposed to a more complex function of <em>x</em> ). function</p>
+<p>where $\mu_k$ and $\sigma_k^2$ are the mean and variance parameters for the $k$th class. For now, let us further assume that $\sigma_1^2 = \dots = \sigma_K^2$: that is, there is a shared variance term across all $K$ classes, which for simplicity we can denote by $\sigma^2$. Plugging (4.16) into (4.15), we find that</p>
 
-<p>function</p>
+\[p_k(x) = \frac{\pi_k \frac{1}{\sqrt{2 \pi} \sigma} \exp \left( -\frac{1}{2 \sigma^2} (x - \mu_k)^2 \right)}{\sum_{l=1}^{K} \pi_l \frac{1}{\sqrt{2 \pi} \sigma} \exp \left( -\frac{1}{2 \sigma^2} (x - \mu_l)^2 \right)} \quad (4.17)\]
 
-<p>The right-hand panel of Figure 4.4 displays a histogram of a random sample of 20 observations from each class. To implement LDA, we began by estimating <em>πk</em> , <em>µk</em> , and <em>σ</em>[2] using (4.20) and (4.21). We then computed the decision boundary, shown as a black solid line, that results from assigning an observation to the class for which (4.22) is largest. All points to the left of this line will be assigned to the green class, while points to the right of this line are assigned to the purple class. In this case, since <em>n</em> 1 = <em>n</em> 2 = 20, ˆ ˆ we have <em>π</em> 1 = <em>π</em> 2. As a result, the decision boundary corresponds to the midpoint between the sample means for the two classes, (ˆ <em>µ</em> 1 + <em>µ</em> ˆ2) <em>/</em> 2. The figure indicates that the LDA decision boundary is slightly to the left of the optimal Bayes decision boundary, which instead equals ( <em>µ</em> 1 + <em>µ</em> 2) <em>/</em> 2 = 0. How well does the LDA classifier perform on this data? Since this is simulated data, we can generate a large number of test observations in order to compute the Bayes error rate and the LDA test error rate. These are 10 <em>.</em> 6 % and 11 <em>.</em> 1 %, respectively. In other words, the LDA classifier’s error rate is only 0 <em>.</em> 5 % above the smallest possible error rate! This indicates that LDA is performing pretty well on this data set.</p>
+<p>The Bayes classifier involves assigning an observation $X = x$ to the class for which (4.17) is largest. Taking the log of (4.17) and rearranging the terms, it is not hard to show that this is equivalent to assigning the observation to the class for which</p>
 
-<p>To reiterate, the LDA classifier results from assuming that the observations within each class come from a normal distribution with a classspecific mean and a common variance <em>σ</em>[2] , and plugging estimates for these parameters into the Bayes classifier. In Section 4.4.3, we will consider a less stringent set of assumptions, by allowing the observations in the $k$ th class to have a class-specific variance, <em>σk</em>[2][.]</p>
+\[\delta_k(x) = x \cdot \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2 \sigma^2} + \log(\pi_k) \quad (4.18)\]
 
-<p>150 4. Classification</p>
+<p>is largest. For instance, if $K = 2$ and $\pi_1 = \pi_2$, then the Bayes classifier assigns an observation to class 1 if $2x(\mu_1 - \mu_2) &gt; \mu_1^2 - \mu_2^2$, and to class 2 otherwise. The Bayes decision boundary is the point for which $\delta_1(x) = \delta_2(x)$; one can show that this amounts to</p>
 
-<p><img src="./img/4_5.png" alt="Figure 4.5" /></p>
+\[x = \frac{\mu_1^2 - \mu_2^2}{2(\mu_1 - \mu_2)} = \frac{\mu_1 + \mu_2}{2} \quad (4.19)\]
 
-<p><strong>FIGURE 4.5.</strong> <em>Two multivariate Gaussian density functions are shown, with p</em> = 2 <em>.</em> Left: <em>The two predictors are uncorrelated.</em> Right: <em>The two variables have a correlation of</em> 0 <em>.</em> 7 <em>.</em></p>
+<p>In practice, even if we are quite certain of our assumption that $X$ is drawn from a Gaussian distribution within each class, to apply the Bayes classifier we still have to estimate the parameters $\mu_1, \dots, \mu_K$, $\pi_1, \dots, \pi_K$, and $\sigma^2$. The <em>linear discriminant analysis</em> (LDA) method approximates the Bayes classifier by plugging estimates for $\pi_k, \mu_k$, and $\sigma^2$ into (4.18). In particular, the following estimates are used:</p>
+
+\[\hat{\mu}_k = \frac{1}{n_k} \sum_{i: y_i = k} x_i \\
+\hat{\sigma}^2 = \frac{1}{n - K} \sum_{k=1}^{K} \sum_{i: y_i = k} (x_i - \hat{\mu}_k)^2 \quad (4.20)\]
+
+<p>where $n$ is the total number of training observations, and $n_k$ is the number of training observations in the $k$th class. The estimate for $\mu_k$ is simply the average of all the training observations from the $k$th class, while $\hat{\sigma}^2$ can be seen as a weighted average of the sample variances for each of the $K$ classes. In the absence of any additional information, LDA estimates $\pi_k$ using the proportion of the training observations that belong to the $k$th class. In other words,</p>
+
+\[\hat{\pi}_k = \frac{n_k}{n} \quad (4.21)\]
+
+<p>The LDA classifier plugs the estimates given in (4.20) and (4.21) into (4.18), and assigns an observation $X = x$ to the class for which</p>
+
+\[\hat{\delta}_k(x) = x \cdot \frac{\hat{\mu}_k}{\hat{\sigma}^2} - \frac{\hat{\mu}_k^2}{2 \hat{\sigma}^2} + \log(\hat{\pi}_k) \quad (4.22)\]
+
+<p>is largest. The word <em>linear</em> in the classifier’s name stems from the fact that the <em>discriminant functions</em> $\hat{\delta}_k(x)$ in (4.22) are linear functions of $x$ (as opposed to a more complex function of $x$).</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4.4 Generative Models For Classification</a></td>
+      <td><a href="../4_4_2_linear_discriminant_analysis_for_p_1/index.html">4.4.2 Linear Discriminant Analysis For P 1 &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

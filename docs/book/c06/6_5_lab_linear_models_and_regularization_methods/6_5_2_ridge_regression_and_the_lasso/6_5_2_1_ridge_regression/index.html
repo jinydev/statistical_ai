@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -515,11 +514,7 @@
         <div class="bd-content ps-lg-4">
             <h1 id="ridge-regression">Ridge Regression</h1>
 
-<p>We will use the function <code class="language-plaintext highlighter-rouge">skl.ElasticNet()</code> to fit both ridge and the lasso. To <code class="language-plaintext highlighter-rouge">skl.Elastic</code> fit a <em>path</em> of ridge regressions models, we use <code class="language-plaintext highlighter-rouge">skl.ElasticNet.path()</code> , which <code class="language-plaintext highlighter-rouge">Net()</code> can fit both ridge and lasso, as well as a hybrid mixture; ridge regression <code class="language-plaintext highlighter-rouge">skl.Elastic</code> corresponds to <code class="language-plaintext highlighter-rouge">l1_ratio=0</code> . It is good practice to standardize the columns <code class="language-plaintext highlighter-rouge">Net.path()</code> of <code class="language-plaintext highlighter-rouge">X</code> in these applications, if the variables are measured in different units. Since <code class="language-plaintext highlighter-rouge">skl.ElasticNet()</code> does no normalization, we have to take care of that ourselves. Since we standardize first, in order to find coefficient estimates on the original scale, we must <em>unstandardize</em> the coefficient estimates. The parameter <em>λ</em> in (6.5) and (6.7) is called <code class="language-plaintext highlighter-rouge">alphas</code> in <code class="language-plaintext highlighter-rouge">sklearn</code> . In order to be consistent with the rest of this chapter, we use <code class="language-plaintext highlighter-rouge">lambdas</code> rather than <code class="language-plaintext highlighter-rouge">alphas</code> in what follows.[10]</p>
-
-<blockquote>
-  <p>10At the time of publication, ridge fits like the one in code chunk [22] issue unwarranted convergence warning messages; we expect these to disappear as this package matures.</p>
-</blockquote>
+<p>We will use the function <code class="language-plaintext highlighter-rouge">skl.ElasticNet()</code> to fit both ridge and the lasso. To fit a <em>path</em> of ridge regressions models, we use <code class="language-plaintext highlighter-rouge">skl.ElasticNet.path()</code> , which can fit both ridge and lasso, as well as a hybrid mixture; ridge regression corresponds to <code class="language-plaintext highlighter-rouge">l1_ratio=0</code> . It is good practice to standardize the columns of <code class="language-plaintext highlighter-rouge">X</code> in these applications, if the variables are measured in different units. Since <code class="language-plaintext highlighter-rouge">skl.ElasticNet()</code> does no normalization, we have to take care of that ourselves. Since we standardize first, in order to find coefficient estimates on the original scale, we must <em>unstandardize</em> the coefficient estimates. The parameter $\lambda$ in (6.5) and (6.7) is called <code class="language-plaintext highlighter-rouge">alphas</code> in <code class="language-plaintext highlighter-rouge">sklearn</code> . In order to be consistent with the rest of this chapter, we use <code class="language-plaintext highlighter-rouge">lambdas</code> rather than <code class="language-plaintext highlighter-rouge">alphas</code> in what follows.<sup id="fnref:10"><a href="#fn:10" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p>
 
 <p>274 6. Linear Model Selection and Regularization</p>
 
@@ -537,9 +532,9 @@ soln_array.shape
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[22]:(19,100)
 </code></pre></div></div>
 
-<p>Here we extract the array of coefficients corresponding to the solutions along the regularization path. By default the <code class="language-plaintext highlighter-rouge">skl.ElasticNet.path</code> method fits a path along an automatically selected range of <em>λ</em> values, except for the case when <code class="language-plaintext highlighter-rouge">l1_ratio=0</code> , which results in ridge regression (as is the case here).[11] So here we have chosen to implement the function over a grid of values ranging from <em>λ</em> = 10[8] to <em>λ</em> = 10 <em>[−]</em>[2] scaled by the standard deviation of <em>y</em> , essentially covering the full range of scenarios from the null model containing only the intercept, to the least squares fit.</p>
+<p>Here we extract the array of coefficients corresponding to the solutions along the regularization path. By default the <code class="language-plaintext highlighter-rouge">skl.ElasticNet.path</code> method fits a path along an automatically selected range of $\lambda$ values, except for the case when <code class="language-plaintext highlighter-rouge">l1_ratio=0</code> , which results in ridge regression (as is the case here).[^11] So here we have chosen to implement the function over a grid of values ranging from $\lambda = 10^8$ to $\lambda = 10^{-2}$ scaled by the standard deviation of $y$ , essentially covering the full range of scenarios from the null model containing only the intercept, to the least squares fit.</p>
 
-<p>Associated with each value of <em>λ</em> is a vector of ridge regression coefficients, that can be accessed by a column of <code class="language-plaintext highlighter-rouge">soln_array</code> . In this case, <code class="language-plaintext highlighter-rouge">soln_array</code> is a 19 <em>×</em> 100 matrix, with 19 rows (one for each predictor) and 100 columns (one for each value of <em>λ</em> ).</p>
+<p>Associated with each value of $\lambda$ is a vector of ridge regression coefficients, that can be accessed by a column of <code class="language-plaintext highlighter-rouge">soln_array</code> . In this case, <code class="language-plaintext highlighter-rouge">soln_array</code> is a 19 <em>×</em> 100 matrix, with 19 rows (one for each predictor) and 100 columns (one for each value of $\lambda$ ).</p>
 
 <p>We transpose this matrix and turn it into a data frame to facilitate viewing and plotting.</p>
 
@@ -650,7 +645,7 @@ soln_path
   </tbody>
 </table>
 
-<p>We plot the paths to get a sense of how the coefficients vary with <em>λ</em> . To control the location of the legend we first set <code class="language-plaintext highlighter-rouge">legend</code> to <code class="language-plaintext highlighter-rouge">False</code> in the plot method, adding it afterward with the <code class="language-plaintext highlighter-rouge">legend()</code> method of <code class="language-plaintext highlighter-rouge">ax</code> .</p>
+<p>We plot the paths to get a sense of how the coefficients vary with $\lambda$ . To control the location of the legend we first set <code class="language-plaintext highlighter-rouge">legend</code> to <code class="language-plaintext highlighter-rouge">False</code> in the plot method, adding it afterward with the <code class="language-plaintext highlighter-rouge">legend()</code> method of <code class="language-plaintext highlighter-rouge">ax</code> .</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [24]:path_fig,ax=subplots(figsize=(8,8))
 soln_path.plot(ax=ax,legend=False)
@@ -658,7 +653,7 @@ ax.set_xlabel('$-\log(\lambda)$',fontsize=20)
 </code></pre></div></div>
 
 <blockquote>
-  <p>11The reason is rather technical; for all models except ridge, we can find the smallest value of <em>λ</em> for which all coefficients are zero. For ridge this value is <em>∞</em> .</p>
+  <p>11The reason is rather technical; for all models except ridge, we can find the smallest value of $\lambda$ for which all coefficients are zero. For ridge this value is <em>∞</em> .</p>
 </blockquote>
 
 <p>6.5 Lab: Linear Models and Regularization Methods</p>
@@ -669,7 +664,7 @@ ax.set_xlabel('$-\log(\lambda)$',fontsize=20)
 ax.legend(loc='upperleft');
 </code></pre></div></div>
 
-<p>(We have used <code class="language-plaintext highlighter-rouge">latex</code> formatting in the horizontal label, in order to format the Greek <em>λ</em> appropriately.) We expect the coefficient estimates to be much smaller, in terms of <em>ℓ</em> 2 norm, when a large value of <em>λ</em> is used, as compared to when a small value of <em>λ</em> is used. (Recall that the <em>ℓ</em> 2 norm is the square root of the sum of squared coefficient values.) We display the coefficients at the 40th step, where <em>λ</em> is 25.535.</p>
+<p>(We have used <code class="language-plaintext highlighter-rouge">latex</code> formatting in the horizontal label, in order to format the Greek $\lambda$ appropriately.) We expect the coefficient estimates to be much smaller, in terms of $\ell_2$ norm, when a large value of $\lambda$ is used, as compared to when a small value of $\lambda$ is used. (Recall that the $\ell_2$ norm is the square root of the sum of squared coefficient values.) We display the coefficients at the 40th step, where $\lambda$ is 25.535.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [25]:beta_hat=soln_path.loc[soln_path.index[39]]
 lambdas[39],beta_hat
@@ -727,7 +722,7 @@ lambdas[39],beta_hat
   </tbody>
 </table>
 
-<p>Let’s compute the <em>ℓ</em> 2 norm of the standardized coefficients.</p>
+<p>Let’s compute the $\ell_2$ norm of the standardized coefficients.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [26]:np.linalg.norm(beta_hat)
 </code></pre></div></div>
@@ -735,7 +730,7 @@ lambdas[39],beta_hat
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[26]:24.17
 </code></pre></div></div>
 
-<p>In contrast, here is the <em>ℓ</em> 2 norm when <em>λ</em> is 2.44e-01. Note the much larger <em>ℓ</em> 2 norm of the coefficients associated with this smaller value of <em>λ</em> .</p>
+<p>In contrast, here is the $\ell_2$ norm when $\lambda$ is 2.44e-01. Note the much larger $\ell_2$ norm of the coefficients associated with this smaller value of $\lambda$ .</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [27]:beta_hat=soln_path.loc[soln_path.index[59]]
 lambdas[59],np.linalg.norm(beta_hat)
@@ -752,7 +747,7 @@ pipe=Pipeline(steps=[('scaler',scaler),('ridge',ridge)])
 pipe.fit(X,Y)
 </code></pre></div></div>
 
-<p>We show that it gives the same <em>ℓ</em> 2 norm as in our previous fit on the standardized data.</p>
+<p>We show that it gives the same $\ell_2$ norm as in our previous fit on the standardized data.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [29]:np.linalg.norm(ridge.coef_)
 </code></pre></div></div>
@@ -766,7 +761,7 @@ pipe.fit(X,Y)
 
 <p>Estimating Test Error of Ridge Regression</p>
 
-<p>Choosing an <em>a priori</em> value of <em>λ</em> for ridge regression is difficult if not impossible. We will want to use the validation method or cross-validation to select the tuning parameter. The reader may not be surprised that the <code class="language-plaintext highlighter-rouge">Pipeline()</code> approach can be used in <code class="language-plaintext highlighter-rouge">skm.cross_validate()</code> with either a validation method (i.e. <code class="language-plaintext highlighter-rouge">validation</code> ) or <em>k</em> -fold cross-validation.</p>
+<p>Choosing an <em>a priori</em> value of $\lambda$ for ridge regression is difficult if not impossible. We will want to use the validation method or cross-validation to select the tuning parameter. The reader may not be surprised that the <code class="language-plaintext highlighter-rouge">Pipeline()</code> approach can be used in <code class="language-plaintext highlighter-rouge">skm.cross_validate()</code> with either a validation method (i.e. <code class="language-plaintext highlighter-rouge">validation</code> ) or <em>k</em> -fold cross-validation.</p>
 
 <p>We fix the random state of the splitter so that the results obtained will be reproducible.</p>
 
@@ -781,6 +776,13 @@ scoring='neg_mean_squared_error',
 cv=validation)
 -results['test_score']
 </code></pre></div></div>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:10">
+      <p>At the time of publication, ridge fits like the one in code chunk [22] issue unwarranted convergence warning messages; we expect these to disappear as this package matures. <a href="#fnref:10" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
 
             <!-- 구글 애드센스 출력 -->

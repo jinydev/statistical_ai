@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_3_introduction_to_numerical_python/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_3_introduction_to_numerical_python/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_3_introduction_to_numerical_python/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_3_introduction_to_numerical_python/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/">02. Statistical Learning</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_3_lab_introduction_to_python/">2 3 lab introduction to python</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_3_lab_introduction_to_python/2_3_3_introduction_to_numerical_python/">2 3 3 introduction to numerical python</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../2_3_2_basic_commands/trans2.html">&lt; 2.3.2 Basic Commands</a></td>
+      <td><a href="../2_3_4_graphics/trans2.html">2.3.4 Graphics &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 <a href="./trans2.html">📖 파이썬 랩(Lab) 해설판보기</a>를 추천합니다! (직역본은 <a href="./trans1.html">📖 직역본 보기</a> 메뉴를 활용하세요!)</p>
+</blockquote>
+
+<h1 id="233-introduction-to-numerical-python">2.3.3 Introduction to Numerical Python</h1>
+<h1 id="233-숫자-마법사-numpy-소개">2.3.3 숫자 마법사 ‘NumPy’ 소개</h1>
+
+<p>As mentioned earlier, this book makes use of functionality that is contained in the <code class="language-plaintext highlighter-rouge">numpy</code> <em>library</em>, or <em>package</em>.
+아까 위에서도 스포일러 했듯이, 이 책의 모든 뼈대 연산은 결국 <code class="language-plaintext highlighter-rouge">numpy</code>라 불리는 기가 막힌 데이터 마법 <em>라이브러리(library)</em>, 즉 <em>패키지(package)</em> 배낭에 담긴 막강한 수학 기능성들을 쏙쏙 빼다 씁니다.</p>
+
+<p>A package is a collection of modules that are not necessarily included in the base <code class="language-plaintext highlighter-rouge">Python</code> distribution.
+패키지가 뭐냐구요? 파이썬을 막 처음 샀을 때 기본 옵션(base Python)으론 주지 않는, 나중에 필요할 때마다 다운로드성 DLC처럼 추가로 낑겨 넣어야 하는 강력한 마법 모듈들의 모음집 팩을 뜻합니다.</p>
+
+<p>The name <code class="language-plaintext highlighter-rouge">numpy</code> is an abbreviation for <em>numerical Python</em>.
+그 위대한 이름 <code class="language-plaintext highlighter-rouge">numpy</code>(넘파이)는 <em>수치적 파이썬(numerical Python)</em> 의 앞 글자를 재치 있게 줄여 지은 이름이죠.</p>
+
+<p>To access <code class="language-plaintext highlighter-rouge">numpy</code>, we must first <code class="language-plaintext highlighter-rouge">import</code> it.
+이 넘파이 마법 보따리에 접근하려면, 일단 우리 메모리로 짐을 싸서 스튜디오로 들여오는 탑승 수속, 즉 <code class="language-plaintext highlighter-rouge">import</code> 주문을 먼저 걸어줘야 합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+</code></pre></div></div>
+
+<p>In the previous line, we named the <code class="language-plaintext highlighter-rouge">numpy</code> <em>module</em> <code class="language-plaintext highlighter-rouge">np</code>; an abbreviation for easier referencing.
+바로 윗줄 타건에서 <code class="language-plaintext highlighter-rouge">import numpy as np</code> 라고 친 이유요? 매번 ‘numpy’라고 5글자나 타자 치는 건 현대 프로그래머들에겐 사치스럽기 그지 없는 극악의 중노동입니다! 그래서 앞으로 언제든 부르기 쉽게(easier referencing) 애칭 <code class="language-plaintext highlighter-rouge">np</code>라는 두 글자의 깜찍한 약칭을 지어준 겁니다.</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">numpy</code>, an <em>array</em> is a generic term for a multidimensional set of numbers.
+이 넘파이 마법계에서 가장 최고 존엄으로 취급되는 <strong><em>배열(array)</em></strong> 이란 존재는, 쉽게 말해 아파트(다차원) 구조로 층층이 숫자들이 나열된 거대한 숫자 집합 주차장을 일컫는 범용 용어입니다.</p>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">np.array()</code> function to define <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>, which are one-dimensional arrays, i.e. vectors.
+가장 먼저 우리는 <code class="language-plaintext highlighter-rouge">np.array()</code>라는 아파트 건설 함수를 호출해, 1층짜리 단독 주택 배열(1차원 배열) 즉 <strong>벡터(vectors)</strong> 라고 불리는 숫자 덩어리 변수 <code class="language-plaintext highlighter-rouge">x</code>와 <code class="language-plaintext highlighter-rouge">y</code>를 예쁘게 정의해 보겠습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Note that if you forgot to run the <code class="language-plaintext highlighter-rouge">import numpy as np</code> command earlier, then you will encounter an error in calling the <code class="language-plaintext highlighter-rouge">np.array()</code> function in the previous line.
+조심하세요! 혹시 깜빡하고 아까 위에서 <code class="language-plaintext highlighter-rouge">import numpy as np</code> 탑승 수속 주문을 켜두지 않았다면, 파이썬이 “np가 도대체 누군데?!” 하며 시뻘건 에러탄을 맞게 될 거란 사실을 가슴에 새깁시다.</p>
+
+<p>The syntax <code class="language-plaintext highlighter-rouge">np.array()</code> indicates that the function being called is part of the <code class="language-plaintext highlighter-rouge">numpy</code> package, which we have abbreviated as <code class="language-plaintext highlighter-rouge">np</code>.
+코드를 읽을 때 <code class="language-plaintext highlighter-rouge">np.array()</code> 란 구문은 그냥 “내가 부른 <code class="language-plaintext highlighter-rouge">array()</code> 함수는 넘파이 패키지(<code class="language-plaintext highlighter-rouge">np</code>) 가문 소속의 함수다!” 라고 가문의 문장에 출처를 정정당당히 밝히고 호출하는 행위입니다.</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> have been defined using <code class="language-plaintext highlighter-rouge">np.array()</code>, we get a sensible result when we add them together.
+어쨌건 이제 변수 <code class="language-plaintext highlighter-rouge">x</code>와 <code class="language-plaintext highlighter-rouge">y</code>는 바보 같은 순수 파이썬 리스트가 아닌 천재적인 <code class="language-plaintext highlighter-rouge">np.array()</code> 행렬로 재탄생해 단단히 구축되었습니다! 이제 둘을 더하면 아주 모범적이고 상식적인 벡터 덧셈 결과가 나올 겁니다.</p>
+
+<p>Compare this to our results in the previous section, when we tried to add two lists without using <code class="language-plaintext highlighter-rouge">numpy</code>.
+이전 섹션 단락에서 넘파이(<code class="language-plaintext highlighter-rouge">numpy</code>) 없이 쌩으로 바보같이 <code class="language-plaintext highlighter-rouge">x + y</code>를 했을 때 “3, 4, 5, 4, 9, 7”로 기차놀이 풀칠을 해버렸던 참사 결과와 이 기막힌 덧셈을 지금 당장 비교해보세요!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>In <code class="language-plaintext highlighter-rouge">numpy</code>, matrices are typically represented as two-dimensional arrays, and vectors as one-dimensional arrays.[1]
+이 <code class="language-plaintext highlighter-rouge">numpy</code> 동네 안에서, 행과 열이 살아 숨 쉬는 진짜배기 수학 <strong>행렬(matrices)</strong> 들은 전형적으로 가로세로 바둑판 같은 <strong>2차원 배열</strong>들로, 한 줄로 쭉 선 <strong>벡터(vectors)</strong> 들은 단출한 <strong>1차원 배열</strong>들로 묘사되어 돌아갑니다.[1]</p>
+
+<p>We can create a two-dimensional array as follows.
+우리는 다음과 같이 바둑판 같은 멋진 2차원 배열 아파트를 간단히 지을 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+         <span class="n">x</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>The object <code class="language-plaintext highlighter-rouge">x</code> has several <em>attributes</em>, or associated objects.
+이렇게 멋지게 지어진 2차원 객체 고층 아파트 <code class="language-plaintext highlighter-rouge">x</code> 는 겉모습만 번지르르한 게 아니라, 아파트 설계도 같은 자아 정보, 이른바 여러 개의 <strong><em>속성들(attributes)</em></strong> 을 꼬리표처럼 달고 다닙니다.</p>
+
+<p>To access an attribute of <code class="language-plaintext highlighter-rouge">x</code>, we type <code class="language-plaintext highlighter-rouge">x.attribute</code>, where we replace <code class="language-plaintext highlighter-rouge">attribute</code> with the name of the attribute.
+내가 만든 아파트 <code class="language-plaintext highlighter-rouge">x</code>의 스펙(속성)이 궁금하다면? 그냥 스위치 누르듯 <code class="language-plaintext highlighter-rouge">x.알고싶은_속성이름</code> 식으로 점을 찍고 타건해 물어보면 됩니다.</p>
+
+<p>For instance, we can access the <code class="language-plaintext highlighter-rouge">ndim</code> attribute of <code class="language-plaintext highlighter-rouge">x</code> as follows.
+예를 들어, “얘야 너 도대체 몇 층짜리 차원(dimension) 아파트니?” 라고 묻고 싶을 땐 냅다 <code class="language-plaintext highlighter-rouge">ndim</code> 속성을 갖다 대면 다음과 같이 스펙을 탁 뱉어냅니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">x</span><span class="p">.</span><span class="n">ndim</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<p>The output indicates that <code class="language-plaintext highlighter-rouge">x</code> is a two-dimensional array.
+결과창에 달랑 ‘2’라고 나온 출력본은 <code class="language-plaintext highlighter-rouge">x</code>가 자랑스럽게 2차원(two-dimensional) 배열 건축물임을 증명합니다.</p>
+
+<p>Similarly, <code class="language-plaintext highlighter-rouge">x.dtype</code> is the <em>data type</em> attribute of the object <code class="language-plaintext highlighter-rouge">x</code>.
+비슷한 이치로, 질문을 바꿔 <code class="language-plaintext highlighter-rouge">x.dtype</code> 스위치를 넣으면 아파트 <code class="language-plaintext highlighter-rouge">x</code>의 벽면 내부 자재가 어떤 타입인지 알려주는 <strong><em>데이터 타입(data type)</em></strong> 스펙이 술술 튀어나옵니다.</p>
+
+<p>This indicates that <code class="language-plaintext highlighter-rouge">x</code> is comprised of 64-bit integers:
+벽면을 열어봤더니, 이 건축물이 크고 단단한 64-비트 정수(integers) 블록들로 옹골차게 구성됐음을 알려주네요:</p>
+
+<blockquote>
+  <p>1 While it is also possible to create matrices using <code class="language-plaintext highlighter-rouge">np.matrix()</code>, we will use <code class="language-plaintext highlighter-rouge">np.array()</code> throughout the labs in this book.
+1 번외로 팁을 주자면, 낡은 기술인 <code class="language-plaintext highlighter-rouge">np.matrix()</code> 구형 주문을 써서 억지로 행렬을 만들 수도 있긴 하지만, 이 책의 모든 실습(labs) 훈련 과정 통틀어 우리는 무조건 모던하고 세련된 만능키 <code class="language-plaintext highlighter-rouge">np.array()</code> 주문만을 내내 고집할 겁니다!</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">x</span><span class="p">.</span><span class="n">dtype</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="nf">dtype</span><span class="p">(</span><span class="sh">'</span><span class="s">int64</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Why is <code class="language-plaintext highlighter-rouge">x</code> comprised of integers?
+잠깐, 근데 왜 <code class="language-plaintext highlighter-rouge">x</code>가 소수점 하나 없는 퍽퍽한 정수들 블록으로만 지어졌을까요?</p>
+
+<p>This is because we created <code class="language-plaintext highlighter-rouge">x</code> by passing in exclusively integers to the <code class="language-plaintext highlighter-rouge">np.array()</code> function.
+그야 당연히 우리가 애초에 <code class="language-plaintext highlighter-rouge">x</code>를 설계할 때 <code class="language-plaintext highlighter-rouge">np.array()</code> 건설함수 입구에다가 소수점 없는 “1, 2, 3, 4” 같은 순혈 정수들만 독점적으로 꽉꽉 욱여넣었기 때문입니다! 뿌린 대로 거두는 법이죠.</p>
+
+<p>If we had passed in any decimals, then we would have obtained an array of <em>floating point numbers</em> (i.e. real-valued numbers).
+만일 자재 창고에 소수점(decimals)이 단 0.1이라도 하나 섞여 들어갔다면? 파이썬은 눈치 빠르게 전체 아파트 벽면을 오차 없이 정밀하게 짜기 위해, 부유하는 소수점 즉 <strong><em>부동 소수점 수치(floating point numbers)</em></strong> (실수 값) 블록의 형태 배열 구조로 몽땅 업그레이드 체인지 했을 겁니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]).</span><span class="n">dtype</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="nf">dtype</span><span class="p">(</span><span class="sh">'</span><span class="s">float64</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Typing <code class="language-plaintext highlighter-rouge">fun?</code> will cause <code class="language-plaintext highlighter-rouge">Python</code> to display documentation associated with the function <code class="language-plaintext highlighter-rouge">fun</code>, if it exists.
+또 하나 엄청난 꿀팁! 여러분이 <code class="language-plaintext highlighter-rouge">fun?</code> 처럼 함수명 뒤에 물음표를 딱 붙이고 실행하면? 만약 그 함수가 세상에 존재하는 놈이라면 <code class="language-plaintext highlighter-rouge">Python</code>은 즉시 그 함수 설명서(documentation)를 무슨 사용 설명서 브로슈어 펼치듯 화면에 짠! 하고 꺼내 전시해 줍니다.</p>
+
+<p>We can try this for <code class="language-plaintext highlighter-rouge">np.array()</code>.
+바로 이 신기한 기술을 <code class="language-plaintext highlighter-rouge">np.array()</code> 아파트 건설 주문에도 당장 똑같이 시도해 찔러볼 수 있죠!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="err">?</span>
+</code></pre></div></div>
+
+<p>This documentation indicates that we could create a floating point array by passing a <code class="language-plaintext highlighter-rouge">dtype</code> argument into <code class="language-plaintext highlighter-rouge">np.array()</code>.
+브로슈어 설명서를 잘 들여다보면 깨알 같은 단서가 나옵니다. 굳이 3.0 처럼 소수점을 주입하지 않더라도, 옵션값으로 <code class="language-plaintext highlighter-rouge">dtype=float</code> 인자 꼬리표를 강제로 달아 던져주는 꼼수만으로도 멋진 부동 소수점 실수 배열을 강제 생성이 가능하다는 깨달음을 줍니다!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="nb">float</span><span class="p">).</span><span class="n">dtype</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="nf">dtype</span><span class="p">(</span><span class="sh">'</span><span class="s">float64</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The array <code class="language-plaintext highlighter-rouge">x</code> is two-dimensional.
+다시 우리의 귀여운 2차원 바둑판 아파트 <code class="language-plaintext highlighter-rouge">x</code> 로 돌아가 볼까요.</p>
+
+<p>We can find out the number of rows and columns by looking at its <code class="language-plaintext highlighter-rouge">shape</code> attribute.
+우리는 <code class="language-plaintext highlighter-rouge">x</code>가 총 몇 층(행)짜리인지, 한 층당 몇 호수(열)가 뚫려 있는지 그 몸매 사이즈를 <code class="language-plaintext highlighter-rouge">shape</code> 이라는 체형 속성 단면 스위치를 한 번 눌러 열람함으로써 단박에 발견해 낼 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">x</span><span class="p">.</span><span class="n">shape</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>A <em>method</em> is a function that is associated with an object.
+프로그래머들이 밥 먹듯 쓰는 <strong><em>메서드(method)</em></strong> 란 놈이 도대체 뭘까요? 간단합니다. 아파트(객체, object) 구내에 전용으로 딱 달라붙어 설치된 붙박이 부대시설(내장 함수, function)을 멋지게 부르는 말입니다.</p>
+
+<p>For instance, given an array <code class="language-plaintext highlighter-rouge">x</code>, the expression <code class="language-plaintext highlighter-rouge">x.sum()</code> sums all of its elements, using the <code class="language-plaintext highlighter-rouge">sum()</code> method for arrays.
+예를 하나 들어보죠! 배열 <code class="language-plaintext highlighter-rouge">x</code> 가 주워졌을 때 우리가 냅다 쓴 <code class="language-plaintext highlighter-rouge">x.sum()</code> 이라는 코드는, 이 배열 아파트가 전용으로 소유한 자체 <code class="language-plaintext highlighter-rouge">sum()</code> 합계 계산기(메서드) 부대시설을 작동시켜 전 호수의 입주민 숫자 요소들을 모조리 싹 다 더해버리는 무시무시한 기능입니다.</p>
+
+<p>The call <code class="language-plaintext highlighter-rouge">x.sum()</code> automatically provides <code class="language-plaintext highlighter-rouge">x</code> as the first argument to its <code class="language-plaintext highlighter-rouge">sum()</code> method.
+이게 엄청 편한 이유요? 내가 <code class="language-plaintext highlighter-rouge">x.sum()</code> 스위치를 딸깍! 하고 누르는 순간, 보이지 않는 곳에선 <code class="language-plaintext highlighter-rouge">x</code> 스스로가 자신의 데이터를 첫 번째 제물(인수)로 바쳐 계산기에 셀프로 집어넣고 합계를 내는 마법을 부리기 때문이죠.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+         <span class="n">x</span><span class="p">.</span><span class="nf">sum</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p>We could also sum the elements of <code class="language-plaintext highlighter-rouge">x</code> by passing in <code class="language-plaintext highlighter-rouge">x</code> as an argument to the <code class="language-plaintext highlighter-rouge">np.sum()</code> function.
+물론, 내장 계산기 부대시설을 안 쓰고 거꾸로 메인 중앙 기압실 함수인 <code class="language-plaintext highlighter-rouge">np.sum()</code> 에 <code class="language-plaintext highlighter-rouge">x</code> 를 통째로 도시락 주듯 인수로 집어던져(passing in) 똑같이 원소들의 총합 연산을 우려낼 수조차 있습니다! (결과는 똑같습니다!)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+         <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p>As another example, the <code class="language-plaintext highlighter-rouge">reshape()</code> method returns a new array with the same elements as <code class="language-plaintext highlighter-rouge">x</code>, but a different shape.
+메서드 뽕맛을 본 김에 또 다른 예시 들어갑니다! 마법의 <code class="language-plaintext highlighter-rouge">reshape()</code> 트랜스포머 메서드를 부르면, 원래 아파트 <code class="language-plaintext highlighter-rouge">x</code> 와 똑같은 주민(원소) 구성은 한 명도 빠짐없이 지독히 살리면서, 건물의 외곽 체형(모습) 구조만 찰흙 주무르듯 요리조리 다르게 주물러 개조시킨 전혀 새로운 배열을 눈앞에 반환해 딱 줍니다!</p>
+
+<p>We do this by passing in a <code class="language-plaintext highlighter-rouge">tuple</code> in our call to <code class="language-plaintext highlighter-rouge">reshape()</code>, in this case <code class="language-plaintext highlighter-rouge">(2, 3)</code>.
+이렇게 형태를 성형 개조하려면, 의사에게 구체적인 요구사항이 적힌 <code class="language-plaintext highlighter-rouge">tuple</code> 견적서(이 경우엔 즉 <code class="language-plaintext highlighter-rouge">(2, 3)</code>)를 거론되는 <code class="language-plaintext highlighter-rouge">reshape()</code> 메서드 내부에다 수술비 넣듯 슬쩍 찔러 넣어주면 그만입니다.</p>
+
+<p>This tuple specifies that we would like to create a two-dimensional array with 2 rows and 3 columns.[2]
+이 <code class="language-plaintext highlighter-rouge">(2, 3)</code> 튜플 주문서가 무슨 뜻이냐고요? “원장님! 2층 건물(행)에 층당 3호실(열)이 있는 날렵한 2차원 배열 쌍커풀 건물로 확 뜯어고쳐 주십시오!” 라고 당당히 요구(specifies)하는 것과 같습니다.[2]</p>
+
+<p>In what follows, the <code class="language-plaintext highlighter-rouge">\n</code> character creates a <em>new line</em>.
+이제 뒤따라오는 코드 구경할 때 주의! 뜬금없이 끼어드는 저 <code class="language-plaintext highlighter-rouge">\n</code> 요괴 문자는 프로그래머들이 몰래 숨겨둔 엑스칼리버입니다. 저 녀석을 치면 그 자리에서 다음 줄로 무조건 강제 엔터(<em>new line</em>)를 치며 줄바꿈을 시전합니다!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+         <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">beginning x:</span><span class="se">\n</span><span class="sh">'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+         <span class="n">x_reshape</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="nf">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+         <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">reshaped x:</span><span class="se">\n</span><span class="sh">'</span><span class="p">,</span> <span class="n">x_reshape</span><span class="p">)</span>
+<span class="n">beginning</span> <span class="n">x</span><span class="p">:</span>
+ <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">reshaped</span> <span class="n">x</span><span class="p">:</span>
+ <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<p>The previous output reveals that <code class="language-plaintext highlighter-rouge">numpy</code> arrays are specified as a sequence of <em>rows</em>.
+방금 본 기가 막힌 트랜스포머 결과를 뜯어보면, 넘파이(<code class="language-plaintext highlighter-rouge">numpy</code>) 아파트 건설사들이 데이터를 어떻게 차곡차곡 쌓는지 알 수 있습니다. 바로 층 단위 즉 <strong><em>행들(rows)</em></strong> 이 연속으로 포근하게 차례차례 쌓여 올라가는 시퀀스 기반 설계도를 따랐음을 만천하에 드러내죠!</p>
+
+<p>This is called <em>row-major ordering</em>, as opposed to <em>column-major ordering</em>.
+기둥(열)부터 무식하게 세우고 보는 <em>열-우선(column-major)</em> 방식 세계와는 180도 정반대로, 이렇게 가로로 길게 층(행)부터 벽돌 쌓듯 지어 올리는 방식을 고상하게 <strong><em>행-우선 순서(row-major ordering)</em></strong> 라고 칭합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Python</code> (and hence <code class="language-plaintext highlighter-rouge">numpy</code>) uses 0-based indexing.
+파이썬(그리고 그 피를 이어받은 넘파이)의 가장 엽기적인 룰 한 가지! 얘네는 숫자를 셀 때 1, 2, 3 순서가 아니라 항상 지하 주차장 0층(0-based indexing)부터 악착같이 세는 끔찍한 습관을 지니고 있습니다.</p>
+
+<p>This means that to access the top left element of <code class="language-plaintext highlighter-rouge">x_reshape</code>, we type in <code class="language-plaintext highlighter-rouge">x_reshape[0,0]</code>.
+자, 이 말인즉슨 성형수술 끝난 아파트 <code class="language-plaintext highlighter-rouge">x_reshape</code> 의 가장 왼쪽 옥탑방 꼭대기 부자 입주민(첫 번째 요소) 집 문을 부수고 접근하려면, 1층 1호가 아니라 [0층, 0호] 번지수인 <code class="language-plaintext highlighter-rouge">x_reshape[0,0]</code> 을 쳐넣어야 열린다는 살벌한 뜻입니다!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">x_reshape</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Similarly, <code class="language-plaintext highlighter-rouge">x_reshape[1,2]</code> yields the element in the second row and the third column of <code class="language-plaintext highlighter-rouge">x_reshape</code>.
+같은 오싹한 논리로, <code class="language-plaintext highlighter-rouge">x_reshape[1,2]</code> 도어벨을 누르면 1층이 아니라 <strong>두 번째 층(행)</strong> 에 있고, 2호가 아니라 <strong>세 번째 위치(열)</strong> 에 몸을 숨긴 숨둥이 원소를 단숨에 색출해 끌고 나옵니다. 헷갈리죠? 1을 더해 생각하세요!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">x_reshape</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="mi">6</span>
+</code></pre></div></div>
+
+<p>Similarly, <code class="language-plaintext highlighter-rouge">x[2]</code> yields the third entry of <code class="language-plaintext highlighter-rouge">x</code>.
+또 똑같이, 그냥 일렬 기차 형태 <code class="language-plaintext highlighter-rouge">x[2]</code> 를 호출해 버리면 2번 칸이 아니라 여지없이 <strong>세 번째 기입 항목</strong>에 지정된 원소 녀석을 토해내게 됩니다!</p>
+
+<p>Now, let’s modify the top left element of <code class="language-plaintext highlighter-rouge">x_reshape</code>.
+이런! 이제 슬쩍 장난기를 발동해서 새롭게 만든 저 <code class="language-plaintext highlighter-rouge">x_reshape</code> 아파트의 최상단 왼쪽 VVIP 원소 놈(1번)을 5번으로 몰래 암살하고 조작 수정해 바꿔치기해 보겠습니다!</p>
+
+<p>To our surprise, we discover that the first element of <code class="language-plaintext highlighter-rouge">x</code> has been modified as well!
+근데 웬걸! 까무러치게 놀라운 등골 오싹 호러 쇼가 벌어집니다! 방금 조작한 건 새 아파트였는데, 멀쩡히 놔뒀던 원래 구형 기차 배열 <code class="language-plaintext highlighter-rouge">x</code> 의 첫 원소 놈까지 쌍둥이 텔레파시처럼 같이 5로 암살당해 변경되어 버렸단 사실을 기겁하며 목격하게 됩니다! 이게 어찌 된 영문일까요?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">x before we modify x_reshape:</span><span class="se">\n</span><span class="sh">'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+         <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">x_reshape before we modify x_reshape:</span><span class="se">\n</span><span class="sh">'</span><span class="p">,</span> <span class="n">x_reshape</span><span class="p">)</span>
+         <span class="n">x_reshape</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+         <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">x_reshape after we modify its top left element:</span><span class="se">\n</span><span class="sh">'</span><span class="p">,</span> <span class="n">x_reshape</span><span class="p">)</span>
+         <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">x after we modify top left element of x_reshape:</span><span class="se">\n</span><span class="sh">'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="n">before</span> <span class="n">we</span> <span class="n">modify</span> <span class="n">x_reshape</span><span class="p">:</span>
+ <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">x_reshape</span> <span class="n">before</span> <span class="n">we</span> <span class="n">modify</span> <span class="n">x_reshape</span><span class="p">:</span>
+ <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="n">x_reshape</span> <span class="n">after</span> <span class="n">we</span> <span class="n">modify</span> <span class="n">its</span> <span class="n">top</span> <span class="n">left</span> <span class="n">element</span><span class="p">:</span>
+ <span class="p">[[</span><span class="mi">5</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="n">x</span> <span class="n">after</span> <span class="n">we</span> <span class="n">modify</span> <span class="n">top</span> <span class="n">left</span> <span class="n">element</span> <span class="n">of</span> <span class="n">x_reshape</span><span class="p">:</span>
+ <span class="p">[</span><span class="mi">5</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>2 Like lists, tuples represent a sequence of objects. Why do we need more than one way to create a sequence? There are a few differences between tuples and lists, but perhaps the most important is that elements of a tuple cannot be modified, whereas elements of a list can be.
+2 아까 리스트 말고 튜플이란 놈도 일렬 기차 무리(시퀀스)라고 했죠. 도대체 튜플은 뭐가 아쉬워서 왜 따로 태어난 걸까요? 기기묘묘한 차이점들이 많지만 가장 치명적인 차이는 딱 하나겁니다! 튜플 요소 놈들은 한 번 태어나면 <strong>절대, 네버, 목에 칼이 들어와도 암살(수정)을 안 당하는 강철 멘탈</strong>을 가졌다는 치명적 점이죠. 반면 리스트 놈들은 원하면 얼마든지 쏙쏙 수정할 수 있는 허술한 종이 멘탈 종족입니다!</p>
+</blockquote>
+
+<p>Modifying <code class="language-plaintext highlighter-rouge">x_reshape</code> also modified <code class="language-plaintext highlighter-rouge">x</code> because the two objects occupy the same space in memory.
+다시 쌍둥이 암살 스릴러 사건으로 돌아와 보죠. 아까 <code class="language-plaintext highlighter-rouge">x_reshape</code> 수정한 게 왜 오리지널 <code class="language-plaintext highlighter-rouge">x</code>한테 전이됐냐? 사실 이 두 배열은 눈에 보이는 옷(shape)만 트랜스포머처럼 다르게 입었을 뿐 컴퓨터 메모리상에선 <strong>완벽히 한 몸의 영혼(동일한 메모리 공간)</strong> 을 배를 갈라 공유하며 차지한 존재였기 때문입니다! 무섭죠?</p>
+
+<p>We just saw that we can modify an element of an array.
+어쨌든 방금 엄청난 짓을 한 겁니다. 우린 파이썬에서 배열 속 입주민을 내 마음대로 쏙쏙 수정 개조할 수 있다는 무서운 사실을 알았죠.</p>
+
+<p>Can we also modify a tuple?
+그렇담 강철 멘탈인 ‘튜플(tuple)’ 입주민 놈들도 암살(수정) 해버릴 수 있을까요?</p>
+
+<p>It turns out that we cannot — and trying to do so introduces an <em>exception</em>, or error.
+해봤더니! 절대 불가능합니다! 튜플 건드리려고 시도하는 순간 파이썬 경호원이 “이 바보야!” 하며 그 유명한 무서운 <strong><em>예외(오류, error)</em></strong> 딱지를 이마에 냅다 붙여버립니다! 건들지 마세요!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+         <span class="n">my_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TypeError: 'tuple' object does not support item assignment
+</code></pre></div></div>
+
+<p>We now briefly mention some attributes of arrays that will come in handy.
+자, 이제 분위기 바꿔서 앞으로 실무에서 평생 우려먹을 배열계의 초단골 옵션 스펙, <strong>속성들(attributes)</strong> 3인방을 간략히 소개해 줍니다.</p>
+
+<p>An array’s <code class="language-plaintext highlighter-rouge">shape</code> attribute contains its dimension; this is always a tuple.
+첫째 파워! 배열에다 점 찍고 <code class="language-plaintext highlighter-rouge">shape</code>를 외치면 녀석의 구체적인 신체 사이즈(차원, 배열 행/열)를 고스란히 바쳐옵니다. 아, 이 사이즈 스펙은 절대 수정 못 하는 강철 멘탈 <strong>튜플</strong> 형식으로 토해낸다는 사실! 메모장에 적으세요.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ndim</code> attribute yields the number of dimensions, and <code class="language-plaintext highlighter-rouge">T</code> provides its transpose.
+둘째 파워 <code class="language-plaintext highlighter-rouge">ndim</code>을 부르면 걍 무식하게 “2차원이요!” 하고 층수만 깔끔히 숫자 리턴하고요! 셋째 꿀파워 <code class="language-plaintext highlighter-rouge">T</code> 단추를 누르면 아파트를 <strong>세로 모공으로 눕히는 트랜스포메이션(전치 행렬)</strong> 결과를 눈앞에 산출해 보여줍니다. 눕방이 편해지죠!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="n">x_reshape</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x_reshape</span><span class="p">.</span><span class="n">ndim</span><span class="p">,</span> <span class="n">x_reshape</span><span class="p">.</span><span class="n">T</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+          <span class="mi">2</span><span class="p">,</span>
+          <span class="nf">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]))</span>
+</code></pre></div></div>
+
+<p>Notice that the three individual outputs <code class="language-plaintext highlighter-rouge">(2,3)</code>, <code class="language-plaintext highlighter-rouge">2</code>, and <code class="language-plaintext highlighter-rouge">array([[5, 4],[2, 5], [3,6]])</code> are themselves output as a tuple.
+여기서 잠깐, 화면 위에서 튀어나온 결과창을 잘 보세요! 세 개의 각기 다른 출력 결과물들이 모여 하나의 큰 강철 괄호 튜플 <code class="language-plaintext highlighter-rouge">(결과1, 결과2, 결과3)</code> 구조로 묶여서 우리에게 배달되었다는 놀라운 디테일에 주의 집중하십시오!</p>
+
+<p>We will often want to apply functions to arrays.
+때때로 우리는 이 무식한 배열 덩어리에 온갖 기기묘묘한 수학 함수 연산을 비 올 듯 사정없이 적용해 융단 폭격을 갈기고 싶어 손목이 근질거리게 될 겁니다.</p>
+
+<p>For instance, we can compute the square root of the entries using the <code class="language-plaintext highlighter-rouge">np.sqrt()</code> function:
+예를 들면, 내친김에 모든 입주민 원소들을 도마 위에 올려놓고 마법의 <strong><code class="language-plaintext highlighter-rouge">np.sqrt()</code></strong> 함수 칼을 휘둘러 싹 다 공평하게 그 무시무시한 수학의 <strong>‘제곱근(루트)’</strong> 값을 일괄 재계산해 버릴 수 있습니다!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span> <span class="mf">2.24</span><span class="p">,</span>  <span class="mf">1.41</span><span class="p">,</span>  <span class="mf">1.73</span><span class="p">,</span>  <span class="mf">2.</span>  <span class="p">,</span>  <span class="mf">2.24</span><span class="p">,</span>  <span class="mf">2.45</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>We can also square the elements:
+칼질뿐일까요? 모든 원소 덩치들을 체육관에 넣고 각각 사이드 근육을 두 배로 펌핑시켜 깡그리 덩어리를 뻥튀기하는 <strong>‘제곱’</strong> 훈련도 시킬 수 있죠!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="mi">25</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">36</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>We can compute the square roots using the same notation, raising to the power of $1/2$ instead of 2.
+제곱근(루트) 함수가 기억 안 난다고요? 괜찮습니다! 방금 제곱한 별 2개(<code class="language-plaintext highlighter-rouge">**</code>) 펌핑 표기법을 그대로 응용해, 숫자 2를 주는 대신에 살짝 비틀어 $1/2$ 즉 <code class="language-plaintext highlighter-rouge">0.5</code> 거듭제곱 파워를 줘버려도 결과는 마법의 루트와 소름 차게 똑같이 산출되니까요!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">27</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">27</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span> <span class="mf">2.24</span><span class="p">,</span>  <span class="mf">1.41</span><span class="p">,</span>  <span class="mf">1.73</span><span class="p">,</span>  <span class="mf">2.</span>  <span class="p">,</span>  <span class="mf">2.24</span><span class="p">,</span>  <span class="mf">2.45</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Throughout this book, we will often want to generate random data.
+이 책으로 험난한 통계 전장을 누비는 내내, 우리는 신의 주사위 놀이처럼 허구한 날 미친 랜덤 무작위 더미 데이터들을 양산하고 창조하고 싶어서 안달이 날 겁니다.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">np.random.normal()</code> function generates a vector of random normal variables.
+그럴 때마다 등장하는 구원투수! <code class="language-plaintext highlighter-rouge">np.random.normal()</code> 이라는 주문 함수는 마술처럼 정규 분포의 마법 속에 뛰노는 변수 무리들을 하나의 멋진 랜덤 백터 덩이군으로 쑥쑥 숨풍 뽑아 형성해 냅니다.</p>
+
+<p>We can learn more about this function by looking at the help page, via a call to <code class="language-plaintext highlighter-rouge">np.random.normal?</code>.
+이 대단한 함수의 속내가 궁금하다고요? 아까 꿀팁 줬죠? <code class="language-plaintext highlighter-rouge">np.random.normal?</code> 을 치며 긴박한 한 통의 호출 구조 명령을 넘기면 만병통치약 같은 도움말 페이지가 튀어나오니 열람하며 더 배울 게 한 다발입니다!</p>
+
+<p>The first line of the help page reads <code class="language-plaintext highlighter-rouge">normal(loc=0.0, scale=1.0, size=None)</code>.
+그 거룩한 도움말 메뉴얼 지면 첫 줄거리를 눈 크게 뜨고 직시해 보면, 마치 암호 문건 같은 <code class="language-plaintext highlighter-rouge">normal(loc=0.0, scale=1.0, size=None)</code> 이라는 무언의 규칙 구조가 기저 표기 구문으로 읽혀 들어올 겁니다.</p>
+
+<p>This <em>signature</em> line tells us that the function’s arguments are <code class="language-plaintext highlighter-rouge">loc</code>, <code class="language-plaintext highlighter-rouge">scale</code>, and <code class="language-plaintext highlighter-rouge">size</code>.
+이 폼나는 서명 <em>시그니처(signature)</em> 라인은, 이 위대한 조물주 함수 안에는 세 가지 필수 영양소 투입 인자, 즉 <strong><code class="language-plaintext highlighter-rouge">loc</code>(평균), <code class="language-plaintext highlighter-rouge">scale</code>(표준편차), <code class="language-plaintext highlighter-rouge">size</code>(개수)</strong> 가 필요함을 은밀히 찌르고 알려주죠.</p>
+
+<p>These are <em>keyword</em> arguments, which means that when they are passed into the function, they can be referred to by name (in any order).[3]
+더 놀라운 건 이 세트는 그냥 인자도 아니고 <strong><em>키워드(keyword) 인자</em></strong> 들이라는 사실! 즉, 믹서기에 짬뽕으로 처넣을 때 “scale=1, loc=0” 이렇게 이름을 딱 명시해 주면 내 맘대로 뒤죽박죽 어떤 빌어먹을 순서로 던져도 함수가 찰떡같이 자리를 찾아 삼켜준다는 은혜로운 뜻이 숨어있습니다![3]</p>
+
+<p>By default, this function will generate random normal variable(s) with mean (<code class="language-plaintext highlighter-rouge">loc</code>) 0 and standard deviation (<code class="language-plaintext highlighter-rouge">scale</code>) 1; furthermore, a single random variable will be generated unless the argument to <code class="language-plaintext highlighter-rouge">size</code> is changed.
+이것도 귀찮다? 그냥 빈 괄호로 부르면, 넘파이님은 기본 옵션(default)값으로 “평균(<code class="language-plaintext highlighter-rouge">loc</code>)은 0, 퍼진 정도(<code class="language-plaintext highlighter-rouge">scale</code>)는 1”로 잡힌, 소위 통계학의 근본 스탠다드 녀석 하나만 뚝딱 만들어줍니다. 게다가 <code class="language-plaintext highlighter-rouge">size</code> 값을 강제로 안 바꾸는 한 짠돌이처럼 딱 <strong>한 놈의 단일 난수</strong>만 주니까 명심하세요!</p>
+
+<p>We now generate 50 independent random variables from a $N(0, 1)$ distribution.
+이제 말 나온 김에, $N(0, 1)$ (평균 0, 표준편차 1) 스펙의 삐까뻔쩍한 통 안에 손을 넣어, 50마리의 눈치 안 보는 독립적인 랜덤 주사위 몬스터들을 생성해 보겠습니다!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+         <span class="n">x</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.19</span><span class="p">,</span>  <span class="mf">0.41</span><span class="p">,</span>  <span class="mf">0.9</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.44</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.38</span><span class="p">,</span>  <span class="mf">0.13</span><span class="p">,</span>  <span class="mf">1.87</span><span class="p">,</span>
+                <span class="o">-</span><span class="mf">0.35</span><span class="p">,</span>  <span class="mf">1.16</span><span class="p">,</span>  <span class="mf">0.79</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.97</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.21</span><span class="p">,</span>  <span class="mf">0.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.62</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6</span> <span class="p">,</span>
+                <span class="o">-</span><span class="mf">0.77</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.12</span><span class="p">,</span>  <span class="mf">0.38</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.22</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.97</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.74</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.56</span><span class="p">,</span>
+                 <span class="mf">1.7</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.95</span><span class="p">,</span>  <span class="mf">0.56</span><span class="p">,</span>  <span class="mf">0.35</span><span class="p">,</span>  <span class="mf">0.87</span><span class="p">,</span>  <span class="mf">0.88</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.66</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.32</span><span class="p">,</span>
+                <span class="o">-</span><span class="mf">0.3</span> <span class="p">,</span> <span class="o">-</span><span class="mf">1.36</span><span class="p">,</span>  <span class="mf">0.92</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.31</span><span class="p">,</span>  <span class="mf">1.28</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.94</span><span class="p">,</span>  <span class="mf">1.07</span><span class="p">,</span>  <span class="mf">0.07</span><span class="p">,</span>
+                 <span class="mf">0.79</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.46</span><span class="p">,</span>  <span class="mf">2.19</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.27</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.64</span><span class="p">,</span>  <span class="mf">0.85</span><span class="p">,</span>  <span class="mf">0.13</span><span class="p">,</span>  <span class="mf">0.46</span><span class="p">,</span>
+                <span class="o">-</span><span class="mf">0.09</span><span class="p">,</span>  <span class="mf">0.7</span> <span class="p">])</span>
+</code></pre></div></div>
+
+<p>We create an array <code class="language-plaintext highlighter-rouge">y</code> by adding an independent $N(50, 1)$ random variable to each element of <code class="language-plaintext highlighter-rouge">x</code>.
+장난 좀 더 칠까요? 방금 만든 그 50칸짜리 배열 아파트 <code class="language-plaintext highlighter-rouge">x</code>의 각 호수별 입주민에다 추가로 $N(50, 1)$ 구역에서 따로 태어난 무작위 변수 몬스터 값들을 강제로 들러붙어 더해 버려서, 덩치를 불린 새로운 <code class="language-plaintext highlighter-rouge">y</code> 아파트 배열을 무단 생성해 보겠습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">np.corrcoef()</code> function computes the correlation matrix between <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>.
+자, 그럼 여기서 의문! 방금 태어난 뚱뚱보 <code class="language-plaintext highlighter-rouge">y</code>놈은 원본 오리지널 <code class="language-plaintext highlighter-rouge">x</code>랑 얼마나 빼닮고 쌍둥이처럼 움직일까요? 파이썬 탐정 사무소 전용 상관관계(Corr) 스캐너 기술 함수인 <strong><code class="language-plaintext highlighter-rouge">np.corrcoef()</code></strong> 가 그 둘 사이의 밀접 끈적한 유착 관계(행렬)를 도출해 계산해 줄 겁니다!</p>
+
+<p>The off-diagonal elements give the correlation between <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>.
+스캐너 분석 결과 창에서 딱 정중앙 대각선(나와 나의 사랑=1) 부분을 빗겨나간 외곽 여분 요소값들을 째려보면? 빙고! <code class="language-plaintext highlighter-rouge">x</code>와 <code class="language-plaintext highlighter-rouge">y</code> 녀석이 얼마나 사이좋게 붙어 다니는지(상관관계) 알려주는 섹시한 상관계수 스코어가 우리 눈앞에 떡 하니 주어집니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="n">np</span><span class="p">.</span><span class="nf">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span><span class="mf">1.</span>  <span class="p">,</span> <span class="mf">0.69</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.69</span><span class="p">,</span> <span class="mf">1.</span>  <span class="p">]])</span>
+</code></pre></div></div>
+
+<p>If you’re following along in your own <code class="language-plaintext highlighter-rouge">Jupyter</code> notebook, then you probably noticed that you got a different set of results when you ran the past few commands.
+잠깐, 지금 여러분만의 노트북 창에 제 코드를 뚝딱뚝딱 복사하며 따라오고 계시는 당신! 눈치가 조금이라도 있다면, 본인이 아까 방금 실행했던 명령 결괏값 창에 떠오른 무작위 숫자 라인업 더미가 제 교재에 찍힌 스크린샷과 머리카락부터 발끝까지 딴판으로 다르다는 사실을 이미 뼈저리게 알아채셨겠군요!</p>
+
+<p>In particular, each time we call <code class="language-plaintext highlighter-rouge">np.random.normal()</code>, we will get a different answer, as shown in the following example.
+이거 기계 고장 아닙니다! 말 그대로 “랜덤(무작위)” 함수이기 때문에, 다음 짧은 예시에 나오듯 우리가 <code class="language-plaintext highlighter-rouge">np.random.normal()</code> 부름 버튼을 딸깍 눌러 제낄 찰나의 때마다 사정없이 요동치며 상이하고 새로운 도출 답변 정답만을 툭툭 내던지는 게 당연한 겁니다!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">31</span><span class="p">]:</span> <span class="nf">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+         <span class="nf">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="p">[</span> <span class="mf">4.28</span>  <span class="mf">2.59</span><span class="p">]</span>
+<span class="p">[</span> <span class="mf">4.62</span> <span class="o">-</span><span class="mf">2.54</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>In order to ensure that our code provides exactly the same results each time it is run, we can set a <em>random seed</em> using the <code class="language-plaintext highlighter-rouge">np.random.default_rng()</code> function.
+하지만, “아놔! 강좌랑 숫자가 다르면 공부할 때 헷갈리잖아요! 매번 똑같은 번호표 좀 달라고!!” 라고 절규할 여러분의 멘탈을 지키기 위하여, 파이썬엔 기막힌 자물쇠가 하나 존재하죠! <code class="language-plaintext highlighter-rouge">np.random.default_rng()</code> 란 방안 함수를 사용해 우주의 비밀 번호 같은 <strong><em>랜덤 시드(random seed)</em></strong> 씨앗 코드를 설정해 틀어막아 버림으로써 1,000번을 돌려도 토씨 하나 안 틀리게 같은 운명의 숫자를 양산시키는 보장 방안 장치를 확보해 놓을 수 있습니다.</p>
+
+<p>This function takes an arbitrary, user-specified integer argument.
+설정법은 단순합니다. 사용자가 자기 생일, 군번, 아니면 로또 번호든 뭐든 임의적인 정수 숫자 덩어리 인수를 이 함수의 뱃속에 저당 잡히듯 박아 넣기만 하면 됩니다.</p>
+
+<p>If we set a random seed before generating random data, then re-running our code will yield the same results.
+그렇게 무작위 몬스터를 뽑아내기 직전 제단에 시드 마법진을 한 번 딱 설정해 놓으면? 이 코드를 천년만년 재실행하며 돌리더라도 컴퓨터 기계는 마치 기시감, 데자뷰에 빠진 양 완전히 예고된 판이한 무결 오차의 같은 운명을 지닌 쌍둥이 결과 숫자물 복제본만을 여지없이 거두어냅니다.</p>
+
+<p>The object <code class="language-plaintext highlighter-rouge">rng</code> has essentially all the random number generating methods found in <code class="language-plaintext highlighter-rouge">np.random</code>.
+게다가 저 시드를 품은 강력한 객체 덩어리 일원 <code class="language-plaintext highlighter-rouge">rng</code> 는 엄청난 잠재력을 과시합니다. 본질적으로 기존 <code class="language-plaintext highlighter-rouge">np.random</code> 오리지널 공장에서 보유하고 돌아가던 그 모든 종류의 무수한 랜덤 수 도출 메서드 기계들을 이 놈이 다 흡수해 보유 상속해 지니고 있거든요!</p>
+
+<p>Hence, to generate normal data we use <code class="language-plaintext highlighter-rouge">rng.normal()</code>.
+그러니 논리적으로 깔끔하게, 우리는 기껏 배운 정규 분포 몬스터를 뽑아낼 땐 더 이상 구형 공장이 아닌 이 시드가 장전된 <code class="language-plaintext highlighter-rouge">rng.normal()</code> 신형 총을 꺼내 단번 일격에 난사를 때려 거둔단 이야기죠!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">32</span><span class="p">]:</span> <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">1303</span><span class="p">)</span>
+         <span class="nf">print</span><span class="p">(</span><span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+         <span class="n">rng2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">1303</span><span class="p">)</span>
+         <span class="nf">print</span><span class="p">(</span><span class="n">rng2</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="p">[</span> <span class="mf">4.09</span> <span class="o">-</span><span class="mf">1.07</span><span class="p">]</span>
+<span class="p">[</span> <span class="mf">4.09</span> <span class="o">-</span><span class="mf">1.07</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Throughout the labs in this book, we use <code class="language-plaintext highlighter-rouge">np.random.default_rng()</code> whenever we perform calculations involving random quantities within <code class="language-plaintext highlighter-rouge">numpy</code>.
+바로 이게 비법입니다. 이 교재 실습의 수만 개 전방 구간 속을 헤집으며 다닐 무렵, 우리 강사진은 여러분이 <code class="language-plaintext highlighter-rouge">numpy</code> 랜덤 주사위를 던지며 헷갈리지 않게 배려하고자 제반 단위 연산이 나타나는 시기마다 언제나 저 <code class="language-plaintext highlighter-rouge">np.random.default_rng()</code> 강철 닻을 사용해 시공간을 동일 포맷으로 확정시킵니다.</p>
+
+<p>In principle, this should enable the reader to exactly reproduce the stated results.
+이렇게 지독하게 자물쇠를 거는 심산과 원칙적 목표는, 바로 컴퓨터 앞 저 멀리서 코드를 치는 불특정 다수의 우리 독자 여러분 누구라도 강좌 모니터에 딱 찍힌 수치 결과 그대로를 소수점 이하까지 100% 한 치 오차 없게 모방 재생산하고 도출시켜 “아, 나도 잘하고 있구나”라는 가능 구조와 여분 안심감을 선사하기 위함입니다.</p>
+
+<p>However, as new versions of <code class="language-plaintext highlighter-rouge">numpy</code> become available, it is possible that some small discrepancies may occur between the output in the labs and the output from <code class="language-plaintext highlighter-rouge">numpy</code>.
+그런데, 최악의 경우를 대비해 스포 하나 날립니다! 세상만사가 항상 기계처럼 풀리지 않듯 추후 출시될 첨단 <code class="language-plaintext highlighter-rouge">numpy</code> 다음 세대 신규 버전 모듈들이 나오게 되면요, 제가 옛날 버전에 맞춰 써놓은 이 책의 실습 결과 출력값과 여러분 최신 파이썬 버전의 결괏값 사이에 “에잉? 끝자리 소수점 하나가 다르네?” 같은 몇몇 국소적이고 좁쌀만 한 조잡 오차 균열 차이가 도출되는 귀여운 비양심적 일탈 불일치 정도는 소폭 일어날 가능성이 있으니 너무 기함하지 마십시오!</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">np.mean()</code>, <code class="language-plaintext highlighter-rouge">np.var()</code>, and <code class="language-plaintext highlighter-rouge">np.std()</code> functions can be used to compute the mean, variance, and standard deviation of arrays.
+숫자 마법을 마무리할 통계의 3신기 트리오! 바로 <code class="language-plaintext highlighter-rouge">np.mean()</code>(평균 내기), <code class="language-plaintext highlighter-rouge">np.var()</code>(분산 흩어짐 재기), 그리고 마지막 보스 <code class="language-plaintext highlighter-rouge">np.std()</code>(표준 편차 요동치기)! 이 세 함수들은 무수한 배열의 뼈대 수치 통계 분석을 가늠해 뽑아내고 척척 연산해 내기 조치 목적으로 다분하게 두루 사용 채택 구동되는 만능 칼잡이 트리오입니다.</p>
+
+<p>These functions are also available as methods on the arrays.
+이 강력 트리오는 따로 함수 공구함에서 안 꺼내고 편하게, 지어둔 배열 아파트 구조물 그 자체 위편 단면에 내재된 전속 부대시설 메서드 점 스위치 조작 도구(예: <code class="language-plaintext highlighter-rouge">x.mean()</code>)만으로도 무결하고 깔끔하게 여전히 이행 사용이 가능한 면모를 부쩍 띄고 있죠!</p>
+
+<blockquote>
+  <p>3 <code class="language-plaintext highlighter-rouge">Python</code> also uses <em>positional</em> arguments. Positional arguments do not need to use a keyword. To see an example, type in <code class="language-plaintext highlighter-rouge">np.sum?</code>. We see that <code class="language-plaintext highlighter-rouge">a</code> is a positional argument, i.e. this function assumes that the first unnamed argument that it receives is the array to be summed. By contrast, <code class="language-plaintext highlighter-rouge">axis</code> and <code class="language-plaintext highlighter-rouge">dtype</code> are keyword arguments: the position in which these arguments are entered into <code class="language-plaintext highlighter-rouge">np.sum()</code> does not matter.
+3 아까 인자(목재 재료)를 짬뽕으로 넣어도 된다 했는데 조건이 있어요! 파이썬은 이름표 없는 맹독성 <em>위치 지정(positional)</em> 인자라는 룰도 공존시킵니다. 위치 지정 녀석들은 이름표(키워드) 따위 무시하고 “오직 순서가 법이다”라고 우깁니다! 예컨대 <code class="language-plaintext highlighter-rouge">np.sum?</code> 에 설명 뜬 <code class="language-plaintext highlighter-rouge">a</code> 같은 놈은요, 우리가 <code class="language-plaintext highlighter-rouge">np.sum(x)</code> 할 때 굳이 이름 명시 안 해도 가장 먼저 들어온 미 기명 첫 번째 녀석 <code class="language-plaintext highlighter-rouge">x</code>를 “아, 이놈이 바로 덧셈 당할 통계 배열 타깃물이구나!” 라고 건방지게 자동 가정해 버리는 무시무시한 지표 위치 룰 구조를 갖추고 있죠. 반면 <code class="language-plaintext highlighter-rouge">axis=0</code> 처럼 이름 찍힌 키워드 인자들은? 얘네는 배열을 맨 앞, 맨 옆, 어디다 냅다 던져넣든 순서는 모조리 상관 않는 무질서 개방성을 증명 보여주는 속성입니다.</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">33</span><span class="p">]:</span> <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+         <span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">standard_normal</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+         <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">y</span><span class="p">.</span><span class="nf">mean</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">33</span><span class="p">]:</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.11</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.11</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">var</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">y</span><span class="p">.</span><span class="nf">var</span><span class="p">(),</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="p">.</span><span class="nf">mean</span><span class="p">())</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="p">(</span><span class="mf">2.72</span><span class="p">,</span> <span class="mf">2.72</span><span class="p">,</span> <span class="mf">2.72</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Notice that by default <code class="language-plaintext highlighter-rouge">np.var()</code> divides by the sample size <em>n</em> rather than $n - 1$; see the <code class="language-plaintext highlighter-rouge">ddof</code> argument in <code class="language-plaintext highlighter-rouge">np.var?</code>.
+단 이 분산 구하는 <code class="language-plaintext highlighter-rouge">np.var()</code> 함수에서 주의할 통계학의 뒤통수 꿀팁 하나! 기본 옵션 상으론 분모를 계산할 때 학계 무수분파 분산 룰인 $n - 1$ 구조 공식을 철저히 파괴하고 시크하게 그 데이터 총 표본수 대가리 덩치 숫자인 통 단위규모 <em>n</em> 으로 가려움 없이 즉각 제수 삼아 나눈다는(자유도 무시) 살벌한 사실 점을 유념하십시오! “어? 분산은 n-1 아닌가요?” 하고 이 옵션을 손질 여부 점검하고 싶다 가령 한다면 단락 부근의 <code class="language-plaintext highlighter-rouge">np.var?</code> 설명서에 숨은 옵션 인자 조절 구역 부분의 <code class="language-plaintext highlighter-rouge">ddof</code> 항을 샅샅이 뒤져 검토해 조정해 부디 써 보시길 바랍니다!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">var</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">np</span><span class="p">.</span><span class="nf">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="p">(</span><span class="mf">1.65</span><span class="p">,</span> <span class="mf">1.65</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">np.mean()</code>, <code class="language-plaintext highlighter-rouge">np.var()</code>, and <code class="language-plaintext highlighter-rouge">np.std()</code> functions can also be applied to the rows and columns of a matrix.
+우리의 이 믿음직한 삼신기 통계 함수 트리오(<code class="language-plaintext highlighter-rouge">np.mean()</code>, <code class="language-plaintext highlighter-rouge">np.var()</code>, <code class="language-plaintext highlighter-rouge">np.std()</code>) 세트 요소 객체 무리는 한낱 단출한 1차원 줄뿐만 아니라, 웅장한 행렬 아파트 전체 단원에 포진한 구조 내부의 특정 구역 다수 층수 “행들” 방면으로, 단면 뾰족한 동 구획 “열들” 단위를 겨냥 세로 꼬집어 통제하여 단전 조작 적용 역시 가능 가용 될 부가 사기 스킬 기능을 보유합니다! (특정 층, 특정 라인 통계 따로 빼기 가능)</p>
+
+<p>To see this, we construct a $10 \times 3$ matrix of $N(0, 1)$ random variables, and consider computing its row sums.
+과연 그게 진짜일지 이 엄청난 기능을 직접 목격 두 눈 가늠하려고, 우리는 잽싸게 저 $N(0, 1)$ 속성의 몬스터들을 잔뜩 욱여넣어 자그마치 “행 10칸 넓이 3칸” 짜리의 거대 $10 \times 3$ 규모 싹쓸이 행렬 아파트를 건축 생성 구조 지어 올리고, 각 방 단락마다 행별로 층층이 통 단면 합 요소를 시도해 쫘아악 추출해 뽑아 계산하는 도출 작용 플랜을 수립해 보겠습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">36</span><span class="p">]:</span> <span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">standard_normal</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+         <span class="n">X</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mf">0.23</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.35</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.28</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mf">0.67</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.39</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">0.48</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.24</span><span class="p">,</span>  <span class="mf">0.96</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mf">0.2</span> <span class="p">,</span>  <span class="mf">0.02</span><span class="p">,</span>  <span class="mf">1.55</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">0.55</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.51</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.18</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">0.54</span><span class="p">,</span>  <span class="mf">1.94</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.27</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mf">0.24</span><span class="p">,</span>  <span class="mf">1.</span>  <span class="p">,</span> <span class="o">-</span><span class="mf">0.89</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mf">0.29</span><span class="p">,</span>  <span class="mf">0.88</span><span class="p">,</span>  <span class="mf">0.58</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">0.09</span><span class="p">,</span>  <span class="mf">0.67</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.83</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">1.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.96</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.67</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>Since arrays are row-major ordered, the first axis, i.e. <code class="language-plaintext highlighter-rouge">axis=0</code>, refers to its rows.
+아까 제가 살짝 경고했죠? 파이썬 배열 건축물 짓는 구조 질서 속성은 필시 기본적으로 바닥 1층 위에 2층을 까는 “행-우선(row-major) 정렬” 성질 주효 기틀을 깐다고요. 그렇기 때문에 이 넘파이에서 첫째 기조 지칭 중심 파워 축 즉 <code class="language-plaintext highlighter-rouge">axis=0</code> 딱지는 컴퓨터 입장에서 바로 그 기준 단락인 <strong>행 단위 조각</strong>들을 단독 지정해 가리키고 아우르며 포위한다는 기명 사실이 됩니다.</p>
+
+<p>We pass this argument into the <code class="language-plaintext highlighter-rouge">mean()</code> method for the object <code class="language-plaintext highlighter-rouge">X</code>.
+우리가 이 사실을 교묘히 이용해 <code class="language-plaintext highlighter-rouge">axis=0</code> 라는 조작 스위치 매개 뼈대 인자를 거대 객체 본원 건물 <code class="language-plaintext highlighter-rouge">X</code> 에 종속된 <code class="language-plaintext highlighter-rouge">mean()</code> 함수 입구 내부 속으로 살짝 던져 주입 단언 투여하면? (마법이 풀리죠!)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">37</span><span class="p">]:</span> <span class="n">X</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">37</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span> <span class="mf">0.15</span><span class="p">,</span>  <span class="mf">0.14</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.34</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>The following yields the same result.
+귀찮은 그대들을 위한 보너스 코드! 이름표 안 달고 쿨하게 숫자 <code class="language-plaintext highlighter-rouge">0</code> 만 딱 집어넣은 아래 등장 구문 조치 역시 한 줌 부끄럼 없이 앞의 결과 출력 양태와 다분 일치하게 모조리 똑같은 단연 결괏값을 뽑아 산출 내어 우리 단전에 사르르 던져 줄 겁니다!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">38</span><span class="p">]:</span> <span class="n">X</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">38</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span> <span class="mf">0.15</span><span class="p">,</span>  <span class="mf">0.14</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.34</span><span class="p">])</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../2_3_2_basic_commands/trans2.html">&lt; 2.3.2 Basic Commands</a></td>
+      <td><a href="../2_3_4_graphics/trans2.html">2.3.4 Graphics &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

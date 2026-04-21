@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -513,7 +512,20 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="in-8-resultsparams"><strong><code class="language-plaintext highlighter-rouge">In [8]:</code></strong> <code class="language-plaintext highlighter-rouge">results.params</code></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4.7.2 Logistic Regression</a></td>
+      <td><a href="../../4_7_3_linear_discriminant_analysis/index.html">4.7.3 Linear Discriminant Analysis &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="in-8-resultsparams"><strong><code class="language-plaintext highlighter-rouge">In [8]:</code></strong> <code class="language-plaintext highlighter-rouge">results.params</code></h1>
 
 <table>
   <thead>
@@ -562,32 +574,30 @@
   </tbody>
 </table>
 
-<p>Likewise we can use the <code class="language-plaintext highlighter-rouge">pvalues</code> attribute to access the <em>p</em> -values for the coefficients (not shown).</p>
+<p>Likewise we can use the <code class="language-plaintext highlighter-rouge">pvalues</code> attribute to access the <em>p</em>-values for the coefficients (not shown).</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [9]:results.pvalues
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">results</span><span class="p">.</span><span class="n">pvalues</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">predict()</code> method of <code class="language-plaintext highlighter-rouge">results</code> can be used to predict the probability that the market will go up, given values of the predictors. This method returns predictions on the probability scale. If no data set is supplied to the <code class="language-plaintext highlighter-rouge">predict()</code> function, then the probabilities are computed for the training data that was used to fit the logistic regression model. As with linear regression, one can pass an optional <code class="language-plaintext highlighter-rouge">exog</code> argument consistent with a design matrix if desired. Here we have printed only the first ten probabilities.</p>
+<p>The <code class="language-plaintext highlighter-rouge">predict()</code> method of <code class="language-plaintext highlighter-rouge">results</code> can be used to predict the probability that the market will go up, given values of the predictors. This method returns predictions on the probability scale. If no data set is supplied to the <code class="language-plaintext highlighter-rouge">predict()</code> function, then the probabilities are computed for the training data that was used to fit the logistic regression model. Here we have printed only the first ten probabilities.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [10]:probs=results.predict()
-probs[:10]
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">predict</span><span class="p">()</span>
+<span class="n">probs</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[10]:array([0.5070841,0.4814679,0.4811388,0.5152223,0.5107812,
-0.5069565,0.4926509,0.5092292,0.5176135,0.4888378])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="mf">0.5070841</span><span class="p">,</span> <span class="mf">0.4814679</span><span class="p">,</span> <span class="mf">0.4811388</span><span class="p">,</span> <span class="mf">0.5152223</span><span class="p">,</span> <span class="mf">0.5107812</span><span class="p">,</span>
+                <span class="mf">0.5069565</span><span class="p">,</span> <span class="mf">0.4926509</span><span class="p">,</span> <span class="mf">0.5092292</span><span class="p">,</span> <span class="mf">0.5176135</span><span class="p">,</span> <span class="mf">0.4888378</span><span class="p">])</span>
 </code></pre></div></div>
 
-<p>In order to make a prediction as to whether the market will go up or down on a particular day, we must convert these predicted probabilities into class labels, <code class="language-plaintext highlighter-rouge">Up</code> or <code class="language-plaintext highlighter-rouge">Down</code> . The following two commands create a vector of class predictions based on whether the predicted probability of a market increase is greater than or less than 0.5.</p>
+<p>In order to make a prediction as to whether the market will go up or down on a particular day, we must convert these predicted probabilities into class labels, <code class="language-plaintext highlighter-rouge">Up</code> or <code class="language-plaintext highlighter-rouge">Down</code>. The following two commands create a vector of class predictions based on whether the predicted probability of a market increase is greater than or less than 0.5.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [11]:labels=np.array(['Down']*1250)
-labels[probs &gt;0.5]="Up"
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="sh">'</span><span class="s">Down</span><span class="sh">'</span><span class="p">]</span><span class="o">*</span><span class="mi">1250</span><span class="p">)</span>
+<span class="n">labels</span><span class="p">[</span><span class="n">probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Up</span><span class="sh">"</span>
 </code></pre></div></div>
 
-<p>176 4. Classification</p>
+<p>The <code class="language-plaintext highlighter-rouge">confusion_table()</code> function from the <code class="language-plaintext highlighter-rouge">ISLP</code> package summarizes these predictions, showing how many observations were correctly or incorrectly classified. The <code class="language-plaintext highlighter-rouge">confusion_table()</code> function takes as first argument the predicted labels, and second argument the true labels.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">confusion_table()</code> function from the <code class="language-plaintext highlighter-rouge">ISLP</code> package summarizes these <code class="language-plaintext highlighter-rouge">confusion_</code> predictions, showing how many observations were correctly or incorrectly <code class="language-plaintext highlighter-rouge">table()</code> classified. Our function, which is adapted from a similar function in the module <code class="language-plaintext highlighter-rouge">sklearn.metrics</code> , transposes the resulting matrix and includes row and column labels. The <code class="language-plaintext highlighter-rouge">confusion_table()</code> function takes as first argument the predicted labels, and second argument the true labels.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [12]:confusion_table(labels,Smarket.Direction)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="nf">confusion_table</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">Direction</span><span class="p">)</span>
 </code></pre></div></div>
 
 <table>
@@ -623,8 +633,124 @@ labels[probs &gt;0.5]="Up"
 
 <p>The diagonal elements of the confusion matrix indicate correct predictions, while the off-diagonals represent incorrect predictions. Hence our model correctly predicted that the market would go up on 507 days and that it would go down on 145 days, for a total of 507 + 145 = 652 correct predictions. The <code class="language-plaintext highlighter-rouge">np.mean()</code> function can be used to compute the fraction of days for which the prediction was correct. In this case, logistic regression correctly predicted the movement of the market 52.2% of the time.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [13]:(507+145)/1250,np.mean(labels==Smarket.Direction)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="p">(</span><span class="mi">507</span><span class="o">+</span><span class="mi">145</span><span class="p">)</span><span class="o">/</span><span class="mi">1250</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">Direction</span><span class="p">)</span>
 </code></pre></div></div>
+
+<h1 id="out13-05216-05216"><strong><code class="language-plaintext highlighter-rouge">Out[13]:</code></strong> <code class="language-plaintext highlighter-rouge">(0.5216, 0.5216)</code></h1>
+
+<p>At first glance, it appears that the logistic regression model is working a little better than random guessing. However, this result is misleading because we trained and tested the model on the same set of 1,250 observations. In other words, 100 − 52.2 = 47.8% is the <em>training</em> error rate. As we have seen previously, the training error rate is often overly optimistic — it tends to underestimate the test error rate. In order to better assess the accuracy of the logistic regression model in this setting, we can fit the model using part of the data, and then examine how well it predicts the <em>held out</em> data.</p>
+
+<p>To implement this strategy, we first create a Boolean vector corresponding to the observations from 2001 through 2004. We then use this vector to create a held out data set of observations from 2005.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">train</span> <span class="o">=</span> <span class="p">(</span><span class="n">Smarket</span><span class="p">.</span><span class="n">Year</span> <span class="o">&lt;</span> <span class="mi">2005</span><span class="p">)</span>
+<span class="n">Smarket_train</span> <span class="o">=</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">]</span>
+<span class="n">Smarket_test</span> <span class="o">=</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+<span class="n">Smarket_test</span><span class="p">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<h1 id="out14-252-9"><strong><code class="language-plaintext highlighter-rouge">Out[14]:</code></strong> <code class="language-plaintext highlighter-rouge">(252, 9)</code></h1>
+
+<p>The object <code class="language-plaintext highlighter-rouge">train</code> is a boolean array, since its elements are <code class="language-plaintext highlighter-rouge">True</code> and <code class="language-plaintext highlighter-rouge">False</code>. Therefore, <code class="language-plaintext highlighter-rouge">Smarket.loc[~train]</code> yields a subset of the rows of the data frame of the stock market data containing only the observations for which <code class="language-plaintext highlighter-rouge">train</code> is <code class="language-plaintext highlighter-rouge">False</code>. The output above indicates that there are 252 such observations.</p>
+
+<p>We now fit a logistic regression model using only the subset of the observations that correspond to dates before 2005. We then obtain predicted probabilities of the stock market going up for each of the days in our test set — that is, for the days in 2005.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">X</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+<span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">y</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+<span class="n">glm_train</span> <span class="o">=</span> <span class="n">sm</span><span class="p">.</span><span class="nc">GLM</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span>
+                   <span class="n">X_train</span><span class="p">,</span>
+                   <span class="n">family</span><span class="o">=</span><span class="n">sm</span><span class="p">.</span><span class="n">families</span><span class="p">.</span><span class="nc">Binomial</span><span class="p">())</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">glm_train</span><span class="p">.</span><span class="nf">fit</span><span class="p">()</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">exog</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Notice that we have trained and tested our model on two completely separate data sets: training was performed using only the dates before 2005, and testing was performed using only the dates in 2005.</p>
+
+<p>Finally, we compare the predictions for 2005 to the actual movements of the market over that time period. We will first store the test and training labels (recall <code class="language-plaintext highlighter-rouge">y_test</code> is binary).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">Direction</span>
+<span class="n">L_train</span><span class="p">,</span> <span class="n">L_test</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">D</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Now we threshold the fitted probability at 50% to form our predicted labels.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="sh">'</span><span class="s">Down</span><span class="sh">'</span><span class="p">]</span><span class="o">*</span><span class="mi">252</span><span class="p">)</span>
+<span class="n">labels</span><span class="p">[</span><span class="n">probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Up</span><span class="sh">'</span>
+<span class="nf">confusion_table</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">L_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">Truth</span>      <span class="n">Down</span>  <span class="n">Up</span>
+<span class="n">Predicted</span>
+<span class="n">Down</span>         <span class="mi">77</span>    <span class="mi">97</span>
+<span class="n">Up</span>           <span class="mi">34</span>    <span class="mi">44</span>
+</code></pre></div></div>
+
+<p>The test accuracy is about 48% while the error rate is about 52%.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="n">L_test</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">labels</span> <span class="o">!=</span> <span class="n">L_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="p">(</span><span class="mf">0.4802</span><span class="p">,</span> <span class="mf">0.5198</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">!=</code> notation means <em>not equal to</em>, and so the last command computes the test set error rate. The results are rather disappointing: the test error rate is 52%, which is worse than random guessing! Of course this result is not all that surprising, given that one would not generally expect to be able to use previous days’ returns to predict future market performance. (After all, if it were possible to do so, then the authors of this book would be out striking it rich rather than writing a statistics textbook.)</p>
+
+<p>We recall that the logistic regression model had very underwhelming <em>p</em>-values associated with all of the predictors. Using predictors that have no relationship with the response tends to cause a deterioration in the test error rate, and so removing such predictors may in turn yield an improvement. Below we refit the logistic regression using just <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code>, which seemed to have the highest predictive power in the original model.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">model</span> <span class="o">=</span> <span class="nc">MS</span><span class="p">([</span><span class="sh">'</span><span class="s">Lag1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Lag2</span><span class="sh">'</span><span class="p">]).</span><span class="nf">fit</span><span class="p">(</span><span class="n">Smarket</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">Smarket</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">X</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+<span class="n">glm_train</span> <span class="o">=</span> <span class="n">sm</span><span class="p">.</span><span class="nc">GLM</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span>
+                   <span class="n">X_train</span><span class="p">,</span>
+                   <span class="n">family</span><span class="o">=</span><span class="n">sm</span><span class="p">.</span><span class="n">families</span><span class="p">.</span><span class="nc">Binomial</span><span class="p">())</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">glm_train</span><span class="p">.</span><span class="nf">fit</span><span class="p">()</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">exog</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="sh">'</span><span class="s">Down</span><span class="sh">'</span><span class="p">]</span><span class="o">*</span><span class="mi">252</span><span class="p">)</span>
+<span class="n">labels</span><span class="p">[</span><span class="n">probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Up</span><span class="sh">'</span>
+<span class="nf">confusion_table</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">L_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">Truth</span>      <span class="n">Down</span>  <span class="n">Up</span>
+<span class="n">Predicted</span>
+<span class="n">Down</span>         <span class="mi">35</span>    <span class="mi">35</span>
+<span class="n">Up</span>           <span class="mi">76</span>   <span class="mi">106</span>
+</code></pre></div></div>
+
+<p>Let’s evaluate the overall accuracy as well as the accuracy within the days when logistic regression predicts an increase.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="p">(</span><span class="mi">35</span><span class="o">+</span><span class="mi">106</span><span class="p">)</span><span class="o">/</span><span class="mi">252</span><span class="p">,</span> <span class="mi">106</span><span class="o">/</span><span class="p">(</span><span class="mi">106</span><span class="o">+</span><span class="mi">76</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="p">(</span><span class="mf">0.5595</span><span class="p">,</span> <span class="mf">0.5824</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now the results appear to be a little better: 56% of the daily movements have been correctly predicted. Hence, in terms of overall error rate, the logistic regression method is no better than the naive approach. However, the confusion matrix shows that on days when logistic regression predicts an increase in the market, it has a 58% accuracy rate. This suggests a possible trading strategy of buying on days when the model predicts an increasing market, and avoiding trades on days when a decrease is predicted.</p>
+
+<p>Suppose that we want to predict the returns associated with particular values of <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code>. We want to predict <code class="language-plaintext highlighter-rouge">Direction</code> on a day when <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code> equal 1.2 and 1.1, respectively, and on a day when they equal 1.5 and -0.8. We do this using the <code class="language-plaintext highlighter-rouge">predict()</code> function.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">'</span><span class="s">Lag1</span><span class="sh">'</span><span class="p">:[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
+<span class="sh">'</span><span class="s">Lag2</span><span class="sh">'</span><span class="p">:[</span><span class="mf">1.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">]});</span>
+<span class="n">newX</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span class="n">results</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">newX</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span>
+<span class="mi">0</span>    <span class="mf">0.4791</span>
+<span class="mi">1</span>    <span class="mf">0.4961</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4.7.2 Logistic Regression</a></td>
+      <td><a href="../../4_7_3_linear_discriminant_analysis/index.html">4.7.3 Linear Discriminant Analysis &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

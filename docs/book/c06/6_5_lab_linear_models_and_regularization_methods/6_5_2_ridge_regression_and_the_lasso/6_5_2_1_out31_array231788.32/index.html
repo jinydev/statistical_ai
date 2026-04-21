@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -515,7 +514,7 @@
         <div class="bd-content ps-lg-4">
             <h1 id="out31-array23178832"><strong><code class="language-plaintext highlighter-rouge">Out[31]:</code></strong> <code class="language-plaintext highlighter-rouge">array([231788.32])</code></h1>
 
-<p>Obviously choosing <em>λ</em> = 0 <em>.</em> 01 is arbitrary, so we will use cross-validation or the validation-set approach to choose the tuning parameter <em>λ</em> . The object <code class="language-plaintext highlighter-rouge">GridSearchCV()</code> allows exhaustive grid search to choose such a parameter. We first use the validation set method to choose <em>λ</em> .</p>
+<p>Obviously choosing $\lambda = 0.01$ is arbitrary, so we will use cross-validation or the validation-set approach to choose the tuning parameter $\lambda$ . The object <code class="language-plaintext highlighter-rouge">GridSearchCV()</code> allows exhaustive grid search to choose such a parameter. We first use the validation set method to choose $\lambda$ .</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Grid
 SearchCV()
@@ -571,7 +570,7 @@ cv=kfold)
 grid_r2.fit(X,Y)
 </code></pre></div></div>
 
-<p>Finally, let’s plot the results for cross-validated <em>R</em>[2] .</p>
+<p>Finally, let’s plot the results for cross-validated $R^2$ .</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [36]:r2_fig,ax=subplots(figsize=(8,8))
 ax.errorbar(-np.log(lambdas),

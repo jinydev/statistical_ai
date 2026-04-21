@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_3_other_considerations_in_the_regression_model/3_3_3_potential_problems/2_2._correlation_of_error_terms/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c03/3_3_other_considerations_in_the_regression_model/3_3_3_potential_problems/2_2._correlation_of_error_terms/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_3_other_considerations_in_the_regression_model/3_3_3_potential_problems/2_2._correlation_of_error_terms/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c03/3_3_other_considerations_in_the_regression_model/3_3_3_potential_problems/2_2._correlation_of_error_terms/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/">03. Linear Regression</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_3_other_considerations_in_the_regression_model/">3 3 other considerations in the regression model</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_3_other_considerations_in_the_regression_model/3_3_3_potential_problems/">3 3 3 potential problems</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_3_other_considerations_in_the_regression_model/3_3_3_potential_problems/2_2._correlation_of_error_terms/">2 2. correlation of error terms</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../trans1.html">&lt; 3.3.3 Potential Problems</a></td>
+      <td><a href="../3_3._non-constant_variance_of_error_terms/trans1.html">3 3. Non-Constant Variance Of Error Terms &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 통계 수식과 용어가 낯설고 어렵다면? 아주 쉽게 풀어쓴 <a href="./trans2.html">📖 쉬운 해설(의역본) 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="2-correlation-of-error-terms">2. Correlation of Error Terms</h1>
+
+<h1 id="두-번째-잠재적-문제점-오차-항의-상관관계">두 번째 잠재적 문제점: 오차 항의 상관관계</h1>
+
+<p>An important assumption of the linear regression model is that the error terms, $\epsilon_1, \epsilon_2, \dots, \epsilon_n$, are uncorrelated.</p>
+
+<p>일반 선형 회귀 모델에서 전제하는 주요한 필수 가정 중 하나는, 각 오차 항배열 $\epsilon_1, \epsilon_2, \dots, \epsilon_n$ 이 상호 어떠한 상관관계도 갖지 않는 무관성 독립 요소(uncorrelated)라는 점입니다.</p>
+
+<p>What does this mean?</p>
+
+<p>대체 이게 구체적으로 무슨 뜻일까요?</p>
+
+<p>For instance, if the errors are uncorrelated, then the fact that $\epsilon_i$ is positive provides little or no information about the sign of $\epsilon_{i+1}$.</p>
+
+<p>한 예로, 만약 해당 오차들이 각자 서로 무관하다면, 특정 오차 $\epsilon_i$ 파편이 기저 부호로 양의 부호(+)’를 띤다는 기정사실 자체가 바로 곁에 붙은 후속 $\epsilon_{i+1}$ 부호의 양태 판별 내역과 관련하여 우리에게 암시해 줄 정보란 필시 거의 없거나 전무하다고 볼 수 있습니다.</p>
+
+<p>The standard errors that are computed for the estimated regression coefficients or the fitted values are based on the assumption of uncorrelated error terms.</p>
+
+<p>추정치에 불과한 회귀 계수들이나 이에 기반해 편제된 적합 예측치들을 상대로 계산되는 표준 오차(standard errors)의 산출은 여전히 이들 오차 항 지표들이 서로 무관하다는 가정에 바탕을 두고 있습니다.</p>
+
+<p>If in fact there is correlation among the error terms, then the estimated standard errors will tend to underestimate the true standard errors.</p>
+
+<p>만약 실상 이들 오차 항들 사이에 어떤 연관 상관관계가 뚜렷이 존재하고 있다면, 추정된 표준 오차 값 묶음은 실제 띠어야 할 참수준 기준치인 진짜 표준 오차 규모를 과소평가(underestimate)해 버리는 경향이 생길 것입니다.</p>
+
+<p>As a result, confidence and prediction intervals will be narrower than they should be.</p>
+
+<p>결과적으로 예측 구간과 신뢰 구간은 당초 할당된 것보다 훨씬 더 좁은 수치폭으로 위축됩니다.</p>
+
+<p>For example, a $95\%$ confidence interval may in reality have a much lower probability than $0.95$ of containing the true value of the parameter.</p>
+
+<p>예를 들어, 95% 신뢰 구간은 당초 호언장담한 $0.95$ 수위 확률보다도 파라미터가 갖는 진정한 기저 참값을 제대로 품을 수 있는 실상 확률이 훨씬 낮아지는 양태로 귀결될 가능성이 높습니다.</p>
+
+<p>In addition, $p$-values associated with the model will be lower than they should be; this could cause us to erroneously conclude that a parameter is statistically significant.</p>
+
+<p>게다가 모델에 부착된 $p$-값들도 마땅히 취해야 할 기준치보다 전반적으로 낮게 계측되어 나올 텐데, 이는 자칫 보잘것없는 특정 파라미터 모수를 놓고서도 통계적으로 아주 유의미하다고 우리가 오판하여 잘못된 결론을 내리게 할 수 있습니다.</p>
+
+<p>In short, if the error terms are correlated, we may have an unwarranted sense of confidence in our model.</p>
+
+<p>간단히 말해 오차 항 사이에 상호 연관성이 존재한다면, 우리는 부당하게 과장된 근거와 과신(unwarranted sense of confidence)에 현혹되어 모델을 맹신하게 될 수 있습니다.</p>
+
+<p>As an extreme example, suppose we accidentally doubled our data, leading to observations and error terms identical in pairs.</p>
+
+<p>한 가지 극단적 예시를 상정해 봅시다. 무심결에 실수로 기존 보유 데이터를 통째로 두 배 늘려 증폭시켰고 관측 대상과 짝지어진 오차 항들이 전부 복제 쌍(pairs)으로 동일하게 맞춰진 상황을 가정해 보겠습니다.</p>
+
+<p>If we ignored this, our standard error calculations would be as if we had a sample of size $2n$, when in fact we have only $n$ samples.</p>
+
+<p>만일 이 오류를 간과했다면 실제 $n$ 크기 표본만을 가졌음에도 우리의 표준 오차 계산 단위 도출물만큼은 버젓이 장막 뒤로 $2n$ 수준이란 두 배 표본 집단을 갖춘 양 거짓 산정을 전개 거행하게 될 것입니다.</p>
+
+<p>Our estimated parameters would be the same for the $2n$ samples as for the $n$ samples, but the confidence intervals would be narrower by a factor of $\sqrt{2}$!</p>
+
+<p>이때 우리가 최종 도달한 파라미터 모수 추정치는 거짓 모수 집단 격 $2n$ 부류 관측 표본에 적용되더라도 $n$ 규모와 동일(same)하게 도출 전개되긴 하겠지만, 문제는 그에 귀속된 신뢰 구간 범주 폭만큼은 무려 앞선 허상 대비치 기준 $\sqrt{2}$ 이란 수치 배율(factor of $\sqrt{2}$) 만큼 어처구니없이 좁아들어 위축 변형되는 현상에 직면합니다!</p>
+
+<p>Why might correlations among the error terms occur?</p>
+
+<p>도대체 왜 오차 항들 이면에서 이런 상관관계 연쇄 파급 현상이 발현되는 걸까요?</p>
+
+<p>Such correlations frequently occur in the context of <em>time series</em> data, which consists of observations for which measurements are obtained at discrete points in time.</p>
+
+<p>그 연유는 이 같은 상관관계성 출현 빈도가 주로 이산적인 특정 시점(discrete points in time)마다 관측 측정치를 추출 조달해수집한 관측치 데이터, 전형적인 소위 <em>시계열(time series)</em> 지표 기반 데이터 맥락 범주 상황 등에 유독 빈번히 국한 거듭 돌발하기 때문입니다.</p>
+
+<p>In many cases, observations that are obtained at adjacent time points will have positively correlated errors.</p>
+
+<p>다수 사례에서, 이처럼 아주 인접한 시간 거점에서 연달아 추출된 인접 관측 데이터는 종종 양의 방향으로 상관관계를 띠는 오차 묶음을 동반 출전시키곤 합니다.</p>
+
+<p>In order to determine if this is the case for a given data set, we can plot the residuals from our model as a function of time.</p>
+
+<p>설령 주어진 특정 데이터 셋에서 이러한 현상이 발생하는지를 판독할 요량이라면 우리는 우리 모델의 잔차(residuals) 묶음을 시간 흐름에 따른 도해 플롯(plot) 표면상에 적나라하게 덧대어 표시 나열해 볼 수 있습니다.</p>
+
+<p>If the errors are uncorrelated, then there should be no discernible pattern.</p>
+
+<p>만약 이 오차 파편들이 전혀 상관관계 띠지 않는 независи 상태라 친다면, 플롯 상에 그 어떠한 식별 가능한 형태의 뚜렷한 가시적 패턴 형상이 단연 나타나지 않아야 마땅합니다.</p>
+
+<p><strong>==&gt; picture [317 x 277] intentionally omitted &lt;==</strong></p>
+
+<p><strong>—– Start of picture text —–</strong><br />
+ρ =0.0<br />0 20 40 60 80 100<br />ρ =0.5<br />0 20 40 60 80 100<br />ρ =0.9<br />0 20 40 60 80 100<br />Observation<br />3<br />2<br />1<br />0<br />Residual −1<br />−3<br />2<br />1<br />0<br />Residual<br />−2<br />−4<br />1.5<br />0.5<br />Residual −0.5<br />−1.5<br /><strong>—– End of picture text —–</strong><br /></p>
+
+<p><strong>FIGURE 3.10.</strong> <em>Plots of residuals from simulated time series data sets generated with differing levels of correlation ρ between error terms for adjacent time points.</em></p>
+
+<p>On the other hand, if the error terms are positively correlated, then we may see <em>tracking</em> in the residuals — that is, adjacent residuals may have similar values.
+반면에, 오차 항 단면들이 다분히 양의 방향 관련성 상관성을 갖게 된다면 잔차 표면에 뭔가 추세 흔적을 연쇄 추적하는 <em>트래킹(tracking)</em> 현상을 넉넉히 구경하게 될 소지가 있습니다 — 이 말은 서로 곁에 맞붙은 이웃 잔차가 극히 동형체 흡사 결과 수치값(similar values) 대역을 가질 것이란 추정 설명을 의미합니다.</p>
+
+<p>Figure 3.10 provides an illustration.
+해당 그림 3.10 지면 일러스트 기조는 이를 명확히 보충해 입증 증명 곁들여 보여 줍니다.</p>
+
+<p>In the top panel, we see the residuals from a linear regression fit to data generated with uncorrelated errors.
+첫 상단 패널 기조를 눈여겨보면 상관관계 흔적 없는 무관 오차 속도로 가상 생성 투입된 데이터 단면에 한차례 선형 회귀 결과를 적합 투사해낸 잔차 결과의 궤적을 우리는 볼 수 있습니다.</p>
+
+<p>There is no evidence of a time-related trend in the residuals.
+이 투영된 잔차 분포 기반상에서는 일련의 뚜렷한 시간 연관성 추세 흔적으로 입증 확인해 줄 아무런 기미의 단서(time-related trend) 따위를 털끝만치도 찾아볼 여력이 없습니다.</p>
+
+<p>In contrast, the residuals in the bottom panel are from a data set in which adjacent errors had a correlation of $0.9$.
+반면 앞선 광경과 맞서서 바닥면 최하단 배후 패널 요소 기저는 앞뒤 연이은 오차 파급이 서로 상관관계 치수로 자그마치 $0.9$ 높은 양분 수준의 상관 요건 상태를 버젓하게 지녔던 다소 조작 세팅된 관측군 모델로부터 뻗어 나온 잔차 흔적의 양태물들입니다.</p>
+
+<p>Now there is a clear pattern in the residuals — adjacent residuals tend to take on similar values.
+이 경우 이제 잔차 파편 도상 전개 패턴상 일련의 극명 뚜렷 노골적인 일관 양태 구조 형성이 확실하게 눈도장 포개어집니다 — 바로 앞선 언급대로 함께 맞붙은 곁 편 제반 잔차들이 하나같이 너무 기막히게 흡사 동급 수위(similar values) 가늠 잣대를 다 같이 차출 띄려는 밀집 경향의 소지를 적나라하게 드러냅니다.</p>
+
+<p>Finally, the center panel illustrates a more moderate case in which the residuals had a correlation of $0.5$.
+종착역 중간 배열 궤도 패널 형상은 앞 두 대조 상황의 대략 절반 타협 여건인 앞뒤 상관 궤적이 한 자릿수 $0.5$ 척도 정도로 서로 교류한 비교적 완만한 모범 온건 사례 단편 하나(more moderate case)의 모사 정면 기조를 약소하게 소략 삽화 증명 제시 도안해 나열 줍니다.</p>
+
+<p>There is still evidence of tracking, but the pattern is less clear.
+분명 여기 양태서조차 일말 언급 현상 궤적 추적 연쇄 반응을 남김없이 파편 조각내어 도사리고 뒷받침 나타남 전제하긴 하지만 전체 형성 기조 잣대는 아무래도 한껏 상쇄 감소 경향 도출 그 수위를 띄느라 앞보다 약화 흐려져 퇴색된 지표 잣대 양상(less clear) 형국 모양새를 띠고 관찰 포착 나타내게 됩니다.</p>
+
+<p>Many methods have been developed to properly take account of correlations in the error terms in time series data.
+지금껏 유독 시계열 형태 분석 모델 단면에서 골칫거리로 산재하는 이 오차 항 연관 요소 문제를 가급적 적확 현명하게 수용 매만져 능숙하게 다룰 방도로 그간 꽤 무수한 해법 조달 창안 수단이 다각도로 고안 및 발전되어 채택 사용 수단화되었습니다.</p>
+
+<p>Correlation among the error terms can also occur outside of time series data.
+그러나 막상 이 오차 항들의 속내 교류 상관 양상은 무수한 시계열 국한 영토 바깥 데이터 평범 일괄지대 밖 외벽 공간(outside of time series data) 등에서마저 돌발 발생 도출할 가망성을 다분히 품고 개방 열려 있습니다.</p>
+
+<p>For instance, consider a study in which individuals’ heights are predicted from their weights.
+한 예로 기껏 특정 다채 개인 고유의 체중 척도를 발판 삼아 몸무게 정보를 토대로 이번엔 예측 키 신장 수치를 단초 추정 예지 가늠해 내는 통계 조사의 연구 전경 대목 상황 구상을 한 번 잠시 머릿속에 고려 삽화 표방해 주지 돌이켜 보십시오.</p>
+
+<p>The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, eat the same diet, or have been exposed to the same environmental factors.
+만일 실험 표본 군에 포함된 특정 관측 부류 단위 일원이 모두 한집안 식구이면서 피를 같이 하는 혈연 한 무리이거나(members of the same family), 같은 식단 습관 노선을 동시 고집하며(eat the same diet), 그게 아님 완전 일관 판박 특정 동일 환경 영향 궤적 요소(same environmental factors) 등에 거듭 동일 노출 처지된 전향 기조하 요건 상태이면 사실 필시 상관없는 상호 오차 독립 체제 구축 수급에 필패한 극악 오류 조건이 동반 발발 이끌려 그 태초 기저 무관 독립성 가정 바탕 뿌리가 심각 균열 뒤틀림 파탄 훼손 유린 기각 파괴(violated) 전락 위험에 위태 직면 놓일 몹시 치명적 사태 소지 수순 우려를 직간접 부추깁니다.</p>
+
+<p>In general, the assumption of uncorrelated errors is extremely important for linear regression as well as for other statistical methods, and good experimental design is crucial in order to mitigate the risk of such correlations.
+일반적으로 기실 오차 항목 독립 무상관 성정 보존 및 확약 가정(assumption of uncorrelated errors)은 비단 지금 선형 회귀에 그뿐 아닌 몹시 다채 다른 통계상 방식 기법 숱 도입 체제 구사에서도 최고 극도로 중차대한 절대 필연 대목 분수령 지주(extremely important) 대단 요소 거점 중요성을 확보 지니며, 결과적으로 고스란히 제반 불가피 상관 오류 지표 노출 동발 파급 발현 오차 오류 위험 치명 요소 그 자체의 폭 발발 우려 리스크 감쇄 요인 저감 약화 조기 방지 체제(mitigate) 실천 타협 이룩 도모 성과 목적 취지선 확보 차원을 담보 단 초석 수립에서 아주 질 좋은 도안 조립 초기 시나리오 밑그림 토대인 표본 초기 실험 설계(good experimental design) 확립 착수 수순 자체가 결코 절대 다른 것과 따질 겨를조차 불허 우위 없이 대단 필경 아주 최고 제일로 필수 긴요 핵심 과업 절대 요소 기조(crucial) 요목 대관 필수 지분 중요 수단 사항 따름 몫 단계 결정을 막강 주름 책임 이룹니다.</p>
+
+<p>3.3 Other Considerations in the Regression Model 103</p>
+
+<p><strong>==&gt; picture [315 x 151] intentionally omitted &lt;==</strong></p>
+
+<p><strong>—– Start of picture text —–</strong><br />
+Response Y Response log(Y)<br />998<br />975<br />845<br />605<br />671<br />437<br />10 15 20 25 30 2.4 2.6 2.8 3.0 3.2 3.4<br />Fitted values Fitted values<br />15<br />0.4<br />10 0.2<br />5 0.0<br />0<br />Residuals Residuals −0.2<br />−5 −0.4<br />−10 −0.6<br />−0.8<br /><strong>—– End of picture text —–</strong><br /></p>
+
+<p><strong>FIGURE 3.11.</strong> <em>Residual plots. In each plot, the red line is a smooth fit to the residuals, intended to make it easier to identify a trend. The blue lines track the outer quantiles of the residuals, and emphasize patterns.</em> Left: <em>The funnel shape indicates heteroscedasticity.</em> Right: <em>The response has been log transformed, and there is now no evidence of heteroscedasticity.</em></p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../trans1.html">&lt; 3.3.3 Potential Problems</a></td>
+      <td><a href="../3_3._non-constant_variance_of_error_terms/trans1.html">3 3. Non-Constant Variance Of Error Terms &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

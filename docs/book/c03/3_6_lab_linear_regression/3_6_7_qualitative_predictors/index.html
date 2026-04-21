@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,47 +502,62 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="367-qualitative-predictors"><em>3.6.7 Qualitative Predictors</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_6_non-linear_transformations_of_the_predictors/3_6_6_1_in_33_anovalmresults1_results3/index.html">&lt; 3.6.6.1 In 33 Anovalmresults1 Results3</a></td>
+      <td><a href="../../3_7_exercises/index.html">3.7 Exercises &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Here we use the <code class="language-plaintext highlighter-rouge">Carseats</code> data, which is included in the <code class="language-plaintext highlighter-rouge">ISLP</code> package. We will attempt to predict <code class="language-plaintext highlighter-rouge">Sales</code> (child car seat sales) in 400 locations based on a number of predictors.</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [35]:Carseats=load_data('Carseats')
+<h1 id="367-qualitative-predictors"><em>3.6.7 Qualitative Predictors</em></h1>
+
+<p>Here we use the <code class="language-plaintext highlighter-rouge">Carseats</code> data, which is included in the <code class="language-plaintext highlighter-rouge">ISLP</code> package.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [35]: Carseats = load_data('Carseats')
 Carseats.columns
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[35]:Index(['Sales','CompPrice','Income','Advertising',
-'Population','Price','ShelveLoc','Age','Education',
-'Urban','US'],
-dtype='object')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[35]: Index(['Sales', 'CompPrice', 'Income', 'Advertising',
+       'Population', 'Price', 'ShelveLoc', 'Age', 'Education',
+       'Urban', 'US'],
+      dtype='object')
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">Carseats</code> data includes qualitative predictors such as <code class="language-plaintext highlighter-rouge">ShelveLoc</code> , an indicator of the quality of the shelving location — that is, the space within a store in which the car seat is displayed. The predictor <code class="language-plaintext highlighter-rouge">ShelveLoc</code> takes on three possible values, <code class="language-plaintext highlighter-rouge">Bad</code> , <code class="language-plaintext highlighter-rouge">Medium</code> , and <code class="language-plaintext highlighter-rouge">Good</code> . Given a qualitative variable such as <code class="language-plaintext highlighter-rouge">ShelveLoc</code> , <code class="language-plaintext highlighter-rouge">ModelSpec()</code> generates dummy variables automatically. These variables are often referred to as a <em>one-hot encoding</em> of the categorical one-hot feature. Their columns sum to one, so to avoid collinearity with an interencoding cept, the first column is dropped. Below we see the column <code class="language-plaintext highlighter-rouge">ShelveLoc[Bad]</code> has been dropped, since <code class="language-plaintext highlighter-rouge">Bad</code> is the first level of <code class="language-plaintext highlighter-rouge">ShelveLoc</code> . Below we fit a multiple regression model that includes some interaction terms.</p>
+<p>The <code class="language-plaintext highlighter-rouge">Carseats</code> data includes qualitative predictors such as <code class="language-plaintext highlighter-rouge">ShelveLoc</code> , an indicator of the quality of the shelving location — that is, the space within a store in which the car seat is displayed.</p>
 
 <p>encoding</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [36]:allvars=list(Carseats.columns.drop('Sales'))
-y=Carseats['Sales']
-final=allvars+[('Income','Advertising'),
-('Price','Age')]
-X=MS(final).fit_transform(Carseats)
-model=sm.OLS(y,X)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [36]: allvars = list(Carseats.columns.drop('Sales'))
+y = Carseats['Sales']
+final = allvars + [('Income', 'Advertising'),
+                   ('Price', 'Age')]
+X = MS(final).fit_transform(Carseats)
+model = sm.OLS(y, X)
 summarize(model.fit())
-Out[36]:coefstderrtP&gt;|t|
-intercept6.57561.0096.5190.000
+
+Out[36]:             coef  std err       t  P&gt;|t|
+intercept       6.5756   1.009   6.519  0.000
 </code></pre></div></div>
 
-<p>3.7 Exercises</p>
+<table>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CompPrice</code></td>
+      <td><code class="language-plaintext highlighter-rouge">0.0929</code></td>
+      <td><code class="language-plaintext highlighter-rouge">0.004</code></td>
+      <td><code class="language-plaintext highlighter-rouge">22.567</code></td>
+      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
+    </tr>
+  </tbody>
+</table>
 
 <table>
-  <thead>
-    <tr>
-      <th><code class="language-plaintext highlighter-rouge">CompPrice</code></th>
-      <th><code class="language-plaintext highlighter-rouge">0.0929</code></th>
-      <th><code class="language-plaintext highlighter-rouge">0.004</code></th>
-      <th><code class="language-plaintext highlighter-rouge">22.567</code></th>
-      <th><code class="language-plaintext highlighter-rouge">0.000</code></th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">Income</code></td>
@@ -632,7 +646,20 @@ intercept6.57561.0096.5190.000
   </tbody>
 </table>
 
-<p>In the first line above, we made <code class="language-plaintext highlighter-rouge">allvars</code> a list, so that we could add the interaction terms two lines down. Our model-matrix builder has created a <code class="language-plaintext highlighter-rouge">ShelveLoc[Good]</code> dummy variable that takes on a value of 1 if the shelving location is good, and 0 otherwise. It has also created a <code class="language-plaintext highlighter-rouge">ShelveLoc[Medium]</code> dummy variable that equals 1 if the shelving location is medium, and 0 otherwise. A bad shelving location corresponds to a zero for each of the two dummy variables. The fact that the coefficient for <code class="language-plaintext highlighter-rouge">ShelveLoc[Good]</code> in the regression output is positive indicates that a good shelving location is associated with high sales (relative to a bad location). And <code class="language-plaintext highlighter-rouge">ShelveLoc[Medium]</code> has a smaller positive coefficient, indicating that a medium shelving location leads to higher sales than a bad shelving location, but lower sales than a good shelving location.</p>
+<p>In the first line above, we made <code class="language-plaintext highlighter-rouge">allvars</code> a list, so that we could add the interaction terms two lines down.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_6_non-linear_transformations_of_the_predictors/3_6_6_1_in_33_anovalmresults1_results3/index.html">&lt; 3.6.6.1 In 33 Anovalmresults1 Results3</a></td>
+      <td><a href="../../3_7_exercises/index.html">3.7 Exercises &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

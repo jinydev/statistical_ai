@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,73 +502,65 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="applied"><em>Applied</em></h1>
+            <p><a href="../3_7_1_conceptual/index.html">&lt; 3.7.1 Conceptual</a></p>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="applied"><em>Applied</em></h1>
 
 <ol>
-  <li>
-    <p>This question involves the use of simple linear regression on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.</p>
-
-    <ul>
-      <li>
-        <p>(a) Use the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to perform a simple linear regression with <code class="language-plaintext highlighter-rouge">mpg</code> as the response and <code class="language-plaintext highlighter-rouge">horsepower</code> as the predictor. Use the <code class="language-plaintext highlighter-rouge">summarize()</code> function to print the results. Comment on the output. For example:</p>
-
-        <ul>
-          <li>
-            <p>i. Is there a relationship between the predictor and the response?</p>
-          </li>
-          <li>
-            <p>ii. How strong is the relationship between the predictor and the response?</p>
-          </li>
-          <li>
-            <p>iii. Is the relationship between the predictor and the response positive or negative?</p>
-          </li>
-          <li>
-            <p>iv. What is the predicted <code class="language-plaintext highlighter-rouge">mpg</code> associated with a <code class="language-plaintext highlighter-rouge">horsepower</code> of 98? What are the associated 95 % confidence and prediction intervals?</p>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <p>(b) Plot the response and the predictor in a new set of axes <code class="language-plaintext highlighter-rouge">ax</code> . Use the <code class="language-plaintext highlighter-rouge">ax.axline()</code> method or the <code class="language-plaintext highlighter-rouge">abline()</code> function defined in the lab to display the least squares regression line.</p>
-      </li>
-      <li>
-        <p>(c) Produce some of diagnostic plots of the least squares regression fit as described in the lab. Comment on any problems you see with the fit.</p>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p>This question involves the use of multiple linear regression on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.</p>
-
-    <ul>
-      <li>
-        <p>(a) Produce a scatterplot matrix which includes all of the variables in the data set.</p>
-      </li>
-      <li>
-        <p>(b) Compute the matrix of correlations between the variables using the <code class="language-plaintext highlighter-rouge">DataFrame.corr()</code> method.</p>
-      </li>
-    </ul>
-  </li>
+  <li>This question involves the use of simple linear regression on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.</li>
 </ol>
-
-<p><code class="language-plaintext highlighter-rouge">.corr()</code></p>
 
 <ul>
   <li>
-    <p>(c) Use the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to perform a multiple linear regression with <code class="language-plaintext highlighter-rouge">mpg</code> as the response and all other variables except <code class="language-plaintext highlighter-rouge">name</code> as the predictors. Use the <code class="language-plaintext highlighter-rouge">summarize()</code> function to print the results. Comment on the output. For instance:</p>
-
-    <ul>
-      <li>i. Is there a relationship between the predictors and the response? Use the <code class="language-plaintext highlighter-rouge">anova_lm()</code> function from <code class="language-plaintext highlighter-rouge">statsmodels</code> to answer this question.</li>
-    </ul>
+    <p>(a) Use the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to perform a simple linear regression with <code class="language-plaintext highlighter-rouge">mpg</code> as the response and <code class="language-plaintext highlighter-rouge">horsepower</code> as the predictor. Use the <code class="language-plaintext highlighter-rouge">summarize()</code> function to print the results. Comment on the output. For example:</p>
+  </li>
+  <li>
+    <p>i. Is there a relationship between the predictor and the response?</p>
+  </li>
+  <li>
+    <p>ii. How strong is the relationship between the predictor and the response?</p>
+  </li>
+  <li>
+    <p>iii. Is the relationship between the predictor and the response positive or negative?</p>
+  </li>
+  <li>
+    <p>iv. What is the predicted <code class="language-plaintext highlighter-rouge">mpg</code> associated with a <code class="language-plaintext highlighter-rouge">horsepower</code> of 98? What are the associated 95 % confidence and prediction intervals?</p>
+  </li>
+  <li>
+    <p>(b) Plot the response and the predictor in a new set of axes <code class="language-plaintext highlighter-rouge">ax</code> . Use the <code class="language-plaintext highlighter-rouge">ax.axline()</code> method or the <code class="language-plaintext highlighter-rouge">abline()</code> function defined in the lab to display the least squares regression line.</p>
+  </li>
+  <li>
+    <p>(c) Produce some of diagnostic plots of the least squares regression fit as described in the lab. Comment on any problems you see with the fit.</p>
   </li>
 </ul>
 
-<p>130 3. Linear Regression</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  - ii. Which predictors appear to have a statistically significant relationship to the response? 
-
-  - iii. What does the coefficient for the `year` variable suggest? 
-</code></pre></div></div>
+<ol>
+  <li>This question involves the use of multiple linear regression on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.</li>
+</ol>
 
 <ul>
+  <li>
+    <p>(a) Produce a scatterplot matrix which includes all of the variables in the data set.</p>
+  </li>
+  <li>
+    <p>(b) Compute the matrix of correlations between the variables using the <code class="language-plaintext highlighter-rouge">DataFrame.corr()</code> method.</p>
+  </li>
+  <li>
+    <p>(c) Use the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to perform a multiple linear regression with <code class="language-plaintext highlighter-rouge">mpg</code> as the response and all other variables except <code class="language-plaintext highlighter-rouge">name</code> as the predictors. Use the <code class="language-plaintext highlighter-rouge">summarize()</code> function to print the results. Comment on the output. For instance:</p>
+  </li>
+  <li>
+    <p>i. Is there a relationship between the predictors and the response? Use the <code class="language-plaintext highlighter-rouge">anova_lm()</code> function from <code class="language-plaintext highlighter-rouge">statsmodels</code> to answer this question.</p>
+  </li>
+  <li>
+    <p>ii. Which predictors appear to have a statistically significant relationship to the response?</p>
+  </li>
+  <li>
+    <p>iii. What does the coefficient for the <code class="language-plaintext highlighter-rouge">year</code> variable suggest?</p>
+  </li>
   <li>
     <p>(d) Produce some of diagnostic plots of the linear regression fit as described in the lab. Comment on any problems you see with the fit. Do the residual plots suggest any unusually large outliers? Does the leverage plot identify any observations with unusually high leverage?</p>
   </li>
@@ -577,7 +568,7 @@
     <p>(e) Fit some models with interactions as described in the lab. Do any interactions appear to be statistically significant?</p>
   </li>
   <li>
-    <p>(f) Try a few different transformations of the variables, such as log( X ), <em>√X</em> , X[2] . Comment on your findings.</p>
+    <p>(f) Try a few different transformations of the variables, such as $\log(X)$, $\sqrt{X}$, $X^2$. Comment on your findings.</p>
   </li>
 </ul>
 
@@ -596,7 +587,7 @@
     <p>(c) Write out the model in equation form, being careful to handle the qualitative variables properly.</p>
   </li>
   <li>
-    <p>(d) For which of the predictors can you reject the null hypothesis $H_0$ : $\beta_j$ = 0?</p>
+    <p>(d) For which of the predictors can you reject the null hypothesis $H_0 : \beta_j = 0$?</p>
   </li>
   <li>
     <p>(e) On the basis of your response to the previous question, fit a smaller model that only uses the predictors for which there is evidence of association with the outcome.</p>
@@ -613,35 +604,32 @@
 </ul>
 
 <ol>
-  <li>In this problem we will investigate the $t$-statistic for the null hypothesis $H_0$ : <em>β</em> = 0 in simple linear regression without an intercept. To begin, we generate a predictor <code class="language-plaintext highlighter-rouge">x</code> and a response <code class="language-plaintext highlighter-rouge">y</code> as follows.</li>
+  <li>In this problem we will investigate the $t$-statistic for the null hypothesis $H_0 : \beta = 0$ in simple linear regression without an intercept. To begin, we generate a predictor <code class="language-plaintext highlighter-rouge">x</code> and a response <code class="language-plaintext highlighter-rouge">y</code> as follows.</li>
 </ol>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rng=np.random.default_rng(1)
-x=rng.normal(size=100)
-y=2*x+rng.normal(size=100)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </code></pre></div></div>
 
 <ul>
-  <li>(a) Perform a simple linear regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> , <em>without</em> an intercept. Report the coefficient estimate \hat{\beta} , the standard error of this coefficient estimate, and the $t$-statistic and $p$-value associated with the null hypothesis $H_0$ : <em>β</em> = 0. Comment on these results. (You can perform regression without an intercept using the keywords argument <code class="language-plaintext highlighter-rouge">intercept=False</code> to <code class="language-plaintext highlighter-rouge">ModelSpec()</code> .)</li>
-</ul>
-
-<p>3.7 Exercises 131</p>
-
-<ul>
   <li>
-    <p>(b) Now perform a simple linear regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> without an intercept, and report the coefficient estimate, its standard error, and the corresponding $t$-statistic and $p$-values associated with the null hypothesis $H_0$ : <em>β</em> = 0. Comment on these results.</p>
+    <p>(a) Perform a simple linear regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> , <em>without</em> an intercept. Report the coefficient estimate $\hat{\beta}$ , the standard error of this coefficient estimate, and the $t$-statistic and $p$-value associated with the null hypothesis $H_0 : \beta = 0$. Comment on these results. (You can perform regression without an intercept using the keywords argument <code class="language-plaintext highlighter-rouge">intercept=False</code> to <code class="language-plaintext highlighter-rouge">ModelSpec()</code> .)</p>
+  </li>
+  <li>
+    <p>(b) Now perform a simple linear regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> without an intercept, and report the coefficient estimate, its standard error, and the corresponding $t$-statistic and $p$-values associated with the null hypothesis $H_0 : \beta = 0$. Comment on these results.</p>
   </li>
   <li>
     <p>(c) What is the relationship between the results obtained in (a) and (b)?</p>
   </li>
   <li>
-    <p>(d) For the regression of Y onto X without an intercept, the <em>t</em> - statistic for $H_0$ : <em>β</em> = 0 takes the form <em>β/</em>[ˆ] SE( \hat{\beta} ), where \hat{\beta} is given by (3.38), and where</p>
+    <p>(d) For the regression of Y onto X without an intercept, the $t$-statistic for $H_0 : \beta = 0$ takes the form $\hat{\beta} / \text{SE}(\hat{\beta})$, where $\hat{\beta}$ is given by (3.38), and where</p>
   </li>
 </ul>
 
 <p><strong>==&gt; picture [133 x 31] intentionally omitted &lt;==</strong></p>
 
-<p>(These formulas are slightly different from those given in Sections 3.1.1 and 3.1.2, since here we are performing regression without an intercept.) Show algebraically, and confirm numerically in <code class="language-plaintext highlighter-rouge">R</code> , that the $t$-statistic can be written as</p>
+<p>(These formulas are slightly different from those given in Sections 3.1.1 and 3.1.2, since here we are performing regression without an intercept.) Show algebraically, and confirm numerically in <code class="language-plaintext highlighter-rouge">Python</code> , that the $t$-statistic can be written as</p>
 
 <p><strong>==&gt; picture [181 x 32] intentionally omitted &lt;==</strong></p>
 
@@ -650,7 +638,7 @@ y=2*x+rng.normal(size=100)
     <p>(e) Using the results from (d), argue that the $t$-statistic for the regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> is the same as the $t$-statistic for the regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> .</p>
   </li>
   <li>
-    <p>(f) In <code class="language-plaintext highlighter-rouge">R</code> , show that when regression is performed <em>with</em> an intercept, the $t$-statistic for $H_0$ : \beta_1 = 0 is the same for the regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> as it is for the regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> .</p>
+    <p>(f) In <code class="language-plaintext highlighter-rouge">Python</code> , show that when regression is performed <em>with</em> an intercept, the $t$-statistic for $H_0 : \beta_1 = 0$ is the same for the regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> as it is for the regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> .</p>
   </li>
 </ul>
 
@@ -660,13 +648,13 @@ y=2*x+rng.normal(size=100)
 
 <ul>
   <li>
-    <p>(a) Recall that the coefficient estimate \hat{\beta} for the linear regression of Y onto X without an intercept is given by (3.38). Under what circumstance is the coefficient estimate for the regression of X onto Y the same as the coefficient estimate for the regression of Y onto X ?</p>
+    <p>(a) Recall that the coefficient estimate $\hat{\beta}$ for the linear regression of Y onto X without an intercept is given by (3.38). Under what circumstance is the coefficient estimate for the regression of X onto Y the same as the coefficient estimate for the regression of Y onto X?</p>
   </li>
   <li>
-    <p>(b) Generate an example in <code class="language-plaintext highlighter-rouge">Python</code> with $n$ = 100 observations in which the coefficient estimate for the regression of X onto Y is <em>different from</em> the coefficient estimate for the regression of Y onto X .</p>
+    <p>(b) Generate an example in <code class="language-plaintext highlighter-rouge">Python</code> with $n = 100$ observations in which the coefficient estimate for the regression of X onto Y is <em>different from</em> the coefficient estimate for the regression of Y onto X .</p>
   </li>
   <li>
-    <p>(c) Generate an example in <code class="language-plaintext highlighter-rouge">Python</code> with $n$ = 100 observations in which the coefficient estimate for the regression of X onto Y is <em>the same as</em> the coefficient estimate for the regression of Y onto X .</p>
+    <p>(c) Generate an example in <code class="language-plaintext highlighter-rouge">Python</code> with $n = 100$ observations in which the coefficient estimate for the regression of X onto Y is <em>the same as</em> the coefficient estimate for the regression of Y onto X .</p>
   </li>
 </ul>
 
@@ -674,14 +662,12 @@ y=2*x+rng.normal(size=100)
   <li>In this exercise you will create some simulated data and will fit simple linear regression models to it. Make sure to use the default random number generator with seed set to 1 prior to starting part (a) to ensure consistent results.</li>
 </ol>
 
-<p>132 3. Linear Regression</p>
-
 <ul>
   <li>
-    <p>(a) Using the <code class="language-plaintext highlighter-rouge">normal()</code> method of your random number generator, create a vector, <code class="language-plaintext highlighter-rouge">x</code> , containing 100 observations drawn from a <em>N</em> (0 <em>,</em> 1) distribution. This represents a feature, X .</p>
+    <p>(a) Using the <code class="language-plaintext highlighter-rouge">normal()</code> method of your random number generator, create a vector, <code class="language-plaintext highlighter-rouge">x</code> , containing 100 observations drawn from a $N(0, 1)$ distribution. This represents a feature, X .</p>
   </li>
   <li>
-    <p>(b) Using the <code class="language-plaintext highlighter-rouge">normal()</code> method, create a vector, <code class="language-plaintext highlighter-rouge">eps</code> , containing 100 observations drawn from a <em>N</em> (0 <em>,</em> 0 <em>.</em> 25) distribution—a normal distribution with mean zero and variance 0 <em>.</em> 25.</p>
+    <p>(b) Using the <code class="language-plaintext highlighter-rouge">normal()</code> method, create a vector, <code class="language-plaintext highlighter-rouge">eps</code> , containing 100 observations drawn from a $N(0, 0.25)$ distribution—a normal distribution with mean zero and variance $0.25$.</p>
   </li>
   <li>
     <p>(c) Using <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">eps</code> , generate a vector <code class="language-plaintext highlighter-rouge">y</code> according to the model</p>
@@ -690,29 +676,29 @@ y=2*x+rng.normal(size=100)
 
 <p><strong>==&gt; picture [182 x 11] intentionally omitted &lt;==</strong></p>
 
-<p>What is the length of the vector <code class="language-plaintext highlighter-rouge">y</code> ? What are the values of \beta_0 and \beta_1 in this linear model?</p>
+<p>What is the length of the vector <code class="language-plaintext highlighter-rouge">y</code> ? What are the values of $\beta_0$ and $\beta_1$ in this linear model?</p>
 
 <ul>
   <li>
     <p>(d) Create a scatterplot displaying the relationship between <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> . Comment on what you observe.</p>
   </li>
   <li>
-    <p>(e) Fit a least squares linear model to predict <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x</code> . Comment on the model obtained. How do \hat{\beta}_0 and \hat{\beta}_1 compare to \beta_0 and \beta_1?</p>
+    <p>(e) Fit a least squares linear model to predict <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x</code> . Comment on the model obtained. How do $\hat{\beta}_0$ and $\hat{\beta}_1$ compare to $\beta_0$ and $\beta_1$?</p>
   </li>
   <li>
     <p>(f) Display the least squares line on the scatterplot obtained in (d). Draw the population regression line on the plot, in a different color. Use the <code class="language-plaintext highlighter-rouge">legend()</code> method of the axes to create an appropriate legend.</p>
   </li>
   <li>
-    <p>(g) Now fit a polynomial regression model that predicts <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x</code> and x[2] . Is there evidence that the quadratic term improves the model fit? Explain your answer.</p>
+    <p>(g) Now fit a polynomial regression model that predicts <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x</code> and $x^2$ . Is there evidence that the quadratic term improves the model fit? Explain your answer.</p>
   </li>
   <li>
-    <p>(h) Repeat (a)–(f) after modifying the data generation process in such a way that there is <em>less</em> noise in the data. The model (3.39) should remain the same. You can do this by decreasing the variance of the normal distribution used to generate the error term \epsilon in (b). Describe your results.</p>
+    <p>(h) Repeat (a)–(f) after modifying the data generation process in such a way that there is <em>less</em> noise in the data. The model (3.39) should remain the same. You can do this by decreasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b). Describe your results.</p>
   </li>
   <li>
-    <p>(i) Repeat (a)–(f) after modifying the data generation process in such a way that there is <em>more</em> noise in the data. The model (3.39) should remain the same. You can do this by increasing the variance of the normal distribution used to generate the error term \epsilon in (b). Describe your results.</p>
+    <p>(i) Repeat (a)–(f) after modifying the data generation process in such a way that there is <em>more</em> noise in the data. The model (3.39) should remain the same. You can do this by increasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b). Describe your results.</p>
   </li>
   <li>
-    <p>(j) What are the confidence intervals for \beta_0 and \beta_1 based on the original data set, the noisier data set, and the less noisy data set? Comment on your results.</p>
+    <p>(j) What are the confidence intervals for $\beta_0$ and $\beta_1$ based on the original data set, the noisier data set, and the less noisy data set? Comment on your results.</p>
   </li>
 </ul>
 
@@ -724,46 +710,38 @@ y=2*x+rng.normal(size=100)
   <li>(a) Perform the following commands in <code class="language-plaintext highlighter-rouge">Python</code> :</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rng=np.random.default_rng(10)
-x1=rng.uniform(0,1,size=100)
-x2=0.5*x1+rng.normal(size=100)/10
-y=2+2*x1+0.3*x2+rng.normal(size=100)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The last line corresponds to creating a linear model in which <code class="language-plaintext highlighter-rouge">y</code> is a function of <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> . Write out the form of the linear model. What are the regression coefficients?</p>
-
-<p>3.7 Exercises 133</p>
 
 <ul>
   <li>
     <p>(b) What is the correlation between <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> ? Create a scatterplot displaying the relationship between the variables.</p>
   </li>
   <li>
-    <p>(c) Using this data, fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x1</code> <em>β</em> ˆ2?andHow <code class="language-plaintext highlighter-rouge">x2</code> .doDescribethese relatethe resultsto theobtained.true \beta_0, What \beta_1, andare \beta_2 \hat{\beta} ?0,Can \hat{\beta}_1, andyou reject the null hypothesis $H_0$ : \beta_1 = 0? How about the null hypothesis $H_0$ : \beta_2 = 0?</p>
+    <p>(c) Using this data, fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> . Describe the results obtained. What are $\hat{\beta}_0$, $\hat{\beta}_1$, and $\hat{\beta}_2$? How do these relate to the true $\beta_0$, $\beta_1$, and $\beta_2$? Can you reject the null hypothesis $H_0 : \beta_1 = 0$? How about the null hypothesis $H_0 : \beta_2 = 0$?</p>
   </li>
   <li>
-    <p>(d) Now fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using only <code class="language-plaintext highlighter-rouge">x1</code> . Comment on your results. Can you reject the null hypothesis $H_0$ : \beta_1 = 0?</p>
+    <p>(d) Now fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using only <code class="language-plaintext highlighter-rouge">x1</code> . Comment on your results. Can you reject the null hypothesis $H_0 : \beta_1 = 0$?</p>
   </li>
   <li>
-    <p>(e) Now fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using only <code class="language-plaintext highlighter-rouge">x2</code> . Comment on your results. Can you reject the null hypothesis $H_0$ : \beta_1 = 0?</p>
+    <p>(e) Now fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using only <code class="language-plaintext highlighter-rouge">x2</code> . Comment on your results. Can you reject the null hypothesis $H_0 : \beta_1 = 0$?</p>
   </li>
   <li>
     <p>(f) Do the results obtained in (c)–(e) contradict each other? Explain your answer.</p>
   </li>
   <li>
-    <p>(g) Suppose we obtain one additional observation, which was unfortunately mismeasured. We use the function <code class="language-plaintext highlighter-rouge">np.concatenate()</code> to <code class="language-plaintext highlighter-rouge">np.conca-</code></p>
-  </li>
-  <li>
-    <p>add this additional observation to each of <code class="language-plaintext highlighter-rouge">x1</code> , <code class="language-plaintext highlighter-rouge">x2</code> and <code class="language-plaintext highlighter-rouge">y</code> . <code class="language-plaintext highlighter-rouge">tenate()</code></p>
+    <p>(g) Suppose we obtain one additional observation, which was unfortunately mismeasured. We use the function <code class="language-plaintext highlighter-rouge">np.concatenate()</code> to add this additional observation to each of <code class="language-plaintext highlighter-rouge">x1</code> , <code class="language-plaintext highlighter-rouge">x2</code> and <code class="language-plaintext highlighter-rouge">y</code> .</p>
   </li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tenate()
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x1=np.concatenate([x1,[0.1]])
-x2=np.concatenate([x2,[0.8]])
-y=np.concatenate([y,[6]])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]])</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">x2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="p">]])</span>
 </code></pre></div></div>
 
 <p>Re-fit the linear models from (c) to (e) using this new data. What effect does this new observation have on the each of the models? In each model, is this observation an outlier? A high-leverage point? Both? Explain your answers.</p>
@@ -777,20 +755,23 @@ y=np.concatenate([y,[6]])
     <p>(a) For each predictor, fit a simple linear regression model to predict the response. Describe your results. In which of the models is there a statistically significant association between the predictor and the response? Create some plots to back up your assertions.</p>
   </li>
   <li>
-    <p>(b) Fit a multiple regression model to predict the response using all of the predictors. Describe your results. For which predictors can we reject the null hypothesis $H_0$ : $\beta_j$ = 0?</p>
+    <p>(b) Fit a multiple regression model to predict the response using all of the predictors. Describe your results. For which predictors can we reject the null hypothesis $H_0 : \beta_j = 0$?</p>
   </li>
   <li>
     <p>(c) How do your results from (a) compare to your results from (b)? Create a plot displaying the univariate regression coefficients from (a) on the <em>x</em> -axis, and the multiple regression coefficients from (b) on the <em>y</em> -axis. That is, each predictor is displayed as a single point in the plot. Its coefficient in a simple linear regression model is shown on the <em>x</em> -axis, and its coefficient estimate in the multiple linear regression model is shown on the <em>y</em> -axis.</p>
   </li>
-</ul>
-
-<p>134 3. Linear Regression</p>
-
-<ul>
-  <li>(d) Is there evidence of non-linear association between any of the predictors and the response? To answer this question, for each predictor X , fit a model of the form</li>
+  <li>
+    <p>(d) Is there evidence of non-linear association between any of the predictors and the response? To answer this question, for each predictor X , fit a model of the form</p>
+  </li>
 </ul>
 
 <p><strong>==&gt; picture [154 x 11] intentionally omitted &lt;==</strong></p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<p><a href="../3_7_1_conceptual/index.html">&lt; 3.7.1 Conceptual</a></p>
 
 
             <!-- 구글 애드센스 출력 -->

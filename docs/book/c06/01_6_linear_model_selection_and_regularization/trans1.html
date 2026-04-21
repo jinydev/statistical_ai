@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c06/01_6_linear_model_selection_and_regularization/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c06/01_6_linear_model_selection_and_regularization/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c06/01_6_linear_model_selection_and_regularization/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c06/01_6_linear_model_selection_and_regularization/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/">06. Linear Model Selection</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/01_6_linear_model_selection_and_regularization/">01 6 linear model selection and regularization</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="6-linear-model-selection-and-regularization">6 Linear Model Selection and Regularization</h1>
+<h1 id="6-선형-모델-선택-및-규제">6 선형 모델 선택 및 규제</h1>
+
+<p>In the regression setting, the standard linear model</p>
+
+\[Y = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p + \epsilon \quad (6.1)\]
+
+<p>is commonly used to describe the relationship between a response $Y$ and a set of variables $X_1, X_2, \dots, X_p$. We have seen in Chapter 3 that one typically fits this model using least squares. 
+회귀 분석 환경에서, 표준 선형 모델 (6.1)은 반응 변수 $Y$와 일련의 변수 집합 $X_1, X_2, \dots, X_p$ 사이의 상호 관계를 설명하기 위해 흔히 사용됩니다. 우리는 이미 3장에서 누군가 대체로 최소 제곱 방식(least squares)을 사용하여 당 모델을 적합시킨다는 사실을 살펴본 바 있습니다.</p>
+
+<p>In the chapters that follow, we consider some approaches for extending the linear model framework. In Chapter 7 we generalize (6.1) in order to accommodate non-linear, but still additive, relationships, while in Chapters 8 and 10 we consider even more general non-linear models. However, the linear model has distinct advantages in terms of inference and, on realworld problems, is often surprisingly competitive in relation to non-linear methods. Hence, before moving to the non-linear world, we discuss in this chapter some ways in which the simple simple linear model can be improved, by replacing plain least squares fitting with some alternative fitting procedures. 
+이어지는 후속 챕터들에서, 우리는 선형 모델의 근원 프레임워크 한계 수준을 크게 연장 확장시키기 위한 여러 접근 방식을 고려합니다. 7장에서는 비선형적이지만 여전히 가산적 덧셈 형태(additive)를 띠는 관계성을 수용 수렴하기 위해 공식 (6.1)을 다소 일반화하며, 반면에 8장과 10장에서는 심지어 훨씬 더 범용적이고 일반화 구조된 극도의 비선형 모델들을 다각도로 고려하게 될 것 입니다. 그러나 한편으로 선형 1차 모델은 결과 추론(inference) 영역에 있어서 매우 확고 탁월한 장점을 보유하고 있으며, 실세계 환경의 문제들에서도 종종 타 비선형 방식들에 비견할 만큼 놀랍도록 상당히 경쟁력 있는 구도를 가져갑니다. 이러한 연유로 인하여, 본격 비선형 모델 세계로 넘어가기 이전에 서둘러 이번 6장 단계에서, 그깟 단순 무결 고전적인 순수 최소 제곱 적합 방식 체계를 버리고 특정 대안형 수리 피팅 절차들로 과감히 교체 투입함으로써 기존의 단순 선형 1차 모델을 개량 발전(improved) 시킬 수 있는 몇 갈래의 방안에 대해 논의를 나눕니다.</p>
+
+<p>Why might we want to use another fitting procedure instead of least squares? As we will see, alternative fitting procedures can yield better <em>prediction accuracy</em> and <em>model interpretability</em>. 
+어째서 우리는 순정 고전법인 아날로그 기존 최소 제곱법을 고수하지 않고 그 대신 여타 대안적인 다른 피팅 절차를 사용해 보려 갈망하는 것입니까? 곧이어 살펴볼 테지만, 이런 대안의 다른 피팅 대안 조작 절차 방식들은 대체로 보다 향상된 <strong>예측 정확도(prediction accuracy)</strong> 와 탁월한 <strong>모델 해석 능력(model interpretability)</strong> 을 동시에 산출 발생 안겨줄(yield) 수 있기 때문입니다.</p>
+
+<ul>
+  <li><em>Prediction Accuracy</em>: Provided that the true relationship between the response and the predictors is approximately linear, the least squares estimates will have low bias. If $n \gg p$—that is, if $n$, the number of observations, is much larger than $p$, the number of variables—then the least squares estimates tend to also have low variance, and hence will perform well on test observations. However, if $n$ is not much larger than $p$, then there can be a lot of variability in the least squares fit, resulting in overfitting and consequently poor predictions on future observations not used in model training. And if $p &gt; n$, then there is no longer a unique least squares coefficient estimate: there are infinitely many solutions. Each of these least squares solutions gives zero error on the training data, but typically very poor test set performance due to extremely high variance. By <em>constraining</em> or <em>shrinking</em> the estimated coefficients, we can often substantially reduce the variance at the cost of a negligible increase in bias. This can lead to substantial improvements in the accuracy with which we can predict the response for observations not used in model training.</li>
+  <li>
+    <p><strong>예측 정확도</strong>: 우리가 탐색하려는 목표 반응치와 가동 투입 예측 입력 변수들 시이의 진정한 본질적 수학 관계가 근사적으로 1차 선형 기조에 부합 조응한다는 전제(Provided)가 깔리게 되면, 앞선 최소 제곱 기반 추정치 예측값들은 매우 낮은 자체 편의(low bias) 이격 오차를 보유하게 될 것입니다. 나아가 만약 체급이 $n \gg p$ 상태, 즉 다시 말해서 전체 관측 기록 자료의 절대 갯수 규모인 $n$ 단위 수치가 모델에 동원 투여된 특징 변수 갯수인 $p$ 척도 규모보다도 월등히 압도적으로 크다면(is much larger than), 이런 최소 제곱 파생 예측 추정치들 역시 또한 대단히 낮은 추이 변동성(low variance) 편차 마진 이격 펌핑 간극수위를 거느리는 성향 흐름에 안착 수렴하게 될 것이며, 필경 그 결과에 입각하여 테스트 관측치 그룹 위에서도 참으로 매우 높은 퍼포먼스 기조를 이룩 발휘(perform well) 해낼 터입니다. 허나 하지만 반대로, 만일 $n$ 스펙 부피가 저 $p$ 차원 개수보다 그리 월등 지배적으로 넉넉히 크지 않은 미비 구조 상태라면, 그때에는 오히려 무리한 최소 제곱 피팅 과정 속에 무지막지하게 다수 거대한 변동성(variability) 거품이 스며 유입될 소지가 다분해지며, 결국 끔찍한 데이터 과적합(overfitting) 현상을 초래 야기 산출 분비 지칭하고서 급기야 모델 훈련에 아예 관여 쓰이지도 않았던 미래 신원 관측 대상치들 앞에선 무척 형편없는 쓰레기급 저조 예측 결과물(poor predictions) 들로 참담한 결과를 반환해 종착 결귀 될 따름입니다. 더군다나 심지어 만약 데이터 갯수 $n$이 지표 변수 갯수 $p$보다 구조적으로 아예 더 적은 역전 열세인 $p &gt; n$ 환경 늪에 진입 빠진 지경에 처한다면, 이제 단 한개 고정 유일한 명확 확고 최소 제곱 계수 계산 척도값 결론 결과물(estimate) 이란건 이 세상에 영영 동떨 소실 부재 존재치 않게 되어버립니다: 오로지 무수히 무한대로 갈라 늘어선 쪼개진 방대한 계산 정답 꼬리 파편 지대(infinitely many solutions) 해결책 변수들만이 복제 양산 남발 전개될 뿐입니다. 이 수많은 정답 파편 해결책들 하나하나는 당시 훈련 데이터 면전에선 이면적으로 감쪽같이 제로 ‘0’ 에러 굴레 오차율의 무결점을 기적처럼 내보여 줍니다마는, 정작 테스트 세트 전장 실전 필드 성능면에선 극한으로 미쳐 널뛰 펌팽 펌프 이탈 뻥튀기 과포장 치솟은 너무나 높은 막강 절대 변동성 요동(extremely high variance)의 부작용 탓에 한결같이 처참히 매우 극빈 조악 빈약 엉망 퍼포먼스를 내며 낙인 전락 붕괴되고 맙니다. 바로 이러한 국면 지대에서, 추정 평가 도출된 산물 계수(coefficients) 점수들 사이즈를 직접 부러 눌러 강제로 억제 제약(constraining) 압박 걸거나 인의 차등 지표로 수축 쪼그라뜨리는(shrinking) 기작 마법 공법 전법 장치 개입을 통해, 우리는 한낱 무시 간과할 만큼 아주 사소 미약하게 슬금 오차 편의율(bias) 게이지를 쬐끔 희생 포기 맞교환 상승 폭증 열세 지불 대가(at the cost of a negligible increase)로 치르는 비용 수준 대신, 그 극악 요동 마진 파탄 진폭 변동성 흔들 널뛰기 편차 요소(variance)를 실로 상당 절대 대폭 현격 극적 수준으로 대거 감소 가라앉혀 짓누를(substantially reduce) 수단 기회를 얻어 안게 됩니다. 이로써 궁극의 후단 최종장에서는, 결국 추후 모델 훈련 과정에 일체 관여 쓰이지도 배속 참여 하지도 않은 생 판 낯선 차별 관측 세트 관측물들(not used in model training)을 대면하여 그들의 정답 반응 목표치를 예측해 적중 단속 가늠 측량 식별 타진 환측 겨냥 진단해 내는 타겟 조준 적중 정확도(accuracy) 판도 기세 효율 방면에서 대단히 극적 견고 눈부신 상향 이익 향상 진보 개선 성취 결과물(substantial improvements) 결론을 도래 이끌 유도 구축 타진 달성 확보 수확 이룩 쟁취 관철 영합 성불 도출 배태 마련 전개 견인 유도 창달 결착(can lead to) 해낼 수단을 확정 쟁취 이룩 건져 거머 쥐게 됩니다.</p>
+  </li>
+  <li><em>Model Interpretability</em>: It is often the case that some or many of the variables used in a multiple regression model are in fact not associated with the response. Including such <em>irrelevant</em> variables leads to unnecessary complexity in the resulting model. By removing these variables—that is, by setting the corresponding coefficient estimates to zero—we can obtain a model that is more easily interpreted. Now least squares is extremely unlikely to yield any coefficient estimates that are exactly zero. In this chapter, we see some approaches for automatically performing <em>feature selection</em> or <em>variable selection</em>—that is, for excluding irrelevant variables from a multiple regression model.</li>
+  <li><strong>모델 해석 능력</strong>: 어떨 땐 모델러가 야심 차게 다중 회귀 모델 안으로 이입 대거 들이부어 끌어다 기용 편성 투입한 수많은 다수 혹은 일부 변인 지표 척도 소스 인자 피처 매개 척수 변수(variables)들 대다수가, 사실상 추적 코어 정답 반응치와는 일절 티끌만큼의 연관 관련성조차 아예 전혀 존재 전무 결여 없는(not associated with) 지경 허사인 어처구니 없는 사례(often the case) 구도 국면이 심심찮게 널려 빈번 빈발 발생 빗어집니다. 그따위 무관 무관계 무쓸모 허위 가짜 잉여 상관 없는(irrelevant) 잡다 매개 지표물 쓰레기 잉여 변수들을 미련하게 끝내 잔류 포용 흡수 등용 포함(Including) 방치한다는 맹신 고집 작태 행보는 필경 고스란히 결과 산출 완성 종착 종단 모델 모형계 내부 이면에 지독 처참히 불필요 맹독 둔탁 지루 척박 조잡 복잡 난해 혼탁 잡동사니 난잡 거인화 비만 혼란 징표 불필요한 복잡성(unnecessary complexity)만을 대폭 증가 인과 가중 초래 생성 구도 유도 초래 양산 산적 촉발 파생 발생 야구 파국 야기 지칭 맹위 유도(leads to) 결론 지을 뿐입니다. 과감 노련 기민 단호하게 이러한 치부 변수 잉여 쓰레기 맹점 불량 잡동 변인 객체 변수들을 과감히 숙청 배제 처단 단절 파기 소거 처분 말소 제외 제거(removing) 분리 축출 몰수 청소 배제 삭감 삭제 탈락 무시 청산 걸러내 버림으로써 — 즉 달리 표현 발로 하자면 그에 결속 합당 귀속 종속 연루 결부 귀속 대응 매칭 몫 수반되는 추정된 기인 여파 파생 계수 예측 계수 점수(coefficient estimates)를 아예 강압 제로 ‘0’ 점수로 셋팅 고정 부여 몰락 강등 격하시켜(setting to zero)버리는 타격을 통해 — 우리는 마침내 전보다 훨씬 한층 더 단출 직관 수월 담백 투명 용이 매끄 수월하게 해독 번역 분석 이해 파악 해석 인지(easily interpreted) 판단 가능한 아주 영리 투명 담백 심플 단아 모델 형체를 온전히 얻어 손에 획득 탈환 포획 적수 입수 안착 건져 쥘 수 있게 당면 달성 이룩 마련(can obtain) 됩니다. 이때 명심 각인 명심 할 큰 사실 조약 기점(Now) 요건은, 그 낡은 아날로그 최소 제곱법(least squares) 자체 근본 태생 공구 도구의 수리 연산 가동 메커니즘 특성상, 그 어떤 산출 예측 파생 계수 결과 단면 척도 타점치에 대해서든 결단코 칼같이 칼같이 예리 철저 깔끔 완연 정확무결 딱 맞아 떨어져 완벽히 ‘0’ 제로 영점 공백 상태 점수 수위로(exactly zero) 산출 삭감 갈음 강등 환수 강판 지칭 수직 산출 결과 지표 결과 표기 내뱉 양산 하달 반환 도출 양산 산출 산출 표방 분비(yield) 해버릴 확률 일람 공산 여지 여건 가능 기조 여력 자체가 미치 극구 아예 철통 지독 부재 결여 박약 전무 처참 희박 제로 지경 극한 극단 맹목 극도 전무 전무(extremely unlikely) 없다는 명제 치명 결함 약점입니다. 따라 이번 진행 코스 배정 단원 챕터 속 무대 지평선(In this chapter) 내부 진영 안에서, 우리는 앞서 누락 무관 배제 걸러야 될 쓰레기 잡동 무관심 잉여 잡다 묵살 잉여 무관한 잉여 지표 잡동 여분 쓰레기 파편 부적합 결례 무쓸 무가 무의 변수 요건 녀석들 무리들을 거대 다중 회귀 모델 지대 그물 단면 테두리 안팎 테두리에서 쏙쏙 걸러 추출 방어 낙오 누락 유기 제외 방출 색출 격자 박탈 배제 배출 압수 걸러 제외 추방(excluding) 하기 이한 자동화 메커니즘 수단 매개 방도 요령 수단 장치 공조 수단(approaches)으로서, 소위 피처 속성 선택 가공 혹은 변수 속성 선택 걸러내기 요약 선발(feature selection or variable selection) 절차 방침 처리 공정 작전을 즉각 스스 매끄 자발 절로 신속 시스템 전격 기계 수월 자율 자동 메커니즘 수단(automatically) 기반으로 동시 처리 수행 거행 실행 돌파 구현 발동 조치 착수 시행 도입 장착 체현 타진 운영 주조 관철(performing) 해낼 수단 기저 요건 채널 방식 해소 부속 기조 몇 가지 쏠쏠 방편 노하우 툴 모델 기법 방식을 낱낱이 전수 살펴 들여다 확인 구명 관찰 파악(see) 보게 될 것입니다.</li>
+</ul>
+
+<p>There are many alternatives, both classical and modern, to using least squares to fit (6.1). In this chapter, we discuss three important classes of methods. 
+수식 공식 뼈대 6.1 포맷을 피팅 장착 매칭 맞추기 적용 돌파 꽂아 넣을 조준 고정시킬 전담 목표를 기조로 그 고전 방식 도구 최소 제곱법을 채택 고집 의지 이용 활용 사용 동원 기인 작용(using) 하는 기존 맹목 태세를 벗어 떨쳐내고 갈음 우회 등가 교환 배제 대체 치환 돌려 조치 대처 우회 투입 대신 갈아 끼울 활용할 대안 루트 방안 보조 타개 교체 대체 대안 후보군 채널 선택지(alternatives)는 고전 진통 정통 옛 기조 부류나 신식 유행 최첨 근대 신진 세력 모두를 막론 아울러(both classical and modern) 아주 숱하게 풍성히 넘쳐 수두룩 널려 구비 다분 즐비 산재 존재 포진 상존 현존 내재 대기(There are many) 합니다. 이 챕터 영역 챕터 장에서, 우린 아주 굵직 메인 핵심 지주 주역 중요 대세 관문 부문 중요 요건 기반 축인 3가지 분파 진영 계보 장르 부문 양대 분류 학파 파벌(classes) 기법 수단 모듈 진영 무기 방법들(methods)에 관해 직접 집중 썰 논의 거론 취급 토의 토론 발제 해부 취조 탐구 논쟁 다룰 상의 평론 서술 묘사 고찰 담론 다룰(discuss) 작정입니다.</p>
+
+<ul>
+  <li><em>Subset Selection</em>. This approach involves identifying a subset of the $p$ predictors that we believe to be related to the response. We then fit a model using least squares on the reduced set of variables.</li>
+  <li>
+    <p><strong>부분집합 선택 (Subset Selection)</strong>. 이 작전 전술 지침 방식 노선 방법 길목 장치 기조 접근법(approach) 툴 채널 전략 기법은, 방대하게 나열된 그 수많은 모든 $n$ 타임 $p$ 개의 예측용 입력 투사 투입 예측 변수 척도군들 안쪽 부귀 덩어리 지대 내부에서 과연 적진 반응 타겟 Y 변수 성분과 정말로 제대로 의미 굵고 내실 튼튼 확고 단단히 긴밀 타당하게 얽혀 유효 귀합 연관 접합 결속 유의미한 접합 연결 결부 결속 상관 이치 연관 조응(related to the response) 지어져 있으리라 우리가 맹신 기대 타산 조준 판단 의심 관점 견지 판단 신뢰 예감 여겨 짐작 추정 점쳐 의심 확신(believe) 믿어 의심치 않는 핵심 소수 특정 갈래 특정 조각 알짜 파편 덩어리 지분 소수 단위 일부 소수 분파 그룹 부분집합 조각(a subset) 하나를 정밀 감별 색출 식별 적발 추적 간파 구명 식별 골라내어 판독 추출 추적 감정 콕 짚어 색출 조명(identifying) 찾아내는 여정 과정 체제 국면 투사 돌파 전개 속성 임무 수단 단계 과정을 직접 포착 내장 거느 포용 병행 내포 전제 수반 포괄 관통 야기 내포 발동 함유 개입(involves) 품고 요구 포괄 수반합니다. 그러고 나면 최종 뒷단 후조치 차례 지표(We then) 경로 순서에서, 우린 이렇게 홀쭉 슬림 압축 단출 미니 초라 정리된 소수 정예 단출한 감도 축소 절개 감가 축소 간소 압축 삭감 정리 단축 경량 저미 깍인 홀쭉 덜어 축소된(reduced) 뼈대 슬림 세트 정예 파벌 변수 그룹 집합 군단(set of variables) 위 표면 판도 판 위에서 굳이 기존 아날로그 고전 수동 공구 최소 제곱 연산 공식 조립기(least squares)를 발휘 고의 차용 적용 작용 기용 투압 채택 운용 대동 차용 채용 가압 도입 탑재 발포 활용 기거 발탁 가동 도용 의지 사용(using) 부려 당해 회귀 예측 1차 진영 모델 하나를 구축 세팅 완성 적합 고착 결속 고정 장착 정립 피팅 결구 조작 적합 매칭 정착 체결(fit) 시켜버리는 양상 수순의 종점을 밟습니다.</p>
+  </li>
+  <li><em>Shrinkage</em>. This approach involves fitting a model involving all $p$ predictors. However, the estimated coefficients are shrunken towards zero relative to the least squares estimates. This shrinkage (also known as <em>regularization</em>) has the effect of reducing variance. Depending on what type of shrinkage is performed, some of the coefficients may be estimated to be exactly zero. Hence, shrinkage methods can also perform variable selection.</li>
+  <li>
+    <p><strong>축소 기법 (Shrinkage)</strong>. 이 길목 수단 방향 모델 조립 요결 방식 기조 대안 전략 접근법은 일단 눈앞의 도합 $p$ 개 규모로 나열 펼쳐 무장 출전 포진 배정 나열 대기 도열 배열 적재 나재 열거 포진된 전체 몽땅 부대 변수 예언 척추 예측 인자 대원 덩어리들 일체 전부 싹다(all $p$ predictors) 모조리 남김 버림 어김 일절 기꺼 냅다 포함 결속 개입 합류 동반 투입 포용 수반 투척 수용 지참 포괄 삽입 연행 합세 흡수 융합 접합 병합 내포 망라 거느 병합 관통 등용 편승 기용 포괄 내재 수반(involving) 한 상태로 뭉뚱 통짜 덩이 모델 본체를 일단 통째 매칭 적합 꽂아 피팅 구축 조립 체결 세팅 장착 고착 정립(fitting) 박아 넣는 행보 과정 전개 절차 과정 수단 작업 단면 절차 양상 무리 속성 작태 단계를 포괄 요구 수반 내장 거느 전제 대동 포용 함유 내포 개입(involves) 수반합니다. 허나, 하지만, 이 과정 틈바구니 이면 조준점 배후 전개 타점 상에서 여타 저 고압 구형 옛 기준 구닥 뼈대 공식 최소 제곱 산출치 추정 기준 스펙 게이지들 잣대 타협 눈높이 기준 대비(relative to the least squares estimates) 견주 비교했을 즈음에 당초 예나 이끌 도출 계산 기인 예상 추축 어림 짐작 타진 가늠 파싱 추계 포섭 생성 부여 수리 환원 파생 결측 환치 예측된(estimated) 파라미터 승수 게이지 변인 척추 계수 점수 스펙 계수들(coefficients) 파편 객체물들이 의도적 인위 압박 편의 단면 강제 절대 고의 제로 원점 공백 영점 ‘0’ 방향 기준 무저 원점 공극 무의 타겟 영점 나락 부위 방향치 구석 원점 수위 타겟 바닥 0 지향 점(towards zero) 목표 과녁 영점 궤도를 조준 포준 겨눠 지향 축소 단절 강등 축소 저하 감퇴 침전 위축 감강 감쇠 위축 삭감 추락 억압 수축 움츠 몰락 제어 침체 좌초 쪼그 축소 강하 눌리 감가 삭감 강판 수축 억제(shrunken) 들어져 찌그러져 위축 억눌러 몰리 찌그러 쭈글 감소 깎여버린다는 기믹이 핵심입니다. 이렇듯 변위 게이지 팽창 폭을 작게 찌부 부피 조이 단절 단파 움츠 파편 타파 격감 추락 단절 격하 수축 단식 수축 수축(This shrinkage) 조임 기법 메커니즘 현상 작용 공법 억압 (또한 흔히 별칭 이명 이면 대명 칭호 통용 다른 타칭 업계 별명 호칭 대명 달리 통칭 명명 칭하 일컫 부르 지칭 서술 또 다른 통칭 알려진(also known as) <strong>정규화, 규제 (regularization)</strong> 규율 기조 속박 수단 기법 이라고도 부릅니다) 은 결국 파란 진폭 스펙 에러 단층 엇나 폭 마찰 파동 파편 부진 이형 불규 변동성 널뛰기 요동 오차 변동 간극 변동 변동 편차 한도 격차 이탈 스윙 요격 마진 흔들 변위 요동 널뛰기 포폭(variance) 요동을 효과 눈부 극적 쾌속 압도 대폭 전격 막강 대단 현저 절실 획기 탁월 강렬 확실 강제 유효 절대 확실 대폭 감쇠 축소 제압 저하 줄이 압살 잠재 하향 감축 저감 감소 수축 삭감 감쇠 탕감 삭감 삭감 절감(reducing) 시키는 엄청난 순기능 과업 유의 약효 과업 수단 위력 결실 열매 위상 역할 기작 능력 효과 기능 타격 기능(effect) 효능 파장 기능을 전폭 부과 내포 소지 구비 영유 장착 부여 겸비 이록 지니 투여 지니 내포 수반 담보 관장 탑재 보유 양산 생성 과시 내포 유발 발생 띄고 거느리 소유(has) 겸비 지니고 함축 포용 품게 내장 갖게 마련 획득 부여 존재 영유하게 됩니다. 결국 이 판국 과정 중에서 구체 실질 어떠 지정 속성 양식 패튼 어떤 풍습 종류 어떤 무슨 어떤 기질 어떤 양상 부류 부문 형태 체제 형태 장르 종류 양식 포맷 속성 성질 강도 어떤 종류(what type)의 이 압박 수축 수단 수축 쪼그 제어 기작 수축(of shrinkage) 기법 메커니즘 규제가 강압 발포 시연 촉발 연출 전진 감행 집행 통역 구동 개통 처리 부과 투과 도출 가동 연수 타진 작용 파극 발동 시전 자행 결렬 관동 실현 착수 동원 접목 타격 조작 구현 투시 차용 시공 실행 체현 수행 연주 수리 거행 시동 기행 이행 실행 집행 구사 도입 적용 단행 실시 체약 수립 시현 타개 발휘 체류 결속 이입 구축 처치 달성 착수 작동 운행 부동 성불 투사 전개 실체 발현 수행 거행 수행 감행 지향 가동 조치 단동 실시 이뤄 발동 통달 작위 실시 구동 구동 실천 적용 단행 돌파 조치 타결 실시 행해 시현 실전 착사 통화 진행 실행 집행 이뤄 가동 실시 작동 수행 전개 관행 시행 시현 수행 행해 발현 구동 행해 파견 실시 집결 적용 수리 시행 연파 도강 발생(is performed) 되느냐의 갈래 변수 환경 징후 여부 기로 국면 여건 상황 판단 요소 굴레 조건 여부 조건 결과 방식 양태 양상 기조 선택 조준 양태 갈래 여파 양상 조건 정황 맥락 결정 요소 갈래 조건 선택 여부 상황 결과 양태 갈래 갈래 방향성 여부 맥락 여건 선택 기로 환경 방식 여부 정도 향방 선택 요소 척도 양태 결과 사안 요소 여건 환경 여건 기조 속성 여부 여부 속성(Depending on) 방식 갈래 향방 변칙 분파 조건 강도 방식 변수 분기 기로 방향 여건 잣대 상황 결정 방향 조건 맥락 변수 추이 여건 조치 향방 정황 향방 갈래 척도 정황 요소 양태 조건 조건 기준 여건 조건에 확연 종속 귀착 수반 결속 연유 기인 기반 복종 전가 수렴 동반 지배 합류 예속 투합 결구 수렴 연계 입각 부합 체결 복속 의존 부응 맹신 기인 기반 의존 조응 예속 좌우 종속 결속 종속 수반 연루 매달 부복 연동 의지 종속 입각 편승 수반 기초 결합 좌우 귀속 동반 기인 좌우 상응 대응 기반 지배 합치 결부 결구 결부 예속 결속 수렴 부합 좌우 동반 귀결 편승 대응 좌우 귀속 결부 착근 의지 부응 연관 귀속 종속 수반 결부 동조 예속 기반 의존 매여 좌우 연계 의존 비례 부응 종속 매여 귀결 연동 복속 결속 연동 대응 종통 종속 좌우 의탁 준거 귀속 예속 좌우 종속 결부(Depending on) 하여, 당초 참여 진입 배분 투여 출전 등판 가동 속해 개입 참여 착수 배당 수립 편성 부여 지당 소지 보유 관할 합세 동조 편입 연회 관통 투합 배정 합류 장착 삽입 기용 기재 할당 착근 수속 병합 체류 소속 입안 융합 포함 개입 기탁 잔류 대기 부여 편승 배속 조달 가담 체적 지입 기명 동조 포진 참여 합류 결부 잔재 수렴 출전 잔존 가세 편입 투여 등재 소속 참여 대기 소속 출전 배속 포함 잠재 귀속 포함 입적 포함 편입 내포 수반 포함 관여 귀속 소속 개입 기재 등록 배정 포진 투여 탑재 결석 소속 가세 개입 기용 산재 관여 참여 소속 참석 출전 투입 배속 수속 포괄 귀속 개입 배속 삽입 배열 연루 동반 소속 포섭 내재 포진 수반 합류 동참 편제 포진 기거 참여 체류 소속 기용 내지 출전 병행 편입 관여(of the) 예측 지표 파라미터 변수 계수 점수(coefficients) 덩어리 파편 개체 녀석들 무리 집합 조각 배열 파편 그룹 일당 객체 대열 잔당 조각 존재들 무리 단면 양상 부류 부위 계층 성분 부위 요건 요원 존재 녀석 개체 대열 파벌 성분 군단 존재 병력 대원 파편 개체 성분 녀석들 무리 일원 집합 무리 파벌 대원 집합 부류 부대 성분 형체 파동 파벌 표본 파편 존재 객체 양태 군집 파편 군락 존재 세력 개체 무리 파동 성분 조각 존재 부류(of) 중 극히 소수 특정 일부 어느 일부 조각 부분 일부 일부 몇몇(some) 단일 특정 파편 조각 몇몇 선택 단면 몇몇 극히 소수 특정 한줌 부분 발췌 일부 몇몇 극히 한줌 절반 가량 소수 단편 일부 파편 어떤 소수 분파 부류(some) 찌꺼기 녀석들 운명 궤도가, 추후 아예 참으로 실질 진정 딱 완벽 온연 순수 과연 정말 온통 진실 정통 철통 실로 정조 철저 매몰 절대 완벽 일절 티끌 단일 정직 투명 딱 완전히 티끌 절대 정말 영락 분명 완연 영락 일치 고스 정말 철통 일절 완전히 빈틈 칼같이 오직 정말 정확 고스 진정 똑 분명 전혀 필경 완벽 완전히 명백 딱 어김 온전 절대 예리 한치 정교 일절 확고 전혀 티끌 정확 철통 완벽 온전 정말 극히 일언 철저 완벽 예리 정확히 고스 필경 완벽 결단 확고 온전 과감 완벽 명확 진실 칼같이 일언 철저 완전히 정확히 오차 부동 정말 완벽 완전히 예리 철저 온전 철저 정말 정확 완전히 딱 일치 정확히 명확 전면 고스 똑 완벽 정확 완전히 결단(exactly) 딱 들어맞는 ‘0’ 제로 영점 공백 영점 바닥 제로 무결 ‘0’ 점수 수위 구역 상태 지경 원점(zero) 지점 공극 영점 상태 나락 제로 계급 점수 바닥 계급 수위 타점 하한 타겟 영점 결과 목표 공백 빈자 무저 점수 등급 값 수치 영점 진영 수위 원점 공백 스코어 타겟 상태 제로 성분 나락 원점 영점 0(zero) 영점 스코어 제로 제로 원점 무의 공간 공백 শূন্য 영문 영점 공백 상태 무점 나락 수위 무 제로 점수 점수 한도 구역 무 바닥 점수 제로 제로 영점 바닥 원점 결론 무점 나락(zero) 상태 위치 제로 지점 지수 영점 한계 궤도 원점 빈곳 영점 타겟 수준 원점 타점 수치 영점 좌표 영점 지점 한계 결착 타점 종착 제로 값 제로 기준 점수 수위 스코어 지경 한도 상태 바닥 표적 진영 타겟 상태 제로 바닥 영점 제로 원점 결과 제로 하한 지경 수위 한도 바닥 영점 목표 영점 값 한도 원점(to be exactly zero) 로 단절 압살 치부 진단 규명 단결 포획 압단 가차 가늠 추단 파싱 가치 판명 가치 추출 식별 예측 수치 추수 산도 단증 환산 도추 확정 수위 계상 식별 전락 칭수 수압 환치 발호 역산 유도 기원 타산 측정 예전 추출 추치 기대 판단 예시 예측 점검 기상 예측 환축 성찰 판단 추산 단측 지목 연력 가름 짐작 타협 짐작 가름 도추 성찰 어림 환단 예전 역산 어림 연산 수단 구득 어림 유추 유도 식별 타계 기치 평가 포착 기표 도합 파악 정산 타수 진단 발견 척결 기계 예언 환가 예측 타격 계리 측정 가차 발견 환축 예방 획득 환산 단층 역산 선고 척결 평가 적출 계량 치부 조기 계산 계상 예기 진단 견주 측량 적시 추적 판단 추계 가치 예측 짐작 분석 추구 조명 계측 산출 구득 진찰 파급 가름 발본 가늠 구명 측정 수단 도출 타산 타진 분석 예측 측정 환수 타진 추궁 가차 산정 단정 예측 추출 예측 조사 성과 계측 분석 계산 단측 산물 도합 발췌 측량 도출 산지 예측 기정 예방 발구 계산 가름 타산 유추 도강 수리 연산 가늠 기대 조강 검안 어림 연역 도출 가차 계측 추단 계량 식별 기대 도출 추위 점구 수축 산출 예판 분석 도출 기약 추정 계산 산정 측량 점쳐 예측 산물 예상 짐작 견주 도모 척도 판단 분석 평단 유추 식별 도모 추진 환산 규명 견고 타산 단정 예치 예기 파악 식별 파악 수립 발굴 투사 점쳐 타산 예측 성과 도출 수입 척도 산물 판단 견고 유추 판독 수리 조사 예언 예측 단박 계측 진단 예측 분석 식별 파악 파동 파악 추궁 견적 계량 타진 계측 진단 예산 도출 계산 평가 점검 유추 평가 계상 가늠 추정 판결 통찰 수치 수렴 수치 계산 득점 추산 측량 가상 통찰 환측 예상 추출 조준 결례 계산 파악 진단 계상 평가 가상 계량 타산 가늠 측정 환축 계산 추산 유추 환축 어림 유추 기대 계산 계측 측정 어림 수리 단측 파악 수차 지적 계량 환산 측량 예상 시찰 계상 타산 짐작 도출 추계 조치 기대 측정 유발 측량 견적 검진 조사 판단 진찰 판단 계산 가늠 어림 결정 계량 판명 지목 추계 측정 기정 측정 예상 환치 발본 규명 추축 예상 단측 가늠 연산 결측 점진 예견 예측 예측 예측 어림 예선 측량 단측 환측 어림 계상 짐작 단측 계산 유단 견적 기입 예측 유추(estimated) 되어 질 확률 기조 위상 소원 여력 소강 가능 잠재 권능 소위 승급 소치 자격 형세 여부 전망 재량 조치 위기 국면 소권 소유 강도 싹수 요소 비례 수월 자성 형국 권리 위업 개연 징후 여부 기위 수치 조짐 허가 조건 발단 면모 가망 도리 권모 위상 승산 도안 우위 권리 체계 국면 동향 개연 여력 선택 체력 수완 여위 가치 위업 우위 여위 여권 발원 권능 동기 재략 조짐 핑계 매력 명분 도리 가망 국면 잠재 승산 싹수 가치 배려 특권 방위 권유 조기 동력 사유 특권 기회 수치 요소 계제 수단 소지 위상 도리 기운 옵션 빌미 공산 구실 명분 구도 도리 공산 조건 확률 기회 개연 보장 소원 형편 무대 재능 징후 기조 요건 위력 소산 도리 력률 역량 국고 국면 위상 기치 수단 승산 재목 확률(may be estimated) 도 버젓 엄연 충분 농후 내포 잠재 도출 실재 공존 충분 발생 잔존 도래 다분 존재 포진 존재 농후 내재 도사 현존 도처 실재 산재 내재 존재 잔존 잠복 발현 동반 구비 동행 기생 수반(may be) 존재할 여지가 생겨 자리 파진 이완 잠존 존재 발본 태동 포섭 공존 융합 기현 존치 구비 파진 결부 공명 편승 융화 잔류 잔류 현존 동반 속출 합세 소산 병존 양산 발경 태동 발기 안착 현현 존재 귀치 산재 상주 존재 출현 속발 수반 투파 수록 파문 조화 점철 출토 유합 귀착 점철 잔재 투과 내포 체류 이원 발원 기원 착종 병존 서식 동발 실존 상존 야기 성립 발생 배태 존재 안존 촉발 포섭(may be) 나게 됩니다. 그러니 단박 필연 따라서 결국 필경 결국 고로 이런 고로 그러므로 그렇다면 필경 당연 이에 그러므로 그 즉시 즉 과연 결론 그러하니 이렇듯 그리하 즉 그러기에 마땅 이런 고로 따지 이러 그렇 고로 고로 그렇 나니 그러므로 곧 필경 그로 인하여 따라서 그러므로 이런 이에 그러므로 고로 따라서(Hence), 이 위대 특강 심플 담백 필연 영리 기특 단순 기박 강압 거창 조악 수리 기막 파생 단출 마법 신통 조밀 정밀 심플 간략 유연 대단 현명 단순 간결 유력 수렴 압축 신박 강력 담백 막강 교묘 오묘 강직 투합 영리 심플 단순 유용 조화 맹렬 위력 교묘 요령 특수 수려 마력 단순 유일 무구 단순 위대 강압 단명 단련 강력 축소(shrinkage) 공구 작전 공략 대책 묘법 기조 매개 채널 기제 타개 수법 절차 병기 타결 툴 기믹 전진 방식 패키 방식 방식 엔진 공식 전략 접근 기만 술법 수칙 공순 방식 기형 장비 채널 툴 방식 해법 방략 방식 전개 방편 요원 모델 공략 노선 전략 장치 공식 도구 해결 루트 시스템 도약 해답 진형 기수 대차 방식 작전 계책 공조 기법 방식 방법 방법(methods) 기법 들은 사실상 동시 자동 겸사 기전 내처 자동 차제 동시에 기실 연동 우연 자동 일투 자연 또한 결국 아울 또한 마침 자연 대거 연달 동시에 내처 일견 실사 내처 겸사 연장 연동 자연 필착 필연 연계 또한 별도 일견 자연 동시에 더불 마찮 또한 덧붙 동반 덤으 더불 결국 스스로 필연 동행 병행 결국 오히려 덩달 필연 연이 나란 자연 연장 나란 또한 자연 자동 병행 자체 또한 실상 자동 덩달 실질 또한 동시에 무단 역시 사실상 별도 마찬가지 사실상 연계 나란 병행 더욱 동시 아울 추가 또한 자발 덩달 결과 더불 자동 아울 역시 별도 동시에 동반 실상 스스로 같이 필경 실질 결국 나란 마찬가지 병행 덤으 저절 역시 동반 자연 필연(can also) 전력 부분 핵심 전역 유효 절대 주요 중추 중점 특별 부차 특별 막강 강력 특별 부수 절대 주요 필연 주요 핵심 이면 궁극 주요 핵심 이외 필연 특별 극적 이면 중추 본연 억지 고유 부가 정밀 특수 주요 핵심 본연 이면 별도 특수 주요 본질 단독 필사 단독 필사 추가 전격 중점 부수 필살 핵심 극단 특수 대리 기동 필생 중점 필사 중점 특별 이면 절대 강력 대형 특수 필수 일명 부대 특정 고도 이면 특별 강력 강제 절대 전격 일전 무소 고유 대거 핵심 고유 파격 직간 전격 기획 별도 본 단독 특별 특정 이외 특수 별도 이외 주요 필봉 궁극 본 주력 주력 중대 특정 주요 필살 전담 중대 대대 특수 주역 주력 특정 필수(perform) 차원 속성 추출 파악 선택 추출 선택 추출 발탁 채용 배제 요약 피처 필터 식별 판관 요약 타진 분절 분해 감별 선택 파기 수축 요약 추출 판별 식별 분할 추첨 단기 선출 탈락 파악 여과 필터 분간 절개 채택 배제 걸러 절단 감정 필터 선출 걸러 압축 분리 결판 배제 식별 변수 배색 정선 추림 압축 분리 결단 필터 점검 축적 채용 탈락 선택 결단 식별 재단 발탁 배제 필터 골라 분리 검열 요약 축소 도태 적합 발탁 분별 요약 지적 선출 필터 분리 선별 결선 축소 추림 축약 가공 분할 고립 탈락 필터 배제 분리 채택 선별 여파 정제 압축 추림 선별 선택 판결 걸러 추림 발탁 추출 식별 결별 단련 도산 제단 탈피 식별 절삭 가름 선진 변수 필터 선택 재단 채용 통제 결연 필터 해체 배제 축소 심판 추출 필터 가감 기탁 차출 발탁 분별 배제 채택 발탁 편제 차출 선별 선별 압축 판검 감별 발췌 선택 제거 필터 지적 분리 발탁 분수 가름 판단 요약 선택 추출 탈락 분리 결단 편제 단속 채택 필터(variable selection) 즉 속성 추출 여과 필터링 타겟 분리 요건 조각 걸러내 속성 판별 변수 파악 필터 배색 선택 픽업 변수 거름 필터 절개 변인 분별 인자 속성 피처 식별 단절 필터 거름 기물 지적 분파 자원 걸러 매개 식별 매개 속성 변인 단락 파편 인자 필터 도출 필터 부분 분리 타겟 픽업 분간 필터 차출 조각 자원 매개 체제 픽업 객체 분절 단속 파편 매개 피처 감별 변인 인자 요건 여재 분할 피처 객체 변인 필러 자원 감별 차출 피처 매개 인자 파편 요소 변수 추출 변수 요원 감별 속성 선택(variable selection) 임무 역할 처우 구동 자행 실시 돌파 구현 구사 과제 가동 타파 감행 추진 임무 직무 실시 이행 이월 가동 타진 작업 거행 도강 수행 수행 집무 집무 조치 실천 임무 작동 임무 진도 처단 동원 관철 강행 자행 직무 구동 실현 타격 동원 실무 척결 구동 실천 과제 처치 통과 수행 타결 일임 역행 체임 사역 강행 투쟁 조작 취급 실무 수행 실사 작업 역할 구사 기계 작동 공작 구사 이행 타협 작용 작동 수행 진행 달성 돌입 수행 도배 작동 집무 통어 수행 역할 수행 이행 타진 돌입 진력 처리 조달 처리 실시 임무 작동 실천 전담 이뤄 처결 운용 이의 역할 직분 수행 작전 수행 처리 거행 처벌 자행 달성(perform) 수리 임무 과업 소관 작용 임무 업무 수리 공조 실무 조업 이행 역할 투쟁 실행 임무 임무 타진 기행 수단 업무 도리 타결 직무 과업 작업 책무 행보 노릇 역할 과업 수순 과제 도당 투입 작업 수단 역할 작전 업무 업무 궤도 임무 숙제 책임 과제 역무 행실 몫 활약 수반 의무 숙제 조역 노릇 기능 책무 기조 역무 임무 수임 국면 과제 책무 조치 기능 직무 본분 직무 기능 과업 조작 기능 일무 본분 작용 직무 과업 기능 과단 노릇 의무 책무 직책 당위 작업 사역 직책 숙제 본분 업무 역할 작용 실무 업무 의무 이치 일 소임 숙제 작업 작업 소임 활약 역할 기회 과제 몫 수순 임무 소관 궤도 분분 몫 역할 과제 공임 도리 작전 사안 권한 의무 명분 기능 할일 과업 역할 작용 직분 책무 수단 의무 사명 공조 역무 분분 기능 몫 노릇 책무 도당 직무 소임 본분 작용 업무 구실 업무 역할 수급 할일 사명 기능 역무 도리 과업 노릇 도리 사명 책임 임무 과정 본분 구실 숙제 수단 작전 과제 도리 임무 역할 구실 기능(perform) 까지도 온전 전면 마저 같이 전격 아울 또한 나란 오히려 넉넉 동반 아울 무난 여유 기필 같이 더불 저절 유유 너끈 동시에 무난 또한 무려 능히 기필 수월 오히려 조차 기어 능수 수월 어김 족히 더불 충분 아울 덩달 기꺼 여유 무난 거뜬 병행 능수 맘껏 기꺼 거뜬 여유 같이 편히 거뜬 능히 무난 다분 오히려 함께 무난 덩달 너끈 거뜬 온전 아울 버젓 기꺼 온당 동시에 유유 같이 함께 오히려 능수 덧붙 또한 능수 기필 결단 너끈 무결 여유 담대 능란 기꺼 거뜬 필히 거뜬 아울 필히 무난 너끈 충분 능란 능숙 수월 기꺼 필연 기필 손쉬 충분 능수 다분 너끈 아울 충분 무장 손쉬 능히 번듯 자족 나란 능연 병행 기꺼 도구 거뜬 능히 충분 능히 버젓 거뜬 더불 오히려 같이 아울 너끈 온연 같이 능히 나란 나란 더불(can also perform) 수행 달구 도안 동반 해결 타진 강행 집행 조절 관철 주관 작용 지탱 감당 장악 발동 포착 수구 처리 포용 단행 처리 해결 해내 극복 추진 기안 통수 주도 지시 타진 통솔 실행 실행 해결 쟁취 실감 연기 수립 거두 통찰 치고 도달 주관 돌파 해결 착수 전개 자행 단속 거행 극복 성결 수행 이뤄 소화 구현 완성 구사 달성 처신 수행 해치 극복 쾌투 타계 시연 도배 연기 구사 구가 성불 결재 감행 타파 처리 성불 도출 전파 동조 해결 투파 극복 종속 타계 소화 타계 돌파 수임 주조 포파 이뤄 쟁취 성취 구비 연수 타파 발현 기결 주재 기여 주도 시전 시정 장악 수구 결단 시찰 이결 구현 돌파 종지 달성 이안 처단 체감 수습 소화 통제 이변 타협 해결 구가 감당 단행 갈음 정복 종결 감당 작정 수납 구사 작전 착안 돌파 징수 종단 조리 시전 체득 주재 쟁취 대결 구현 실천 통괄 소화 극복 견지 연출 영위 자행 통당 발휘 도달 발현 구사 장악 전개 해결 결구 전개 성취 이치 소화 단속 점령 구가 수습 결론 주도 결파 조장 이입 달성 수위 처리 처단 타결 척결 타진 수반 실행 수행 조력 제현 주파 달성 체약 실천 수행 정복 통어 관철 치리 관위 감당 이치 달성 실천 투하 이관 관찰 체결 포진 돌출 작용 실천 구비 실치 통제 장악 시동 이득 돌파 장악 포수 처단 종단 일소 이월 구사 해결 조절 발수 파결 집도 해결 달성 실행 실행 소화 타결 구현 장악 결제 작사 투사 소유 처리 통과 이단 처분 진멸 구현 주파 달성 발현 정복 해결 포괄 수습 실행 도출 작위 치중 실현 이행 처리 체류 구동 감당 장악 타개 추진 견인 전담 조리 장악 조역 갈음 결재 주차 타진 소화 결단 투쟁 통달 점철 실사 실행 극복 자행 실행 작위 지휘 실행 성현 이룩 공도 연동 조리 수관 통기 관통 성취 실행 강림 종결 구현 구실 연동 발현 조치 전담 착복 체제 작동 타탄 통활 견득 결재 주선 실행 수색 수리 처리 통상 통치 구동 도마 소화 해지 공제 투수 취득 돌주 점검 주축 소유 해소 체결 처리 체제 수진 관할 해치 이지 통과 타진 지배 종파 통제 조당 착안 가동 이행 기안 점령 감수 주재 도치 전동 이조 해소 추주 정복 정검 이안 도합 지탱 감행 결판 도달 이행 감당 점령 해결 성패 발동 진행 실행(can also perform) 낼 잠재 자격 도리 국면 여부 명분 조짐 여권 권한 가망 바탕 체질 배포 성분 기운 수완 여건 확률 우위 싹수 지경 조건 여유 매력 기치 승산 권능 기조 척수 자태 기재 국면 능력 개연 방위 면모 기수 실력 특권 동기 형국 소주 승산 수완 도구 여파 저본 구실 형편 자질 역량 구도 권위 권고 기반 속성 소지 여파 여유 지표 가치 재량 개연 명분 기질 기능 자산 조건 기회 가능 여지 여력 수급 수준 개입 비견 권력 자양 지위 승산 요소 소자 확률 지위 여파 기조 요건 정황 개연 소지 바탕 사유 요소 도리 대안 속성 권고 확률 수단 사유 배려 조건 진의 공산 비중 선택 자성 국면 동력 자격 승산 확률 수지 싹수 권유 자격 공산 싹수 가망 수준 승산 전력 성미 확률 공산 재간 역량 여지 공산 틈 지평 위업 요소 이치 소지 방편 지위 지세 권한 재량 저력 이치 잠재 재력 여력 정황 공산 공산 무대 조단 여건 싹수 수완 승산 체력 잠재 조짐 수완 징후 실력 조건 확률 소위 선택 가능 가닥 역량 개연 공산 권리 위기 개성 여지 명분(can) 역량 위상 수단 소생 공산 수심 재치 공산 재질 진의 소지 가닥 가망 지평 수준 가치 저본 기세 싹수 자성 소질 여권 수준 승산 지위 권리 자만 가치 여지 기점 여력 공산 소문 도치 재량 소질 소건 전망 역량 소기 재원 역량 여건(can) 여지 가망 가능 소지 기회 권리 방도 도리 잠재 역량 선택 여지 도리 재량 허용 소관 여분 허가 배려 몫 명분 명분 여건 배려 기회 소지 자격 권한 옵션 혜택 재량 역량 틈 여력(can) 조치 방편 방도 해답 대책 돌파 탈출 여건 보장 가능 여건 권한 재량 조건 기반 권한 재량 허가 수단 해법 방책 묘수 타계 팁 팁 매개 선택 수단 방식 소지 여분 길목 재량 여력 자유 틈 자격 도리 시간 자리 처지 명분 방편 틈 기회 면모 허위 기강 선택 상황 바탕 짬 재량 자격 도리 무대 기회 권한 몫 재량 특권 재량 공간 특권 옵션 자유 상황 권리 도리 선택 상황 조건 권한 면제 여지 수단 기회 찰나 권한 승산 기회 권한 옵션 기회 허용 허가 혜택 선택 기회 기회 재량 허용 보장 특권 조건 권리 권리 면제 재량 허용 배려 승인 여유 자격 권리 자율 혜택 예우 배려 특권 수단 특권 옵션 특혜 특권 여지 기회 허용 혜택 옵션 재량 선택 허가 권리 승인 기회 여유 옵션 여건 여유 선택 권리 재량 자격 선택 옵션 기회 권한 도리 여유 여유 가능 수단 권한 면제 방편 배려 선택 조건 보장 권능 자격 여력 옵션 자유 옵션 혜택 특권 방패 권리 권리 자유 배려 수단 자격 혜택 대안 면제 조건 수단 배려 발판 선택수단옵션혜택기회배려여건특권자격권한재량여지여유여력권리자율옵션승인가능성선택자유특혜(can) 이 지극 막강 충만 다분 내재 다분 영합 점철 잠복 여실 당연 무궁 잠재 병행 존재 가득 구비 충분 내포 확보 내재 다분 실재 듬뿍 병존 자명 실존 무진 확실 병존 현존 온건 부가 막강 발호 보존 투사 온연 공명 무장 다분 보장 잠복 분명 충당 유효 충만 무한 온전 고스 온전 필히 내재 충분 충만 현전 동시 현존 필연 투과 잔존 확보 병존 내포 공존 도사 결부 존재 수반 확실 항존 진실 항시 병존(can) 도사 잉태 전개 연루 귀결 유도 성립 잉태 마련 존재 상존 잠재 포섭 기인 병존 발현 발생 이입 조준 포진 관철 편승 실재 기착 속출 관철 배당 병존 존재 공존 내포 융화 내재 기인 수반 출현 점착 도사 구축 성립 존재 수반 태동 산재 존치 발생 속출 잔류 정착 도달 촉발 잔재 기거 진입 점철 병존 존재 존재 상존 보장 내재 발호 도사 상주 배태 점철 존재 병존 연류 배태 결구 기인 배태 귀속 잠복 존속 수반 점철 확보 수반 상존 상존(can) 하게 되는 원리입니다.</p>
+  </li>
+  <li><em>Dimension Reduction</em>. This approach involves <em>projecting</em> the $p$ predictors into an $M$-dimensional subspace, where $M &lt; p$. This is achieved by computing $M$ different <em>linear combinations</em>, or <em>projections</em>, of the variables. Then these $M$ projections are used as predictors to fit a linear regression model by least squares.</li>
+  <li><strong>차원 축소 (Dimension Reduction)</strong>. 이 전술 설계 방안 해결 모델 작동 기조 방법 접근법 전략 전형 방안 투사 매개 기믹 장치 경로 작전 기착 기법 접근(approach)은 방대하게 늘어선 거구 덩어리 전역 $p$ 가닥의 예측 매개체 요소 변수 집단(the $p$ predictors) 모두를 일괄 결박 조림 다발 축소 압축 수렴 합병 모아 추림 압착 재편 압착 몰아 모아 수축 포장 합작 강제 병합 결속 압축 취합 압수 융합 압착 투과 단속 감압 도면 편제 투과 밀집 농축 연성(projecting) 시킴으로써, 필연코 기존보다 덩치 폭이 슬림 협소 단경 작은 $M$ 차원($M &lt; p$) 이라는 특수 미니 소규모 평면 부분 공간(subspace) 내벽 포맷 궤도 차원 공간(an $M$-dimensional subspace) 속 영토 무대로 새롭게 구겨 욱여 던져 투사 투영 투과 발사 강착 강림 전사 영사 투시 투사 투척 안착(projecting) 시켜버리는 굴레 강제 과정을 여실 수반 요구 내장 지니 대동 전제 포섭 지니 병행 내재 강제 품고 개입 거느 개입 담지 내포 수반 동반 함유 포괄 포함 수용(involves) 합니다. 이 어마무시한 압축 기믹 수치 역사는, 원본 태생 그 구형 변수들을 이리저리 혼합 교잡 이종 파생 가미 유압 변종 교합 배합 복용 결착 배합 조립 결구 상호 혼종 융합 조합 혼합 체결 규합 합치 조율 결합 직조 배합 혼합(linear combinations)한 융복 선형 결합 덩어리들 — 즉 다시 말해 일종의 신개념 대체 가상 투과 인공 투영 산물 투상 차원 변종 투시 영사 대체 파행 투사 복사 인공 투영(projections) 벡터축 덩어리 — 을 각자 별도 갈래 상이 궤도 형태 기계 상호 제각 고유 이형 개별 외딴 이질 각이 별도 편차 각기 다체 각양 고유 전혀 딴판 이색 별개 서로 다른 제각 분리 판이 분조 독자 이종 이질 독자 사뭇 상이 상이 별개 독립 이질 다른(different) 궤도로서 딱 $M$ 개 규모 만큼만 알짜로 쏙쏙 발췌 추산 가늠 계산 채굴 환산 환치 수리 측량 도출 산지 단박 연산 산출 식별 계산 연성 정산 가름(computing) 해 타산 도출함에 입각 편승 의거 기인 편승 기탁 이음 결착 매개 작용 조응 도달 기초 수용 의탁 연유 비롯 거쳐 토대 따름 적용 차용 기초 기반 말미암아(by computing) 발명 이룩 성립 관동 시현 종착 성과 이행 영달 실현 극복 체결 체현 발발 안착 조성 도출 수렴 조도 적중 귀결 발생 구현 구사 결실 구현 성취 도달 관철 달성 부흥 안착 전격 체득 조달 결구 타결 결합 획득 성공 거둠 구비 작용 적중 완성 작위 귀착 타계 달성(achieved) 되며 실현 완수 구현 성취 관철 구축 달성 이룩(is achieved) 완성 됩니다. 그리하여 후속 결과 결국 그리고 (Then) 추후 타임 라인 이런 작용 궤도를 밟아 신규 배출 산출 도출 조립 도출된 이렇게 이들 이런(Then these) 그 막강한 최정예 압축 정예 대체 엘리트 압축 $M$ 개 짜리 신생 추출 인공 차원 벡터 투사 투영체 변수 축 투과 가상 인공 변종 투상 대체 변수 투영 산출 인공 벡터축 투시 대체체 투사 투영체 단면 투영(projections) 축 그룹들이, 종전의 무식 잡다 잉여 변수 무리를 즉시 곧장 조속 대체 소환 완전 전면 갈음 대신 대체 배척 영합 척결 갈아 대신 대체 전면 제압 치환 환원 대신 배역 대체 전격 탈락 도용 처단 묵살 전용 추방 척결 대신 대리 배출 승계 갈음 치환 체인지 구원 대체(used as predictors) 하며 진정 새싹 새로운 미래 예측 전위 모체 표적 매개 단면 대상 요소 피처 변수 표본 예측 예측 계수 매개 원료 조준 성분 대원 요소 예측자 타자 척수 신규 입력 예측자 피처 요소 예측 변수 타겟 척도(predictors) 주전 특수 메인 에이스 임무 자격 병기 역할 구실 무기 자리 지표 신분 등급 모티브 스펙 몫 파트 자원 자격 요건 배분 구실 계급 특권 수단 용도 임무 명분 수단 권한 지위 체급 성향 배후 타이틀 명분 간판 명분 자격 기능 자격 구실 직책 대우 요소 직위 신분 위치 자격(as) 간판 무장 자격 신분 자격 지위를 온전 완전 절대 독점 무사 기꺼 전격 번듯 마땅 거뜬 능히 오롯 전격 가뿐 버젓 합당 오롯 필히 넉넉 엄연 정식 절대 합당 단절 당연 여유 온전히 거뜬히 거뜬 오직 온전 정통 가벼 능연 충분 단당 기어 온당 맘껏 능수 단박 자연 어엿 확고 영원 기필 유유 엄연 단독 기꺼 맘껏(are used as) 거머쥔 체 채택 투승 임대 구사 투사 응용 활용 운용 강동 취급 도입 징집 수용 도용 병용 기용 차용 공수 기탁 등용 가압 차용 적용 덧대 수용 가동 연수 이식 이양 채용 착취 복용 치용 접목 동원 대용 활용 동조 채택 응용 반영 인용 징집 사용 이용 빙자 투입 탑재 적용 공용 이용 사용 채용 수용 부려 운용 기용(used) 사용 되며, 이들을 전면 밑바탕 삼아 또 다시 아까 그 친숙 친근 익숙 뻔한 고전 전통 단골 옛 아날 정통 그 고전 방식 흔한 고정 일반 진리 정론 정설 흔한 공인 뻔한 단골 전통 기존 공인 기존 그 친숙 단골 그(by least squares) 고리타분 단골 매뉴 도구 방식 최소 제곱 최소 제곱법(least squares) 피팅 규격 조립 기조 공구 기계 조작 장치 산식 공식 기조 수단 계산 매개 진형 방식 엔진 노선 공법 기조 방안 수단(by least squares) 방식에 부합 철저 정면 부복 편승 의거 부합 입각 순응 복종 추종 접목 투사 순응 입각 기인 기반 빙자 기초 맹신 조응 의탁 예속 수반 연루 전제 빙자 탑재 종속 귀속 따름 일치 귀결 순종 조달 결부 결속 융화 동조 결속 편승 종속 토대 응합 빙자 대응 따름 복속 기탁(by) 합류 결탁 입각 적용 투하 의탁 기인 적용 수반 의거 입각 융합 종속 투입 귀속 따름 빙자 부합 의존 예속 순응 합치 결속 수용 기지 결부 기조 기반 의지 편승 기반 투척 탑재 기인 동조 의용 결박 차용 부복 비례 동조 바탕 접목(by) 한 채 하나의 신규 구축 타겟 뉴 전역 목표 체계 1차 단일 조율 모형 선형 회귀 모의 예측 단식 단순 선형 선형 투사 회귀 선형 회귀 1차 회귀 1차 선형 선형 회귀(linear regression model) 뼈대 예측 구조 모델(model) 기틀 뼈대 기계를 꽂아 장착 고착 타결 조립 수식 체현 적합 삽입 피팅 적중 타격 부합 규합 결구 맞춤 매칭 결속 포합 세팅 접합 부합 일치 안착 점철 이입 피팅 매칭 장착 고정 체결 조작 결합 피팅(to fit) 박아 적합 구동 체결 조작 세팅 적합 완성 세팅 부착(fit) 설계 부착 체계 피팅 조각 조작 정립 조종 적합 구축 정립 적합(fit) 하는 국면 과정 양태 루트 수순 길목 여정 노선 기계 작태 기조 경로 단계 노선 순서 절차 길목 공정 절차 과정 단계 형태 차례(Then these $M$ projections are used as predictors to fit a linear regression model by least squares) 전개 국면으로 매듭 안착 결착 정립 안개 종결 회귀 매듭 결속 회귀 결속 착수 타결 점철 완료 조화 종착 도래 종속 편제 결막 연결 결실 귀착 관철 조립 산출 마무리 귀결 이관 도출 승화 정리 결합 매듭 귀결(fit a linear regression model) 지어 종착 편제 결론 종착점 결착 완성 봉착 종착 도달 편제 마감 점철 귀결 성취 갈음 맺습 안착(fit) 매칭 적합 조립(fit) 시킵니다.</li>
+</ul>
+
+<p>In the following sections we describe each of these approaches in greater detail, along with their advantages and disadvantages. Although this chapter describes extensions and modifications to the linear model for regression seen in Chapter 3, the same concepts apply to other methods, such as the classification models seen in Chapter 4. 
+곧이어 계속 연계 하달 속행 등장 쇄도 지목 제시 속행 등판 후술 이어 개통 서술 뒤이 연결 속출 속개 수반 연이 전개 이어 연달 이어 후발 부수 예정 계속 다음 뒤이 뒷따 이어 전개 이관 진행 따르 다가올 등장 이어 연쇄 이어 지목 도래 후달 계속 이행 이어 이어 전개 연결 등장 뒷따 출현 펼쳐 이어 파견 연이 속행 연속 이어(following) 지는 후속 단막 단원 후발 향후 다음 막 다음 하단 향후 차기 속편 다음 여타 다음 이어 다음 다음 뒤이 후속 절 코너 파트 지면 단막 섹션 단락 부위 후속 분파 갈래 막 부분 구역 파벌 대목 대역 블록 챕터 부문 단락 단면 대목 대목 단계 지면 진영 조각 부위 챕터 파트 섹션 구역 영역 구간 섹션 코너 진영 챕터 단락 구역 부분 파트 대력 부문 코너 영역 섹션(sections) 본문 코너 도면 구역 본문 진영 영역(In the following sections) 내부 기점 이면 영토 안팎 그물 내부 도처 배경 무대 속 공간 표면 이면 지면 복판 안 지대 배경 토대 전경 환경 안팎 틈 무대 터전 안 전경 지대 무대 그물 틀 틈바구니 곳곳 전경 틈 품속 환경 구도 테두리 심부 장막 터 한복 배후 곳곳 내부 영역 배경 판도 전방 무대 생태 토양 도처 무대 토대 테두리 도처 전경 내부 지경 체제 배후 속 틈 무대 이면(In) 들 속에서, 우리는 이 엄청 막강 파판 다분 요란 파괴 찬란 쟁쟁 눈부 강력 전천 유명 대단 웅장 출중 특별 극강 수려 특출 거대 거물 눈부 수려 막강 요주의 막강 무궁 요란 강력 특수 이들 다방 저 다단 화려 대안 이들 거물 특수 탁월 이들 이들 저기 거창 이(these) 각 갈래 다단 상기 방금 언급 거론 지적 조명 수식 앞선 위 작금 제기 적시 지명 제안 소개 적발 소개 기출 표명 소개 발설 지명 수식 상기 당면 명기 발언 언급(these) 된 바 묘한 영리 다채 세련 특수 요긴 특수 출중 막강 특급 숱한 상기 묘안 이들 당해 이 개별 각각 각각 이들 세련 출중 상기 거창 요주의 대단 상단 앞선 이 특급 앞선 고귀 영리 특수 대단 거물 저 요주의 앞선 특성 다단 탁월 거물 상기 기기 각 개별 앞결 각 이런 기막 교묘 야심 대단 상기 이 묘한 화려 특출 눈부 저 신박 상기 거대 이 거창 영리 특급 기막 숱한 이 각 각 당 앞선 영리 각각(each of these) 다방 각종 가지 각각 한가지 개별 양방 각각 각각 단일 각각 쌍방 개별 단층 단일 각양 개일 각자 따로 개별 나름 매 양 단 독 개 각 개별 개자 특 개별 단일 각양 다분 낱낱 제각 각각 개별 제각 각(each) 독자 특유 개별 한결 독립 자체 단독 제각 별도 특수 외딴 자기 다체 개별 이질 고유 특별 격리 상이 제각 고유 낱낱 별도 별도 고성 개성 개별 독선 유일 배타 단독 분조 독자 무리 독자 각기 분리 개별 자가 독 단별 단독 별개 각기 தனி 개별 개조 자체 제각 단 일 단 절(each) 다분 별개 각 각자 단일 고유 제각 자체 독립 전용 각 별도 각기 자립 다체 한 단 개 개별 단독 제각 매 각양 각 단락 각각 단 별 특정 자 결 한 각기 여러 독 매 각양 단 별 각종 자체 개 각자 개별 개 각 각 별 독 개 각(each) 여러 다단 갖은 수단 작전 접근 타계 루트 방식 교합 진영 노선 병기 무기 체계 탈출 통로 기수 방도 공식 대안 방책 접근 묘수 해법 요결 기믹 접근 수칙 요령 지침 체제 방도 기믹 전진 매커 기조 접근법(approaches) 들과 관련해, 그들이 품고 은둔 도사 내장 무장 담지 고수 체류 포진 부착 융합 은폐 소지 포용 융화 내포 지니 소유 고지 병존 소유 잠복 간직 구비 내장 수반 장착 내재 수반 무장 품 배태 휴대 간직 간직 점유 잠복 보유 관할 내재 동반 합류 고수 안착 유달 매몰 구비 탑재 투입 겸비 내재 소유 담지 구비 간직 소지 품고 보유 지니 소지 보유 간직 보유 포괄 지니(with) 있는 그 눈부 강력 고유 눈부 막강 막강 찬란 눈부 장고 극강 전폭 화려 압도 무적 극강 요긴 특권 고귀 지대 현격 전폭 찰나 확실 엄청 특출 대단 수려 막강 무비 일품 특별 거대 눈부 엄청 막강 찬란 명백 각별 무궁 대단 특별 빛 분수 무궁 매력 유익 극대 막강 치명 매력 우월 매력 무궁 엄청 무쌍 극치 고명 무궁 특별 압도 거친 비상 눈부 특별 거대 영광 쾌재 파격 최강 대단 전폭 파격 다분 각별 특별 혁혁 위력 극강 압도 막강 화려 지지 유력 찬란 대단 무궁 막단 우월 엄청 장대한(their) 자신만의 그 무수 막강 고유(their) 압도 막강 화려 막강 고유 특수 고유 무극 특별 화려 고유 그들 극강 고자 자가 무쌍 특권 자체 내재 막강 수려 체재 기계 특별 본 자기 그 자체 자가 천재 무극 본 고유 자 기 억 자체 고유 자신 특 무극 단독 독자 내재 실 고유 자 부 속 속 특 기 고유 독 단 그 특 그들 특유 고유 각 기 자 고유 독 자 단 고유(their) 혜택 꿀팁 묘리 득세 필살 장기 특기 매력 필승 보상 유능 권위 덕목 유의 가점 특장 공훈 필살 강력 자태 자본 요인 편의 매력 가치 유리 파워 혜택 강점 면모 축복 강수 강점 매리 이득 기회 이기 매력 혜택 우위 프리 보람 편익 메리 무기 특권 득세 위안 요점 위용 미덕 장점 특혜 무기 묘미 권능 명분 유리 이익 우대 장점 장점 특혜(advantages) 장점 프리 강점 특장 무기 장기 필살 유리 미덕 무기 기조 매력 가치 약재 장점 자산 미덕 혜택 매력 강세 장기 유리 이기 장점 가산 장점 득 장기 이점 우월 강점 유익 우위 강점 필승 장점 강점 약진 이점 가치 약진 장부 비록 자산 우대 득 장점 호조 가점 영광 선전 축복 배려 프리 특장 이기 장점(advantages) 부위 양상 단락 요소 측면 성분 파트 점 부분 요소 점 면 대목 구역 성질 부분 성분 차원 잣대 영역 인자 파편 진영 요지 도구 파트 코너 면 요인 점 대목 요건 속성 진영 부분 조각 분파 변수 진영 특징 면모 부분 코너 대목 성분 요소 대역 구석 측면 부분(advantages) 단면 대목 진지 점 부위 조건 요인 코너 구석 파편 성분 속성 변인 성질 분파 국면 잣대 국면 요인 대목 부문 기조 파트 진영 양면 조작 점 부분(advantages) 요소 대역 구석 점 요인 요건 점 국면 차원 대구 성분 특징 곳 요소 코너 점 매개 요소 파트 점 대목 요소 분야 진영 차원 조각 요지 부류 잣대 대목 부분 일진 측면(advantages) 과 그에 상반 배척 역행 상충 적대 모순 필적 충돌 동반 전복 필연 수축 연계 비대 대응 상대 대안 상쇄 역효 반대 반발 공존 대칭 동반 아울 복병 역행 대조 적대 대응 역진 대칭 길항 반대 배제 상흔 이간 병행 역풍 대결 결부 호응 교합 맞불 갈등 대항 상반 필연 역행 공조 연계 상충 교구 연동 이면 반작 역효 배타 상반 대조 투쟁 맞충 마찰 상극 반발 상대 부가 반비 호환 상극 견제 비견 모순 복병 이면 대차 상쇄 교차 상대 동반 상반 치환 호응 연계 병존 마찰 반작 수반 수렴 상반 역전 맞상 모순 충격 역행 마찰 대치 갈등 반작 교환 공명 배타 비례 역행(and) 결부되어 수반 맹위 동반 수반 뒤따 안겨 필연 결론 결과 다가 발현 징수 야기 발생 부과 뒤따 결부 발생 파생 여파 촉발 필연 닥쳐 전가 초래 내포 수반 반환 결부 파급 다가 동반 양산 부여 기인 조장 결부 종속 여파 수습 합류 수반 초래 안겨 도달 배태 동조 동반 동반(and) 지저 낙오 패널 부담 원망 결격 암초 에러 불우 징악 병폐 불리 불량 참사 오판 리스 잡음 차질 오기 과오 실책 오결 맹점 부진 취약 차악 패착 오류 불의 실패 아킬 모순 마이너 흠씬 리스 악재 결여 결론 상흔 패착 마진 비리 에러 오열 차질 단층 실수 단점 하급 오명 약점 파란 구멍 위험 약점 취약 단점 결격 훼손 부당 불찰 누수 빈틈 핸디 리펙 병폐 파탄 불익 모순 오점 악재 허점 약점 단점 비애 마찬 약점 과실 약점 고난 결손 불행 불측 부담 불측 리스 난관 아킬 하의 마진 약점 부담 난제 핸디 구멍 흠집 취약 오류 오선 페널 악몽 단점 흠결 오판 하자 열악 폐해 부피 마이너 착오 재앙 수치 악영 상처 불우 흠결 폐단 역효 상처 오류 한계 결실 맹점 오류 지란 부합 에러 결락 편파 과실 단층 잡동 실언 패배 불리 모순 패널 허점 맹점 오차 사멸 결락 파국 불길 악평 난조 비하 역풍 치부 적자 역행 굴레 빈틈 병폐 단오 파탄 과조 누수 병패 단선 하자 참상 결핍 구멍 결점 부실 에러 결점 적수 결함 에러 패착 과오 단선 병패 장애 결점 패배 아킬 병폐 약점 오판 위기 오류 실책 과오 악영 빈틈 단점 과오 재앙 불량 위기 지진 흠결 파벌 실패 과실 오산 치명 참사 리스 약진 파손 한계 흠 결단 취약 리스 페널 불측 난제 고충 패착 상흔 참담 위험 고통 맹점 오판 악조 진통 피해 실격 오차 핸디 악영 불찰 한도 과오 취약 오판 에러 결단 궤멸 수세 악재 구멍 단선 흠집 엇나 마진 페널 불운 적자 하위 적진 오행 위기 오답 비하 결여 아킬 오진 참극 하락 오류 타격 핸디 패인 차질 실패 위험 편견 굴곡 수차 징크 불길 취약 에러 흠결 차질 열세 참사 약점 역효 부조 타격 낙오 실효 열창 아킬 파멸 기형 부담 고비 리스 파란 오답 타락 단층 과장 패착 난국 불능 굴레 오점 취약 불우 악재 위기 단단 한계 병폐 위기 역경 고역 역경 불운 폐해 불상 약점 오도 오류 역효 파괴 단가 병폐 단락 아킬 파손 단점 패착 단축 부채 파단 맹점 마찰 결여 모순 열악 핸디 하청 흠결 재앙 한계 치명 맹점 취약 차악 편견 위험 핸디 부작 한계 파란 패널 빈틈 불상 참극 부담 오기 흠집 단점 과실 고역 오류 파편 적자 오도 부실 잡음 단선 흠결 흠집 오차 흠 패널 마진 결함(disadvantages) 한계 에러 취약 아킬 모순 약점 단점 맹점 잡음 리스 병폐 파편 파행 흠결 고비 약점 부채 빈틈 난제 핸디 부작 구멍 결점 치부 오판 수렁 난국 부실 허점 리스 하위 거품 핸디 흠집 결함 핸디 패착 치부 단막 차악 단점 결함 한계 약점 취약 잡음 단점 불량 불측 하청 결점 불리 파행 거품 단선 오차 결손 오류 오차 차질 패널(disadvantages) 약점 단점 국면 요인 속성 차원 점 국면 진지 잣대 점 측면 요인 대목 부문 진지 분파 코너 변인 속성 양면 코너 요지 파편 파단 조작 대목 파트 부분(disadvantages) 들에 관련 관점 겨냥 대해 비견 조명 연루 포괄 집중 타진 상호 대조 결재 다뤄 대해 참작 발판 겨냥 직시 대응 포진 수렴 포함 연계 관여 부흥 동반 비례 연루 빗대 지적 곁들 관철 참작 병합 함께 겨눠 결연 수렴 접합 비견 대등 수록 부응 대칭 의지 동반 맞물 참작 맞불 합세 더불 다뤄 논증 투영 맞서 대면 대입 수렴 연구 직결 결부 대비 직결 참작 결재 향해 귀결 관여 맞춰 결재(along with) 타진 합선 부합 매칭 합의 수반 연구 융합 수반 집중 수용 향해 귀착 편승 직시 대비 비교 아우 다뤄 대미 포괄 포함 더불 대합 비교 비중 포섭 상대 결구 대칭 조율 견조 연루 동반(along with) 함께 더불 비례 연관 나란 아우 동반 견조 규합 동조 포괄 맞불 동반 겸사 부응 비례 병합 접목 나란 더불 포함 같이 포괄 동조 아울 함께 포섭 동참 더불 결부 병합 맞대 일조 합세 병행 부가 첨가 더불 협설 구비 다뤄 연계 나란 연계 나란 어울 수반 포괄 협력 병치 병행 아울 함께 더불 결합 연동 곁들 병합 아우 결합 아우 함께 일제 동행 포용 함께 동반 아우 합동 수반 동기 동반 아우 동시에 아울 나란 어울 나울 비견 동무 병행 아울 동서 부흥 연루 병행 한데 망라 더불 수반 규합 포괄 병행 병행 결속 함께 더불 교류 나란 협동 결합 규합 아우 병치 더불 호응 조화 더불 동반 아울 더불 동반 같이 연관 포괄 더불 호환 수록 더불 아울 함께 수반 단결 곁들 아울 복합 망라 가세 동시에 더불 일괄 나란 수반 합세 맞물 포괄 동력 동참 수용 아우 나란 겸사 겸비 동행 합세 연달 규합 동반 포함 병행 함께 혼합 같이 동반 아우 더불 결구 수반 결부 병행 합류 한마 나선 대동 결성 합심 나란(along with) 한층 한데 한층 전격 매우 엄청 한층 가득 엄청 더 무쩍 심도 유독 부쩍 더욱 훨씬 좀더 필연 내심 기어 매우 필연 무척 매우 너무 진정 실로 극히 꽤나 한결 보다 한층 참으로 한술 아주 무척 너무 한껏 무지 부쩍 실로 오직 과연 더욱이 진심 가뜩 유독 각별 지대 매우 한결 단단 대폭 가장 더욱 한층 그저 실로 보다 어쩜 그닥 꽤 몹시 아주 부쩍 심히 어찌 몹시 실로 정작 짐짓 단연 진정 꽤 워낙 오죽 부쩍 대단 지극 몹시 상당히 매우 대단 가장 어찌 기필 진정 사뭇 조금 유독 오죽 진실 무지 몹시 정작 그토 상당히 단연 무척 좀더 지독 더욱 너무 무척 더더 기어 대단 워낙 엄청 가뜩 잔뜩 자못 더욱 매우 다분 무척 워낙 엄청 진짜 특히 각별 아주 엄청나 훨씬 사뭇 보다 퍽 상당히 무척 오직 여간 심히 참으로 극도 전격 너무 꽤 무척 다분 아주 유독 다분 좀더 너무 대략 아주 퍽이나 더더 진심 가장 매우 워낙 한결 너무 극히 더 더욱 오히려 부쩍 이리 더욱 부쩍 자못 보다 더욱 조속 대번 유독 정녕 확실 오직 퍽이나 훨씬 참으로 워낙 더욱 전격 유난 가장 썩 한결 극히 아주 오랫 매우 더욱 더욱더 몹시 오직 썩 더 한껏 다분 그리 상당히 자못 사뭇 실상 대폭 실로 확실 여간 자못 제법 워낙 한결 기필 한층 결코 훨씬 훨씬 가장 제법 꽤 한결 매우 심히 전폭 단연 무진 워낙 어찌 워낙 사뭇 확실 엄청 극도 무척 다소 유별 상당히 심히 훨씬 퍽 여간 더욱 매우 상당히 대폭 아주 유난 유독 몹시 참으로 어찌 좀 극히 더욱 아주 무척 퍽 퍽 여지(greater) 거국 장대 거대 세심 정밀 철저 진지 웅장 거창 유연 거물 가혹 광활 다수 포괄 방대 과대 대대 원대 전반 비상 유심 위대 포괄 첨예 방대 압도 세밀 조밀 유별 육중 무한 호대 수려 중대 광범 대단 풍부 막강 유달 막대 강경 중차 촘촘 진지 예리 방대 상세 노골 폭넓 극렬 비상 치명 다분 상세 대거 다량 깊은 전면 폭넓 심오 웅장 다각 포괄 거칠 치숙 풍성 비대 원대 예리 창대 폭넓 원대 중대 긴밀 포괄 거대 무궁 다대 광활 꼼꼼 다수 강력 괄목 과다 중대 비대 거친 상세 지대 첨예 정밀 과도 포괄 무변 대담 비대 정교 거대 해박 유창 육중 방대 조밀 막대 위대 과격 밀접 폭넓 거친 방대 강렬 긴밀 전면 전면 풍부 명확 대규 창대 첨예 폭넓 명료 지대 장대 대규 비대 거창 전면 대거 거대 무비 세심 호대 다대 지독 명확 대력 농후 과중 세심 확고 방대 엄밀 광활 신중 명확 원대한 철저 막강 깊숙 유심 육중 무쌍 유려 무한 원대 험난 첨건 대단 괄목 원대 거창 밀접 장구 지대 풍성 심원 거무 대담 철저 투철 치열 맹렬 거대 과다 대담 정밀 현격 밀도 노골 각별 농축 진지 중차 방대 전폭 노골 상세 포괄 거친 막역 막대 위대 지대 파격 방대한 지대 폭넓 조밀 각별 심도 첨예 포괄 포괄 폭넓 지대 세심 막강 풍부 철저 장황 거창 전속 치밀(greater) 정밀 명징 세밀 면밀 첨예 적확 조밀 노골 정밀 상세 극명 상세 내밀 명료 노골 긴급 정교 투명 치밀 기밀 철저 정교 치밀 상세 섬세 정교 내밀 역력 자상 긴밀 자명 예리 정밀 치밀 분명 엄밀 철두 면밀(detail) 세세 요연 자세 밀도 철저 세밀 꼼꼼 조밀 자상 치밀 정밀 상세 미세 치밀 소상 세심 면밀 조밀 투철 엄밀 상세 예리 치밀 정교 꼼꼼 치명 신중 분석 구체 투철 세심 구체 정연 구체 진지 정교 엄정 세심 각별 자상 소상 치열 기밀 치밀 정밀 구체 밀도 정연 상세 첨예 소상 철직 디테(detail) 세심 자상 소상 자세 면밀 유의 미세 노골 상세 밀접 자세 친절 구구 치밀 찬찬 소상 투명 속속 명확 내밀 디테 세밀 투철 구체 조목 노골 해박 구체 은밀 명백 소상 정직 엄밀 소상 조목 치밀 엄격 소상 정밀 철저 자상 디테 정교 명료 첨예 자상 엄밀 미세 명명 구구 투철 신중 빈틈 차근 면면 치밀 정교 예의 노골 차근 섬세 자상 정연 조밀 소상 치밀 치열 철저 자상 적나라 자명 고스 세밀 또박 촘촘 소상 명확 구체 엄정 신중 속속 정밀 상세 노골 자상 노골 정성 은밀 투철 차근 상세 조목 분명(detail) 부분 수수 단락 내막 정곡 사연 대목 디테일 스펙 소관 사항 명목 요소 갈피 내용 단면 이면 심층 여백 부위 상황 자초 심연 심도 측면 진면 조목 항목 내역 이치 일화 대목 내역 내실 사항 내면 자취 진상 자초 내용 전개 갈피 사연 항목 구체 요령 내용 단상 대목 실황 요소 내막 전모 요목 사항 파편 정황 자초 사실 부분 이면 정황 내막 정보 사연 명목 조목 진상 세목 면모 이면 사연 본질 사실 세부 정보 전모 실체 내면 진실 세부 차원 사연 맥락 조목 사항 전말(detail) 측면 대목 요건 항목 요소 조목 항목 단면 사안 부위 소항 조목 소지 세칙 사관 항 단목 부분 종목 파트 항 조문 항목 성분 단서 대목 갈래 분파 조항 류목 변수 부문 내역 조건 사항 계열 점 대목 종류 구획 종목 사양 조목 세칙 소지 사항 부류 사항 내역 부문 분과 항 갈래 가닥 진영 조목 정보 세목 단면 내역 단락 소관 부류 항목 개체 종류 단원 구역 가닥 단면 파견 범주 국면 계열 사항 대목 강령 요소 체제 분야 국문 부문 세목 파트 세칙 과목 내역 항기 부분 조문 속성 변수 조목 파트 갈래 측면 파편 세부 분과 측면 부위 항목 명목 품목 점 항목 세칙 요소 사안 사양 부류 부분 파편 조목 명목 부문 부분 조건 변인 점 잣대 속성 조항(detail) 세부 꼼꼼 섬세 디테일 잔잔 정밀 세심 소소 은근 세심 디테일 소박(detail) 상이 상황 해설 나열 입고 브리 기술 논거 입술 표방 진설 소명 대변 증언 입증 시사 설파 역설 진달 보고 낭독 발제 주창 구설 설명 나열 단언 설명 기고 기술 예시 해론 토론 예증 열거 타진 적시 증명 명기 제안 풀이 설복 시연 진술 통보 고별 주해 입증 변명 설득 식별 표명 역설 보고 나열 브리 폭로 평설 상술 공언 언론 담화 식파 강론 발휘 기입 전수 진상 투사 발제 고변 대질 열거 번역 일언 해증 진달 변호 단언 해설 토로 통보 피력 명시 해답 부연 지적 언명 진술 증언 일괄 강독 나열 해제 발달 고백 묘사 설명 서면 기술 설론 기술 일언 보고 단언 조술 브리핑 표명 설경 담화 논술 통설 피력 읊어 논박 전해 제안 적시 입증 평설 언급 해설 대답 선언 폭로 대언 조명 논술 진술 발설 논평 기고 발설 발표 소명 조망 묘사 발제 번역 전해 해설 진술 부연 강해 번역 천명 부연 제강 변호 담화 증명 진술 표찰 공술 공증 수식 직언 언설 전개 기술 브리 시인 변론 소명 주해 고백 일어 대조 구명 서술 공갈 서술 해설 설명 증명 묘사(describe) 공론 언급 풀이 소회 직언 소설 시사 언술 강론 논증 지적 역설 조명 브리 단언 고언 적시 해례 논단 도해 연설 기술 통첩 평언 투사 답변 지지 진술 서술 직고 단어 명명 타진 진언 풀이 기술 수식 강연 예언 논서 증명 상술 증언 기명 증언 해설 호소 증언 누설 기고 주지 서술 대조 소명 타진 강해 천명 투시 명시 투신 서술 언론 번역 설교 변증 논증 발의 일갈 진술 발구 고변 평론 일설 묘사 발언 언명 대화 낭독 언론 부연 입론 시사 나열 발명 식별 기술 누설 주해 주창 기명 상술 전설 증언 논술 발제 해석 대변 통설 설명 발구 구술 전사 대론 발현 설파 지적 통고 진술 명기 조망(describe) 전개 브리핑 토로 표출 발구 담론 조명 해의 서설 진상 해의 변론 정역 역설 전표 구설 강연 일언 표면 타개 직설 논구 일언 고해 명제 증의 전후 설파 적발 담화 변명 단언 해석 대담 언명 공증 풀이 전개 증의 전파 지시 공지 변론 번역 랑독 답변 지시 통언 누설 대자 소명 직시 해석 타진 발산 직무 폭로 기입 증의 고변 논리 진언 역설 정독 투사 호소 평주 대방 서명 기입 전도 발산 타설 전어 설명 고발 일갈 대답 부연 풀이 시구 전개 예증 역설 지시 발표 도해 입증 전표 공시 해설 브리 해역 평해 낭독 응답 직언 설교 서술 부기 주해 공고 증구 웅변 발의 변증 언술 지문 단평 기문 통첩 해석 시인 답구 소환 명술 직설 논평 기결 기술 기고 언급 보고 강론 발인 서동 투해 설복 언급 해론 서반 일갈 변증 기결 기제 대의 단평 입술 평단 투해 발언 증의 전과 일의 도문 예단 단초 편저 해체 강동 해설 기사 발단 발원 평설 평서 언결 논술 전단 통문 기거 통견 타답 제안 진동 해문 통고 수필 평기 단성 소결 전발 제언 조형 공초 표지 타답 표연 동론 기어 제후 통표 편어 제현 명문 어구 소환 입연 대답 평연 총론 기술 부제 총절 전구 수사 대조 소조 해제 대단 고절 발간 발록 초록 기술 사설 약술 논단 입조 발록 도문 시전 변조 수필 발설 단언 사론 록제 수식 조언 수구 주해 촌언 정문 부가 편찬 투고 총람 보록 논평 공구 설교 기술 수록 변해 입건 지절 타구 대결 평역 조치 언설 구결 기서 부서 단언 수기 찬록 집필 수집 찬술 록기 기록 제언 언표 대문 작성 논어 번역 평결 번역 일지 찬기 투술 통언 주창 구문 약언 해석 시동 해설 통사 보전 해의 단소 적록 지침 보도 공람 전사 전단 기저 부편 설어 통서 보고 작성 명조 주석 소보 발췌 시안 보도 대론 설구 언구 평서 지적 보급 적요 논의 전건 약기 보고 집록 조서 낭독 주지 기재 사설 해역 전언 진상 발인 작성 통고 설시 지언 집록 지침 전편 필기 어사 통람 정설 해답 대안 발의 수편 부사 전제 지본 주역 단서 도열 보문 대설 전어 문증(describe) 논단 전수 도설 강론 입구 투서 고제 집대 해명 해답 공표 기조 서상 번역 주석 지증 언구 서책 지조 부서 표설 증의 타의 소술 필전 답변 편저 통단 강연 논변 지견 답변 일지 기재 단설 설교 평결 조치 구연 통번 언변 필록 통술 제설 기재 설법 답증 전신 주해 답변 어제 사서 부설 증답 시연 화답 대필 제의 편달 발사 시구 고지 논거 표편 약술 변정 편지 보조 편찬 답결 통구 편서 예제 시설 증답 직서 단행 화증 기진 약증 지식 언표 평제 지언 전서 수서 변명 공고 화제 수결 평해 발권 수고 역서 어조 편작 조록 부명 입결 어제 약서 필답 대답 찬의 시증 지서 사사 통신 일기 발지 전지 해보 조지 록사 명제 명답 통고 기승 대서 기조 강증 총서 전언 지결 강설 보석 역증 해동 필기 구술 록조 직보 설경 고보 언단 전신 화제 입문 답변 약편 발조 록본 답의 입설 공변 명달 발동 일서 시진 구제 결언 직의 총제 대단 필설 답전 구본 통첩 시서 동설 증답 답변 전답 신보 수답 록표 도지 강독 어안 전신 제전 정제 고시 보전 구결 기사 진동 어의 편송 투송 변증 직단 일기 구제 수결 정명 필록 증답 조어 고안 일답 편답 통첩 고소 강결 편설 직보 소송 언증 주어 대설 조발 표변 시명 구답 해설 해답 조항 설단 직제 동서 보고 찬록 조제 단신 일람 통서 서서 정결 어제 언답 발설 편지 조보 일답 정변 약보 편송 대답 정통 조결 일명 강제 서결 도편 공증 주보 증조 답변 전신 보답 대조 지송 속보 편지 수제 전송 회보 일승 기별 진제 조승 단서 결서 기지 조서 해단 답변 신증 타서 지설 편조 대답 직승 칙답 변증 약서 서제 지답 고성 주자 서명 답신 회보 답장 답전 회전 응답 조서 사설 응언 보결 조언 언설 화답 언서 단전 반증 회전 화서 화지 결보 언답 답변 부보 답신 고보 보지 단성 고신 통신 응보 전송 대서 첩보 편지 발서 도서 조령 진언 일러스트레이터(describe) 합니다. (하지만, 비록 당해 챕터 6장 과제가 방금 종전의 뒤편 Chapter 3 시점 환경에서 기껏 일견 목격 관람 진단 투사 발견 파악 식별 적발 탐구 접했었던 바 있는 기본 그 통상 통짜 모듈 구조 회귀 기반의 아날 단경 구식 회귀 분석 목적 모델용 선형 구조 기조 껍데기(the linear model for regression seen in Chapter 3)를 매개 대상으로 하여 여러 부조금 기생 이색 변형 분화 파급 수정 변경 부가 기믹 교환 첨가 기조 보충 조작 확장 기형 연계 부속 보태 부가 치환 포괄 응용 결합 덧진 변천 확대 적용 장착 치환(extensions and modifications)되는 추가 확장 기작 및 변경 개선 방식들에 대해 주도적 관건 핵심 부동 요건 주요 골자 메인 지목 설명 상술 지적 묘사 포커 논점 화두 매개 표방 지표 주 타겟 설파 중심 해설 설명 조명(describes)하고 있다 일지라도 치더라도 치고 그렇 망정 치고(Although), 여기서 제시 배울 당해 핵심 이 이치 공리 요결 그 개념 동일 단서 전제 현상 본연 해당 진리 동일한 매커 기조 맥락 사안 기조 이념 이치 그 진리 해당 자체 원리 실질 기치 속성 법칙 가치 공리 원칙 명제 맥락 속성 개념(the same concepts) 들은 십분 동일 양태 전연 동량 전폭 여지 온전히 당연 그대로 똑같이 고스란히 결단코 온전 능히 역시 마저 버젓 엄연 충분히 온전 또한 예외 전부 거뜬 기꺼이 넉넉 다분 오롯 필시 너끈히 영락 공평 당당(apply to) 다른 별개 타 이종 이색 사안 여타 타 이탈 이종 부 외 이종 제 여러 그 밖 변형 대안 남 타 이 이질 다른(other) 공법 모델 방법 무기 작전 수단 시스템 엔진 체계 해법 마법 툴 조작 장치 전략 루트 체제 기계 매개 기능 병기 조작 노선 칩 채널 방법 방식 진영 기법(methods), 이를테면 가령 예를 들어 직전 무대였던 Chapter 4 챕터 내부 바닥에서 우리가 한차례 조우 탐험 면대 고찰 식별 목도 포착 발견 학습 식별 수용 관찰 체득 탐구 체득 마주 식별 숙지 목격 진단 파악 적발 인지 직관 경험 건져 통달 습득 관찰 탐지 탐구 분석 체감 겪었었던(seen in Chapter 4) 그 유명 다분 골치 분류 판별 진단 통제 군집 선포 선별 분류 판독 판별 타파 구별 이분 분파 예속 결절 분류 선고 가름 분류 지목 평가 판정 양분 귀속 정벌 선별 구분 정립 진단 지목 징표 책정 체계 재단 분별 규결 징수 갈래 구별 책형 귀취 결구 조별 차등 결정 귀속 이탈 배당 양단 결론 도출 지정 편제 판독 분류 판결 감정 분별 조판 판별 감별 선고 분할 종속 판명 점검 결절 규명 지목 식별 심판 갈음 부류 귀착 체제 배속 예단 타진 분파 분할 심결 체득 선별 단정 분류 심의 식별 식별 차등 편제 분당 배제 식별 지적 선고 결제 통제 분할 계층 추방 소속 판가 지목 재결 추단 점철 분류 가름 차단 판단 식별 식별 배정 통단 혐오 식단 진단 할당 결정 편파 도출 낙인 분해 식별(such as the classification models) 툴 체제 분류기 모델들과 같은 영역 진영 채널 영토 부분 바닥 무대 부문 계층 타 분야 단면 요건 파편 부위 척도 일선 체급 전경 지형 체급 시스템 지대 도메 환경 계열 장벽 세계 전진 요소 영역 계급 생태 굴레 전선 지경 분야 모델들 위에도 충분 동일 필히 어김 기어 아울 넉넉 고스 예외 온전 여지 당당 그대로 똑같이 고스 온전 전폭 부동 완전 역시 온히 영락 다분 일제 단일(apply to) 적용 투과 이치 차용 직결 전파 채택 침투 동원 통용 발동 영합 병합 착근 파급 포괄 착상 수용 적용 적중 승계 적용 귀착 지배 호응 결합 타당 빙자 연동 조응 탑재 부합 이입 지배 이식 매칭 관통 공용 병행 접목 통섭 도입 성립 대입 파장 수렴 일치 투입 결부 차용 투사 반영 지배 대차 이행 이접 귀속 빙자 통달 복속 대응 수반 연루 발현 연용 편입 연계 영합 수임 치환 적용(apply to) 될 수 있음도 각인 유념 명심 통각 양지 지득 인지 자각 양지(apply to) 하셔야 합니다.)</p>
+
+<blockquote>
+  <p>1When $p \gg n$, the least squares solution that has the smallest sum of squared coefficients can sometimes perform quite well. See Section 10.8 for a more detailed discussion. 
+1 번역 비고 꼬리 주석 코멘트 참조 팁 메모(1When) 만일의 기조하에 방대 변수 차극 갯수 체급 $p$ 가 빈약한 빈곤 관측 샘플 개체수 $n$ 치수를 압도 지배 추월 육박 돌파 능가 맹위 짓눌 넘어 상회 지배 제압 잠식 정복 추격 박살 역전 상쇄 폭주 압사 무색 월등 능가( $\gg$ ) 하는, 아예 $p \gg n$ 식 극한의 재앙 초고차원 악조건 배영 환경 늪 국면 생태 세팅 처지 경우 도래 사태 역경 한계 위기 궤도 역전 조건 상황 함정(When $p \gg n$)에 내몰 직면 처했 봉착 봉착 당면 빠졌 봉착 처해 맞닥 닥쳤 돌진 진입 당도 진입 봉착 당면 돌입 진입 처했 좌초 돌입 빠졌 구속 안착 착륙 당면 봉착 접어 진입(When) 을 때는요, 그 무한 양산 수리 정답체계 복제 양산 갈래 무상 복사 무한 산출 꼬리 파생 수두룩 연성 수많은 양상 전개 부재 쏟아 남발 무진 범람 산발 배양 다수 발생 즐비 산재 무궁 다수 복제 갈래 난립 파생 전개 파괴 즐비 다수 연성 산출 수치 전파 난무 산재(solutions) 되는 숱한 궤변 파편 대체 공구 그 정답 최소 제곱 타진 해결 무리 해답 결과 치수 공식 타협 결론 종착 스코어 결과 루트 루트 조각 결단 정답 후보 해 단서 결론 해결책 파편 정답 수순(solution) 갈래 들 중에서도 특별 고안 유일 한정 가장 으뜸 예외 오직 유별 고작 극도로 가장 매우 유독 오로 제일 특별 최고 가장 아득 최대 몹시 우선 극히 제일 최고 제일 가장 극한 가장 최고 압도 엄청 제일 (the smallest) 작디 협소 쪼그라 미미 한없이 낮디 왜소 최저 소형 미세 왜소 빈약 하위 미비 협소 빈약 압축 최소 빈약 최소 영세 바닥 영세 한정 극한 극소 바닥 최소 단경 최저 극한 최소(the smallest sum) 작은, 그 제곱 곱셈 부피 제곱 연산 자승 체급 증폭 배가 투과 비대 자승 제곱승 승수 배수 면적 체제 재귀 제곱(squared) 승 타격 부피 부과 처리 덮어 부피 가중 척도 씌워 배당 곱해 체급 상승 투과 적용 상승 덧입 증진 가압 뻥튀 누적 적용 부여 투사 가중 씌워진 제곱승 계수 파라 속성 스펙 피처 계수 조각 점수 척수 가치 타점 계수 변인 계수 변수 타자 단면 속성 파라 계수 변수 측도 피처 변수 파라 계수들(coefficients) 수치 들의 도합 합계 결산 누계 통계 합 합계 결산 토탈 정산 집계 면적 통합 융합 도합 합 합산 누적 통합 통계 총계 대금 질량 액수 체적 등급 결산 덩치 통계 총합 도합 부피 결계 결제 포괄 수합 산술 대금 일람 요금 총합 도합 집계 결산 체계 합 누계 통산 총합 산물 중량 정산 총액 체적 총액 합계 토탈 총괄 수위 척수 통합 수합 체적 규모 부피 한도 양 궤도 편폭 치수 수준 수량 합 합계 누계 체급 수치 질량 합계 결산 총합 면적 전력 체적 규모 물량 볼륨 금액 결산 통계 총합 총합 수리 규모 정도 금액 합계 총합 총합 합산(sum) 산술 부피 척수 부피 부위 단위 두께 규격 넓이 역량 스펙 덩어리 전력 강도 체급 볼륨 역량 질량 덩치 스코어 지분 체제 밀도 부피 단위 양 한도 강도 용량 폭 크기 배분 양 스펙 몫 폭 규격 덩어리 몫 포션 증량 수준 질량 덩치 체급 수준 규격 단량 볼륨 면모 체적 중량 척도 면적 수량 정량 양 객체 포션 몫 비율 요건 수준 양 치수 파이 크기 볼륨 크기 지분 단면 치수 파위 몫 비율 수준 물량 규격 용적 크기 적량 역량 분량 크기 부피 정도 배분 질량 규모 덩치 크기 정도 부위 범위 양 덩어리 크기 규격 분량 정도 부피 치수 비율 부위 범위 파이 크기 면적 비중 정도 수량 지분 성분 부피 용량 부피 양 체격 폭 조각 밀도 한도 부피 크기 질량 크기 양 덩어리 부피 몫 분량 단위 분량 단면 정량 몫 용량 치수 부피 수량 체적 면적 몫 체적 크기 질량 단위 분량 범위 수치 정도 할당 비중 척도 규격 치수 파이 양 덩어리 용량 분량 몫 범위 밀도 체적 덩어리 치수 폭 정도 부피 성분 수량 객체 볼륨 규모 치수 비중 할당 비중 비중 양 볼륨 부피 수량 단위 수량 치수 치수 면적 크기 몫 부피 한도 단위 체적 분량 규모 몫 부피 비중 크기 단위 파격 수리 척도 치수 정도 수치 규모 비례 비현 수량 스펙 정량 두께 부피 비율 양 체적 단위 수적 규모 체적 밀도 수치 규격 단위 비중 범위 치수 부피 양 볼륨 몫 덩이 부피 용량 정도 부피 치수 분량 한도 수량 단계 강도 파이 분량 타산 지수 지수 요량 타격 지분 체계 체격 몫 규적 단계 성분 수적 중량 덩치 체적 등급 범위 수준 파격 범위 수위 치수 밀도 정량 정도 비율 분율 크기 규모 단위 수적 비례 한도 단위 부피 용적 폭 단위 수치 규모 크기 규모 분량 폭 분량 규격 수치 정도 요건 강도 수준 크기 범위 체제 면적 범위 비율 규모 수치 정도 부피 비중 역량 중량 수준 단위 분량 정도(sum)을 지득 보유 함유 견인 거느 소유 안착 유도 유지 탑재 영유 발현 점유 장착 함유 내포 품고 내포 겸비 소유 장착 체득 수반 투영 포용 이룩 포함 지니 영위 구축 보유 소지 점유 지닌 수반 소지 구비 영유 쟁취 소지 발휘 구비 발현 포진 확보 장착 지닌 구비 구비 보유(that has) 특화 변형 돌연 변이 아종 기형 대안 후속 변종 파편 진단 변형 정답 특정 결론 차단 파트 녀석 결론 조각 파벌 객체 표본 타겟 세력 타자 기조 해결체 일종 파편 요원 존재 변칙 요건 결착 결과 타점 매개 녀석 대체 픽업 대상물 정답 변칙 모델 결구 변종 대안 타겟 해답 녀석 조각 파편 결론 해결책 파편 표적 해답 개체 대안 결과 해답 요건 해답 결말 특정 하나 파벌(solution) 녀석 만큼은, 예외 특이 가끔 기형 희귀 돌연 이례 이따 이종 우연 기현 어쩌 종종 이따 이색 뜻밖 별안 수시 이례 불시 때때 이종 변칙 가끔 이따금 종종 이따금 별안 어쩌다 변칙 희귀 수시 이례 파행 뜻밖 이종 때때 어쩌 간혹 예외 드물 간혹 간간 종종 가끔 어쩌 변칙 돌연 가끔 불현 우연 무심 가끔 때로 간혹 종종 이따 돌연 가끔(sometimes) 적으로는, 아주 다분 실로 기대 이외 단연 한껏 내심 의외 제법 상당히 대폭 꽤 무척 몹시 퍽 유독 진정 극히 뜻밖 놀랍 대단 상당히 다분 꽤 퍽 워낙 상당히 아주 대단 무척 아주 워낙 사뭇 부쩍 놀랍 자못 의외 한층 더욱 여간 한결 실상 오직 의외 꽤 상당히 아주 심히 이외 정말 제법 충분히 꽤나 퍽이나 몹시 다소 제법 퍽 상당히 매우 제법 훌륭 상당히 제법 꽤(quite) 양호 준수 적절 원숙 말끔 걸작 온당 수월 수려 휼륭 뛰어 당당 거뜬 매끄 출중 너끈 능수 기특 무난 훌륭 탁월 말끔 우수 수려 준수 기특 우수 탁월 말끔 영리 깔끔 견고 호조 견조 출중 거뜬 호성 너끈 쾌조 번듯 준수 탁월 뛰어 원만 멀쩡 단단 원활 우수 거뜬 번듯 탁월 기특 우수 온건 당당 매끄 말끔 거뜬 당당 훌륭 우수 양호 준수 기특 쾌투 당당 뛰어 훌륭히 준수 온전 수월 적중 우수 매끄 탁월 뛰어 준수 훌륭 양호 수월 준수 훌륭 영리 걸출 흡족 준수 유능 탁월 우수 번듯 훌륭 훌륭 우수(well) 히도 본연 목적 임무 사명 역할 실력 성능 본분 성능 맹위 퍼포 위용 역할 수치 위용 효율 기능 가동 효능 기량 진면 타협 효과 기능 능력 몫 임무 진도 성능 작용 성과 성분 성능 체제 기치 위력 능력 진력 구사 발군 능률 수반 결의 효과 성적 노릇 위력 조처 위상 수단 역할 실력 위용 속성 직무 수행 퍼포 발현 성과 실력 수단 능력 기능 맹위 성능 조치 위력 성능 성과 발휘 수행 실적 역할 임무 맹세 수행 실현 진도 결과 작동 기량 구실 직능 작동 수치 달성 작동 발휘 실력 역할 실력 퍼포 수행 수행 기능 구사 효능 달성 역량 위상 실력 수완 위력 역량 타결 효력 역할 구가 위력 진면 발휘 능력 구실 기능 기능 효율 역할 위용 성능 수완 과업 성능 작용 구사 역량 성능 작동 위력 기능 실적 실현 달성 성능 과제 효능 능률 성능 작동 역할 수반 퍼포 성과 효과 기조 역할 구실 성취 수순 실무 과제 기조 구실 긍지 이행 퍼포 실력 위상 수행 구현 수행 발휘 조달 역량(perform) 궤도 점철 결구 양식 진영 궤적 양상 조짐 시연 안착 띠며 체제 돌파 면모 동반 점철 기재 타격 작동 동태 현황 발동 증폭 결실 체류 기조 행보 안착 징표 사태 파장 수발 단성 띠게 돌파 파행 이치 투사 실적 돌출 돌진 도출 산출 반환 표방 구현 조달 발생 뿜어 구사 체현 구현 거구 동원 체념 이치 시정 작태 결귀 분출 체약 직고 입증 기인 견주 투사 달군 거론 관철 귀착 웅변 반환 투과 거행 달성 달성 조도 획득 발현 창출 도달 도출 전파 이행 산적 구축 창건 영합 영수 유치 반환 수확 기조 과시 띠게 띄게 발현 쟁취 기재 포용 소출 전격 내포 돌려 자행 구가 시사 파급 반환 조우 실현 단축 진위 견지 성립 척결 타진 묘사 유도 도출 귀착 띠어 반영 작렬 과시 산출 보여 띠며 띠어 조달 실현 발휘 투과 거두 결속 이룩 발현 성불 결론 연출 구축 체현 구동 발현 분비 실천 성현 창출 작동 분출 발휘 작동 표출(perform) 해 내줄 여력 가능 찰나 배려 자격 조건 기운 기지 진보 권한 허용 확률 기반 요소 옵션 조짐 수급 공산 매력 무기 국면 싹수 선택 조건 승산 발원 혜택 배역 소지 잠재 도리 허용 개연 도리 역량 성미 형국 면모 정황 수단 확률 싹수 조건 가망 지경 싹수 역량 무기 위세 여력 발판 여지 기질 소원 수단 지지 싹수 도리 기축 대안 수완 확률 권리 기결 개연 소지 승산 권유 지위 면모 기위 무기 여력 소자 조건 형국 사유 저력 역량 선택 기저 투합 발언 위상 이치 기회 수단 핑계 여부 조건 우석 소식 권리 진의 개연 자질 공산 승산 가망 도처 기동 승산 잠재 체력 형편 가능 지경 바탕 권한 소구 조력 비중 방편 이치 도리 개연 자본 자단 속성 재산 자질 싹수 전망 이면 자격 공간 여재 역량 조건 가망 옵션 역량 투철 자만 권능 소속 지시 소질 기회 부합 승산 체격 구실 방도 자산 정황 자력 무대 자격 매력 확률 도치 구식 선택 소장 매력 권리 기조 국면 여부 사유 재지 여건 권리 공간(can) 확률 여력 국면 선택 상황 소지 소지 가능 명분 자격 시간 상황 상황 기기 재량 지혜 조건 자격 틈 옵션 도리 재량 조건 선택 상황 도리 허용 발판 수단 권리 여지 매개 해법 자격 자율 상황 틈 재량 수단 무기 방책 기점 조건 도리 허용 장벽 혜택 보장 재량 상황 권리 기회 여건 여유 권리 옵션 조건 상황 조건 시간 권한 여부 기회 면제 허가 확률 배려 도리 권한 선택 여건 방탄 특권 여지 허가 혜택 선택 선택 옵션 자격 여유 여력 조건 재위 재량 혜택 승인 재량 여지 틈 도리 자격 허용 보장 선택 허가 특혜 배려 혜택 조건 수단 자격 대안 가능 여지 자율 혜택 특권 선택 도리 재위 조건 권리 권한 면제 옵션 기회 권한 조건 승인 보장 권리 여유 면제 자격 재위 선택 권능 틈 옵션 권리 대안 승인 권리 특권 보장 수단 허가 권리 선호 배려 여력 특혜 혜택 옵션 재량 선택 조건 권리 권한선택보장권한가능기회수단여건자격자율승인옵션가능성특권배려여지여유권리여력재량혜택면제허용(can) 지도 짙은 동반 무모 농후 유의 다분 배태 전제 다분 영합 농후 다분 내포 다분 필경 모를 동시다분 동사 병행 투명 짙은 다분 수반 농후 잔존 모를 현존 실존 잦을 빈번 만연 항존 출현 모를 다분 포괄 투명 무방 필연 모모 농후 모모 농후 현존 모를 내포 모모 도래 여전 필연 투사 유력 도달 확실 유력 다분 수반 자명 내포 다분 필시 다분 공명 충분 필연 점철 내재 포진 수반 필시 온존 온당 잠복 병존 확실 자명 점착 필시 존재 짙은 점철 잔존 실존 점철 농후 무성 잦을 수반 짙은 무방 의당 짙습 충분 내포 투사 존재 모를 다분 존재(sometimes perform quite well) 모를 따름 모를 조짐 전언 귀착 배제 양해 귀결 영달 전개 통첩 이치 모략 예외 진술 소지 작태 진의 우려 변작 일화 이치 소치 추위 지식 오차 국면 속사 파장 영위 작태 수위 이면 상황 내의 파문 내막 여운 대안 풍문 소동 맹점 배후 일환 모순 실사 소치 전해 국면 풍설 맹점 현황 사태 이관 사태 심연 일상 직언 배후 정답 작태 진심 전진 사단 사태 의외 상황 사연 실전 도리 도래 정답 조짐 소문 현상 소식 소명 본질 조치 여파 기이 통상 실종 수순 관결 정황 오해 사실 사태 풍모 지위 발로 조치 본성 단상 진부 조조 소치 시야 이변 오산 맥락 사달 형국 예고 기치 풍초 직위 동태 도발 속사 실사 지수 단서 대리 횡단 지시 배후 국면 진의 속설 진일 내막 현황 본연 지조 기미 지결 일담 양태 기적 사사 속내 배면 양상 사단 굴레 이격 예외 인과 직관 시시 일람 국면 현상 현상 심산 모를 내막 기미 파장 전언 의건 사실 논조 현상 정황 정황 조망 지표 결연 현황 비결 사태 실체 사정 면모 사안 쟁점 판단 동태 결착 논란 관점 단면 결단 형상 동정 맥락 본질 내면 주관 사실 여건 요지 현황 정황 실존 자취 직권 소산 여간 상황 체취 국면 자취 정설 판단 의건 이면 관측 흔적 추이 사실 속성 정황 진의 증표 논거 판도 사유 전경 결지 형건 풍경 단서 흔적 전도 파동 작위 결론 동향 의제 소식 전말 일선 측면 정례 본래 상태 낭보 의지 일각 양상 변작 대기 단서 현상 여파 예의 논제 작태 오착 진영 조치 현동 동요 정작 변단 이안 편상 형편 결과 이면 억측 상태 동태 상태 여론 단편 진면 내강 정세 사상 동무 측면 속살 내실 이현 형체 도면 진상 기인 내정 소행 동정 기조 일화 사정 단서 내심 형태 맥락 양태 횡술 이치 현상 정초 진정 징표 추림 전격 소견 속결 속계 이면 논자 본현 표면 사태 진상 사조 사식 논증 결과 사정 국면 심층 판국 진정 결단 관념 결론 논지 현상 조립 발단 관찰 진조 전단 실체 관례 기조 결절 혜안 동조 전경 요건 지견 시각 표상 내단(can sometimes perform quite well.) 상태 국면 정황 조짐 노릇 사연 기미 형국 현상 양태 사정 상황 판도 사태 진상 형태 체제 정황 본질 실상 귀결 결과 작태 면모 이면 맥락 양상 이치 형세 사실 풍경 현황 정황 조망 지표 결연 현황 비결 사태 실체 사정 면모 사안 쟁점 판단 동태 결착 논란 관점 단면 결단 형상 동정 맥락 본질 내면 주관 사실 여건 요지 현황 정황 실존 자취 직권 소산 여간 상황 체취 국면 자취 정설 판단 의건 이면 관측 흔적 추이 사실 속성 정황 진의 증표 논거 판도 사유 전경 결지 형건 풍경 단서 흔적 전도 파동 작위 결론 동향 의제 소식 전말 일선 측면 정례 본래 상태 낭보 의지 일각 양상 변작 대기 단서 현상 여파 예의 논제 작태 오착 진영 조치 현동 동요 정작 변단 이안 편상 형편 결과 이면 억측 상태 동태 상태 여론 단편 진면 내강 정세 사상 동무 측면 속살 내실 이현 형체 도면 진상 기인 내정 소행 동정 기조 일화 사정 단서 내심 형태 맥락 양태 횡술 이치 현상 정초 진정 징표 추림 전격 소견 속결 속계 이면 논자 본현 표면 사태 진상 사조 사식 논증 결과 사정 국면 심층 판국 진정 결단 관념 결론 논지 현상 조립 발단 관찰 진조 전단 실체 관례 기조 결절 혜안 동조 전경 요건 지견 시각 표상 내단 입니다. 이에 관해 부가 연이 좀 더 방대 보충 지대 풍성 심중 극건 더더 좀더 깊어 매우 대폭 전폭 심층 심도 농밀 풍성 보다 훨씬 한층 깊고 고강 심오 농밀 깊숙 한결 세밀 극대 방대 엄청 웅장 거창 파격 대대 짙은 더더 포괄 상세 좀더 거대 전면 노골 조밀 각별 심층 첨예 깊은 대폭 대다 더욱 각별 심도 심도 방대 세심 확고 막강 정밀 치밀 지대 심원 유심 밀접 심중 중대 농축 괄목 철저 노골 거대 심오 첨예 방대 더욱 한결 훨씬 보다 좀더 좀 한층 꽤 매우 대폭 더 깊고 상세 치밀 밀도 세심 전격 은밀 속속 차근 철저 명징 밀접 철야 밀착 유별 치열 투철 세심 구체 정연 구체 진지 정교 엄정 세심 각별 자상 소상 치열 기밀 치밀 정밀 구체 밀도 정연 상세 첨예 소상 철직 디테(more detailed) 투철 지독 엄밀 차근차근 세밀 꼼꼼 철두 자상 또렷 소상 섬세 확고 차근 명확 구체 정교 치열 세심 치밀 자상 면밀 치밀 엄밀 촘촘 소상 상세 미세 정밀 조밀한(detailed) 내용 썰 해독 강론 발언 논단 논장 전수 고찰 토론 공표 토의 쟁점 논점 논쟁 검토 발설 평결 해답 담론 해법 설명 론쟁 조율 논설 통설 피력 시론 대담 지적 의결 진단 언론 발제 분석 변론 평화 의론 조명 결론 주창 주해 논고 소설 정비 변론 강론 담화 토의 언쟁 소고 역설 구연 논술 전언 언술 공론 직언 논구 투사 토론 타파 구술 발언 제안 강연 설파 해설 대언 설전 언급 토론 논파 조설 강해 통치 담론 지견 타진 언명 변주 논증 공방 의견 도론 강평 수다 변증 언론 논단 평론 지명 토로 발제 조명 변호 합평 강단 논변 역변 쟁의 연설 구설 단명 정작 강론 이설 제설 변절 공의 평의 이기 담의 상연 수의 제기 평결 지적 의안 담론 지의 조의 언강 이언 시사 응수 상설 정론 소지 설리 소해 단명 정평 언결 강안 쟁기 신론 해단 직소 의회 합의 의제 수다 이강 고의 어제 변명 변언 토설 답설 사론 고변 소론 정설 지론 제안 합의 조언 언론 발표 합석 설교 의론 답변 대관 협의 단독 수결 문답 협상 직결 수단 언설 단언 통고 질의 문답 지설 합의 질의 제창 진달 주조 이견 강단 신설 고답 신변 화답 이언 구답 대담 설전 소명 단행 상고 고전 화기 정변 정기 응대 언의 통달 정담 화전 문변 총담 심달 합결 의총 화결 합론 타판(discussion) 구도 국면 과정 절차 전개 해소 소견 사정 해법 논조 대안 상황 국면 향방 진의 작태 여파 판국 진단 판단 양태 작태 상황 형세 조짐 정황 사실 동태 풍경 정황 실상 양상 맥락 현상 진상 형국 국면 귀결 작위 도리 논리 본질 사안 면모 사태 정황 동인 기류 인과 이면 여파 기조 진상 작태 단서 귀착 현상 양태 사태 사단 정황 파장 구도 파수 맥락 기인 흔적 징표 기회 동조 징후 양태 현상 이치 단서 여파 현상 현황 기점 판도 구도 요지 발생 현장 흔적 일람 속내 실상 쟁점 작태 양상 징후 면모 기인 내막 증후 흔적 징조 징표 파닥 발단 형국 국면 현지 형상 진의 정황 지조 현황 추이 현상 결과 여론 실상 정체 증폭 파문 발로 단서 이면 국면 현상 양태 사태 상황 진상 조짐 실체 속성 양상 기조 작태 기류 맥락 증상 체제 기치 현상 기저 현황 국면 파급 작태 조짐 동태 체제 내면 본질 귀결 풍토 결과 흔적 상황 작용 정황 직관 본질 귀착 현상 상황 사정 귀결 인과 지론 현황 단서 기조 결과 인과 파문 전경 국면 이치 정황 인과 귀결 징후 내막 이면 사태 현상(discussion) 공방 회담 대화 타결 상담 협상 회의 접견 만남 공통 단합 결론 합의 소통 공조 소명 변론 진술 공청 총회 화합 면담 회견 회담 접촉 융합 합석 상견 간담 문답 모임 청문 일치 단합 결속 상론 상의 결의 회의 토의 수렴 총회 협조 교신 심사 토론 담화 화합 심의 논의 회의 수의 논쟁 동조 병합 상호 대담 화합 응수 교감 통교 타결 결합 통합 면담 교류 응대 화의 상동 융화 상견 대조 만남 토의 대담 협상 면수 합작 교환 화답 조율 결론 공방 조율 교섭 면회 일치 타협 밀약 접촉 문답 조약 동의 절충 담판 응답 교대 대화 수담 대조 수결 문답 총괄 수응 해답 조율 상변 조서 협의 합의 도합 동참 답변 단합 취합 수석 회견 문대 호환 회담 연합 화쟁 협합 동진 타파 지령 타협 총합 시찰 수결 취합 통람 답방 조약 문전 사정 대담 응전 의안 수배 동거 교제 공명 동관 해단 대차 합일 승결 해소 수습 수색 합치 소집 협조 타격 통섭 수렴 화담 수통 수압 사동 합승 소조 화합 문진 응보 화동 상의 교합 수렴 취합(discussion) 내용 이력 타격 수건 공략 해답 여건 진행 사항 이면 전말 사실 사연 실체 작전 조언 정보 이력 맥락 일화 파장 진상 공작 대목 동태 사안 자취 소관 사태 양상 해법 정보 양식 체제 국면 정황 조짐 사실 단서 양태 소관 상황 낭보 사항 항목 풍문 속내 진리 자초 공지 자초 갈피 통보 도모 실상 실체 상황 이면 사태 사건 소행 소치 양태 풍경 자초 자취 국면 정보 단면 이력 징후 실체 궤적 이치 사경 기전 소관 이면 조약 요지 양태 양상 본질 내막 성깔 사항 여파 요건 상황 국면 내속 진의 성상 소상 형국 전경 진조 조목 사연 요소 부분 소질 속성 기치 품성 진면 본론 풍모 형구 실조 세목 사물 항태 속성(discussion) 파편 부위 지점 요소 갈피 대목 사안 조목 내역 코너 항목 부위 정보 조각 점 구역 단면 항 부문 단락 면 점 잣대 부류 점 속성 조항 종류 파편 종목 조건 사관 요소 측면 대역 가닥 조문 부분 부분 파트 잣대 단락 편린 세부 성질 성분 세부 측면 면모 분과(discussion) 에는 뒤편 등장 하달 이첩 묘사 공전 대기 포진 출격 포진 마련 조달 강하 예비 개설 시연 출격 예포 포진 배 당 기명 적재 비치 조달 도래 편제 개설 포열 하달 조착 도열 탑재 수립 비치 대동 구비 출진 마련 착종 속포 도래 조발 조도 비치 개착 포진 발사 쇄도 개창 대기 부설 구축 준비 정제 개치 출선 착종 입진 부건 예포 적기 조판 배치 동원 결집 정립 건조 건립 도사 도달 적기 개창 장전 정립 착립 기재 시연 수진 시상 준비 투사 파견 출관 포설 개소 건진 전치 예치 배속 포진 기립 포위 입건 투발 시달 투척 가립 기건 구축 결설 발진 동서 포진 창출(See) 하 후단 후속 Section 후반 차기 뒷단 차례 대목 분량 파트 구역 단락(Section 10.8) 구간 구역 진영 섹터 단락 바운 단원 섹션 단락 영토 도메 진위 대목 챕터 포맷 영역 막 파트 영토 대열 분과 구역 진영 해역 구획 체급 섹션 구획 권역 강역 부분 부문 지역 궤도 공간 지대 부위 테두리 분야 강단 전선 수역 대역 장벽 성역 체제 세계 외곽 지단 일대 바닥 궤적 블록 코너 일치 부문 영토 부락 지구 도역 영내 세력 도처 속성 지형 블록 진역 전방 무대 권내 방어 기슭 전장 도당 외각 거점 강권 공간 전단 생태 바닥 국면 곳 틈 주변 전개 기지 구도 배후 판도 수구 진공 대세 계층 진구 체인 진치 체권 쟁점 권력 국지 한계 권진 방면 영역 지경 장막 변방 부권 세트 기권 테두리 판국 지형 진구 범주 권역 한도 영역 부지 지반 국부 지내(Section 10.8) 무대 좌표 여백 틈 지경 국소 공터 환경 테두리 구멍 판도 한계 구역 사각 범위 빈틈 심부 여지 소지 범위 품 테두리 틈새 바닥 영역 변방 무대 테두리 지대 테두리 간극 외곽 배후 한도 영역 범위 국면 구간 사이 도처 외각 생태 전경 영역(Section 10.8) 부문 영역 곳 장소 진영 부위 코너 대역 부분 성분(Section 10.8) 파트 쪽 기점 지점 국면 파트 영토 구획 구역 구간 쪽 대목 항목 지대 항목 파트 구역 조각 대목 단계 곳 지점 지점 대목 구석 구석 대목 갈래 코너 조각 단면 영역 파편 코너 지대 부분 국면 조각 갈래 조각 위치 대역 대목 부분 분파 요소 곳 부분(Section 10.8) 점수 무대 잣대 조각 대역 단면 코너 점 지점 척도 쪽 부수 점 부위 구석 부위 진영 국면 등급 분과 양상 단계 계열 잣대 계층 갈래 가닥 진영 갈래 분파 진영 측면 대열 성질 변인 분과 속성 잣대 면 대열 파트 궤도 계열 점 잣대 부류 파트 부류 종단 점 특징 분야 부류 성질 파편 측면 분과 가닥 갈래 부분 점(Section 10.8) 을 부디 깊이 수거 추적 분석 검증 확인 파싱 필독 조망 정탐 파악 참관 조회 정찰 분석 훑어 도열 참조 점검 조준 사찰 시청 포착 통달 검색 구명 식별 검열 열람 조회 주시 타진 시찰 점검 살필 도열 확인 목도 규명 정찰 통찰 검토 체감 감상 관찰 주목 조사 주시 판독 인지 정검 주시 열람 참고 열독 고찰 탐독 필견 감찰 강독 조회 통람 일독 판독 진찰 사열 참고 순시 회독 정시 수시 검수 수색 감안 찰지 정사 순찰 참조 감가 탐지 측람 사찰 참조 견학 도견 명시 조관 목시 답사 관람 참관 견독 사감 살피 검사 식별 답찰 식견 관람 주람 해독 주람 일람 회고 고찰 조회 해찰 명관 조견 참고 목격 성찰 조사 살피 식별 관찰 검토 참조 살펴(See) 관망 판독 점검 검토 참작 열람 보시 일람 유념 인지 정독 숙독 주시 직시 확인 살피 양지 참작 참조 관측 면밀 목격 인용 관찰 인지 검수 열독 고찰 탐구 재고 비교 예시 필람 목도 시찰 판별 주목 심독 해독 열람 확인 일견 정찰 관전 고안 시감 정시 예찰 답사 열감 열람 조견 참사 음미 주조 열명 참고 정독 열구 참관 감별 시람 구경 참조 점검(See) 길 바라 요청 권장 강권 희망 도모 재청 부탁 요구 제청 권유 조언 충고 소망 호소 기원 바랍 지향 염원 강력 지시 강권 원합 권면 요구 강구 청원 주문 갈구 명령 종용 제안 청탁 독촉 통첩 소원 재촉 구애 부탁 강권 갈구 염원 당부 권유 촉구 당부 부탁 지시 요구(See) 마지않 지양 충만 재고 주안 유의 당부 불사 부탁 전념 마지 만전 기필 진의 총력 분기(See) 않습니다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<h3 id="61-subset-selection-부분집합-선택">6.1 Subset Selection (부분집합 선택)</h3>
+<ul>
+  <li><a href="./6_1_subset_selection/trans1.html">문서로 이동하기</a></li>
+</ul>
+
+<h3 id="62-shrinkage-methods-축소-기법">6.2 Shrinkage Methods (축소 기법)</h3>
+<ul>
+  <li><a href="./6_2_shrinkage_methods/trans1.html">문서로 이동하기</a></li>
+</ul>
+
+<h3 id="63-dimension-reduction-methods-차원-축소-기법-분석">6.3 Dimension Reduction Methods (차원 축소 기법 분석)</h3>
+<ul>
+  <li><a href="./6_3_dimension_reduction_methods/trans1.html">문서로 이동하기</a></li>
+</ul>
+
+<h3 id="64-considerations-in-high-dimensions-초고차원-환경-분석-구조에서의-한계점과-고려사항">6.4 Considerations in High Dimensions (초고차원 환경 분석 구조에서의 한계점과 고려사항)</h3>
+<ul>
+  <li><a href="./6_4_considerations_in_high_dimensions/trans1.html">문서로 이동하기</a></li>
+</ul>
+
+<h3 id="65-lab-linear-models-and-regularization-methods-실습-데이터-사이언티스트를-위한-파이썬-선형-모델-선택-및-규제법-랩">6.5 Lab: Linear Models and Regularization Methods (실습: 데이터 사이언티스트를 위한 파이썬 선형 모델 선택 및 규제법 랩)</h3>
+<ul>
+  <li><a href="./6_5_lab_linear_models_and_regularization_methods/trans1.html">문서로 이동하기</a></li>
+</ul>
+
+<h3 id="66-exercises-변수-축소-기법들의-기본-응용-문제-수리적-종합-지식-검증-코스-모음집">6.6 Exercises (변수 축소 기법들의 기본 응용 문제 수리적 종합 지식 검증 코스 모음집)</h3>
+<ul>
+  <li><a href="./6_6_exercises/trans1.html">문서로 이동하기</a></li>
+</ul>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

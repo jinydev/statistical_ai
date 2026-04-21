@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -513,13 +512,25 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="in-33-anova_lmresults1-results3"><strong><code class="language-plaintext highlighter-rouge">In [33]:</code></strong> <code class="language-plaintext highlighter-rouge">anova_lm(results1, results3)</code></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.6.6 Non-Linear Transformations Of The Predictors</a></td>
+      <td><a href="../../3_6_7_qualitative_predictors/index.html">3.6.7 Qualitative Predictors &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="in-33-anova_lmresults1-results3"><strong><code class="language-plaintext highlighter-rouge">In [33]:</code></strong> <code class="language-plaintext highlighter-rouge">anova_lm(results1, results3)</code></h1>
 
 <table>
   <thead>
     <tr>
       <th><strong><code class="language-plaintext highlighter-rouge">Out[33]:</code></strong></th>
-      <th> </th>
       <th><code class="language-plaintext highlighter-rouge">df_resid</code></th>
       <th><code class="language-plaintext highlighter-rouge">ssr</code></th>
       <th><code class="language-plaintext highlighter-rouge">df_diff</code></th>
@@ -530,7 +541,6 @@
   </thead>
   <tbody>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">0</code></td>
       <td><code class="language-plaintext highlighter-rouge">503.0</code></td>
       <td><code class="language-plaintext highlighter-rouge">19168.13</code></td>
@@ -540,7 +550,6 @@
       <td><code class="language-plaintext highlighter-rouge">NaN</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">1</code></td>
       <td><code class="language-plaintext highlighter-rouge">502.0</code></td>
       <td><code class="language-plaintext highlighter-rouge">14165.61</code></td>
@@ -552,26 +561,33 @@
   </tbody>
 </table>
 
-<p>Here <code class="language-plaintext highlighter-rouge">results1</code> represents the linear submodel containing predictors <code class="language-plaintext highlighter-rouge">lstat</code> and <code class="language-plaintext highlighter-rouge">age</code> , while <code class="language-plaintext highlighter-rouge">results3</code> corresponds to the larger model above with a quadratic term in <code class="language-plaintext highlighter-rouge">lstat</code> . The <code class="language-plaintext highlighter-rouge">anova_lm()</code> function performs a hypothesis test comparing the two models. The null hypothesis is that the quadratic term in the bigger model is not needed, and the alternative hypothesis is that the bigger model is superior. Here the $F$-statistic is 177.28 and the associated $p$-value is zero. In this case the $F$-statistic is the square of the $t$-statistic for the quadratic term in the linear model summary for <code class="language-plaintext highlighter-rouge">results3</code> — a consequence of the fact that these nested models differ by one degree of</p>
-
-<blockquote>
-  <p>13Actually, <code class="language-plaintext highlighter-rouge">poly()</code> is a wrapper for the workhorse and standalone function <code class="language-plaintext highlighter-rouge">Poly()</code> that does the work in building the model matrix.</p>
-</blockquote>
+<p>Here <code class="language-plaintext highlighter-rouge">results1</code> represents the linear submodel containing predictors <code class="language-plaintext highlighter-rouge">lstat</code> and <code class="language-plaintext highlighter-rouge">age</code>, while <code class="language-plaintext highlighter-rouge">results3</code> corresponds to the larger model above with a quadratic term in <code class="language-plaintext highlighter-rouge">lstat</code>.</p>
 
 <p>126 3. Linear Regression</p>
 
-<p>freedom. This provides very clear evidence that the quadratic polynomial in <code class="language-plaintext highlighter-rouge">lstat</code> improves the linear model. This is not surprising, since earlier we saw evidence for non-linearity in the relationship between <code class="language-plaintext highlighter-rouge">medv</code> and <code class="language-plaintext highlighter-rouge">lstat</code> .</p>
+<p>The function <code class="language-plaintext highlighter-rouge">anova_lm()</code> can take more than two nested models as input, in which case it compares every successive pair of models.</p>
 
-<p>The function <code class="language-plaintext highlighter-rouge">anova_lm()</code> can take more than two nested models as input, in which case it compares every successive pair of models. That also explains why their are <code class="language-plaintext highlighter-rouge">NaN</code> s in the first row above, since there is no previous model with which to compare the first.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [34]:ax=subplots(figsize=(8,8))[1]
-ax.scatter(results3.fittedvalues ,results3.resid)
-ax.set_xlabel('Fittedvalue')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [34]: ax = subplots(figsize=(8, 8))[1]
+ax.scatter(results3.fittedvalues, results3.resid)
+ax.set_xlabel('Fitted value')
 ax.set_ylabel('Residual')
-ax.axhline(0,c='k',ls='--')
+ax.axhline(0, c='k', ls='--')
 </code></pre></div></div>
 
-<p>We see that when the quadratic term is included in the model, there is little discernible pattern in the residuals. In order to create a cubic or higher-degree polynomial fit, we can simply change the degree argument to <code class="language-plaintext highlighter-rouge">poly()</code> .</p>
+<p>We see that when the quadratic term is included in the model, there is little discernible pattern in the residuals.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.6.6 Non-Linear Transformations Of The Predictors</a></td>
+      <td><a href="../../3_6_7_qualitative_predictors/index.html">3.6.7 Qualitative Predictors &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_6_indexing_data/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_6_indexing_data/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_6_indexing_data/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_6_indexing_data/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/">02. Statistical Learning</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_3_lab_introduction_to_python/">2 3 lab introduction to python</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_3_lab_introduction_to_python/2_3_6_indexing_data/">2 3 6 indexing data</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../2_3_5_sequences_and_slice_notation/trans2.html">&lt; 2.3.5 Sequences And Slice Notation</a></td>
+      <td><a href="../2_3_7_loading_data/trans2.html">2.3.7 Loading Data &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 <a href="./trans2.html">📖 파이썬 랩(Lab) 해설판보기</a>를 추천합니다! (직역본은 <a href="./trans1.html">📖 직역본 보기</a> 메뉴를 활용하세요!)</p>
+</blockquote>
+
+<h1 id="236-indexing-data">2.3.6 Indexing Data</h1>
+<h1 id="236-데이터-인덱싱-정보-낚아채기">2.3.6 데이터 인덱싱 (정보 낚아채기)</h1>
+
+<p>To begin, we create a two-dimensional <code class="language-plaintext highlighter-rouge">numpy</code> array.
+인덱싱(원하는 데이터만 쏙쏙 뽑아내는 기술) 사냥을 시작하기 위해, 우리는 먹잇감이 될 듬직한 2-차원 <code class="language-plaintext highlighter-rouge">numpy</code> 배열 바둑판 하나를 생성해 줍니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">56</span><span class="p">]:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">)).</span><span class="nf">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+         <span class="n">A</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">56</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>Typing <code class="language-plaintext highlighter-rouge">A[1, 2]</code> retrieves the element corresponding to the second row and third column. (As usual, <code class="language-plaintext highlighter-rouge">Python</code> indexes from 0.)
+자, <code class="language-plaintext highlighter-rouge">A[1, 2]</code> 라고 주소를 쳐서 사냥개를 날려볼까요? 이 녀석은 배열 무리 속에서 ‘두 번째 행(1층)’과 ‘세 번째 열(2호)’의 교차점에 은신한 범인(원소)을 정확히 포위해 물어(retrieves) 옵니다. (늘 주의하세요, 파이썬 동네의 지번 체계는 항상 1이 아니라 0번부터 시작합니다!)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">57</span><span class="p">]:</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">57</span><span class="p">]:</span> <span class="mi">6</span>
+</code></pre></div></div>
+
+<p>The first number after the open-bracket symbol <code class="language-plaintext highlighter-rouge">[</code> refers to the row, and the second number refers to the column.
+공식 하나 외우고 갑시다. 대괄호 <code class="language-plaintext highlighter-rouge">[</code> 가 열리고 나오는 첫 번째 숫자는 무조건 아파트의 <strong>행(row, 층수)</strong> 을 가리키며, 두 번째로 찍히는 녀석은 무조건 방 위치인 <strong>열(column, 호수)</strong> 을 가리키는 절대 규칙입니다.</p>
+
+<h2 id="indexing-rows-columns-and-submatrices">Indexing Rows, Columns, and Submatrices</h2>
+<h2 id="행-열-그리고-서브-행렬부분행렬-동시에-덮치기">행, 열, 그리고 서브-행렬(부분행렬) 동시에 덮치기</h2>
+
+<p>To select multiple rows at a time, we can pass in a list specifying our selection. For instance, <code class="language-plaintext highlighter-rouge">[1, 3]</code> will retrieve the second and fourth rows:
+만약 내가 한 층만 터는 게 아니라 동시에 여러 행(층)을 한꺼번에 싹쓸이하고 싶다면? 간단합니다. 내가 털고 싶은 층수만 적은 <code class="language-plaintext highlighter-rouge">[1, 3]</code> 같은 살생부(리스트)를 주소창에 쑥 건네면 됩니다. 이 명단은 단숨에 빌딩의 두 번째 층과 네 번째 층 전체를 야무지게 강탈해 올 겁니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">58</span><span class="p">]:</span> <span class="n">A</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">58</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>To select the first and third columns, we pass in <code class="language-plaintext highlighter-rouge">[0, 2]</code> as the second argument in the square brackets. In this case we need to supply the first argument <code class="language-plaintext highlighter-rouge">:</code> which selects all rows.
+반대로 건물 전체 층을 놔두고 세로 기둥(열), 즉 “첫 번째 열과 세 번째 열 라인 전체만 압수수색해!” 라고 하고 싶다면? 대괄호의 두 번째 자리에 세로줄 살생부 <code class="language-plaintext highlighter-rouge">[0, 2]</code> 를 던져줍니다. 이때 주의할 점! 앞쪽 층수(행) 자리에는 텅 비운 채로 “전체 다 털어!”를 의미하는 무적의 프리패스 마크인 콜론 <code class="language-plaintext highlighter-rouge">:</code> 을 반드시 먼저 깔아(supply)줘야만 합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">59</span><span class="p">]:</span> <span class="n">A</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">59</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>Now, suppose that we want to select the submatrix made up of the second and fourth rows as well as the first and third columns. This is where indexing gets slightly tricky. It is natural to try to use lists to retrieve the rows and columns:
+자, 이제 난이도를 높여서 대형 작전을 짜봅시다. “모든 층 다 말고 딱 두 번째 층과 네 번째 층만 고르면서, 각 층마다 첫 번째 방과 세 번째 방에 있는 놈들만 솎아내서 모아(부분행렬) 와!” 이 요구를 들어주려다 보니 파이썬의 인덱싱 문법에서 살짝 잔머리가 아찔해지는(tricky) 딜레마 구간이 찾아옵니다. 우리의 순진한 인간 두뇌로는 당연히 앞뒤로 리스트 명단을 두 개 나란히 꽂아놓고 자연스레 다음과 같이 코딩을 시도하겠죠:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">60</span><span class="p">]:</span> <span class="n">A</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">60</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">14</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Oops — what happened? We got a one-dimensional array of length two identical to
+우웁스! (Oops —) 결과가 왜 이 모양이죠?! 원판 네모행렬이 아니라, 꼴랑 숫자 2개짜리에 심지어 바짝 쪼그라든 1차원 볼품없는 배열 막대기 하나만 던져졌습니다. 이 기괴한 막대기는 사실 아래 동작과 똑같은 겁니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">61</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">61</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">14</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Similarly, the following code fails to extract the submatrix comprised of the second and fourth rows and the first, third, and fourth columns:
+이 멍청한 파이썬의 오해법칙(?)은 행과 열 개수를 다르게 주면 아예 에러를 내뿜습니다. 아래처럼 “2개 층에서 3개 호수를 뒤져라!”라고 리스트 짝짜꿍으로 넘겨버리면 미니 서브 행렬(submatrix) 추출 명령은 대차게 실패해 터져버리죠:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">62</span><span class="p">]:</span> <span class="n">A</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="nb">IndexError</span><span class="p">:</span> <span class="n">shape</span> <span class="n">mismatch</span><span class="p">:</span> <span class="n">indexing</span> <span class="n">arrays</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">broadcast</span>
+            <span class="n">together</span> <span class="k">with</span> <span class="nf">shapes </span><span class="p">(</span><span class="mi">2</span><span class="p">,)</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)</span>
+</code></pre></div></div>
+
+<p>We can see what has gone wrong here. When supplied with two indexing lists, the <code class="language-plaintext highlighter-rouge">numpy</code> interpretation is that these provide pairs of <em>i, j</em> indices for a series of entries. That is why the pair of lists must have the same length. However, that was not our intent, since we are looking for a submatrix.
+도대체 왜 이런 대참사가 났는지 변명을 들어볼까요. <code class="language-plaintext highlighter-rouge">numpy</code> 놈의 뇌 회로는 이렇습니다. 리스트명단표 두 개를 던져주면 “아항! [1번층, 0호] 그리고 [3번층, 2호] 이렇게 ‘짝바위 쌍(pairs)’으로 1:1 매칭 핀셋 추적을 하라는 임무구나!” 라고 제멋대로 해석해 버립니다. 그래서 리스트 명부끼리 조 짝 숫자가 다르면 당황해서 에러를 뱉었던 거죠. 하지만 우리의 원래 의도는 ‘격자형 그물’을 던져 모든 교차점 놈들을 쓸어 담는 거창한 부분행렬 납치 작전이었으니 대화가 어긋난 셈입니다.</p>
+
+<p>One easy way to do this is as follows. We first create a submatrix by subsetting the rows of <code class="language-plaintext highlighter-rouge">A</code>, and then on the fly we make a further submatrix by subsetting its columns.
+이 그물망 작전을 해결하는 가장 쉽고 무식한 편법은 이거죠. 일단 먼저 <code class="language-plaintext highlighter-rouge">A</code>에서 그물 대상이 되는 ‘행(가로)’들만 통째로 발라내어 임시 부분 도마를 만들고, 그 잘린 도마들을 허공에 띄운 채 곧바로 이어서(on the fly) ‘열(세로)’들을 다시 한번 대각 토막 썰기(subsetting) 시전해 이중 절단하는 방식입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">63</span><span class="p">]:</span> <span class="n">A</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]][:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">63</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>There are more efficient ways of achieving the same result. The <em>convenience function</em> <code class="language-plaintext highlighter-rouge">np.ix_()</code> allows us to extract a submatrix using lists, by creating an intermediate <em>mesh</em> object.
+무식한 칼질 말고, 같은 결과를 달성하면서도 훨씬 뼈대 있고 효율적인 귀족형 방식이 있습니다. 바로 파이썬이 준비한 전용 효자손 함수, <strong>편의 함수(convenience function) <code class="language-plaintext highlighter-rouge">np.ix_()</code></strong> 를 호출하는 겁니다. 이놈은 우리가 건네준 가로세로 명부 리스트들을 엮어서 보이지 않는 <strong>거대한 중간 ‘그물망(mesh)’ 투망</strong>을 짠 뒤, 한 번에 배열에 덮어씌워 타깃들만 단숨에 건져 올려버립니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">64</span><span class="p">]:</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ix_</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+         <span class="n">A</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">64</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>Alternatively, we can subset matrices efficiently using slices. The slice <code class="language-plaintext highlighter-rouge">1:4:2</code> captures the second and fourth items of a sequence, while the slice <code class="language-plaintext highlighter-rouge">0:3:2</code> captures the first and third items (the third element in a slice sequence is the step size).
+대안으로 앞장 2.3.5에서 배운 그 전설의 절단검, <strong>슬라이스(slices)</strong> 마법을 끄집어내어 행렬들을 한 줄로 훅훅 효율적으로 썰어버릴 수도 있습니다. 마법 주문 <code class="language-plaintext highlighter-rouge">1:4:2</code> (1번부터 3번방까지, 2보폭으로 뛰어라!)는 순서의 2번째와 4번째 녀석만 포박해 채가고, 세로줄 주문 <code class="language-plaintext highlighter-rouge">0:3:2</code> 는 제일 앞놈과 세 번째 녀석 목줄만 사로잡는(captures) 화려한 이도류 칼춤을 보여줍니다 (마지막 3번째 칸 숫자는 당연히 보폭 징검다리 점프 크기인 건 안 까먹으셨죠?).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">65</span><span class="p">]:</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">65</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>Why are we able to retrieve a submatrix directly using slices but not using lists? Its because they are different <code class="language-plaintext highlighter-rouge">Python</code> types, and are treated differently by <code class="language-plaintext highlighter-rouge">numpy</code>. Slices can be used to extract objects from arbitrary sequences, such as strings, lists, and tuples, while the use of lists for indexing is more limited.
+여기서 질문! 아까 ‘리스트 명부’를 쌍으로 던졌을 땐 에러를 뿜으며 멍청한 짓을 하더니, 왜 이 ‘슬라이스 부호’ 쌍을 넣을 땐 찰떡같이 그물망 방식으로 행렬 서브 셋을 직접 쫙쫙 아름답게 건져 올리는 걸까요? 간단합니다. 넘파이(<code class="language-plaintext highlighter-rouge">numpy</code>) 뇌 구조에선 이 두 개가 신분 계급 자체가 전혀 다른 파이썬 종족들(types)이어서, 완전히 급을 다르게 취급하기 때문입니다. 슬라이스(Slice) 칼은 글자, 리스트, 튜플 등 파이썬 세상 모든 시퀀스를 도륙낼 수 있는 마스터 소드지만, 반면 콤마 찍은 리스트(list) 따위를 명찰표 용도로 넘파이에 갖다 쓰는 짓은 그 허당 제약성(limited)이 무척 빡빡한 탓이죠.</p>
+
+<h2 id="boolean-indexing">Boolean Indexing</h2>
+<h2 id="불리언boolean-인덱싱-참치와-꽁치-걸러내는-진실의-그물">불리언(Boolean) 인덱싱 (참치와 꽁치 걸러내는 진실의 그물)</h2>
+
+<p>In <code class="language-plaintext highlighter-rouge">numpy</code>, a <em>Boolean</em> is a type that equals either <code class="language-plaintext highlighter-rouge">True</code> or <code class="language-plaintext highlighter-rouge">False</code> (also represented as 1 and 0, respectively).
+파이썬 넘파이 세계에서 가장 살벌한 분류법, <strong><em>불리언(Boolean)</em></strong> 요원들의 존재감이 드러날 차례입니다. 불리언이란 “이것은 기필코 참(<code class="language-plaintext highlighter-rouge">True</code>)이다!” 아니면 “이것은 새빨간 거짓(<code class="language-plaintext highlighter-rouge">False</code>)이다!”라는 극단적 양자택일 상태만을 가진 데이터 혈통을 말합니다. (아, 심심하면 가끔 흑백 필터 씌워서 참은 <code class="language-plaintext highlighter-rouge">1</code>, 거짓은 <code class="language-plaintext highlighter-rouge">0</code> 숫자로 둔갑해서 나타나기도 합니다.)</p>
+
+<p>The next line creates a vector of 0’s, represented as Booleans, of length equal to the first dimension of <code class="language-plaintext highlighter-rouge">A</code>.
+이어질 무자비한 코드는 거대 배열 <code class="language-plaintext highlighter-rouge">A</code> 의 가로 세로 덩치 크기와 똑같은 길이의, 모두 새까만 거짓말인 <code class="language-plaintext highlighter-rouge">0(False)</code> 상태를 부여받은 빈 수건 돌리기용 불리언 군단 일렬 벡터 배열을 생성해 도열시킵니다.</p>
+
+<p>We now set two of the elements to <code class="language-plaintext highlighter-rouge">True</code>.
+그런 다음 우린 요원들 사이를 걸어가며 딱 두 명의 요원 머리통 스위치만 탁탁 눌러 빛의 요원(<code class="language-plaintext highlighter-rouge">True</code>)으로 무단 설정 조작 귀순을 시킵니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="n">keep_rows</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">bool</span><span class="p">)</span>
+         <span class="n">keep_rows</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="n">keep_rows</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">True</span>
+         <span class="n">keep_rows</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span>  <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span>  <span class="bp">True</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Note that the elements of <code class="language-plaintext highlighter-rouge">keep_rows</code>, when viewed as integers, are the same as the values of <code class="language-plaintext highlighter-rouge">np.array([0, 1, 0, 1])</code>. Below, we use <code class="language-plaintext highlighter-rouge">==</code> to verify their equality. When applied to two arrays, the <code class="language-plaintext highlighter-rouge">==</code> operation is applied elementwise.
+흥미로운 점! 방금 우리가 공작한 <code class="language-plaintext highlighter-rouge">keep_rows</code> 빛의 요원 배열표를 파이썬의 숫자 필터로 슥 훑어보면 무식하게 생긴 강박증 숫자 배열 <code class="language-plaintext highlighter-rouge">np.array([0, 1, 0, 1])</code> 과 영혼 쌍둥이처럼 똑같은 치수들을 품고 있다는 점에 주목하십시오.
+아래에서, 우리는 진실의 거울인 <code class="language-plaintext highlighter-rouge">==</code> (똑같냐?) 기호를 등판시켜 그들의 유전자 단위 부합 동등성을 심판대에 검증시킵니다. 이 <code class="language-plaintext highlighter-rouge">==</code> 연산 심판봉은 두 집단을 통째로 재지 않고, 줄 세워놓고 각 위치 병사들끼리 한 명씩 원소별(elementwise)로 치밀하게 마스크를 벗겨 검문 처리하는 깡패 필터 방식입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">68</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span><span class="n">keep_rows</span> <span class="o">==</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">68</span><span class="p">]:</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<p>(Here, the function <code class="language-plaintext highlighter-rouge">np.all()</code> has checked whether all entries of an array are <code class="language-plaintext highlighter-rouge">True</code>. A similar function, <code class="language-plaintext highlighter-rouge">np.any()</code>, can be used to check whether any entries of an array are <code class="language-plaintext highlighter-rouge">True</code>.)
+(깨알 팁 하나 가슴에 품으세요. 여기서 등장한 형사 가제트 함수 <code class="language-plaintext highlighter-rouge">np.all()</code> 은 “수용소 안의 모든 죄수(출입 항목)가 단 한 명도 빠짐없이 <code class="language-plaintext highlighter-rouge">True</code> 병이 걸렸느냐?”를 철두철미하게 뒤지는 감식반입니다. 반면 그의 허술한 파트너 형사 <code class="language-plaintext highlighter-rouge">np.any()</code> 는 “야, 아무나 한 명이라도 <code class="language-plaintext highlighter-rouge">True</code> 걸린 놈 있냐?” 하고 한 명만 보여도 사건 종결 내버리는 빠른 서칭을 위해 쓰이곤 한답니다.)</p>
+
+<p>However, even though <code class="language-plaintext highlighter-rouge">np.array([0, 1, 0, 1])</code> and <code class="language-plaintext highlighter-rouge">keep_rows</code> are equal according to <code class="language-plaintext highlighter-rouge">==</code>, they index different sets of rows!
+하지만 대반전 호러 스펙터클! 설사 <code class="language-plaintext highlighter-rouge">np.array([0, 1, 0, 1])</code> 정수 군단과 <code class="language-plaintext highlighter-rouge">keep_rows</code> 불리언(True/False) 요원 군단이 거울 잣대 <code class="language-plaintext highlighter-rouge">==</code> 앞에서 DNA가 일치하는 한 핏줄이라고 떴을지언정, 막상 이 두 부대를 지휘봉(인덱싱 도구)으로 배열 사냥에 등판시키면 완전히 딴 세상의 다른 사냥감 행(rows)들 무리 세트를 낚아채 오는 대형 방송사고를 일으킵니다!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="n">A</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>The former retrieves the first, second, first, and second rows of <code class="language-plaintext highlighter-rouge">A</code>.
+전자(정수 군단) 놈들은 너무 우직해서, 명령표에 적힌 0, 1, 0, 1 숫자를 보곤 앵무새처럼 “아하! 0층 한 번, 1층 한 번, 다시 0층 한 번, 다시 1층 한 번 가져오라는 거네?” 하면서 멍청하게 원본 아파트 <code class="language-plaintext highlighter-rouge">A</code> 의 첫 번째와 두 번째 층만 무한 반복해서 발췌 복사해 옵니다.</p>
+
+<p>By contrast, <code class="language-plaintext highlighter-rouge">keep_rows</code> retrieves only the second and fourth rows of <code class="language-plaintext highlighter-rouge">A</code> — i.e. the rows for which the Boolean equals <code class="language-plaintext highlighter-rouge">True</code>.
+그에 반해, 후자의 똑똑한 암살 요원 군단 <code class="language-plaintext highlighter-rouge">keep_rows</code> 진실 그물망은 전혀 다르게 투척됩니다. 이 녀석들은 아파트 <code class="language-plaintext highlighter-rouge">A</code> 앞마당에 쭉 서서 “음~ 1층은 버리고 2층은 챙기고 3층은 버리고 4층은 챙기고!” 이런 식으로 자기 배지 상태표(<code class="language-plaintext highlighter-rouge">Boolean</code>)가 <code class="language-plaintext highlighter-rouge">True</code>(빛의 요원 조명)라고 번쩍번쩍 빛나는 위치 지점들에 상주하는 행들만 정갈하게 생포 압수해 냅니다! 놀라운 차이죠.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">70</span><span class="p">]:</span> <span class="n">A</span><span class="p">[</span><span class="n">keep_rows</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">70</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>This example shows that Booleans and integers are treated differently by <code class="language-plaintext highlighter-rouge">numpy</code>.
+이 호러 반전 예제가 뼈저리게 가르쳐주는 교훈! 넘파이(<code class="language-plaintext highlighter-rouge">numpy</code>) 독재 체제 내부에선, 1/0 정수 군벌 나부랭이와 True/False 특수 불리언 혈통은 눈에 뻔히 같아 보여도 그 체급과 취급 방식 대우가 완전히 뼛속부터 다르다는 극명한 진실을 증명해 시사합니다.</p>
+
+<p>We again make use of the <code class="language-plaintext highlighter-rouge">np.ix_()</code> function to create a mesh containing the second and fourth rows, and the first, third, and fourth columns.
+충격은 거두고 다시 실전으로 돌아갑니다. 우리는 2, 4층을 장악하고 1, 3, 4호 구역을 쑥대밭으로 만들 전용 그물망(mesh)을 짜기 위해, 아까 그 훌륭한 요술 부채 마법 함수 <code class="language-plaintext highlighter-rouge">np.ix_()</code> 님을 다시 한번 더 등판 무대에 소환시킵니다.</p>
+
+<p>This time, we apply the function to Booleans, rather than lists.
+근데 이번 작전 구역에선 한 가지 변칙을 줍니다! 예전 멍청한 단순 정수 리스트 명부 따위를 던졌던 것 대신에 차라리 독기가 바짝 오른 <strong>불리언(<code class="language-plaintext highlighter-rouge">True</code>/<code class="language-plaintext highlighter-rouge">False</code>) 지문 리스트 군단</strong>을 해당 요술 부채 함수의 작동 엔진에 쑥 밀어 넣어 부과 타격시켜 봅니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">71</span><span class="p">]:</span> <span class="n">keep_cols</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">bool</span><span class="p">)</span>
+         <span class="n">keep_cols</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">True</span>
+         <span class="n">idx_bool</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ix_</span><span class="p">(</span><span class="n">keep_rows</span><span class="p">,</span> <span class="n">keep_cols</span><span class="p">)</span>
+         <span class="n">A</span><span class="p">[</span><span class="n">idx_bool</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">71</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>We can also mix a list with an array of Booleans in the arguments to <code class="language-plaintext highlighter-rouge">np.ix_()</code>:
+심지어! 우리 편의 만능 요술 부채 <code class="language-plaintext highlighter-rouge">np.ix_()</code> 의 입속(인자 구간 통로)에는 가로세로 줄을 던질 때 하나는 ‘멍청한 단순 정수 리스트’를 끼우고, 반대쪽은 ‘스마트 불리언 진릿값 배열’을 치밀하게 <strong>혼합(mix) 짬짜면</strong>해 투척해도 토하지 않고 소화해 낼 넉넉한 포용 공산을 갖추고 탑재했습니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">72</span><span class="p">]:</span> <span class="n">idx_mixed</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ix_</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">keep_cols</span><span class="p">)</span>
+         <span class="n">A</span><span class="p">[</span><span class="n">idx_mixed</span><span class="p">]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">72</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>For more details on indexing in <code class="language-plaintext highlighter-rouge">numpy</code>, readers are referred to the <code class="language-plaintext highlighter-rouge">numpy</code> tutorial mentioned earlier.
+이 지옥불 같은 <code class="language-plaintext highlighter-rouge">numpy</code> 그물 던지기 인덱싱 편법 농간 기술들의 더 끝이 없는 심연 세부 옵션들이 내심 당기시나요? 코피 한 번 터져보길 바라는 용기 있는 제현 독자들께선, 이 글 앞단에서 아까 던져 줬던 그 전설의 절대경전 <strong>공식 <code class="language-plaintext highlighter-rouge">numpy</code> 튜토리얼 성지 링크로 가셔서</strong> 날밤을 새며 무림 비급을 단연코 더 파고 참조 정독하시길 눈물 어린 당부의 말씀을 전합니다!</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../2_3_5_sequences_and_slice_notation/trans2.html">&lt; 2.3.5 Sequences And Slice Notation</a></td>
+      <td><a href="../2_3_7_loading_data/trans2.html">2.3.7 Loading Data &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

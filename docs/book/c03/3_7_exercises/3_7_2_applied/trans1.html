@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_7_exercises/3_7_2_applied/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c03/3_7_exercises/3_7_2_applied/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_7_exercises/3_7_2_applied/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c03/3_7_exercises/3_7_2_applied/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/">03. Linear Regression</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_7_exercises/">3 7 exercises</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_7_exercises/3_7_2_applied/">3 7 2 applied</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <p><a href="../3_7_1_conceptual/trans1.html">&lt; 3.7.1 Conceptual</a></p>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 통계 수식과 용어가 낯설고 어렵다면? 아주 쉽게 풀어쓴 <a href="./trans2.html">📖 쉬운 해설(의역본) 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="applied"><em>Applied</em></h1>
+<h1 id="응용">응용</h1>
+
+<ol>
+  <li>This question involves the use of simple linear regression on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.</li>
+  <li>이 질문은 <code class="language-plaintext highlighter-rouge">Auto</code> 데이터셋에 단순 선형 회귀를 사용하는 것을 포함합니다.</li>
+</ol>
+
+<ul>
+  <li>(a) Use the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to perform a simple linear regression with <code class="language-plaintext highlighter-rouge">mpg</code> as the response and <code class="language-plaintext highlighter-rouge">horsepower</code> as the predictor.</li>
+  <li>(a) <code class="language-plaintext highlighter-rouge">mpg</code>를 반응 변수로 하고 <code class="language-plaintext highlighter-rouge">horsepower</code>를 예측 변수로 하여 단순 선형 회귀를 수행하기 위해 <code class="language-plaintext highlighter-rouge">sm.OLS()</code> 함수를 사용하십시오.</li>
+</ul>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">summarize()</code> function to print the results.
+결과를 출력하기 위해 <code class="language-plaintext highlighter-rouge">summarize()</code> 함수를 사용하십시오.</p>
+
+<p>Comment on the output.
+출력에 대해 논평하십시오.</p>
+
+<p>For example:
+예를 들어:</p>
+
+<ul>
+  <li>i. Is there a relationship between the predictor and the response?</li>
+  <li>
+    <p>i. 예측 변수와 반응 변수 사이에 관계가 있습니까?</p>
+  </li>
+  <li>ii. How strong is the relationship between the predictor and the response?</li>
+  <li>
+    <p>ii. 예측 변수와 반응 변수 사이의 관계는 얼마나 강합니까?</p>
+  </li>
+  <li>iii. Is the relationship between the predictor and the response positive or negative?</li>
+  <li>
+    <p>iii. 예측 변수와 반응 변수 사이의 관계는 양의 관계입니까 아니면 음의 관계입니까?</p>
+  </li>
+  <li>iv. What is the predicted <code class="language-plaintext highlighter-rouge">mpg</code> associated with a <code class="language-plaintext highlighter-rouge">horsepower</code> of 98?</li>
+  <li>iv. 98의 <code class="language-plaintext highlighter-rouge">horsepower</code>와 연관된 예측된 <code class="language-plaintext highlighter-rouge">mpg</code>는 무엇입니까?</li>
+</ul>
+
+<p>What are the associated 95 % confidence and prediction intervals?
+연관된 95% 신뢰 구간과 예측 구간은 무엇입니까?</p>
+
+<ul>
+  <li>(b) Plot the response and the predictor in a new set of axes <code class="language-plaintext highlighter-rouge">ax</code> .</li>
+  <li>(b) 새로운 축 세트 <code class="language-plaintext highlighter-rouge">ax</code>에 반응 변수와 예측 변수를 플롯하십시오.</li>
+</ul>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">ax.axline()</code> method or the <code class="language-plaintext highlighter-rouge">abline()</code> function defined in the lab to display the least squares regression line.
+최소 제곱 회귀선을 표시하기 위해 랩에서 정의된 <code class="language-plaintext highlighter-rouge">ax.axline()</code> 메서드 또는 <code class="language-plaintext highlighter-rouge">abline()</code> 함수를 사용하십시오.</p>
+
+<ul>
+  <li>(c) Produce some of diagnostic plots of the least squares regression fit as described in the lab.</li>
+  <li>(c) 랩에 설명된 대로 최소 제곱 회귀 적합의 몇 가지 진단 플롯을 생성하십시오.</li>
+</ul>
+
+<p>Comment on any problems you see with the fit.
+적합에서 보이는 문제에 대해 논평하십시오.</p>
+
+<ol>
+  <li>This question involves the use of multiple linear regression on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.</li>
+  <li>이 질문은 <code class="language-plaintext highlighter-rouge">Auto</code> 데이터셋에 다중 선형 회귀를 사용하는 것을 포함합니다.</li>
+</ol>
+
+<ul>
+  <li>(a) Produce a scatterplot matrix which includes all of the variables in the data set.</li>
+  <li>
+    <p>(a) 데이터셋의 모든 변수를 포함하는 산점도 행렬을 생성하십시오.</p>
+  </li>
+  <li>(b) Compute the matrix of correlations between the variables using the <code class="language-plaintext highlighter-rouge">DataFrame.corr()</code> method.</li>
+  <li>
+    <p>(b) <code class="language-plaintext highlighter-rouge">DataFrame.corr()</code> 메서드를 사용하여 변수들 사이의 상관관계 행렬을 계산하십시오.</p>
+  </li>
+  <li>(c) Use the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to perform a multiple linear regression with <code class="language-plaintext highlighter-rouge">mpg</code> as the response and all other variables except <code class="language-plaintext highlighter-rouge">name</code> as the predictors.</li>
+  <li>(c) <code class="language-plaintext highlighter-rouge">mpg</code>를 반응 변수로 하고 <code class="language-plaintext highlighter-rouge">name</code>을 제외한 모든 다른 변수를 예측 변수로 하여 다중 선형 회귀를 수행하기 위해 <code class="language-plaintext highlighter-rouge">sm.OLS()</code> 함수를 사용하십시오.</li>
+</ul>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">summarize()</code> function to print the results.
+결과를 출력하기 위해 <code class="language-plaintext highlighter-rouge">summarize()</code> 함수를 사용하십시오.</p>
+
+<p>Comment on the output.
+출력에 대해 논평하십시오.</p>
+
+<p>For instance:
+예를 들어:</p>
+
+<ul>
+  <li>i. Is there a relationship between the predictors and the response?</li>
+  <li>i. 예측 변수들과 반응 변수 사이에 관계가 있습니까?</li>
+</ul>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">anova_lm()</code> function from <code class="language-plaintext highlighter-rouge">statsmodels</code> to answer this question.
+이 질문에 답하기 위해 <code class="language-plaintext highlighter-rouge">statsmodels</code>의 <code class="language-plaintext highlighter-rouge">anova_lm()</code> 함수를 사용하십시오.</p>
+
+<ul>
+  <li>ii. Which predictors appear to have a statistically significant relationship to the response?</li>
+  <li>
+    <p>ii. 어느 예측 변수들이 반응 변수와 통계적으로 유의미한 관계가 있는 것으로 보입니까?</p>
+  </li>
+  <li>iii. What does the coefficient for the <code class="language-plaintext highlighter-rouge">year</code> variable suggest?</li>
+  <li>
+    <p>iii. <code class="language-plaintext highlighter-rouge">year</code> 변수의 계수는 무엇을 시사합니까?</p>
+  </li>
+  <li>(d) Produce some of diagnostic plots of the linear regression fit as described in the lab.</li>
+  <li>(d) 랩에 설명된 대로 선형 회귀 적합의 몇 가지 진단 플롯을 생성하십시오.</li>
+</ul>
+
+<p>Comment on any problems you see with the fit.
+적합에서 보이는 문제에 대해 논평하십시오.</p>
+
+<p>Do the residual plots suggest any unusually large outliers?
+잔차 플롯들이 유난히 큰 이상치들을 시사합니까?</p>
+
+<p>Does the leverage plot identify any observations with unusually high leverage?
+레버리지 플롯이 유난히 높은 레버리지를 가진 관측치들을 식별합니까?</p>
+
+<ul>
+  <li>(e) Fit some models with interactions as described in the lab.</li>
+  <li>(e) 랩에 설명된 대로 상호작용 항이 있는 몇몇 모델들을 적합하십시오.</li>
+</ul>
+
+<p>Do any interactions appear to be statistically significant?
+어떤 상호작용들이 통계적으로 유의미해 보입니까?</p>
+
+<ul>
+  <li>(f) Try a few different transformations of the variables, such as $\log(X)$, $\sqrt{X}$, $X^2$.</li>
+  <li>(f) $\log(X)$, $\sqrt{X}$, $X^2$와 같이 변수들의 몇 가지 다른 변환들을 시도해 보십시오.</li>
+</ul>
+
+<p>Comment on your findings.
+당신의 발견에 대해 논평하십시오.</p>
+
+<ol>
+  <li>This question should be answered using the <code class="language-plaintext highlighter-rouge">Carseats</code> data set.</li>
+  <li>이 질문은 <code class="language-plaintext highlighter-rouge">Carseats</code> 데이터셋을 사용하여 답해져야 합니다.</li>
+</ol>
+
+<ul>
+  <li>(a) Fit a multiple regression model to predict <code class="language-plaintext highlighter-rouge">Sales</code> using <code class="language-plaintext highlighter-rouge">Price</code> , <code class="language-plaintext highlighter-rouge">Urban</code> , and <code class="language-plaintext highlighter-rouge">US</code> .</li>
+  <li>
+    <p>(a) <code class="language-plaintext highlighter-rouge">Price</code>, <code class="language-plaintext highlighter-rouge">Urban</code>, 그리고 <code class="language-plaintext highlighter-rouge">US</code>를 사용하여 <code class="language-plaintext highlighter-rouge">Sales</code>를 예측하기 위한 다중 회귀 모델을 적합하십시오.</p>
+  </li>
+  <li>(b) Provide an interpretation of each coefficient in the model.</li>
+  <li>(b) 모델의 각 계수에 대한 해석을 제공하십시오.</li>
+</ul>
+
+<p>Be careful—some of the variables in the model are qualitative!
+주의하십시오—모델의 변수들 중 일부는 질적 변수입니다!</p>
+
+<ul>
+  <li>(c) Write out the model in equation form, being careful to handle the qualitative variables properly.</li>
+  <li>
+    <p>(c) 질적 변수들을 적절히 처리하도록 주의하면서, 모델을 방정식 형태로 작성하십시오.</p>
+  </li>
+  <li>(d) For which of the predictors can you reject the null hypothesis $H_0 : \beta_j = 0$?</li>
+  <li>
+    <p>(d) 어느 예측 변수들에 대해 귀무 가설 $H_0 : \beta_j = 0$을 기각할 수 있습니까?</p>
+  </li>
+  <li>(e) On the basis of your response to the previous question, fit a smaller model that only uses the predictors for which there is evidence of association with the outcome.</li>
+  <li>
+    <p>(e) 이전 질문에 대한 당신의 응답을 바탕으로, 결과와 연관성에 대한 증거가 있는 예측 변수들만을 사용하는 더 작은 모델을 적합하십시오.</p>
+  </li>
+  <li>(f) How well do the models in (a) and (e) fit the data?</li>
+  <li>
+    <p>(f) (a)와 (e)의 모델들이 데이터를 얼마나 잘 적합합니까?</p>
+  </li>
+  <li>(g) Using the model from (e), obtain 95 % confidence intervals for the coefficient(s).</li>
+  <li>
+    <p>(g) (e)의 모델을 사용하여, 계수(들)에 대한 95% 신뢰 구간들을 얻으십시오.</p>
+  </li>
+  <li>(h) Is there evidence of outliers or high leverage observations in the model from (e)?</li>
+  <li>(h) (e)의 모델에서 이상치들이나 높은 레버리지 관측치들의 증거가 있습니까?</li>
+</ul>
+
+<ol>
+  <li>In this problem we will investigate the $t$-statistic for the null hypothesis $H_0 : \beta = 0$ in simple linear regression without an intercept.</li>
+  <li>이 문제에서 우리는 절편이 없는 단순 선형 회귀에서 귀무 가설 $H_0 : \beta = 0$에 대한 $t$-통계량을 조사할 것입니다.</li>
+</ol>
+
+<p>To begin, we generate a predictor <code class="language-plaintext highlighter-rouge">x</code> and a response <code class="language-plaintext highlighter-rouge">y</code> as follows.
+시작하기 위해, 우리는 다음과 같이 예측 변수 <code class="language-plaintext highlighter-rouge">x</code>와 반응 변수 <code class="language-plaintext highlighter-rouge">y</code>를 생성합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>(a) Perform a simple linear regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> , <em>without</em> an intercept.</li>
+  <li>(a) 절편 <em>없이</em>, <code class="language-plaintext highlighter-rouge">y</code>를 <code class="language-plaintext highlighter-rouge">x</code>에 대해 단순 선형 회귀를 수행하십시오.</li>
+</ul>
+
+<p>Report the coefficient estimate $\hat{\beta}$ , the standard error of this coefficient estimate, and the $t$-statistic and $p$-value associated with the null hypothesis $H_0 : \beta = 0$.
+계수 추정치 $\hat{\beta}$, 이 계수 추정치의 표준 오차, 그리고 귀무 가설 $H_0 : \beta = 0$과 연관된 $t$-통계량과 $p$-값을 보고하십시오.</p>
+
+<p>Comment on these results.
+이러한 결과들에 대해 논평하십시오.</p>
+
+<p>(You can perform regression without an intercept using the keywords argument <code class="language-plaintext highlighter-rouge">intercept=False</code> to <code class="language-plaintext highlighter-rouge">ModelSpec()</code> .)
+(당신은 <code class="language-plaintext highlighter-rouge">ModelSpec()</code>에 대한 키워드 인수 <code class="language-plaintext highlighter-rouge">intercept=False</code>를 사용하여 절편 없이 회귀를 수행할 수 있습니다.)</p>
+
+<ul>
+  <li>(b) Now perform a simple linear regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> without an intercept, and report the coefficient estimate, its standard error, and the corresponding $t$-statistic and $p$-values associated with the null hypothesis $H_0 : \beta = 0$.</li>
+  <li>(b) 이제 절편 없이 <code class="language-plaintext highlighter-rouge">x</code>를 <code class="language-plaintext highlighter-rouge">y</code>에 대해 단순 선형 회귀를 수행하고, 계수 추정치, 그것의 표준 오차, 그리고 귀무 가설 $H_0 : \beta = 0$과 연관된 상응하는 $t$-통계량과 $p$-값들을 보고하십시오.</li>
+</ul>
+
+<p>Comment on these results.
+이러한 결과들에 대해 논평하십시오.</p>
+
+<ul>
+  <li>(c) What is the relationship between the results obtained in (a) and (b)?</li>
+  <li>
+    <p>(c) (a)와 (b)에서 얻은 결과들 사이의 관계는 무엇입니까?</p>
+  </li>
+  <li>(d) For the regression of Y onto X without an intercept, the $t$-statistic for $H_0 : \beta = 0$ takes the form $\hat{\beta} / \text{SE}(\hat{\beta})$, where $\hat{\beta}$ is given by (3.38), and where</li>
+  <li>(d) 절편이 없는 Y의 X에 대한 회귀에서, $H_0 : \beta = 0$에 대한 $t$-통계량은 $\hat{\beta} / \text{SE}(\hat{\beta})$의 형태를 취하며, 여기서 $\hat{\beta}$는 (3.38)에 의해 주어지고, 여기서</li>
+</ul>
+
+<p><strong>==&gt; picture [133 x 31] intentionally omitted &lt;==</strong>
+<strong>==&gt; picture [133 x 31] intentionally omitted &lt;==</strong></p>
+
+<p>(These formulas are slightly different from those given in Sections 3.1.1 and 3.1.2, since here we are performing regression without an intercept.)
+(이러한 공식들은 섹션 3.1.1과 3.1.2에서 주어진 것들과 약간 다른데, 왜냐하면 여기에서 우리는 절편 없는 회귀를 수행하고 있기 때문입니다.)</p>
+
+<p>Show algebraically, and confirm numerically in <code class="language-plaintext highlighter-rouge">Python</code> , that the $t$-statistic can be written as
+대수적으로 보여주고, <code class="language-plaintext highlighter-rouge">Python</code>에서 수치적으로 확인하여, $t$-통계량이 다음과 같이 쓰여질 수 있음을 보여주십시오.</p>
+
+<p><strong>==&gt; picture [181 x 32] intentionally omitted &lt;==</strong>
+<strong>==&gt; picture [181 x 32] intentionally omitted &lt;==</strong></p>
+
+<ul>
+  <li>(e) Using the results from (d), argue that the $t$-statistic for the regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> is the same as the $t$-statistic for the regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> .</li>
+  <li>
+    <p>(e) (d)로부터의 결과들을 사용하여, <code class="language-plaintext highlighter-rouge">y</code>의 <code class="language-plaintext highlighter-rouge">x</code>에 대한 회귀의 $t$-통계량이 <code class="language-plaintext highlighter-rouge">x</code>의 <code class="language-plaintext highlighter-rouge">y</code>에 대한 회귀의 $t$-통계량과 동일하다고 주장하십시오.</p>
+  </li>
+  <li>(f) In <code class="language-plaintext highlighter-rouge">Python</code> , show that when regression is performed <em>with</em> an intercept, the $t$-statistic for $H_0 : \beta_1 = 0$ is the same for the regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> as it is for the regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> .</li>
+  <li>(f) <code class="language-plaintext highlighter-rouge">Python</code>에서, 만약 회귀가 절편과 <em>함께</em> 수행될 때, $H_0 : \beta_1 = 0$에 대한 $t$-통계량은 <code class="language-plaintext highlighter-rouge">y</code>의 <code class="language-plaintext highlighter-rouge">x</code>에 대한 회귀에서의 경우와 <code class="language-plaintext highlighter-rouge">x</code>의 <code class="language-plaintext highlighter-rouge">y</code>에 대한 회귀에서의 경우가 동일함을 보여주십시오.</li>
+</ul>
+
+<ol>
+  <li>This problem involves simple linear regression without an intercept.</li>
+  <li>이 문제는 절편이 없는 단순 선형 회귀를 포함합니다.</li>
+</ol>
+
+<ul>
+  <li>(a) Recall that the coefficient estimate $\hat{\beta}$ for the linear regression of Y onto X without an intercept is given by (3.38).</li>
+  <li>(a) 절편 없는 Y의 X에 대한 선형 회귀를 위한 계수 추정치 $\hat{\beta}$가 (3.38)에 의해 주어진다는 것을 상기하십시오.</li>
+</ul>
+
+<p>Under what circumstance is the coefficient estimate for the regression of X onto Y the same as the coefficient estimate for the regression of Y onto X?
+어떤 상황 하에서 X의 Y에 대한 회귀의 계수 추정치가 Y의 X에 대한 회귀의 계수 추정치와 동일해집니까?</p>
+
+<ul>
+  <li>(b) Generate an example in <code class="language-plaintext highlighter-rouge">Python</code> with $n = 100$ observations in which the coefficient estimate for the regression of X onto Y is <em>different from</em> the coefficient estimate for the regression of Y onto X .</li>
+  <li>
+    <p>(b) <code class="language-plaintext highlighter-rouge">Python</code>에서 X의 Y에 대한 회귀의 계수 추정치가 Y의 X에 대한 회귀의 계수 추정치와 <em>다른</em> $n = 100$ 관측치를 갖는 예시를 생성하십시오.</p>
+  </li>
+  <li>(c) Generate an example in <code class="language-plaintext highlighter-rouge">Python</code> with $n = 100$ observations in which the coefficient estimate for the regression of X onto Y is <em>the same as</em> the coefficient estimate for the regression of Y onto X .</li>
+  <li>(c) <code class="language-plaintext highlighter-rouge">Python</code>에서 X의 Y에 대한 회귀의 계수 추정치가 Y의 X에 대한 회귀의 계수 추정치와 <em>동일한</em> $n = 100$ 관측치를 갖는 예시를 생성하십시오.</li>
+</ul>
+
+<ol>
+  <li>In this exercise you will create some simulated data and will fit simple linear regression models to it.</li>
+  <li>이 연습문제에서 당신은 약간의 시뮬레이션된 데이터를 생성할 것이며 단순 선형 회귀 모델들을 그것에 적합시킬 것입니다.</li>
+</ol>
+
+<p>Make sure to use the default random number generator with seed set to 1 prior to starting part (a) to ensure consistent results.
+일관된 결과를 보장하기 위해 파트 (a)를 시작하기 전에 시드가 1로 설정된 기본 난수 생성기를 사용하도록 확인하십시오.</p>
+
+<ul>
+  <li>(a) Using the <code class="language-plaintext highlighter-rouge">normal()</code> method of your random number generator, create a vector, <code class="language-plaintext highlighter-rouge">x</code> , containing 100 observations drawn from a $N(0, 1)$ distribution.</li>
+  <li>(a) 난수 생성기의 <code class="language-plaintext highlighter-rouge">normal()</code> 메서드를 사용하여, $N(0, 1)$ 분포에서 추출된 100개의 관측치들을 포함하는 벡터 <code class="language-plaintext highlighter-rouge">x</code>를 생성하십시오.</li>
+</ul>
+
+<p>This represents a feature, X .
+이것은 특성 X를 나타냅니다.</p>
+
+<ul>
+  <li>(b) Using the <code class="language-plaintext highlighter-rouge">normal()</code> method, create a vector, <code class="language-plaintext highlighter-rouge">eps</code> , containing 100 observations drawn from a $N(0, 0.25)$ distribution—a normal distribution with mean zero and variance $0.25$.</li>
+  <li>
+    <p>(b) <code class="language-plaintext highlighter-rouge">normal()</code> 메서드를 사용하여, 평균이 0이고 분산이 $0.25$인 정규 분포인 $N(0, 0.25)$ 분포에서 추출된 100개의 관측치들을 포함하는 벡터 <code class="language-plaintext highlighter-rouge">eps</code>를 생성하십시오.</p>
+  </li>
+  <li>(c) Using <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">eps</code> , generate a vector <code class="language-plaintext highlighter-rouge">y</code> according to the model</li>
+  <li>(c) <code class="language-plaintext highlighter-rouge">x</code>와 <code class="language-plaintext highlighter-rouge">eps</code>를 사용하여, 이 모델에 따라 벡터 <code class="language-plaintext highlighter-rouge">y</code>를 생성하십시오.</li>
+</ul>
+
+<p><strong>==&gt; picture [182 x 11] intentionally omitted &lt;==</strong>
+<strong>==&gt; picture [182 x 11] intentionally omitted &lt;==</strong></p>
+
+<p>What is the length of the vector <code class="language-plaintext highlighter-rouge">y</code> ?
+벡터 <code class="language-plaintext highlighter-rouge">y</code>의 길이는 무엇입니까?</p>
+
+<p>What are the values of $\beta_0$ and $\beta_1$ in this linear model?
+이 선형 모델에서 $\beta_0$와 $\beta_1$의 값들은 무엇입니까?</p>
+
+<ul>
+  <li>(d) Create a scatterplot displaying the relationship between <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> .</li>
+  <li>(d) <code class="language-plaintext highlighter-rouge">x</code>와 <code class="language-plaintext highlighter-rouge">y</code> 사이의 관계를 표시하는 산점도를 생성하십시오.</li>
+</ul>
+
+<p>Comment on what you observe.
+당신이 관찰하는 것에 대해 논평하십시오.</p>
+
+<ul>
+  <li>(e) Fit a least squares linear model to predict <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x</code> .</li>
+  <li>(e) <code class="language-plaintext highlighter-rouge">x</code>를 사용하여 <code class="language-plaintext highlighter-rouge">y</code>를 예측하기 위한 최소 제곱 선형 모델을 적합하십시오.</li>
+</ul>
+
+<p>Comment on the model obtained.
+얻어진 모델에 대해 논평하십시오.</p>
+
+<p>How do $\hat{\beta}_0$ and $\hat{\beta}_1$ compare to $\beta_0$ and $\beta_1$?
+$\hat{\beta}_0$와 $\hat{\beta}_1$은 $\beta_0$ 및 $\beta_1$과 비교하여 어떻습니까?</p>
+
+<ul>
+  <li>(f) Display the least squares line on the scatterplot obtained in (d).</li>
+  <li>(f) (d)에서 얻은 산점도에 최소 제곱 선형을 표시하십시오.</li>
+</ul>
+
+<p>Draw the population regression line on the plot, in a different color.
+다른 색상으로 플롯에 모집단 회귀선을 그리십시오.</p>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">legend()</code> method of the axes to create an appropriate legend.
+적절한 범례를 생성하기 위해 축의 <code class="language-plaintext highlighter-rouge">legend()</code> 메서드를 사용하십시오.</p>
+
+<ul>
+  <li>(g) Now fit a polynomial regression model that predicts <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x</code> and $x^2$ .</li>
+  <li>(g) 이제 <code class="language-plaintext highlighter-rouge">x</code>와 $x^2$를 사용하여 <code class="language-plaintext highlighter-rouge">y</code>를 예측하는 다항 회귀 모델을 적합하십시오.</li>
+</ul>
+
+<p>Is there evidence that the quadratic term improves the model fit?
+이차 항이 모델의 적합도를 향상시킨다는 증거가 있습니까?</p>
+
+<p>Explain your answer.
+당신의 답변을 설명하십시오.</p>
+
+<ul>
+  <li>(h) Repeat (a)–(f) after modifying the data generation process in such a way that there is <em>less</em> noise in the data.</li>
+  <li>(h) 데이터에 잡음이 <em>적도록</em> 데이터 생성 과정을 수정한 후 (a)-(f)를 반복하십시오.</li>
+</ul>
+
+<p>The model (3.39) should remain the same.
+모델 (3.39)은 동일하게 유지되어야 합니다.</p>
+
+<p>You can do this by decreasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b).
+당신은 (b)에서 오차 항 $\epsilon$을 생성하기 위해 사용된 정규 분포의 분산을 감소시킴으로써 이를 수행할 수 있습니다.</p>
+
+<p>Describe your results.
+당신의 결과들을 설명하십시오.</p>
+
+<ul>
+  <li>(i) Repeat (a)–(f) after modifying the data generation process in such a way that there is <em>more</em> noise in the data.</li>
+  <li>(i) 데이터에 잡음이 <em>많도록</em> 데이터 생성 과정을 수정한 후 (a)-(f)를 반복하십시오.</li>
+</ul>
+
+<p>The model (3.39) should remain the same.
+모델 (3.39)은 동일하게 유지되어야 합니다.</p>
+
+<p>You can do this by increasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b).
+당신은 (b)에서 오차 항 $\epsilon$을 생성하기 위해 사용된 정규 분포의 분산을 증가시킴으로써 이를 수행할 수 있습니다.</p>
+
+<p>Describe your results.
+당신의 결과들을 설명하십시오.</p>
+
+<ul>
+  <li>(j) What are the confidence intervals for $\beta_0$ and $\beta_1$ based on the original data set, the noisier data set, and the less noisy data set?</li>
+  <li>(j) 원래 데이터셋, 잡음이 더 많은 데이터셋, 그리고 잡음이 더 적은 데이터셋을 기반으로 한 $\beta_0$와 $\beta_1$에 대한 신뢰 구간들은 무엇입니까?</li>
+</ul>
+
+<p>Comment on your results.
+당신의 결과들에 대해 논평하십시오.</p>
+
+<ol>
+  <li>This problem focuses on the <em>collinearity</em> problem.</li>
+  <li>이 문제는 <em>공선성(collinearity)</em> 문제에 초점을 맞춥니다.</li>
+</ol>
+
+<ul>
+  <li>(a) Perform the following commands in <code class="language-plaintext highlighter-rouge">Python</code> :</li>
+  <li>(a) <code class="language-plaintext highlighter-rouge">Python</code>에서 다음 명령들을 수행하십시오:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The last line corresponds to creating a linear model in which <code class="language-plaintext highlighter-rouge">y</code> is a function of <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> .
+마지막 줄은 <code class="language-plaintext highlighter-rouge">y</code>가 <code class="language-plaintext highlighter-rouge">x1</code>과 <code class="language-plaintext highlighter-rouge">x2</code>의 함수인 선형 모델을 생성하는 것에 해당합니다.</p>
+
+<p>Write out the form of the linear model.
+선형 모델의 형태를 작성하십시오.</p>
+
+<p>What are the regression coefficients?
+회귀 계수들은 무엇입니까?</p>
+
+<ul>
+  <li>(b) What is the correlation between <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> ?</li>
+  <li>(b) <code class="language-plaintext highlighter-rouge">x1</code>과 <code class="language-plaintext highlighter-rouge">x2</code> 사이의 상관관계는 무엇입니까?</li>
+</ul>
+
+<p>Create a scatterplot displaying the relationship between the variables.
+변수들 사이의 관계를 표시하는 산점도를 생성하십시오.</p>
+
+<ul>
+  <li>(c) Using this data, fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> .</li>
+  <li>(c) 이 데이터를 사용하여, <code class="language-plaintext highlighter-rouge">x1</code>과 <code class="language-plaintext highlighter-rouge">x2</code>를 사용하여 <code class="language-plaintext highlighter-rouge">y</code>를 예측하기 위한 최소 제곱 회귀를 적합하십시오.</li>
+</ul>
+
+<p>Describe the results obtained.
+얻어진 결과들을 설명하십시오.</p>
+
+<p>What are $\hat{\beta}_0$, $\hat{\beta}_1$, and $\hat{\beta}_2$?
+$\hat{\beta}_0$, $\hat{\beta}_1$, 및 $\hat{\beta}_2$는 무엇입니까?</p>
+
+<p>How do these relate to the true $\beta_0$, $\beta_1$, and $\beta_2$?
+이것들은 실제 $\beta_0$, $\beta_1$, 및 $\beta_2$와 어떻게 연관됩니까?</p>
+
+<p>Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
+귀무 가설 $H_0 : \beta_1 = 0$을 기각할 수 있습니까?</p>
+
+<p>How about the null hypothesis $H_0 : \beta_2 = 0$?
+귀무 가설 $H_0 : \beta_2 = 0$은 어떻습니까?</p>
+
+<ul>
+  <li>(d) Now fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using only <code class="language-plaintext highlighter-rouge">x1</code> .</li>
+  <li>(d) 이제 <code class="language-plaintext highlighter-rouge">x1</code>만을 사용하여 <code class="language-plaintext highlighter-rouge">y</code>를 예측하기 위한 최소 제곱 회귀를 적합하십시오.</li>
+</ul>
+
+<p>Comment on your results.
+당신의 결과들에 대해 논평하십시오.</p>
+
+<p>Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
+귀무 가설 $H_0 : \beta_1 = 0$을 기각할 수 있습니까?</p>
+
+<ul>
+  <li>(e) Now fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using only <code class="language-plaintext highlighter-rouge">x2</code> .</li>
+  <li>(e) 이제 <code class="language-plaintext highlighter-rouge">x2</code>만을 사용하여 <code class="language-plaintext highlighter-rouge">y</code>를 예측하기 위한 최소 제곱 회귀를 적합하십시오.</li>
+</ul>
+
+<p>Comment on your results.
+당신의 결과들에 대해 논평하십시오.</p>
+
+<p>Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
+귀무 가설 $H_0 : \beta_1 = 0$을 기각할 수 있습니까?</p>
+
+<ul>
+  <li>(f) Do the results obtained in (c)–(e) contradict each other?</li>
+  <li>(f) (c)–(e)에서 얻어진 결과들이 서로 모순됩니까?</li>
+</ul>
+
+<p>Explain your answer.
+당신의 답변을 설명하십시오.</p>
+
+<ul>
+  <li>(g) Suppose we obtain one additional observation, which was unfortunately mismeasured.</li>
+  <li>(g) 불행히도 잘못 측정된 하나의 추가적인 관측치를 우리가 얻었다고 가정하십시오.</li>
+</ul>
+
+<p>We use the function <code class="language-plaintext highlighter-rouge">np.concatenate()</code> to add this additional observation to each of <code class="language-plaintext highlighter-rouge">x1</code> , <code class="language-plaintext highlighter-rouge">x2</code> and <code class="language-plaintext highlighter-rouge">y</code> .
+우리는 <code class="language-plaintext highlighter-rouge">np.concatenate()</code> 함수를 사용하여 이 추가적인 관측치를 <code class="language-plaintext highlighter-rouge">x1</code>, <code class="language-plaintext highlighter-rouge">x2</code> 그리고 <code class="language-plaintext highlighter-rouge">y</code>의 각각에 더합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]])</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">x2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>Re-fit the linear models from (c) to (e) using this new data.
+이 새로운 데이터를 사용하여 (c)부터 (e)까지의 선형 모델들을 재적합하십시오.</p>
+
+<p>What effect does this new observation have on the each of the models?
+이 새로운 관측치가 각각의 모델들에 어떠한 영향을 미칩니까?</p>
+
+<p>In each model, is this observation an outlier?
+각각의 모델에서, 이 관측치가 이상치입니까?</p>
+
+<p>A high-leverage point?
+높은 레버리지 지점입니까?</p>
+
+<p>Both?
+둘 다입니까?</p>
+
+<p>Explain your answers.
+당신의 답변들을 설명하십시오.</p>
+
+<ol>
+  <li>This problem involves the <code class="language-plaintext highlighter-rouge">Boston</code> data set, which we saw in the lab for this chapter.</li>
+  <li>이 문제는 이 장을 위한 랩에서 우리가 보았던 <code class="language-plaintext highlighter-rouge">Boston</code> 데이터셋을 포함합니다.</li>
+</ol>
+
+<p>We will now try to predict per capita crime rate using the other variables in this data set.
+우리는 이제 이 데이터셋 내의 다른 변수들을 사용하여 1인당 범죄율을 예측하려고 시도할 것입니다.</p>
+
+<p>In other words, per capita crime rate is the response, and the other variables are the predictors.
+다시 말해, 1인당 범죄율이 반응 변수이고, 다른 변수들은 예측 변수들입니다.</p>
+
+<ul>
+  <li>(a) For each predictor, fit a simple linear regression model to predict the response.</li>
+  <li>(a) 각각의 예측 변수에 대해, 반응 변수를 예측하기 위한 단순 선형 회귀 모델을 적합하십시오.</li>
+</ul>
+
+<p>Describe your results.
+당신의 결과들을 설명하십시오.</p>
+
+<p>In which of the models is there a statistically significant association between the predictor and the response?
+어느 모델들에서 예측 변수와 반응 변수 사이에 통계적으로 유의미한 연관성이 있습니까?</p>
+
+<p>Create some plots to back up your assertions.
+당신의 주장들을 뒷받침할 만한 몇몇 플롯들을 생성하십시오.</p>
+
+<ul>
+  <li>(b) Fit a multiple regression model to predict the response using all of the predictors.</li>
+  <li>(b) 모든 예측 변수들을 사용하여 반응 변수를 예측하기 위한 다중 회귀 모델을 적합하십시오.</li>
+</ul>
+
+<p>Describe your results.
+당신의 결과들을 설명하십시오.</p>
+
+<p>For which predictors can we reject the null hypothesis $H_0 : \beta_j = 0$?
+우리가 어느 예측 변수들에 대해 귀무 가설 $H_0 : \beta_j = 0$을 기각할 수 있습니까?</p>
+
+<ul>
+  <li>(c) How do your results from (a) compare to your results from (b)?</li>
+  <li>(c) (a)로부터의 당신의 결과들이 (b)로부터의 결과들과 어떻게 비교됩니까?</li>
+</ul>
+
+<p>Create a plot displaying the univariate regression coefficients from (a) on the <em>x</em> -axis, and the multiple regression coefficients from (b) on the <em>y</em> -axis.
+(a)로부터의 단변량 회귀 계수들을 <em>x</em>-축에, 그리고 (b)로부터의 다중 회귀 계수들을 <em>y</em>-축에 표시하는 플롯을 생성하십시오.</p>
+
+<p>That is, each predictor is displayed as a single point in the plot.
+즉, 각각의 예측 변수가 플롯에서 단일 점으로 표시됩니다.</p>
+
+<p>Its coefficient in a simple linear regression model is shown on the <em>x</em> -axis, and its coefficient estimate in the multiple linear regression model is shown on the <em>y</em> -axis.
+단순 선형 회귀 모델에서의 그것의 계수는 <em>x</em>-축에 보여지고, 다중 선형 회귀 모델에서의 계수 추정치는 <em>y</em>-축에 보여집니다.</p>
+
+<ul>
+  <li>(d) Is there evidence of non-linear association between any of the predictors and the response?</li>
+  <li>(d) 어떤 예측 변수들과 반응 변수 사이에 비선형 연관성의 증거가 있습니까?</li>
+</ul>
+
+<p>To answer this question, for each predictor X , fit a model of the form
+이 질문에 답하기 위해, 각각의 예측 변수 X에 대해 이러한 형태의 모델을 적합하십시오</p>
+
+<p><strong>==&gt; picture [154 x 11] intentionally omitted &lt;==</strong>
+<strong>==&gt; picture [154 x 11] intentionally omitted &lt;==</strong></p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<p><a href="../3_7_1_conceptual/trans1.html">&lt; 3.7.1 Conceptual</a></p>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

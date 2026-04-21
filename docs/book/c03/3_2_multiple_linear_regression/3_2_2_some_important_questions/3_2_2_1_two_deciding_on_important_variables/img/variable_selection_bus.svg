@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff4e6"/>
+      <stop offset="100%" stop-color="#fff9db"/>
+    </linearGradient>
+
+    <!-- Bus Gradient -->
+    <linearGradient id="busGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe066"/>
+      <stop offset="100%" stop-color="#fcc419"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-5%" y="-5%" width="120%" height="120%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.2"/>
+    </filter>
+
+    <!-- Animations -->
+    <!-- Forward Selection: Passenger boarding X1 -->
+    <animate id="walkIn" xlink:href="#passForward" attributeName="transform" type="translate" values="-80,0; 30,0" dur="2s" fill="freeze" begin="0s; loopAnim.end"/>
+    <animate id="fadeOutFwd" xlink:href="#passForward" attributeName="opacity" values="1;0" dur="0.5s" fill="freeze" begin="walkIn.end"/>
+    <!-- Person reappears inside bus -->
+    <animate id="appearFwd" xlink:href="#insidePass1" attributeName="opacity" values="0;1" dur="0.5s" fill="freeze" begin="fadeOutFwd.end"/>
+
+    <!-- Backward Selection: Passenger kicked out -->
+    <animate id="kickOut" xlink:href="#insidePassBack" attributeName="opacity" values="1;0" dur="0.5s" fill="freeze" begin="2s; loopAnim.end+2s"/>
+    <animate id="appearBack" xlink:href="#passBackward" attributeName="opacity" values="0;1" dur="0.2s" fill="freeze" begin="kickOut.end"/>
+    <animate id="flyOut" xlink:href="#passBackward" attributeName="transform" type="translate" values="55,0; 180,50" dur="1.5s" fill="freeze" begin="appearBack.begin"/>
+    <animate id="fadeFly" xlink:href="#passBackward" attributeName="opacity" values="1;0" dur="0.5s" fill="freeze" begin="flyOut.end-0.5s"/>
+
+    <animate id="loopAnim" attributeName="visibility" from="visible" to="visible" dur="5s" begin="0s"/>
+    
+    <!-- Reset hacks -->
+    <animate xlink:href="#passForward" attributeName="opacity" values="0" dur="0.1s" fill="freeze" begin="loopAnim.end-0.1s"/>
+    <animate xlink:href="#insidePass1" attributeName="opacity" values="0" dur="0.1s" fill="freeze" begin="loopAnim.end-0.1s"/>
+    <animate xlink:href="#insidePassBack" attributeName="opacity" values="1" dur="0.1s" fill="freeze" begin="loopAnim.end-0.1s"/>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)" rx="15"/>
+
+  <!-- Divider Line -->
+  <line x1="400" y1="20" x2="400" y2="480" stroke="#ced4da" stroke-width="4" stroke-dasharray="10,10"/>
+
+  <!-- =============================== -->
+  <!-- LEFT PANEL: FORWARD SELECTION -->
+  <!-- =============================== -->
+  <g transform="translate(10, 50)">
+    <text x="190" y="0" font-family="'Jua', sans-serif" font-size="28" fill="#1864ab" text-anchor="middle" font-weight="bold">1. 전진 선택 (Forward)</text>
+    <text x="190" y="30" font-family="'Jua', sans-serif" font-size="16" fill="#868e96" text-anchor="middle">"텅 빈 버스에 쓸만한 승객부터 차례로!"</text>
+
+    <!-- Empty Bus -->
+    <g transform="translate(100, 100)" filter="url(#shadow)">
+      <rect x="0" y="0" width="220" height="150" fill="url(#busGrad)" rx="20"/>
+      <rect x="180" y="0" width="60" height="150" fill="#e67700" rx="20"/>
+      <!-- Windows -->
+      <rect x="20" y="20" width="40" height="50" fill="#e7f5ff" rx="5"/>
+      <rect x="70" y="20" width="40" height="50" fill="#e7f5ff" rx="5"/>
+      <rect x="120" y="20" width="40" height="50" fill="#e7f5ff" rx="5"/>
+      <rect x="180" y="20" width="40" height="50" fill="#a5d8ff" rx="5"/>
+      <!-- Wheels -->
+      <circle cx="50" cy="150" r="25" fill="#343a40"/>
+      <circle cx="50" cy="150" r="10" fill="#fff"/>
+      <circle cx="180" cy="150" r="25" fill="#343a40"/>
+      <circle cx="180" cy="150" r="10" fill="#fff"/>
+      
+      <text x="100" y="110" font-family="'Jua', sans-serif" font-size="20" fill="#343a40" text-anchor="middle" font-weight="bold">모델 감옥 버스</text>
+
+      <!-- Inside passenger 1 (Appears later) -->
+      <g id="insidePass1" transform="translate(40,45)" opacity="0">
+        <circle cx="0" cy="0" r="15" fill="#4dabf7"/>
+        <text x="0" y="5" font-family="'Jua', sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">X1</text>
+      </g>
+    </g>
+
+    <!-- Boarding Passenger (X1) -->
+    <g id="passForward" transform="translate(-80, 0)">
+      <!-- Positioned to walk towards the bus (x=100) -->
+      <g transform="translate(30, 220)" filter="url(#shadow)">
+        <circle cx="0" cy="0" r="20" fill="#4dabf7"/>
+        <text x="0" y="6" font-family="'Jua', sans-serif" font-size="16" fill="#fff" text-anchor="middle" font-weight="bold">X1</text>
+        <path d="M-10,20 L-10,50 L10,50 L10,20 Z" fill="#4dabf7"/>
+        <!-- Star icon for high priority -->
+        <text x="0" y="-30" font-family="'Apple Color Emoji', 'Segoe UI Emoji', sans-serif" font-size="24" text-anchor="middle">⭐</text>
+      </g>
+    </g>
+
+    <!-- Text bubble for passenger -->
+    <g transform="translate(20, 180)">
+      <path d="M0,0 Q90,-30 180,0 Q200,30 180,60 Q90,90 0,60 Q-20,30 0,0" fill="#fff" stroke="#4dabf7" stroke-width="2"/>
+      <text x="90" y="30" font-family="'Jua', sans-serif" font-size="14" fill="#343a40" text-anchor="middle" font-weight="bold">오차율 1등! 타겠습니다!</text>
+    </g>
+  </g>
+
+
+  <!-- =============================== -->
+  <!-- RIGHT PANEL: BACKWARD SELECTION -->
+  <!-- =============================== -->
+  <g transform="translate(410, 50)">
+    <text x="190" y="0" font-family="'Jua', sans-serif" font-size="28" fill="#e03131" text-anchor="middle" font-weight="bold">2. 후진 제거 (Backward)</text>
+    <text x="190" y="30" font-family="'Jua', sans-serif" font-size="16" fill="#868e96" text-anchor="middle">"꽉 찬 버스에서 쓸모없는 놈 파문!"</text>
+
+    <!-- Packed Bus -->
+    <g transform="translate(50, 100)" filter="url(#shadow)">
+      <rect x="0" y="0" width="220" height="150" fill="url(#busGrad)" rx="20"/>
+      <rect x="180" y="0" width="60" height="150" fill="#e67700" rx="20"/>
+      <!-- Windows -->
+      <rect x="20" y="20" width="40" height="50" fill="#e7f5ff" rx="5"/>
+      <rect x="70" y="20" width="40" height="50" fill="#e7f5ff" rx="5"/>
+      <rect x="120" y="20" width="40" height="50" fill="#e7f5ff" rx="5"/>
+      <rect x="180" y="20" width="40" height="50" fill="#a5d8ff" rx="5"/>
+      <!-- Wheels -->
+      <circle cx="50" cy="150" r="25" fill="#343a40"/>
+      <circle cx="50" cy="150" r="10" fill="#fff"/>
+      <circle cx="180" cy="150" r="25" fill="#343a40"/>
+      <circle cx="180" cy="150" r="10" fill="#fff"/>
+      <text x="100" y="110" font-family="'Jua', sans-serif" font-size="20" fill="#343a40" text-anchor="middle" font-weight="bold">모델 감옥 버스</text>
+
+      <!-- Inside Passengers -->
+      <!-- Pass 1 -->
+      <g transform="translate(40,45)">
+        <circle cx="0" cy="0" r="15" fill="#20c997"/>
+        <text x="0" y="5" font-family="'Jua', sans-serif" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">X1</text>
+      </g>
+      <!-- Pass 2 -->
+      <g transform="translate(90,45)">
+        <circle cx="0" cy="0" r="15" fill="#fab005"/>
+        <text x="0" y="5" font-family="'Jua', sans-serif" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">X2</text>
+      </g>
+      <!-- Pass to be kicked -->
+      <g id="insidePassBack" transform="translate(140,45)">
+        <circle cx="0" cy="0" r="15" fill="#adb5bd"/>
+        <text x="0" y="5" font-family="'Jua', sans-serif" font-size="11" fill="#fff" text-anchor="middle" font-weight="bold">X3</text>
+      </g>
+    </g>
+
+    <!-- Boarding Passenger (X3) getting kicked -->
+    <g id="passBackward" transform="translate(55, 0)" opacity="0">
+      <g transform="translate(30, 145)" filter="url(#shadow)">
+        <circle cx="0" cy="0" r="20" fill="#adb5bd"/>
+        <text x="0" y="6" font-family="'Jua', sans-serif" font-size="16" fill="#fff" text-anchor="middle" font-weight="bold">X3</text>
+        <path d="M-10,20 L-10,50 L10,50 L10,20 Z" fill="#adb5bd"/>
+        <!-- Sweating / crying emoji effect -->
+        <text x="0" y="-30" font-family="'Jua', sans-serif" font-size="16" fill="#c92a2a" text-anchor="middle">p=0.9(무죄)</text>
+      </g>
+    </g>
+
+    <!-- Text bubble for passenger -->
+    <g transform="translate(180, 240)">
+      <path d="M0,0 Q90,-30 180,0 Q200,30 180,60 Q90,90 0,60 Q-20,30 0,0" fill="#fff" stroke="#e03131" stroke-width="2"/>
+      <text x="90" y="30" font-family="'Jua', sans-serif" font-size="14" fill="#c92a2a" text-anchor="middle" font-weight="bold">으아아악! 나 무관한데!</text>
+    </g>
+  </g>
+
+</svg>

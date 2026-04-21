@@ -3,24 +3,26 @@ layout: default
 title: "index"
 ---
 
-# 4.1 An Overview of Classification 
+[< 4. Classification](../index.html) | [4.2 Why Not Linear Regression >](../4_2_why_not_linear_regression/index.html)
 
-Classification problems occur often, perhaps even more so than regression problems. Some examples include: 
 
-© Springer Nature Switzerland AG 2023 
+> 💡 **학습 팁:** 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 [📖 직역본 보기](./trans1.html)를 추천합니다!
 
-135 
+# 4.1 An Overview of Classification
 
-G. James et al., _An Introduction to Statistical Learning_ , Springer Texts in Statistics, https://doi.org/10.1007/978-3-031-38747-0_4 
+Classification problems occur often, perhaps even more so than regression problems. Some examples include:
 
-136 4. Classification 
+1. A person arrives at the emergency room with a set of symptoms that could possibly be attributed to one of three medical conditions. Which of the three conditions does the individual have?
+2. An online banking service must be able to determine whether or not a transaction being performed on the site is fraudulent, on the basis of the user’s IP address, past transaction history, and so forth.
+3. On the basis of DNA sequence data for a number of patients with and without a given disease, a biologist would like to figure out which DNA mutations are deleterious (disease-causing) and which are not.
 
-1. A person arrives at the emergency room with a set of symptoms that could possibly be attributed to one of three medical conditions. Which of the three conditions does the individual have? 
+Just as in the regression setting, in the classification setting we have a set of training observations $(x_1, y_1), \dots , (x_n, y_n)$ that we can use to build a classifier. We want our classifier to perform well not only on the training data, but also on test observations that were not used to train the classifier. In this chapter, we will illustrate the concept of classification using the simulated `Default` data set. We are interested in predicting whether an individual will default on his or her credit card payment, on the basis of annual income and monthly credit card balance. The data set is displayed in Figure 4.1. In the left-hand panel of Figure 4.1, we have plotted annual `income` and monthly credit card `balance` for a subset of 10,000 individuals. The individuals who defaulted in a given month are shown in orange, and those who did not in blue. (The overall default rate is about 3 %, so we have plotted only a fraction of the individuals who did not default.) It appears that individuals who defaulted tended to have higher credit card balances than those who did not. In the center and right-hand panels of Figure 4.1, two pairs of boxplots are shown. The first shows the distribution of `balance` split by the binary `default` variable; the second is a similar plot for `income` . In this chapter, we learn how to build a model to predict `default` ($Y$) for any given value of `balance` ($X_1$) and `income` ($X_2$). Since $Y$ is not quantitative, the simple linear regression model of Chapter 3 is not a good choice: we will elaborate on this further in Section 4.2.
 
-2. An online banking service must be able to determine whether or not a transaction being performed on the site is fraudulent, on the basis of the user’s IP address, past transaction history, and so forth. 
+It is worth noting that Figure 4.1 displays a very pronounced relationship between the predictor `balance` and the response `default`. In most real applications, the relationship between the predictor and the response will not be nearly so strong. However, for the sake of illustrating the classification procedures discussed in this chapter, we use an example in which the relationship between the predictor and the response is somewhat exaggerated.
 
-3. On the basis of DNA sequence data for a number of patients with and without a given disease, a biologist would like to figure out which DNA mutations are deleterious (disease-causing) and which are not. 
+---
 
-Just as in the regression setting, in the classification setting we have a set of training observations ( _x_ 1 _, y_ 1) _, . . . ,_ ( _xn, yn_ ) that we can use to build a classifier. We want our classifier to perform well not only on the training data, but also on test observations that were not used to train the classifier. In this chapter, we will illustrate the concept of classification using the simulated `Default` data set. We are interested in predicting whether an individual will default on his or her credit card payment, on the basis of annual income and monthly credit card balance. The data set is displayed in Figure 4.1. In the left-hand panel of Figure 4.1, we have plotted annual `income` and monthly credit card `balance` for a subset of 10 _,_ 000 individuals. The individuals who defaulted in a given month are shown in orange, and those who did not in blue. (The overall default rate is about 3 %, so we have plotted only a fraction of the individuals who did not default.) It appears that individuals who defaulted tended to have higher credit card balances than those who did not. In the center and right-hand panels of Figure 4.1, two pairs of boxplots are shown. The first shows the distribution of `balance` split by the binary `default` variable; the second is a similar plot for `income` . In this chapter, we learn how to build a model to predict `default` ( $Y$) for any given value of `balance` ( $X_1$) and `income` ( $X_2$). Since $Y$is not quantitative, the simple linear regression model of Chapter 3 is not a good choice: we will elaborate on this further in Section 4.2. 
+## Sub-Chapters
 
-It is worth noting that Figure 4.1 displays a very pronounced relationship between the predictor `balance` and the response `default` . In most real applications, the relationship between the predictor and the response will not be nearly so strong. However, for the sake of illustrating the classification procedures discussed in this chapter, we use an example in which the relationship between the predictor and the response is somewhat exaggerated. 
+
+[< 4. Classification](../index.html) | [4.2 Why Not Linear Regression >](../4_2_why_not_linear_regression/index.html)

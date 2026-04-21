@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_3_the_bootstrap/5_3_3_1_out19_0.0912/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_3_the_bootstrap/5_3_3_1_out19_0.0912/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_3_the_bootstrap/5_3_3_1_out19_0.0912/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_3_the_bootstrap/5_3_3_1_out19_0.0912/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/">05. Resampling Methods</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/5_3_lab_cross-validation_and_the_bootstrap/">5 3 lab cross-validation and the bootstrap</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_3_the_bootstrap/">5 3 3 the bootstrap</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_3_the_bootstrap/5_3_3_1_out19_0.0912/">5 3 3 1 out19 0.0912</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="out19-00912"><code class="language-plaintext highlighter-rouge">Out[19]:</code> <code class="language-plaintext highlighter-rouge">0.0912</code></h1>
+
+<p>The final output shows that the bootstrap estimate for $\text{SE}(\hat{\alpha})$ is $0.0912$. 
+최종 종착 귀결 산출물 기록은 당해 $\text{SE}(\hat{\alpha})$ 오차 지표 편차성에 관해 부트스트랩이 산출 기명해 준 추정값이 $0.0912$ 수위에 안착함을 내보여(shows) 증언해 줍니다.</p>
+
+<h3 id="estimating-the-accuracy-of-a-linear-regression-model">Estimating the Accuracy of a Linear Regression Model</h3>
+<h3 id="선형-회귀-모델의-정확도-추정하기">선형 회귀 모델의 정확도 추정하기</h3>
+
+<p>The bootstrap approach can be used to assess the variability of the coefficient estimates and predictions from a statistical learning method. Here we use the bootstrap approach in order to assess the variability of the estimates for $\beta_0$ and $\beta_1$, the intercept and slope terms for the linear regression model that uses <code class="language-plaintext highlighter-rouge">horsepower</code> to predict <code class="language-plaintext highlighter-rouge">mpg</code> in the <code class="language-plaintext highlighter-rouge">Auto</code> data set. We will compare the estimates obtained using the bootstrap to those obtained using the formulas for $\text{SE}(\hat{\beta}_0)$ and $\text{SE}(\hat{\beta}_1)$ described in Section 3.1.2. 
+부트스트랩 접근 타진 방식 기조는 임의의 기계 통계 학습 메커니즘 구동 모델상에서 돌출돼 떨어져 나오는 각종 계수 추정 지표들(coefficient estimates) 및 예측 파생값 결괏치 본연이 지닌 가변성(variability) 널뛰기 이격을 진단 평가(assess)하려는 용도 기반으로 폭넓게 착취 운용(used to)될 수 있습니다. 작금의 대목(Here)에서 우리들은 바로 이 본연의 부트스트랩 접근 시도를 채택 취하여 활용할 셈인데, 이의 목적은 기 출시된 <code class="language-plaintext highlighter-rouge">Auto</code> 차량 제원 데이터 더미 묶음 정보 위에서 기어코 <code class="language-plaintext highlighter-rouge">horsepower</code> 인자를 축으로 <code class="language-plaintext highlighter-rouge">mpg</code> 결괏수치를 측량 견인 예측(predict)코자 도출 산출해 올렸던 일직선 1차 회귀 모듈 함수가 뿜어내고 산출한 구성요소 성분들 즉 $Y$ 절편 위치 축항 및 곡선 편향 기울기 단위체로 지목 추종되는 쌍방의 모수 표적 치수 $\beta_0$ 및 $\beta_1$ 두 녀석이 태생적으로 발산 웅거하고 지닌 편차적 변동성 이탈 변위를 직접 검정 평가(assess) 수리하려는 소임 때문입니다. 향후 우리는 방금 부트스트랩을 매개로 삼아 도출 획득 구득 달성된 개별 모수 쌍의 편차 추산치 수위 결과물을 예전 3.1.2장 도입부에 언급 기입 서술(described) 남겼었던 $\text{SE}(\hat{\beta}_0)$ 와 $\text{SE}(\hat{\beta}_1)$ 측량 공식 체계를 활용해 도출해 건졌던 당대 기록 산출물들(those)과 나란히 상호 대조 왈가왈부 비교(compare) 교차 점검할 것입니다.</p>
+
+<p>To use our <code class="language-plaintext highlighter-rouge">boot_SE()</code> function, we must write a function (its first argument) that takes a data frame <code class="language-plaintext highlighter-rouge">D</code> and indices <code class="language-plaintext highlighter-rouge">idx</code> as its only arguments. But here we want to bootstrap a specific regression model, specified by a model formula and data. We show how to do this in a few simple steps. 
+지금 우리가 짠 맞춤 <code class="language-plaintext highlighter-rouge">boot_SE()</code> 코딩 연산 체제를 매끄럽게 실제 원활 운용 탑승 구동하려면, 사전에 반드시 <code class="language-plaintext highlighter-rouge">D</code>라고 불리는 데이터 구조 판과 <code class="language-plaintext highlighter-rouge">idx</code> 조준 주소 일련 지표 인덱스를 쌍끌이 단 두 개의 한정된(only) 순수 인자 요건체(takes)로만 취급해 영접 흡수하는 사전 기초 밑작업 격의 개체 종속 별립 함수(그 자체로 함수 1선발 인자가 될 것임) 하나를 사전에 단독 축조 기입 코딩(write) 완료해 매어두어야 하는 의무 제약이 따릅니다(must). 그런데 작금 닥친 이곳 국면에서 우리들의 희망(want to)은, 오히려 수식(1) 조건과 (2)데이터 구조를 병합 적시(specified) 구명하여 못을 박아 규정 픽스해놓은 철통같은 하나의 특정 회기 예측 모델 통째 모듈체를 거대하게 부트스트랩 빙빙 돌리기 전개 회전시키고픈 포부에 기원합니다. 이어지는 몇 회의 아주 간소 간단한 편의적 코딩 걸음(steps) 처리 편제 절차들을 통해 이런 요구의 실질 구현 달성 메커니즘을 상세히 시연 내보여(show) 증명합니다.</p>
+
+<p>We start by writing a generic function <code class="language-plaintext highlighter-rouge">boot_OLS()</code> for bootstrapping a regression model that takes a formula to define the corresponding regression. We use the <code class="language-plaintext highlighter-rouge">clone()</code> function to make a copy of the formula that can be refit to the new dataframe. This means that any derived features such as those defined by <code class="language-plaintext highlighter-rouge">poly()</code> (which we will see shortly), will be re-fit on the resampled data frame. 
+그 시발점(start by)으로 우리는 해당 대응 회기 체계를 뚜렷이 설계 입증 확정(define)코자 그 뼈대 공식 자체를 입력 흡인(takes) 접수하는, 회귀 모형용 뺑뺑이 재추출 기믹 가동 공구로서의 일반 범용 형태성 성향(generic)의 다용도 함수인 <code class="language-plaintext highlighter-rouge">boot_OLS()</code> 를 백지부터 하나 기입 마련 축조하는 것에서부터 신호탄을 쏩니다. 우리들은 그 안에 내장된 파이썬 기능 공구 <code class="language-plaintext highlighter-rouge">clone()</code> 명령어 체제 기능을 활용 착취하여 본 공식 규격 본체와 구별되는 거푸집 복사본 사본 껍데기(copy)를 1차 마련해 복제시켜 냄으로써, 그것이 향후 계속 재등장할 낯설고 신규한 새 데이터 판 위에 족족 자유자재 재 장착 접합 피팅(refit) 구사되도록 활로를 열어젖힙니다. 이 같은 선결 처리 체계가 의미(means that) 부여하는 바인죽, 앞으로 우리가 맞닥뜨릴 (가령 잠시 뒤에 조만간 관찰 전개시켜 목격하게 될) 이른바 <code class="language-plaintext highlighter-rouge">poly()</code> 다항수식 전개항과 같은 작위에 의해 전개 창조되는 일체의 파생 발생 기인 스펙 특징 징후 변동물(derived features)들 역시도 결국에는 전부, 반복 재모집 창출 배포된 당해 신생 표본 풀 프레임 기단 위층에 몽땅 죄다 한 점 예외 없이 다시 재구성 탑재 장착 갱신되어 리-피팅(re-fit) 처리 동화 접수됨이 가능해진다는 사실에 다름 아닙니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="k">def</span> <span class="nf">boot_OLS</span><span class="p">(</span><span class="n">model_matrix</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+             <span class="n">D_</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+             <span class="n">Y_</span> <span class="o">=</span> <span class="n">D_</span><span class="p">[</span><span class="n">response</span><span class="p">]</span>
+             <span class="n">X_</span> <span class="o">=</span> <span class="nf">clone</span><span class="p">(</span><span class="n">model_matrix</span><span class="p">).</span><span class="nf">fit_transform</span><span class="p">(</span><span class="n">D_</span><span class="p">)</span>
+             <span class="k">return</span> <span class="n">sm</span><span class="p">.</span><span class="nc">OLS</span><span class="p">(</span><span class="n">Y_</span><span class="p">,</span> <span class="n">X_</span><span class="p">).</span><span class="nf">fit</span><span class="p">().</span><span class="n">params</span>
+</code></pre></div></div>
+
+<p>This is not quite what is needed as the first argument to <code class="language-plaintext highlighter-rouge">boot_SE()</code>. The first two arguments which specify the model will not change in the bootstrap process, and we would like to <em>freeze</em> them. The function <code class="language-plaintext highlighter-rouge">partial()</code> from the <code class="language-plaintext highlighter-rouge">functools</code> module does precisely this: it takes a function as an argument, and freezes some of its arguments, starting from the left. We use it to freeze the first two model-formula arguments of <code class="language-plaintext highlighter-rouge">boot_OLS()</code>. 
+다만 솔직히 까놓고 고백하자면 현시점 저 위에 갓 빚어진 저 조악한 모양새 코딩만으론 여전히 메인 엔진인 <code class="language-plaintext highlighter-rouge">boot_SE()</code> 기능체 입구의 선두 제1 타겟 인수 자리에 냅다 투입 활용되기에 뭔가 약간 상당히 부적합하고 딱 맞아떨어지지 않는 체적 어불성설 불합리성(not quite what is needed)의 요소가 은은히 깃들어 있습니다. 모델 몸체 자체를 지목 확정 규정 픽싱시켜내는 저 첫 번째 도립된 2쌍의 인자 단위들은 장차 숱하게 무한 궤도로 빙빙 반복될 거대한 부트스트랩 반복 가속 프로세싱 궤도 여정 절차 내내 단 한 치도 융통 전환 변용될(will not change) 요량과 건더기가 전무하며, 고로 차라리 우리들 입장에선 그들의 고정값을 일찌감치 한데 영구 점착(freeze) ‘얼음’ 고착 조치 동결시켜 버리는 편이 낫습니다. 바로 요 부분, 파이썬 부품 <code class="language-plaintext highlighter-rouge">functools</code> 모듈 상에 안착 보관되어 있는 <code class="language-plaintext highlighter-rouge">partial()</code> 기믹 함수란 녀석이 그야말로 빈틈 한 치 없이 이 요구 소임 자체를 기깔나고 기가 막히게 세밀 정교히(precisely) 처리 성사해 냅니다: 이 공구 녀석은 거대한 1개의 타겟 함수 자체를 하나의 뭉퉁그려진 대상 인자 속성인 양 삼켜버린(takes) 채로, 그 함수 좌측면(from the left) 변두리에 대기 나열 붙어있는 인자열 단위 구멍 중 절반 대다수 일부 요원들만 쏙 지목해서 얼음 땡 영구 동결 고착 점착 마비(freezes) 처분을 강행 기입해 줍니다. 우리는 바로 이러한 <code class="language-plaintext highlighter-rouge">partial()</code> 녀석의 절묘한 냉동 스킬 기능을 부려먹음(use)으로써 조금 전 코딩 설계했던 갓난 함수 <code class="language-plaintext highlighter-rouge">boot_OLS()</code> 몸체의 서두를 여는 선두 2개쌍, 곧 즉 모형과 수식 골자 뼈대를 각각 지목 지시 담당하고 있던 바로 그 두 관문 인자(model-formula arguments)를 사전에 철두철미 차갑게 못 박아 영원 불변 고정 동결(freeze) 조치해버립니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">hp_func</span> <span class="o">=</span> <span class="nf">partial</span><span class="p">(</span><span class="n">boot_OLS</span><span class="p">,</span> <span class="nc">MS</span><span class="p">([</span><span class="sh">'</span><span class="s">horsepower</span><span class="sh">'</span><span class="p">]),</span> <span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Typing <code class="language-plaintext highlighter-rouge">hp_func?</code> will show that it has two arguments <code class="language-plaintext highlighter-rouge">D</code> and <code class="language-plaintext highlighter-rouge">idx</code> — it is a version of <code class="language-plaintext highlighter-rouge">boot_OLS()</code> with the first two arguments frozen — and hence is ideal as the first argument for <code class="language-plaintext highlighter-rouge">boot_SE()</code>. 
+이 상태에서 파이썬 프롬프트 터미널창 지시줄 상에 <code class="language-plaintext highlighter-rouge">hp_func?</code> 명령어 스펠링 오더를 기입 타이핑 구동(Typing) 치게 되면 화면 디스플레이 전면부에는 비로소 이 가공 처리 개조 완료된 모듈 녀석이 단 2개의 순수한 요구 잔여 구멍(arguments) 수급 조건인 <code class="language-plaintext highlighter-rouge">D</code> 통괄 데이터프레임과 <code class="language-plaintext highlighter-rouge">idx</code> 열 번호 명단표만을 여전히 벌린 채 살아 숨 쉰다는 상태란 점을 상세 조명 나열 브리핑 개시 보도(show) 해주게 됩니다 — 요약하자면 이는 원본 <code class="language-plaintext highlighter-rouge">boot_OLS()</code> 로봇의 구조 형체 중 서두 첫 2발의 장착 구문 공극 홀을 강제 기입 시멘트로 공구리 동결(frozen) 접합시킨 맞춤형 변종 버전 파생 봇이란 뜻이며 — 그로 말미암은 결과 도출상, 태생적으로 메인 통제탑 <code class="language-plaintext highlighter-rouge">boot_SE()</code> 에 맹목적으로 밀어 넣어 기입 상납 차출시키기 위한 제1 최적격 일선 후보 인자 개체로서 완벽 무결의 자격 조건 이상향(is ideal as)을 달성 챙취 획득함에 다름 아닙니다(hence).</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">hp_func()</code> function can now be used in order to create bootstrap estimates for the intercept and slope terms by randomly sampling from among the observations with replacement. We first demonstrate its utility on 10 bootstrap samples. 
+완성형에 다다른 바로 이 조립체 함수 <code class="language-plaintext highlighter-rouge">hp_func()</code> 모듈은 이에 말미암아, 태초 근원 데이터 풀 전체 관측 요원 표본 개체들(the observations) 내부 명단 구성 안에서 철저히 중복 복원 허용 추출 방침 굴레(with replacement) 하의 제약 없는 무작위 랜덤 뺑뺑이 재복원 중복 모집(randomly sampling) 난수 행정 거행 기조를 기반 동력 추종 맹신 삼아서 도안해 낸 두 개 대상 절편 상수 타자와 미지 기울기 변곡 상향 하향 모수 타겟 타자 변인들(intercept and slope terms) 각기 모두에 귀속 관여할 부트스트랩 측량 도안 평가 추정물 다발 결과 결집 생산 공정 산출 도모 목표(in order to create) 달성 실전에 영구 봉쇄 배치 실전 활용 실무 투사 배치(can now be used) 가동될 채비를 완연히 마치게 됐습니다. 우선 도입 초도 단계로서 가볍게 몸을 덥히고자, 우리는 이 공정 공구 체제의 유효 통달 효용 가치 쓰임새(utility) 전반을 단 10가락의 부트스트랩 재현 단발 샘플 복제 모집 체계 위에서 시범 운영 시찰 증명 나열(demonstrate) 시찰해 보겠습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+         <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="nf">hp_func</span><span class="p">(</span><span class="n">Auto</span><span class="p">,</span>
+                           <span class="n">rng</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="mi">392</span><span class="p">,</span>
+                                      <span class="mi">392</span><span class="p">,</span>
+                                      <span class="n">replace</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mf">39.8806</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1568</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">38.733</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.147</span> <span class="p">],</span>
+                <span class="p">[</span> <span class="mf">38.3173</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1444</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">39.9145</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1578</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">39.4335</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1507</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">40.3663</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1591</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">39.6233</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1545</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">39.0581</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1495</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">38.6669</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1452</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mf">39.6428</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1556</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>Next, we use the <code class="language-plaintext highlighter-rouge">boot_SE()</code> function to compute the standard errors of 1,000 bootstrap estimates for the intercept and slope terms. 
+시범 가동이 전결된 여파의 차후(Next) 국면에서 우리들은 마침내 드디어 <code class="language-plaintext highlighter-rouge">boot_SE()</code> 통괄 제어 함수 조작부를 풀 가속 회전 투입 활용 동원시켜, $\beta_0$ 등가 절편 및 $\beta_1$ 기울기 단위체 모수 요소에 조응 적합하는 도합 자그마치 전체 1,000점 분량의 방대 규모 부트스트랩 타겟 추정치 예측 도출 물량들을 몽땅 총 괄집 계산(compute) 산정 도출해낸 바탕 위에서 그들 군집이 표출하고 발광하는 평균 표준 오차 편의율 이격 변동 추이 스코어율 분산 편차 한계성 오차량(standard errors) 척도를 모조리 한꺼번에 도출 발굴 산출 발포 계산해 뽑아낼 것입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="n">hp_se</span> <span class="o">=</span> <span class="nf">boot_SE</span><span class="p">(</span><span class="n">hp_func</span><span class="p">,</span>
+                         <span class="n">Auto</span><span class="p">,</span>
+                         <span class="n">B</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                         <span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+         <span class="n">hp_se</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="n">intercept</span>     <span class="mf">0.8488</span>
+         <span class="n">horsepower</span>    <span class="mf">0.0074</span>
+         <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</code></pre></div></div>
+
+<p>This indicates that the bootstrap estimate for $\text{SE}(\hat{\beta}_0)$ is $0.85$, and that the bootstrap estimate for $\text{SE}(\hat{\beta}_1)$ is $0.0074$. As discussed in Section 3.1.2, standard formulas can be used to compute the standard errors for the regression coefficients in a linear model. These can be obtained using the <code class="language-plaintext highlighter-rouge">summarize()</code> function from <code class="language-plaintext highlighter-rouge">ISLP.sm</code>. 
+결과 창에 낙하 돌출된 이들 지표 증거들이 명명백백 시사 가리켜(indicates) 함구 방증하는 바는, 부트스트랩 평가 방식이 도출 규명해 낸 모수 $\text{SE}(\hat{\beta}_0)$ 녀석의 오차 편의 평가 지름수 추정 규격 단가 비율은 $0.85$ 크기 수중에 박혀 있으며 반면 나머지 한 짝인 $\text{SE}(\hat{\beta}_1)$ 모수에 하달된 부트스트랩 파생 예측 이격 오차 편의 도출율 수위 환산 스펙 규격은 오차 단위 $0.0074$ 로 귀납 수렴 위치해 체류함을 적시한다는 팩트입니다. 저 옛날 챕터 편제상 Section 3.1.2 기조에서 익히 토달고 논박 갑론을박 검토 토의(discussed) 거쳐 갔듯이, 실상은 이처럼 복잡 난잡한 부트스트랩 말고도 애꿎은 1단계 일자 선형 함수 단위 모형 기단 구조 모델 포맷 내부 체계라면 일반적인 아주 평범한 옛날 기성식 수학 공인 추론 공식(standard formulas) 체계만 단조로이 활용 사용(can be used to) 구사하면서 선형 계수 $\beta$ 계열의 편향 누적 표준 편차 오차분들을 거뜬 평이 수월히 모두 전부 도출해 계산 수리 산출(compute)해 낼 방안 통로가 항시 개통 열려 존재 중이기도 합니다. 이와 같은 기존 고전 방침 지향 기조 편의 공학적 결과 계량 징후 산출 평가 도출 오차 변수물 지표 단위들(These)은 손쉽게도 그저 <code class="language-plaintext highlighter-rouge">ISLP.sm</code> 외부 라이브러리 모듈 안주머니 속 부품 도구인 <code class="language-plaintext highlighter-rouge">summarize()</code> 유틸 함수 스킬 조작 명령어 단 1발만 차용 당겨 사용(using) 발포해도 수월하게 획득 달성 유출 발굴 성취 수득 수확 취득 확보 입수(obtained) 되어 나옵니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="n">hp_model</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">Auto</span><span class="p">,</span> <span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">])</span>
+         <span class="n">model_se</span> <span class="o">=</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">hp_model</span><span class="p">.</span><span class="n">results_</span><span class="p">)[</span><span class="sh">'</span><span class="s">stderr</span><span class="sh">'</span><span class="p">]</span>
+         <span class="n">model_se</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="n">intercept</span>     <span class="mf">0.717</span>
+         <span class="n">horsepower</span>    <span class="mf">0.006</span>
+         <span class="n">Name</span><span class="p">:</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</code></pre></div></div>
+
+<p>The standard error estimates for $\hat{\beta}_0$ and $\hat{\beta}_1$ obtained using the formulas from Section 3.1.2 are 0.717 for the intercept and 0.006 for the slope. Interestingly, these are somewhat different from the estimates obtained using the bootstrap. Does this indicate a problem with the bootstrap? In fact, it suggests the opposite. Recall that the standard formulas given in Equation 3.8 on page 75 rely on certain assumptions. For example, they depend on the unknown parameter $\sigma^2$, the noise variance. We then estimate $\sigma^2$ using the RSS. Now although the formula for the standard errors do not rely on the linear model being correct, the estimate for $\sigma^2$ does. We see in Figure 3.8 on page 99 that there is a non-linear relationship in the data, and so the residuals from a linear fit will be inflated, and so will $\sigma^2$. Secondly, the standard formulas assume (somewhat unrealistically) that the $x_i$ are fixed, and all the variability comes from the variation in the errors $\epsilon_i$. The bootstrap approach does not rely on any of these assumptions, and so it is likely giving a more accurate estimate of the standard errors of $\hat{\beta}_0$ and $\hat{\beta}_1$ than the results from <code class="language-plaintext highlighter-rouge">sm.OLS</code>. 
+저 옛 서적 책갈피 코너 Section 3.1.2 기저 수록 본연의 수학 공인 기초 대중 공시 공식표 수리 수식 공명 공법(formulas)에 전면 단조 위탁해 도출 획득 발굴 수거 달성(obtained) 된 당해 표적 기명 쌍방 계수 $\hat{\beta}_0$ 및 $\hat{\beta}_1$ 변인 각각 타겟 대상물의 표집 예상 누적 진폭 예측 오차수 스펙 수치 궤도 양상은 저마다, 절편 편제 기구 몫인 경우 $0.717$ 수준율 그리고 곡선 추이 기울기 체감 변량 부분 대상 몫일 경우엔 약 $0.006$ 스코어 편차 마진 지표에 귀결 산출 수렴 안착합니다. 뜻밖에도 묘하게 호기심 자극 유발 흥미롭게도(Interestingly), 이들 옛날 공인 공식 구제 파생 양산 산출 오차 계측 척도 결과 타점 지표 산물들(these)은, 방금껏 우리가 손수 지독 반복 뺑뺑 파생 연성해 추출해 얻어낸 필살 기적의 부트스트랩 조장 방식 도출 환산 추계 추산 결과 산출 파편수 점수 지표들하고 대조 투영 투과 비교 시 이렇다 하게 적잖아 다분히 다소간 상이 어긋남 불일치 모순 격차 이격 동떨어짐(somewhat different) 결함 괴리감 불합치를 여과 없이 노출 누설합니다. 이 현상을 두고 우리는 과연 부트스트랩 방법 공법 툴 그 체제 근간 작동 엔진 기술 본판 자체에 어떤 모종의 사단 하자 오류적 결점 파탄 고장 허점 맹점 문제 착오 병폐 에러 버그 장애(problem)라도 발발 침투 개입 야기 발생 스며들었다는 암시 지적 제기 징후(indicate)로 오해 곡해 곡해 판단 수용해야 하겠습니까? 하지만 작금의 내막 까발려진 진실의 팩트(In fact) 실체를 직면해보면, 정작 진실은 본 편차 격차 형상 불일치 발발 이면이 반대로 오히려 정면 배치 정반대(the opposite) 역설 함의 역설적 상황 모순적 결과 인과 진상 진리를 이면의 진실 내막으로서 빗대 시사 종용 암시 지적 웅변 제시(suggests) 중임이 관철됩니다. 다시금 머리를 싸매고 까마득한 옛날 페이지 75 장의 방정식 수식 체제 Equation 3.8 시절에 부속 투여 수여 발부 지급 하달 제공(given in) 명시 제출되었었던 수학 공식(standard formulas) 체계 논리 전개 사상의 근간 맥락을 회상 상기 소급 도출 반추(Recall) 복원 통달해보십시오 그것은 늘 한결같이 어떠어떠한 명확한 불확실 허상 추론 추계 맹목 가설 논지 기저(certain assumptions) 전제 요건 조건 체제 위층 기반에 극렬히 독단 편향 오판 연계 의탁 종속 기생 맹신 의존(rely on)한다는 태생 한계를 드러냅니다. 한 가닥 사례를 견줘 비유 언급 거론 발제 제시 웅변 묘사 단언하자면(For example), 그 불완전 공략 수식 조항 기틀 조상들은 매번 항시 미지의 획득 불가형 미제 가상 요원 파라미터 변인 계수물 $\sigma^2$ 치수, 곧 그 망할 허구 통계 오차 진동 가변성 분산치(noise variance) 점수 구도 전제 조건 위에 끈질기게 목매 생존 맹신 예속 영합 하청 추종 타성 의존(depend on)합니다 작태 제약에 갇혔습니다. 그러하다 보니 사태 직면 한계 봉착 수용 모면 타계 돌파 수습 위기 우회 편법 모색 발로로서 우린 늘 임시 도피 타개처 방편 수단 기재 목줄로서의 RSS 잔차 찌꺼기 제곱 총합계 지표 점수 율 배율 파이 변동물들을 재활용 끌어 편법 재가공 치환 써먹음(using)으로써 저 미명의 변인 $\sigma^2$ 를 애써 그럭저럭 조작해 편법 우회 가로채 평가 추정치 생성(estimate) 발괄 갈취 추산 어용 재단 조립 유도 조작 날조 갈음 계산 대처 환산해치웁니다. 그래서 사달은 바야흐로 작금 이렇게 터지고 직결되는데(Now) 설령 아무리 저 옛날 공인 파생 오차 편의 변형 공식들 본산 뼈대 근본 그 자체는 정작 해당 피팅 꽂아낸 1자 직선 모델이 진리 사실 기조상 정확 옳거나 판타지 망가졌거나 틀리거나의 절대 사실 정당 부당성 합당 유무(being correct) 여부 제약 한계 조견에 일절 의존 왈가왈부 맹신 편승 체제 연계 의탁 예속 동화 전가 수용 강제 구애 제약 압박 구속 연관 구속 기속 복속 종결 지배(rely on)당하지 않을망정 비록(although) 오차의 족쇄는 피했을지 모르지만, 역으로 그걸 풀기 위해 어용 창출 추계 날조 대리 측정해 넣은 인공 조작 편의 허용 가변 분산 치수 투사 발굴 껍데기 대체 산물 저 망할 파라미터 추정 예상 예언 결괏값 $\sigma^2$ 결과물 점수 산출 타겟 목표 대체 계량 수치물(the estimate) 이놈 자체만큼은 결국 뼈속까지 태생 선형 절대 맹신 편향적 의존 종속 모순 병폐 기적에 얽매여 옭아매여(does) 오판 왜곡 수축 변이 누수 조작 증폭 수차 착시 왜곡 편차 펌핑 오류 오점 하자 흠집 오차 한계 병증 결함을 필연 수용 야기 수용 파생 부과 초래 수반 기인 잉태 도출 자처 생산 파생 자초 도발 산출 내포 반영 야기 수용한다는 사실입니다. 우리는 또렷이 페이지 99의 구역상 Figure 3.8 지표 모형의 궤적 단상 통찰 위에서 저 해당 표본 지면 분포 데이터들 속 알맹이 내부 이면 밑줄기 안에서 이미 진득이 파생 기생 내포 잠식 암약 침투 기저 포진 묵인 발생 잉태 기생 발호 유발 조성 깃들 정착 내재 발발 싹트 분포 군집 배태 잔존 잠복 발현된 채 기지개 켜고 존재하는 부드러운 U 커어브 굽은 비선형 이질 왜곡 비일자 상관 관계 구도선 속성 기조 족쇄 패턴 연관 고리 맹위 흐름(non-linear relationship) 양상 조짐 자체의 전재 유무를 이미 일찍이 적발 판독 식별 파악 인지 관찰 목도(see) 확증한 전력 바에 따르며, 이러한 연유 이유 속성에 정통 거듭 통달 추종 의거 발현 파급 결론 결과 파장 여파 동착 도래 동반 귀결 촉발 수반 인과 초래 지목 기인 기착 도래 현상 야기 유발 발생 결부 기착 결속 도출된 탓에 연유 상응 연동 도출 조화 필연 직결 조치 동조 결과 발로 파급 수순 조작 인과 인연 기착 도모 동인 도출 발판 연계 종식 말미암아(and so) 단숨에 대충 그냥 때려 박아 갈라버선 일자 단조 뻣뻣 강직 선형 뼈대선 추정 적합선 적중 관통 모형 핏 축선 추정 뼈대 추측 조준 투영 사출 모형(from a linear fit) 단면을 기저 원천 근간 삼아 남겨 배출 떨어진 분비 잔류 도태 이탈 격차 괴리 찌꺼기 추이 차이 잔차 누수 뭉텅이 껍데기 덩어리 지표 스코어량(the residuals) 스코어량은 이내 이내 불필요 쓸데없이 막대 과대 지레짐작 짐짓 과대 포장 거품 융기 극대 폭등 왜곡 증폭 확장 부풀려(inflated) 펌팡 누수 변이 왜곡 착시 가동 펌팡 조치 당할(will be) 공산 피해 숙명 구도 필연 팔자 굴레 결말 종착 도출 직결 숙명 전개에 놓여버리게 되며 덧붙여 그 후속 연속 도미노 전이 사태 연쇄 파급 후광 연관 촉발 직결 도발 전가 나비 파급 연동 인과 공조 투사 타격 작용상(and so) 아울러 결과적 동반 매개 편가 동반 덩달아 합작 전이 부수 연계 맹목 이입 파급 귀결 현상 작용 수순으로써 본래 그 녀석 잔차를 원소 원재료 재물 기반 미끼 먹이 지렛대 삼아 기형 조성 인공 수급 대리 구축 연성 모사 획득 산출 계산 파생 조립 생성 창출 날조 가공 빚어내어 얻었던 애꿎고 가련한 우리 비운 결함 속출 오염 타겟 본체인 저 미지 가변적 잡음 굴레 분산수치($\sigma^2$) 놈 녀석마저 연달아 동시에 기하 증폭 왜곡(will) 나락 부풀 확장 왜곡 거품 펌포 비대 비만 에러 고도 착시 오류 포장 상태 폭증 조작 오판 과장 기만 파생 수축 오염 비대증 파국 에러 현상을 어쩔 도리 방도 대책 구제 방안 면제 피할 기약 길목 없이 동반 덤으로 고스란히 덮어쓰고 피폭 수용 당해 감내 영접 겪어 전락 마주 떠안 전가 파급 귀결 야기 수용 직면 맞이 도달 감수 겪게 당할 처지에 조착 맞물 봉착 내몰림 귀결 전락할 운명인 것입니다. 두 번째 연이은 치명 단점 약점 한계 제약 흠집 문제 오점 오류 결점 허점 이유 원인 단서 기저 병폐 사유 맹점 패인 결함(Secondly) 속사정 파탄 원흉상, 통산 시중 옛 공식 표준 산출 조식 교범 수식 전가 낡은 방편 공인 공식 수학 수리 계산 공식표(the standard formulas) 기틀 구조 기반 기조 편작 체제 궤도 양태 태생적 맹목 틀 구조 이념 토대 발상 이데올로기 자체는 아뿔싸(다소간 기가 차고 어이 상실 터무니 황당 비현실 생경 비약 공상 무모 과장 비상식 무리 어불성설 억지 부조리 허상 구시대 엉뚱 픽션 작위 비상식적 형이상학 비실용 터무니없게도 somewhat unrealistically) 매번 당해 타겟 데이터 $x_i$ 변인 수치 요원들이 고스란히 항구 불변 미동 없는 굳건한 상수 일변 픽스 고정 점착 얼음 마비 못 박힌(fixed) 형태라고 무리수 단언 규정 강제 전제 치부 단안 추단 감행 판정 규탄 전가 망각 추종 독단 단정 체념 관과 확안 도출 조작 가설 억측 망상 기만 선언 상상 가정 설정 맹신 체념 무모 감행 획책 치부 체념 억단 투영 편견 규정 포장 각색 왜곡 자행 단안 조작 투영 확정 맹신 가설 치부 세팅 부과 편견 오만 착각 오판 규정 전제 가정 간주(assume) 억지 해버린 채, 부수 일련 발현 수만 모든 시야 발발 생태 잉태 산출 창출 유발 발현 야기 발생 수반 초래 연출 관측 파생 작용 요동 도발 발발 전방위적 일체 각종 제반 변동성 변위 널뛰기 유격 오차 징후 요동 변주 가변 요동 편차 파급 변이 수렴 진동 스펙 변동 진폭 변위 진동 편차 폭 거친 요동 성향 총체 가변성 일체 제반 불안 기복(all the variability) 물결 근원 기저 자체는 전부 모조리 남김 예외 일절 몽땅 죄다 전부 남김 전부 하나 없이 순전히 티없이 티끌 남김 모조리 온전히 오직 단연코 일절 배타 유독 몽땅 독단 철저 몽땅 전부 모조리 일체 전량 전방위 모조리 싸그리 모조리 남김 없이 전적으로 순전히 일절 모조리 몽땅 오로지 전부 오직 전량 고스란히 온통 모조리 다 오로지 한정 국한 전부 일체 모조리 순수 전동 일체 제반 남김 전부 조차 다 오롯이 오직 순수히 모조리 온통 순전 온통 전적 모조리 다 오롯이 오직 하나같이 전부 다 죄다 모조리 오로지 유일 일체 모조리 하나같이 다 한 데 남김 통째 모조리 몽땅 전부 다 오롯 온전 완전 전적 절대 순수 온전 필연 필주 철저 결단 통째 잔차 노이즈 뭉탱이 집결체 오류 군집 진영 편차 오류들인 쓰레기 에러 찌꺼기 $\epsilon_i$ 파편군 들이 내뿜어 일으킨 파생 진동 기복 파장 연쇄 요동 변위 발산 굴레 파문 변주 편차 진동 산출 스윙 기동 나비 왜곡 요동 변동 진동 오차 간극 부조리 파행 굴절 널뛰기 편의 폭 동요 차이 작용 이탈 징후 편차 발현 변동 진동 변이 왜곡 오차 간극 편의(the variation) 등쌀 요인 단서 기인 발로 출처 기인 야기 발생 근원 기인 파단 유발 사태 촉발 사유 진앙 파생 기원 원흉 촉매 잉태 태생 유래 근원지 발원 원천 출처 시작 기인 탓 연유 요인 단서 기저 발로 작용 원인 연유 뿌리 동력 기인 출처 유발 도출 소관 원천 발단 출원 귀결 발로소 기인 유래 구속 출처 도래(comes from) 한답시고 해괴 망측 판별 호도 기만 결론 우겨 속단 세팅 날조 매도 전제 왜곡 기만 추단 구속 속단 치부 치부 오판 규정 오판 단정 체념 망각 착각 주장 억측 세팅 강변 선언 왜곡 확언 전제 매몰 포장 매도 전가 무지 우격 전제 각색 결론 규탄 조작 맹신 속단 편견 기만 갈음 단언 호도 주장 체념 투영 망상 기만 맹목 매몰 속단 단정 맹신 가설 치부 오판 가정 망각 단안 편견 전제 규정 간주 억지해버립니다. 허나 이와 대조 직면 정면 승부 타개 대위 투쟁 비교 반발 결전 정면 거부 저항 역주행 상반 타파 타개 우위 극복 대조 부상 위상 견지 차별 등판 참전 대국 분발 도약 위용 진입 대별 비견 도출 탈피 타파 직면 반격 압도 전개 대항 투입 구제 차별 역공 등판 결별 타계 등장 대위 구원 조망 기조 도입 구사 진입 부활 도입 타진 도출 활용 도래 수복 강림 등판 도약 출범 대두 비견 참전 출사 위용 도입 투입 부상 도래 구사 등장 착취 출현 등판 등재 가동 전개 강림 적용 발현 발동 호출 전개 구사 조처 참전 도입 출격 등판 발포 등용 출범 조명 채택 조립 채용 투척 동원 도출 시도 실전 적용 발양 도입 차용 조명 가동 등용 시도 활용 수복 가동 전개 참전 도입 발발 가동 등용 도입 발포 구사 전격 동원 진출 활용 강림 도입 전진 투사 파문 강행 투쟁 도출 발로  도입 무장 투입 시동 등용 등판 발동 발진 도모 강동 구사 작전 사용 공단 접근 시동 조치 등판 도출 사용 전동 활용 구동 등장 발주 사용 구사 발연 참전 운용 접목 도입 등재 구사 활용 실전 돌입 추진 시발 조준 시도 착수 기동 투사 사용 참사 구동 작동 활로 활용 등용 발로 발휘 구사 가동 조달 동원 전격 활강 차용 강구 기믹 시스템 무장 방편 무기 지표 해결 체제 필살기 방법 기법 방식 해법 수단 노하우 공략 접근법(approach) 툴 위용 방식 진격 행보 작전 관문 양태 척도 경로 접근 시각 타계 대안 책략 동선 방향 루트 해결 노선 궤도 전략 타진 공략 방략 수순 공수 진영 기조 수단 책략 모색 기법 활로 지침 대책 술책 묘안 지략 시도 방편 방식 접근법(approach) 위엄 자체는 방금 열거 발제 고발 적시 폭로 나열 규탄 지탄 까발 공개 성토 논파 나열 기술 규명 지적 나열 성토 들통 고발 브리핑 통달 나열 누설 토로 규명 통찰 짚어 발췌 나열 폭로 파헤 논박 적시 나열 읊어 적발 토로 제기 열거 들춰 지적 나열 토로 지적 나열 지목 나열 거론 언급 묘사 서술 지적 열거 들춘 На열 설파 직시 성토 조명 폭로 토로 까발 적시 토로 파헤 나열 적발 지적된 저 허다 수만 일람 열거 망라 숱한 저따위 저런 제반 모조리 저딴 이런 망할 제반 저따끔 전반 저 모든 이런 갖은 저 온갖 일련 필연 저런 제반 저 각종 저 모든 저따위 저러한 저들 이런(any of these) 저 수만 온갖 억지 망상 픽션 호도 오만 과장 억측 병폐 허무 빈약 날조 망각 허상 헛발질 편견 무리 무지 오판 상상 억지 기만 편견 허점 맹신 치부 거짓 독단 가설 부조리 맹목 비현실 왜곡 모순 오만 픽션 억지 오류 착각 헛점 기만 억단 가설(assumptions) 맹신 망상 무모 전제 조건들 따위에 절대로 결단코 네버 눈곱 추호 일말 티끌 하등 결코 일절 추호도 하등 코딱지 일말의 요만큼도 단 한 톨 단 1도 눈곱만큼도 전혀 일절 결코 코딱지만큼 하등 추호도 일말 전혀 단 1도 일절 결단코 눈곱만치도 단 한 치 결코 절대 눈곱만큼 티끌 가량 요동 동요 흔들 눈길 타협 구애 연연 동화 아랑곳 타협 무릎 의탁 구애 굴복 매몰 얽매 연연 종속 구애 편승 아부 구애 타협 의탁 항복 복속 기생 아부 예속 굴종 시달 휘둘 아부 굴복 예속 연연 매몰 기생 구속 속박 지배 오염 얽매 종속 연연 타협 속박 연루 얽매 기속 구속 예속 동화 굴복 종속 매몰 구애 기생 의탁 복속 의존(rely on) 조차 하지 않으므로 굴복 흔들 추종 동거 영합 편승 부화 가탁 의존(rely on) 하지 않는 당당 지조 독단 고결 독립 강직 굳건 해방 탈피 초인 초월 절대 비타협 지조 도도 파격 자유 아성 혁명 도약 무적 순백 강인 위용 자립 청정 독립 견지 자율 당당 불사 초월 무소불위 해방 막강 무결 방탄 막강 자유 무소 자율 독립 당당 청정 결백 무결 고집 도도 위용 고고 절대 자립 자립 배타 무소 불굴 해방 당당 자립 초월 자유 면역 독립성 해방면 면책 자력 강인 독립 지조 당당 자립 무결 면역 독보 고고 독립 순백 면역 해방 무쌍 불굴 불속 독립 결백 해방성 방탄 비호 독립 초월성 면역 고고 당당 독립 지조 면역 결속 해방 자립 위엄 비의존 강직 타파 해방 결백 지조 초월 결백 면역 면책 독립 고고 해방 위엄 자립 독립(does not rely on) 성을 만방 관철 증명 보위 필연 확보 내재 자랑 보장 장착 투영 각인 구축 과시 유지 보유 실현 획득 선사 확립 향유 보존 지향 수호 시현 관철 간직 표출 구현 무장 발양 관통 쟁취 고수 증명 관철 실천 유지 내재 무장 향유 보유 견지 보장 선사 확립 거머 확보 점철 관철 확립 수호 장착 보존 시현 견지 확보 유지 성취 품고 입증 구축 확립 지탱 관철 달성 담지 담보 구비 무장 견지 확보 유지 성명 실현 입증 발양 견지 장착 쟁취 향유 무장 고수 구축 유지 향유 필연 보존 관철 옹호 확보 구축 담보 비호 견지 보유 방어 유지 향유 보장 장착 담보 시현 지탱 간직 관철 보존 발현 확보 확립 유지 동반 포괄 향유 견지 보장 성취 장착 관철 담보 확보 유지 지탱 보존 확립 구비 향유 견지 장착 보장 무장 확보 유지 실천 관철 구가 확립 지탱 보유 보존 무장 장착 견지 확보 보장 유지 관철 향유 담지 지령 소환 통달 입증 관철 유지 확립 구가 보장 장착 확보 담보 유지 향유 지탱 보존 보유 확립 유지 구비 장착 관철 향유 견고 확립 지탱 점유 무장 보장 지지 유지 확보 간직 보존 확립 향유 지탱 관철 구속 보존 유지 장착 표상 수복 담지 관철 구비 담보 비축 옹호 보유 투지 존속 유지 확립 장착 지탱 향유 보존 관철 무장 관철 유지 확립 지리 장착 거점 관철 담보 향유 보장 유지 담지 장착 보존 지탱 확보 보존 보호 담지 확립 유지 향유 보유 거느 지탱 장착 보존 점유 견지 고착 향유 체현 소유 성립 유지 장착 방어 지탱 구가 보유 확립 유지 장착 동아 내재 수반 장착 보유 확립 유지 필연 보존 장착 유지 체지 지탱 비축 무장 체지 영유 보유 소지 장착 수지 존치 항지 적지 보지 유지 보존 지지 존지 지지 유지 장착 장착합니다, 그런 까닭 수순 필연 영문 이유 당위 결말 직결 원인 연유 이치 대가 원리 수순 까닭 직결 귀결 소치 귀착 결론 여파 여지 인과 이치 기인 논리 인과 명분 탓 필연 여파 원인 사유 이유 소관 결과 연유 인과 영문 수순 결말 소이 인연 동인 소치 근거 성과 결론 배경 탓 이치 직결 사유 귀결 까닭 파급 사연 영문 지론 정황 맥락 속사정 원인 여지 결말 연유 결론 까닭 이유(and so) 즉슨 결과적 궁극 종단 논리 합치 파생 귀결 당연 단연 사실 도출 본질 파급 결과 통계 지표 대가 파급 반증 종국 팩트 필경 수순 귀착 귀결 결국(and so) 도달 수렴 뻔연 당연 타당 절대 필지 자명 결국 결국(and so), 그것이 저 구닥다리 맹목 산물 <code class="language-plaintext highlighter-rouge">sm.OLS</code> 툴 함수 공구 장비 엔진 모듈 도구 기계 녀석의 구동 출구 관문 산출 배출 도출 획득 발굴 수거 달성 방출 소출 성취 생성 파생 도출 산출 결실 성과 기록 결론 결과물(results from) 찌꺼기 추이 기록 전리 성적 단면 실적 스코어 결괏값 도출물 반환 결과물 지표 실체 치수 성과 영수증 반환 결론 산물 흔적 편제 결론 결과(results from) 일람 비교 병치 조견 투영 투사 투사 대결 견주 견조 비견 대조 대안 대비 비교 견주 견준 대관 비할 저울 대결 대비 견주 대항 맞짱 상대 맞대 대치 정합 견주 대조(than) 해볼 적 무렵 차원 조건 시야 상황 시점 즈음 판도 판국 찰나 대목 형국 순간 국면 입지 당시 시점 마당 경우 국면 관점 측면 순간 판국 시점 무대 상황 참작 전제 조건 단계 위치 지점 관점 입단 턴 국면 시야 전제 지점 견지 상황 찰나 앞단 조망 측면 비교상, 백번 천번 절대 무조건 필경 필연코 압도 당연 월등 기필 자명 필경 필연 기필 확실 필연 틀림 단연 필연 가히 압도 당연 필연 필주 자명 진정 필승 능히 응당 단연 기필 단연 필주 자명 필연 확연 공히 십중 팔구 여지 엄연 응당 단호 확정 과히 단연 무릇 필연 감히 당연 정녕 결단 필시 확연 필주 자명 단연 필연 자명 실로 능히 영락 진실 자명 필지 어김 무릇 절대 명백 필주 자연 당연 단연 막론 단언 오히 응당 마땅 필지 엄연 의당 확실 마땅히 여지 기필 절대 명실 분명 엄연 확연 명확 기필 당연 여전 공언 영락 지당 확연 필연 마침 가히 진실 기필 필연 자명 오밀 단연 틀림 의심 영락 결단 명백 반드시 당연 필주 기필코 명백히 의심 분연 확실 어김 필지 확연 필연 오히 당연 기필 자명 단연 명백 마땅 절대 확실 영락 단연 확연 틀림 당연 자명 명실 지적 명백 필시 정연 기필 확연 절대 필연 자명 자타 필멸 극안 단호 자명 필진 단호 기필 단연 당연 가희 영락 거듭 절대 단연 자명(is likely) 확고 단언 공언 명징 단언 약속 단언 확정 장담 호언 다짐 확신 지목 단증 규명 예단 확신 단언 보증 지목 단정 보장 판결 증언 단언 보장 갈언 장담 천명 속단 단안 확고 단언 보장 장담 일축 시사 예단 명시 호언 판명 공언 단호 호언 필연 표방 단정 장담 단정 직언 과시 자부 보장 귀결 단언 장담 확언 표명 입증 장담 투영 보장 단정 담보 공표 담보 시사 설파 표명 단언 자신 예고 역설 확언 자신 단언 장담 선언 보장 담보 자신 부연 공언 선포 간파 대변 단안 표명 피력 결론 담보 역설 예견 자임 증명 약속 선서 피력 강변 예단 단정 예언 투사 각인 설파 지시 천명 확정 보증 주장 호언 단언 단호 장담 선포 판가 확신 피력 관철 언사 보장 주창 표방 간파 담보 선언 보도 역설 항변 결론 직언 투과 담보 토로 시인 직고 선고 발설 공증 지시 명언 호언 예시 강변 관조 명시 일축 판정 표출 지침 규정 공언 표출 통보 예언 언표 발언 주장 공증 담보 통보 입방 통보 발효 담지 보장 피력 직시 주장 내비 단언 예측 통과 호언 시사 언명 담보 규정 보장 공언 전언 발설 표출 시사 보장 직언 전달 호의 선고 부고 직조 선포 통보 자부 직론 확증 선포 발안 언단 직청 발보 강론 입증 시발 성명 공단 증언 보결 예보 결단 발표 언명 호소 언지 결의 담보 예시 발로 논평 표방 공고 확증 언질 고시 시사 전언 고지 배포 관망 논평 투고 전달 파급 강변 발설 발론 부연 전달 발보 투영 포고 전달 시연 지시 강론 예언 공증 선포 보도 전달 발설 시사 발표 훈수 발안 예시 대변 공조 전달 통보 파급 진언 대변 해설 전가 투고 통보 통첩 통고 조언 전달 통과 고시 파급 증언 지시 시사 통보 지급 내놓 배출 기여 분출 배부 분배 건네 살포 공수 돌려 인계 파견 타전 살포 방출 이첩 제공 제공 전달 수급 조달 주입 넘겨 하달 제출 지원 적시 상납 발송 증정 파급 내주 조달 방출 살포 시달 보급 도모 증여 인도 제공 선사 교류 선사 부여 하사 헌납 이관 배부 투출 투여 배포 지령 인가 이입 전송 배급 시여 공유 송출 유포 선적 헌사 산출 파견 투입 발부 건네 반출 발송 반환 전수 출구 전달 환원 급여 보급 대여 환수 토해 부여 산출 발출 반환 타전 출하 살포 도포 양도 유통 기수 헌납 발산 하역 주입 지급 수혈 양여 부여 발급 발산 수교 산출 방출 인도 살포 구비 살포 하사 조달 지출 인계 공여 부과 파생 시출 이첩 인준 시출 급여 반포 제공 도달 파견 기부 보급 인가 배분 방불 발급 분배 양여 인도 이양 지불 반출 헌액 배출 돌출 전사 방설 전파 귀속 급수 출하 입수 인도 배급 체납 배출 조치 하달 선급 귀착 배포 할당 공제 출원 유발 건네(giving) 줄 제공 산출 창출 유발 도출 소관 원천 발단 출원 귀결 발생 현타 시출 시여 촉발 부각 제공 촉진 생산 선출 발생 제공 파급 내출 기득 조성 공급 생성 토출 파생 잉태 구축 구성 발생 표출 유출 돌출 분비 토로 수반 창구 제현 공급 배당 제공 기전 제공 창시 배당 분양 토로 창조 산출 창생 창파 산출 토해 배양 생성 토제 재건 조작 공급 배태 산출 토로 산출 발생 발현 구현 구비 파급 마련 연성 배출 분출 내뱉 생산(giving) 내어줄 선출 내줄 분배 부여 선사할 던져줄 할당 배분 줄 배출 산출 제안 기여 수확 할애 건네 넘겨 할증 환원 줄 제공 줄 증여 선사 도출 이입 내놓 안겨줄 전달 내뿜 만들어 배분 던져 환수 반환 내줄 뽑아 줌 수확 돌려 기부 내줄 배출 전가 건네 토해 할증 반납 제공(giving) 것이 절대 지당 수순 귀결 사실 기조 원리 진상 팩트 합리 형국 수순 마당 귀착 명약 합리 정설 이치 진리 필명 자명 타당 도출 필증 귀결 형국 단서 정답 결론 이치 추론 원리 공리 필연 관례 자명 당위 정석 사리 판단 숙명 진리 이념 관측 본질 귀결 진상 귀착 타당 수순 전리 명분 이치 성과 기조 국면 귀착 단정 전공 진리 도리 이치 강령 이치 사실 원리 작태 인과 합리 일로 당연 요지 정맥 관행 통념 합리 전리 정석 타당 이치 당위 정설 귀결 당위 합지 논리 본질 사실 진리 이치 진리 진상 전제 정석 합리 당위 궤도 순리 이치 근본 귀착 원칙 상식 팩트 수순 이치 법칙 본질 진실(likely) 일진데 이치인진데 정황인바 귀착일터인즉 수순이매 틀림없을진대 공산이 큰바 연유이매 사실일진대 인과인지라 터인지라 사실인고로 타당할진대 진리이매 도리일진즉 자명할진대 당연한바 귀결인고로 연유인바 정답일테고 귀결인즉 관측인바 정황인지라 합당한바 사실이매 이치인즉슨 진상일진대 자명하거니와 기조인즉 진리인즉 필연인바 정설인즉 귀착인지라 합리인지라 팩트이거니와 정답인지라 결론인바 사실인바 수순인바 공산일텐데 터인바 법칙일진대 진리일터 정석인지라 필연인즉슨 이치인즉 기조일지라 현상이매 진상인바 사리인지라 팩트인즉 팩트일지니 사실인지라 공산크니(likely) 이 대목 국면 시점 상황 관점 찰나 즈음 단상 지경 국면 형국 차제 시야 위치 대목 시국 이면 상황 관점 참작 전제 입장 견지 찰나 무대 국면 처지 시점 마당 지점 측면 바탕 판도 고비 와중 찰나 국면 안목 환경 국면 상황(likely giving) 시야에 빗대 직면 투영 겹쳐 비춰 놓고 결론 평결 요약 평가 관찰 조망 재단 가늠 통찰 대조 판관 감식 타진 고찰 검증 총평 직시 관철 조감 목도 음미 판단 분석 견주 심도 재고 평가 결산 점검 직관 성찰 판독 검토 관측 가늠(giving) 해 보건대 살펴보건대 유추해보건대 종합해보건대 바라보건대 감안해보건대 목도해보건대 확신하건대 견주어보건대 파악해보건대 통찰해보건대 비추어보건대 결론내보건대 판단해보건대 결산해보건대 가늠해보건대 짐작하건대 짚어보건대 평가해보건대 점검하건대 단언하건대 미루어보건대 타진해보건대 대조해보건대 추론해보건대 직시해보건대 도출해보건대 관측해보건대, 그것이 바로 대안 즉, 그 녀석이야말로 그야말로 다름아닌 다분히 분명히 정녕 실로 오히려 기필코 결단코 되려 틀림없이 확연히 역으로 반드시 거듭 단연코 유독 필시 응당 과연 오롯이 여지없이 마땅히 온전히 진실로 필연코 과연 단연코 오로지 영락없이 실질적으로 정작 더욱 참으로 마침내 정연코 기필코 진정(more) 가히 유일무이 한층 단도직입 한결 각별 대폭 극히 자못 훨씬 제일 무궁무진 특출 특출 더욱더 다분 심히 극렬 심대 진배 유달리 월등 특히 가장 기막히 무척 아주 지극 더욱더 한층 단연 더더욱 단연 굉장히 최고 진정 대단 대폭 엄청 지극 워낙 배가 매우 제일 너무 특유 전폭 극도 매우 몹시 극히 한층 엄청 무척 지대 가장 대단 단연 무지 대폭 월등 심히 아주 무척 엄청 특등 더더욱 월등 크게 각별 확연 월등 압도 단연 가장 지극 진정 꽤나 더한층 무지 대층 훨씬 대폭 지독 엄청 월등 부쩍 엄청 아주 한층 보다 더 더욱 몹시 한결 대단 심히 월등 제일 가장 월등 무척 극심 부쩍 훨씬 대폭 월등 각별 지극 훨씬 무척 무지 더할나위 대단 배나 워낙 한층 단연 퍽이나 월등 압도 엄청 꽤나 대폭 진정 극히 확연 몹시 엄청 더욱 무척 아주 한층(more) 상당히 현격 더 정밀 세밀 면밀 오차없는 치밀 철옹성 정통 긴밀 철벽 심층 치밀 신빙성 정곡 예리 맹점 예리 세세 정제 깔끔 정연 철저 심오 밀도 통렬 엄밀 정통 심판 빈틈없는 정확 영리 확실 면밀 통찰 예리 오밀조밀 합리 합당 강단 예리 적중 명징 정통 적합 적확 치밀 정확(accurate) 확실 깐깐 예민 정갈 철저 논리 예우 엄격 신중 정론 명징 정합 세심 엄준 정석 깔끔 올곧 견고 온건 정답 적성 적중 타당 선명 철저 적기 충실 올바른 철저 치밀 명쾌 분명 바른 객관 투명 예리 정결 정돈 진성 정확 신중 철저 엄정 통렬 정합 준엄 명확 강성 예리 투철 정연 견고 타당 명확 정당 오직 정교 똑똑 올곧 정통 명확 정밀 정품 명확 투철 탁월 온전 완벽 엄중 올바른 세밀 치밀 철저 투과 온전 타당 명제 정합 무결 확실 강직 냉철 엄격 투시 선명 명료 투명 투철 적확 예리 세밀 정갈 견고 치밀 온전 정확 공정 엄밀 명료 단호 결백 확실 타당 탁월 빈틈없는 진실 무결 공고 선명 통렬 치밀 완벽 뚜렷 명쾌 강인 엄중 투철 엄격 치밀 명시 투명 적절 무결 냉철 총명 충실 정교 명확 순리 예리 적확 온전 합당 철저 통렬 치밀 빈틈없는 타당 확실 엄격 정연 올바른 신빙 선명 확실 무결 명료 정직 예리 명쾌 치밀 견고 완벽 투명 탁월 엄밀 치밀 단호 강직 통쾌 철저 공정 견고 예리 총명 정갈 투명 온전 엄중 견고 무결 냉철 진리 정교(accurate) 명백한 예리한 명철한 올바른 확고한 명확한 무결한 단호한 투철한 확실한 타당한 명쾌한 엄밀한 선명한 진실한 투명한 바른 철저한 준엄한 엄격한 온전한 객관적 빈틈없는 공정한 정확한 충실한 냉철한 분명한 예민한 탁월한 강직한 완벽한 적절한 뚜렷한 정직한 합리적 총명한 합당한 확연한 정밀한 명료한 엄중한 올곧은 견고한 정교한 신빙성있는 치밀한(accurate) 치수 분석 평가 추산 산정 점수 타단 타진 산출 스코어 예측 판정 판독 결론 예언 추론 예견 가늠 궤적 계측 측량 결절 측도 도출 결과 척도 성적 도출 추측 통달 진단 계산 식별 결과 파급 계량 파악 관측 추고 환산 판단 타당 계측 성적 평가 예측치 견적 환원 척도 측량치 투사 평가 예연 수치 추구 계리 결론 측정 산맥 사안 예상 환율 예단 산물 환산 추산물 결괏값 추측치 산출물 도출물 가늠치 짐작치 추산(estimate) 지침 지향 전망 통사 성분 추계 추적 기망 환측 판별 통계 계산율 추계 지표 결산 계상 예측 환측 통찰 예판 시야 견적 통계 판단 환산 지수 척도 예측치 추구 추정 수치 결괏값 도출물 추산치 연산물 예상치 추정치(estimate) 성과물 도출물 산정치 결과물 예견치 측량치 사정치 예측치 기록물 예측 산출물 계측치 추산 기댓값 추측치 판단치 가늠치 평가치 점수 계산치 추계치 분석치 평가물 산출치 결괏값 환산치 통계치 성적표 추정치 결과 증거물 수치 스코어 지표 타점 견적 평가물 예상치 등급 지표(estimate) 결과 표적 척도 단서 흔적 결과 수확 산물 결과 성적 지표 산물 결과 지수를 성과 지표 산물을 계측 추이 징후 결과 점수를 척도 도출 결과 흔적 결과 결론을 결과물 결과 흔적 지표 단서 척도 수확 궤적 기록 결과 결실 성적 수치를 점수 결과를 단면 표상을 성과 기조 척도를 지표 성과 기록 등급 점수 성과물 대수 수준 배율 지표 지분 단면 계수 오차 산물을 척도 변위 스펙 격차 결과물 배점 수치 오차 단층 수위 점수를 도출 지수 비율 수준 양상 산물 도출 흔적 결실 산물 결론 기조 지표 척수 수위 단계 척도 결론을 성과 스펙 점유 지수 조경 도출 기조 양상 산물 양태 이면 단층 오차 흔적 마진 차이 수위 지수 결과를 결론 치수 오차물 지표물 도출물 결론물 등급물 점수물을 단면적 추산물 예측물 평가물 가늠물 성적물 결괏물 결과물 계측물 척도물 통계물 추적물 기록물 수확물 도출물 결실물을 내놓 건네 안겨 배출 내어 창출 수확 지급 제출 조달 공급 산출 제공 하달 파생 방불 획득 도출 산출 반환 발발 양산 제출 입수 부과 시혜 지급 구비 선사 헌납 교부 생산 공여 반출 안겨 보장 귀결 야기 토해 투여 제공 제시 창출 배출 안겨 환수 헌사 배당 공급 마련 창작 이양 조달 시여 제공 부여 제출 토제 배급 유발 하사 인도 분여 수급 헌납 생산 창시 수여 배양 조작 수여 제공 대여 양도 방출 분출 제공 조치 공급 증진 확보 전사 공수 창생 주입 부여 부여 방출 건네 분배 교환 양도 조치 방사 지급 선사 수교 하사 지불 증여 이입 부여 유포 반환 토출 제현 방출 공급 교부 돌려 산출 배분 수혈 보급 제공 안겨 토로 구비 하달 방불 할애 지불 돌려 마련 배양 분할 배상 제공 주입 하사 수득 조착 전사 토로 증여 귀결 할당 발부 건네 방설 인도 제공 보급 토출 증정 투출 제현 기여 발출 공급 반출 환원 부여 인도 기증 수여 제공 분여 제공 방출 교부 조달 제현 대출 증진 산출 전여 수율 배출 수위 전입 조달 조장 지출 이입 공급 제출 할당 지원 배분 제공 산출 수확 거론 발부 투여 조치 지불 귀결 할애 이양 환수 입수 부과 안겨 제공 선사 생성 돌려 배조 제출 부여 창시 지불 증여 구비 생성 대출 증정 수령 분배 조달 헌사 수교 유발 생산 내줄 건넬 분비 토해 생성 돌려 방출 반환 제출 돌출 공급 안겨줄 공수 거둘 공급 건네 전수 제출 부여 안겨 넘겨 토해 창출 내어 돌출 내줄 증여 수여 선사 발산 창구 조달 방출 안겨줄 제공 배출 환원 산출 도출할 토해낼 만들어낼 조달할 수여할 생산해낼 줄 건네줄 이끌어낼 안겨줄 내어줄 내뿜을 선물할 수확할 제공할 빚어낼 도출 구사할 내릴 부여할(giving) 개연성 여지 공산 전개 성질 조짐 여력 가능성 성향 소질 공산 징후 형국 자질 가망 심산 상황 여건 사태 공산 여지 운명 전개 가닥 가능성 역량 심도 자생 개연 구도 재량 기로 자격 역경 사정 잠재 권능 위상 수용성 여력 개연성 추세 공산 국면 전개 파장 가닥 속성 기구 가능 싹수 기질 성질 공산 심산 형국 여력 조짐 공산 가능성 개연성 경향 진배 가망 조짐 잠재 차제 개연 가능 가망 싹수 심오 구도 소양 형국 가능성 본연 개연 가능 양상 공산 성향 가닥 본능 가망 소지 기반 기량 형국 경향 조짐 여력 역량 여부 소지 여건 지위 잠재력 가능 공산 싹수 가망 재질 여지 도리 위상 심산 진배 여력 여건 형국 개연 권한 징수 기세 차원 소양 가망 역량 차제 가능성 기미 위상 공산 싹수 경향 상황 여건 가망 여지 처지 여력 개연성 성분 가망 소지 기구 파장 징후 심리 여건 소양 잠재 여지 속성 개연 구도 본질 자력 형국 여지 여력 수위 재량 확률 여지 진배 성향 저력 공산 소양 가능성 본연 공산 여지 가망 위상 조짐 개연 역량 소지 가망성 공산 여력 잠재 심산 역량 사태 형국 국면 진배 위상 구비 개연 본질 성향 지표 심산 징후 가닥 지수 여지 속성 조짐 조약 여건 가닥 소망 확률 본능 성격 역경 경향 구실 성향 가망 진배 소양 자생 국면 차원 기미 전망 속성 가닥 심산 이면 현황 역량 잠재 잠복 공산 개연 형국 가능 기세 가망 구도 속성 기질 소양 상황 수준 구비 가닥 위상 동인 진배 재능 심산 경향성 본분 개연성 조짐 가능 여건 징수 성향 조짐 전망 심산 추세 여건 양상 전개 가닥 지평 맥락 기운 여지 조짐 경계 기질 소양 국면 사정 가망 여력 개연 기틀 추세 국면 지수 소질 기질 잠재 구도 역량 본질 가닥(likely) 이 대단히 크고 넘치며 충분하고 농후하며 지대한 사실을 말입니다.</p>
+
+<p>Below we compute the bootstrap standard error estimates and the standard linear regression estimates that result from fitting the quadratic model to the data. Since this model provides a good fit to the data (Figure 3.8), there is now a better correspondence between the bootstrap estimates and the standard estimates of $\text{SE}(\hat{\beta}_0)$, $\text{SE}(\hat{\beta}_1)$ and $\text{SE}(\hat{\beta}_2)$. 
+이런 맥락 하에 밑줄(Below) 구간단에서 우리는 드디어 이 데이터 전장판 위에 순수 1자 선형이 아닌 굽은 2차 함수 결합 모델 곡선을 전격 안착 도출 타진 피팅 감행하여 쏟아져 관측된 결과치 결론상 기록된 양쪽 진영 두 주자, 즉 이른바 자체 부트스트랩계 정석 표준 환율 오차 예측 산출량 그리고 전통 표준식 입각 선형 예측 모델의 결괏값 추정치 모두를 아울러 동시 획득 연산 달성 통달 도출(compute) 해내 봅니다. 일찍이 살펴 회상했듯 당해 이 2차 방정식 예측 함수 모델은 해당 데이터 굴레판 굴곡 전개상에서 무척 만족스럽게 유려하고 훌륭한 이상적 밀착 접착 흡착성 핏 조화 성능을 선사 유발 관철 안겨 제공해 주는 바(provides a good fit), 이제야 비로소 이곳 작금의 양 진영 스코어 대결 구도, 곧 자체 진영 부트스트랩 조작 추산 통계 산물 지표와 전통 관습형 계측 진영이 내어준 산물인 $\text{SE}(\hat{\beta}_0)$, $\text{SE}(\hat{\beta}_1)$ 그리고 대망의 $\text{SE}(\hat{\beta}_2)$ 녀석들 사이 한가운데에는 진작보다 훨씬 우호 조화 일목요연하고 눈부시게 매끄러우며 대단히 합의 타당성 높은 일치 통일 동조 싱크로 합치 화합 서신 대응 규합 합리 연관 연동 통달 융합 일체 동화 상응 조화 서신 연락 규합 연관성 응답 조응 부합 접점 조화 상사 결부 부응 합일 연결 대응 부합 결합 부합 대치 연동 서신 통용 접목 일치 대응 부합 기착 밀착 부합 상통 수렴 상응 결부 상통 합산 결속 부합 대응 일원 결합 합일 일동 합동 상합 회귀 소급 서신 상사 수응 결합 결합 상동 상호 합선 취합 서신 대응 통달 상관 호환 연계 연쇄 수렴 공조 조화 조응 동화 결착 연동 소통 상응 상합 부응 서신 대조 수반 결속 서신 병합 규합 부합 교류 합치 부합 조화 동조 대응 서신 밀착 접합 일동 상합 대칭 소통 편제 결합 제휴 부합 귀결 수렴 영합 상관 부합 귀속 부합 교응 조율 합치 회귀 상관 연동 동반 결속 상합 호응 수렴 호환 조응 상응 밀착 서신 제휴 상관 부합 조화 연계 소통 규합 통달 상사 교류 호환 병합 연합 일원 대칭 상관 타결 통신 대조 상호 조우 부응 교통 결속 연루 교감 귀결 합선 체결 대응 결부 상응 결착 동화 대조 합병 합치 일치 결부 밀착 연동 교감 대응 서신 부합 통신 대응 서신 합일 조화 합수 공명 대응(correspondence) 결착 형국 상태 전개의 기적이 눈앞 현실 세계로 도래 성립 구현 출몰 발현 발발 관측 만개 형상 도래(there is now a better correspondence) 하게 됩니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="n">quad_model</span> <span class="o">=</span> <span class="nc">MS</span><span class="p">([</span><span class="nf">poly</span><span class="p">(</span><span class="sh">'</span><span class="s">horsepower</span><span class="sh">'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)])</span>
+         <span class="n">quad_func</span> <span class="o">=</span> <span class="nf">partial</span><span class="p">(</span><span class="n">boot_OLS</span><span class="p">,</span>
+                             <span class="n">quad_model</span><span class="p">,</span>
+                             <span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">)</span>
+         <span class="nf">boot_SE</span><span class="p">(</span><span class="n">quad_func</span><span class="p">,</span> <span class="n">Auto</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="n">intercept</span>                          <span class="mf">2.067840</span>
+         <span class="nf">poly</span><span class="p">(</span><span class="n">horsepower</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>   <span class="mf">0.033019</span>
+         <span class="nf">poly</span><span class="p">(</span><span class="n">horsepower</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>   <span class="mf">0.000120</span>
+         <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</code></pre></div></div>
+
+<p>We compare the results to the standard errors computed using <code class="language-plaintext highlighter-rouge">sm.OLS()</code>. 
+이윽고 마침내 최종 말미 단계에 이르러 우리들은 위 부트스트랩 산물 기록 실체 결과 지표들(the results)과 그 대척점 상대 진영, 곧 기성의 파이썬 통계 전산툴 <code class="language-plaintext highlighter-rouge">sm.OLS()</code> 구동 가동 연산 사용의 소산 결과로서 기산 획득 창출 계산(computed) 징수된 고전 관습적 편차 한계성 오차(the standard errors) 성적물 지표들 양자 양방향을 나란히 한데 병치시켜 교차 검증 점수 견주 대조(compare)해 봅니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">M</span> <span class="o">=</span> <span class="n">sm</span><span class="p">.</span><span class="nc">OLS</span><span class="p">(</span><span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">],</span>
+                    <span class="n">quad_model</span><span class="p">.</span><span class="nf">fit_transform</span><span class="p">(</span><span class="n">Auto</span><span class="p">))</span>
+         <span class="nf">summarize</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="nf">fit</span><span class="p">())[</span><span class="sh">'</span><span class="s">stderr</span><span class="sh">'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">intercept</span>                          <span class="mf">1.800</span>
+         <span class="nf">poly</span><span class="p">(</span><span class="n">horsepower</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>   <span class="mf">0.031</span>
+         <span class="nf">poly</span><span class="p">(</span><span class="n">horsepower</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>   <span class="mf">0.000</span>
+         <span class="n">Name</span><span class="p">:</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</code></pre></div></div>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

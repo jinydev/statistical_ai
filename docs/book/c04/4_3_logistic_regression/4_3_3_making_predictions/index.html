@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,93 +502,46 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="433-making-predictions"><em>4.3.3 Making Predictions</em></h1>
-
-<p>Once the coefficients have been estimated, we can compute the probability of <code class="language-plaintext highlighter-rouge">default</code> for any given credit card balance. For example, using the coefficient estimates given in Table 4.1, we predict that the default probability</p>
-
-<ol>
-  <li>Classification</li>
-</ol>
-
-<p>142</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>4. Classifcation</th>
-      <th>4. Classifcation</th>
-    </tr>
-  </thead>
+            <table>
   <tbody>
     <tr>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>Coefcient<br />Std. error<br /><em>z</em>-statistic<br /><em>p</em>-value</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Intercept</code><br /><code class="language-plaintext highlighter-rouge">balance</code></td>
-      <td><em>−_10.6513<br />0.3612<br /></em>−<em>29.5<br /></em>&lt;<em>0.0001<br />0.0055<br />0.0002<br />24.9<br /></em>&lt;_0.0001</td>
+      <td><a href="../4_3_2_estimating_the_regression_coefficients/index.html">&lt; 4.3.2 Estimating The Regression Coefficients</a></td>
+      <td><a href="../4_3_4_multiple_logistic_regression/index.html">4.3.4 Multiple Logistic Regression &gt;</a></td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>TABLE 4.1.</strong> <em>For the</em> <code class="language-plaintext highlighter-rouge">Default</code> <em>data, estimated coefficients of the logistic regression model that predicts the probability of</em> <code class="language-plaintext highlighter-rouge">default</code> <em>using</em> <code class="language-plaintext highlighter-rouge">balance</code> <em>. A one-unit increase in</em> <code class="language-plaintext highlighter-rouge">balance</code> <em>is associated with an increase in the log odds of</em> <code class="language-plaintext highlighter-rouge">default</code> <em>by</em> 0 <em>.</em> 0055 <em>units.</em></p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<table>
-  <thead>
-    <tr>
-      <th><em>ase in</em> <code class="language-plaintext highlighter-rouge">balance</code> <em>is</em><br />5 <em>units.</em></th>
-      <th><em>associated wi</em></th>
-      <th><em>th an increase</em></th>
-      <th><em>in the log od</em></th>
-      <th><em>ds of</em> <code class="language-plaintext highlighter-rouge">defau</code></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td> </td>
-      <td>Coefcient</td>
-      <td>Std. error</td>
-      <td><em>z</em>-statistic</td>
-      <td><em>p</em>-value</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Intercept</code></td>
-      <td>_−_3.5041</td>
-      <td>0.0707</td>
-      <td>_−_49.55</td>
-      <td>_&lt;_0.0001</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">student[Yes]</code></td>
-      <td>0.4049</td>
-      <td>0.1150</td>
-      <td>3.52</td>
-      <td>0.0004</td>
-    </tr>
-  </tbody>
-</table>
+<h1 id="433-making-predictions">4.3.3 Making Predictions</h1>
 
-<p><strong>TABLE 4.2.</strong> <em>For the</em> <code class="language-plaintext highlighter-rouge">Default</code> <em>data, estimated coefficients of the logistic regression model that predicts the probability of</em> <code class="language-plaintext highlighter-rouge">default</code> <em>using student status. Student status is encoded as a dummy variable, with a value of</em> 1 <em>for a student and a value of</em> 0 <em>for a non-student, and represented by the variable</em> <code class="language-plaintext highlighter-rouge">student[Yes]</code> <em>in the table.</em></p>
+<p>Once the coefficients have been estimated, we can compute the probability of <code class="language-plaintext highlighter-rouge">default</code> for any given credit card balance. For example, using the coefficient estimates given in Table 4.1, we predict that the default probability for an individual with a <code class="language-plaintext highlighter-rouge">balance</code> of $1,000 is</p>
 
-<p>for an individual with a <code class="language-plaintext highlighter-rouge">balance</code> of $1,000 is</p>
+\[\hat{p}(X) = \frac{e^{-10.6513 + 0.0055 \times 1000}}{1 + e^{-10.6513 + 0.0055 \times 1000}} = 0.00576\]
 
-\[\hat{p}(X) = 
-rac{e^{-10.6513 + 0.0055 	imes 1000}}{1 + e^{-10.6513 + 0.0055 	imes 1000}} = 0.00576\]
+<p>which is below 1%. In contrast, the predicted probability of default for an individual with a <code class="language-plaintext highlighter-rouge">balance</code> of $2,000 is much higher, and equals 0.586 or 58.6%.</p>
 
-<p>which is below 1 %. In contrast, the predicted probability of default for an individual with a balance of $2 <em>,</em> 000 is much higher, and equals 0 <em>.</em> 586 or 58 <em>.</em> 6 %.</p>
+<p>One can use qualitative predictors with the logistic regression model using the dummy variable approach from Section 3.3.1. As an example, the <code class="language-plaintext highlighter-rouge">Default</code> data set contains the qualitative variable <code class="language-plaintext highlighter-rouge">student</code> . To fit a model that uses student status as a predictor variable, we simply create a dummy variable that takes on a value of 1 for students and 0 for non-students. The logistic regression model that results from predicting probability of default from student status can be seen in Table 4.2. The coefficient associated with the dummy variable is positive, and the associated <em>p</em>-value is statistically significant. This indicates that students tend to have higher default probabilities than non-students:</p>
 
-<p>One can use qualitative predictors with the logistic regression model using the dummy variable approach from Section 3.3.1. As an example, the <code class="language-plaintext highlighter-rouge">Default</code> data set contains the qualitative variable <code class="language-plaintext highlighter-rouge">student</code> . To fit a model that uses student status as a predictor variable, we simply create a dummy variable that takes on a value of 1 for students and 0 for non-students. The logistic regression model that results from predicting probability of default from student status can be seen in Table 4.2. The coefficient associated with the dummy variable is positive, and the associated <em>p</em> -value is statistically significant. This indicates that students tend to have higher default probabilities than non-students:</p>
-
-\[egin{align*}
-\hat{	ext{Pr}}(	ext{default} = 	ext{Yes} \mid 	ext{student} = 	ext{Yes}) &amp;= 
-rac{e^{-3.5041 + 0.4049 	imes 1}}{1 + e^{-3.5041 + 0.4049 	imes 1}} = 0.0431 \
-\hat{	ext{Pr}}(	ext{default} = 	ext{Yes} \mid 	ext{student} = 	ext{No}) &amp;= 
-rac{e^{-3.5041 + 0.4049 	imes 0}}{1 + e^{-3.5041 + 0.4049 	imes 0}} = 0.0292
+\[\begin{align*}
+\hat{\text{Pr}}(\text{default} = \text{Yes} \mid \text{student} = \text{Yes}) &amp;= \frac{e^{-3.5041 + 0.4049 \times 1}}{1 + e^{-3.5041 + 0.4049 \times 1}} = 0.0431 \\
+\hat{\text{Pr}}(\text{default} = \text{Yes} \mid \text{student} = \text{No})  &amp;= \frac{e^{-3.5041 + 0.4049 \times 0}}{1 + e^{-3.5041 + 0.4049 \times 0}} = 0.0292
 \end{align*}\]
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_3_2_estimating_the_regression_coefficients/index.html">&lt; 4.3.2 Estimating The Regression Coefficients</a></td>
+      <td><a href="../4_3_4_multiple_logistic_regression/index.html">4.3.4 Multiple Logistic Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

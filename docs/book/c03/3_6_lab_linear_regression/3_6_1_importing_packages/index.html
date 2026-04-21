@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,44 +502,53 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="361-importing-packages"><em>3.6.1 Importing packages</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.6 Lab Linear Regression</a></td>
+      <td><a href="../3_6_2_simple_linear_regression/index.html">3.6.2 Simple Linear Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="361-importing-packages"><em>3.6.1 Importing packages</em></h1>
 
 <p>We import our standard libraries at this top level.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [1]:importnumpyasnp
-importpandasaspd
-frommatplotlib.pyplotimportsubplots
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [1]: import numpy as np
+import pandas as pd
+from matplotlib.pyplot import subplots
 </code></pre></div></div>
 
-<p>New imports</p>
-
-<p>Throughout this lab we will introduce new functions and libraries. However, we will import them here to emphasize these are the new code objects in this lab. Keeping imports near the top of a notebook makes the code more readable, since scanning the first few lines tells us what libraries are used.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [2]:importstatsmodels.apiassm
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [2]: import statsmodels.api as sm
 </code></pre></div></div>
 
 <p>We will provide relevant details about the functions below as they are needed.</p>
 
-<p>Besides importing whole modules, it is also possible to import only a few items from a given module. This will help keep the <em>namespace</em> clean. namespace We will use a few specific objects from the <code class="language-plaintext highlighter-rouge">statsmodels</code> package which we <code class="language-plaintext highlighter-rouge">statsmodels</code> import here.</p>
+<p>Besides importing whole modules, it is also possible to import only a few items from a given module.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [3]:fromstatsmodels.stats.outliers_influence\
-importvariance_inflation_factorasVIF
-fromstatsmodels.stats.anovaimportanova_lm
+<p>This will help keep the <em>namespace</em> clean.</p>
+
+<p>We will use a few specific objects from the <code class="language-plaintext highlighter-rouge">statsmodels</code> package which we import here.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [3]: from statsmodels.stats.outliers_influence \
+import variance_inflation_factor as VIF
+from statsmodels.stats.anova import anova_lm
 </code></pre></div></div>
 
 <p>As one of the import statements above is quite a long line, we inserted a line break <code class="language-plaintext highlighter-rouge">\</code> to ease readability.</p>
 
 <p>We will also use some functions written for the labs in this book in the <code class="language-plaintext highlighter-rouge">ISLP</code> package.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [4]:fromISLPimportload_data
-fromISLP.modelsimport(ModelSpecasMS,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [4]: from ISLP import load_data
+from ISLP.models import (ModelSpec as MS,
 summarize,
 poly)
 </code></pre></div></div>
-
-<p>Inspecting Objects and Namespaces</p>
-
-<p>The function <code class="language-plaintext highlighter-rouge">dir()</code> provides a list of objects in a namespace.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dir()
 </code></pre></div></div>
@@ -558,17 +566,21 @@ poly)
 ...
 </code></pre></div></div>
 
-<p>3.6 Lab: Linear Regression 117</p>
-
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'poly',
 'quit',
 'sm',
 'summarize']
 </code></pre></div></div>
 
-<p>This shows you everything that <code class="language-plaintext highlighter-rouge">Python</code> can find at the top level. There are certain objects like <code class="language-plaintext highlighter-rouge">__builtins__</code> that contain references to built-in functions like <code class="language-plaintext highlighter-rouge">print()</code> .</p>
+<p>This shows you everything that <code class="language-plaintext highlighter-rouge">Python</code> can find at the top level.</p>
 
-<p>Every python object has its own notion of namespace, also accessible with <code class="language-plaintext highlighter-rouge">dir()</code> . This will include both the attributes of the object as well as any methods associated with it. For instance, we see <code class="language-plaintext highlighter-rouge">'sum'</code> in the listing for an array.</p>
+<p>There are certain objects like <code class="language-plaintext highlighter-rouge">__builtins__</code> that contain references to built-in functions like <code class="language-plaintext highlighter-rouge">print()</code>.</p>
+
+<p>Every python object has its own notion of namespace, also accessible with <code class="language-plaintext highlighter-rouge">dir()</code>.</p>
+
+<p>This will include both the attributes of the object as well as any methods associated with it.</p>
+
+<p>For instance, we see <code class="language-plaintext highlighter-rouge">'sum'</code> in the listing for an array.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [6]:A=np.array([3,5,11])
 dir(A)
@@ -581,13 +593,28 @@ dir(A)
 ...
 </code></pre></div></div>
 
-<p>This indicates that the object <code class="language-plaintext highlighter-rouge">A.sum</code> exists. In this case it is a method that can be used to compute the sum of the array <code class="language-plaintext highlighter-rouge">A</code> as can be seen by typing <code class="language-plaintext highlighter-rouge">A.sum?</code> .</p>
+<p>This indicates that the object <code class="language-plaintext highlighter-rouge">A.sum</code> exists.</p>
+
+<p>In this case it is a method that can be used to compute the sum of the array <code class="language-plaintext highlighter-rouge">A</code> as can be seen by typing <code class="language-plaintext highlighter-rouge">A.sum?</code>.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [7]:A.sum()
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[7]:19
 </code></pre></div></div>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.6 Lab Linear Regression</a></td>
+      <td><a href="../3_6_2_simple_linear_regression/index.html">3.6.2 Simple Linear Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

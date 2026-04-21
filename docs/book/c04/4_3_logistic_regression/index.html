@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -493,73 +492,53 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="43-logistic-regression">4.3 Logistic Regression</h1>
-
-<p>Consider again the <code class="language-plaintext highlighter-rouge">Default</code> data set, where the response <code class="language-plaintext highlighter-rouge">default</code> falls into one of two categories, <code class="language-plaintext highlighter-rouge">Yes</code> or <code class="language-plaintext highlighter-rouge">No</code> . Rather than modeling this response $Y$directly, logistic regression models the <em>probability</em> that $Y$belongs to a particular category.</p>
-
-<p>For the <code class="language-plaintext highlighter-rouge">Default</code> data, logistic regression models the probability of default. For example, the probability of default given <code class="language-plaintext highlighter-rouge">balance</code> can be written as</p>
-
-\[p(	ext{balance}) = 	ext{Pr}(	ext{default} = 	ext{Yes} \mid 	ext{balance})\]
-
-<table>
+            <table>
   <tbody>
     <tr>
-      <td>The values of Pr( <code class="language-plaintext highlighter-rouge">default</code> = <code class="language-plaintext highlighter-rouge">Yes</code> _</td>
-      <td>_ <code class="language-plaintext highlighter-rouge">balance</code> ), which we abbreviate <em>p</em> ( <code class="language-plaintext highlighter-rouge">balance</code> ), will range between 0 and 1. Then for any given value of <code class="language-plaintext highlighter-rouge">balance</code> , a prediction can be made for <code class="language-plaintext highlighter-rouge">default</code> . For example, one might predict default = Yes</td>
+      <td><a href="../4_2_why_not_linear_regression/index.html">&lt; 4.2 Why Not Linear Regression</a></td>
+      <td><a href="4_3_1_the_logistic_model/index.html">4.3.1 The Logistic Model &gt;</a></td>
     </tr>
   </tbody>
 </table>
 
-<p>4.3 Logistic Regression 139</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p><img src="./img/4_2.png" alt="Figure 4.2" /></p>
+<h1 id="43-logistic-regression">4.3 Logistic Regression</h1>
 
-<p><strong>FIGURE 4.2.</strong> <em>Classification using the</em> <code class="language-plaintext highlighter-rouge">Default</code> <em>data.</em> Left: <em>Estimated probability of</em> <code class="language-plaintext highlighter-rouge">default</code> <em>using linear regression. Some estimated probabilities are negative! The orange ticks indicate the 0/1 values coded for</em> <code class="language-plaintext highlighter-rouge">default</code> <em>(</em> <code class="language-plaintext highlighter-rouge">No</code> <em>or</em> <code class="language-plaintext highlighter-rouge">Yes</code> <em>).</em> Right: <em>Predicted probabilities of</em> <code class="language-plaintext highlighter-rouge">default</code> <em>using logistic regression. All probabilities lie between</em> 0 <em>and</em> 1 <em>.</em></p>
+<p>Consider again the <code class="language-plaintext highlighter-rouge">Default</code> data set, where the response <code class="language-plaintext highlighter-rouge">default</code> falls into one of two categories, <code class="language-plaintext highlighter-rouge">Yes</code> or <code class="language-plaintext highlighter-rouge">No</code>. Rather than modeling this response $Y$ directly, logistic regression models the <em>probability</em> that $Y$ belongs to a particular category.</p>
 
-<p>for any individual for whom <em>p</em> (balance) <em>&gt;</em> 0 <em>.</em> 5. Alternatively, if a company wishes to be conservative in predicting individuals who are at risk for default, then they may choose to use a lower threshold, such as <em>p</em> (balance) <em>&gt;</em> 0 <em>.</em> 1.</p>
+<p>For the <code class="language-plaintext highlighter-rouge">Default</code> data, logistic regression models the probability of default. For example, the probability of default given <code class="language-plaintext highlighter-rouge">balance</code> can be written as</p>
+
+\[p(\text{balance}) = \text{Pr}(\text{default} = \text{Yes} \mid \text{balance})\]
+
+<p>The values of Pr(<code class="language-plaintext highlighter-rouge">default</code> = <code class="language-plaintext highlighter-rouge">Yes</code> $\mid$ <code class="language-plaintext highlighter-rouge">balance</code>), which we abbreviate $p(\text{balance})$, will range between 0 and 1. Then for any given value of <code class="language-plaintext highlighter-rouge">balance</code> , a prediction can be made for <code class="language-plaintext highlighter-rouge">default</code>. For example, one might predict default = Yes for any individual for whom $p(\text{balance}) &gt; 0.5$. Alternatively, if a company wishes to be conservative in predicting individuals who are at risk for default, then they may choose to use a lower threshold, such as $p(\text{balance}) &gt; 0.1$.</p>
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<h3 id="431-the-logistic-model">4.3.1 The Logistic Model</h3>
 
-<h3 id="431-the-logistic-model-로지스틱-모형">4.3.1 The Logistic Model (로지스틱 모형)</h3>
-<ul>
-  <li><a href="./4_3_1_the_logistic_model/">문서로 이동하기</a></li>
-</ul>
+<h3 id="432-estimating-the-regression-coefficients">4.3.2 Estimating the Regression Coefficients</h3>
 
-<p>오즈(Odds)와 로짓(Logit) 변환을 선형 함수와 매핑해 로지스틱 모형을 구축하는 수식을 유도합니다.
-수학적으로 선형 관계가 로그 오즈 단위에서 성립함을 살펴봅니다.</p>
+<h3 id="433-making-predictions">4.3.3 Making Predictions</h3>
 
-<h3 id="432-estimating-the-regression-coefficients-회귀-계수-추정">4.3.2 Estimating the Regression Coefficients (회귀 계수 추정)</h3>
-<ul>
-  <li><a href="./4_3_2_estimating_the_regression_coefficients/">문서로 이동하기</a></li>
-</ul>
+<h3 id="434-multiple-logistic-regression">4.3.4 Multiple Logistic Regression</h3>
 
-<p>관측된 데이터가 나올 확률을 최대로 만드는 최대 우도 추정법(Maximum Likelihood Estimation)을 배웁니다.
-로지스틱 회귀에서 손실을 어떻게 최소화하는지 식별합니다.</p>
+<h3 id="435-multinomial-logistic-regression">4.3.5 Multinomial Logistic Regression</h3>
 
-<h3 id="433-making-predictions-예측하기">4.3.3 Making Predictions (예측하기)</h3>
-<ul>
-  <li><a href="./4_3_3_making_predictions/">문서로 이동하기</a></li>
-</ul>
+<hr />
 
-<p>추정된 계수를 바탕으로 특정 주어진 특성값 하에서 어떠한 클래스에 속할 확률을 수식과 파이썬 코드로 도출하는 방법입니다.
-특정 임계값(Threshold)을 넘는 타겟을 분류 예측합니다.</p>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<h3 id="434-multiple-logistic-regression-다중-로지스틱-회귀">4.3.4 Multiple Logistic Regression (다중 로지스틱 회귀)</h3>
-<ul>
-  <li><a href="./4_3_4_multiple_logistic_regression/">문서로 이동하기</a></li>
-</ul>
-
-<p>예측 변수(X)가 여러 개인 경우로 확장하여, 교란 변수 효과와 복잡한 요인 분석을 동시에 수행하는 방법을 다룹니다.
-조건부 확률에 여러 변수가 미치는 영향을 검토합니다.</p>
-
-<h3 id="435-multinomial-logistic-regression-다항-로지스틱-회귀">4.3.5 Multinomial Logistic Regression (다항 로지스틱 회귀)</h3>
-<ul>
-  <li><a href="./4_3_5_multinomial_logistic_regression/">문서로 이동하기</a></li>
-</ul>
-
-<p>타겟 클래스가 2개를 넘어 3개 이상(예: 질병 3종류 분류)일 때 적용할 수 있도록 로지스틱 회귀 모델 체계를 통계적으로 확장합니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_2_why_not_linear_regression/index.html">&lt; 4.2 Why Not Linear Regression</a></td>
+      <td><a href="4_3_1_the_logistic_model/index.html">4.3.1 The Logistic Model &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

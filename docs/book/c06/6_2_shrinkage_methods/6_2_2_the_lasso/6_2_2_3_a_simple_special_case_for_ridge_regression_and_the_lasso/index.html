@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -515,7 +514,7 @@
         <div class="bd-content ps-lg-4">
             <h1 id="a-simple-special-case-for-ridge-regression-and-the-lasso">A Simple Special Case for Ridge Regression and the Lasso</h1>
 
-<p>In order to obtain a better intuition about the behavior of ridge regression and the lasso, consider a simple special case with <em>n</em> = <em>p</em> , and <strong>X</strong> a diagonal matrix with 1’s on the diagonal and 0’s in all off-diagonal elements. To simplify the problem further, assume also that we are performing regression without an intercept. With these assumptions, the usual least squares problem simplifies to finding <em>β</em> 1 <em>, . . . , βp</em> that minimize</p>
+<p>In order to obtain a better intuition about the behavior of ridge regression and the lasso, consider a simple special case with $n = p$, and <strong>X</strong> a diagonal matrix with 1’s on the diagonal and 0’s in all off-diagonal elements. To simplify the problem further, assume also that we are performing regression without an intercept. With these assumptions, the usual least squares problem simplifies to finding $\beta_1, \ldots, \beta_p$ that minimize</p>
 
 \[\sum_{j=1}^p (y_j - \beta_j)^2 \quad (6.11)\]
 
@@ -523,7 +522,7 @@
 
 \[\hat{\beta}_j = y_j\]
 
-<p>And in this setting, ridge regression amounts to finding <em>β</em> 1 <em>, . . . , βp</em> such that</p>
+<p>And in this setting, ridge regression amounts to finding $\beta_1, \ldots, \beta_p$ such that</p>
 
 \[\sum_{j=1}^p (y_j - \beta_j)^2 + \lambda \sum_{j=1}^p \beta_j^2 \quad (6.12)\]
 
@@ -535,7 +534,7 @@
 
 <p><img src="./img/6_10.png" alt="Figure 6.10" /></p>
 
-<p><strong>FIGURE 6.10.</strong> <em>The ridge regression and lasso coefficient estimates for a simple setting with n</em> = <em>p and</em> <strong>X</strong> <em>a diagonal matrix with</em> 1 <em>’s on the diagonal.</em> Left: <em>The ridge regression coefficient estimates are shrunken proportionally towards zero, relative to the least squares estimates.</em> Right: <em>The lasso coefficient estimates are soft-thresholded towards zero.</em></p>
+<p><strong>FIGURE 6.10.</strong> <em>The ridge regression and lasso coefficient estimates for a simple setting with $n = p$ and</em> <strong>X</strong> <em>a diagonal matrix with 1’s on the diagonal.</em> Left: <em>The ridge regression coefficient estimates are shrunken proportionally towards zero, relative to the least squares estimates.</em> Right: <em>The lasso coefficient estimates are soft-thresholded towards zero.</em></p>
 
 <p>is minimized. One can show that in this setting, the ridge regression estimates take the form</p>
 
@@ -549,58 +548,46 @@ y_j + \lambda/2 &amp; \text{if } y_j &lt; -\lambda/2; \\
 0 &amp; \text{if } |y_j| \le \lambda/2.
 \end{cases} \quad (6.15)\]
 
-<p>Figure 6.10 displays the situation. We can see that ridge regression and the lasso perform two very different types of shrinkage. In ridge regression, each least squares coefficient estimate is shrunken by the same proportion. In contrast, the lasso shrinks each least squares coefficient towards zero by a constant amount, <em>λ/</em> 2; the least squares coefficients that are less than <em>λ/</em> 2 in absolute value are shrunken entirely to zero. The type of shrinkage performed by the lasso in this simple setting (6.15) is known as <em>softthresholding</em> . The fact that some lasso coefficients are shrunken entirely to softzero explains why the lasso performs feature selection.</p>
-
-<p>thresholding</p>
+<p>Figure 6.10 displays the situation. We can see that ridge regression and the lasso perform two very different types of shrinkage. In ridge regression, each least squares coefficient estimate is shrunken by the same proportion. In contrast, the lasso shrinks each least squares coefficient towards zero by a constant amount, $\lambda/2$; the least squares coefficients that are less than $\lambda/2$ in absolute value are shrunken entirely to zero. The type of shrinkage performed by the lasso in this simple setting (6.15) is known as <em>soft-thresholding</em>. The fact that some lasso coefficients are shrunken entirely to zero explains why the lasso performs feature selection.</p>
 
 <p>In the case of a more general data matrix <strong>X</strong> , the story is a little more complicated than what is depicted in Figure 6.10, but the main ideas still hold approximately: ridge regression more or less shrinks every dimension of the data by the same proportion, whereas the lasso more or less shrinks all coefficients toward zero by a similar amount, and sufficiently small coefficients are shrunken all the way to zero.</p>
 
 <p>Bayesian Interpretation of Ridge Regression and the Lasso</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>We now show that one can view ridge regression and the lasso through a Bayesian lens. A Bayesian viewpoint for regression assumes that the coefficient vector <em>β</em> has some <em>prior</em> distribution, say <em>p</em> ( <em>β</em> ), where <em>β</em> = ( <em>β</em> 0 <em>, β</em> 1 <em>, . . . , βp</em> ) <em>[T]</em> . The likelihood of the data can be written as <em>f</em> ( _Y</td>
-      <td>X, β_ ),</td>
-    </tr>
-  </tbody>
-</table>
+<p>We now show that one can view ridge regression and the lasso through a Bayesian lens. A Bayesian viewpoint for regression assumes that the coefficient vector $\beta$ has some <em>prior</em> distribution, say $p(\beta)$, where $\beta = (\beta_0, \beta_1, \ldots, \beta_p)^T$. The likelihood of the data can be written as $f(Y \mid X, \beta)$,</p>
 
 <p>6.2 Shrinkage Methods 251</p>
 
 <p><img src="./img/6_11.png" alt="Figure 6.11" /></p>
 
-<p><strong>FIGURE 6.11.</strong> Left: <em>Ridge regression is the posterior mode for β under a Gaussian prior.</em> Right: <em>The lasso is the posterior mode for β under a double-exponential prior.</em></p>
+<p><strong>FIGURE 6.11.</strong> Left: <em>Ridge regression is the posterior mode for $\beta$ under a Gaussian prior.</em> Right: <em>The lasso is the posterior mode for $\beta$ under a double-exponential prior.</em></p>
 
-<p>where <em>X</em> = ( <em>X</em> 1 <em>, . . . , Xp</em> ). Multiplying the prior distribution by the likelihood gives us (up to a proportionality constant) the <em>posterior distribution</em> , which takes the form</p>
+<p>where $X = (X_1, \ldots, X_p)$. Multiplying the prior distribution by the likelihood gives us (up to a proportionality constant) the <em>posterior distribution</em>, which takes the form</p>
 
 \[p(\beta \mid X, Y) \propto f(Y \mid X, \beta) p(\beta \mid X)\]
 
-<p>where the proportionality above follows from Bayes’ theorem, and the equality above follows from the assumption that <em>X</em> is fixed. We assume the usual linear model,</p>
+<p>where the proportionality above follows from Bayes’ theorem, and the equality above follows from the assumption that $X$ is fixed. We assume the usual linear model,</p>
 
 \[Y = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p + \epsilon\]
 
-<p>and suppose that the errors are independent and drawn from a normal distribution. Furthermore, assume that <em>p</em> ( <em>β</em> ) =[�] <em>[p] j</em> =1 <em>[g]</em>[(] <em>[β][j]</em>[)][,][for][some][density] function <em>g</em> . It turns out that ridge regression and the lasso follow naturally from two special cases of <em>g</em> :</p>
+<p>and suppose that the errors are independent and drawn from a normal distribution. Furthermore, assume that $p(\beta) = \prod_{j=1}^p g(\beta_j)$, for some density function $g$. It turns out that ridge regression and the lasso follow naturally from two special cases of $g$:</p>
 
 <ul>
   <li>
-    <p>If <em>g</em> is a Gaussian distribution with mean zero and standard deviation a function of <em>λ</em> , then it follows that the <em>posterior mode</em> for <em>β</em> —that posterior</p>
+    <p>If $g$ is a Gaussian distribution with mean zero and standard deviation a function of $\lambda$, then it follows that the <em>posterior mode</em> for $\beta$—that is, the most likely value for $\beta$, given the data—is given by the ridge regression solution. (In fact, the ridge regression solution is also the posterior mean.)</p>
   </li>
   <li>
-    <p>is, the most likely value for <em>β</em> , given the data—is given by the ridge mode regression solution. (In fact, the ridge regression solution is also the posterior mean.)</p>
-  </li>
-  <li>
-    <p>If <em>g</em> is a double-exponential (Laplace) distribution with mean zero and scale parameter a function of <em>λ</em> , then it follows that the posterior mode for <em>β</em> is the lasso solution. (However, the lasso solution is <em>not</em> the posterior mean, and in fact, the posterior mean does not yield a sparse coefficient vector.)</p>
+    <p>If $g$ is a double-exponential (Laplace) distribution with mean zero and scale parameter a function of $\lambda$, then it follows that the posterior mode for $\beta$ is the lasso solution. (However, the lasso solution is <em>not</em> the posterior mean, and in fact, the posterior mean does not yield a sparse coefficient vector.)</p>
   </li>
 </ul>
 
-<p>The Gaussian and double-exponential priors are displayed in Figure 6.11. Therefore, from a Bayesian viewpoint, ridge regression and the lasso follow directly from assuming the usual linear model with normal errors, together with a simple prior distribution for <em>β</em> . Notice that the lasso prior is steeply peaked at zero, while the Gaussian is flatter and fatter at zero. Hence, the lasso expects a priori that many of the coefficients are (exactly) zero, while ridge assumes the coefficients are randomly distributed about zero.</p>
+<p>The Gaussian and double-exponential priors are displayed in Figure 6.11. Therefore, from a Bayesian viewpoint, ridge regression and the lasso follow directly from assuming the usual linear model with normal errors, together with a simple prior distribution for $\beta$. Notice that the lasso prior is steeply peaked at zero, while the Gaussian is flatter and fatter at zero. Hence, the lasso expects a priori that many of the coefficients are (exactly) zero, while ridge assumes the coefficients are randomly distributed about zero.</p>
 
 <p>252 6. Linear Model Selection and Regularization</p>
 
 <p><img src="./img/6_12.png" alt="Figure 6.12" /></p>
 
-<p><strong>FIGURE 6.12.</strong> Left: <em>Cross-validation errors that result from applying ridge regression to the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set with various values of λ.</em> Right: <em>The coefficient estimates as a function of λ. The vertical dashed lines indicate the value of λ selected by cross-validation.</em></p>
+<p><strong>FIGURE 6.12.</strong> Left: <em>Cross-validation errors that result from applying ridge regression to the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set with various values of $\lambda$.</em> Right: <em>The coefficient estimates as a function of $\lambda$. The vertical dashed lines indicate the value of $\lambda$ selected by cross-validation.</em></p>
 
 
             <!-- 구글 애드센스 출력 -->

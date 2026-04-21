@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient for Corkboard -->
+    <linearGradient id="corkboard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4a261"/>
+      <stop offset="100%" stop-color="#e76f51"/>
+    </linearGradient>
+
+    <!-- Post-it Gradients -->
+    <linearGradient id="postit1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fffeec"/><stop offset="100%" stop-color="#fdf498"/></linearGradient>
+    <linearGradient id="postit2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ebfbee"/><stop offset="100%" stop-color="#b2f2bb"/></linearGradient>
+    <linearGradient id="postit3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e7f5ff"/><stop offset="100%" stop-color="#a5d8ff"/></linearGradient>
+    <linearGradient id="postit4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff0f6"/><stop offset="100%" stop-color="#ffb8d2"/></linearGradient>
+
+    <filter id="shadow" x="-5%" y="-5%" width="120%" height="120%">
+      <feDropShadow dx="4" dy="4" stdDeviation="5" flood-opacity="0.3"/>
+    </filter>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- String drawing animations -->
+    <animate id="draw1" xlink:href="#string1" attributeName="stroke-dashoffset" values="300;0" dur="1s" fill="freeze" begin="0s; reset.end+1s" />
+    <animate id="draw2" xlink:href="#string2" attributeName="stroke-dashoffset" values="300;0" dur="1s" fill="freeze" begin="1s; reset.end+2s" />
+    <animate id="draw3" xlink:href="#string3" attributeName="stroke-dashoffset" values="300;0" dur="1s" fill="freeze" begin="2s; reset.end+3s" />
+    <animate id="draw4" xlink:href="#string4" attributeName="stroke-dashoffset" values="300;0" dur="1s" fill="freeze" begin="3s; reset.end+4s" />
+    
+    <!-- Reset loop hack -->
+    <animate id="reset" attributeName="visibility" from="visible" to="visible" dur="5s" begin="draw4.end+2s"/>
+    
+    <animate id="fade1" xlink:href="#q1" attributeName="opacity" values="0;1" dur="0.5s" fill="freeze" begin="0.5s; reset.end+1.5s"/>
+    <animate id="fade2" xlink:href="#q2" attributeName="opacity" values="0;1" dur="0.5s" fill="freeze" begin="1.5s; reset.end+2.5s"/>
+    <animate id="fade3" xlink:href="#q3" attributeName="opacity" values="0;1" dur="0.5s" fill="freeze" begin="2.5s; reset.end+3.5s"/>
+    <animate id="fade4" xlink:href="#q4" attributeName="opacity" values="0;1" dur="0.5s" fill="freeze" begin="3.5s; reset.end+4.5s"/>
+    
+    <!-- Hide elements on loop reset -->
+    <animate xlink:href="#q1" attributeName="opacity" values="1;0;0" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="reset.begin"/>
+    <animate xlink:href="#q2" attributeName="opacity" values="1;0;0" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="reset.begin"/>
+    <animate xlink:href="#q3" attributeName="opacity" values="1;0;0" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="reset.begin"/>
+    <animate xlink:href="#q4" attributeName="opacity" values="1;0;0" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="reset.begin"/>
+    
+    <animate xlink:href="#string1" attributeName="stroke-dashoffset" values="0;300;300" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="reset.begin"/>
+    <animate xlink:href="#string2" attributeName="stroke-dashoffset" values="0;300;300" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="reset.begin"/>
+    <animate xlink:href="#string3" attributeName="stroke-dashoffset" values="0;300;300" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="reset.begin"/>
+    <animate xlink:href="#string4" attributeName="stroke-dashoffset" values="0;300;300" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="reset.begin"/>
+
+  </defs>
+
+  <!-- Corkboard Background -->
+  <rect width="100%" height="100%" fill="url(#corkboard)" rx="10" stroke="#8b5a2b" stroke-width="20"/>
+
+  <text x="400" y="55" font-family="'Jua', sans-serif" font-size="28" fill="#fff" text-anchor="middle" font-weight="bold" filter="url(#shadow)">[ 사건명: 다중 선형 회귀 명탐정 수사 보드 ]</text>
+
+  <!-- Center Target node -->
+  <g transform="translate(400, 300)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="70" fill="#212529" stroke="#fff" stroke-width="6"/>
+    <text x="0" y="-10" font-family="'Jua', sans-serif" font-size="20" fill="#fff" text-anchor="middle" font-weight="bold">타깃 타파!</text>
+    <text x="0" y="25" font-family="'Jua', sans-serif" font-size="34" fill="#fa5252" text-anchor="middle" font-weight="bold">Y</text>
+    <!-- Red string pin center -->
+    <circle cx="0" cy="0" r="8" fill="#d9480f" stroke="#fff" stroke-width="2"/>
+  </g>
+
+  <!-- Red Strings -->
+  <!-- path length is approx 280, setting dasharray and offset to 300 -->
+  <path id="string1" d="M 400,300 L 250,180" fill="none" stroke="#e03131" stroke-width="4" stroke-dasharray="300" stroke-dashoffset="300" />
+  <path id="string2" d="M 400,300 L 550,180" fill="none" stroke="#e03131" stroke-width="4" stroke-dasharray="300" stroke-dashoffset="300" />
+  <path id="string3" d="M 400,300 L 250,450" fill="none" stroke="#e03131" stroke-width="4" stroke-dasharray="300" stroke-dashoffset="300" />
+  <path id="string4" d="M 400,300 L 550,450" fill="none" stroke="#e03131" stroke-width="4" stroke-dasharray="300" stroke-dashoffset="300" />
+
+  <!-- Quadrant 1 (Top Left) - F-통계량 -->
+  <g id="q1" transform="translate(140, 100)" opacity="0" filter="url(#shadow)">
+    <!-- Post it -->
+    <rect x="0" y="0" width="220" height="150" fill="url(#postit1)" rx="2" transform="rotate(-3)"/>
+    <circle cx="110" cy="20" r="6" fill="#1864ab" stroke="#fff" stroke-width="2"/>
+    <text x="110" y="55" font-family="'Jua', sans-serif" font-size="20" fill="#1864ab" text-anchor="middle" font-weight="bold">Q1. 범인이 있긴 한가?</text>
+    <text x="110" y="85" font-family="'Jua', sans-serif" font-size="16" fill="#343a40" text-anchor="middle">적어도 하나는 유의미?</text>
+    <text x="110" y="115" font-family="'Jua', sans-serif" font-size="18" fill="#d9480f" text-anchor="middle" font-weight="bold">F-통계량 기계!</text>
+  </g>
+
+  <!-- Quadrant 2 (Top Right) - Variable Selection -->
+  <g id="q2" transform="translate(440, 100)" opacity="0" filter="url(#shadow)">
+    <!-- Post it -->
+    <rect x="0" y="0" width="220" height="150" fill="url(#postit2)" rx="2" transform="rotate(4)"/>
+    <circle cx="110" cy="20" r="6" fill="#1864ab" stroke="#fff" stroke-width="2"/>
+    <text x="110" y="55" font-family="'Jua', sans-serif" font-size="19" fill="#087f5b" text-anchor="middle" font-weight="bold">Q2. 전부 공범? 몇놈만?</text>
+    <text x="110" y="85" font-family="'Jua', sans-serif" font-size="15" fill="#343a40" text-anchor="middle">무고한 예측 변수 솎아내기</text>
+    <text x="110" y="115" font-family="'Jua', sans-serif" font-size="18" fill="#d9480f" text-anchor="middle" font-weight="bold">변수 선택 (Selection)</text>
+  </g>
+
+  <!-- Quadrant 3 (Bottom Left) - Model Fit -->
+  <g id="q3" transform="translate(140, 360)" opacity="0" filter="url(#shadow)">
+    <!-- Post it -->
+    <rect x="0" y="0" width="220" height="150" fill="url(#postit3)" rx="2" transform="rotate(2)"/>
+    <circle cx="110" cy="20" r="6" fill="#1864ab" stroke="#fff" stroke-width="2"/>
+    <text x="110" y="55" font-family="'Jua', sans-serif" font-size="20" fill="#0b7285" text-anchor="middle" font-weight="bold">Q3. 추리가 완벽한가?</text>
+    <text x="110" y="85" font-family="'Jua', sans-serif" font-size="16" fill="#343a40" text-anchor="middle">내 모델 점수는 몆 점?</text>
+    <text x="110" y="115" font-family="'Jua', sans-serif" font-size="18" fill="#d9480f" text-anchor="middle" font-weight="bold">R² &amp; RSE 분석</text>
+  </g>
+
+  <!-- Quadrant 4 (Bottom Right) - Prediction -->
+  <g id="q4" transform="translate(440, 360)" opacity="0" filter="url(#shadow)">
+    <!-- Post it -->
+    <rect x="0" y="0" width="220" height="150" fill="url(#postit4)" rx="2" transform="rotate(-4)"/>
+    <circle cx="110" cy="20" r="6" fill="#1864ab" stroke="#fff" stroke-width="2"/>
+    <text x="110" y="55" font-family="'Jua', sans-serif" font-size="19" fill="#a61e4d" text-anchor="middle" font-weight="bold">Q4. 내일 일축 적중률은?</text>
+    <text x="110" y="85" font-family="'Jua', sans-serif" font-size="15" fill="#343a40" text-anchor="middle">미래 범위 예상하기</text>
+    <text x="110" y="115" font-family="'Jua', sans-serif" font-size="18" fill="#d9480f" text-anchor="middle" font-weight="bold">예측 구간 (Interval)</text>
+  </g>
+
+</svg>

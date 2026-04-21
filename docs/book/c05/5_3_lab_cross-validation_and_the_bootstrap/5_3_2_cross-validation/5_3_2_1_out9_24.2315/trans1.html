@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_2_cross-validation/5_3_2_1_out9_24.2315/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_2_cross-validation/5_3_2_1_out9_24.2315/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_2_cross-validation/5_3_2_1_out9_24.2315/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_2_cross-validation/5_3_2_1_out9_24.2315/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/">05. Resampling Methods</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/5_3_lab_cross-validation_and_the_bootstrap/">5 3 lab cross-validation and the bootstrap</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_2_cross-validation/">5 3 2 cross-validation</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/5_3_lab_cross-validation_and_the_bootstrap/5_3_2_cross-validation/5_3_2_1_out9_24.2315/">5 3 2 1 out9 24.2315</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="out9-242315"><code class="language-plaintext highlighter-rouge">Out[9]:</code> <code class="language-plaintext highlighter-rouge">24.2315</code></h1>
+
+<p>The arguments to <code class="language-plaintext highlighter-rouge">cross_validate()</code> are as follows: an object with the appropriate <code class="language-plaintext highlighter-rouge">fit()</code>, <code class="language-plaintext highlighter-rouge">predict()</code>, and <code class="language-plaintext highlighter-rouge">score()</code> methods, an array of features <code class="language-plaintext highlighter-rouge">X</code> and a response <code class="language-plaintext highlighter-rouge">Y</code>. We also included an additional argument <code class="language-plaintext highlighter-rouge">cv</code> to <code class="language-plaintext highlighter-rouge">cross_validate()</code>; specifying an integer $K$ results in $K$-fold cross-validation. We have provided a value corresponding to the total number of observations, which results in leave-one-out cross-validation (LOOCV). The <code class="language-plaintext highlighter-rouge">cross_validate()</code> function produces a dictionary with several components; we simply want the cross-validated test score here (MSE), which is estimated to be $24.23$. We can repeat this procedure for increasingly complex polynomial fits. To automate the process, we again use a for loop which iteratively fits polynomial regressions of degree 1 to 5, computes the associated crossvalidation error, and stores it in the $i$th element of the vector <code class="language-plaintext highlighter-rouge">cv_error</code>. The variable <code class="language-plaintext highlighter-rouge">d</code> in the for loop corresponds to the degree of the polynomial. We begin by initializing the vector. This command may take a couple of seconds to run. 
+<code class="language-plaintext highlighter-rouge">cross_validate()</code> 함수에 할당되는 인자(arguments)의 목록은 다음과 같습니다: 적절한 형태의 <code class="language-plaintext highlighter-rouge">fit()</code>, <code class="language-plaintext highlighter-rouge">predict()</code>, 그리고 <code class="language-plaintext highlighter-rouge">score()</code> 메서드를 함께 구비한 체계적인 객체, 스펙 특징 변수 성향의 묶음 배열 <code class="language-plaintext highlighter-rouge">X</code> 그리고 거기에 상응하는 판독 반응 결괏값 <code class="language-plaintext highlighter-rouge">Y</code>. 덩달아 우리는 추가 인자 조건 <code class="language-plaintext highlighter-rouge">cv</code> 지정을 <code class="language-plaintext highlighter-rouge">cross_validate()</code> 부름 절차상에 하나 더 귀속(included) 시켰습니다; 이것을 일정치의 정수 $K$ 로 구체화 지목 명시하는(specifying) 행위는 여타 $K$-폴드 교차 검증 절차 구동 성과를 유도 창출(results in)해 냅니다. 이번 예제에서 우린 저 항목군 내에 정확히 전체 관측물 표본 숫자 덩어리와 합치상응(corresponding to)하는 크기 단위를 찔러 넣었으며(provided), 이는 필연적으로 단일 관측치 제외 교차 검정, 즉 철절한(LOOCV) 작업 발동에 안착합니다(results in). 저 <code class="language-plaintext highlighter-rouge">cross_validate()</code> 가동 함수 지는 여러 가지 구성 파생 조합 컴포넌트를 함유 보유한 딕셔너리 구조체 목록을 분출해내게(produces) 됩니다; 다만 우리가 여기서 진정 갈취하길 희망하는 건 순수 교차 테스트 스코어인 (MSE) 단 하나뿐이며, 해당 결과 추정 산출물은 $24.23$ 이란 점수로 타진 검정(estimated) 되었습니다. 우리는 보다 더 복잡 난해하게 구성 짜인 고단계 다항식 융합 모형(polynominal fits)에 향해서도 본연의 회기 테스트 절차 반복 가동을 추구할 수 있습니다. 해당 밟아가는 전반 공정을 기계 통제로 전격 가동 자동화(automate) 체제로 이룩하고자, 우리는 다시 순환 포 회전 구문(for loop)을 꺼내들며 차근차근 1단계 차수부터 5형 차수에 이르기까지 다양한 다항식 결부 회귀 모형군을 중첩 체계로 빙빙 투과 반복 돌려(iteratively fits) 가동할 수 있는데, 이는 각 연관 도출 교차 오류 지수를 끄집어내는 전산 계산(computes) 처리 역할을 감당함에 더해져 그것의 결과 추산물을 향후 저장소 <code class="language-plaintext highlighter-rouge">cv_error</code> 구역의 $i$번째 방에 순차적 차곡 적재 보관해줄(stores) 것입니다. 당해 구동문 구조 내부 루프 내 포진한 타겟 변형 지표 변수 <code class="language-plaintext highlighter-rouge">d</code>는 본연적 뼈대 다항식의 각 등급 차수 조율을 상징 반영(corresponds to) 합니다. 우리들은 그전에 제일 먼저 저장 장치 벡터 공간 선별 규합 초기화(initializing) 작전을 착수하는 것으로 전반을 출범합니다. 이 코딩 가동 명령어 집합은 현실 구동 마칠 때까지 통상 몇 초가량의 약간 소요 실행 시간 텀을 야기 소비(take) 할 수도 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">cv_error</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+         <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">horsepower</span><span class="sh">'</span><span class="p">])</span>
+         <span class="n">M</span> <span class="o">=</span> <span class="nf">sklearn_sm</span><span class="p">(</span><span class="n">sm</span><span class="p">.</span><span class="n">OLS</span><span class="p">)</span>
+         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span>
+             <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">power</span><span class="p">.</span><span class="nf">outer</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+             <span class="n">M_CV</span> <span class="o">=</span> <span class="nf">cross_validate</span><span class="p">(</span><span class="n">M</span><span class="p">,</span>
+                                   <span class="n">X</span><span class="p">,</span>
+                                   <span class="n">Y</span><span class="p">,</span>
+                                   <span class="n">cv</span><span class="o">=</span><span class="n">Auto</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+             <span class="n">cv_error</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">M_CV</span><span class="p">[</span><span class="sh">'</span><span class="s">test_score</span><span class="sh">'</span><span class="p">])</span>
+         <span class="n">cv_error</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="mf">24.2315</span><span class="p">,</span> <span class="mf">19.2482</span><span class="p">,</span> <span class="mf">19.3350</span><span class="p">,</span> <span class="mf">19.4244</span><span class="p">,</span> <span class="mf">19.0332</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>As in Figure 5.4, we see a sharp drop in the estimated test MSE between the linear and quadratic fits, but then no clear improvement from using higher-degree polynomials. 
+이미 Figure 5.4 단락 국면에서도 직관 인지했듯(As in), 우리는 본 결과 안에서도 뻣뻣한 일자 선형과 부드러운 U-커브형(이차 핏) 결합 구간 이동상에서만 도출 산출(estimated)된 테스트 관측 MSE 결과 오류의 기록적 낙폭 하락 저공 침강세(sharp drop) 를 확연히 시각 발견 검정(see)합니다, 그러나 애석하게도 차후 후열에 들어선 3기 4기 그 이상 단계 차원 대의 극고차수 다항 곡선식 채택 용역 등용(using higher-degree polynomials) 으로는 어떠한 두드러진 실성적 지표 향상 진전(clrear improvement) 상황도 추가 이끌지 못함을 적발 인지하게 됩니다.</p>
+
+<p>Above we introduced the <code class="language-plaintext highlighter-rouge">outer()</code> method of the <code class="language-plaintext highlighter-rouge">np.power()</code> function. The <code class="language-plaintext highlighter-rouge">outer()</code> method is applied to an operation that has two arguments, such as <code class="language-plaintext highlighter-rouge">add()</code>, <code class="language-plaintext highlighter-rouge">min()</code>, or <code class="language-plaintext highlighter-rouge">power()</code>. It has two arrays as arguments, and then forms a larger array where the operation is applied to each pair of elements of the two arrays. 
+앞 과정 상단(Above) 단락을 통과 중 우리는 함수 공구 요소인 <code class="language-plaintext highlighter-rouge">np.power()</code> 내부에 장착 구비된 보조 객체 기능 단위인 <code class="language-plaintext highlighter-rouge">outer()</code> 작동 기믹 메서드를 임시방편 신규 소개 도입(introduced)하였습니다. <code class="language-plaintext highlighter-rouge">outer()</code> 메서드 도구는 통상적 두 개 양쪽 인자 지표(two arguments)들을 공조 결합 병행 대등 보유 운영하는 덧셈 추가 <code class="language-plaintext highlighter-rouge">add()</code>, 극소 파악 <code class="language-plaintext highlighter-rouge">min()</code>, 이나 누승 지수 산출 작동 체제인 <code class="language-plaintext highlighter-rouge">power()</code> 형태 일련 계산 작용 활동상에 폭넓게 적용 부가 수용(applied to) 됩니다. 이는 초기 투입으로 두 쌍 결합 계통 요소 배열 뭉치(arrays)들을 기본 인수 자격분으로 흡수 취합한 이후, 종국적으로 두 진영 집합 내 배열 편제 속 구성 각 요소 인물 짝 맞춤별 결합(each pair of elements) 쌍 구도 단상 위로 덮어씌워 부가시킨 가동 실행 작용이 폭넓게 연루 조치된 한 단계 체급 불려 성장 조성된(forms) 비대 확장 배열체 산물 덩어리를 생성 구축시킵니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+         <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+         <span class="n">np</span><span class="p">.</span><span class="n">add</span><span class="p">.</span><span class="nf">outer</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mi">5</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+                <span class="p">[</span> <span class="mi">7</span><span class="p">,</span>  <span class="mi">9</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>In the CV example above, we used $K = n$, but of course we can also use $K &lt; n$. The code is very similar to the above (and is significantly faster). Here we use <code class="language-plaintext highlighter-rouge">KFold()</code> to partition the data into $K = 10$ random groups. We use <code class="language-plaintext highlighter-rouge">random_state</code> to set a random seed and initialize a vector <code class="language-plaintext highlighter-rouge">cv_error</code> in which we will store the CV errors corresponding to the polynomial fits of degrees one to five. 
+앞서 지나쳤던 CV 교차 검정 코딩 전개상 위 구도에서 우리는 일시적으로 극치 타깃 스코어 $K = n$ 체계를 조작 설정해 넣었으나, 물론 지당하게도 우리는 $K &lt; n$ 방식 수위 조절도 능히 교체 도입 투입 가능합니다. 이 수정 작동법 투입된 스크립트 코드 전반 편제 양상 구조도 기실 초회 위와 대조해 보더라도 대단히 밀접 유사할 따름이며 (무엇보다 극도로 신속 가동(significantly faster) 된다는 장점이 부가됩니다). 이곳 새 작전 코너판 우린 전체 기반 데이터 더미 파이를 향해 무작위 $K = 10$ 진영 분할 갈라치기(partition) 쪼갬을 행할 의도로 <code class="language-plaintext highlighter-rouge">KFold()</code> 시스템 기구를 새로 소환 발령합니다. 뒤이어 우리들은 여지없이 시드 난수 고정을 담보해 찍어줄 도구 <code class="language-plaintext highlighter-rouge">random_state</code> 를 채비함에 병행하여, 뒤어어 1위부터 5위 등급 각 단계 층위에 차곡 매핑 대응 배당 고착시킬(corresponding to) 교차 에러 분석 도출분 오류(CV errors) 결과 찌꺼기들을 전부 취합 누적 적재시켜 담을 장바구니 빈 공간 즉 벡터 배열 저장고 <code class="language-plaintext highlighter-rouge">cv_error</code> 를 전원 초가 개통 환기(initialize)해 가동 배정합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">cv_error</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+         <span class="n">cv</span> <span class="o">=</span> <span class="nc">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                    <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                    <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># use same splits for each degree
+</span>         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span>
+             <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">power</span><span class="p">.</span><span class="nf">outer</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+             <span class="n">M_CV</span> <span class="o">=</span> <span class="nf">cross_validate</span><span class="p">(</span><span class="n">M</span><span class="p">,</span>
+                                   <span class="n">X</span><span class="p">,</span>
+                                   <span class="n">Y</span><span class="p">,</span>
+                                   <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">)</span>
+             <span class="n">cv_error</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">M_CV</span><span class="p">[</span><span class="sh">'</span><span class="s">test_score</span><span class="sh">'</span><span class="p">])</span>
+         <span class="n">cv_error</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="mf">24.2077</span><span class="p">,</span> <span class="mf">19.1853</span><span class="p">,</span> <span class="mf">19.2763</span><span class="p">,</span> <span class="mf">19.4785</span><span class="p">,</span> <span class="mf">19.1372</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Notice that the computation time is much shorter than that of LOOCV. (In principle, the computation time for LOOCV for a least squares linear model should be faster than for $K$-fold CV, due to the availability of the formula (5.2) for LOOCV; however, the generic <code class="language-plaintext highlighter-rouge">cross_validate()</code> function does not make use of this formula.) We still see little evidence that using cubic or higher-degree polynomial terms leads to a lower test error than simply using a quadratic fit. 
+일단 전면에 두드러진 바로 이 연산 소비 시간상 비용 궤적이 조금 전 저 노가다 끝판왕 LOOCV의 전개 상황 때보다 압도적으로 체감되듯 극저하(much shorter) 감소했다는 사태 자체에 우선 주의 깊게 감지(Notice)하여 주십시오. (원리를 따져 파고들자면(In principle), 가장 편한 구도인 최소 제곱형 단순 직선 모델 전장에서 구동되는 LOOCV 가동을 위한 연계 연산 작동 처리 공정 속도는 애당초 (5.2)란 막강한 속성 돌파 지원 공식 공식의 채용 보장 활용이 뒷받침 지원 허가(availability)된 바 있음에 따라 오히려 상대 진영인 $K$-폴드 팀 구동 스피드를 상회 능가 앞질러 발휘(faster) 되어야만 마땅합니다. 허나, 일반 범용적 제너릭 부류 함수 공구 형태 성격인 현 <code class="language-plaintext highlighter-rouge">cross_validate()</code> 시스템 틀 구조 내부 자체의 속성상에서는 융통성 한계로 말미암아 치명적 저 패스워드 편법 공식 수혜적 우위(Does not make use of this formula)를 자율 통달 인지 식별해 구동 도용 접합 활용치 않음으로써 이런 이변이 파생합니다.) 우리들은 다시 재검 여전히 차기 등급 대의 지표선, 3형 입체항 구조나 부가적 점철 증폭 고차 다항식 층위 함수 요소를 차용하는 시도 자체가 결단코 단지 기초 2차 유동 커어브를 다루어 적적 수용함(simply using a quadratic fit)보다 낮고 이상적인 결과 에러 하락 지표 점수를 초래 수여(leads to)할 수 있다고 확신 장담 주장해낼 하등 어떤 그럴싸한 여지나 물증 근거 기반 지수 단서들(little evidence)조차도 결국 이번 판에서도 역시 건져내지 포착할 길이 보이지 않는 잿빛(see little evidence) 상태라는 점을 지속 확인 겹쳐 맞이하게 됩니다.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">cross_validate()</code> function is flexible and can take different splitting mechanisms as an argument. For instance, one can use the <code class="language-plaintext highlighter-rouge">ShuffleSplit()</code> function to implement the validation set approach just as easily as K-fold cross-validation. 
+마지막으로 덧붙이자면(Furthermore), 당해 도구 <code class="language-plaintext highlighter-rouge">cross_validate()</code> 내장 함수 기능 도구는 매우 유연(flexible) 자유분방한 조립성을 구축 지니고 있어 이것의 입력 인자 입 주둥이 구멍(argument) 안쪽에 사용자가 독단 체제 마련한 제각각 판별 분해 다각적 기믹 분할 통제 모터 궤도(different splitting mechanisms) 작동 규준들을 자율 할당 이식 부과 접합 수용(can take)해 처리 연동케 합니다. 단언하건대 한 예 구체 실사로(For instance), 여러분 즉 누구라도(one can) 이 <code class="language-plaintext highlighter-rouge">ShuffleSplit()</code> 무작위 짬뽕 기능 모터 엔진 도구를 착취 가동 부과시켜 당해 K-분할 뺑뺑이 전개만큼이나 수월하게 편할(just as easily as) 뿐더러, 고전 유산 산물격 방식인 단순 단절 반절 자르기 쪼갬 세트 검증(validation set approach) 검사 기획 시스템 양식안마저 거뜬 완벽히 흉내 작동 모사 구현 반영 설계(implement) 시켜낼 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">validation</span> <span class="o">=</span> <span class="nc">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                   <span class="n">test_size</span><span class="o">=</span><span class="mi">196</span><span class="p">,</span>
+                                   <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+         <span class="n">results</span> <span class="o">=</span> <span class="nf">cross_validate</span><span class="p">(</span><span class="n">hp_model</span><span class="p">,</span>
+                                  <span class="n">Auto</span><span class="p">.</span><span class="nf">drop</span><span class="p">([</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                                  <span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">],</span>
+                                  <span class="n">cv</span><span class="o">=</span><span class="n">validation</span><span class="p">)</span>
+         <span class="n">results</span><span class="p">[</span><span class="sh">'</span><span class="s">test_score</span><span class="sh">'</span><span class="p">]</span>
+</code></pre></div></div>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

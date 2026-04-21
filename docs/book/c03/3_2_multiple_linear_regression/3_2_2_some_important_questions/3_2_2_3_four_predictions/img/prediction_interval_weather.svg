@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f9fa"/>
+      <stop offset="100%" stop-color="#fff"/>
+    </linearGradient>
+
+    <!-- Map gradients -->
+    <linearGradient id="mapGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b2f2bb"/>
+      <stop offset="100%" stop-color="#51cf66"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-5%" y="-5%" width="120%" height="120%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+
+    <!-- Animations -->
+    <!-- Bar Expansion Left -->
+    <animate id="barLeftAnim" xlink:href="#confBar" attributeName="width" values="0; 60" dur="1.5s" fill="freeze" begin="0.5s; loopReset.end+0.5s"/>
+    
+    <!-- Bar Expansion Right (Much wider) -->
+    <animate id="barRightAnim" xlink:href="#predBar" attributeName="width" values="0; 160" dur="1.5s" fill="freeze" begin="0.5s; loopReset.end+0.5s"/>
+    <animate id="barRightMove" xlink:href="#predBar" attributeName="x" values="180; 130" dur="1.5s" fill="freeze" begin="0.5s; loopReset.end+0.5s"/>
+
+    <!-- Text Fade in -->
+    <animate id="textLeftAnim" xlink:href="#confText" attributeName="opacity" values="0;1" dur="0.5s" fill="freeze" begin="2s; loopReset.end+2s"/>
+    <animate id="textRightAnim" xlink:href="#predText" attributeName="opacity" values="0;1" dur="0.5s" fill="freeze" begin="2s; loopReset.end+2s"/>
+    <animate id="textWarnAnim" xlink:href="#warnText" attributeName="opacity" values="0;1" dur="0.5s" fill="freeze" begin="2.5s; loopReset.end+2.5s"/>
+
+    <animate id="loopReset" attributeName="visibility" from="visible" to="visible" dur="6s" begin="0s"/>
+
+    <animate xlink:href="#confBar" attributeName="width" values="0" dur="0.1s" fill="freeze" begin="loopReset.end-0.1s"/>
+    <animate xlink:href="#predBar" attributeName="width" values="0" dur="0.1s" fill="freeze" begin="loopReset.end-0.1s"/>
+    <animate xlink:href="#confText" attributeName="opacity" values="0" dur="0.1s" fill="freeze" begin="loopReset.end-0.1s"/>
+    <animate xlink:href="#predText" attributeName="opacity" values="0" dur="0.1s" fill="freeze" begin="loopReset.end-0.1s"/>
+    <animate xlink:href="#warnText" attributeName="opacity" values="0" dur="0.1s" fill="freeze" begin="loopReset.end-0.1s"/>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)" rx="15"/>
+
+  <!-- Divider Line -->
+  <line x1="400" y1="20" x2="400" y2="480" stroke="#ced4da" stroke-width="4" stroke-dasharray="10,10"/>
+
+  <!-- =============================== -->
+  <!-- LEFT PANEL: Confidence Interval -->
+  <!-- =============================== -->
+  <g transform="translate(10, 30)">
+    <rect x="70" y="0" width="240" height="40" fill="#e7f5ff" rx="20"/>
+    <text x="190" y="27" font-family="'Jua', sans-serif" font-size="22" fill="#1864ab" text-anchor="middle" font-weight="bold">신뢰 구간 (Confidence)</text>
+    
+    <text x="190" y="65" font-family="'Jua', sans-serif" font-size="16" fill="#495057" text-anchor="middle">"전국에 띄운 수만 개 매장의 평균!"</text>
+
+    <!-- Map Graphic -->
+    <g transform="translate(120, 100)" filter="url(#shadow)">
+      <path d="M 50,0 Q 150,50 100,150 Q 80,200 40,150 Q 0,100 50,0 Z" fill="url(#mapGrad)" stroke="#2f9e44" stroke-width="3"/>
+      <!-- Dots representing average across many cities -->
+      <circle cx="50" cy="50" r="4" fill="#1864ab"/>
+      <circle cx="80" cy="70" r="4" fill="#1864ab"/>
+      <circle cx="40" cy="90" r="4" fill="#1864ab"/>
+      <circle cx="90" cy="120" r="4" fill="#1864ab"/>
+      <circle cx="60" cy="150" r="4" fill="#1864ab"/>
+      <text x="70" y="190" font-family="'Jua', sans-serif" font-size="20" fill="#343a40" text-anchor="middle" font-weight="bold">전국 5,000개 <tspan fill="#1864ab">평균값</tspan></text>
+    </g>
+
+    <!-- Interval Bar -->
+    <g transform="translate(20, 340)">
+      <!-- Number line -->
+      <line x1="20" y1="20" x2="320" y2="20" stroke="#adb5bd" stroke-width="3"/>
+      
+      <!-- Prediction point -->
+      <circle cx="170" cy="20" r="6" fill="#343a40"/>
+      <text x="170" y="10" font-family="'Jua', sans-serif" font-size="14" fill="#343a40" text-anchor="middle">예상 11,250 뷰</text>
+
+      <!-- Interval Range -->
+      <rect id="confBar" x="140" y="15" width="60" height="10" fill="#1864ab" opacity="0.6" rx="5"/>
+      <path d="M140,10 L140,30" fill="none" stroke="#1864ab" stroke-width="2"/>
+      <path d="M200,10 L200,30" fill="none" stroke="#1864ab" stroke-width="2"/>
+
+      <g id="confText" opacity="0">
+        <text x="170" y="50" font-family="'Jua', sans-serif" font-size="18" fill="#1864ab" text-anchor="middle" font-weight="bold">[10,985 ~ 11,528]</text>
+        <rect x="110" y="60" width="120" height="25" fill="#f1f3f5" rx="5"/>
+        <text x="170" y="78" font-family="'Jua', sans-serif" font-size="14" fill="#495057" text-anchor="middle">폭이 좁고 확실함!</text>
+      </g>
+    </g>
+  </g>
+
+
+  <!-- =============================== -->
+  <!-- RIGHT PANEL: Prediction Interval -->
+  <!-- =============================== -->
+  <g transform="translate(410, 30)">
+    <rect x="70" y="0" width="240" height="40" fill="#fff0f6" rx="20"/>
+    <text x="190" y="27" font-family="'Jua', sans-serif" font-size="22" fill="#a61e4d" text-anchor="middle" font-weight="bold">예측 구간 (Prediction)</text>
+    
+    <text x="190" y="65" font-family="'Jua', sans-serif" font-size="16" fill="#495057" text-anchor="middle">"내일 당장 옆집 한 곳만의 판매량?!"</text>
+
+    <!-- Specific House Graphic -->
+    <g transform="translate(120, 100)" filter="url(#shadow)">
+      <!-- Target ring -->
+      <circle cx="70" cy="100" r="60" fill="none" stroke="#e03131" stroke-width="3" stroke-dasharray="10,5"/>
+      <!-- A single house / store -->
+      <path d="M 30,100 L 70,60 L 110,100 L 110,140 L 30,140 Z" fill="#ffe066" stroke="#f08c00" stroke-width="3"/>
+      <!-- Door -->
+      <rect x="60" y="110" width="20" height="30" fill="#d9480f"/>
+      
+      <text x="70" y="190" font-family="'Jua', sans-serif" font-size="20" fill="#343a40" text-anchor="middle" font-weight="bold">찍어서 <tspan fill="#e03131">단 1곳!</tspan> (특정)</text>
+      <g id="warnText" opacity="0">
+        <text x="170" y="70" font-family="'Apple Color Emoji', 'Segoe UI Emoji', sans-serif" font-size="28" text-anchor="middle">⛈️</text>
+        <text x="170" y="100" font-family="'Jua', sans-serif" font-size="14" fill="#e03131" text-anchor="middle">뭔 일 터질지</text>
+        <text x="170" y="120" font-family="'Jua', sans-serif" font-size="14" fill="#e03131" text-anchor="middle">아무도 모름!</text>
+      </g>
+    </g>
+
+    <!-- Interval Bar -->
+    <g transform="translate(20, 340)">
+      <!-- Number line -->
+      <line x1="20" y1="20" x2="320" y2="20" stroke="#adb5bd" stroke-width="3"/>
+      
+      <!-- Prediction point -->
+      <circle cx="170" cy="20" r="6" fill="#343a40"/>
+      <text x="170" y="10" font-family="'Jua', sans-serif" font-size="14" fill="#343a40" text-anchor="middle">예상 11,250 뷰 (동일함)</text>
+
+      <!-- Interval Range (Wider) -->
+      <rect id="predBar" x="180" y="15" width="0" height="10" fill="#e03131" opacity="0.6" rx="5"/>
+      <path d="M90,10 L90,30" fill="none" stroke="#e03131" stroke-width="2"/>
+      <path d="M250,10 L250,30" fill="none" stroke="#e03131" stroke-width="2"/>
+
+      <g id="predText" opacity="0">
+        <text x="170" y="50" font-family="'Jua', sans-serif" font-size="18" fill="#e03131" text-anchor="middle" font-weight="bold">[7,930 ~ 14,580]</text>
+        <rect x="90" y="60" width="160" height="25" fill="#f1f3f5" rx="5"/>
+        <text x="170" y="78" font-family="'Jua', sans-serif" font-size="14" fill="#495057" text-anchor="middle">틀리지 않으려 폭이 <tspan fill="#e03131" font-weight="bold">매우 넓어짐!</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

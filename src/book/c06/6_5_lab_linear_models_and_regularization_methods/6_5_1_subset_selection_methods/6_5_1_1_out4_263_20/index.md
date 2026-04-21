@@ -5,7 +5,7 @@ title: "index"
 
 # **`Out[4]:`** `(263, 20)` 
 
-We first choose the best model using forward selection based on _Cp_ (6.2). This score is not built in as a metric to `sklearn` . We therefore define a function to compute it ourselves, and use it as a scorer. By default, `sklearn` tries to maximize a score, hence our scoring function computes the negative _Cp_ statistic. 
+We first choose the best model using forward selection based on Cp (6.2). This score is not built in as a metric to `sklearn` . We therefore define a function to compute it ourselves, and use it as a scorer. By default, `sklearn` tries to maximize a score, hence our scoring function computes the negative _Cp_ statistic. 
 
 ```
 In [5]:defnCp(sigma2,estimator,X,Y):
@@ -18,7 +18,7 @@ return-(RSS+2*p*sigma2)/n
 
 6.5 Lab: Linear Models and Regularization Methods 269 
 
-We need to estimate the residual variance _σ_[2] , which is the first argument in our scoring function above. We will fit the biggest model, using all the variables, and estimate _σ_[2] based on its MSE. 
+We need to estimate the residual variance $\sigma^2$ , which is the first argument in our scoring function above. We will fit the biggest model, using all the variables, and estimate $\sigma^2$ based on its MSE. 
 
 ```
 In [6]:design=MS(Hitters.columns.drop('Salary')).fit(Hitters)
@@ -27,13 +27,13 @@ X=design.transform(Hitters)
 sigma2=OLS(Y,X).fit().scale
 ```
 
-The function `sklearn_selected()` expects a scorer with just three arguments — the last three in the definition of `nCp()` above. We use the function `partial()` first seen in Section 5.3.3 to freeze the first argument with our estimate of _σ_[2] . 
+The function `sklearn_selected()` expects a scorer with just three arguments — the last three in the definition of `nCp()` above. We use the function `partial()` first seen in Section 5.3.3 to freeze the first argument with our estimate of $\sigma^2$ . 
 
 ```
 In [7]:neg_Cp=partial(nCp,sigma2)
 ```
 
-We can now use `neg_Cp()` as a scorer for model selection. Along with a score we need to specify the search strategy. This is done through the object `Stepwise()` in the `ISLP.models` package. The method `Stepwise.first_peak()` runs forward stepwise until any further additions to the model do not result in an improvement in the evaluation score. Similarly, the method `Stepwise.fixed_steps()` runs a fixed number of steps of stepwise search. 
+We can now use ``neg_Cp()`` as a scorer for model selection. Along with a score we need to specify the search strategy. This is done through the object `Stepwise()` in the `ISLP.models` package. The method `Stepwise.first_peak()` runs forward stepwise until any further additions to the model do not result in an improvement in the evaluation score. Similarly, the method `Stepwise.fixed_steps()` runs a fixed number of steps of stepwise search. 
 
 ```
 In [8]:strategy=Stepwise.first_peak(design,
@@ -44,7 +44,7 @@ direction='forward',
 max_terms=len(design.terms))
 ```
 
-We now fit a linear regression model with `Salary` as outcome using forward selection. To do so, we use the function `sklearn_selected()` from the `sklearn_ ISLP.models` package. This takes a model from `statsmodels` along with a search strategy and selects a model with its `fit` method. Without specifying a `scoring` argument, the score defaults to MSE, and so all 19 variables will be selected (output not shown). 
+We now fit a linear regression model with `Salary` as outcome using forward selection. To do so, we use the function `sklearn_selected()` from the `ISLP.models` package. This takes a model from `statsmodels` along with a search strategy and selects a model with its `fit` method. Without specifying a `scoring` argument, the score defaults to MSE, and so all 19 variables will be selected (output not shown). 
 
 ```
 selected()
@@ -90,7 +90,7 @@ Out[10]:('Assists',
 
 Choosing Among Models Using the Validation Set Approach and Cross-Validation 
 
-As an alternative to using _Cp_ , we might try cross-validation to select a model in forward selection. For this, we need a method that stores the full path of models found in forward selection, and allows predictions for each of these. This can be done with the `sklearn_selection_path()` estima- `sklearn_` tor from `ISLP.models` . The function `cross_val_predict()` from `ISLP.models` computes the cross-validated predictions for each of the models along the `path()` path, which we can use to evaluate the cross-validated $\text{MSE}$ along the path. Here we define a strategy that fits the full forward selection path. While `predict()` there are various parameter choices for `sklearn_selection_path()` , we use the defaults here, which selects the model at each step based on the biggest reduction in RSS. 
+As an alternative to using Cp, we might try cross-validation to select a model in forward selection. For this, we need a method that stores the full path of models found in forward selection, and allows predictions for each of these. This can be done with the `sklearn_selection_path()` estima- `sklearn_` tor from `ISLP.models` . The function `cross_val_predict()` from `ISLP.models` computes the cross-validated predictions for each of the models along the `path()` path, which we can use to evaluate the cross-validated $\text{MSE}$ along the path. Here we define a strategy that fits the full forward selection path. While `predict()` there are various parameter choices for `sklearn_selection_path()` , we use the defaults here, which selects the model at each step based on the biggest reduction in RSS. 
 
 ```
 selection_

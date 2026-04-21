@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,51 +502,59 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="431-the-logistic-model"><em>4.3.1 The Logistic Model</em></h1>
-
-<table>
+            <table>
   <tbody>
     <tr>
-      <td>How should we model the relationship between <em>p</em> ( $X$) = Pr( $Y=$ 1 _</td>
-      <td>X_ ) and $X$? (For convenience we are using the generic 0/1 coding for the response.) In Section 4.2 we considered using a linear regression model to represent these probabilities:</td>
+      <td><a href="../index.html">&lt; 4.3 Logistic Regression</a></td>
+      <td><a href="../4_3_2_estimating_the_regression_coefficients/index.html">4.3.2 Estimating The Regression Coefficients &gt;</a></td>
     </tr>
   </tbody>
 </table>
 
-\[p(X) = eta_0 + eta_1 X\]
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>If we use this approach to predict <code class="language-plaintext highlighter-rouge">default</code> = <code class="language-plaintext highlighter-rouge">Yes</code> using <code class="language-plaintext highlighter-rouge">balance</code> , then we obtain the model shown in the left-hand panel of Figure 4.2. Here we see the problem with this approach: for balances close to zero we predict a negative probability of default; if we were to predict for very large balances, we would get values bigger than 1. These predictions are not sensible, since of course the true probability of default, regardless of credit card balance, must fall between 0 and 1. This problem is not unique to the credit default data. Any time a straight line is fit to a binary response that is coded as 0 or 1, in principle we can always predict <em>p</em> ( $X$) <em>&lt;</em> 0 for some values of $X$and <em>p</em> ( $X$) <em>&gt;</em> 1 for others (unless the range of $X$is limited).</p>
+<h1 id="431-the-logistic-model">4.3.1 The Logistic Model</h1>
 
-<p>To avoid this problem, we must model <em>p</em> ( $X$) using a function that gives outputs between 0 and 1 for all values of $X$. Many functions meet this description. In logistic regression, we use the <em>logistic function</em>,</p>
+<p>How should we model the relationship between $p(X) = \text{Pr}(Y=1 \mid X)$ and $X$? (For convenience we are using the generic 0/1 coding for the response.) In Section 4.2 we considered using a linear regression model to represent these probabilities:</p>
 
-\[p(X) = 
-rac{e^{eta_0 + eta_1 X}}{1 + e^{eta_0 + eta_1 X}} \quad (4.2)\]
+\[p(X) = \beta_0 + \beta_1 X\]
 
-<p>logistic function</p>
+<p>If we use this approach to predict <code class="language-plaintext highlighter-rouge">default</code> = <code class="language-plaintext highlighter-rouge">Yes</code> using <code class="language-plaintext highlighter-rouge">balance</code>, then we obtain the model shown in the left-hand panel of Figure 4.2. Here we see the problem with this approach: for balances close to zero we predict a negative probability of default; if we were to predict for very large balances, we would get values bigger than 1. These predictions are not sensible, since of course the true probability of default, regardless of credit card balance, must fall between 0 and 1. This problem is not unique to the credit default data. Any time a straight line is fit to a binary response that is coded as 0 or 1, in principle we can always predict $p(X) &lt; 0$ for some values of $X$ and $p(X) &gt; 1$ for others (unless the range of $X$ is limited).</p>
 
-<p>To fit the model (4.2), we use a method called <em>maximum likelihood</em> , which maximum we discuss in the next section. The right-hand panel of Figure 4.2 illustrates likelihood the fit of the logistic regression model to the <code class="language-plaintext highlighter-rouge">Default</code> data. Notice that for</p>
+<p>To avoid this problem, we must model $p(X)$ using a function that gives outputs between 0 and 1 for all values of $X$. Many functions meet this description. In logistic regression, we use the <em>logistic function</em>,</p>
 
-<p>140 4. Classification</p>
+\[p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}} \quad (4.2)\]
 
-<p>low balances we now predict the probability of default as close to, but never below, zero. Likewise, for high balances we predict a default probability close to, but never above, one. The logistic function will always produce an <em>S-shaped</em> curve of this form, and so regardless of the value of $X$, we will obtain a sensible prediction. We also see that the logistic model is better able to capture the range of probabilities than is the linear regression model in the left-hand plot. The average fitted probability in both cases is 0.0333 (averaged over the training data), which is the same as the overall proportion of defaulters in the data set.</p>
+<p>To fit the model (4.2), we use a method called <em>maximum likelihood</em>, which we discuss in the next section. The right-hand panel of Figure 4.2 illustrates the fit of the logistic regression model to the <code class="language-plaintext highlighter-rouge">Default</code> data. Notice that for low balances we now predict the probability of default as close to, but never below, zero. Likewise, for high balances we predict a default probability close to, but never above, one. The logistic function will always produce an <em>S-shaped</em> curve of this form, and so regardless of the value of $X$, we will obtain a sensible prediction. We also see that the logistic model is better able to capture the range of probabilities than is the linear regression model in the left-hand plot. The average fitted probability in both cases is 0.0333 (averaged over the training data), which is the same as the overall proportion of defaulters in the data set.</p>
 
 <p>After a bit of manipulation of (4.2), we find that</p>
 
-\[rac{p(X)}{1 - p(X)} = e^{eta_0 + eta_1 X} \quad (4.3)\]
+\[\frac{p(X)}{1 - p(X)} = e^{\beta_0 + \beta_1 X} \quad (4.3)\]
 
-<p>The quantity <em>p</em> ( $X$) <em>/</em> [1 <em>− p</em> ( $X$)] is called the <em>odds</em> , and can take on any value odds between 0 and <em>∞</em> . Values of the odds close to 0 and <em>∞</em> indicate very low and very high probabilities of default, respectively. For example, on average 1 in 5 people with an odds of 1 <em>/</em> 4 will default, since <em>p</em> ( $X$) = 0 <em>.</em> 2 implies an odds of 1 <em>−</em> 0 <em>.</em> 02 <em>.</em> 2[= 1] <em>[/]</em>[4][. Likewise, on average nine out of every ten people with] an odds of 9 will default, since <em>p</em> ( $X$) = 0 <em>.</em> 9 implies an odds of 1 <em>−</em> 0 <em>.</em> 09 <em>.</em> 9[=][9][.] Odds are traditionally used instead of probabilities in horse-racing, since they relate more naturally to the correct betting strategy.</p>
+<p>The quantity $p(X) / [1 - p(X)]$ is called the <em>odds</em>, and can take on any value between 0 and $\infty$. Values of the odds close to 0 and $\infty$ indicate very low and very high probabilities of default, respectively. For example, on average 1 in 5 people with an odds of $1/4$ will default, since $p(X) = 0.2$ implies an odds of $0.2 / (1 - 0.2) = 1/4$. Likewise, on average nine out of every ten people with an odds of 9 will default, since $p(X) = 0.9$ implies an odds of $0.9 / (1 - 0.9) = 9$. Odds are traditionally used instead of probabilities in horse-racing, since they relate more naturally to the correct betting strategy.</p>
 
 <p>By taking the logarithm of both sides of (4.3), we arrive at</p>
 
-\[\log\left(
-rac{p(X)}{1 - p(X)}
-ight) = eta_0 + eta_1 X \quad (4.4)\]
+\[\log\left( \frac{p(X)}{1 - p(X)} \right) = \beta_0 + \beta_1 X \quad (4.4)\]
 
-<p>The left-hand side is called the <em>log odds</em> or <em>logit</em> . We see that the logistic log odds regression model (4.2) has a logit that is linear in $X$.</p>
+<p>The left-hand side is called the <em>log odds</em> or <em>logit</em>. We see that the logistic regression model (4.2) has a logit that is linear in $X$.</p>
 
-<p>logit</p>
+<p>Recall from Chapter 3 that in a linear regression model, $\beta_1$ gives the average change in $Y$ associated with a one-unit increase in $X$. By contrast, in a logistic regression model, increasing $X$ by one unit changes the log odds by $\beta_1$ (4.4). Equivalently, it multiplies the odds by $e^{\beta_1}$ (4.3). However, because the relationship between $p(X)$ and $X$ in (4.2) is not a straight line, $\beta_1$ does <em>not</em> correspond to the change in $p(X)$ associated with a one-unit increase in $X$. The amount that $p(X)$ changes due to a one-unit change in $X$ depends on the current value of $X$. But regardless of the value of $X$, if $\beta_1$ is positive then increasing $X$ will be associated with increasing $p(X)$, and if $\beta_1$ is negative then increasing $X$ will be associated with decreasing $p(X)$.</p>
 
-<p>Recall from Chapter 3 that in a linear regression model, <em>β</em> 1 gives the average change in $Y$associated with a one-unit increase in $X$. By contrast, in a logistic regression model, increasing $X$by one unit changes the log odds by <em>β</em> 1 (4.4). Equivalently, it multiplies the odds by <em>e[β]</em>[1] (4.3). However, because the relationship between <em>p</em> ( $X$) and $X$in (4.2) is not a straight line, <em>β</em> 1 does <em>not</em> correspond to the change in <em>p</em> ( $X$) associated with a one-unit increase in $X$. The amount that <em>p</em> ( $X$) changes due to a one-unit change in $X$depends on the current value of $X$. But regardless of the value of $X$, if <em>β</em> 1 is positive then increasing $X$will be associated with increasing <em>p</em> ( $X$), and if <em>β</em> 1 is negative then increasing $X$will be associated with decreasing <em>p</em> ( $X$). The fact that there is not a straight-line relationship between <em>p</em> ( $X$) and $X$, and the fact that the rate of change in <em>p</em> ( $X$) per unit change in $X$depends on the current value of $X$, can also be seen by inspection of the right-hand panel of Figure 4.2.</p>
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4.3 Logistic Regression</a></td>
+      <td><a href="../4_3_2_estimating_the_regression_coefficients/index.html">4.3.2 Estimating The Regression Coefficients &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

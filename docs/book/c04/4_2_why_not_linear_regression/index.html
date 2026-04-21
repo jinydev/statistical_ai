@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -493,19 +492,24 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="42-why-not-linear-regression">4.2 Why Not Linear Regression?</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../4_1_an_overview_of_classification/index.html">&lt; 4.1 An Overview Of Classification</a></td>
+      <td><a href="../4_3_logistic_regression/index.html">4.3 Logistic Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="42-why-not-linear-regression">4.2 Why Not Linear Regression?</h1>
 
 <p>We have stated that linear regression is not appropriate in the case of a qualitative response. Why not?</p>
 
-<p>Suppose that we are trying to predict the medical condition of a patient in the emergency room on the basis of her symptoms. In this simplified example, there are three possible diagnoses: <code class="language-plaintext highlighter-rouge">stroke</code> , <code class="language-plaintext highlighter-rouge">drug overdose</code> , and</p>
-
-<p>4.2 Why Not Linear Regression? 137</p>
-
-<p><img src="./img/4_1.png" alt="Figure 4.1" /></p>
-
-<p><strong>FIGURE 4.1.</strong> <em>The</em> <code class="language-plaintext highlighter-rouge">Default</code> <em>data set.</em> Left: <em>The annual incomes and monthly credit card balances of a number of individuals. The individuals who defaulted on their credit card payments are shown in orange, and those who did not are shown in blue.</em> Center: <em>Boxplots of</em> <code class="language-plaintext highlighter-rouge">balance</code> <em>as a function of</em> <code class="language-plaintext highlighter-rouge">default</code> <em>status.</em> Right: <em>Boxplots of</em> <code class="language-plaintext highlighter-rouge">income</code> <em>as a function of</em> <code class="language-plaintext highlighter-rouge">default</code> <em>status.</em></p>
-
-<p><code class="language-plaintext highlighter-rouge">epileptic seizure</code> . We could consider encoding these values as a quantitative response variable, $Y$, as follows:</p>
+<p>Suppose that we are trying to predict the medical condition of a patient in the emergency room on the basis of her symptoms. In this simplified example, there are three possible diagnoses: <code class="language-plaintext highlighter-rouge">stroke</code>, <code class="language-plaintext highlighter-rouge">drug overdose</code>, and <code class="language-plaintext highlighter-rouge">epileptic seizure</code>. We could consider encoding these values as a quantitative response variable, $Y$, as follows:</p>
 
 \[Y = egin{cases} 
 1 &amp; 	ext{if stroke} \ 
@@ -513,7 +517,7 @@
 3 &amp; 	ext{if epileptic seizure} 
 \end{cases}\]
 
-<p>Using this coding, least squares could be used to fit a linear regression model to predict $Y$on the basis of a set of predictors $X_1$ <em>, . . . , Xp</em> . Unfortunately, this coding implies an ordering on the outcomes, putting <code class="language-plaintext highlighter-rouge">drug overdose</code> in between <code class="language-plaintext highlighter-rouge">stroke</code> and <code class="language-plaintext highlighter-rouge">epileptic seizure</code> , and insisting that the difference between <code class="language-plaintext highlighter-rouge">stroke</code> and <code class="language-plaintext highlighter-rouge">drug overdose</code> is the same as the difference between <code class="language-plaintext highlighter-rouge">drug overdose</code> and <code class="language-plaintext highlighter-rouge">epileptic seizure</code> . In practice there is no particular reason that this needs to be the case. For instance, one could choose an equally reasonable coding,</p>
+<p>Using this coding, least squares could be used to fit a linear regression model to predict $Y$ on the basis of a set of predictors $X_1, \dots, X_p$. Unfortunately, this coding implies an ordering on the outcomes, putting <code class="language-plaintext highlighter-rouge">drug overdose</code> in between <code class="language-plaintext highlighter-rouge">stroke</code> and <code class="language-plaintext highlighter-rouge">epileptic seizure</code>, and insisting that the difference between <code class="language-plaintext highlighter-rouge">stroke</code> and <code class="language-plaintext highlighter-rouge">drug overdose</code> is the same as the difference between <code class="language-plaintext highlighter-rouge">drug overdose</code> and <code class="language-plaintext highlighter-rouge">epileptic seizure</code>. In practice there is no particular reason that this needs to be the case. For instance, one could choose an equally reasonable coding,</p>
 
 \[Y = egin{cases} 
 1 &amp; 	ext{if epileptic seizure} \ 
@@ -523,26 +527,22 @@
 
 <p>which would imply a totally different relationship among the three conditions. Each of these codings would produce fundamentally different linear models that would ultimately lead to different sets of predictions on test observations.</p>
 
-<p>If the response variable’s values did take on a natural ordering, such as <em>mild</em> , <em>moderate</em> , and <em>severe</em> , and we felt the gap between mild and moderate was similar to the gap between moderate and severe, then a 1, 2, 3 coding would be reasonable. Unfortunately, in general there is no natural way to</p>
+<p>If the response variable’s values did take on a natural ordering, such as <em>mild</em>, <em>moderate</em>, and <em>severe</em>, and we felt the gap between mild and moderate was similar to the gap between moderate and severe, then a 1, 2, 3 coding would be reasonable. Unfortunately, in general there is no natural way to convert a qualitative response variable with more than two levels into a quantitative response that is ready for linear regression.</p>
 
-<p>138 4. Classification</p>
-
-<p>convert a qualitative response variable with more than two levels into a quantitative response that is ready for linear regression.</p>
-
-<p>For a <em>binary</em> (two level) qualitative response, the situation is better. For binary instance, perhaps there are only two possibilities for the patient’s medical condition: <code class="language-plaintext highlighter-rouge">stroke</code> and <code class="language-plaintext highlighter-rouge">drug overdose</code> . We could then potentially use the <em>dummy variable</em> approach from Section 3.3.1 to code the response as follows:</p>
+<p>For a <em>binary</em> (two level) qualitative response, the situation is better. For binary instance, perhaps there are only two possibilities for the patient’s medical condition: <code class="language-plaintext highlighter-rouge">stroke</code> and <code class="language-plaintext highlighter-rouge">drug overdose</code>. We could then potentially use the <em>dummy variable</em> approach from Section 3.3.1 to code the response as follows:</p>
 
 \[Y = egin{cases} 
 0 &amp; 	ext{if stroke} \ 
 1 &amp; 	ext{if drug overdose} 
 \end{cases} \quad (4.1)\]
 
-<p>We could then fit a linear regression to this binary response, and predict <code class="language-plaintext highlighter-rouge">drug overdose</code> if <em>Y</em>[ˆ] <em>&gt;</em> 0 <em>.</em> 5 and <code class="language-plaintext highlighter-rouge">stroke</code> otherwise. In the binary case it is not hard to show that even if we flip the above coding, linear regression will produce the same final predictions.</p>
+<p>We could then fit a linear regression to this binary response, and predict <code class="language-plaintext highlighter-rouge">drug overdose</code> if $\hat{Y} &gt; 0.5$ and <code class="language-plaintext highlighter-rouge">stroke</code> otherwise. In the binary case it is not hard to show that even if we flip the above coding, linear regression will produce the same final predictions.</p>
 
 <table>
   <tbody>
     <tr>
-      <td>For a binary response with a 0/1 coding as above, regression by least squares is not completely unreasonable: it can be shown that the <em>Xβ</em>[ˆ] obtained using linear regression is in fact an estimate of Pr( <code class="language-plaintext highlighter-rouge">drug overdose</code> _</td>
-      <td>X_ ) in this special case. However, if we use linear regression, some of our estimates might be outside the [0 <em>,</em> 1] interval (see Figure 4.2), making them hard to interpret as probabilities! Nevertheless, the predictions provide an ordering and can be interpreted as crude probability estimates. Curiously, it turns out that the classifications that we get if we use linear regression to predict a binary response will be the same as for the linear discriminant analysis (LDA) procedure we discuss in Section 4.4.</td>
+      <td>For a binary response with a 0/1 coding as above, regression by least squares is not completely unreasonable: it can be shown that the $X\hat{eta}$ obtained using linear regression is in fact an estimate of $	ext{Pr}(	ext{drug overdose}</td>
+      <td>X)$ in this special case. However, if we use linear regression, some of our estimates might be outside the $[0, 1]$ interval (see Figure 4.2), making them hard to interpret as probabilities! Nevertheless, the predictions provide an ordering and can be interpreted as crude probability estimates. Curiously, it turns out that the classifications that we get if we use linear regression to predict a binary response will be the same as for the linear discriminant analysis (LDA) procedure we discuss in Section 4.4.</td>
     </tr>
   </tbody>
 </table>
@@ -550,8 +550,21 @@
 <table>
   <tbody>
     <tr>
-      <td>To summarize, there are at least two reasons not to perform classification using a regression method: (a) a regression method cannot accommodate a qualitative response with more than two classes; (b) a regression method will not provide meaningful estimates of Pr( _Y</td>
-      <td>X_ ), even with just two classes. Thus, it is preferable to use a classification method that is truly suited for qualitative response values. In the next section, we present logistic regression, which is well-suited for the case of a binary qualitative response; in later sections we will cover classification methods that are appropriate when the qualitative response has two or more classes.</td>
+      <td>To summarize, there are at least two reasons not to perform classification using a regression method: (a) a regression method cannot accommodate a qualitative response with more than two classes; (b) a regression method will not provide meaningful estimates of $	ext{Pr}(Y</td>
+      <td>X)$, even with just two classes. Thus, it is preferable to use a classification method that is truly suited for qualitative response values. In the next section, we present logistic regression, which is well-suited for the case of a binary qualitative response; in later sections we will cover classification methods that are appropriate when the qualitative response has two or more classes.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_1_an_overview_of_classification/index.html">&lt; 4.1 An Overview Of Classification</a></td>
+      <td><a href="../4_3_logistic_regression/index.html">4.3 Logistic Regression &gt;</a></td>
     </tr>
   </tbody>
 </table>

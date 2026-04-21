@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,54 +502,58 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="463-generalized-linear-models-in-greater-generality"><em>4.6.3 Generalized Linear Models in Greater Generality</em></h1>
-
-<p>We have now discussed three types of regression models: linear, logistic and Poisson. These approaches share some common characteristics:</p>
-
-<ol>
-  <li>
-    <p>Each approach uses predictors $X_1$ <em>, . . . , Xp</em> to predict a response $Y$. We assume that, conditional on $X_1$ <em>, . . . , Xp</em> , $Y$belongs to a certain family of distributions. For linear regression, we typically assume that $Y$follows a Gaussian or normal distribution. For logistic regression, we assume that $Y$follows a Bernoulli distribution. Finally, for Poisson regression, we assume that $Y$follows a Poisson distribution.</p>
-  </li>
-  <li>
-    <p>Each approach models the mean of $Y$as a function of the predictors. In linear regression, the mean of $Y$ takes the form</p>
-  </li>
-</ol>
-
-\[ext{E}(Y \mid X_1, \dots, X_p) = eta_0 + eta_1 X_1 + \dots + eta_p X_p \quad (4.39)\]
-
-<p>i.e. it is a linear function of the predictors. For logistic regression, the mean instead takes the form</p>
-
-\[ext{E}(Y \mid X_1, \dots, X_p) = 
-rac{e^{eta_0 + eta_1 X_1 + \dots + eta_p X_p}}{1 + e^{eta_0 + eta_1 X_1 + \dots + eta_p X_p}} \quad (4.40)\]
-
-<p>while for Poisson regression it takes the form</p>
-
-\[ext{E}(Y \mid X_1, \dots, X_p) = e^{eta_0 + eta_1 X_1 + \dots + eta_p X_p} \quad (4.41)\]
-
-<p>Equations (4.39)–(4.41) can be expressed using a <em>link function</em> , <em>η</em> , which link function</p>
-
-<blockquote>
-  <p>5In fact, the variance in the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data appears to be much higher than the mean, a situation referred to as <em>overdispersion</em> . This causes the Z-values to be inflated in Table 4.11. A more careful analysis should account for this overdispersion to obtain more accurate Z-values, and there are a variety of methods for doing this. But they are beyond the scope of this book.</p>
-</blockquote>
-
-<p>4.7 Lab: Logistic Regression, LDA, QDA, and KNN 173</p>
-
-<table>
+            <table>
   <tbody>
     <tr>
-      <td>applies a transformation to E( _Y</td>
-      <td>X_ 1 <em>, . . . , Xp</em> ) so that the transformed mean is a linear function of the predictors. That is,</td>
+      <td><a href="../4_6_2_poisson_regression_on_the_bikeshare_data/index.html">&lt; 4.6.2 Poisson Regression On The Bikeshare Data</a></td>
+      <td><a href="../../4_7_lab_logistic_regression_lda_qda_and_knn/index.html">4.7 Lab Logistic Regression Lda Qda And Knn &gt;</a></td>
     </tr>
   </tbody>
 </table>
 
-\[\eta(	ext{E}(Y \mid X_1, \dots, X_p)) = eta_0 + eta_1 X_1 + \dots + eta_p X_p \quad (4.42)\]
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>The link functions for linear, logistic and Poisson regression are <em>η</em> ( <em>µ</em> ) = <em>µ</em> , <em>η</em> ( <em>µ</em> ) = log( <em>µ/</em> (1 <em>− µ</em> )), and <em>η</em> ( <em>µ</em> ) = log( <em>µ</em> ), respectively.</p>
+<h1 id="463-generalized-linear-models-in-greater-generality">4.6.3 Generalized Linear Models in Greater Generality</h1>
 
-<p>The Gaussian, Bernoulli and Poisson distributions are all members of a wider class of distributions, known as the <em>exponential family</em> . Other well- exponential known members of this family are the <em>exponential</em> distribution, the <em>Gamma</em> family distribution, and the <em>negative binomial</em> distribution. In general, we can perexponential form a regression by modeling the response $Y$as coming from a particular Gamma member of the exponential family, and then transforming the mean of the negative response so that the transformed mean is a linear function of the predictors binomial via (4.42). Any regression approach that follows this very general recipe is known as a <em>generalized linear model</em> (GLM). Thus, linear regression, logistic generalized regression, and Poisson regression are three examples of GLMs. Other exlinear model amples not covered here include <em>Gamma regression</em> and <em>negative binomial regression</em> .</p>
+<p>We have now discussed three types of regression models: linear, logistic and Poisson. These approaches share some common characteristics:</p>
 
-<p>linear model</p>
+<ol>
+  <li>Each approach uses predictors $X_1, \dots, X_p$ to predict a response $Y$. We assume that, conditional on $X_1, \dots, X_p$, $Y$ belongs to a certain family of distributions. For linear regression, we typically assume that $Y$ follows a Gaussian or normal distribution. For logistic regression, we assume that $Y$ follows a Bernoulli distribution. Finally, for Poisson regression, we assume that $Y$ follows a Poisson distribution.</li>
+  <li>Each approach models the mean of $Y$ as a function of the predictors. In linear regression, the mean of $Y$ takes the form</li>
+</ol>
+
+\[\text{E}(Y \mid X_1, \dots, X_p) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p \quad (4.39)\]
+
+<p>i.e. it is a linear function of the predictors. For logistic regression, the mean instead takes the form</p>
+
+\[\text{E}(Y \mid X_1, \dots, X_p) = \frac{e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}}{1 + e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p}} \quad (4.40)\]
+
+<p>while for Poisson regression it takes the form</p>
+
+\[\text{E}(Y \mid X_1, \dots, X_p) = e^{\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p} \quad (4.41)\]
+
+<p>Equations (4.39)–(4.41) can be expressed using a <em>link function</em>, $\eta$, which applies a transformation to $E(Y \mid X_1, \dots, X_p)$ so that the transformed mean is a linear function of the predictors. That is,</p>
+
+\[\eta(\text{E}(Y \mid X_1, \dots, X_p)) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p \quad (4.42)\]
+
+<p>The link functions for linear, logistic and Poisson regression are $\eta(\mu) = \mu$, $\eta(\mu) = \log(\mu / (1 - \mu))$, and $\eta(\mu) = \log(\mu)$, respectively.</p>
+
+<p>The Gaussian, Bernoulli and Poisson distributions are all members of a wider class of distributions, known as the <em>exponential family</em>. Other well-known members of this family are the <em>exponential</em> distribution, the <em>Gamma</em> distribution, and the <em>negative binomial</em> distribution. In general, we can perform a regression by modeling the response $Y$ as coming from a particular member of the exponential family, and then transforming the mean of the response so that the transformed mean is a linear function of the predictors via (4.42). Any regression approach that follows this very general recipe is known as a <em>generalized linear model</em> (GLM). Thus, linear regression, logistic regression, and Poisson regression are three examples of GLMs. Other examples not covered here include <em>Gamma regression</em> and <em>negative binomial regression</em>.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_6_2_poisson_regression_on_the_bikeshare_data/index.html">&lt; 4.6.2 Poisson Regression On The Bikeshare Data</a></td>
+      <td><a href="../../4_7_lab_logistic_regression_lda_qda_and_knn/index.html">4.7 Lab Logistic Regression Lda Qda And Knn &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_2_shrinkage_methods/6_2_1_ridge_regression/6_2_1_1_an_application_to_the_credit_data/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c06/6_2_shrinkage_methods/6_2_1_ridge_regression/6_2_1_1_an_application_to_the_credit_data/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_2_shrinkage_methods/6_2_1_ridge_regression/6_2_1_1_an_application_to_the_credit_data/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c06/6_2_shrinkage_methods/6_2_1_ridge_regression/6_2_1_1_an_application_to_the_credit_data/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/">06. Linear Model Selection</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_2_shrinkage_methods/">6 2 shrinkage methods</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_2_shrinkage_methods/6_2_1_ridge_regression/">6 2 1 ridge regression</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_2_shrinkage_methods/6_2_1_ridge_regression/6_2_1_1_an_application_to_the_credit_data/">6 2 1 1 an application to the credit data</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="6211-an-application-to-the-credit-data">6.2.1.1 An Application to the Credit Data</h1>
+<h1 id="6211-신용-데이터-적용-사례-an-application-to-the-credit-data">6.2.1.1 신용 데이터 적용 사례 (An Application to the Credit Data)</h1>
+
+<p>In Figure 6.4, the ridge regression coefficient estimates for the <code class="language-plaintext highlighter-rouge">Credit</code> data set are displayed. In the left-hand panel, each curve corresponds to the ridge regression coefficient estimate for one of the ten variables, plotted as a function of $\lambda$. For example, the black solid line represents the ridge regression estimate for the <code class="language-plaintext highlighter-rouge">income</code> coefficient, as $\lambda$ is varied. At the extreme left-hand side of the plot, $\lambda$ is essentially zero, and so the corresponding ridge coefficient estimates are the same as the usual least squares estimates. But as $\lambda$ increases, the ridge coefficient estimates shrink towards zero. When $\lambda$ is extremely large, then all of the ridge coefficient estimates are basically zero; this corresponds to the <em>null model</em> that contains no predictors. In this plot, the <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">limit</code>, <code class="language-plaintext highlighter-rouge">rating</code>, and <code class="language-plaintext highlighter-rouge">student</code> variables are displayed in distinct colors, since these variables tend to have by far the largest coefficient estimates. While the ridge coefficient estimates tend to decrease in aggregate as $\lambda$ increases, individual coefficients, such as <code class="language-plaintext highlighter-rouge">rating</code> and <code class="language-plaintext highlighter-rouge">income</code>, may occasionally increase as $\lambda$ increases. 
+그림 6.4에는 <code class="language-plaintext highlighter-rouge">Credit</code> 데이터 세트를 위한 릿지 회귀 계수 추정치들이 시각 표시되어 있습니다. 분할 왼쪽 패널 도표에서, 각 도출 곡선은 $\lambda$ 의 함수로 그려진 10개 변수 개체 중 하나의 릿지 회귀 계수 추정치에 각각 해당됩니다. 예를 들어 조명하자면, 검은색 실선 부분은 $\lambda$ 가 변동됨에 따른 <code class="language-plaintext highlighter-rouge">income</code>(소득) 파라미터 계수에 부여된 릿지 판단 회귀 추정치를 나타냅니다. 플롯 그래프의 가장 극단적인 왼쪽 끝 가장자리 면에서 $\lambda$ 값은 사실상 본질적으로 0이며, 그렇기 때문에 이에 상응되는 릿지 계수 추정치 결과는 обы적인 평범한 최소 제곱법 추정치 결과 통계와 동일합니다. 그러나 $\lambda$ 계수 값이 점진 증가함에 따라서, 추산 릿지 계수 추정치들은 결국 0 지점을 향해 계속 수축(shrink) 됩니다. $\lambda$ 가 극도로 크게 거대해지면, 모든 소속된 릿지 산출 계수 추정치 결과들이 기본적으로 사실상 0이 되어 버립니다; 이 극단 국면 상황은 타겟 반응 요소 변수들을 일절 예측 변수로 포함하지 않는 기본 <strong>‘기저 모델(null model)’</strong> 에 사실상 완벽 대응됩니다. 이 도표 선상에서 <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">limit</code>, <code class="language-plaintext highlighter-rouge">rating</code>, 그리고 <code class="language-plaintext highlighter-rouge">student</code> 명칭 변수 곡선들은 단연 고유 색상들로 도색되어 표시되는데, 이는 그 특정 파편 계수 변수들이 단연 가장 큰 계수치 수량 추정치를 뽐내는 경향성을 띠기 때문입니다. 비록 릿지 산출 계수 추정치 궤적이 $\lambda$ 가 순차 증가함에 따라서 대개 전체 통합적(in aggregate)으로 지속 감소 경향을 띠긴 하지만, 간혹 <code class="language-plaintext highlighter-rouge">rating</code> 이나 <code class="language-plaintext highlighter-rouge">income</code> 같은 개별 독립 계수 항목들은 $\lambda$ 가 순차 증가할 때 국지적으로 역행 반등 증가하는 예외 국면을 종종 띨 수 있습니다.</p>
+
+<p>The right-hand panel of Figure 6.4 displays the same ridge coefficient estimates as the left-hand panel, but instead of displaying $\lambda$ on the $x$-axis, we now display $|\hat{\beta}<em>{\lambda}^R|_2 / |\hat{\beta}|_2$, where $\hat{\beta}$ denotes the vector of least squares coefficient estimates. The notation $|\beta|_2$ denotes the $\ell_2$ norm (pronounced “ell 2”) of a vector, and is defined as $|\beta|_2 = \sqrt{\sum</em>{j=1}^p \beta_j^2}$. It measures the distance of $\beta$ from zero. As $\lambda$ increases, the $\ell_2$ norm of $\hat{\beta}<em>{\lambda}^R$ will always decrease, and so will $|\hat{\beta}</em>{\lambda}^R|<em>2 / |\hat{\beta}|_2$. The latter quantity ranges from 1 (when $\lambda = 0$, in which case the ridge regression coefficient estimate is the same as the least squares estimate, and so their $\ell_2$ norms are the same) to 0 (when $\lambda = \infty$, in which case the ridge regression coefficient estimate is a vector of zeros, with $\ell_2$ norm equal to zero). Therefore, we can think of the $x$-axis in the right-hand panel of Figure 6.4 as the amount that the ridge regression coefficient estimates have been shrunken towards zero; a small value indicates that they have been shrunken very close to zero. 
+그림 6.4의 우단 오른편 패널 지표는 좌측 패널 지표 영역과 동일한 릿지 분포 산출 계수 추정치를 전시 표출하지만, 여기서 가로 $x$-축을 $\lambda$ 로 두는 대신, 이번 파트에서는 $|\hat{\beta}</em>{\lambda}^R|<em>2 / |\hat{\beta}|_2$ 지표를 표시하며, 이 공식 구문에서 $\hat{\beta}$ 은 명백히 최소 오차 제곱법 계수 추정치 결과 값들의 통합 벡터를 강하게 지칭 묘사(denotes) 합니다. 수학 표기법 $|\beta|_2$ 은 벡터의 $\ell_2$ 놈(norm, “엘 투(ell 2)” 제재 규범으로 발음)을 직접 지칭 묘사하며, 수리 $|\beta|_2 = \sqrt{\sum</em>{j=1}^p \beta_j^2}$ 통계 공식으로 정의됩니다. 이는 0에서 출발한 벡터 $\beta$ 의 측정 유클리드 거리를 평가 측정합니다. $\lambda$ 변수가 점차 증가하면서 유도 계산된 $\hat{\beta}<em>{\lambda}^R$ 항목 결과의 도출 $\ell_2$ 놈 분자 수치 결과는 무조건 언제나 일관되게 감쇠 감소할 것이고, 결국 분수 비율식 $|\hat{\beta}</em>{\lambda}^R|_2 / |\hat{\beta}|_2$ 수치 역시 반드시 수반 감소합니다. 후방의 분수량 결괏값 결과는 1 ( $\lambda = 0$ 이라 가정될 경우, 이런 가정 특수 상황 케이스 하에서는 릿지 회귀 계수 추정치가 도리어 최소 제곱 추정치와 동일하므로 양측 $\ell_2$ 놈 계산값 통계 역시 동일할 것이므로) 부터 종착 0 ( $\lambda = \infty$ 극한 다다를 무렵, 이 경우 예측 릿지 회귀 추정치가 0으로 채워진 빈 제로 벡터가 되고 대응 $\ell_2$ 놈 계산값 통계 역시 0이 되므로) 범위 사이에 분포합니다. 그러므로 우리는 그림 6.4 오른쪽 패널 $x$ 축 상에 남겨진 위치를 예측 릿지 회귀 계수 추정치가 얼마나 0을 향해 수축 마모 마진 퇴화되었는지 증명하는 징수 산정 양(amount) 값으로 생각 간주해 볼 수 있습니다; 작은 수치는 그들이 0에 지극히 가깝도록 압축 극단 수축 소결되었다는 사실을 증거 뜻(indicates) 합니다.</p>
+
+<p>The standard least squares coefficient estimates discussed in Chapter 3 are <em>scale equivariant</em> : multiplying $X_j$ by a constant $c$ simply leads to a scaling of the least squares coefficient estimates by a factor of $1/c$. In other words, regardless of how the $j$th predictor is scaled, $X_j \hat{\beta}<em>j$ will remain the same. In contrast, the ridge regression coefficient estimates can change _substantially</em> when multiplying a given predictor by a constant. For instance, consider the <code class="language-plaintext highlighter-rouge">income</code> variable, which is measured in dollars. One could reasonably have measured income in thousands of dollars, which would result in a reduction in the observed values of <code class="language-plaintext highlighter-rouge">income</code> by a factor of 1,000. Now due to the sum of squared coefficients term in the ridge regression formulation (6.5), such a change in scale will not simply cause the ridge regression coefficient estimate for <code class="language-plaintext highlighter-rouge">income</code> to change by a factor of 1,000. In other words, $X_j \hat{\beta}<em>{j,\lambda}^R$ will depend not only on the value of $\lambda$, but also on the scaling of the $j$th predictor. In fact, the value of $X_j \hat{\beta}</em>{j,\lambda}^R$ may even depend on the scaling of the <em>other</em> predictors! Therefore, it is best to apply ridge regression after <em>standardizing the predictors</em>, using the formula
+제 3장에서 폭넓게 거론된 표준 최소 제곱법 계수 추정치는 구조상 <strong>‘비례 동변(scale equivariant)’</strong> 특유 성향에 기반합니다: 타겟 변수 예측 개체 요소 $X_j$ 에 특정 상수 $c$ 단위를 기입해 곱하는 변환 조작 작업은 오로지 단지 도출 최소 제곱 추정 계수 결괏값을 다시 역산 스케일 비율 단위인 $1/c$ 상쇄 배수 편차 매개 인자(factor)로 줄여 축소 변동 치환 축소(scaling) 시키는 인과 부수 결과로 귀결(leads to) 성립됩니다. 다른 어조 말 표현으로 정리하자면, 특정 $j$번째 개별 관측 변수 단위를 아무리 조작 가공 단위 수리 변환(scaled) 한다 할지라도 무관하게(regardless of), 편차 보정을 마친 $X_j \hat{\beta}<em>j$ 조합 결과 연산 본질 자체는 흔들림 없이 결국 완벽히 기존 값 상태를 고정 유지 보존(remain) 동결 척도 보존 할 것입니다. 반면에 이와 대조적으로 상반되게, 이른바 릿지 회귀 추정 결론 계수 추정 통계 결과는 주어진 할당 관측 예측 변수에 그저 일개 단위를 단지 상수치로 한 번 곱했을 뿐이라 해도, 실제 추정 판도 체감 수치가 파격적으로 기하 유의 급격 <strong>상당히(substantially)</strong> 변화 변동 전파 변질 요동 전도 변질(change) 을 크게 엄청 겪을 수 있습니다. 예를 다시 재차 들자면, 기초 달러 화폐 기준 단가 측정 시스템 척도로 계측 관측 평가 책정치 측정(measured) 단위 산출된 <code class="language-plaintext highlighter-rouge">income</code> 화폐 변수를 상상 생각해 고려 주시 살펴 보십시오. 임의의 누군가는 정말 충분 합리 합당(reasonably) 융통 편의 상 화폐 소득의 측정 기본 방편 수치를 도출 달러 단가가 아닌 1,000 기준 천 달러 화귀 묶음 기축 단위(thousands of dollars) 마진 척도 스케일 기준(measured) 단위 척도로 재산 재측 책정(measured) 할 수 있었을 것이며, 이는 필시 결국 기존 등록 수록 관측 포착 기록 도출 기재 관측(observed) 되어 지표화된 <code class="language-plaintext highlighter-rouge">income</code> 단위 측정치 물량 값을 강제 약 1,000 배 축소 배수 인자 분수 배율(factor) 만큼 감소 위축 동반 수축 강등 삭감 단기 축소 (reduction) 하향 파동 결과 인과 축소 삭감 결과를 유도 귀착 직결 조작 부응 수반 매개 배수 결과 반환 낳게(result in) 통과 창출 초래 반환 낳게 할 것입니다. 자 이제 이럴 시 릿지 함수 구조 공식 수식(6.5) 평가 항목 정립 조항 식에 각인 포진 속박 기재 고정 명시(formulation) 위치한 파라미터 계수 산술 제곱 통합 총합 수리(sum of squared coefficients) 체제 성분 항 단위 계산 항목 부분 덕분 인과 구조 기 전 탓 이유 까닭(due to) 으로, 그런 단순 단조로운 일방 지표 기본 체계 스케일 상 단순 측정 관측 크기 조작 변환 단위 파동 단위 조치(change in scale) 장개 사유는 단순히 직접 <code class="language-plaintext highlighter-rouge">income</code> 타겟 릿지 평가 추정 계수 해당 변수 항목을 순응 무사 무난 1,000 단위 역수 비율(factor) 만큼 비례 호환 상쇄 동반 연동 변동 전이 차등 단방 요동 파생 이변(change) 하게끔 단조 유도 유발 기인 단순 이끌 유도 초래(cause) 만들지 않을 것입니다. 다른 말로 이를 구조 풀자면, 공식 합산 $X_j \hat{\beta}</em>{j,\lambda}^R$ 곱셈 통계 결과 지표 수치는 오직 단독 인자 $\lambda$ 단일 변수값(value) 단위 크기 에만 상관 의존 추종 투합 의존(depend) 기댈 뿐 아니라 또한 아예 오히려 이 개별 객체 $j$ 번째 예측 변수 항목 스케일 마진 크기 단면 단위 크기(scaling) 조작 변동 인자 팩터 지표 에도 함께 단단 얽혀 연관 귀착 결합 의존(depend) 연동 종속 연동될 것입니다. 사실 까고 기실 사실관(In fact), 저 도출 $X_j \hat{\beta}_{j,\lambda}^R$ 결과 지표 산출 변동 수치는 아예 완전히 상관 엉뚱한 타 다른 외부 나머지 주변 기타(other) 주변 잉여 예측 항목 변수 유닛들의 단위 스케일 척도 단면 조정(scaling) 단위 크기 조작 변동 스케일 지표 스케일 단위 크기 결과 에까지도 엮여 직접 결속 요동 연동 매듭 귀속 통제 연동 의존(depend) 영향 의탁 파급 작용(depend) 을 탈 수조차 수렴(even) 입습니다 영향 의지 통달 될 수 영향 관조 영향(even) 관여 영향 탈 수조차 존재 있습니다! 그러므로, 최적 결론 방침 방식(best) 답은 이 표준 공식 수리 지표를 전용 차용 픽업 개입 동조 도용 투입 통달 응용 수단 이용 활용 강제 기입 발판 치환 기용(using) 투사 발판 조작 삼아 하여금, 타겟 모델 투입 변동 객체 예측 타겟 변수 유닛들을 선제 징수 미리 우선 사전에 <strong>‘예측 변수 표준화 세탁 조작(standardizing the predictors)’</strong> 단계를 먼저 전처리 통과 강제 선도 예속 조작 거친 단행 통과 시행 강제 치른 전단 선도 선 치른 거친 이후에(after) 그다음 비로소 릿지 구조 처리를 전격 강제 적용 구동 대입 접목 동조 결탁 접목 대입 편제 대입 착수 집어 적용 작동(apply) 개시(apply) 개입 접목 도입 시도 추진 하는 것입니다.</p>
+
+\[\tilde{x}_{ij} = \frac{x_{ij}}{\sqrt{\frac{1}{n} \sum_{i=1}^n (x_{ij} - \bar{x}_j)^2}} \quad (6.6)\]
+
+<p>so that they are all on the same scale. In (6.6), the denominator is the estimated standard deviation of the $j$th predictor. Consequently, all of the standardized predictors will have a standard deviation of one. As a result the final fit will not depend on the scale on which the predictors are measured. In Figure 6.4, the $y$-axis displays the standardized ridge regression coefficient estimates—that is, the coefficient estimates that result from performing ridge regression using standardized predictors. 
+그래야 모든 변수들이 전부 똑같은 스케일 상에 위치하게 됩니다. 공식 (6.6)에서 계산 분모 수치는 $j$번째 예측 변수에 대해 추정된 결론 표준 편차 결과값입니다. 결과적으로 모든 표준화된 예측 변수는 무조건 1의 수리 통계 표준 편차를 가지게 됩니다. 그에 따른 연쇄 결과로 모델 결론 최종 적합 궤적은 변수가 측정된 최초 스케일에 절대 의존하지 않게 됩니다. 그림 6.4에서 세로축 $y$ 선은 미리 통계 표준화된 릿지 회귀 계수 추정치들을 표시합니다 — 다시 말해, 투입 예측 변수를 선행 표준화하고 나서 계산 수행한 릿지 회귀의 산출 계수 결과치들입니다.</p>
+
+<p>Why Does Ridge Regression Improve Over Least Squares? 
+왜 리지 회귀 기법이 최소 제곱법에 비해 성능이 향상될까요?</p>
+
+<p>Ridge regression’s advantage over least squares is rooted in the <em>bias-variance trade-off</em>. As $\lambda$ increases, the flexibility of the ridge regression fit decreases, leading to decreased variance but increased bias. This is illustrated in the left-hand panel of Figure 6.5, using a simulated data set containing $p = 45$ predictors and $n = 50$ observations. The green curve in the left-hand panel of Figure 6.5 displays the variance of the ridge regression predictions as a function of $\lambda$. At the least squares coefficient estimates, which correspond to ridge regression with $\lambda = 0$, the variance is high but there is no bias. But as $\lambda$ increases, the shrinkage of the ridge coefficient estimates leads to a substantial reduction in the variance of the predictions, at the expense of a slight increase in bias. Recall that the test mean squared error (MSE), plotted in purple, is closely related to the variance plus the squared bias. For values of $\lambda$ up to about 10, the variance decreases rapidly, with very little increase in bias, plotted in black. Consequently, the $\text{MSE}$ drops considerably as $\lambda$ increases from 0 to 10. Beyond this point, the decrease in variance due to increasing $\lambda$ slows, and the shrinkage on the coefficients causes them to be significantly underestimated, resulting in a large increase in the bias. The minimum $\text{MSE}$ is achieved at approximately $\lambda = 30$. Interestingly, because of its high variance, the $\text{MSE}$ associated with the least squares fit, when $\lambda = 0$, is almost as high as that of the null model for which all coefficient estimates are zero, when $\lambda = \infty$. However, for an intermediate value of $\lambda$, the $\text{MSE}$ is considerably lower. 
+최소 제곱법 대비 릿지의 강점은 <strong>‘편향-분산 절충(bias-variance trade-off)’</strong> 에 뿌리를 둡니다. 조율 $\lambda$ 가 커짐에 따라, 릿지 적합 추정의 유연성은 감소하며 분산이 크게 하락하지만 편향은 어느 정도 증가합니다. 이는 $p = 45$ 개 변수들과 $n = 50$ 개 관측치를 갖춘 시뮬레이션 데이터 세트를 사용하여, 그림 6.5 왼쪽 패널에서 투명하게 표현됩니다. 왼쪽 패널의 초록색 곡선은 릿지 예측 분산을 $\lambda$ 의 함수로 시각 노출합니다. 조율 $\lambda = 0$ 릿지에 해당하는 최소 제곱법 기준에서는 분산은 기형적으로 높지만 편향 오류는 전무합니다. 그러나 $\lambda$ 가 점차 상승함에 따라, 릿지 파라미터 계수 수축 조치는 약간의 편향 증가를 대가로 분산 폭을 <strong>상당히(substantial)</strong> 감소 시킵니다. 보라색 곡선 검증 테스트 오류 스코어 $\text{MSE}$ 평가치는 모델의 자체 분산(variance) 과 모델의 편향 제곱 단위(squared bias) 를 단순 합산한 값과 밀접하게 연관되어 있음을 기억하십시오. $\lambda$ 값이 약 10 에 도달하기까지, 분산은 일제히 급격하게 감소하며 검은 선으로 표기된 편향 스코어는 아주 조금 증가할 뿐입니다. 결과적으로 (Consequently), 테스트 $\text{MSE}$ 수치는 $\lambda$ 가 0에서 10 도달 위치로 점차 상승함에 따라 크게 급강하합니다 (drops). 이 분수 기점을 넘어서게 되면 점점 $\lambda$ 에 기인한 분산폭 감소 효율은 현저히 둔화되고 한편 릿지의 징계 수축 현상은 계수들을 과소평가 되도록 유도하여 거대한 편향의 상승 폭주를 야기합니다. 최저 종점 $\text{MSE}$ 성적은 $\lambda = 30$ 지점 인근 일대에서 마침내 달성 안착됩니다. 흥미롭게도 예측 분산이 과도하게 커서 $\lambda = 0$ 최소 제곱법 모형의 $\text{MSE}$ 결과 점수는 $\lambda = \infty$ 가 될 때 수축 제재로 계수 추정치가 모든게 제로화 되어버린 ‘빈 깡통 모델(Null Model)’의 최악 $\text{MSE}$ 성적과 거의 상응 맞먹습니다. 반면 중간의 최적 $\lambda$ 값 사이 영역에서는, $\text{MSE}$ 가 확연하게 더 낮게 도출됩니다.</p>
+
+<p>The right-hand panel of Figure 6.5 displays the same curves as the left-hand panel, this time plotted against the $\ell_2$ norm of the ridge regression coefficient estimates divided by the $\ell_2$ norm of the least squares estimates. Now as we move from left to right, the fits become more flexible, and so the bias decreases and the variance increases. 
+그림 6.5의 우단 오른편 패널 지표는 앞서 왼쪽 면에서 다루어진 패널과 완전히 동일 기조 지표 곡선 수치를 재현합니다; 허나 이번 파트에서는 $x$-가로축 기준이 순정 최소 오차 제곱 추정치의 $\ell_2$ 놈 단위 수치로 릿지 예측 추정치의 $\ell_2$ 놈 계산값을 나눈 비율 수치로 환산되어 나타납니다. 자 이제 해당 플롯 영역 왼쪽에서부터 오른쪽 방향으로 시선을 점차 이동해 나갈 수록, 모델 적합의 유연성은 훨씬 점진 유연해 지며 이는 모델의 편향 오류지표 (bias) 는 순차 하락하게 되고 반대로 모델의 분산 (and the variance) 은 거꾸로 상향 증가하게 됨을 뜻합니다.</p>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

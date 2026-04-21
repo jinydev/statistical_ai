@@ -5,7 +5,7 @@ title: "index"
 
 # **`Out[31]:`** `array([231788.32])` 
 
-Obviously choosing _λ_ = 0 _._ 01 is arbitrary, so we will use cross-validation or the validation-set approach to choose the tuning parameter _λ_ . The object `GridSearchCV()` allows exhaustive grid search to choose such a parameter. We first use the validation set method to choose _λ_ . 
+Obviously choosing $\lambda = 0.01$ is arbitrary, so we will use cross-validation or the validation-set approach to choose the tuning parameter $\lambda$ . The object `GridSearchCV()` allows exhaustive grid search to choose such a parameter. We first use the validation set method to choose $\lambda$ . 
 
 ```
 Grid
@@ -68,7 +68,7 @@ cv=kfold)
 grid_r2.fit(X,Y)
 ```
 
-Finally, let’s plot the results for cross-validated _R_[2] . 
+Finally, let’s plot the results for cross-validated $R^2$ . 
 
 ```
 In [36]:r2_fig,ax=subplots(figsize=(8,8))

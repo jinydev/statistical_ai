@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -515,7 +514,7 @@
         <div class="bd-content ps-lg-4">
             <h1 id="out30-array1342140"><strong><code class="language-plaintext highlighter-rouge">Out[30]:</code></strong> <code class="language-plaintext highlighter-rouge">array([134214.0])</code></h1>
 
-<p>The test $\text{MSE}$ is 1.342e+05. Note that if we had instead simply fit a model with just an intercept, we would have predicted each test observation using the mean of the training observations. We can get the same result by fitting a ridge regression model with a <em>very</em> large value of <em>λ</em> . Note that <code class="language-plaintext highlighter-rouge">1e10</code> means 10[10] .</p>
+<p>The test $\text{MSE}$ is 1.342e+05. Note that if we had instead simply fit a model with just an intercept, we would have predicted each test observation using the mean of the training observations. We can get the same result by fitting a ridge regression model with a <em>very</em> large value of $\lambda$ . Note that <code class="language-plaintext highlighter-rouge">1e10</code> means 10^{10} .</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [31]:ridge.alpha=1e10
 results=skm.cross_validate(ridge,

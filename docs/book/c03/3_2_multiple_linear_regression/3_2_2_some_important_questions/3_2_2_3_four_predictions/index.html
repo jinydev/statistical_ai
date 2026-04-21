@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -513,17 +512,30 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="four-predictions">Four: Predictions</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_2_2_2_three_model_fit/index.html">&lt; 3.2.2.2 Three Model Fit</a></td>
+      <td><a href="../../../3_3_other_considerations_in_the_regression_model/index.html">3.3 Other Considerations In The Regression Model &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Once we have fit the multiple regression model, it is straightforward to apply (3.21) in order to predict the response Y on the basis of a set of values for the predictors $X_1$ <em>, X</em> 2 <em>, . . . , Xp</em> . However, there are three sorts of uncertainty associated with this prediction.</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="four-predictions">Four: Predictions</h1>
+
+<p>Once we have fit the multiple regression model, it is straightforward to apply (3.21) in order to predict the response $Y$ on the basis of a set of values for the predictors $X_1, X_2, \dots, X_p$.</p>
+
+<p>However, there are three sorts of uncertainty associated with this prediction.</p>
 
 <ol>
-  <li>The coefficient estimates $\hat{\beta}<em>0, \hat{\beta}_1, \dots, \hat{\beta}_p$ are estimates for $\beta_0, \beta_1, \dots, \beta_p$ . That is, the _least squares plane</em></li>
+  <li>The coefficient estimates $\hat{\beta}<em>0, \hat{\beta}_1, \dots, \hat{\beta}_p$ are estimates for $\beta_0, \beta_1, \dots, \beta_p$. That is, the _least squares plane</em></li>
 </ol>
 
 \[\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \dots + \hat{\beta}_p X_p\]
-
-<p>90 3. Linear Regression</p>
 
 <p>is only an estimate for the <em>true population regression plane</em></p>
 
@@ -532,21 +544,51 @@
 <p>The inaccuracy in the coefficient estimates is related to the <em>reducible error</em> from Chapter 2. We can compute a <em>confidence interval</em> in order to determine how close $\hat{Y}$ will be to $f(X)$.</p>
 
 <ol>
-  <li>
-    <p>Of course, in practice assuming a linear model for $f(X)$ is almost always an approximation of reality, so there is an additional source of potentially reducible error which we call <em>model bias</em> . So when we use a linear model, we are in fact estimating the best linear approximation to the true surface. However, here we will ignore this discrepancy, and operate as if the linear model were correct.</p>
-  </li>
-  <li>
-    <p>Even if we knew $f(X)$—that is, even if we knew the true values for $\beta_0, \beta_1, \dots, \beta_p$ —the response value cannot be predicted perfectly because of the random error \epsilon in the model (3.20). In Chapter 2, we referred $\hat{Y}$ ? We useto this <em>prediction</em> as the <em>irreducibleintervals</em> to <em>error</em> answer. Howthismuchquestion.will Y Predictionvary from intervals are always wider than confidence intervals, because they incorporate both the error in the estimate for $f(X)$ (the reducible error) and the uncertainty as to how much an individual point will differ from the population regression plane (the irreducible error).</p>
-  </li>
+  <li>Of course, in practice assuming a linear model for $f(X)$ is almost always an approximation of reality, so there is an additional source of potentially reducible error which we call <em>model bias</em>.</li>
 </ol>
 
-<p>We use a <em>confidence interval</em> to quantify the uncertainty surrounding confidence the <em>average</em> <code class="language-plaintext highlighter-rouge">sales</code> over a large number of cities. For example, given that interval $100\,000 is spent on <code class="language-plaintext highlighter-rouge">TV</code> advertising and $20\,000 is spent on <code class="language-plaintext highlighter-rouge">radio</code> advertising in each city, the 95 % confidence interval is [10 <em>,</em> 985 <em>,</em> 11 <em>,</em> 528]. We interpret this to mean that 95 % of intervals of this form will contain the true value of $f(X)$.[9] On the other hand, a <em>prediction interval</em> can be used to quantify the prediction uncertainty surrounding <code class="language-plaintext highlighter-rouge">sales</code> for a <em>particular</em> city. Given that $100\,000 is interval spent on <code class="language-plaintext highlighter-rouge">TV</code> advertising and $20\,000 is spent on <code class="language-plaintext highlighter-rouge">radio</code> advertising in that city the 95 % prediction interval is [7 <em>,</em> 930 <em>,</em> 14 <em>,</em> 580]. We interpret this to mean that 95 % of intervals of this form will contain the true value of Y for this city. Note that both intervals are centered at 11 <em>,</em> 256, but that the prediction interval is substantially wider than the confidence interval, reflecting the increased uncertainty about <code class="language-plaintext highlighter-rouge">sales</code> for a given city in comparison to the average <code class="language-plaintext highlighter-rouge">sales</code> over many locations.</p>
+<p>So when we use a linear model, we are in fact estimating the best linear approximation to the true surface.</p>
+
+<p>However, here we will ignore this discrepancy, and operate as if the linear model were correct.</p>
+
+<ol>
+  <li>Even if we knew $f(X)$ — that is, even if we knew the true values for $\beta_0, \beta_1, \dots, \beta_p$ — the response value cannot be predicted perfectly because of the random error $\epsilon$ in the model (3.20).</li>
+</ol>
+
+<p>In Chapter 2, we referred to this as the <em>irreducible error</em>. How much will $Y$ vary from $\hat{Y}$? We use <em>prediction intervals</em> to answer this question.</p>
+
+<p>Prediction intervals are always wider than confidence intervals, because they incorporate both the error in the estimate for $f(X)$ (the reducible error) and the uncertainty as to how much an individual point will differ from the population regression plane (the irreducible error).</p>
+
+<p>We use a <em>confidence interval</em> to quantify the uncertainty surrounding the <em>average</em> <code class="language-plaintext highlighter-rouge">sales</code> over a large number of cities.</p>
+
+<p>For example, given that $$100,000$ is spent on <code class="language-plaintext highlighter-rouge">TV</code> advertising and $$20,000$ is spent on <code class="language-plaintext highlighter-rouge">radio</code> advertising in each city, the $95\%$ confidence interval is $[10,985, 11,528]$.</p>
+
+<p>We interpret this to mean that $95\%$ of intervals of this form will contain the true value of $f(X)$.[9]</p>
 
 <blockquote>
-  <p>9In other words, if we collect a large number of data sets like the <code class="language-plaintext highlighter-rouge">Advertising</code> data set, and we construct a confidence interval for the average <code class="language-plaintext highlighter-rouge">sales</code> on the basis of each data set (given $100\,000 in <code class="language-plaintext highlighter-rouge">TV</code> and $20\,000 in <code class="language-plaintext highlighter-rouge">radio</code> advertising), then 95 % of these confidence intervals will contain the true value of average <code class="language-plaintext highlighter-rouge">sales</code> .</p>
+  <p>[9] In other words, if we collect a large number of data sets like the <code class="language-plaintext highlighter-rouge">Advertising</code> data set, and we construct a confidence interval for the average <code class="language-plaintext highlighter-rouge">sales</code> on the basis of each data set (given $$100,000$ in <code class="language-plaintext highlighter-rouge">TV</code> and $$20,000$ in <code class="language-plaintext highlighter-rouge">radio</code> advertising), then $95\%$ of these confidence intervals will contain the true value of average <code class="language-plaintext highlighter-rouge">sales</code>.</p>
 </blockquote>
 
-<p>3.3 Other Considerations in the Regression Model 91</p>
+<p>On the other hand, a <em>prediction interval</em> can be used to quantify the uncertainty surrounding <code class="language-plaintext highlighter-rouge">sales</code> for a <em>particular</em> city.</p>
+
+<p>Given that $$100,000$ is spent on <code class="language-plaintext highlighter-rouge">TV</code> advertising and $$20,000$ is spent on <code class="language-plaintext highlighter-rouge">radio</code> advertising in that city the $95\%$ prediction interval is $[7,930, 14,580]$.</p>
+
+<p>We interpret this to mean that $95\%$ of intervals of this form will contain the true value of $Y$ for this city.</p>
+
+<p>Note that both intervals are centered at 11,256, but that the prediction interval is substantially wider than the confidence interval, reflecting the increased uncertainty about <code class="language-plaintext highlighter-rouge">sales</code> for a given city in comparison to the average <code class="language-plaintext highlighter-rouge">sales</code> over many locations.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_2_2_2_three_model_fit/index.html">&lt; 3.2.2.2 Three Model Fit</a></td>
+      <td><a href="../../../3_3_other_considerations_in_the_regression_model/index.html">3.3 Other Considerations In The Regression Model &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -513,23 +512,41 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="out31-true"><strong><code class="language-plaintext highlighter-rouge">Out[31]:</code></strong> <code class="language-plaintext highlighter-rouge">True</code></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4.7.3 Linear Discriminant Analysis</a></td>
+      <td><a href="../../4_7_4_quadratic_discriminant_analysis/index.html">4.7.4 Quadratic Discriminant Analysis &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>If we wanted to use a posterior probability threshold other than 50% in order to make predictions, then we could easily do so. For instance, suppose that we wish to predict a market decrease only if we are very certain that the</p>
+<h1 id="out31-true"><strong><code class="language-plaintext highlighter-rouge">Out[31]:</code></strong> <code class="language-plaintext highlighter-rouge">True</code></h1>
 
-<p>4.7 Lab: Logistic Regression, LDA, QDA, and KNN 181</p>
+<p>If we wanted to use a posterior probability threshold other than 50% in order to make predictions, then we could easily do so. For instance, suppose that we wish to predict a market decrease only if we are very certain that the market will indeed decrease on that day — say, if the posterior probability is at least 90%. We know that the first column of <code class="language-plaintext highlighter-rouge">lda_prob</code> corresponds to the label <code class="language-plaintext highlighter-rouge">Down</code> after having checked the <code class="language-plaintext highlighter-rouge">classes_</code> attribute, hence we use the column index 0 rather than 1 as we did above.</p>
 
-<p>market will indeed decrease on that day — say, if the posterior probability is at least 90%. We know that the first column of <code class="language-plaintext highlighter-rouge">lda_prob</code> corresponds to the label <code class="language-plaintext highlighter-rouge">Down</code> after having checked the <code class="language-plaintext highlighter-rouge">classes_</code> attribute, hence we use the column index 0 rather than 1 as we did above.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [32]:np.sum(lda_prob[:,0]&gt;0.9)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">32</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">lda_prob</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[32]:0
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">32</span><span class="p">]:</span> <span class="mi">0</span>
 </code></pre></div></div>
 
 <p>No days in 2005 meet that threshold! In fact, the greatest posterior probability of decrease in all of 2005 was 52.02%.</p>
 
-<p>The LDA classifier above is the first classifier from the <code class="language-plaintext highlighter-rouge">sklearn</code> library. We will use several other objects from this library. The objects follow a common structure that simplifies tasks such as cross-validation, which we will see in Chapter 5. Specifically, the methods first create a generic classifier without referring to any data. This classifier is then fit to data with the <code class="language-plaintext highlighter-rouge">fit()</code> method and predictions are always produced with the <code class="language-plaintext highlighter-rouge">predict()</code> method. This pattern of first instantiating the classifier, followed by fitting it, and then producing predictions is an explicit design choice of <code class="language-plaintext highlighter-rouge">sklearn</code> . This uniformity makes it possible to cleanly copy the classifier so that it can be fit on different data; e.g. different training sets arising in cross-validation. This standard pattern also allows for a predictable formation of workflows.</p>
+<p>The LDA classifier above is the first classifier from the <code class="language-plaintext highlighter-rouge">sklearn</code> library. We will use several other objects from this library. The objects follow a common structure that simplifies tasks such as cross-validation, which we will see in Chapter 5. Specifically, the methods first create a generic classifier without referring to any data. This classifier is then fit to data with the <code class="language-plaintext highlighter-rouge">fit()</code> method and predictions are always produced with the <code class="language-plaintext highlighter-rouge">predict()</code> method. This pattern of first instantiating the classifier, followed by fitting it, and then producing predictions is an explicit design choice of <code class="language-plaintext highlighter-rouge">sklearn</code>. This uniformity makes it possible to cleanly copy the classifier so that it can be fit on different data; e.g. different training sets arising in cross-validation. This standard pattern also allows for a predictable formation of workflows.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4.7.3 Linear Discriminant Analysis</a></td>
+      <td><a href="../../4_7_4_quadratic_discriminant_analysis/index.html">4.7.4 Quadratic Discriminant Analysis &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

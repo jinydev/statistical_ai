@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_1_simple_linear_regression/3_1_2_assessing_the_accuracy_of_the_coefficient_estimates/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c03/3_1_simple_linear_regression/3_1_2_assessing_the_accuracy_of_the_coefficient_estimates/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_1_simple_linear_regression/3_1_2_assessing_the_accuracy_of_the_coefficient_estimates/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c03/3_1_simple_linear_regression/3_1_2_assessing_the_accuracy_of_the_coefficient_estimates/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/">03. Linear Regression</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_1_simple_linear_regression/">3 1 simple linear regression</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_1_simple_linear_regression/3_1_2_assessing_the_accuracy_of_the_coefficient_estimates/">3 1 2 assessing the accuracy of the coefficient estimates</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <blockquote>
+  <p>💡 <strong>학습 팁:</strong> 통계 수식과 용어가 낯설고 어렵다면? 아주 쉽게 풀어쓴 <a href="./trans2.html">📖 쉬운 해설(의역본) 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_1_1_estimating_the_coefficients/trans1.html">&lt; 3.1.1 Estimating the Coefficients</a></td>
+      <td><a href="../3_1_3_assessing_the_accuracy_of_the_model/trans1.html">3.1.3 Assessing the Accuracy of the Model &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="312-assessing-the-accuracy-of-the-coefficient-estimates">3.1.2 Assessing the Accuracy of the Coefficient Estimates</h1>
+
+<h1 id="312-계수-추정치의-정확도-평가">3.1.2 계수 추정치의 정확도 평가</h1>
+
+<p>Recall from (2.1) that we assume that the <em>true</em> relationship between $X$ and $Y$ takes the form $Y = f(X) + \epsilon$ for some unknown function $f$, where $\epsilon$ is a mean-zero random error term.</p>
+
+<p>(2.1)에서 살펴보았듯이, 우리는 $X$ 와 $Y$ 사이의 <em>실제(true)</em> 관계가 어떤 미지의 함수 $f$ 에 대해 $Y = f(X) + \epsilon$ 의 형태를 띤다고 가정하며, 여기서 $\epsilon$ 은 평균이 0인 무작위 오차항입니다.</p>
+
+<p>If $f$ is to be approximated by a linear function, then we can write this relationship as</p>
+
+<p>만약 $f$ 가 선형 함수로 근사될 수 있다면, 우리는 이 관계를 다음과 같이 쓸 수 있습니다.</p>
+
+\[Y = \beta_0 + \beta_1 X + \epsilon \quad (3.5)\]
+
+<p>Here $\beta_0$ is the intercept term—that is, the expected value of $Y$ when $X = 0$, and $\beta_1$ is the slope—the average increase in $Y$ associated with a one-unit increase in $X$.</p>
+
+<p>여기서 $\beta_0$ 는 절편 항입니다—즉 $X = 0$ 일 때 기대되는 $Y$ 의 값입니다, 그리고 $\beta_1$ 은 기울기입니다— $X$ 가 1단위 증가할 때 연관된 $Y$ 의 평균적인 증가량입니다.</p>
+
+<p>The error term is a catch-all for what we miss with this simple model: the true relationship is probably not linear, there may be other variables that cause variation in $Y$, and there may be measurement error.</p>
+
+<p>오차항은 이 단순한 모델에서 우리가 놓치는 모든 것을 포괄합니다: 실제 관계는 아마 선형이 아닐 것이고, $Y$ 에 변동을 유발하는 다른 변수들이 있을 수 있으며, 측정 오차가 존재할 수도 있습니다.</p>
+
+<p>We typically assume that the error term is independent of $X$.</p>
+
+<p>우리는 일반적으로 오차항이 $X$ 와 독립이라고 가정합니다.</p>
+
+<p><strong>==&gt; picture [284 x 145] intentionally omitted &lt;==</strong></p>
+
+<p><strong>—– Start of picture text —–</strong><br />
+5 6 7 8 9 β 0 β 1<br />β 0<br /> 2.2<br /> 2.3<br /> 2.15<br /> 2.5<br /> 2.5<br /> 2.11<br /> 3<br /> 3<br />RSS<br />0.06<br />β 1 0.05<br />0.04<br />0.03<br /><strong>—– End of picture text —–</strong><br /></p>
+
+<p><strong>FIGURE 3.2.</strong> <em>Contour and three-dimensional plots of the RSS on the</em> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>data, using</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>as the response and</em> <code class="language-plaintext highlighter-rouge">TV</code> <em>as the predictor. The red dots correspond to the least squares estimates $\hat{\beta}_0$ and $\hat{\beta}_1$, given by (3.4).</em></p>
+
+<p><strong>FIGURE 3.2.</strong> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>데이터에 대한 RSS(잔차 제곱합)의 등고선 및 3차원 플롯이며,</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>를 응답 변수로,</em> <code class="language-plaintext highlighter-rouge">TV</code> <em>를 예측 변수로 사용했습니다. 붉은 점들은 (3.4) 식에 의해 주어지는 최소 제곱 추정치 $\hat{\beta}_0$ 와 $\hat{\beta}_1$ 에 해당합니다.</em></p>
+
+<p>The model given by (3.5) defines the <em>population regression line</em>, which is the best linear approximation to the true relationship between $X$ and $Y$.$^1$</p>
+
+<p>(3.5) 차식으로 주어지는 모델은 <em>모집단 회귀선(population regression line)</em> 을 정의하며, 이는 $X$ 와 $Y$ 사이의 실제 관계에 대한 가장 훌륭한 선형 근사치입니다.$^1$</p>
+
+<p>The least squares regression coefficient estimates (3.4) characterize the <em>least squares line</em> (3.2).</p>
+
+<p>최소 제곱 회귀 계수 추정치 (3.4) 식은 <em>최소 제곱선(least squares line)</em> 인 (3.2) 식을 특징짓습니다.</p>
+
+<p>The left-hand panel of Figure 3.3 displays these two lines in a simple simulated example.</p>
+
+<p>그림 3.3의 왼쪽 패널은 간단한 시뮬레이션 예제 안에서 이 두 선을 보여줍니다.</p>
+
+<p>We created 100 random $X$s, and generated 100 corresponding $Y$s from the model</p>
+
+<p>우리는 100개의 무작위 $X$ 들을 생성했고, 다음 모델로부터 상응하는 100개의 $Y$ 들을 생성했습니다.</p>
+
+\[Y = 2 + 3X + \epsilon \quad (3.6)\]
+
+<p>where $\epsilon$ was generated from a normal distribution with mean zero.</p>
+
+<p>여기서 $\epsilon$ 은 평균이 0인 정규 분포로부터 생성되었습니다.</p>
+
+<p>The red line in the left-hand panel of Figure 3.3 displays the <em>true</em> relationship, $f(X) = 2 + 3X$, while the blue line is the least squares estimate based on the observed data.</p>
+
+<p>그림 3.3의 왼쪽 패널에 있는 붉은 선은 $f(X) = 2 + 3X$ 이라는 <em>실제(true)</em> 관계를 보여주며, 반면 파란 선은 관측된 데이터를 바탕으로 한 최소 제곱 추정치입니다.</p>
+
+<p>The true relationship is generally not known for real data, but the least squares line can always be computed using the coefficient estimates given in (3.4).</p>
+
+<p>실제 관계는 일반적으로 실제 데이터에 대해서는 알려져 있지 않지만, 최소 제곱선은 (3.4) 식에 주어진 계수 추정치를 사용하여 언제나 계산될 수 있습니다.</p>
+
+<p>In other words, in real applications, we have access to a set of observations from which we can compute the least squares line; however, the population regression line is unobserved.</p>
+
+<p>다시 말해, 실제 응용에서는 최소 제곱선을 계산할 수 있는 일련의 관측 집합에 접근할 수 있습니다; 하지만, 모집단 회귀선은 관측되지 않습니다.</p>
+
+<p>In the right-hand panel of Figure 3.3 we have generated ten different data sets from the model given by (3.6) and plotted the corresponding ten least squares lines.</p>
+
+<p>그림 3.3의 오른쪽 패널에서는 식 (3.6) 에 주어진 모델로부터 10개의 다른 데이터 세트를 생성하고 해당되는 10개의 최소 제곱선을 그렸습니다.</p>
+
+<p>Notice that different data sets generated from the same true model result in slightly different least squares lines, but the unobserved population regression line does not change.</p>
+
+<p>동일하게 참인 모델에서 생성된 서로 다른 데이터 세트들은 약간씩 다른 최소 제곱선을 초래하지만, 관측되지 않는 모집단 회귀선은 변하지 않는다는 점에 주목하십시오.</p>
+
+<p>At first glance, the difference between the population regression line and the least squares line may seem subtle and confusing.</p>
+
+<p>언뜻 보기에, 모집단 회귀선과 최소 제곱선 사이의 차이는 미묘하고 혼란스러워 보일 수 있습니다.</p>
+
+<p>We only have one data set, and so what does it mean that two different lines describe the relationship between the predictor and the response?</p>
+
+<p>우리는 데이터 세트를 오직 하나만 가지고 있는데, 그렇다면 두 개의 서로 다른 선이 예측 변수와 응답 변수 간의 관계를 묘사한다는 것은 무엇을 의미할까요?</p>
+
+<p>Fundamentally, the concept of these two lines is a natural extension of the standard statistical approach of using information from a sample to estimate characteristics of a large population.</p>
+
+<p>근본적으로, 이 두 선의 개념은 표본으로부터 얻은 정보를 사용하여 거대한 모집단의 특성을 추정하는 표준 통계적 접근법의 자연스러운 확장입니다.</p>
+
+<p>For example, suppose that we are interested in knowing</p>
+
+<p>예를 들어, 우리가 알고 싶은 것이 있다고 가정해 봅시다.</p>
+
+<blockquote>
+  <p>1The assumption of linearity is often a useful working model.</p>
+</blockquote>
+
+<blockquote>
+  <p>1선형성이라는 가정은 종종 유용한 실무 모델입니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>However, despite what many textbooks might tell us, we seldom believe that the true relationship is linear.</p>
+</blockquote>
+
+<blockquote>
+  <p>하지만, 많은 교과서들이 우리에게 말해주는 바에도 불구하고, 우리는 실제 참인 관계가 선형일 것이라고 거의 믿지 않습니다.</p>
+</blockquote>
+
+<p><strong>==&gt; picture [315 x 158] intentionally omitted &lt;==</strong></p>
+
+<p><strong>—– Start of picture text —–</strong><br />
+−2 −1 0 1 2 −2 −1 0 1 2<br />X X<br />10 10<br />5 5<br />Y Y<br />0 0<br />−5 −5<br />−10 −10<br /><strong>—– End of picture text —–</strong><br /></p>
+
+<p><strong>FIGURE 3.3.</strong> <em>A simulated data set.</em> Left: <em>The red line represents the true relationship, f(X) = 2 + 3X, which is known as the population regression line. The blue line is the least squares line; it is the least squares estimate for f(X) based on the observed data, shown in black.</em> Right: <em>The population regression line is again shown in red, and the least squares line in dark blue. In light blue, ten least squares lines are shown, each computed on the basis of a separate random set of observations. Each least squares line is different, but on average, the least squares lines are quite close to the population regression line.</em></p>
+
+<p><strong>FIGURE 3.3.</strong> <em>시뮬레이션된 데이터 세트.</em> 왼쪽: <em>붉은 선은 실제 관계 $f(X) = 2 + 3X$ 를 나타내며, 이는 모집단 회귀선으로 알려져 있습니다. 파란 선은 최소 제곱선입니다; 이것은 관측된 데이터(검은색으로 표시됨)를 바탕으로 한 $f(X)$ 의 최소 제곱 추정치입니다.</em> 오른쪽: <em>모집단 회귀선이 다시 붉은색으로 표시되고, 최소 제곱선이 짙은 파란색으로 표시됩니다. 밝은 파란색으로는, 각기 분리된 무작위 관측 세트를 기반으로 각각 계산된 10개의 최소 제곱선이 표시됩니다. 각각의 최소 제곱선은 다르지만, 평균적으로 볼 때 최소 제곱선들은 모집단 회귀선에 꽤 가깝습니다.</em></p>
+
+<p>the population mean $\mu$ of some random variable $Y$.</p>
+
+<p>어떤 확률 변수 $Y$ 의 모집단 평균 $\mu$ 가 그 예시입니다.</p>
+
+<p>Unfortunately, $\mu$ is unknown, but we do have access to $n$ observations from $Y$, $y_1, \dots, y_n$, which we can use to estimate $\mu$.</p>
+
+<p>불행히도 $\mu$ 는 알려져 있지 않지만, 우리는 이를 추정하는 데 사용할 수 있는 $Y$ 로부터 온 $n$ 개의 관측치인 $y_1, \dots, y_n$ 에 접근 가능한 상태입니다.</p>
+
+<p>A reasonable estimate is $\hat{\mu} = \bar{y}$, where $\bar{y} = \frac{1}{n} \sum_{i=1}^n y_i$ is the sample mean.</p>
+
+<p>타당한 추정치는 $\hat{\mu} = \bar{y}$ 이며, 여기서 $\bar{y} = \frac{1}{n} \sum_{i=1}^n y_i$ 는 표본 평균입니다.</p>
+
+<p>The sample mean and the population mean are different, but in general the sample mean will provide a good estimate of the population mean.</p>
+
+<p>표본 평균과 모집단 평균은 다르지만, 일반적으로 표본 평균은 모집단 평균에 대한 훌륭한 추정치를 제공할 것입니다.</p>
+
+<p>In the same way, the unknown coefficients $\beta_0$ and $\beta_1$ in linear regression define the population regression line.</p>
+
+<p>같은 방식으로, 선형 회귀에 있는 미지의 계수 $\beta_0$ 와 $\beta_1$ 는 모집단 회귀선을 정의합니다.</p>
+
+<p>We seek to estimate these unknown coefficients using $\hat{\beta}_0$ and $\hat{\beta}_1$ given in (3.4).</p>
+
+<p>우리는 식 (3.4) 에 주어진 $\hat{\beta}_0$ 와 $\hat{\beta}_1$ 값을 사용하여 이 미지의 계수들을 추정하고자 노력합니다.</p>
+
+<p>These coefficient estimates define the least squares line.</p>
+
+<p>이러한 계수 추정치들이 곧장 최소 제곱선을 정의힙니다.</p>
+
+<p>The analogy between linear regression and estimation of the mean of a random variable is an apt one based on the concept of <em>bias</em>.</p>
+
+<p>선형 회귀와 무작위 변수의 평균 추정 사이의 비유는 <em>편향(bias)</em> 개념에 기반을 둔 적절한 비유 중 하나입니다.</p>
+
+<p>If we use the sample mean $\hat{\mu}$ to estimate $\mu$, this estimate is <em>unbiased</em>, in the sense that on average, we expect $\hat{\mu}$ to equal $\mu$.</p>
+
+<p>우리가 $\mu$ 를 추정하기 위해 표본 평균 $\hat{\mu}$ 를 쓴다면, 이 추정치는 평균적으로 우리가 $\hat{\mu}$ 가 $\mu$ 와 같아질 것이라고 기대한다는 측면에서 <em>불편향적(unbiased)</em> 입니다.</p>
+
+<p>What exactly does this mean?</p>
+
+<p>이것이 정확히 무엇을 의미할까요?</p>
+
+<p>It means that on the basis of one particular set of observations $y_1, \dots, y_n$, $\hat{\mu}$ might overestimate $\mu$, and on the basis of another set of observations, $\hat{\mu}$ might underestimate $\mu$.</p>
+
+<p>그 뜻은 $y_1, \dots, y_n$ 의 한정된 기저 관점 하에서 $\hat{\mu}$ 는 $\mu$ 를 과대평가할 수 있고, 다른 관측치 세트의 기저 관점에서는 $\hat{\mu}$ 가 $\mu$ 를 과소평가할 수 있다는 뜻입니다.</p>
+
+<p>But if we could average a huge number of estimates of $\mu$ obtained from a huge number of sets of observations, then this average would <em>exactly</em> equal $\mu$.</p>
+
+<p>하지만 만일 수많은 관측치 세트들로부터 얻어진 방대한 $\mu$ 의 추정치들을 모아 평균을 낼 수 있다면, 이 평균은 <em>정확하게(exactly)</em> $\mu$ 와 같아질 것입니다.</p>
+
+<p>Hence, an unbiased estimator does not <em>systematically</em> over- or under-estimate the true parameter.</p>
+
+<p>따라서, 불편향 추정치는 참된 매개변수를 <em>체계적으로(systematically)</em> 과대평가 하거나 과소평가하지 않습니다.</p>
+
+<p>The property of unbiasedness holds for the least squares coefficient estimates given by (3.4) as well: if we estimate $\beta_0$ and $\beta_1$ on the basis of a particular data set, then our estimates won’t be exactly equal to $\beta_0$ and $\beta_1$.</p>
+
+<p>불편향성의 속성은 식 (3.4) 로 주어지는 최소 제곱 계수 추정치들에 대해서도 동일하게 성립합니다: 우리가 특정 단면 데이터 세트를 근거 삼아 $\beta_0$ 와 $\beta_1$ 를 추정한다면, 우리의 추정치는 결코 $\beta_0$ 및 $\beta_1$ 과 완벽하게 같지는 않을 것입니다.</p>
+
+<p>But if we could average the estimates obtained over a huge number of data sets, then the average of these estimates would be spot on!</p>
+
+<p>하지만 우리가 수많은 방대한 데이터 세트에 걸쳐 획득한 추정치들을 전부 함께 모아들여 평균을 낼 수 있다면, 이 추정치들의 평균은 정확히 들어맞을 것입니다!</p>
+
+<p>In fact, we can see from the righthand panel of Figure 3.3 that the average of many least squares lines, each estimated from a separate data set, is pretty close to the true population regression line.</p>
+
+<p>실제로, 우리는 앞선 그림 3.3의 오른쪽 패널 도식을 통해, 분리된 개별 데이터 세트에서 각각 추정된 수많은 단위 최소 제곱선들의 평균 치세가 진짜 참된 모집단 회귀선 본 궤도 위치에 꽤 상당히 근접함을 두 눈으로 볼 수 있습니다.</p>
+
+<p>We continue the analogy with the estimation of the population mean $\mu$ of a random variable $Y$.</p>
+
+<p>무작위 변수 $Y$ 의 모집단 평균 $\mu$ 추정에 관한 비유를 계속해서 이어 나갑니다.</p>
+
+<p>A natural question is as follows: how accurate is the sample mean $\hat{\mu}$ as an estimate of $\mu$?</p>
+
+<p>한 가지 자연스런 의문사항이 다음과 같이 따릅니다: 표본 평균 $\hat{\mu}$ 은 $\mu$ 의 추정치로서 얼마나 정확할까요?</p>
+
+<p>We have established that the average of $\hat{\mu}$’s over many data sets will be very close to $\mu$, but that a single estimate $\hat{\mu}$ may be a substantial underestimate or overestimate of $\mu$.</p>
+
+<p>우리는 많은 데이터 집합에 걸쳐서 취합된 무수한 $\hat{\mu}$ 의 평균은 거의 $\mu$ 와 무척 가까울 것이라 정립했지만, 단일 추정 기록 단편 $\hat{\mu}$ 만큼은 자칫 본연 $\mu$ 치수에 대해 상당한 수치의 과소평가 혹은 과대평가 결과물이 오롯이 될 수 있음을 확립해 두었습니다.</p>
+
+<p>How far off will that single estimate of $\hat{\mu}$ be?</p>
+
+<p>저 단일 추정치 $\hat{\mu}$ 값은 (진짜 평균값에서부터)얼마나 이탈하게 될까요?</p>
+
+<p>In general, we answer this question by computing the <em>standard error</em> of $\hat{\mu}$, written as $\text{SE}(\hat{\mu})$.</p>
+
+<p>일반적으로 우리는 $\text{SE}(\hat{\mu})$ 라고 표기되는 $\hat{\mu}$ 의 <em>표준 오차(standard error)</em> 를 산출 계산함으로써 이 의문사항 질문에 대해 대답합니다.</p>
+
+<p>We have the well-known formula:</p>
+
+<p>우리에겐 이러한 익히 잘 알려져 있는 도출 공식이 마련되어 있습니다:</p>
+
+\[\text{Var}(\hat{\mu}) = \text{SE}(\hat{\mu})^2 = \frac{\sigma^2}{n} \quad (3.7)\]
+
+<p>where $\sigma$ is the standard deviation of each of the realizations $y_i$ of $Y$.$^2$</p>
+
+<p>위 기재 공식 구조에서 표지 기수 $\sigma$ 는 단위 $Y$ 가 발현된 편린 조각들인 $y_i$ 조각 개개인 하나하나가 각각 기여 조달하는 표준 편차 모치입니다.$^2$</p>
+
+<p>Roughly speaking, the standard error tells us the average amount that this estimate $\hat{\mu}$ differs from the actual value of $\mu$.</p>
+
+<p>대략적으로 무사히 말해 두자면, 이 기조 표준 오차 단위는 추정 수치값 $\hat{\mu}$ 결단 본단이 기존 실제 모수 평균 본값 $\mu$ 수치와 엇갈려 동떨어져 있는 평균적인 편차 폭의 크기가 산술 어느 정도 통단 수준인지를 곧장 우리에게 알려 전해 줍니다.</p>
+
+<p>Equation 3.7 also tells us how this deviation shrinks with $n$—the more observations we have, the smaller the standard error of $\hat{\mu}$.</p>
+
+<p>식 3.7 단위 등식은 또한 이러한 빗나가는 단별 편차가 지수 $n$ 치수에 맞물려 기조 어떻게 그 넓이 크기가 축소 감면되는지도 알려줍니다—우리가 가진 통치 관측치 표단 수가 거대 더 방대히 많아질수록, 표지 $\hat{\mu}$ 에 배당 적용되는 표준 수리 오차 본결 산치 단위는 더 작아집니다.</p>
+
+<p>In a similar vein, we can wonder how close $\hat{\beta}_0$ and $\hat{\beta}_1$ are to the true values $\beta_0$ and $\beta_1$.</p>
+
+<p>비슷한 맥락이 부여된 상황에서, 우리는 $\hat{\beta}_0$ 와 표수 $\hat{\beta}_1$ 수치가 본연 참값 모치 $\beta_0$ 와 지지 $\beta_1$ 단위에 대해 도달 과연 어떻게 수리적으로 일치 및 근접한 파지 모구 표본 상태일지 궁금증을 해 볼 제지 조달 수가 있습니다.</p>
+
+<p>To compute the standard errors associated with $\hat{\beta}_0$ and $\hat{\beta}_1$, we use the following formulas:</p>
+
+<p>$\hat{\beta}_0$ 기치 및 모도 투합 $\hat{\beta}_1$ 측치에 단기 연루 관련된 계도 모치 표준 산치 오차들을 결결 연산 계산해 도찰 내기 부단 위하여, 우리는 도단 다음 단결 공식을 도집 의거 조단 사용합니다:</p>
+
+\[\text{SE}(\hat{\beta}_0)^2 = \sigma^2 \left[ \frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i - \bar{x})^2} \right], \quad \text{SE}(\hat{\beta}_1)^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i - \bar{x})^2} \quad (3.8)\]
+
+<p>where $\sigma^2 = \text{Var}(\epsilon)$.</p>
+
+<p>여기 구조 공식 내에서 표제 $\sigma^2 = \text{Var}(\epsilon)$ 단위와 동등 합일 무치 부단 기치 연합 편의 일치합니다.</p>
+
+<p>For these formulas to be strictly valid, we need to assume that the errors $\epsilon_i$ for each observation have common variance $\sigma^2$ and are uncorrelated.</p>
+
+<p>이러한 모치 기재 공식들이 통구 엄격하게 합치 타당성을 정오 조단 가지기 기위 본단 위해서, 결단 우리는 지단 각각의 개별 배단 관측치 조단 오차항 지오 $\epsilon_i$ 가 통상적인 공통 분산 단면 $\sigma^2$ 를 구지 모구 가지고 서로 지조 비상관적인 무상관 구도 상관관계가 나타나지 않음에 필연 필단 의거 가정 도치 부합 단결 해야만 합니다.</p>
+
+<p>This is clearly not true in Figure 3.1, but the formula still turns out to be a good approximation.</p>
+
+<p>이는 모자 단결 그림 3.1 에서는 단수 명확히 수리 전제 참이 지위 부설 도달 아님이 분명하지만, 지지 도조 이 전제 공식은 단도 여전히 부도 도합 통결 훌륭한 산당 근사치로 지지 도결 증명 판명 조지 기리 전제 도출됩니다.</p>
+
+<p>Notice in the formula that $\text{SE}(\hat{\beta}<em>1)$ is smaller when the $x_i$ are more spread out; intuitively we have more _leverage</em> to estimate a slope when this is the case.</p>
+
+<p>수식에서 $x_i$ 가 더 넓게 퍼져 있을수록 $\text{SE}(\hat{\beta}<em>1)$ 가 더 작아진다는 점에 주목하십시오; 직관적으로 볼 때 이러한 경우 우리는 기울기를 추정할 수 있는 더 많은 _지렛대(leverage)</em> 를 가지게 됩니다.</p>
+
+<p>We also see that $\text{SE}(\hat{\beta}_0)$ would be the same as $\text{SE}(\hat{\mu})$ if $\bar{x}$ were zero (in which case $\hat{\beta}_0$ would be equal to $\bar{y}$).</p>
+
+<p>만약 $\bar{x}$ 가 0이라면 (이 경우 $\hat{\beta}_0$ 는 $\bar{y}$ 와 같을 것입니다) $\text{SE}(\hat{\beta}_0)$ 는 $\text{SE}(\hat{\mu})$ 와 같을 것이라는 점도 알 수 있습니다.</p>
+
+<p>In general, $\sigma^2$ is not known, but can be estimated from the data.</p>
+
+<p>일반적으로 $\sigma^2$ 는 알려져 있지 않지만 데이터로부터 추정할 수 있습니다.</p>
+
+<p>This estimate of $\sigma$ is known as the <em>residual standard error</em>, and is given by the formula $\text{RSE} = \sqrt{\text{RSS} / (n - 2)}$.</p>
+
+<p>$\sigma$ 에 대한 이 추정치는 <em>잔차 표준 오차(residual standard error)</em> 라고 알려져 있으며, $\text{RSE} = \sqrt{\text{RSS} / (n - 2)}$ 수식에 의해 주어집니다.</p>
+
+<p>Strictly speaking, when $\sigma^2$ is estimated from the data we should write $\widehat{\text{SE}}(\hat{\beta}_1)$ to indicate that an estimate has been made, but for simplicity of notation we will drop this extra “hat”.</p>
+
+<p>엄밀히 말해서, $\sigma^2$ 이 데이터로부터 추정될 때 우리는 추정이 이루어졌음을 나타내기 위해 $\widehat{\text{SE}}(\hat{\beta}_1)$ 로 적어야만 하지만 표기의 단순화를 위해 이 추가적인 “햇(hat)” 을 생략할 것입니다.</p>
+
+<p>That is, there is approximately a 95% chance that the interval</p>
+
+<p>즉, 다음 구간이</p>
+
+\[\left[ \hat{\beta}_1 - 2 \cdot \text{SE}(\hat{\beta}_1), \, \hat{\beta}_1 + 2 \cdot \text{SE}(\hat{\beta}_1) \right] \quad (3.10)\]
+
+<p>will contain the true value of $\beta_1$.$^3$</p>
+
+<p>(위의 국문 문장에 결합 완료)</p>
+
+<p>Similarly, a confidence interval for $\beta_0$ approximately takes the form</p>
+
+<p>유사하게, $\beta_0$ 에 대한 신뢰 구간(confidence interval)은 대략적으로 다음과 같은 형태를 취합니다.</p>
+
+\[\hat{\beta}_0 \pm 2 \cdot \text{SE}(\hat{\beta}_0) \quad (3.11)\]
+
+<p>In the case of the advertising data, the 95% confidence interval for $\beta_0$ is $[6.130, 7.935]$ and the 95% confidence interval for $\beta_1$ is $[0.042, 0.053]$.</p>
+
+<p>광고 데이터 예제의 경우, $\beta_0$ 에 대한 95% 신뢰 구간은 $[6.130, 7.935]$ 이고 $\beta_1$ 에 대한 95% 신뢰 구간은 $[0.042, 0.053]$ 입니다.</p>
+
+<p>Therefore, we can conclude that in the absence of any advertising, sales will, on average, fall somewhere between 6,130 and 7,935 units.</p>
+
+<p>따라서, 우리는 어떤 광고도 없는 상황에서 판매량은 평균적으로 6,130 단위와 7,935 단위 사이 어딘가로 떨어질 것이라고 결론 내릴 수 있습니다.</p>
+
+<p>Furthermore, for each $$1,000$ increase in television advertising, there will be an average increase in sales of between 42 and 53 units.</p>
+
+<p>나아가, 텔레비전 광고에서 1,000 달러가 증가할 때마다 42 단위와 53 단위 사이 구간의 판매량 평균 증가가 있을 것입니다.</p>
+
+<p>Standard errors can also be used to perform <em>hypothesis tests</em> on the coefficients.</p>
+
+<p>표준 오차는 계수에 대한 <em>가설 검정(hypothesis tests)</em> 을 수행하는 데에도 사용될 수 있습니다.</p>
+
+<p>The most common hypothesis test involves testing the <em>null hypothesis</em> of</p>
+
+<p>가장 일반적인 가설 검정은 다음과 같은 <em>귀무가설(null hypothesis)</em> 을 검정하는 작업과 관련이 있습니다.</p>
+
+\[H_0 : \beta_1 = 0 \quad (3.12)\]
+
+<p>versus the <em>alternative hypothesis</em></p>
+
+<p>이에 반대되는 <em>대립가설(alternative hypothesis)</em> 은 다음과 같습니다.</p>
+
+\[H_a : \beta_1 \neq 0 \quad (3.13)\]
+
+<p>Mathematically, this corresponds to testing</p>
+
+<p>수학적으로, 이는 다음을 테스트하는 것과 대응됩니다.</p>
+
+\[H_0 : \text{There is no relationship between } X \text{ and } Y\]
+
+<p>versus</p>
+
+<p>이에 반대되는 상황은:</p>
+
+\[H_a : \text{There is some relationship between } X \text{ and } Y\]
+
+<p>since if $\beta_1 = 0$ then the model (3.5) reduces to $Y = \beta_0 + \epsilon$, and $X$ is not associated with $Y$.</p>
+
+<p>왜냐하면 만약 $\beta_1 = 0$ 이라면 모델 (3.5) 제식은 $Y = \beta_0 + \epsilon$ 로 축소될 것이며, $X$ 는 $Y$ 와 연관되지 않게 되기 때문입니다.</p>
+
+<p>To test the null hypothesis, we need to determine whether $\hat{\beta}_1$, our estimate for $\beta_1$, is sufficiently far from zero that we can be confident that $\beta_1$ is non-zero.</p>
+
+<p>이 귀무가설을 검정하기 위해, 우리는 $\beta_1$ 에 대한 우리의 추정치인 $\hat{\beta}_1$ 이 $\beta_1$ 이 0이 아니라고 확신할 수 있을 만큼 충분히 0에서 멀리 떨어져 있는지 결정해야 합니다.</p>
+
+<p>How far is far enough?</p>
+
+<p>얼마나 멀어야 충분할까요?</p>
+
+<p>This of course depends on the accuracy of $\hat{\beta}_1$—that is, it depends on $\text{SE}(\hat{\beta}_1)$.</p>
+
+<p>이것은 물론 $\hat{\beta}_1$ 의 정확도에—즉 $\text{SE}(\hat{\beta}_1)$ 에 달려 있습니다.</p>
+
+<p>If $\text{SE}(\hat{\beta}_1)$ is small, then even relatively small values of $\hat{\beta}_1$ may provide strong evidence that $\beta_1 \neq 0$, and hence that there is a relationship between $X$ and $Y$.</p>
+
+<p>만약 $\text{SE}(\hat{\beta}_1)$ 이 작다면, 상대적으로 작은 $\hat{\beta}_1$ 값이라도 $\beta_1 \neq 0$ 임을, 나아가 $X$ 와 $Y$ 사이에 관계가 존재한다는 것을 반증하는 강력한 증거를 제공할 수 있습니다.</p>
+
+<p>In contrast, if $\text{SE}(\hat{\beta}_1)$ is large, then $\hat{\beta}_1$ must be large in absolute value in order for us to reject the null hypothesis.</p>
+
+<p>반대로 $\text{SE}(\hat{\beta}_1)$ 가 크다면, 우리가 귀무가설을 기각하기 위해서 $\hat{\beta}_1$ 의 절대값은 무조건 커야만 합니다.</p>
+
+<p>In practice, we compute a <em>$t$-statistic</em>, given by</p>
+
+<p>실제로는 다음과 같이 주어지는 <em>$t$-통계량($t$-statistic)</em> 을 계산합니다.</p>
+
+\[t = \frac{\hat{\beta}_1 - 0}{\text{SE}(\hat{\beta}_1)} \quad (3.14)\]
+
+<blockquote>
+  <p>$^3$ <em>Approximately</em> for several reasons.</p>
+</blockquote>
+
+<blockquote>
+  <p>$^3$ 몇 가지 이유에서 <em>대략적으로(Approximately)</em> 라고 표현했습니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>Equation 3.10 relies on the assumption that the errors are Gaussian.</p>
+</blockquote>
+
+<blockquote>
+  <p>식 3.10 은 오차들이 가우시안 확률 분포를 가진다는 가정에 의존합니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>Also, the factor of 2 in front of the $\text{SE}(\hat{\beta}_1)$ term will vary slightly depending on the number of observations $n$ in the linear regression.</p>
+</blockquote>
+
+<blockquote>
+  <p>또한 $\text{SE}(\hat{\beta}_1)$ 항 앞에 있는 계수 2는 선형 회귀의 관측치 $n$ 수에 따라 미세하게 다를 수 있습니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>To be precise, rather than the number 2, (3.10) should contain the 97.5% quantile of a $t$-distribution with $n-2$ degrees of freedom.</p>
+</blockquote>
+
+<blockquote>
+  <p>정확히 말해, (3.10) 수식은 2 보다는 $n-2$ 자유도를 취한 $t$-분포의 97.5% 분위수를 두어야 맞습니다.</p>
+</blockquote>
+
+<blockquote>
+  <p>Details of how to compute the 95% confidence interval precisely in <code class="language-plaintext highlighter-rouge">R</code> will be provided later in this chapter.</p>
+</blockquote>
+
+<blockquote>
+  <p>이 장의 후반부에서 <code class="language-plaintext highlighter-rouge">R</code> 안에서 95% 신뢰 구간을 아주 정교하게 계산해 내는 세부 방식을 제공할 것입니다.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left">Coefficient</th>
+      <th style="text-align: left">Std. error</th>
+      <th style="text-align: left">$t$-statistic</th>
+      <th style="text-align: left">$p$-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Intercept</code></td>
+      <td style="text-align: left">7.0325</td>
+      <td style="text-align: left">0.4578</td>
+      <td style="text-align: left">15.36</td>
+      <td style="text-align: left">$&lt; 0.0001$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">TV</code></td>
+      <td style="text-align: left">0.0475</td>
+      <td style="text-align: left">0.0027</td>
+      <td style="text-align: left">17.67</td>
+      <td style="text-align: left">$&lt; 0.0001$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>TABLE 3.1.</strong> <em>For the</em> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>data, coefficients of the least squares model for the regression of number of units sold on TV advertising budget. An increase of</em> $$1,000$ <em>in the TV advertising budget is associated with an increase in sales by around 50 units. (Recall that the</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>variable is in thousands of units, and the</em> <code class="language-plaintext highlighter-rouge">TV</code> <em>variable is in thousands of dollars.)</em></p>
+
+<p><strong>TABLE 3.1.</strong> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>데이터에 대한 표본 도표로, TV 광고 예산을 근거로 한 제품 판매 단위 회귀를 위한 최소 제곱 모델의 계수. TV 광고 예산의</em> $$1,000$ <em>증가는 대략 판매량 50 단위의 상승 결과와 연관되어 있습니다. (</em><code class="language-plaintext highlighter-rouge">sales</code> <em>변수가 수천 단위이며,</em> <code class="language-plaintext highlighter-rouge">TV</code> <em>변수 단위 역시 수천 달러라는 점을 상기하십시오.)</em></p>
+
+<p>which measures the number of standard deviations that $\hat{\beta}_1$ is away from 0.</p>
+
+<p>이는 $\hat{\beta}_1$ 이 0에서부터 벗어난 표준 편차 숫자를 측정합니다.</p>
+
+<p>If there really is no relationship between $X$ and $Y$, then we expect that (3.14) will have a $t$-distribution with $n - 2$ degrees of freedom.</p>
+
+<p>만일 실제로 아무 관계가 없다면 우리는 식 (3.14) 수식이 $n - 2$ 자유도의 $t$-분포 모델을 띨 것이라 기대합니다.</p>
+
+<p>The $t$-distribution has a bell shape and for values of $n$ greater than approximately 30 it is quite similar to the standard normal distribution.</p>
+
+<p>$t$-분포는 종(bell) 형태를 취하며 값 $n$ 이 대략 30보다 클 경우 표준 정규 분포와 매우 유사합니다.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Consequently, it is a simple matter to compute the probability of observing any number equal to $</td>
+      <td>t</td>
+      <td>$ or larger in absolute value, assuming $\beta_1 = 0$.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>결론적으로 $\beta_1 = 0$ 이라 가정하고 살펴볼 때 표본의 절대값이 $</td>
+      <td>t</td>
+      <td>$ 와 같거나 큰 관측 확률을 따지는 계산은 무척 간단한 문제입니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We call this probability the <em>$p$-value</em>.</p>
+
+<p>우리는 이 확률을 <em>$p$-값($p$-value)</em> 이라고 부릅니다.</p>
+
+<p>Roughly speaking, we interpret the $p$-value as follows: a small $p$-value indicates that it is unlikely to observe such a substantial association between the predictor and the response due to chance, in the absence of any real association between the predictor and the response.</p>
+
+<p>대략적으로 말해, 우리는 $p$-값을 다음과 같이 해석합니다: 작은 $p$-값은 예측 변수와 응답 변수 단독 사이에 어떠한 실제 연관성이 없는 상태에서 오직 우연 발생적인 확률로 인해 예측 변수와 응답 변수 사이의 실질적인 연대성을 관측하게 될 객관적인 요율이 사실상 굉장히 낮음을 시사합니다.</p>
+
+<p>Hence, if we see a small $p$-value, then we can infer that there is an association between the predictor and the response.</p>
+
+<p>따라서, 작은 $p$-값을 보게 된다면 예측 변수와 응답 변수 사이엔 명확한 어떤 연관성이 있다고 추정할 수 있습니다.</p>
+
+<p>We <em>reject the null hypothesis</em>—that is, we declare a relationship to exist between $X$ and $Y$—if the $p$-value is small enough.</p>
+
+<p>만일 도출된 확률 $p$-값이 단지 충분히 작다면 저희는 귀무 가설 자체를 과감히 기각(<em>reject the null hypothesis</em>)하고—즉 $X$ 와 $Y$ 편 사이엔 분명한 동반 공존적 인과 관계가 실재 존재한다고 선언합니다.</p>
+
+<p>Typical $p$-value cutoffs for rejecting the null hypothesis are 5% or 1%, although this topic will be explored in much greater detail in Chapter 13.</p>
+
+<p>이런 기각 결정의 컷오프(cutoff) 판단 통상 지점들은 전형적으로 수리 비율 5% 이나 혹 1% 로 상정됩니다, 비록 이 화두 쟁점 주제는 다가올 제 13장에서 한결 보다 깊은 심층 상세 논의로 추후 다루어 지겠지만 말입니다.</p>
+
+<p>When $n = 30$, these correspond to $t$-statistics (3.14) of around 2 and 2.75, respectively.</p>
+
+<p>기준 단위를 $n = 30$ 치수로 삼아 본다면, 해당 컷오프 점들은 방정식 (3.14) 수치 안의 $t$-통계량 기준상 대략 각각 숫자 2 와 2.75 수치 비율로 대치 대응되어 일치 성립합니다.</p>
+
+<p>Table 3.1 provides details of the least squares model for the regression of number of units sold on TV advertising budget for the <code class="language-plaintext highlighter-rouge">Advertising</code> data.</p>
+
+<p>표 3.1 에서는 해당 <code class="language-plaintext highlighter-rouge">Advertising</code> 모델 데이터 위에서 산립된 TV 기반 예산 자본의 제품 유닛 판매 숫자 회귀를 위한 편향 최소 제곱 치수 모델에 대한 세부 항목 단위들을 제시합니다.</p>
+
+<p>Notice that the coefficients for $\hat{\beta}_0$ and $\hat{\beta}_1$ are very large relative to their standard errors, so the $t$-statistics are also large; the probabilities of seeing such values if $H_0$ is true are virtually zero.</p>
+
+<p>관측 기록 항목상 투여된 $\hat{\beta}_0$ 요소 및 $\hat{\beta}_1$ 수치들의 단편 계수가 당해 단입 본연 표준 오차 비율 요소들과 견주어 보았을 상황 적에 상당한 상대 폭으로 크고 거대함을 주목하십시오, 나아가 도달 산출의 이 여파로 동반 결집 통계치인 $t$-통계량 치표들도 그와 같이 똑같이 큰 상태를 유지합니다; 이 말은 즉, 본연 기저 당사 가설 기반치 $H_0$ 가 진짜 실존하는 명백한 참(true) 이었을 시 기조 상태상에서, 이처럼 기조상 동종의 값들을 오롯이 관측 직견 발견 보게 될 우연적 상황 확률이 사실상 0(zero) 수렴 기반과 전무 다름없다는 귀결 결과를 말합니다.</p>
+
+<p>Hence we can conclude that $\beta_0 \neq 0$ and $\beta_1 \neq 0$.$^4$</p>
+
+<p>고로 결론적으로, 우리는 $\beta_0 \neq 0$ 임과 단도직입적으로 $\beta_1 \neq 0$ 이라는 결론을 도외시 내릴 수 있는 확증 단계에 놓이게 됩니다.$^4$</p>
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<p>This is the document for 3.1.2 Assessing the Accuracy of the Coefficient Estimates.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_1_1_estimating_the_coefficients/trans1.html">&lt; 3.1.1 Estimating the Coefficients</a></td>
+      <td><a href="../3_1_3_assessing_the_accuracy_of_the_model/trans1.html">3.1.3 Assessing the Accuracy of the Model &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

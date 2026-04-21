@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,30 +502,43 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="363-multiple-linear-regression"><em>3.6.3 Multiple Linear Regression</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_2_simple_linear_regression/3_6_2_1_out24_374/index.html">&lt; 3.6.2.1 Out24 374</a></td>
+      <td><a href="../3_6_4_multivariate_goodness_of_fit/index.html">3.6.4 Multivariate Goodness Of Fit &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>In order to fit a multiple linear regression model using least squares, we again use the <code class="language-plaintext highlighter-rouge">ModelSpec()</code> transform to construct the required model matrix and response. The arguments to <code class="language-plaintext highlighter-rouge">ModelSpec()</code> can be quite general, but in this case a list of column names suffice. We consider a fit here with the two variables <code class="language-plaintext highlighter-rouge">lstat</code> and <code class="language-plaintext highlighter-rouge">age</code> .</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [25]:X=MS(['lstat','age']).fit_transform(Boston)
-model1=sm.OLS(y,X)
-results1=model1.fit()
+<h1 id="363-multiple-linear-regression"><em>3.6.3 Multiple Linear Regression</em></h1>
+
+<p>In order to fit a multiple linear regression model using least squares, we again use the <code class="language-plaintext highlighter-rouge">ModelSpec()</code> transform to construct the required model matrix and response.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [25]: X = MS(['lstat', 'age']).fit_transform(Boston)
+model1 = sm.OLS(y, X)
+results1 = model1.fit()
 summarize(results1)
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[25]:
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coefstderrtP&gt;|t|
-intercept33.22280.73145.4580.000
-lstat-1.03210.048-21.4160.000
-age0.03450.0122.8260.005
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>           coef  std err       t  P&gt;|t|
+intercept 33.2228   0.731 45.458  0.000
+lstat     -1.0321   0.048 -21.416 0.000
+age        0.0345   0.012  2.826  0.005
 </code></pre></div></div>
 
-<p>Notice how we have compacted the first line into a succinct expression describing the construction of <code class="language-plaintext highlighter-rouge">X</code> .</p>
+<p>Notice how we have compacted the first line into a succinct expression describing the construction of <code class="language-plaintext highlighter-rouge">X</code>.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">Boston</code> data set contains 12 variables, and so it would be cumbersome to have to type all of these in order to perform a regression using all of the predictors. Instead, we can use the following short-hand:</p>
+<p>The <code class="language-plaintext highlighter-rouge">Boston</code> data set contains 12 variables, and so it would be cumbersome to have to type all of these in order to perform a regression using all of the predictors.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [26]:terms=Boston.columns.drop('medv')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [26]: terms = Boston.columns.drop('medv')
 terms
 </code></pre></div></div>
 
@@ -534,18 +546,16 @@ terms
 drop()
 </code></pre></div></div>
 
-<p>3.6 Lab: Linear Regression</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[26]:Index(['crim','zn','indus','chas','nox','rm','age','dis',
-'rad','tax','ptratio','lstat'],
-dtype='object')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[26]: Index(['crim', 'zn', 'indus', 'chas', 'nox', 'rm', 'age', 'dis',
+       'rad', 'tax', 'ptratio', 'lstat'],
+      dtype='object')
 </code></pre></div></div>
 
 <p>We can now fit the model with all the variables in <code class="language-plaintext highlighter-rouge">terms</code> using the same model matrix builder.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [27]:X=MS(terms).fit_transform(Boston)
-model=sm.OLS(y,X)
-results=model.fit()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [27]: X = MS(terms).fit_transform(Boston)
+model = sm.OLS(y, X)
+results = model.fit()
 summarize(results)
 </code></pre></div></div>
 
@@ -553,7 +563,6 @@ summarize(results)
   <thead>
     <tr>
       <th><strong><code class="language-plaintext highlighter-rouge">Out[27]:</code></strong></th>
-      <th> </th>
       <th><code class="language-plaintext highlighter-rouge">coef</code></th>
       <th><code class="language-plaintext highlighter-rouge">std err</code></th>
       <th><code class="language-plaintext highlighter-rouge">t</code></th>
@@ -562,7 +571,6 @@ summarize(results)
   </thead>
   <tbody>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">intercept</code></td>
       <td><code class="language-plaintext highlighter-rouge">41.6173</code></td>
       <td><code class="language-plaintext highlighter-rouge">4.936</code></td>
@@ -570,7 +578,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">crim</code></td>
       <td><code class="language-plaintext highlighter-rouge">-0.1214</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.033</code></td>
@@ -578,7 +585,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">zn</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.0470</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.014</code></td>
@@ -586,7 +592,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.001</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">indus</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.0135</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.062</code></td>
@@ -594,7 +599,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.829</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">chas</code></td>
       <td><code class="language-plaintext highlighter-rouge">2.8400</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.870</code></td>
@@ -602,7 +606,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.001</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">nox</code></td>
       <td><code class="language-plaintext highlighter-rouge">-18.7580</code></td>
       <td><code class="language-plaintext highlighter-rouge">3.851</code></td>
@@ -610,7 +613,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">rm</code></td>
       <td><code class="language-plaintext highlighter-rouge">3.6581</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.420</code></td>
@@ -618,7 +620,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">age</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.0036</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.013</code></td>
@@ -626,7 +627,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.787</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">dis</code></td>
       <td><code class="language-plaintext highlighter-rouge">-1.4908</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.202</code></td>
@@ -634,7 +634,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">rad</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.2894</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.067</code></td>
@@ -642,7 +641,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">tax</code></td>
       <td><code class="language-plaintext highlighter-rouge">-0.0127</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.004</code></td>
@@ -650,7 +648,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.001</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">ptratio</code></td>
       <td><code class="language-plaintext highlighter-rouge">-0.9375</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.132</code></td>
@@ -658,7 +655,6 @@ summarize(results)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">lstat</code></td>
       <td><code class="language-plaintext highlighter-rouge">-0.5520</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.051</code></td>
@@ -668,13 +664,26 @@ summarize(results)
   </tbody>
 </table>
 
-<p>What if we would like to perform a regression using all of the variables but one? For example, in the above regression output, <code class="language-plaintext highlighter-rouge">age</code> has a high $p$-value. So we may wish to run a regression excluding this predictor. The following syntax results in a regression using all predictors except <code class="language-plaintext highlighter-rouge">age</code> (output not shown).</p>
+<p>What if we would like to perform a regression using all of the variables but one?</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [28]:minus_age=Boston.columns.drop(['medv','age'])
-Xma=MS(minus_age).fit_transform(Boston)
-model1=sm.OLS(y,Xma)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [28]: minus_age = Boston.columns.drop(['medv', 'age'])
+Xma = MS(minus_age).fit_transform(Boston)
+model1 = sm.OLS(y, Xma)
 summarize(model1.fit())
 </code></pre></div></div>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_2_simple_linear_regression/3_6_2_1_out24_374/index.html">&lt; 3.6.2.1 Out24 374</a></td>
+      <td><a href="../3_6_4_multivariate_goodness_of_fit/index.html">3.6.4 Multivariate Goodness Of Fit &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

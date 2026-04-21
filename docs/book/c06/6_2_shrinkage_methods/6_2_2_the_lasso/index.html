@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -505,33 +504,33 @@
         <div class="bd-content ps-lg-4">
             <h1 id="622-the-lasso"><em>6.2.2 The Lasso</em></h1>
 
-<p>Ridge regression does have one obvious disadvantage. Unlike best subset, forward stepwise, and backward stepwise selection, which will generally select models that involve just a subset of the variables, ridge regression will includewill shrink all of the coefficients towards zero, but it will not set any of themall <em>p</em> predictors in the final model. The penalty <em>λ</em>[�] <em>βj</em>[2][in (][6.5][)] exactly to zero (unless <em>λ</em> = <em>∞</em> ). This may not be a problem for prediction accuracy, but it can create a challenge in model interpretation in settings in which the number of variables <em>p</em> is quite large. For example, in the <code class="language-plaintext highlighter-rouge">Credit</code> data set, it appears that the most important variables are <code class="language-plaintext highlighter-rouge">income</code> , <code class="language-plaintext highlighter-rouge">limit</code> , <code class="language-plaintext highlighter-rouge">rating</code> , and <code class="language-plaintext highlighter-rouge">student</code> . So we might wish to build a model including just these predictors. However, ridge regression will always generate a model involving all ten predictors. Increasing the value of <em>λ</em> will tend to reduce the magnitudes of the coefficients, but will not result in exclusion of any of the variables.</p>
+<p>Ridge regression does have one obvious disadvantage. Unlike best subset, forward stepwise, and backward stepwise selection, which will generally select models that involve just a subset of the variables, ridge regression will include all $p$ predictors in the final model. The penalty $\lambda \sum \beta_j^2$ in (6.5) will shrink all of the coefficients towards zero, but it will not set any of them exactly to zero (unless $\lambda = \infty$). This may not be a problem for prediction accuracy, but it can create a challenge in model interpretation in settings in which the number of variables $p$ is quite large. For example, in the <code class="language-plaintext highlighter-rouge">Credit</code> data set, it appears that the most important variables are <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">limit</code>, <code class="language-plaintext highlighter-rouge">rating</code>, and <code class="language-plaintext highlighter-rouge">student</code>. So we might wish to build a model including just these predictors. However, ridge regression will always generate a model involving all ten predictors. Increasing the value of $\lambda$ will tend to reduce the magnitudes of the coefficients, but will not result in exclusion of any of the variables.</p>
 
-<p>The <em>lasso</em> is a relatively recent alternative to ridge regression that overcomes this disadvantage. The lasso coefficients, <em>β</em>[ˆ] <em>λ[L]</em>[,][minimize the quantity</p>
+<p>The <em>lasso</em> is a relatively recent alternative to ridge regression that overcomes this disadvantage. The lasso coefficients, $\hat{\beta}_{\lambda}^L$, minimize the quantity</p>
 
 \[\sum_{i=1}^n \left( y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 + \lambda \sum_{j=1}^p |\beta_j| = \text{RSS} + \lambda \sum_{j=1}^p |\beta_j| \quad (6.7)\]
 
 <table>
   <tbody>
     <tr>
-      <td>Comparing (6.7) to (6.5), we see that the lasso and ridge regression have similar formulations. The only difference is that the <em>βj</em>[2][term][in][the][ridge] regression penalty (6.5) has been replaced by _</td>
-      <td>βj</td>
-      <td>_ in the lasso penalty (6.7). In statistical parlance, the lasso uses an <em>ℓ</em> 1 (pronounced “ell 1”) penalty instead of an <em>ℓ</em> 2 penalty. The <em>ℓ</em> 1 norm of a coefficient vector <em>β</em> is given by <em>∥β∥</em> 1 =[�] _</td>
-      <td>βj</td>
-      <td>_ .</td>
+      <td>Comparing (6.7) to (6.5), we see that the lasso and ridge regression have similar formulations. The only difference is that the $\beta_j^2$ term in the ridge regression penalty (6.5) has been replaced by $</td>
+      <td>\beta_j</td>
+      <td>$ in the lasso penalty (6.7). In statistical parlance, the lasso uses an $\ell_1$ (pronounced “ell 1”) penalty instead of an $\ell_2$ penalty. The $\ell_1$ norm of a coefficient vector $\beta$ is given by $|\beta|_1 = \sum</td>
+      <td>\beta_j</td>
+      <td>$.</td>
     </tr>
   </tbody>
 </table>
 
-<p>As with ridge regression, the lasso shrinks the coefficient estimates towards zero. However, in the case of the lasso, the <em>ℓ</em> 1 penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero when the tuning parameter <em>λ</em> is sufficiently large. Hence, much like best subset selection, the lasso performs <em>variable selection</em> . As a result, models generated from the lasso are generally much easier to interpret than those produced by ridge regression. We say that the lasso yields <em>sparse</em> models—that is, sparse models that involve only a subset of the variables. As in ridge regression, selecting a good value of <em>λ</em> for the lasso is critical; we defer this discussion to Section 6.2.3, where we use cross-validation.</p>
+<p>As with ridge regression, the lasso shrinks the coefficient estimates towards zero. However, in the case of the lasso, the $\ell_1$ penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero when the tuning parameter $\lambda$ is sufficiently large. Hence, much like best subset selection, the lasso performs <em>variable selection</em>. As a result, models generated from the lasso are generally much easier to interpret than those produced by ridge regression. We say that the lasso yields <em>sparse</em> models—that is, sparse models that involve only a subset of the variables. As in ridge regression, selecting a good value of $\lambda$ for the lasso is critical; we defer this discussion to Section 6.2.3, where we use cross-validation.</p>
 
 <p>6.2 Shrinkage Methods 245</p>
 
 <p><img src="./img/6_6.png" alt="Figure 6.6" /></p>
 
-<p><strong>FIGURE 6.6.</strong> <em>The standardized lasso coefficients on the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set are shown as a function of λ and ∥β</em>[ˆ] <em>λ[L][∥]</em>[1] <em>[/][∥][β]</em>[ˆ] <em>[∥]</em>[1] <em>[.]</em></p>
+<p><strong>FIGURE 6.6.</strong> <em>The standardized lasso coefficients on the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set are shown as a function of $\lambda$ and $|\hat{\beta}</em>{\lambda}^L|<em>1 / |\hat{\beta}|_1$.</em></p>
 
-<p>As an example, consider the coefficient plots in Figure 6.6, which are generated from applying the lasso to the <code class="language-plaintext highlighter-rouge">Credit</code> data set. When <em>λ</em> = 0, then the lasso simply gives the least squares fit, and when <em>λ</em> becomes sufficiently large, the lasso gives the null model in which all coefficient estimates equal zero. However, in between these two extremes, the ridge regression and lasso models are quite different from each other. Moving from left to right in the right-hand panel of Figure 6.6, we observe that at first the lasso results in a model that contains only the <code class="language-plaintext highlighter-rouge">rating</code> predictor. Then <code class="language-plaintext highlighter-rouge">student</code> and <code class="language-plaintext highlighter-rouge">limit</code> enter the model almost simultaneously, shortly followed by <code class="language-plaintext highlighter-rouge">income</code> . Eventually, the remaining variables enter the model. Hence, depending on the value of <em>λ</em> , the lasso can produce a model involving any number of variables. In contrast, ridge regression will always include all of the variables in the model, although the magnitude of the coefficient estimates will depend on <em>λ</em> .</p>
+<p>As an example, consider the coefficient plots in Figure 6.6, which are generated from applying the lasso to the <code class="language-plaintext highlighter-rouge">Credit</code> data set. When $\lambda = 0$, then the lasso simply gives the least squares fit, and when $\lambda$ becomes sufficiently large, the lasso gives the null model in which all coefficient estimates equal zero. However, in between these two extremes, the ridge regression and lasso models are quite different from each other. Moving from left to right in the right-hand panel of Figure 6.6, we observe that at first the lasso results in a model that contains only the <code class="language-plaintext highlighter-rouge">rating</code> predictor. Then <code class="language-plaintext highlighter-rouge">student</code> and <code class="language-plaintext highlighter-rouge">limit</code> enter the model almost simultaneously, shortly followed by <code class="language-plaintext highlighter-rouge">income</code>. Eventually, the remaining variables enter the model. Hence, depending on the value of $\lambda$, the lasso can produce a model involving any number of variables. In contrast, ridge regression will always include all of the variables in the model, although the magnitude of the coefficient estimates will depend on $\lambda$.</p>
 
 <p>Another Formulation for Ridge Regression and the Lasso</p>
 
@@ -542,18 +541,18 @@
 \underset{\beta}{\text{minimize}} \sum_{i=1}^n \left( y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 \quad &amp;\text{subject to} \quad \sum_{j=1}^p \beta_j^2 \le s \quad (6.9)
 \end{align*}\]
 
-<p>respectively. In other words, for every value of <em>λ</em> , there is some <em>s</em> such that the Equations (6.7) and (6.8) will give the same lasso coefficient estimates. Similarly, for every value of <em>λ</em> there is a corresponding <em>s</em> such that Equations (6.5) and (6.9) will give the same ridge regression coefficient estimates.</p>
+<p>respectively. In other words, for every value of $\lambda$, there is some $s$ such that the Equations (6.7) and (6.8) will give the same lasso coefficient estimates. Similarly, for every value of $\lambda$ there is a corresponding $s$ such that Equations (6.5) and (6.9) will give the same ridge regression coefficient estimates.</p>
 
 <p>246 6. Linear Model Selection and Regularization</p>
 
 <table>
   <tbody>
     <tr>
-      <td>When <em>p</em> = 2, then (6.8) indicates that the lasso coefficient estimates have the smallest RSS out of all points that lie within the diamond defined by _</td>
-      <td>β_ 1 _</td>
-      <td>_ + _</td>
-      <td>β_ 2 _</td>
-      <td>≤ s_ . Similarly, the ridge regression estimates have the smallest RSS out of all points that lie within the circle defined by <em>β</em> 1[2][+] <em>[ β]</em> 2[2] <em>[≤][s]</em>[.]</td>
+      <td>When $p = 2$, then (6.8) indicates that the lasso coefficient estimates have the smallest RSS out of all points that lie within the diamond defined by $</td>
+      <td>\beta_1</td>
+      <td>+</td>
+      <td>\beta_2</td>
+      <td>\le s$. Similarly, the ridge regression estimates have the smallest RSS out of all points that lie within the circle defined by $\beta_1^2 + \beta_2^2 \le s$.</td>
     </tr>
   </tbody>
 </table>
@@ -561,18 +560,18 @@
 <table>
   <tbody>
     <tr>
-      <td>We can think of (6.8) as follows. When we perform the lasso we are trying to find the set of coefficient estimates that lead to the smallest RSS, subject to the constraint that there is a <em>budget s</em> for how large[�] <em>[p] j</em> =1 _[</td>
-      <td>][β][j][</td>
-      <td>]<em>[can][be.] When _s</em> is extremely large, then this budget is not very restrictive, and so the coefficient estimates can be large. In fact, if <em>s</em> is large enough that the least squares solution falls within the budget, then (6.8) will simply yield the least squares solution. In contrast, if <em>s</em> is small, then[�] <em>[p] j</em> =1 _[</td>
-      <td>][β][j][</td>
-      <td>]<em>[ must be] small in order to avoid violating the budget. Similarly, (6.9) indicates that when we perform ridge regression, we seek a set of coefficient estimates such that the RSS is as small as possible, subject to the requirement that � _pj</em> =1 <em>[β] j</em>[2][not][exceed][the][budget] <em>[s]</em>[.] The formulations (6.8) and (6.9) reveal a close connection between the lasso, ridge regression, and best subset selection. Consider the problem</td>
+      <td>We can think of (6.8) as follows. When we perform the lasso we are trying to find the set of coefficient estimates that lead to the smallest RSS, subject to the constraint that there is a <em>budget</em> $s$ for how large $\sum_{j=1}^p</td>
+      <td>\beta_j</td>
+      <td>$ can be. When $s$ is extremely large, then this budget is not very restrictive, and so the coefficient estimates can be large. In fact, if $s$ is large enough that the least squares solution falls within the budget, then (6.8) will simply yield the least squares solution. In contrast, if $s$ is small, then $\sum_{j=1}^p</td>
+      <td>\beta_j</td>
+      <td>$ must be small in order to avoid violating the budget. Similarly, (6.9) indicates that when we perform ridge regression, we seek a set of coefficient estimates such that the RSS is as small as possible, subject to the requirement that $\sum_{j=1}^p \beta_j^2$ not exceed the budget $s$. The formulations (6.8) and (6.9) reveal a close connection between the lasso, ridge regression, and best subset selection. Consider the problem</td>
     </tr>
   </tbody>
 </table>
 
 \[\underset{\beta}{\text{minimize}} \sum_{i=1}^n \left( y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 \quad \text{subject to} \quad \sum_{j=1}^p I(\beta_j \ne 0) \le s \quad (6.10)\]
 
-<p>Here <em>I</em> ( <em>βj</em> = 0) is an indicator variable: it takes on a value of 1 if <em>βj</em> = 0, and equals zero otherwise. Then (6.10) amounts to finding a set of coefficient estimates such that RSS is as small as possible, subject to the constraint that no more than <em>s</em> coefficients can be nonzero. The problem (6.10) is equivalent to best subset selection. Unfortunately, solving (6.10) is computationally infeasible when <em>p</em> is large, since it requires considering all � <em>ps</em> � models containing <em>s</em> predictors. Therefore, we can interpret ridge regression and the lasso as computationally feasible alternatives to best subset selection that replace the intractable form of the budget in (6.10) with forms that are much easier to solve. Of course, the lasso is much more closely related to best subset selection, since the lasso performs feature selection for <em>s</em> sufficiently small in (6.8), while ridge regression does not.</p>
+<p>Here $I(\beta_j \ne 0)$ is an indicator variable: it takes on a value of 1 if $\beta_j \ne 0$, and equals zero otherwise. Then (6.10) amounts to finding a set of coefficient estimates such that RSS is as small as possible, subject to the constraint that no more than $s$ coefficients can be nonzero. The problem (6.10) is equivalent to best subset selection. Unfortunately, solving (6.10) is computationally infeasible when $p$ is large, since it requires considering all $\binom{p}{s}$ models containing $s$ predictors. Therefore, we can interpret ridge regression and the lasso as computationally feasible alternatives to best subset selection that replace the intractable form of the budget in (6.10) with forms that are much easier to solve. Of course, the lasso is much more closely related to best subset selection, since the lasso performs feature selection for $s$ sufficiently small in (6.8), while ridge regression does not.</p>
 
 <hr />
 

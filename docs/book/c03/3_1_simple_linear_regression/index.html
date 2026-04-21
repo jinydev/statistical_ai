@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -493,62 +492,66 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="31-simple-linear-regression">3.1 Simple Linear Regression</h1>
-<h1 id="31-단순-선형-회귀-simple-linear-regression">3.1 단순 선형 회귀 (Simple Linear Regression)</h1>
+            <blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3. Linear Regression</a></td>
+      <td><a href="./3_1_1_estimating_the_coefficients/index.html">3.1.1 Estimating the Coefficients &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="31-simple-linear-regression">3.1 Simple Linear Regression</h1>
 
 <p><em>Simple linear regression</em> lives up to its name: it is a very straightforward approach for predicting a quantitative response $Y$ on the basis of a single predictor variable $X$. It assumes that there is approximately a linear relationship between $X$ and $Y$. Mathematically, we can write this linear relationship as</p>
-
-<p><em>단순 선형 회귀(Simple linear regression)</em> 는 그 이름 그대로입니다: 단일 예측 변수 $X$ 를 바탕으로 양적 응답 $Y$ 를 예측하기 위한 매우 직관적인 접근법입니다. 이 기법은 $X$ 와 $Y$ 사이에 대략적인 선형 관계가 존재한다고 가정합니다. 수학적으로, 이러한 선형 관계는 다음과 같이 작성할 수 있습니다:</p>
 
 \[Y \approx \beta_0 + \beta_1 X \quad (3.1)\]
 
 <p>You might read “$\approx$” as <em>“is approximately modeled as”</em>. We will sometimes describe (3.1) by saying that we are <em>regressing $Y$ on $X$</em> (or <em>$Y$ onto $X$</em>).</p>
 
-<p>기호 “$\approx$” 는 <em>“~로 대략 모델링된다”</em> 라고 읽을 수 있습니다. 때때로 우리는 식 (3.1) 을 가리켜 <em>‘$Y$ 를 $X$ 에 대해 회귀시킨다(regressing $Y$ on $X$)’</em> (혹은 <em>‘$X$ 위로 $Y$ 를 회귀시킨다’</em> ) 라고 표현하기도 합니다.</p>
-
 <p>For example, $X$ may represent <code class="language-plaintext highlighter-rouge">TV</code> advertising and $Y$ may represent <code class="language-plaintext highlighter-rouge">sales</code>. Then we can regress <code class="language-plaintext highlighter-rouge">sales</code> onto <code class="language-plaintext highlighter-rouge">TV</code> by fitting the model</p>
-
-<p>예를 들어, 판단 요인 $X$ 가 <code class="language-plaintext highlighter-rouge">TV</code> 광고비를 나타내고 그로 인한 결과 지표 $Y$ 가 <code class="language-plaintext highlighter-rouge">sales</code> (판매량) 을 나타낼 수 있습니다. 그런 다음 우리는 다음과 같은 모델을 적합함으로써 <code class="language-plaintext highlighter-rouge">sales</code> 변수를 <code class="language-plaintext highlighter-rouge">TV</code> 기준 상에 회귀시킬 수 있습니다:</p>
 
 \[\text{sales} \approx \beta_0 + \beta_1 \times \text{TV} \quad (3.2)\]
 
 <p>In Equation 3.1, $\beta_0$ and $\beta_1$ are two unknown constants that represent the <em>intercept</em> and <em>slope</em> terms in the linear model. Together, $\beta_0$ and $\beta_1$ are known as the model <em>coefficients</em> or <em>parameters</em>. Once we have used our training data to produce estimates $\hat{\beta}_0$ and $\hat{\beta}_1$ for the model coefficients, we can predict future sales on the basis of a particular value of TV advertising by computing</p>
 
-<p>방정식 3.1 구간에서 $\beta_0$ 와 $\beta_1$ 는 선형 모델에서 각각 모형 <em>절편(intercept)</em> 과 모형 <em>기울기(slope)</em> 항을 나타내는 두 개의 구체적인 미지 상수입니다. 함께 모아 $\beta_0$ 와 $\beta_1$ 는 통상 모델 <em>계수(coefficients)</em> 또는 조작 특정 <em>파라미터(parameters)</em> 로 알려져 있습니다. 일단 우리가 확보한 훈련 데이터를 사용하여 이 모델 계수들에 대한 추정치 $\hat{\beta}_0$ 와 $\hat{\beta}_1$ 를 각각 생성하고 나면, 다음과 같은 체계 구문을 연산 작용함으로써 특정 단위의 TV 광고비 수치를 토대로 향후 미래의 달성 판매량을 곧장 예측해 낼 수 있습니다:</p>
-
 \[\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x \quad (3.3)\]
 
 <p>where $\hat{y}$ indicates a prediction of $Y$ on the basis of $X = x$. Here we use a <em>hat</em> symbol, $\hat{ }$, to denote the estimated value for an unknown parameter or coefficient, or to denote the predicted value of the response.</p>
 
-<p>여기서 변수 $\hat{y}$ 는 특정 전제 조건 $X = x$ 값에 기초한 산출 도달 결괏값 $Y$ 의 예정 예측 수치를 의미합니다. 이곳에서 우리는 알려지지 않은 형태의 미지 파라미터 혹은 대상 계수에 대한 추정치를 별도 표시하거나, 아니면 최종 해당 범주 응답 변수의 구체적 예측값을 가시적으로 나타내기 위해 특수 <em>햇(hat)</em> 모양 기호인 $\hat{ }$ 표시를 추가해 사용합니다.</p>
+<hr />
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<h3 id="311-estimating-the-coefficients-계수-추정">3.1.1 Estimating the Coefficients (계수 추정)</h3>
+<h3 id="311-estimating-the-coefficients">3.1.1 Estimating the Coefficients</h3>
 <ul>
-  <li><a href="./3_1_1_estimating_the_coefficients/">문서로 이동하기</a></li>
+  <li><a href="./3_1_1_estimating_the_coefficients/">Go to Document</a></li>
 </ul>
 
-<p>주어진 훈련 데이터를 가장 잘 설명하는 회귀 계수를 추정하기 위해 최소 제곱법(Least Squares)을 사용하는 과정을 살펴봅니다.
-잔차(Residual)의 개념과 잔차 제곱합(RSS)을 최소화하는 수학적 직관을 다룹니다.</p>
-
-<h3 id="312-assessing-the-accuracy-of-the-coefficient-estimates-계수-추정치의-정확도-평가">3.1.2 Assessing the Accuracy of the Coefficient Estimates (계수 추정치의 정확도 평가)</h3>
+<h3 id="312-assessing-the-accuracy-of-the-coefficient-estimates">3.1.2 Assessing the Accuracy of the Coefficient Estimates</h3>
 <ul>
-  <li><a href="./3_1_2_assessing_the_accuracy_of_the_coefficient_estimates/">문서로 이동하기</a></li>
+  <li><a href="./3_1_2_assessing_the_accuracy_of_the_coefficient_estimates/">Go to Document</a></li>
 </ul>
 
-<p>추정한 회귀 계수가 실제 모집단 계수와 얼마나 가까운지(표준 오차, 신뢰 구간) 통계적으로 검증하는 방법을 배웁니다.
-가설 검정(Hypothesis Testing)과 p-값(p-value)을 통해 변수의 유의성을 판단하는 법을 다룹니다.</p>
-
-<h3 id="313-assessing-the-accuracy-of-the-model-모델의-정확도-평가">3.1.3 Assessing the Accuracy of the Model (모델의 정확도 평가)</h3>
+<h3 id="313-assessing-the-accuracy-of-the-model">3.1.3 Assessing the Accuracy of the Model</h3>
 <ul>
-  <li><a href="./3_1_3_assessing_the_accuracy_of_the_model/">문서로 이동하기</a></li>
+  <li><a href="./3_1_3_assessing_the_accuracy_of_the_model/index.html">Go to Document</a></li>
 </ul>
 
-<p>적합된 선형 회귀 모델이 전체 데이터의 변동성을 얼마나 잘 설명하는지 R²(결정계수) 통계량 등으로 측정합니다.
-또한 잔차 표준 오차(RSE)를 통해 실제 예측값이 모델 적합선과 차이나는 절대적 오차를 파악합니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3. Linear Regression</a></td>
+      <td><a href="./3_1_1_estimating_the_coefficients/index.html">3.1.1 Estimating the Coefficients &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

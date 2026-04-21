@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -507,11 +506,9 @@
 
 <p>When we perform the lasso, ridge regression, or other regression procedures in the high-dimensional setting, we must be quite cautious in the way that we report the results obtained. In Chapter 3, we learned about <em>multicollinearity</em> , the concept that the variables in a regression might be correlated with each other. In the high-dimensional setting, the multicollinearity problem is extreme: any variable in the model can be written as a linear combination of all of the other variables in the model. Essentially, this means that we can never know exactly which variables (if any) truly are predictive of the outcome, and we can never identify the <em>best</em> coefficients for use in the regression. At most, we can hope to assign large regression coefficients to variables that are correlated with the variables that truly are predictive of the outcome.</p>
 
-<p>6.5 Lab: Linear Models and Regularization Methods 267</p>
-
 <p>For instance, suppose that we are trying to predict blood pressure on the basis of half a million SNPs, and that forward stepwise selection indicates that 17 of those SNPs lead to a good predictive model on the training data. It would be incorrect to conclude that these 17 SNPs predict blood pressure more effectively than the other SNPs not included in the model. There are likely to be many sets of 17 SNPs that would predict blood pressure just as well as the selected model. If we were to obtain an independent data set and perform forward stepwise selection on that data set, we would likely obtain a model containing a different, and perhaps even non-overlapping, set of SNPs. This does not detract from the value of the model obtained— for instance, the model might turn out to be very effective in predicting blood pressure on an independent set of patients, and might be clinically useful for physicians. But we must be careful not to overstate the results obtained, and to make it clear that what we have identified is simply <em>one of many possible models</em> for predicting blood pressure, and that it must be further validated on independent data sets.</p>
 
-<p>It is also important to be particularly careful in reporting errors and measures of model fit in the high-dimensional setting. We have seen that when <em>p &gt; n</em> , it is easy to obtain a useless model that has zero residuals. Therefore, one should <em>never</em> use sum of squared errors, p-values, <em>R</em>[2] statistics, or other traditional measures of model fit on the training data as evidence of a good model fit in the high-dimensional setting. For instance, as we saw in Figure 6.23, one can easily obtain a model with <em>R</em>[2] = 1 when <em>p &gt; n</em> . Reporting this fact might mislead others into thinking that a statistically valid and useful model has been obtained, whereas in fact this provides absolutely no evidence of a compelling model. It is important to instead report results on an independent test set, or cross-validation errors. For instance, the $\text{MSE}$ or <em>R</em>[2] on an independent test set is a valid measure of model fit, but the $\text{MSE}$ on the training set certainly is not.</p>
+<p>It is also important to be particularly careful in reporting errors and measures of model fit in the high-dimensional setting. We have seen that when $p &gt; n$, it is easy to obtain a useless model that has zero residuals. Therefore, one should <em>never</em> use sum of squared errors, p-values, $R^2$ statistics, or other traditional measures of model fit on the training data as evidence of a good model fit in the high-dimensional setting. For instance, as we saw in Figure 6.23, one can easily obtain a model with $R^2 = 1$ when $p &gt; n$. Reporting this fact might mislead others into thinking that a statistically valid and useful model has been obtained, whereas in fact this provides absolutely no evidence of a compelling model. It is important to instead report results on an independent test set, or cross-validation errors. For instance, the $\text{MSE}$ or $R^2$ on an independent test set is a valid measure of model fit, but the $\text{MSE}$ on the training set certainly is not.</p>
 
 
             <!-- 구글 애드센스 출력 -->

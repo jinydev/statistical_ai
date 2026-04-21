@@ -5,13 +5,7 @@ title: "index"
 
 # _6.3.1 Principal Components Regression_ 
 
-_Principal components analysis_ (PCA) is a popular approach for deriving principal 
-
-components analysis 
-
-6.3 Dimension Reduction Methods 255 
-
-a low-dimensional set of features from a large set of variables. PCA is discussed in greater detail as a tool for _unsupervised learning_ in Chapter 12. Here we describe its use as a dimension reduction technique for regression. 
+_Principal components analysis_ (PCA) is a popular approach for deriving a low-dimensional set of features from a large set of variables. PCA is discussed in greater detail as a tool for _unsupervised learning_ in Chapter 12. Here we describe its use as a dimension reduction technique for regression. 
 
 ---
 

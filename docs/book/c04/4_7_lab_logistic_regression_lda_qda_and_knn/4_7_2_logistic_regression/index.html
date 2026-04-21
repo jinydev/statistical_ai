@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,7 +502,16 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="472-logistic-regression"><em>4.7.2 Logistic Regression</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_1_the_stock_market_data/index.html">&lt; 4.7.1 The Stock Market Data</a></td>
+      <td><a href="4_7_2_1_in_8_results.params/index.html">4.7.2.1 In 8 Results.Params &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="472-logistic-regression"><em>4.7.2 Logistic Regression</em></h1>
 
 <p>Next, we will fit a logistic regression model in order to predict <code class="language-plaintext highlighter-rouge">Direction</code> using <code class="language-plaintext highlighter-rouge">Lag1</code> through <code class="language-plaintext highlighter-rouge">Lag5</code> and <code class="language-plaintext highlighter-rouge">Volume</code> . The <code class="language-plaintext highlighter-rouge">sm.GLM()</code> function fits <em>gener-</em> <code class="language-plaintext highlighter-rouge">sm.GLM()</code> <em>alized linear models</em> , a class of models that includes logistic regression. generalized Alternatively, the function <code class="language-plaintext highlighter-rouge">sm.Logit()</code> fits a logistic regression model dilinear model rectly. The syntax of <code class="language-plaintext highlighter-rouge">sm.GLM()</code> is similar to that of <code class="language-plaintext highlighter-rouge">sm.OLS()</code> , except that we must pass in the argument <code class="language-plaintext highlighter-rouge">family=sm.families.Binomial()</code> in order to tell <code class="language-plaintext highlighter-rouge">statsmodels</code> to run a logistic regression rather than some other type of generalized linear model.</p>
 
@@ -592,14 +600,18 @@ summarize(results)
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<hr />
 
-<h3 id="jupyter-notebook-output-노트북-출력-결과">Jupyter Notebook Output (노트북 출력 결과)</h3>
-<ul>
-  <li><a href="./4_7_2_1_out14_252_9/">문서로 이동하기</a></li>
-</ul>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p>파이썬 분류 코드 실행 후 콘솔에서 튀어나오는 모델 객체 크기나 정확도 반환값들에 대해 해석력을 점검합니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_1_the_stock_market_data/index.html">&lt; 4.7.1 The Stock Market Data</a></td>
+      <td><a href="4_7_2_1_in_8_results.params/index.html">4.7.2.1 In 8 Results.Params &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

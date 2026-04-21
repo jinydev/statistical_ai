@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,257 +502,122 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="476-k-nearest-neighbors"><em>4.7.6 K-Nearest Neighbors</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_5_naive_bayes/index.html">&lt; 4.7.5 Naive Bayes</a></td>
+      <td><a href="../4_7_7_linear_and_poisson_regression_on_the_bikeshare_data/index.html">4.7.7 Linear And Poisson Regression On The Bikeshare Data &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>We will now perform KNN using the <code class="language-plaintext highlighter-rouge">KNeighborsClassifier()</code> function. This <code class="language-plaintext highlighter-rouge">KNeighbors</code></p>
+<h1 id="476-k-nearest-neighbors"><em>4.7.6 K-Nearest Neighbors</em></h1>
 
-<blockquote>
-  <p>6There are two formulas for computing the sample variance of <em>n</em> observations 1 <em>n</em> 1 <em>n x</em> 1 <em>, . . . , xn</em> : <em>n</em> � <em>i</em> =1[(] <em>[x][i][−][x]</em>[¯][)][2][and] <em>n−</em> 1 � <em>i</em> =1[(] <em>[x][i][−][x]</em>[¯][)][2][where] <em>[x]</em>[¯][is][the][sample][mean.] In most cases the distinction is not important.</p>
-</blockquote>
+<p>We will now perform KNN using the <code class="language-plaintext highlighter-rouge">KNeighborsClassifier()</code> function. This function works similarly to the other model-fitting functions that we have encountered thus far.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Classifier()
+<p>As is the case for LDA and QDA, we fit the classifier using the <code class="language-plaintext highlighter-rouge">fit</code> method. New predictions are formed using the <code class="language-plaintext highlighter-rouge">predict</code> method of the object returned by <code class="language-plaintext highlighter-rouge">fit()</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">47</span><span class="p">]:</span> <span class="n">knn1</span> <span class="o">=</span> <span class="nc">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">knn1</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">L_train</span><span class="p">)</span>
+<span class="n">knn1_pred</span> <span class="o">=</span> <span class="n">knn1</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nf">confusion_table</span><span class="p">(</span><span class="n">knn1_pred</span><span class="p">,</span> <span class="n">L_test</span><span class="p">)</span>
 </code></pre></div></div>
 
-<ol>
-  <li>Classification</li>
-</ol>
-
-<p>184</p>
-
-<p>function works similarly to the other model-fitting functions that we have encountered thus far.</p>
-
-<p>As is the case for LDA and QDA, we fit the classifier using the <code class="language-plaintext highlighter-rouge">fit</code> method. New predictions are formed using the <code class="language-plaintext highlighter-rouge">predict</code> method of the object returned by <code class="language-plaintext highlighter-rouge">fit()</code> .</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [47]:knn1=KNeighborsClassifier(n_neighbors=1)
-knn1.fit(X_train,L_train)
-knn1_pred=knn1.predict(X_test)
-confusion_table(knn1_pred,L_test)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">47</span><span class="p">]:</span> <span class="n">Truth</span>      <span class="n">Down</span>   <span class="n">Up</span>
+<span class="n">Predicted</span>            
+<span class="n">Down</span>         <span class="mi">43</span>   <span class="mi">58</span>
+<span class="n">Up</span>           <span class="mi">68</span>   <span class="mi">83</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[47]:TruthDownUp
-Predicted
-Down4358
-Up6883
+<p>The results using $K=1$ are not very good, since only 50% of the observations are correctly predicted. Of course, it may be that $K=1$ results in an overly-flexible fit to the data.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">48</span><span class="p">]:</span> <span class="p">(</span><span class="mi">83</span><span class="o">+</span><span class="mi">43</span><span class="p">)</span><span class="o">/</span><span class="mi">252</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">knn1_pred</span> <span class="o">==</span> <span class="n">L_test</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>The results using $K$ = 1 are not very good, since only 50% of the observations are correctly predicted. Of course, it may be that $K$ = 1 results in an overly-flexible fit to the data.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [48]:(83+43)/252,np.mean(knn1_pred==L_test)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">48</span><span class="p">]:</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[48]:(0.5,0.5)
+<p>We repeat the analysis below using $K=3$.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">49</span><span class="p">]:</span> <span class="n">knn3</span> <span class="o">=</span> <span class="nc">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">knn3_pred</span> <span class="o">=</span> <span class="n">knn3</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">L_train</span><span class="p">).</span><span class="nf">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">knn3_pred</span> <span class="o">==</span> <span class="n">L_test</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>We repeat the analysis below using $K$ = 3.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [49]:knn3=KNeighborsClassifier(n_neighbors=3)
-knn3_pred=knn3.fit(X_train,L_train).predict(X_test)
-np.mean(knn3_pred==L_test)
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[49]:0.532
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">49</span><span class="p">]:</span> <span class="mf">0.5317460317460317</span>
 </code></pre></div></div>
 
 <p>The results have improved slightly. But increasing $K$ further provides no further improvements. It appears that for these data, and this train/test split, QDA gives the best results of the methods that we have examined so far.</p>
 
-<p>KNN does not perform well on the <code class="language-plaintext highlighter-rouge">Smarket</code> data, but it often does provide impressive results. As an example we will apply the KNN approach to the <code class="language-plaintext highlighter-rouge">Caravan</code> data set, which is part of the <code class="language-plaintext highlighter-rouge">ISLP</code> library. This data set includes 85 predictors that measure demographic characteristics for 5,822 individuals. The response variable is <code class="language-plaintext highlighter-rouge">Purchase</code> , which indicates whether or not a given individual purchases a caravan insurance policy. In this data set, only 6% of people purchased caravan insurance.</p>
+<p>KNN does not perform well on the <code class="language-plaintext highlighter-rouge">Smarket</code> data, but it often does provide impressive results. As an example we will apply the KNN approach to the <code class="language-plaintext highlighter-rouge">Caravan</code> data set, which is part of the <code class="language-plaintext highlighter-rouge">ISLP</code> library. This data set includes 85 predictors that measure demographic characteristics for 5,822 individuals. The response variable is <code class="language-plaintext highlighter-rouge">Purchase</code>, which indicates whether or not a given individual purchases a caravan insurance policy. In this data set, only 6% of people purchased caravan insurance.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [50]:Caravan=load_data('Caravan')
-Purchase=Caravan.Purchase
-Purchase.value_counts()
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">50</span><span class="p">]:</span> <span class="n">Caravan</span> <span class="o">=</span> <span class="nf">load_data</span><span class="p">(</span><span class="sh">'</span><span class="s">Caravan</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">Purchase</span> <span class="o">=</span> <span class="n">Caravan</span><span class="p">.</span><span class="n">Purchase</span>
+<span class="n">Purchase</span><span class="p">.</span><span class="nf">value_counts</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[50]:No5474
-Yes348
-Name:Purchase,dtype:int64
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">50</span><span class="p">]:</span> <span class="n">No</span>     <span class="mi">5474</span>
+         <span class="n">Yes</span>     <span class="mi">348</span>
+         <span class="n">Name</span><span class="p">:</span> <span class="n">Purchase</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">int64</span>
 </code></pre></div></div>
 
-<p>The method <code class="language-plaintext highlighter-rouge">value_counts()</code> takes a <code class="language-plaintext highlighter-rouge">pd.Series</code> or <code class="language-plaintext highlighter-rouge">pd.DataFrame</code> and returns a <code class="language-plaintext highlighter-rouge">pd.Series</code> with the corresponding counts for each unique element. In this case <code class="language-plaintext highlighter-rouge">Purchase</code> has only <code class="language-plaintext highlighter-rouge">Yes</code> and <code class="language-plaintext highlighter-rouge">No</code> values and returns how many values of each there are.</p>
-
-<p>4.7 Lab: Logistic Regression, LDA, QDA, and KNN</p>
-
-<p>185</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [51]:348/5822
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">51</span><span class="p">]:</span> <span class="mi">348</span> <span class="o">/</span> <span class="mi">5822</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[51]:0.0598
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">51</span><span class="p">]:</span> <span class="mf">0.05977327378907592</span>
 </code></pre></div></div>
 
-<p>Our features will include all columns except <code class="language-plaintext highlighter-rouge">Purchase</code> .</p>
+<p>Our features will include all columns except <code class="language-plaintext highlighter-rouge">Purchase</code>.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [52]:feature_df=Caravan.drop(columns=['Purchase'])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">52</span><span class="p">]:</span> <span class="n">feature_df</span> <span class="o">=</span> <span class="n">Caravan</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">Purchase</span><span class="sh">'</span><span class="p">])</span>
 </code></pre></div></div>
 
-<p>Because the KNN classifier predicts the class of a given test observation by identifying the observations that are nearest to it, the scale of the variables matters. Any variables that are on a large scale will have a much larger effect on the <em>distance</em> between the observations, and hence on the KNN classifier, than variables that are on a small scale. For instance, imagine a data set that contains two variables, <code class="language-plaintext highlighter-rouge">salary</code> and <code class="language-plaintext highlighter-rouge">age</code> (measured in dollars and years, respectively). As far as KNN is concerned, a difference of 1,000 USD in salary is enormous compared to a difference of 50 years in age. Consequently, <code class="language-plaintext highlighter-rouge">salary</code> will drive the KNN classification results, and <code class="language-plaintext highlighter-rouge">age</code> will have almost no effect. This is contrary to our intuition that a salary difference of 1,000 USD is quite small compared to an age difference of 50 years. Furthermore, the importance of scale to the KNN classifier leads to another issue: if we measured <code class="language-plaintext highlighter-rouge">salary</code> in Japanese yen, or if we measured <code class="language-plaintext highlighter-rouge">age</code> in minutes, then we’d get quite different classification results from what we get if these two variables are measured in dollars and years.</p>
+<p>Because the KNN classifier predicts the class of a given test observation by identifying the observations that are nearest to it, the scale of the variables matters.</p>
 
-<p>A good way to handle this problem is to <em>standardize</em> the data so that all standardize variables are given a mean of zero and a standard deviation of one. Then all variables will be on a comparable scale. This is accomplished using the <code class="language-plaintext highlighter-rouge">StandardScaler()</code> transformation.</p>
+<p>A good way to handle this problem is to <em>standardize</em> the data so that all variables are given a mean of zero and a standard deviation of one. Then all variables will be on a comparable scale. This is accomplished using the <code class="language-plaintext highlighter-rouge">StandardScaler()</code> transformation.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Standard
-In [53]:scaler=StandardScaler(with_mean=True,Scaler()
-with_std=True,
-copy=True)
-</code></pre></div></div>
-
-<p>The argument <code class="language-plaintext highlighter-rouge">with_mean</code> indicates whether or not we should subtract the mean, while <code class="language-plaintext highlighter-rouge">with_std</code> indicates whether or not we should scale the columns to have standard deviation of 1 or not. Finally, the argument <code class="language-plaintext highlighter-rouge">copy=True</code> indicates that we will always copy data, rather than trying to do calculations in place where possible.</p>
-
-<p>This transformation can be fit and then applied to arbitrary data. In the first line below, the parameters for the scaling are computed and stored in <code class="language-plaintext highlighter-rouge">scaler</code> , while the second line actually constructs the standardized set of features.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [54]:scaler.fit(feature_df)
-X_std=scaler.transform(feature_df)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">53</span><span class="p">]:</span> <span class="n">scaler</span> <span class="o">=</span> <span class="nc">StandardScaler</span><span class="p">(</span><span class="n">with_mean</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                 <span class="n">with_std</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                 <span class="n">copy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">scaler</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">feature_df</span><span class="p">)</span>
+<span class="n">X_std</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">feature_df</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Now every column of <code class="language-plaintext highlighter-rouge">feature_std</code> below has a standard deviation of one and a mean of zero.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [55]:feature_std=pd.DataFrame(
-X_std,
-columns=feature_df.columns);
-feature_std.std()
-Out[55]:MOSTYPE1.000086
-MAANTHUI1.000086
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">56</span><span class="p">]:</span> <span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="nf">train_test_split</span><span class="p">(</span><span class="n">X_std</span><span class="p">,</span> <span class="n">Purchase</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div></div>
 
-<ol>
-  <li>Classification</li>
-</ol>
+<p>We fit a KNN model on the training data using $K=1$, and evaluate its performance on the test data.</p>
 
-<p>186</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MGEMOMV1.000086
-MGEMLEEF1.000086
-MOSHOOFD1.000086
-...
-AZEILPL1.000086
-APLEZIER1.000086
-AFIETS1.000086
-AINBOED1.000086
-ABYSTAND1.000086
-Length:85,dtype:float64
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">57</span><span class="p">]:</span> <span class="n">knn1</span> <span class="o">=</span> <span class="nc">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">knn1_pred</span> <span class="o">=</span> <span class="n">knn1</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">).</span><span class="nf">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">y_test</span> <span class="o">!=</span> <span class="n">knn1_pred</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">y_test</span> <span class="o">!=</span> <span class="sh">"</span><span class="s">No</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Notice that the standard deviations are not quite 1 here; this is again due to some procedures using the 1 <em>/n</em> convention for variances (in this case <code class="language-plaintext highlighter-rouge">scaler()</code> ), while others use 1 <em>/</em> ( <em>n −</em> 1) (the <code class="language-plaintext highlighter-rouge">std()</code> method). See the footnote <code class="language-plaintext highlighter-rouge">.std()</code> on page 183. In this case it does not matter, as long as the variables are all on the same scale.</p>
-
-<p>Using the function <code class="language-plaintext highlighter-rouge">train_test_split()</code> we now split the observations into <code class="language-plaintext highlighter-rouge">train_test_</code> a test set, containing 1000 observations, and a training set containing the <code class="language-plaintext highlighter-rouge">split()</code> remaining observations. The argument <code class="language-plaintext highlighter-rouge">random_state=0</code> ensures that we get the same split each time we rerun the code.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [56]:(X_train,
-X_test,
-y_train,
-y_test)=train_test_split(feature_std ,
-Purchase,
-test_size=1000,
-random_state=0)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">57</span><span class="p">]:</span> <span class="p">(</span><span class="mf">0.111</span><span class="p">,</span> <span class="mf">0.067</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">?train_test_split</code> reveals that the non-keyword arguments can be <code class="language-plaintext highlighter-rouge">lists</code> , <code class="language-plaintext highlighter-rouge">arrays</code> , <code class="language-plaintext highlighter-rouge">pandas dataframes</code> etc that all have the same length ( <code class="language-plaintext highlighter-rouge">shape[0]</code> ) and hence are <em>indexable</em> . In this case they are the dataframe <code class="language-plaintext highlighter-rouge">feature_std</code> and indexable the response variable <code class="language-plaintext highlighter-rouge">Purchase</code> . We fit a KNN model on the training data using $K$ = 1, and evaluate its performance on the test data.</p>
+<p>It turns out that KNN with $K=1$ does far better than random guessing among the customers that are predicted to buy insurance. Among 62 such customers, 9, or 14.5%, actually do purchase insurance. This is double the rate that one would obtain from random guessing.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [57]:knn1=KNeighborsClassifier(n_neighbors=1)
-knn1_pred=knn1.fit(X_train,y_train).predict(X_test)
-np.mean(y_test!=knn1_pred),np.mean(y_test!="No")
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">59</span><span class="p">]:</span> <span class="mi">9</span> <span class="o">/</span> <span class="p">(</span><span class="mi">53</span> <span class="o">+</span> <span class="mi">9</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[57]:(0.111,0.067)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">59</span><span class="p">]:</span> <span class="mf">0.14516129032258066</span>
 </code></pre></div></div>
 
-<p>The KNN error rate on the 1,000 test observations is about 11%. At first glance, this may appear to be fairly good. However, since just over 6% of customers purchased insurance, we could get the error rate down to almost 6% by always predicting <code class="language-plaintext highlighter-rouge">No</code> regardless of the values of the predictors! This is known as the <em>null rate</em> .</p>
+<hr />
 
-<p>Suppose that there is some non-trivial cost to trying to sell insurance to a given individual. For instance, perhaps a salesperson must visit each potential customer. If the company tries to sell insurance to a random selection of customers, then the success rate will be only 6%, which may be far too low given the costs involved. Instead, the company would like to try to sell insurance only to customers who are likely to buy it. So the overall error rate is not of interest. Instead, the fraction of individuals that are correctly predicted to buy insurance is of interest.</p>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p>null rate</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [58]:confusion_table(knn1_pred,y_test)
-</code></pre></div></div>
-
-<p>4.7 Lab: Logistic Regression, LDA, QDA, and KNN</p>
-
-<p>187</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[58]:
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TruthNoYes
-Predicted
-No88058
-Yes539
-</code></pre></div></div>
-
-<p>It turns out that KNN with $K$ = 1 does far better than random guessing among the customers that are predicted to buy insurance. Among 62 such customers, 9, or 14.5%, actually do purchase insurance. This is double the rate that one would obtain from random guessing.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [59]:9/(53+9)
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[59]:0.145
-</code></pre></div></div>
-
-<p>Tuning Parameters</p>
-
-<p>The number of neighbors in KNN is referred to as a <em>tuning parameter</em> , also tuning referred to as a <em>hyperparameter</em> . We do not know <em>a priori</em> what value to use. It is therefore of interest to see how the classifier performs on test hyperdata as we vary these parameters. This can be achieved with a <code class="language-plaintext highlighter-rouge">for</code> loop, described in Section 2.3.8. Here we use a for loop to look at the accuracy of our classifier in the group predicted to purchase insurance as we vary the number of neighbors from 1 to 5:</p>
-
-<p>parameter hyperparameter</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [60]:forKinrange(1,6):
-knn=KNeighborsClassifier(n_neighbors=K)
-knn_pred=knn.fit(X_train,y_train).predict(X_test)
-C=confusion_table(knn_pred,y_test)
-templ=('K={0:d}:#predictedtorent:{1:&gt;2},'+
-'#whodidrent{2:d},accuracy{3:.1%}')
-pred=C.loc['Yes'].sum()
-did_rent=C.loc['Yes','Yes']
-print(templ.format(
-K,
-pred,
-did_rent,
-did_rent/pred))
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>K=1:#predictedtorent:62,#whodidrent9,accuracy14.5%
-K=2:#predictedtorent:6,#whodidrent1,accuracy16.7%
-K=3:#predictedtorent:20,#whodidrent3,accuracy15.0%
-K=4:#predictedtorent:3,#whodidrent0,accuracy0.0%
-K=5:#predictedtorent:7,#whodidrent1,accuracy14.3%
-</code></pre></div></div>
-
-<p>We see some variability — the numbers for <code class="language-plaintext highlighter-rouge">K=4</code> are very different from the rest.</p>
-
-<p>Comparison to Logistic Regression</p>
-
-<p>As a comparison, we can also fit a logistic regression model to the data. This can also be done with <code class="language-plaintext highlighter-rouge">sklearn</code> , though by default it fits something like the <em>ridge regression</em> version of logistic regression, which we introduce in Chapter 6. This can be modified by appropriately setting the argument <code class="language-plaintext highlighter-rouge">C</code> below. Its default value is 1 but by setting it to a very large number, the algorithm converges to the same solution as the usual (unregularized) logistic regression estimator discussed above.</p>
-
-<p>188 4. Classification</p>
-
-<p>Unlike the <code class="language-plaintext highlighter-rouge">statsmodels</code> package, <code class="language-plaintext highlighter-rouge">sklearn</code> focuses less on inference and more on classification. Hence, the <code class="language-plaintext highlighter-rouge">summary</code> methods seen in <code class="language-plaintext highlighter-rouge">statsmodels</code> and our simplified version seen with <code class="language-plaintext highlighter-rouge">summarize</code> are not generally available for the classifiers in <code class="language-plaintext highlighter-rouge">sklearn</code> .</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [61]:logit=LogisticRegression(C=1e10,solver='liblinear')
-logit.fit(X_train,y_train)
-logit_pred=logit.predict_proba(X_test)
-logit_labels=np.where(logit_pred[:,1]&gt;5,'Yes','No')
-confusion_table(logit_labels ,y_test)
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[61]:TruthNoYes
-Predicted
-No93367
-Yes00
-</code></pre></div></div>
-
-<p>We used the argument <code class="language-plaintext highlighter-rouge">solver='liblinear'</code> above to avoid a warning with the default solver which would indicate that the algorithm does not converge.</p>
-
-<p>If we use 0 <em>.</em> 5 as the predicted probability cut-off for the classifier, then we have a problem: none of the test observations are predicted to purchase insurance. However, we are not required to use a cut-off of 0 <em>.</em> 5. If we instead predict a purchase any time the predicted probability of purchase exceeds 0 <em>.</em> 25, we get much better results: we predict that 29 people will purchase insurance, and we are correct for about 31% of these people. This is almost five times better than random guessing!</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [62]:logit_labels=np.where(logit_pred[:,1]&gt;0.25,'Yes','No')
-confusion_table(logit_labels ,y_test)
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[62]:TruthNoYes
-Predicted
-No91358
-Yes209
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [63]:9/(20+9)
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[63]:0.310
-</code></pre></div></div>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_5_naive_bayes/index.html">&lt; 4.7.5 Naive Bayes</a></td>
+      <td><a href="../4_7_7_linear_and_poisson_regression_on_the_bikeshare_data/index.html">4.7.7 Linear And Poisson Regression On The Bikeshare Data &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

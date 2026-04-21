@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_3_dimension_reduction_methods/6_3_1_principal_components_regression/6_3_1_2_the_principal_components_regression_approach/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c06/6_3_dimension_reduction_methods/6_3_1_principal_components_regression/6_3_1_2_the_principal_components_regression_approach/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_3_dimension_reduction_methods/6_3_1_principal_components_regression/6_3_1_2_the_principal_components_regression_approach/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c06/6_3_dimension_reduction_methods/6_3_1_principal_components_regression/6_3_1_2_the_principal_components_regression_approach/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/">06. Linear Model Selection</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_3_dimension_reduction_methods/">6 3 dimension reduction methods</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_3_dimension_reduction_methods/6_3_1_principal_components_regression/">6 3 1 principal components regression</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_3_dimension_reduction_methods/6_3_1_principal_components_regression/6_3_1_2_the_principal_components_regression_approach/">6 3 1 2 the principal components regression approach</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="6312-주성분-회귀-접근법-the-principal-components-regression-approach">6.3.1.2 주성분 회귀 접근법 (The Principal Components Regression Approach)</h1>
+
+<p>The <em>principal components regression</em> (PCR) approach involves constructing the first $M$ principal components, $Z_1, \ldots, Z_M$, and then using these components as the predictors in a linear regression model that is fit using least squares. The key idea is that often a small number of principal components suffice to explain most of the variability in the data, as well as the relationship with the response. In other words, we assume that <em>the directions in which $X_1, \ldots, X_p$ show the most variation are the directions that are associated with $Y$</em>. While this assumption is not guaranteed to be true, it often turns out to be a reasonable enough approximation to give good results. 
+<strong>주성분 회귀(principal components regression, PCR)</strong> 접근법은 앞에서 구한 $M$개의 주성분 $Z_1, \ldots, Z_M$을 새로운 예측 변수로 사용하여 최소 제곱법 기반 선형 회귀 모델에 적합시키는 기법입니다. 이 기법의 핵심적인 아이디어는 보통 “소수의 몇 개 주성분”만으로도 데이터가 지닌 전체 분산의 대부분을 훌륭히 설명할 수 있고, 반응 변수 $Y$와의 관계성까지 충분히 설명해 낸다는 것에 있습니다. 즉, 우리는 <em>$X_1, \ldots, X_p$ 원본 변수들이 공간상에서 가장 크게 변동하는 방향이 곧 반응 변수 $Y$와 밀접하게 연관된 방향일 것이다</em> 라고 가정합니다. 항상 옳은 것은 아니지만, 실전에서는 좋은 결과를 주는 합리적인 근사법으로 자주 통용됩니다.</p>
+
+<p><img src="./img/6_17.png" alt="Figure 6.17" /></p>
+
+<p><strong>FIGURE 6.17.</strong> <em>Plots of the second principal component scores $z</em>{i2}$ versus_ <code class="language-plaintext highlighter-rouge">pop</code> <em>and</em> <code class="language-plaintext highlighter-rouge">ad</code> <em>. The relationships are weak.</em> 
+<strong>그림 6.17.</strong> <em>추출된 두 번째 주성분 점수 $z</em>{i2}$ 축과 원시 데이터_ <code class="language-plaintext highlighter-rouge">pop</code> <em>및</em> <code class="language-plaintext highlighter-rouge">ad</code> <em>간의 비교 플롯. 이들 사이의 연관성은 매우 약합니다.</em></p>
+
+<p><img src="./img/6_18.png" alt="Figure 6.18" /></p>
+
+<p><strong>FIGURE 6.18.</strong> <em>PCR was applied to two simulated data sets. In each panel, the horizontal dashed line represents the irreducible error.</em> Left: <em>Simulated data from Figure 6.8.</em> Right: <em>Simulated data from Figure 6.9.</em> 
+<strong>그림 6.18.</strong> <em>PCR 기법이 가상 시뮬레이션 환경에 적용되었습니다. 각 패널의 가로 점선은 절대 줄일 수 없는 태생적 한계 오차(irreducible error)를 상징합니다.</em> 왼쪽: <em>그림 6.8 모델에서 파생된 모의 데이터.</em> 오른쪽: <em>그림 6.9 환경의 모의 데이터.</em></p>
+
+<p>If the assumption underlying PCR holds, then fitting a least squares model to $Z_1, \ldots, Z_M$ will lead to better results than fitting a least squares model to $X_1, \ldots, X_p$, since most or all of the information in the data that relates to the response is contained in $Z_1, \ldots, Z_M$, and by estimating only $M \ll p$ coefficients we can mitigate overfitting. In the advertising data, the first principal component explains most of the variance in both <code class="language-plaintext highlighter-rouge">pop</code> and <code class="language-plaintext highlighter-rouge">ad</code>, so a principal component regression that uses this single variable to predict some response of interest, such as <code class="language-plaintext highlighter-rouge">sales</code>, will likely perform quite well. 
+만약 PCR의 핵심 가정이 맞아떨어진다면, $Z_1, \ldots, Z_M$ 성분들에게 최소 제곱법 회귀를 적합시키는 것이 모든 원본 변수 $X_1, \ldots, X_p$ 를 다 쓸 때보다 훨씬 나은 예측 성과를 가져다 줍니다. 타겟 $Y$ 변수를 파악하는 데 필요한 정보 대부분이 이미 소수의 $Z_1, \ldots, Z_M$ 에 압축되어 있기 때문입니다. 게다가 추정해야 할 계수도 $p$개에서 훨씬 적은 $M$개로 줄어들므로, 과적합(overfitting) 문제마저 완화시킬 수 있습니다. 앞서 본 광고 데이터 예시에서, 제 1 주성분 한 개가 투입 지표 <code class="language-plaintext highlighter-rouge">pop</code>과 <code class="language-plaintext highlighter-rouge">ad</code> 양쪽의 분산을 잘 대변했습니다. 따라서 이것 단 하나만 변수로 써서 <code class="language-plaintext highlighter-rouge">sales</code> (매출) 같은 목표를 예측하는 주성분 회귀 모델은 아주 탁월하게 작동할 가능성이 큽니다.</p>
+
+<p>Figure 6.18 displays the PCR fits on the simulated data sets from Figures 6.8 and 6.9. Recall that both data sets were generated using $n = 50$ observations and $p = 45$ predictors. However, while the response in the first data set was a function of all the predictors, the response in the second data set was generated using only two of the predictors. The curves are plotted as a function of $M$, the number of principal components used as predictors in the regression model. As more principal components are used 
+부속된 그림 6.18은 이전 챕터의 그림 6.8과 6.9 환경에서 산출된 PCR 적합 결과를 보여줍니다. 두 데이터 모두 $n = 50$ 관측치와 $p = 45$ 개의 예측 변수로 구성되었습니다. 하지만 첫 번째 세트의 반응 변수($Y$)는 45개 변수 모두의 다중 조합으로 구성된 반면, 두 번째 세트의 반응 변수는 딱 두 개의 제한된 변수들에만 의존해 도출되었습니다. 패널의 곡선 궤적들은 회귀 모델의 부품으로써 몇 개의 차원 주성분을 골라 투입할 것인지 나타내는 개수 $M$ 을 기준으로 표시했습니다. 예측 모델에 더 많은 주성분 다수가 순차적으로 연속 장전되어 쓰일수록,</p>
+
+<p><img src="./img/6_19.png" alt="Figure 6.19" /></p>
+
+<p><strong>FIGURE 6.19.</strong> <em>PCR, ridge regression, and the lasso were applied to a simulated data set in which the first five principal components of X contain all the information about the response Y. In each panel, the irreducible error $	ext{Var}(\epsilon)$ is shown as a horizontal dashed line.</em> Left: <em>Results for PCR.</em> Right: <em>Results for lasso (solid) and ridge regression (dotted). The x-axis displays the shrinkage factor of the coefficient estimates, defined as the $\ell_2$ norm of the shrunken coefficient estimates divided by the $\ell_2$ norm of the least squares estimate.</em> 
+<strong>그림 6.19.</strong> <em>초기 통계 데이터 상위 5개의 중심 주성분들만이 반응 타겟 $Y$ 에 관한 모든 정보를 통째로 독식하고 있는 상황을 가정한 모의 시뮬레이션 환경입니다. 주인공 PCR 기법, 능선 회귀(ridge regression), 라쏘(lasso) 추정 모델이 나란히 적용되었습니다. 각 분리 패널에서 결코 제어가 불가능한 태생적 기저 오차 한계 $	ext{Var}(\epsilon)$ 규모는 평행 가로 점선으로 지시됩니다.</em> 왼쪽: <em>PCR 구동 결과망.</em> 오른쪽: <em>라쏘 모델(단색 실선) 및 능선 회귀(점선) 구동 결산 모음. $x$-축선은 축소된 계수 범위들의 $\ell_2$ 노름을 단순 최소 제곱 추정치의 $\ell_2$ 노름 위상치로 나눈 비율 스케일을 보여줍니다.</em></p>
+
+<p>in the regression model, the bias decreases, but the variance increases. This results in a typical U-shape for the mean squared error. When $M = p = 45$, then PCR amounts simply to a least squares fit using all of the original predictors. The figure indicates that performing PCR with an appropriate choice of $M$ can result in a substantial improvement over least squares, especially in the left-hand panel. However, by examining the ridge regression and lasso results in Figures 6.5, 6.8, and 6.9, we see that PCR does not perform as well as the two shrinkage methods in this example. 
+예측 다형 모델이 복잡해질수록 유연성이 커져 모델 고유의 편향 헛발질 오차(bias)는 수치가 꾸준히 감소하지만 반대로 측정 잡음에 민감하게 요동치는 오차 분산(variance) 비중 규모는 가파르게 늘어납니다. 이런 상충적인 분산-편향 트레이드오프는 예측 평균 제곱 오류(MSE) 결과 곡선상에서 우리가 자주 보는 전형적인 U자형 함몰 커브를 연출하게 됩니다. 만약 최대치인 $M = p = 45$ 개 한계 선까지 남김없이 몽땅 채워 허용한다면 그때 예측 모델의 산출 성과는 오리지널 생 변수 진영을 다 때려넣은 매우 단순 무식한 구식 일반 최소 제곱 적합 결과와 본질상 똑같은 수준으로 통계 수렴해버릴 따름입니다. 화면 특히 좌측면 시각 뷰 전개를 보면, 적절한 양단 균형 지점인 맞춤형 최적의 이상적 차원 $M$ 을 신중히 지성적으로 골라 PCR 체계를 채택 돌린다면 과거 기본 모델들 대비 매우 대단히 엄청난 성능 보강 개선 도약 효과(substantial improvement)를 쟁취 성취 기대 달성 할 수 있다는 희망 증거를 대변 시사합니다. 그러나 예전 챕터인 능선 회귀 체제나 단편 단절의 라쏘 위상 모델들을 동시에 펼쳐놓고 양단을 비교해 조사 평단 해보면, 지금 이 예시 환경 한정에서는 단면 PCR 분석 방식 예측 역량이 그 패널티 축적 정규화 모델 패권 위상들보다 꽤 쳐져 그리 만족하게 훌륭 우수하지만은 않다고 판별 할 수 냉정히 있습니다.</p>
+
+<p>The relatively worse performance of PCR in Figure 6.18 is a consequence of the fact that the data were generated in such a way that many principal components are required in order to adequately model the response. In contrast, PCR will tend to do well in cases when the first few principal components are sufficient to capture most of the variation in the predictors as well as the relationship with the response. The left-hand panel of Figure 6.19 illustrates the results from another simulated data set designed to be more favorable to PCR. Here the response was generated in such a way that it depends exclusively on the first five principal components. Now the bias drops to zero rapidly as $M$, the number of principal components used in PCR, increases. The mean squared error displays a clear minimum at $M = 5$. The right-hand panel of Figure 6.19 displays the results on these data using ridge regression and the lasso. All three methods offer a significant improvement over least squares. However, PCR and ridge regression slightly outperform the lasso. 
+이번 그림 6.18 예시 체제에서 유독 형편없이 저조한 빈약 구동력을 나타낸 이 무단 PCR 예측 성과 타격 평가 약세 이유는 대체 무엇 때문일까요? 가장 근본 원인은, 애초 타겟 반응 결과물 구조를 제대로 설명하기 위해서는 상당량의 덩치 큰 여러 다수 주성분 컴포넌트 척도 무리가 단체로 요구 동원되어야 하도록 데이터 자체가 그렇게 매우 불유연하고 악의적으로 까다롭게 생성 파생되었다는 태생 한계 사실에서 기인합니다. 
+반면 이를 역전해 볼까요(In contrast). 첫 1,2 수위 극소수 주성분 한두 단위만으로도 거대한 산포 분산 파장 거의 통째 절대 다수를 흡수 관장하고, 타겟 변수와의 심층 연관성마저 독점 꽉 포섭 통제 잡아주는 몹시 유리하고 찰떡같은 맞춤형 최적 모의 데이터 여건 체제라면 과연 상황이 어떠할까요? 이런 특화 무대에선 단연코 PCR 기법 수법이 극명히 다른 기법들을 뛰어넘어 괴물급 우수한 측정 활약을 공언 펼치는 경주 우세 경향 특성이 단연 극대화됩니다. 위 좌측 단면 그림인 왼쪽 도식 패널 궤도를 보면, 이는 우리가 일부러 분석 설계자 입장에서 이런 우주적 극대화 역전 성능을 증명 발현 치환해 보이기 위해, 전면 노골적으로 PCR 도출 측정 능력이 매우 압도적 호의 유리 성취로 발현 거두도록 교묘 역설 조작 도출 설계 맞춤 세팅된 새로운 모의 시뮬레이션 데이터를 기기 도입 구동 도출 결산해 돌려 이룩한 예측 측정 성과 결과 구도도해입니다. 여기서 목표 타겟 반응 변수 구조 무리는 거의 압도적 전면 전적으로 가장 완전 첫 수위 5개 주요 추출 궤도 기둥들에만 독점 매달려 구조 기인 종속되게 구성 셋업 결속 모델링 되었습니다. 
+이 무대 환경 안에서 이제 투입 운용 주성분 누적 단위 척도 지수 숫자인 모형 한계 $M$ 이 늘어남에 발맞춰, 그토록 내재 요동치던 오차 편향 착각 요인(bias)이 신기루처럼 급전 순식간 하락 절벽 곤두박질 계단으로 이어져 영점 원좌표 지점 $0$(zero)을 겨냥 향해 막힘없이 돌파 급락 쇄도합니다. 평균 궤도 잔차 오류 통계 이면 결산치 역시도 수위 단위 지점 $M = 5$ 궤도상 단위 부분 선에서 단연 뚜렷 확고 선명하고 꽉 막힌 거대 절저 최저 기착 거점(clear minimum) 무사 함몰 도달 안착 성취 기염을 대변 공시 대변합니다.
+맞붙은 우측 화면 분할 패널 비교 도면 그림 6.19 진영 대치 뷰는 이번에도 편향 능선 회귀 기틀과 무단 절단 단절 숙청 제재 압박 조교 진영 라쏘 체계들을, 위 동일 일원 편애 조작 집중 환경 데이터상 다시 평행 대치 구동시켜 이들 간 수차 산출 파워 대항 비교 측정 결산 나열 나열선입니다. 비교 전쟁에 참전 맞붙은 세 진영 분석 무리 모델들 그 누가 보아도, 초창기 허술 무구한 차원 단순 최소 구식 제곱 투박 무식 회귀 시절보다 확연 엄청난 위력 파괴 유의미 단계성 거대 쟁취 개선치 표본 결산 향상점을 놀랍게 자랑 시위 내보입니다. 허나, 이번 이 파워 접전 우위 비교 승부 대면 진영에서만은 근소 아주 미세하게도 차원 파편 수합 묶음 PCR 체제 압축 수법 연합 무리 진영과 축 억압 조율 기법 진영 능선 제재 세력군이! 저 독단 0 삭제 라쏘 처단 모델 제어 측정 지표보다도 아주 근소 아슬한 우위 미세 측정 편파 비율 격차 우위 성과로 조금 실적 살며시 능가 퍼포먼스 기록 측정 승리 수치 대반전 쾌거 선방 측면 지수 우세 위력을 판가름 결국 보여 타전 증언해줍니다(slightly outperform).</p>
+
+<p>We note that even though PCR provides a simple way to perform regression using $M &lt; p$ predictors, it is <em>not</em> a feature selection method. This is because each of the $M$ principal components used in the regression is a linear combination of all $p$ of the <em>original</em> features. For instance, in (6.19), $Z_1$ was a linear combination of both <code class="language-plaintext highlighter-rouge">pop</code> and <code class="language-plaintext highlighter-rouge">ad</code>. Therefore, while PCR often performs quite well in many practical settings, it does not result in the 
+우리는 비록 PCR 모델 통제가 비대한 전체 변수 $p$ 개를 죄다 쓰지 않고 줄어든 투입 단면 차원 수량, 즉 $M &lt; p$ 개의 타겟 변수 궤도 부품 단위만을 영리하게 선별 동원하여 회귀를 달성하게 해 주는 심플하고 명확한 가교를 제공하지만, 여기서 분명히 착각하지 말아야 할 경고가 있습니다. 이 치트키 수법이 원본 변수의 속성을 아예 솎아 잘라 버리는 잔혹한 기법인 ‘특징 선별 방법(feature selection method)’ 부류 수단으로는 절대 결코 <em>아니라는(not)</em> 명제 사실을 뼈저리게 유념해야 합니다.
+그 자명한 까닭은 예측 모델에 영입 사용된 각 누적 $M$ 개들의 압축 체제 주성분 녀석들 속내를 까보면, 결국 모조리 본래 오리지널(<em>original</em>) 변수들 전체 $p$ 개를 하나도 버림 없이 다 엮고 비빔 혼합 비율로 재설계한 선형 결합(linear combination) 합작 산물 덩어리일 따름이기 때문입니다.
+예를 떠올려보자면 식 (6.19)에서 주성분 에이스 기둥 $Z_1$ 녀석도, 그 실체는 기초 오리지널 투입원이던 <code class="language-plaintext highlighter-rouge">pop</code> 인자와 <code class="language-plaintext highlighter-rouge">ad</code> 측 두 무리 특성 모두를 다 양다리 걸쳐 믹서기로 합쳐 빚어낸 선형 조형 혼합 결합체 비율 비율이었습니다! 고로 PCR 조치가 여러 실전 산업 분석 환경에서 실로 요긴히 우수한 예측 효능 타파 기적 결과를 압도 산출 보일지언정, 이는 절대 결코 본연적으로</p>
+
+<p><img src="./img/6_20.png" alt="Figure 6.20" /></p>
+
+<p><strong>FIGURE 6.20.</strong> Left: <em>PCR standardized coefficient estimates on the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set for different values of $M$.</em> Right: <em>The ten-fold cross-validation $	ext{MSE}$ obtained using PCR, as a function of $M$.</em> 
+<strong>그림 6.20.</strong> 왼쪽 패널: <em>다차원</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>통계 데이터 표본 세트 진영을 겨냥하여 각기 다르게 상이한 제어 할당 튜닝 개수인</em> $M$ <em>허용 값들의 통제하에 추출 생성된 PCR 기반 표준화 도출 계수 추정 결괏값들 모음 궤도.</em> 오른쪽 작도면: <em>가변 할당 튜닝된 통제량</em> $M$ <em>지수 단위에 대응 함수로 산출 획득된 PCR 통계 기반의 10-겹 교차 분석 검증 도달 $	ext{MSE}$ 허용 오차 실패 곡선.</em></p>
+
+<p>development of a model that relies upon a small set of the original features. In this sense, PCR is more closely related to ridge regression than to the lasso. In fact, one can show that PCR and ridge regression are very closely related. One can even think of ridge regression as a continuous version of PCR![8] 
+원본 초기 핵심 변수 자원들의 추려진 소규모 정예 표본 세트에만 기대 구동하는 압축 제한 모형 체계 단위 시스템의 단면 진전이나 수립 도달 단계 종착지 결과로는 시스템상 수렴해 절대 연결 귀결 도달되지 않는다는 모순 한계 사실입니다.
+오히려 이런 통계 압축 희석 관점 체계 하에서 바라볼 때 다단 압축 PCR 구조 체제 모형은 상대방 극단 완전 소거 단절 처단자인 학살 라쏘(lasso) 추정법과는 길을 달리 이질하며 척을 지고, 그보다는 튀는 놈을 지그시 눌러 억제 축소하는 능선 산맥 회귀(ridge regression) 성향 측 조치법과 공조하며 훨씬 더 밀물 결속 다각 밀접 진득한 수리 연관성 교점 성향 궤도 수석 공생 인척 관계를 굳어 지닙니다. 
+사실 수식 원리를 까면 증명되듯 무수한 PCR 체재 제어 단면 방식 기저와 능선 회귀 제재 구조 수리 기저는 가히 심도 친밀하게 끈적 동일 밀접 연관 치밀하게 얽혀 수립된 동일 지배 공생 체계 원류에 서 있습니다. 우리는 극단으로 나아가 능선 회귀 통제 제재 튜닝 기법을, 거센 끊김 없이 단절 한계 이면 없이 매끄럽게 연속 전개되는 하나의 부드러운 전면 변수 PCR 체계 단계의 초 무결점 진화 궁극체 무한 전위 “연속 교차 버전(continuous version)” 진화 매개체로 환원 등치시켜 동시 간주해 동일시 판독 해석 처리해 버릴 수도 있는 단계입니다![8]</p>
+
+<p>In PCR, the number of principal components, $M$, is typically chosen by cross-validation. The results of applying PCR to the <code class="language-plaintext highlighter-rouge">Credit</code> data set are shown in Figure 6.20; the right-hand panel displays the cross-validation errors obtained, as a function of $M$. On these data, the lowest cross-validation error occurs when there are $M = 10$ components; this corresponds to almost no dimension reduction at all, since PCR with $M = 11$ is equivalent to simply performing least squares. 
+실무 PCR 과정에서 장착할 주성분의 최적 개수 $M$ 은 일반적으로 <strong>교차 검증(cross-validation)</strong> 평가 점수에 따라 선택됩니다. <code class="language-plaintext highlighter-rouge">Credit</code> 데이터 세트에 PCR을 적용한 결과가 그림 6.20에 나와 있습니다. 오른쪽 그림은 주성분 개수 $M$ 의 함수로 얻어진 교차 검증 예측 오류를 보여줍니다. 이 데이터의 경우, 주성분이 $M = 10$ 개일 때 가장 낮은 최저 교차 검증 에러 점수가 나타났습니다. 그런데 총 변수가 11개인 데이터에서 $M = 11$ 이면 모든 변수를 다 넣은 기본 최소 제곱 회귀와 동일하므로, $M = 10$ 이라는 이 결과는 사실상 분석에서 차원 축소가 거의 전혀 이뤄지지 않았음을 의미합니다.</p>
+
+<p>When performing PCR, we generally recommend <em>standardizing</em> each predictor, using (6.6), prior to generating the principal components. This standardization ensures that all variables are on the same scale. In the absence of standardization, the high-variance variables will tend to play a larger role in the principal components obtained, and the scale on which the variables are measured will ultimately have an effect on the final PCR model. However, if the variables are all measured in the same units (say, kilograms, or inches), then one might choose not to standardize them. 
+PCR을 수행할 때 한 가지 핵심 조언을 명심하세요. 처음 주성분들을 생성해내기 전에 예측 변수들을 식 (6.6)에 따라 무조건 <strong>표준화(standardizing)</strong> 할 것을 강력히 권장합니다. 이렇게 해야 모든 변수들이 페널티 없이 다 같이 동일한 크기(scale) 안에서 경쟁하도록 보장됩니다. 만약 이 표준화를 제대로 안 한다면, 겉보기에 큰 측정 수치의 덩치만 큰 이른바 고분산 측정 변수(high-variance variables)들이 도출된 주성분 안에서 가장 큰 비중(larger role)을 부당하게 차지하고 장악해버리는 경향이 발생합니다. 그 결과, 각 변수의 겉보기 수치 배율만이 최종 PCR 회귀 모델 결과 전체를 결정짓고 망쳐버리는 재앙을 낳게 됩니다. 그러나 예외적으로 원래 데이터 변수들이 (예를 들어 전부 다 ‘킬로그램’ 이나 ‘인치’ 등) 하나같이 처음부터 다 똑같은 하나의 동일한 단위 규격으로 통일 측정된 거라면, 통계 모델러 재량에 따라 억지로 귀찮게 표준화를 시킬 필요는 없을 수도 있습니다.</p>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

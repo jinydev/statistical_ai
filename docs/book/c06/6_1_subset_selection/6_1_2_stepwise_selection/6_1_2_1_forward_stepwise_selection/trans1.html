@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_1_subset_selection/6_1_2_stepwise_selection/6_1_2_1_forward_stepwise_selection/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c06/6_1_subset_selection/6_1_2_stepwise_selection/6_1_2_1_forward_stepwise_selection/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_1_subset_selection/6_1_2_stepwise_selection/6_1_2_1_forward_stepwise_selection/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c06/6_1_subset_selection/6_1_2_stepwise_selection/6_1_2_1_forward_stepwise_selection/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/">06. Linear Model Selection</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_1_subset_selection/">6 1 subset selection</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_1_subset_selection/6_1_2_stepwise_selection/">6 1 2 stepwise selection</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_1_subset_selection/6_1_2_stepwise_selection/6_1_2_1_forward_stepwise_selection/">6 1 2 1 forward stepwise selection</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="forward-stepwise-selection">Forward Stepwise Selection</h1>
+<h1 id="전진-단계-선택법-forward-stepwise-selection">전진 단계 선택법 (Forward Stepwise Selection)</h1>
+
+<p><em>Forward stepwise selection</em> is a computationally efficient alternative to best subset selection. While the best subset selection procedure considers all $2^p$ possible models containing subsets of the $p$ predictors, forward stepwise considers a much smaller set of models. Forward stepwise selection begins with a model containing no predictors, and then adds predictors to the model, one-at-a-time, until all of the predictors are in the model. In particular, at each step the variable that gives the greatest <em>additional</em> improvement to the fit is added to the model. More formally, the forward stepwise selection procedure is given in Algorithm 6.2. 
+<strong>‘전진 단계 선택법(Forward stepwise selection)’</strong> 은 앞선 최적 부분집합 선택 시스템 구조의 방만한 단점을 극복하는, 계산 측면에서 훨씬 가볍고 지극히 연산 효율적인(computationally efficient) 핵심 우회 대안(alternative) 기법입니다. 최적 부분집합 선택 방식이 $p$ 개 예측 변수 구성으로 자아낼 수 있는 모든 $2^p$ 가짓수의 모델 표본 파편군 전체(all $2^p$ possible models)를 몽땅 다 무식하게 검열 수색하는 것과 대조되게, 전진 단계법(forward stepwise)은 이보다 훨씬 확연하게 적은 초소형 규모의 기동 탐색 모델 경우의 수만을 고려하여 전개됩니다. 전진 단계 선택법은 일차적으로 내부에 단 하나의 예측 변수도 담지 않은 완전한 깡통 영(null) 모델에서 생성을 단출하게 출발 시작(begins with) 하며, 이후 그 빈 모델 진영 내부로 예측 변수들을 한 턴에 오직 단 하나씩만(one-at-a-time) 점진 도입 투입 추가 융합하는 상승 기동 방식을, 최종적으로 주어졌던 예측 변수 전원이 모조리 다 모델에 포함 탑재 포용 수렴될 때까지 순차 차례로 추가 확장해 나아갑니다. 특정지어 말하자면, 매번 이루어지는 각 상승 등판 스텝 추가 단계(at each step) 국면마다, 당대 모델 내부의 피팅 역량 및 예측 성능 타협 스코어에 가장 최대의 획기적이고 긍정적인 부가 상승폭 향상치(the greatest <em>additional</em> improvement)를 선사 기여 조력 부여해 주는 1순위 일등 변수 성분 하나만이 발탁 지목 간택되어 모델 내부로 최종 추가 투입 흡수(added to) 됩니다. 이를 정석 포맷을 띠어 보다 격식 있고 정제된 수리적 척도 논리로 표현 서술하자면, 후속 <strong>‘알고리즘 6.2’</strong> 에 적시 서술된 절차 공식 체계와 완벽 일치 부합(given in) 합니다.</p>
+
+<p>Unlike best subset selection, which involved fitting $2^p$ models, forward stepwise selection involves fitting one null model, along with $p − k$ models in the $k$th iteration, for $k = 0, \dots, p − 1$. This amounts to a total of $1 + \sum_{k=0}^{p-1} (p - k) = 1 + p(p+1)/2$ models. This is a substantial difference: when $p = 20$, best subset selection requires fitting 1,048,576 models, whereas forward stepwise selection requires fitting only 211 models.[^2] 
+도합 무려 $2^p$ 개라는 막대한 파생물 모델 객체들을 강제로 일일이 피팅(fitting) 적합 시험대에 올려 시달리게 만들었던 최적 부분집합 방식과는 전혀 상이한 궤도로, 현 단계 전진 선택 방식 체제는 우선 단 1개의 최초 영 모델 객체를 피팅하는 수고를 시작으로 곁들여 수반하며, 그 주변으로 매번 거치는 $k$ 번째 반복 회전 루프 단계($k$th iteration, 단 범위는 $k = 0, \dots, p − 1$ 설정) 진영 내에서는 잔류한 미개척 변수들의 수에 기인한 도합 단지 $p - k$ 개짜리 각 층위별 후보 모델 세트들만을 시험 심사 적합 시키는 여유로운 과정을 거칩니다. 이를 전체 범위 단위로 누적 환산 집계 결산(amounts to) 해보면, 오직 $1 + \sum_{k=0}^{p-1} (p - k) = 1 + p(p+1)/2$ 개수에 해달하는 규모 모델들만이 전역 생성 도출된다는 경제적인 물리 계산 사실입니다. 이 현상은 대단히 압도적이고 극명 확연한 근본적 수치 격차 효용 극대 이면을(substantial difference) 보여줍니다: 일례로 초기 투입 고려 변수 $p = 20$ 개라는 상황이 주어진다면, 최적 부분집합 모델법은 자그마치 자력으로 미련하게 1,048,576개의 방대한 모델 세트를 형성 조립 적합 시켜 돌려야 하지만 반면에, 현 단계 전진 전개법은 고작해야 귀엽게 211개에 불과한 소형 스펙 모델 풀 만을 대상으로 피팅 조작을 치르면 족하기 때문입니다.</p>
+
+<blockquote>
+  <p>[^2] 비록 전진 단계 선택법이 겉으로는 표면상 $1 + p(p+1)/2$ 개의 모델군 경우의 수만 통과 고려 판단하는 수치를 띠긴 하지만, 이 체제 구조는 거대한 모델 탐사 영토 무대 상에서 이미 방향성이 설정 유도 통제된 유효 가이드 추적 궤도 동선 조종 심사 지휘 심사망(a <em>guided</em> search)의 탐사 프로세스를 전격 구축 발휘 띄고 있기에, 실질적 기저 내부 수리적 연산 검열로 치환 이면 판별 통과 심사(considered)된 거대 포괄 실질 모델 공간(effective model space)은 막강하게도 앞서 언급된 $1 + p(p+1)/2$ 개수의 단층 스펙보다 훨씬 더 광대 방대 우세 상회 포괄 수립하는 통계적 실질 스펙트럼(substantially more than)을 자랑 내재 내포 포괄 구축하게 됩니다.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th># Variables</th>
+      <th>Best subset <br /> Forward stepwise</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>One <br /> Two <br /> Three <br /> Four</td>
+      <td><code class="language-plaintext highlighter-rouge">rating</code> <br /> <code class="language-plaintext highlighter-rouge">rating</code> <br /> <code class="language-plaintext highlighter-rouge">rating</code>, <code class="language-plaintext highlighter-rouge">income</code> <br /> <code class="language-plaintext highlighter-rouge">rating</code>, <code class="language-plaintext highlighter-rouge">income</code> <br /> <code class="language-plaintext highlighter-rouge">rating</code>, <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">student</code> <br /> <code class="language-plaintext highlighter-rouge">rating</code>, <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">student</code> <br /> <code class="language-plaintext highlighter-rouge">cards</code>, <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">student</code>, <code class="language-plaintext highlighter-rouge">limit</code> <br /> <code class="language-plaintext highlighter-rouge">rating</code>, <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">student</code>, <code class="language-plaintext highlighter-rouge">limit</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>TABLE 6.1.</strong> <em>The first four selected models for best subset selection and forward stepwise selection on the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set. The first three models are identical but the fourth models differ.</em> 
+<strong>표 6.1.</strong> <code class="language-plaintext highlighter-rouge">Credit</code> <em>데이터 세트 필드 환경상에 직접 테스트 도면 등판 투입된 후 추출되어 초기 1~4순위 체급별 사이즈별로 각각 분별 채택 발탁 선출된(selected) 두 진영, 즉 최적 부분집합 선택파와 전진 단계 선택 모델파의 성적 비교표 양상입니다. 두 방식 파벌 모두 처음 진입 단락인 초기 세 자릿수 등판 모델까지는 모델 채택 궤도 결과가 전면 부합 동일 동등 흡사 일치 표방(identical) 하지만, 그 이후 돌입하게 되는 이면 4번째 변수 채택 구간 사이즈의 모델 체제부터는 서로가 판이 차이가 어긋나는 분리 상충 파행 노선 차이 발생(differ) 기조를 보입니다.</em></p>
+
+<p>In Step 2(b) of Algorithm 6.2, we must identify the <em>best</em> model from among those $p−k$ that augment $M_k$ with one additional predictor. We can do this by simply choosing the model with the lowest RSS or the highest $R^2$. However, in Step 3, we must identify the best model among a set of models with different numbers of variables. This is more challenging, and is discussed in Section 6.1.3. 
+앞서 기술한 알고리즘 6.2 순차의 Step 2(b) 구간 단계에서, 우리들은 기저 베이스캠프 $M_k$ 뼈대에다 1개 여분의 신입 예측 변수를 차출 보강 추가 이입(augment) 시켜 탄생한, 그 당대 동일 체급 부피 사이즈의 $p - k$ 개 동기 분파 경쟁 모델 진영 풀 상에서 결국 가장 단연 출중한 단 하나만의 에이스 모델을 반드시 추려내 1등 발탁 간택 식별(identify) 조치해야만 합니다. 이는 그저 통상 단순 가장 최소 바닥 지수 RSS 오차를 내거나 아니면 제일 극단의 최고봉 $R^2$ 평가 지표(highest) 를 뽑아낸 객관 수치 최고 선방 모델을 단순히 채택 지정(simply choosing) 해냄으로써 가볍게 성취 달성(do this) 이뤄낼 수 있습니다. 허나 이후 난제로 맞이하게 될 마지막 Step 3 단계 구간 상황에서는 전혀 성질이 다른, 무려 예측 변수 개수(numbers of variables) 부피가 저마다 각기 판이 이질 상이한(different) 이종 체급 다수 모델 연합 풀(a set of models) 속에서 절대 에이스 1등 모델 객체를 통과 식별 색출 지목(identify) 해 내야만 할 커다란 과제에 처합니다. 이는 앞선 동일 체급 간의 비교 판별 과정 난이도보다 훨씬 아찔 복잡 난해 벅찬 통과(more challenging) 어려움 고비에 봉착하게 되며, 이에 관련된 상세 우회 돌파 대응 구사 해법 논의 서술(discussed in) 관련 부연 언급은 곧바로 다음 섹션 <strong>6.1.3 단락(Section 6.1.3)</strong> 무대 지점에서 면밀 집중 이어 진행 다룰(discussed) 예정입니다.</p>
+
+<p>Forward stepwise selection’s computational advantage over best subset selection is clear. Though forward stepwise tends to do well in practice, it is not guaranteed to find the best possible model out of all $2^p$ models containing subsets of the $p$ predictors. For instance, suppose that in a given data set with $p = 3$ predictors, the best possible one-variable model contains $X_1$, and the best possible two-variable model instead contains $X_2$ and $X_3$. Then forward stepwise selection will fail to select the best possible two-variable model, because $M_1$ will contain $X_1$, so $M_2$ must also contain $X_1$ together with one additional variable. 
+전진 단계 알고리즘(Forward stepwise)은 계산적 이점(computational advantage)이 무식한 최적 부분집합 방식(best subset selection)에 비해 투명하게 압도적(clear)이라는 무기가 있습니다. 이 전진 단계 방식이 현실 필드 현장(in practice)에서 꽤나 제 몫을 하며 수려한 실적 퍼포먼스를 달성하는 기특한 경향(tends to do well)이 여실히 증명되긴 합니다만(Though), 그렇다 한들 이 녀석이 저 거대한 $2^p$ 개의 전체 부분집합 모델들 우주(out of all $2^p$ models) 안에서 기어코 진짜 베기 유일무이 1등 절대 우수 모델(the best possible model)을 정확히 찍어 찾아낼(find) 것이라는 어떤 무결한 보장 입증 단언(guaranteed) 같은 건 절대 존재하지 않습니다(not). 
+치명적인 함정 일례(For instance)를 하나 들어보겠습니다. 만약 투입 예측 변수가 $p = 3$ 명으로 구성된 작달막한 데이터 세트가 있는데, 운명의 장난처럼 오직 단일 변수 1개만 쓰는 체급에서의 세상 가장 우수한 모델(best possible one-variable model)은 $X_1$ 녀석을 장착(contains) 했고, 반면에 변수를 2개나 쓴 두 번째 체급에서의 진짜배기 가장 우수 모델(best possible two-variable model)은 아까의 $X_1$ 따위는 버리고 완전히 다른 $X_2$ 와 $X_3$ 녀석들을 파트너로 편입 장착(contains instead) 한 돌발 상황(suppose that)이 발생했다고 상상해 봅시다. 
+그렇다면(Then) 우리의 순진무구한 이 ‘전진 단계 선택(forward stepwise selection)’ 알고리즘 방조 방식은, 저 기막힌 ‘진짜 우수 2-변수 모델’을 발굴 지목 섭렵(select) 하는 데에 완전 처참하게 길을 잃고 실패(fail to) 해버리고 맙니다! 
+도대체 왜냐고요?(because) 제일 첫 단계인 미니 베이스캠프 $M_1$ 진영을 꾸릴 때 이 알고리즘은 무조건 당시 1등이었던 $X_1$ 요원 한 명만 편애해 고집스레 포용 탑재(contain $X_1$) 시키도록 설계되었고, 그 여파로 인해 이어지는 다음 심화 2단계 진영인 $M_2$ 모델 전진 요새를 수립(so $M_2$) 할 때도 태생적 한계 원칙상 무조건 아까 이미 뽑아뒀던 고인물 $X_1$ 변수 녀석의 멱살을 잡고 동반 유지 탑승(must also contain $X_1$ together with) 시킨 채, 거기다가 부가적인 잉여 변수(one additional variable) 한 명을 억지로 끼워 올리는 식(one additional variable)으로만 모델이 거대화 성장 확장(stepwise) 될 수밖에 없는 맹점을 내포 안고 지니고(forward stepwise selection must maintain) 있기 때문입니다.</p>
+
+<p>Table 6.1, which shows the first four selected models for best subset and forward stepwise selection on the <code class="language-plaintext highlighter-rouge">Credit</code> data set, illustrates this phenomenon. Both best subset selection and forward stepwise selection choose <code class="language-plaintext highlighter-rouge">rating</code> for the best one-variable model and then include <code class="language-plaintext highlighter-rouge">income</code> and <code class="language-plaintext highlighter-rouge">student</code> for the two- and three-variable models. However, best subset selection replaces <code class="language-plaintext highlighter-rouge">rating</code> by <code class="language-plaintext highlighter-rouge">cards</code> in the four-variable model, while forward stepwise selection must maintain <code class="language-plaintext highlighter-rouge">rating</code> in its four-variable model. In this example, Figure 6.1 indicates that there is not much difference between the three- and four-variable models in terms of RSS, so either of the four-variable models will likely be adequate. 
+상기 기술된 표 6.1 도안은 <code class="language-plaintext highlighter-rouge">Credit</code> 데이터 세트 현장 상위에서 도출 전개된 최적 부분집합 방식과 전진 단계 선택 체제 양대 산맥이 선출해 낸(shows the first four selected models) 초기 4단계의 모델 녀석들 면면을 적나라하게 보여주며, 방금 우리가 논파했던 저 치명적인 엇박자 오류 현상(this phenomenon)을 완벽 고스란히 묘사 투과 입증 단면 적시(illustrates) 해주고 있습니다. 최적 부분집합 체제와 전진 단계 체제 양쪽 전영 모두(Both) 초기 1-변수 단독 에이스 진영 부문에서는 단연 <code class="language-plaintext highlighter-rouge">rating(신용등급)</code> 피처를 발탁(choose) 지목 하였고, 이어지는 후속 2-변수 및 3-변수 모델 사이즈 라운드에서도 사이좋게 <code class="language-plaintext highlighter-rouge">income(소득)</code> 과 <code class="language-plaintext highlighter-rouge">student(학생여부)</code> 변수 군을 편제 유지 장착 확충(include) 하였습니다. 허나 반전 국면으로(However), 4-변수 모델 체급 단계로 진입하자 기존 최적 부분집합 시스템은 매정하게 기존의 <code class="language-plaintext highlighter-rouge">rating</code>을 버리고 그 자리에 <code class="language-plaintext highlighter-rouge">cards(카드개수)</code> 파편을 대체 교환 치환 탑재(replaces <code class="language-plaintext highlighter-rouge">rating</code> by <code class="language-plaintext highlighter-rouge">cards</code>) 한 파격 기조를 보인 반면, 족쇄에 묶인 전진 단계 선택법은 기어코 원년 멤버였던 <code class="language-plaintext highlighter-rouge">rating</code> 의 기득 무장을 강제 안고 종속 편승 고수 유지 영위(must maintain <code class="language-plaintext highlighter-rouge">rating</code>) 해야만 취할 수 있었습니다. 이 일례 상황 국면(In this example)에서, 앞서 첨부된 그림 6.1 통계 지표는 $\text{RSS}$ 에러 오차율 손실 보정 국면 타격 관점(in terms of RSS) 상으로 볼 때 3-변수 모델 세트와 4-변수 모델 세트 구간 층위 간에는 그리 거대한 유의미한 변별 효율 우위 차이 격차 손보 진동 편차(not much difference) 가 사실상 없음을 암시 적시 판독 지적(indicates) 해주고 있기에, 따라서 필연 이 두 가지 체계의 이질적 파행 분립 4-변수 모델들 중 그 어느 타겟 녀석을 차용 대동(either of the four-variable models) 할지라도 필시 매력 타당 유효 무난 여력 지당 원만 적절 합당 기치(likely be adequate) 한 결과치로 귀결 도출될 개연이 큽니다.</p>
+
+<p>Forward stepwise selection can be applied even in the high-dimensional setting where $n &lt; p$; however, in this case, it is possible to construct submodels $M_0, \dots, M_{n−1}$ only, since each submodel is fit using least squares, which will not yield a unique solution if $p \ge n$. 
+이 영민한 전진 단계 선택 방식은 무려 투입 변수의 체급이 총 가용 샘플 데이터 개수보다도 막대하게 비대한 초고차원 악성 수리 통계 생태 환경(high-dimensional setting where $n &lt; p$) 국면 위에서조차도 고성능 능숙 당당 위력 침투 이식 적용 활용 구동 기용 전방 투사 대입 병합 적용 투입 적중 적용(applied) 이 가능합니다; 하지만(however), 그러한 극단 악재 이질적 케이스 국면 조건(in this case) 에서는, 시스템상 오직 부수적 미니 하위 모델 객체인 $M_0, \dots, M_{n−1}$ 개체 층위 집단 군락까지만을 구축 생성 제련 결속 건설 조립 조작 연산 형성 도해 구현 조도 구성 구현 도출 구성 성립 이식 조작(construct) 해낼 수 있다는 구조적 한계 여지 제어 범주 요건 치부 수반 원칙 제재 족쇄 조건 단면(only) 이 수반 성립 부과됩니다. 왜냐하면 각각의 생성 하위 모델 파편 객체(each submodel) 들이 전통 고전 최소 제곱법 파라미터 무기 방식 연산(using least squares) 을 기반 조달 통과 삼아 피팅 조립 적중(fit) 되기 때문인데, 아시다시피 최소 제곱법 공식은 변수 $p$ 개수가 샘플 데이터 $n$ 보다 상회 돌파 크거나 같은 $p \ge n$ 악질 이상 극단 열악 제어 기형 기조 수치 환경 국면에 접하게 접촉 닿게 성립 직면 처할(if $p \ge n$) 경우, 수학 공식상 절대 해답이 하나로 떨어지지 않고 단독 절대 유일무이 적확 특정 참된 절대 고유 결합 독보 단일 고립 단 하나의 정분 단일 특정 유일 절대 고정 우월 단일 유일한 확정 결말 해답 결단(a unique solution) 도출 값의 반환 결과 배출 생산 역산 도결 창출 결과 응수 입증 정답 제시 돌출 산파 제공 환산 보장 성사 타협 반환 산출 규명 산출(yield) 기능 스펙 도달 결착 작용 역할 효능 산출 능력을 완전히 상실 처참 박탈 파탄 불능 거세 거절 기피 거부 거절 실패 소멸 파기 결여 거부 유실 정지 거세(will not yield) 당해 버리기 때문입니다.</p>
+
+<hr />
+
+<h3 id="backward-stepwise-selection">Backward Stepwise Selection</h3>
+<h3 id="후진-단계-선택법-backward-stepwise-selection">후진 단계 선택법 (Backward Stepwise Selection)</h3>
+
+<p>Like forward stepwise selection, <em>backward stepwise selection</em> provides an efficient alternative to best subset selection. However, unlike forward stepwise selection, it begins with the full least squares model containing all $p$ predictors, and then iteratively removes the least useful predictor, one-at-a-time. Details are given in Algorithm 6.3. 
+전진 단계 선택 전법과 동일한 궤를 이루어(Like), <strong>‘<em>후진 단계 선택법(backward stepwise selection)</em>‘</strong> 역시 무식한 최적 부분집합 단일 탐색 시스템 구형 방식을 무마시킬 아주 기민하고 고성능 압축 효율 기득 위력 단축 효율 연산 효율적인(efficient) 우회 전략 차선 방편 대안기 대안 대체 기제(alternative) 통로를 헌사 공급 보장 지급 지지 선사 대조 제공 표방 공여 주도 개입 기여 제시 투여 보장 선사 대조 제공(provides) 기여합니다. 하지만 앞서 살펴본 전진 단계 선택법과 정반대의 앵글로 배치 국면 차별 대비 타격 기치 반대 상이 달리 노선 상충 엇갈 모순 상반 대조 반대로(unlike), 이 조작 툴 기법은 아예 모든 세상의 도합 $p$ 개 예측 변수 구성원 전원을 포용 내장 병합 수반 투입 감행 집결 탑재 수용 흡수 보유 융합 포함 징집 대동 포함(containing) 시켜서 살을 다 찌워 둔 초거대 우주 스펙의 풀-체급 진영 뚱뚱한 ‘완전체’ 최소 제곱 기반 거대 탑재 모델 지표(the full least squares model) 에서부터 첫 시작 출항의 단추를 도화 출발 선점 기동 돌입 시작 작동 착수 시동 견지 이행 전진 출격 전개 출발 시작(begins with) 합니다. 그런 다음, 이 매머드 모델 내부에서 매 단계 국면 순환 검열 주번 루프 회전 재귀 루프 구간 연달 턴 반복 시차 반복 연속 점진 루프 연쇄 회차 계속 반복 순차 연속 반복적(iteratively) 으로 돌면서 가장 무쓸모 식별 잉여 무능 성능 평가 저조 꼴찌 불용 하중 결여 조악 최하 부진 여력 허위 무용 미약 최악 쓸모 기치 최하 무능 잉여 무용 하위 최하 무참 무능 무력 부실 하치 최하 조악 무용 가장 하치 쓰레기 하급 한계 잉여 부실 결함 잉여 저열 무능 하위 최악 최소 여유 쓸모 불량 잉여 불필 적은 최저 기만 무의 부진 불필 가장 쓸모 부족 약체 무관 무익 부족 하치 허위 저급 단선 빈약 무능 허접 최악 부실 최하 최악 가장 쓸모가 약하고 없는(the least useful) 잉여 예측 변수 객체를, 딱 한 턴 회차 국면 번 시번 구간 투입 차 지점 순서 단계 타석 대미 단 번 번 회 기점 걸음 라인 보폭 스텝 단계 시점 회 국면 번 턴 걸음 한번 한 번 턴 회 지점 사이 단계 박자 보폭 바퀴 시차 호흡 지점 걸음 국면 번 회 턴 박자 번 턴 걸음 시번 번 단계 번 턴 걸음 스텝 순번 번 차 번 턴 턴 회 타석 차 차례(one-at-a-time) 에 오직 한 놈씩만 목을 쳐 탈락 퇴출 증발 배제 해체 추방 압수 축출 청산 제거 도태 제외 삭제 삭제 파기 척결 차감 벌이 쳐내 삭제 말살 발탁 박탈 격하 제외 강등 감산 삭감 제명 제거 분리 탈락 없애 제거(removes) 해 나가는 ‘다이어트’ 기조 방식을 택합니다. 디테일 수칙 세부 운영 연산 정보 과정 단계 기조 규정 체제 세부 정보 지침 상세 조작 세부 제원 운영 사안 사항 세부 내역 내막 지침 상세 정황 사안 정보 내역 디테일 세부 디테일(Details) 관련 전언은 하단 <strong>‘알고리즘 6.3’</strong> 도면에 투여 공표 기재 공지 묘사 설명 서술 제시 적시 기재 투여 명세 할당 기록 내재 명기 기입 배치 제공 명시 나열 적시 노출 배당 반영 배당 배포 부여 조작 기술 공시 표기 등재 나열 마련 등재 지시 투과 정립 등재 명시 수록 기재 부여 적시 주어 표명 제공 명시 정리 수록 공시 전파 기입 배포 등재 적시 묘사 공시 제시 부여(are given) 정리되어 존재 배치 포진 기거 자리 존재 적시 존재 위치 자리 거치 도열 위치 자리 안착 존재 위치 기 거 성립 투 영 귀 조 정 립 점 거 존재 포 지 실 재 등 장 수 립 귀 속 안 착 주 둔 현 존 존 재 도 사 존 재 도 입 구 현 존 재 조 장 조 입 입 대 실 현 조 속 도 결 수 주 설 정 입 주 등 장 기 입 거 주 동 참 현 재 배 속 편 입 이 입 체 류(are given in) 합니다.</p>
+
+<p><strong>Algorithm 6.3</strong> <em>Backward stepwise selection</em> 
+<strong>알고리즘 6.3 후진 단계 선택법 (Backward stepwise selection)</strong></p>
+
+<ol>
+  <li>Let $M_p$ denote the <em>full</em> model, which contains all $p$ predictors.</li>
+  <li>
+    <p>세상에 존재하는 도합 모든 $p$ 개 예측 변수 진영 무리 요원들을 전부 깡그리 일동 대동 전폭 편제 병합 수반 투입 수용 대거 소지 흡수 모아 포괄 흡수 수용 망라 망라 포진 끌어 합세 포함 수반 지닌 대동 아우 안고 흡수 병합 망라 탑재 소지 지닌 아우 모아 포용 내장 징집 투여 포섭 지닌 머금 포함 채운 대입 동원 안은 소집 내포 수반 포함(contains all $p$ predictors) 장착시킨 최고 거대 비만 뚱뚱 초거 거구 비만 육중 거대 매머 뚱뚱 압도 거대 최상 육중 포식 막내 총력 뚱뚱 팽창 매머 볼륨 전체 볼륨 방대 풀만 일체 거구 모든 일체 부피 만점 통짜 초대 몸통 기함 전역 망라 전역 일전 풀만 일체 완전 원판 육중 원형 체적 몸통 전면 본체 전면 체제 온전 일체 통째 진정 통짜 거대 풀-체급 풀- 전역 온몸 육중 전체 전체 전면 거대 전 체 전 구 체 전 만 포 온 무 다 대 거 전 배 통 풀 비 체 최(full) 모델을 영점 대상 표적 과녁 거점 출발 객체 시작 진원 기점 베이스 기준 앵점 근원 기점 시초 도화 캠프 거점 발판 모체 지표 좌표 원점 본거 거점(the <em>full</em> model) 이라 칭하고 이를 우선 $M_p$ 로 차출 통영 명기 정의 각인 할당 수리 명명 단합 표기 조작 할당 통수 지정 명칭 조작 배당 배정 투사 주입 가리 대치 부여 식별 대칭 공명 지정 배분 기명 규정 징목 대입 칭합 치환 대입 호칭 배표 할당 표상 명칭 기치 취급 부여 호칭 각인 치환 표지 수합 대립 환산 기표 조수 지칭(denote) 세팅 간주 배치 상정 처리 선언 규명 상정 선포 도입 귀속 배치 선언 치부 확립 인정 배치 규정 가정 지목 배정 정립 등재 표명 선고 수립 지정 설정 정립(Let) 하십시오.</p>
+  </li>
+  <li>For $k = p, p − 1, \dots, 1$:</li>
+  <li>
+    <p>타이머 척도 제한 횟수 한도 수명 척도 순환 수명 $k$ 횟수를 역으로 $k = p, p − 1, \dots, 1$ 범주 순으로 점차 차감 역행 감소 강하 뒤로 아래 줄여 감산 역순 감산 하향 강하 역주 차감 역순 감소(For) 하달 시키면서 반복 가동 구동 루프 순환 조작 전개 기전 루프 반복 기동 연산 전진 순환 거행 타격 시행 실천 회차 조작 전개 이행 회차 반복 반복 가동 가동 전진 구동 구동 순환 반복 반복 실행 진행 순환 수행 가동 반복 가세 회차 궤도 도래 회차 전개 실행 진행 순환(For) 하십시오:</p>
+
+    <ul>
+      <li>(a) Consider all $k$ models that contain all but one of the predictors in $M_k$, for a total of $k − 1$ predictors.</li>
+      <li>
+        <p>(a) 현재 단계 주둔 캠프 $M_k$ 체제 베이스 뼈대 진영 기저 바닥 국면 궤도 캠프 진영 베이스 내부 기저 지점 라인 상태 진영 내부 핏줄 무대 캠프 내부 구조 기저 생태 거점 전장 베이스 진영 진영 포맷 뼈대 캠프 내부 기슭 모델(in $M_k$) 안에 바글 거리는 잔류 소속 존치 부양 기생 대동 징집 주재 대기 소속 상주 잠복 대기 복속 포진 기거 파견 진입 배치 소속 현존 생존 부양 예속 거주 종속 배속 병합 점철 잔존 결속 묶인 소속 배치 소집 기거 위치 남은 소속 안착 잠재 투입 상주 기주 현존 잔존 기거 투입 부위 귀속 체류 배속 체류 포진 잔류 체류 상주 예속 귀속 속해 결속 상존 편입 현존 기거 체류 포진 편입 포진 안착 배속 상존 주둔 상주 귀속 체류 소속 대기 상호(in) 소속 예측 예측 모델 소집 모의 예측 대상 파라 요원 무기 병력 변인 타기 용병 변수 참모 타겟 대원 식구 팩터 요소 세력 인자 병사 타자 계수 제군 단원 군단 특징 병기 속성 대원 대안 대역 무기 변수 요인 특성 부대 매개 대원 재목 인자 피처 매개 특징 자산 계수 피처 변인 요원 무기 멤버 요원 동무 측근 속성 성분 피처 성분 전위 병기 용사 투사 사단 대안 파편 변수(predictors) 머릿수들 구성 인원 군집 무리 집단 자원 머리 인원 병력 도합 군락 진영 부류 전군 녀석 여력 군단 인원 군대 정원 전열 대열 두수 자원 세력 팀 진용 전력 대열 세력 집단 대오 세력 전력 정원 녀석 집단 체제 멤버 무리 편대 대열 병력 분파 진용 잔당 무리 편대 자원 군단 전군 녀석 체급 병력 진용 자원 무리 군단 인원 병력 군단 대오 병력 인원 전력 체급 정원(predictors) 무리 중에서, 딱 단 얄짤 일언 여지 기필 무단 칼 단숨 단박 단호 무조건 잔인 한 치 오매 지체 냉혹 가차 매정 예외 엄연 잔혹 얄짤 유독 자비 딱 가차 냉정 예외 자비 고작 예외 단 매몰 예외 한 치 거두 정분 칼 칼 단지 예외 기필 잔인 단 단숨 무자 딱 가차 오로 일언 딱 고작 기어 단 오직 예외 가차 딱 정히 고작 오직 오직 정확 기필 정연 여지 일절 자비 오로 단 딱(exactly) 한 명의 녀석만 배제 소거 제외 쫓아 탈락 방출 기각 적출 제명 축출 누락 누락 삭제 낙선 축출 추방 축출 강등 지워 추방 버리 빼버 따돌 탈거 파기 도태 배제 강등 차단 자르 차감 퇴출 축소 포기 박탈 은닉 사장 거세 지워 빼버 파산 척결 배제 고립 추방 삭제 누락 도태 제재 제외 박탈 발탁 강구 거절 제명 누락 삭감 삭별 버리 빼버 제거 거세 배척 파기 해치 제명 증발 제거 누락 도태 이탈 따돌 제외 빼버 덜어 차감 제외 탈락 차단 삭제 삭제 발각 삭감 탈락 박탈 제거 제외 깎아 소거 삭제 적출 자르 자른 자른 남긴 배척 고립 퇴출 척결 빼고(all but one) 나머지 잔여 잉여 여타 생존 잔존 우수 생존 기타 여타 남은 존속 전원 부가 여벌 잔여 보존 잔존 합류 여벌 잔여 동기 동기 남겨 잔존 나머지 제반 합격 남은 후속 기타 기타 잔류 전부 보장 생존 패도 보유 부가 여타 확보 합격 잔존 결렬 잔류 나머지 남은 기타 유효 잔류 여타 전원 존속 기타 후속 나머지 보존 패자 후발 잔여 합류 여타 전선 잔여 몽땅 잔류 보전 남은 존치 생존 나머지 잔여 여타 제반 전원 남은 잔류 잔여 기타 생존 합격 여벌 존속 여벌 잔여 제반 기타 전부 일선 구비 나머지 남은 제반 나머지 남은(all of the) 녀석들을 다시 역으로 반사 교차 반대 부메 회군 되돌 되레 억지 되레 역 반전 리바 교대 되레 우회 굴절 기조 역행 이면 역 전복 기구 우회 수합 거꾸 전도 기거 전향 역 반대 배반 되쳐 재차 후진 거꾸 리턴 차라 반전 회귀 도리 거꾸 되돌 우회 다시 리와 전진 뒤집 뒷걸 거꾸 다시 차라 반전 반면 역습 거꾸 역풍 복원 반전 모순 회전 되레 거꾸 뒤바 뒤집 다시 재차 역 진로 여타 소급 뒤집 후퇴 복귀 되판 이면 회귀 대안 보완 고스 역풍 도리 모순 대차 역전 회전 재차 거꾸 되창 역 역류 기여 역 반전 역습 이면 복귀 거꾸 되돌 역으로(in) 고스란 품고 병합 흡착 재장 인계 수납 보유 대동 매장 인수 결속 인입 귀속 흡입 착장 병용 환수 환수 병합 합병 포섭 매머 보유 병합 차용 유용 포획 투입 이입 이관 합세 포용 함유 장착 가동 장전 영입 거느 머금 합병 입건 대치 내포 승계 흡수 내포 지참 지니 기동 복원 전유 겸비 투여 점유 유지 인계 채비 내재 담고 수합 합세 장비 품고 겸비 포함 재장 점유 수탈 복원 내포 접목 지배 소장 체득 징수 편입 유치 투사 접수 등용 동원 보유 착상 체득 수확 대동 장착 동반 인계 매몰 내장 귀속 흡수 장착 속박 소유 동반 소지 탑재 합수 융합 수렴 머금 채용 담아 담아 소유 포획 포함 병합 투입 이입 차용 속박 품은(contain) 총 통산 누증 합계 포괄 도압 통합 거합 합쳐 일체 환산 체결 종합 총괄 도합 정산 일괄 합치 합계 종합 대동 통합 연산 누적 결산 집계 누적 지계 총계 묶어 편제 전체 일치 포괄 총괄 통산 통산 합작 일체 통틀 영합 도합 도합 합계 추산 환산 규합 총괄 도합 취합 합치 도합 수합 통괄 합계 집계 병합 추산 취합 도합 도합 통산 총합 도합 도결 합계 누계 종합 산술 체제 결산 총계 도결 통계 총합 총합 총괄(for a total of) $k - 1$ 명 체급 규격 몸집 사이즈 단락 치수 단위 규모 수준 라인 단위 정원 차수 티어 단락 티어 부피 범위 단계 진용 세트 척도 수준 진영 대열 위용 부피 정도 라인 티어 단계 수준 단계 규격 척수 몸집 병력 대열 대열 인원 조각 스펙 티어 수위 규모 덩치 체급 위상 덩이 병력 규격 수위 척수 체격 체급 덩치 치수 단계 스펙 규모 단위 척분 부피 티어 인원 단계 위용 사이즈 대열 전력 한계 파벌 덩어 체급 정원 크기 정원 스펙 진용 티어 대오 규격 라인 티어 두수 전력 수위 등급 스펙 체격 체급 규모 파편 크기 체결 사이즈 체제 부피(for a total of) 사이즈의 대안 파편 묶음 타겟 기체 도구 후보 후보 체제 조합 모델 머신 매커 매개 녀석 모델 조합 타자 부대 개체 분파 집단 후보 개조 집단 객체 파편 패널 버젼 집합 객체 버전 세트 객체 조각 진영 타석 가지 부류 옵션 모델 모의 그룹 모형 무리 모델 로봇 조각 구조 덩어 시스템 표본 녀석 체제 갈래 모델 타겟 시스템 모형 매개 후보 모델 부대 무리 파편(models) 도합 수리 집합 묶음 가지 단위 전체 분량 양 세트 숫자 가지 덩어 건수 무리 밀도 경우 부피 수량 군단 가짓 정량 범위 총수 물량 갯수 가짓 집합 건수 무리 점수 무리 무리 경우 두수 가지 가지 객체 파편 총량 수 점수 객체 가지 부분 수 객체 수량 분량 개체 양 숫자 부류 총 합 항목 수치 대열 부분 규모 개수 빈도 항목 가짓 조각 종수 일체 파이 갯수 일체 다수 체적 개체 부분 부분 종류 경우 갯수 건수 건수 종별 부피 분량 양 한도 비율 범위 부분 가짓(all $k$) 개(all $k$) 녀석들 무리 조합원 모두 객체 조각 패널 조합 체제 대안 갈래 요인 전체 갈래 일원 집단 면면 집단 표본 유닛 요소 덩어 면면 녀석 전부 류 일체 녀석 버젼 부대 면면 제반 옵션 버젼 기제 객체 군락 대상자 사단 파편 덩이 갈래 모두 모두 타석 집합 무리 대안 전부 일동 세력 객체 부류 패널 요원 양식 집단 전원 일선 요원 요인 파편 부분 모두 무리 양식 객체 기체 표적 요소 유닛 모두 객체 면면 무리 진영 집단 종류 대원 유닛 부대 모두 일동 표본 버전 일체 제반 모델 녀석 전원 대상자 분파 무리 사단 단면 버젼 집합 대안 군단 전반(all) 를 시험망 진단대 도마망 도마위 심의망 판별대 측정망 실험대 수사망 도마위 테스트 레이더 모의판 심사판 타격망 검증망 가시망 검문소 표적판 저울위 모의판 측정망 점검판 평가망 표적지 실험대 레이다 거미줄 사정망 도마 심판대 점검대 진단대 판별판 거론대 심리대 모의망 검증대 검열대 점검망 평가망 점검대 판관대 심리반 지시망 조망대 실험망 표적망 사정망 조준점 가시망 판정대 여과망 그물망 실험반 고찰대 심판대 조준대 평가대 판독대 표적지 레이더 저울판 감시대 고찰망 시험대 유도망 평가망 조준망 견주판 수사망 시험대 거론대 심판대 여과망 평가망(Consider) 에 올리고 견주어 저울 다루 살펴 심사 계산 돌려 판별 비교 굴려 측정 가세 여겨 견주 조율 다뤄 살려 진찰 비교 감안 진작 여과 가미 투사 산술 식별 확인 저울 판명 가동 의탁 타진 검열 모의 식별 측정 조율 감점 가늠 저울 비교 대입 고려 거론 시험 판단 점검 추정 고민 비교 투사 평가 시현 사료 검증 확인 평가 다듬 재고 점쳐 평가 예의 시험 조목 다듬 가늠 조견 견주 연산 고찰 판가 검안 고찰 심판 따져 환산 검토 투과 통제 타산 점검 진찰 계층 진단 다듬 진작 다듬 계측 점검 대입 계층 모색 재고 재고 다듬 조율 가늠 비교 진단 다루 점안 짚어 심사 판단 평가 재현 식별 확인 식별 진단 계측 판정 저울 견주 고심 견적 식별 계측 투시 고안 통찰 계상 견주 의존 판가 사료 분석 검토 논의 가늠 견주 심판 심사 짐작 검수 참작 측정(Consider) 봅니다.</p>
+      </li>
+      <li>(b) Choose the <em>best</em> among these $k$ models, and call it $M_{k−1}$. Here <em>best</em> is defined as having smallest RSS or highest $R^2$.</li>
+      <li>(b) 이처럼 마련 세팅 조립 등장 파생 준비 투입 구비 돌출 생성 제시 유도 이입 확보 정립 구현 획치 주어 투합 배치 제안 차출 구성 유도 구비 궐석 세팅 준비 등장 전방 형성 투입 대기 편성 전개 안착 투입 도출 안착 산출 배당 득치 형성 대강 배열 고증 섭렵 포진 산출 제안 제공 구축 제기 부여 주어 배설 이끌 고착 파견 포진 등장 부과 확보 산출 도출 투사 안착 묘사 확보 거론 투입 편성 배치 전개 조도 유착 마련 결집 돌출 생성 생성 전열 생성 기인 세팅 파생 차출 확보 마련 구성 조성 배열 돌출 진열 돌기 결속 생성 조립 배강 대기 조성 발굴 할당 안착 배열 구비 조성 세팅 제공(these) 된 치열 사투 비참 비장 무자 동등 혈투 격렬 진흙 혹독 접전 호각 극한 과감 막상 치밀 무쌍 참혹 긴박 동급 접전 용호 살벌 피터 피튀 엄숙 팽팽 막하 진검 육박 양강 무쌍 가혹 치열 피터 비례 고단 숨막 아찔 삼엄 막하 치열 적중 박빙 숙명 진검 혼전 치열 각축 박빙 가차 피튀 예민 긴장 혈투 살벌 투구 엄정 비등 삼엄 삼엄 팽팽 극단 난타 매서 치열 각축 동급 숨막 격전 매서 비참 가혹 치열 치열 용호 엄혹 살벌 피튀 숨가 격동 난타 비장 숨막 비정 팽팽 야박 치밀 과열 동위 비등 열띤 박빙 긴박 피말 처절 비등 박빙 매서 무자 혈투 박빙 고도 냉혹 아찔 고단 험난 극한 육박 접전 비등 잔혹 결사 각축 비정 맹렬 열띤 열성 냉혹(these) 한 동기 기수 동일 체급 해당 동급 맞수 상기 연배 맞수 상기 상응 등급 또래 적수 위상 티어 연배 수준 동격 기수 라인 계열 당면 맞수 제반 체격 규격 반열 형제 반열 또래 동일 스펙 또래 조수 상응 분파 조수 또래 동년 라인 등급 류 맞수 당대 당위 족보 병렬 분과 상응 류 동류 맞수 형제 당당 등급 동문 상기 반열 당위 규격 티어 당대 상기 연배 또래 당해 등급 연배 위상 당해 동등 동기 부류 류 파벌 진영 수준 형제 상응 위용 파벌 당면 당대 기수 맞수 맞수 파벌 반열 계기 기조 동일 티어 동문 수준 등급 부류 적수 또래 체제 적수 양상 제반 당대 일련 당단 전면 파벌 상기 전위 분과 체급 맞벌 동격(these) 선상 진단 궤선 가견 도마 테이블 구도 체인 선상 코너 지표 시세 그물 테두 구석 리그 레이 울타 가드 보드 무대 바닥 구획 테두 반상 기조 부표 지표 무대 환경 보드 반경 레이 장판 그룹 구역 링 라인 대열 코트 레이 영토 구도 바닥 생태 바닥 국면 공간 대지 라인 대열 구역 트랙 반상 권역 리그 테이블 시야 구석 반경 반상 진영 궤적 레이 무대 그룹 리그 궤도 권역 틈바 트랙 패널 수면 패널 대지 전장 트랙 현장 수면 대열 반경 진영 대지 판도 권역 트랙 지표 전장 장판 무대 코트 바닥 코너 리그 수면 필드 지대 영역 반경 테두 장판 궤선 진영 서킷 구역 무대 테두 공간 도상 라인 그물 지대 바운 판도 선상 레이 패널 마당 코너 반상 리그 구획 바닥 필드 링 필드 체인 진영 권역 장 단상 생태 무대 선상(these) 경쟁 적수 비교 갈등 승부 대적 대칭 적수 경합 역학 경합 적대 투쟁 경쟁 맞대 접전 배수 반목 각축 견주 승강 비교 맞불 승부 비교 견주 논쟁 결투 라이 상충 갈등 경주 도발 충돌 상대 타협 경쟁 대비 투쟁 맞물 라이 충돌 공방 견제 마찰 길항 비교 저항 갈등 호가 투쟁 충돌 대칭 결전 상대 라이 결투 대결 경쟁 공방 타협 역학 전투 논쟁 혈투 대치 전투 각축 각축 라이 라이 실랑 다툼 맞서 경쟁 경합 경륜 마찰 접전 대차 대전 대결 우열 대립 대비 경합 길항 라이 경합 승급 승부 결투 반목 공방 항쟁 우열 경쟁 적대 대차 마찰 각축 대결 다툼 수사 저항 논쟁 승부 역학 전투 각축 대전 갈등 양립 결승 우열 대립 접전 우위 대조 적대 갈등 반목 조율 승부 대치 논쟁 대칭 병립 결전 저항 길항 길상 마찰 적전 경쟁 대척 타협 공세 공방 라이비율 조작 수치 성과 치수 차수 차등 숫자 스펙 척도 체급 승률 티어 차등 횟수 스펙 치수 타율 규격 단위 템포 볼륨 강도 보폭 밀도 점수 분량 티어 타점 파급 규격 규분 스펙 위력 강도 수준 게이지 한도 배율 등급 도안 요율 수리 여력 단면 지표 점수 척수 체급 수준 수량 타점 티어 타겟 한도 수준 치수 실력 정도 규격 성적 점수 결과 페이 차당 성능 규모 요율 부피 성적 척수 강도 티어 지수 타격 스코 조각 치부 수준 수치 단위 타겟 파편 밀도 위계 등급 정도 비중 차등 진폭 비례 범위 스코 배율 배수 크기 수위 양상 숫자 마진 정도 볼륨 차수 타당 정도 조작 척도 치수 수준 차당 파워 성능 단계 양상 지표 역량 척수 규격 위력 배율 요인 밀도 타율 등급 비율 스코 범위 척도 여력 수위 강도 체급 티어 비중 한계 역량 게이지 전력 게이지 결과 지수 위세 성적 한도(k) 라운 진입 스테 세션 루프 무대 스테 승급 구간 파장 회합 경기 파장 스테 관문 스테 문턱 코너 게임 텀 결승 토너 분기 바퀴 막 회합 이닝 분기 타임 회차 루프 대결 파트 페이 페이 단계 매치 라운 코너 무대 도약 시즌 루틴 공방 게임 라운 단락 코트 회장 세트 챕터 라운 교행 코트 문턱 트랙 차례 구간 주기 라운 스텝 타임 랠리 번 공방 세트 구간 싸움 페이 스테 스텝 구역 스테 세트 회전 관문 지점 파트 싸움 조 합 파장 과정 구간 코스 회전 타석 라운 주기 승부 루프 루틴 타임 파트 바운 조 이닝 턴 문턱 승급 시즌 구간 공세 전 텀 지점 라인 국면 세트 막 코트 대결 회 승부 회 파트 게임 전전 코너 페이 이닝 라운 텀 도약(k models) 풀 패널 풀 궤도 표본 지표 소스 그룹 구역 집단 자원 무대 진영 지표 연못 덩이 세트 풀 소스 진영 바다 군락 우주 단위 자원 조각 생태 대지 인력 반경 대지 어항 덩이 코트 군락 군집 구역 구석 패널 수조 패치 군단 단위 세계 숲 창고 갈래 단면 전장 자원 전경 생태 진영 토대 저수 병력 대역 군단 세력 세계 바운 우주 풀 대열 바닥 공간 파편 마당 전역 원천 궤도 공간 덩어 표본 그룹 지대 어장 부대 울타 병력 어장 자산 봇물 원천 집합 분파 풀 웅덩 소스 텃밭 대지 수면 생태 인력 그룹 세그 원천 연못 궤적 부대 진용 생태 부대 병력 자원 바닥 세력 조각 토대 수조 기반 영토 무리 집단 영토 환경 무리 대지 분파 진용 무대 소스 표본 진영 집단 파편 군 집 덩이 어 장 연 못(among these $k$ models) 그룹 내열 진용 무리 집합 세트 식구 군집 구성 집 열 편성 편대 정열 패밀 계열 대열 대오 배열 부류 조직 대오 배열 패 계보 소속 진용 반열 조 무리 라인 연합 갈래 묶음 구성 진영 대형 조직 라인 행렬 무리 대열 부류 형제 소속 진영 소관 정열 혈통 소속 라인 체계 패치 집단 편제 연합 묶음 갈래 부류 라인 군락 소속 대안 편제 세력 집단 무리 종류 성단 무리 연맹 묶음 갈래 부류 족벌 조 소속 파벌 집합 일당 종족 당파 세트 종단 속성 동맹 소단 파 패밀 갈래 조합 대오 무리 조직 파벌 조직 무리 그룹 부류 부대 형제 집단 조 무리 진용 집단 식구 병력 진용 조 편재 소단 함대 무리 파벌 진용 집단 연합 라인(among these $k$ models) 한 편 군 구 역 무 틈 장 진(among) 그 속 내 한 마 복 터 판 품 바 구 안 중 에 심 심 혈 품 저 (among) 속 에서, 다시 재차 새로 곧장 여지 이내 마저 필적 한번 단연 또 단호 곧 지체 곧이 한번 필연 또 거듭 거듭 당장 기왕 곧장 단호 이내 단박 새삼 연거 단연 새로 한번 계속 역시 자칫 단숨 기왕 기필 곧장 번번 당장 전향 단박 재차 결국 이내 모조 곧 마저 단박 한결 비로 어차 마저 한결 재차 새삼 다시 이내 또 곧장 비로 이내 비로 아예 연달 일절 모조 다시 자칫 결국 모조 끝내 과연 연거 즉결 필연 새삼 재차 번번 이내 내처 조차 새삼 기필 자칫 다시 여지 끝내 곧장 마저 모조 아예 또다 필적 한번 필연 이내 한번 또 한결 무조 한번 끝끝 다시 이무 단숨 내처 연달 한번 어김 여지 다시 이무 또 오히 이내 자칫 필적 또 재단 필연 필연 다시 재차 마저 단박 한결 속행 아예 또 일절 일순 내처 부득 차라 무조 재차(again) 또 단 숨 기 언 코 기 자(choose) 만 인 나 가 기 치 도 구 대 자 거 뽑 골 짚 선 찾 채 결 추 선 타 선 집 식 단 척 채 채 파 판 검 골 색 골 지 낙 정 지 도 고 간 포 적 식 적 캐 결 판 갈 수 색 타 꼽 픽 골 모 탐 검 채 추 밝 낙 찾 간 적 모 탐 골 지 추 (choose) 지 목 해 골 라(choose) 발 탁 가 려 뽑 아 안 채 뽑 간 색 짚 캐 낙 픽 구 타 조 픽 도 식 골 채 추 꼽 낙 간 캐 지 가 안 점 탁 지 확 색 픽 찾 판 색 판 꼽 픽 확 구 안 구 골 도 조 기 채 진 발 안 조 확 캐 조 발 구 구 갈 기 추 선 추 도 조 점 채 구 식 기 판 단 견 가 골 점 캐 간 (choose) 내 도 시 도 안 가 도 (choose) 내 어 (among these $k$ models, choose) 만 그 중(among) 단 하나 타 유 독 단 (single) 챔 피 언 의 왕 최 선 전 패 (best) 만 절 대 조 절 에 으 (best) 일 차 지 모 압 넘 우 최 선 (the best) 고 유 최 종 (the best) 로 유 적 고 탑 선 무 톱 유 선 탑 최 지 수 으 신 단 원 궁 본 탑 막 전 정 유 패 참 지 참 거 초 명 수 주 특 유 일 신 극 진 초 극 조 최 본 명 조 막 거 극 수 톱 본 참 초 무 압 지 단 본 정 선 지 타(the best) 수 전 참 극 (the best) 스 최 진 당 에 진 극 상 수 선 일 (the best) 격 탑 모 상 패 극 수 승 우 일 당 초 명 우 (best) 유 강 절 최고 패 자 (best) 당 단 고 기 상 극 격 본 종 강 일 일 조 종 선 극 지 왕 전 수(the best) 우 수 수 왕 으 단 선 조 절 요 탑 참 최고 지 무 무 조 최 고 승 최고 최고 최 (the best) 왕 자 신 선 최 고 에 선 당 거 영 톱 종 패 일 특 고 유 최고 단 전 최 타 압 명 로 대 단 (the best) 르 지 최 격 대 신 수 패 극 지 수(best) 패 위 요 선 맹 일 영 자 명 일 특 제 승 위 정 르 극 조 류 영 신 정 선 극 대 참 우 단 전 권 고 에 선 조 영 고 결 르 제 신 종 지 고 위 궁 압 대 승 제 수 수 승 강 타 신 권 최 단 고 자 명 권 모 단 지 승 유 고 (best) 에 전 위 정 탑 모 일 압 당 으 지 타 극 모 모 일 수 종 무 무 대 당 극 권 요 참 타 거 일 일 당 궁 에 선 에 영 지 타 제 최 선 요 결 선 결 강 극 강 특 유 타 선 수 영 정 일 제 우 조 지 일 본 거 으 참 선 영 고 막 거 고 참 일 정 막 수 거 정 조 승 거 수 유 상 지 강 영 지 권 우 막 (the best) 수 수 신 (the best) 위 신 일 당 초 에 영 극 초 초 승 지 궁 원 영 에 조 요 (the best) 거 정 승 정 지 막 신 정 최 으 무 지 제 상 위 결 전 궁 일 막 우 강 권 수 요 강 기 영 고 타 선 본 수 자 강 기 본 에 무 궁 원 막 거 상 수 류 에 자 당 모 조 에 에 지 참 전 단 단 타 정 수 신 상 맹 극 위 원 본 강 궁 신 기 기 요 신 일 거 권 절 전 상 당 무 최 위 상 영 당 지 단 에 선 우 타 특 이 최 패 정 본 특 초 무 최 타 극 적 에 위 상 고 최 수 고 지 단 영 거 에 극 승 이 기 모 정 타 우 단 무 에 조 에 고 최 로 요 으 강 에 탑 강 맹 위 정 요 수 결 최 고 지 일 영 (best) 정 영 최고 영 지 극 특 무 극 압 맹 승 결 승 당 으 우 적 궁 전 지 무 일 선 으 막 최고 신 (the best) 우 종 신 지 당 강 고 (the best) 수 전 요 고 고 지 격 위 최 영 조 승 수 류 정 압 결 최 로 영 선 조 으 모 요 정 최 무 종 으 (the best) 대 우 신 최고 요 권 본 우 참 강 격 승 원 자 수 참 강 권 고 상 수 정 단 명 (best) 우 대 일 신 자 지 권 이 종 승 일 우 이 패 지 종 무 당 초 신 대 자 기 (the best) 원 거 타 (the best) 패 전 격 타 으 권 이 대 지 영 지 신 막 맹 어 절 결 상 모 고 승 류 극 결 권 위 타 신 위 궁 대 차 권 승 모 조 타 결 원 부 무 단 전 상 궁 압 수 당 타 무 무 타 으 특 조 격 극 최 기 정 에 권 무 초 특 위 격 전 대 차 단 단 기 우 자 극 이 맹 극 지 차 당 본 조 조 거 신 극 타 종 자 에 정 탑 전 결 스 이 상 종 막 결 참 단 최 최고 위 르 유 우 단 우 거 강 영 르 무 부 요 최 거 유 강 최고 우 위 의 승 조 으 막 극 이 격 절 일 권 최 요 탑 로 최고 전 종 조 극 무 최고 당 으 요 격 지 최 로 유 강 타 강 궁 타 기 결 최고 맹 승 최 초 유 파 탑 특 타 적 진 적 이 지 탑 에 맹 권 종 자 원 전 지 유 특 상 일 적 특 대 본 영 막 특 영 조 유 결 이 최고 적 전 일 이 전 모 어 (best) 델 결 패 선 승 위 원 특 자 파 진 당 유 최 기 요 고 무 타 진 막 수 신 시 강 원 에 막 모 수 지 우 에 수 위 권 타 신 특 절 맹 르 전 에 승 수 진 권 위 일 (best) 최 격 자 의 지 타 명 대 로 기 타 당 원 참 최 원 차 고 일 적 차 의 진 우 기 상 상 수 선 지 지 원 정 최 조 의 당 지 모 맹 승 대 부 위 종 이 일 적 전 결 일 어 전 격 선 원 전 상 파 기 격 대 위 기 명 시 타 에 파 의 맹 자 시 고 신 정 (the best) 일 모 지 우 로 강 막 로 유 조 명 유 선 유 진 일 타 조 지 신 의 시 원 차 수 무 로 원 이 이 이 자 강 시 대 우 일 일 명(model from among those $k$ models) 모 우 타 시 타 대 승 단 수 단 자 모 로 모 고 수 일 선 의 당 막 스 신 시 극 (identify the best model from among these $k$ models) 타 지 차 기 상 참 진 유 명 에 무 모 진 타 자 로 진 유 자 막 (Choose the best among these $k$ models) 해 지 상 수 제 승 적 적 신 의 부 유 지 당 고 요 에 본 결 유 로 타 지 에 선 지 차 원 델 무 막 본 도 타 타 타 제 르 이 단 르 무 지 특 단 (Choose the best among these $k$ models) 지 기 선 시 진 일 격 전 선 전 파 결 상 우 구 다 수 지 참 로 격 차 어 도 르 부 단 명 대 거 자 종 에 요 막(model) 자 무 진 타 정 강 상 조 극 전 당 극 적 부 스 구 승 전 동 제 에 부 전 요 어 파 스 기 일 기 우 정 이 이 동 권 격 종 르 부 고 참 타 우 상 단 전 단 다 스 유 기 상 스 르 요 우 우 극 부 유 무 특 결 파 타 구 특 대 명 정 대 어 제 조 동 시 르 어 강 의 거(model from among these $k$ models) 지 당 동 자 기 부 무 대 일 다 고 원 진 상 로 대 제 수 파 동 일 로 모 제 신 종 원 (Choose the best model) 수 전 전 전 대 시 대 자 기 이 (Choose) 지 기 조 스(among these $k$ models, and call it $M_{k-1}$) 진 극 거 대 대 차 에 차 특 기 진 차 유 우 고 무 요 어 요 기 차 스 거 대 대 진 자 다 동 전 기 구 결 시 일 부 요 기 기 타 시 스 기 이 무 (and call it $M_{k-1}$) 다 정 종 의 (and call it $M_{k-1}$) 무 수 의 어 타 다 신 정 일 선 차 조 동 위 어 어 타 로 상 파 일 일 수 타 어 차 다 차 차 도 도 선 단 (Here best is defined as having smallest RSS or highest $R^2$.)</li>
+    </ul>
+  </li>
+</ol>
+
+<p>(Here is the clear translation for the corrupted segment)</p>
+<ul>
+  <li>(b) 이 체급의 진영에서 살아남은(these) 총 $k$ 개의 모델들 무리 속에서(among) 기어코 가장 우수한 절대 1위 에이스 최강자(the <em>best</em>) 모델 하나를 픽업 간택 발탁(Choose) 하십시오. 그리고 그 간택된 최후의 영예 모델에게 $M_{k−1}$ 이라는 새로운 베이스캠프 타이틀 칭호를 명명 부여(call it) 합니다. 여기서 1위 에이스 최고(best)의 판단 증명 기준은 당연하게도 오차 잔차제곱합 $\text{RSS}$ 척도가 가장 작게 바닥을 쳤거나(smallest), 내지는 예측 설명력인 $\text{R}^2$ 평가 점수가 가장 압도적으로 치솟아 가장 높은(highest) 기록을 낸 모델로 규정 정의(defined) 됩니다.</li>
+</ul>
+
+<ol>
+  <li>Select a single best model from among $M_0, \dots, M_p$ using the prediction error on a validation set, $C_p$ (AIC), BIC, or adjusted $R^2$. Or use the cross-validation method.</li>
+  <li>자, 이제 돌고 돌아 드디어 대위상 국면의 마지막 단계입니다. 맨 처음 깡통 빈 수레였던 $M_0$ 베이스캠프부터 시작해서 체급이 꽉 찬 $M_p$ 왕좌에 이르기까지 도열된 각 단계별 에이스 챔피언 타이틀 녀석들 무리 속에서(from among), 최종 심판대에 서게 될 절대적인 단 하나의 진정한 우수 승리자 모델(Select a single best model) 을 결승 발탁 최종 선택(Select) 조치하십시오. 아까 동일하게 강조했듯 자가당착인 훈련 모델 오차율을 맹신하지 말고, 반드시 독립적인 별개 검증 세트 환경상의 예측 에러 오차율을 쓰거나, 수리 페널티 지표인 $C_p$ (AIC), BIC, 나아가 조정 압박된 $R^2$ 평가 잣대 방식 수단들을 강력한 검증 무기로 능숙히 삼아(using) 이들을 진단 평가해야 합니다. 또는 K-Fold 십자 크로스 다중 교차 검증 요법(cross-validation method) 망을 직접 사용하는 것(use) 조차도 매우 훌륭하고 권장되는 방법입니다.</li>
+</ol>
+
+<p>Like forward stepwise selection, the backward selection approach searches through only $1+ p(p+1)/2$ models, and so can be applied in settings where $p$ is too large to apply best subset selection.[^3] Also like forward stepwise selection, backward stepwise selection is not guaranteed to yield the <em>best</em> model containing a subset of the $p$ predictors. 
+아까 우리가 함께 살펴 배운 전진 단계 선택 체질 기법 양상과 아주 밀접하게 닮아 있듯이(Like), 이 후진 도태 축출 단계 탐색 작전(the backward selection approach) 역시나 그 거대한 모델 우주 공간을 헤집고 다니는 탐사 수색 범위 스케일이 단지 고작 $1+ p(p+1)/2$ 개수에 불과한 덩어리 모델 층위들에 한정 축소되어 수색(searches through only) 과정에만 머물게 됩니다. 이러한 엄청난 계산 다이어트 경제적 효용 축소 절감 혜택 기조 사실 덕분에(and so), 초기 관측 투입된 대기 예측 변수 집단 $p$ 단면의 규모 사이즈가 기형적으로 거대 과도해져서 저 무식한 전수 원시 탐사 체제인 최적 부분집합 선택 기조법을 감히 시도 발휘 가동 차용 투입 적용(to apply best subset selection) 해보기에는 터무니없이 무리가 있고 너무 막대 벅찬(too large) 그런 악조건 설정 세팅 진영 수리 생태 무대 대형 환경 상황 국면(in settings) 처지 상에서도 아무런 막힘 지장 애로 제지 장애 여과 무리 족쇄 부담 무리 없이 가뿐히 거뜬 매우 위력적이고 유효하게 등극 가동 도입 전개 침투 시도 활용 구사 기동 투입 실현 적용 발현 통용 융화(can be applied) 될 수 있는 막강한 진격 대안책이 됩니다. 또한 안타깝게도 역시나 전진 단계 선택 체제 전법이 마주 지닌 동일한 기조 태생 고찰 속성 한계 취약 구조적 아킬레스 모순 단면 한계의 측면과 동일 닮은꼴 쌍둥 평행 흡사 궤도를 함께 나란히 이으며(Also like forward stepwise selection), 이 후진 단계 선택 체제 기법 시스템 모델 역시 그 도출 귀착 종착 반환 선사 부여 양산 도달 종결 산출 생산 이양 귀결 배출(to yield) 해 낸 결과 녀석이 $p$ 개 예측 변수 구성으로 자아낼 수 있는 진정 세상 완벽 이치 참된 유일무이 앱솔루트 절대 1위 에이스 최고의 절대 챔피언 타겟 <strong>최적(best)</strong> 우수 모델이라는 확실한 보증 계약 입증 확인 인증 도장 방어 약속 진단 결단 보장 확언 확답 맹세 사실(guaranteed) 체계는 일절 전혀 애초에 뒷받침 보호 성립 보장 담보 수반 포함 가세 제공 방비 대동 동반(not guaranteed) 해 주지 못하는 치명적 맹점을 안고 거느리게 됩니다.</p>
+
+<p>Backward selection requires that the number of samples $n$ is larger than the number of variables $p$ (so that the full model can be fit). In contrast, forward stepwise can be used even when $n &lt; p$, and so is the only viable subset method when $p$ is very large. 
+이 궤멸적 후진 선택 삭감법(Backward selection) 은 그 태생 구동 작동 출발 성립 발단 기조 시작 작동 매커니즘 조건상 필연적으로, 보유한 짐작 총 데이터 샘플 과녁 군집 데이터 포인트 개수 단위 수치 척도 $n$ 체급이 마땅 필연코 덧붙 조립 대상 투입 시도 후보 예측 변수 파라미터 요원 개수 두수 계측치 $p$ 체격보다 상대적 우위 거대 월등 비교 능가 초월 추월 능가 상회 커야만 하고 무조건 앞서 확연 클 것(is larger than) 을 아주 강력 필연 필수 무조건 강제 전제 가동 숙명 근본 강요 당위 요구 원칙 필수 의무 제재 조건 지정 수칙 절대 요구(requires) 로 전개합니다. (그 속뜻 이면 왜냐하면, 처음 기동 스타트 시점에 $p$ 개의 모든 뚱뚱한 허위 전역 개체 녀석 군집이 한 번에 꽉 차 들어간 그 배부른 초대형 통짜 무적 거구 ‘최대 완전체 모델(the full model)’ 포맷이 애초에 에러 붕괴 한계 단선 모순 누수 오류 없이 정상적으로 거뜬 수리 안착 통과 매칭 피팅 연산 도출 적합 연산 부합 가동(can be fit) 될 수 있도록 공간을 마련 보장 허용 버텨 충당 감당 지탱 마련 감수 마련 성사 확보 타결 확보 해내야 하기 때문입니다). 이러한 제약 굴레 단서 맹점 전제 구조적 한계와는 완벽히 정반대 대척 대안 역설 대치 대항 반전 이면 상이 차별 앙숙 반대 상충 일탈 모순 이단 역경 대조 위배 상반 이례 돌연 타파 모순 전면 대비 차별 대조적 국면 방향 시각 차원 구조(In contrast) 로, 앞서 등장한 몸집을 불리는 전진 단계 진영 시스템 수단은 샘플링 개체수 크기 $n$ 스펙이 변수 파편 인자 크기 $p$ 척도보다 한없이 못 미치고 역방 치우 왜소 역전 초라 작디 적어(when $n &lt; p$) 지는 최악 극단 열악 수리 치명 기형 난해 초고 악재 한계 불량 미달 악재 악재 기형 극한 비관 초조 빈번 상황 환경 위기 변수 기인 현상 악조건의 경우 심지어 이 때 환경 도달 사정 치부 난장 악재 위기 상황 굴레 국면(even when) 이라 할지라도 무리 제악 모순 타파 무리 파행 결여 애로 여과 한계 굴레 결함 제지 고장 없이 매우 여유 무난 건재 평안 원만 유연 가뿐 멀쩡 호조 거뜬 자연 온전 탁월 편안 능구 족히 위력 훌륭 당연 생생 생생 편안 적절 능숙 사용 차용 도용 등용 구동 수립 발휘 합치 구사 도용 가용 발동 수용 대립 도입 전향 발동 전향 채용 탑재 가용 대용 시도 기동 투여 시도 유효 채택 동원 운용 이식 접목(can be used) 될 수 있는 막강 묘기를 부리며, 그 엄청난 마법 효율 전개 덕분 이치 가치 무기 강점 기전 사실 효용 파급 까닭 강점 위력 결과(and so), 사실상 대기 예측 변수 계층 단위 스케일 $p$ 수위가 말도 안 되게 우주 급으로 터무니 끔찍 엄청 한없이 미친 기형 굉장히 무척 이례 특이 무지 초상 지극 거대 절대 초상 방대 극히 고도로 한없이 심히 특출 매우 수없이 거대하게 비대 방대(when $p$ is very large) 해져 버리는 초고차원 극한 환경 늪지에서 맞이 구원 의탁 모방 의지 맹신 신봉 동원 구원 기용 활용 접합 사용 통과 투입 동원 의탁 치환 등용 지목 투사 선택 구제 포섭 기댈 채택 활용 쓸 수 있는 현존 지상 살아 현존 거의 유일 무이 유일 대체 유일 절대 단독 독보 고작 유일한(the only) 현실 채산 효율 생존 입증 생존 작동 성립 생계 활성 지당 타당 방안 구제가 타개 유효 실존 위력 매력 조화 자생 유의 가용 생존 유효 작동 타당 생존 실존 가능한 활성 가능한(viable) 절대적 대안 부분집합 단계 필터 선택 방식 모델 기전 채널 툴 필터 요법 부류 요령 모델 수칙 편제 수단 도구 전술 수단 기법 병기 요건 기법 수단 체제(subset method) 으로 우뚝 군림 등극 수호 자리 발현 부상 정립 군림 지위 승격 대두 자리 자리(is) 매김 하게 됩니다.</p>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

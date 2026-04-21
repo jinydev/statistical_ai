@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f9fa"/>
+      <stop offset="100%" stop-color="#fff0f6"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+
+    <!-- Flow animations -->
+    <animate id="flow1" xlink:href="#flowPath1" attributeName="stroke-dashoffset" values="40;0" dur="0.8s" repeatCount="indefinite"/>
+    <animate id="flow2" xlink:href="#flowPath2" attributeName="stroke-dashoffset" values="40;0" dur="1.2s" repeatCount="indefinite"/>
+    <animate id="flow3" xlink:href="#flowPath3" attributeName="stroke-dashoffset" values="40;0" dur="2s" repeatCount="indefinite"/>
+    
+    <animateTransform id="gearSpin" xlink:href="#gearAnim" attributeName="transform" type="rotate" from="0 400 380" to="360 400 380" dur="4s" repeatCount="indefinite"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bg)" rx="15"/>
+
+  <!-- Title section -->
+  <g transform="translate(100, 30)">
+    <rect width="600" height="50" fill="#ffffff" rx="25" filter="url(#shadow)"/>
+    <text x="300" y="32" font-family="'Jua', sans-serif" font-size="24" fill="#d6336c" text-anchor="middle" font-weight="bold">다중 선형 회귀: 여러 개의 힌트를 공장으로!</text>
+  </g>
+
+  <!-- Input Nodes (Predictors) -->
+  <!-- Box 1 (TV) -->
+  <g transform="translate(150, 150)">
+    <rect x="-60" y="-40" width="120" height="80" fill="#4dabf7" rx="15" filter="url(#shadow)"/>
+    <text x="0" y="-10" font-family="'Jua', sans-serif" font-size="20" fill="#fff" text-anchor="middle" font-weight="bold">TV 광고비 ($X_1$)</text>
+    <circle cx="0" cy="20" r="15" fill="#fff"/>
+    <text x="0" y="26" font-family="'Jua', sans-serif" font-size="20" fill="#1864ab" text-anchor="middle" font-weight="bold">📺</text>
+  </g>
+
+  <!-- Box 2 (Radio) -->
+  <g transform="translate(400, 150)">
+    <rect x="-60" y="-40" width="120" height="80" fill="#fcc419" rx="15" filter="url(#shadow)"/>
+    <text x="0" y="-10" font-family="'Jua', sans-serif" font-size="20" fill="#fff" text-anchor="middle" font-weight="bold">라디오비 ($X_2$)</text>
+    <circle cx="0" cy="20" r="15" fill="#fff"/>
+    <text x="0" y="26" font-family="'Jua', sans-serif" font-size="20" fill="#e67700" text-anchor="middle" font-weight="bold">📻</text>
+  </g>
+
+  <!-- Box 3 (Newspaper) -->
+  <g transform="translate(650, 150)">
+    <rect x="-60" y="-40" width="120" height="80" fill="#20c997" rx="15" filter="url(#shadow)"/>
+    <text x="0" y="-10" font-family="'Jua', sans-serif" font-size="20" fill="#fff" text-anchor="middle" font-weight="bold">신문 광고 ($X_3$)</text>
+    <circle cx="0" cy="20" r="15" fill="#fff"/>
+    <text x="0" y="26" font-family="'Jua', sans-serif" font-size="20" fill="#087f5b" text-anchor="middle" font-weight="bold">📰</text>
+  </g>
+
+  <!-- Flow Paths / Pipes -->
+  <path d="M 150,190 L 150,230 L 350,280 L 350,330" fill="none" stroke="#ced4da" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 400,190 L 400,230 L 400,280 L 400,330" fill="none" stroke="#ced4da" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 650,190 L 650,230 L 450,280 L 450,330" fill="none" stroke="#ced4da" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Animated Center Flows -->
+  <path id="flowPath1" d="M 150,190 L 150,230 L 350,280 L 350,330" fill="none" stroke="#339af0" stroke-width="8" stroke-dasharray="20,20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="flowPath2" d="M 400,190 L 400,230 L 400,280 L 400,330" fill="none" stroke="#fcc419" stroke-width="8" stroke-dasharray="20,20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="flowPath3" d="M 650,190 L 650,230 L 450,280 L 450,330" fill="none" stroke="#20c997" stroke-width="8" stroke-dasharray="20,20" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Amplifier Dials (Coefficients / Betas) -->
+  <!-- Beta 1 -->
+  <g transform="translate(150, 260)">
+    <circle cx="0" cy="0" r="30" fill="#fff" stroke="#4dabf7" stroke-width="5" filter="url(#shadow)"/>
+    <text x="0" y="-5" font-family="'Jua', sans-serif" font-size="16" fill="#1864ab" text-anchor="middle" font-weight="bold">곱하기파워</text>
+    <text x="0" y="15" font-family="'Jua', sans-serif" font-size="20" fill="#1864ab" text-anchor="middle" font-weight="bold">$\beta_1$</text>
+  </g>
+
+  <!-- Beta 2 -->
+  <g transform="translate(400, 260)">
+    <circle cx="0" cy="0" r="30" fill="#fff" stroke="#fcc419" stroke-width="5" filter="url(#shadow)"/>
+    <text x="0" y="-5" font-family="'Jua', sans-serif" font-size="16" fill="#d9480f" text-anchor="middle" font-weight="bold">곱하기파워</text>
+    <text x="0" y="15" font-family="'Jua', sans-serif" font-size="20" fill="#d9480f" text-anchor="middle" font-weight="bold">$\beta_2$</text>
+  </g>
+
+  <!-- Beta 3 -->
+  <g transform="translate(650, 260)">
+    <circle cx="0" cy="0" r="30" fill="#fff" stroke="#20c997" stroke-width="5" filter="url(#shadow)"/>
+    <text x="0" y="-5" font-family="'Jua', sans-serif" font-size="16" fill="#087f5b" text-anchor="middle" font-weight="bold">곱하기파워</text>
+    <text x="0" y="15" font-family="'Jua', sans-serif" font-size="20" fill="#087f5b" text-anchor="middle" font-weight="bold">$\beta_3$</text>
+  </g>
+
+  <!-- Main Output Box (Sales Y) -->
+  <g transform="translate(400, 380)">
+    <!-- Spinning Gear animation -->
+    <g id="gearAnim">
+      <circle cx="0" cy="0" r="50" fill="#ffe066"/>
+      <path d="M-10,-55 L10,-55 L15,-45 L-15,-45 Z" fill="#ffe066" transform="rotate(0)"/>
+      <path d="M-10,-55 L10,-55 L15,-45 L-15,-45 Z" fill="#ffe066" transform="rotate(45)"/>
+      <path d="M-10,-55 L10,-55 L15,-45 L-15,-45 Z" fill="#ffe066" transform="rotate(90)"/>
+      <path d="M-10,-55 L10,-55 L15,-45 L-15,-45 Z" fill="#ffe066" transform="rotate(135)"/>
+      <path d="M-10,-55 L10,-55 L15,-45 L-15,-45 Z" fill="#ffe066" transform="rotate(180)"/>
+      <path d="M-10,-55 L10,-55 L15,-45 L-15,-45 Z" fill="#ffe066" transform="rotate(225)"/>
+      <path d="M-10,-55 L10,-55 L15,-45 L-15,-45 Z" fill="#ffe066" transform="rotate(270)"/>
+      <path d="M-10,-55 L10,-55 L15,-45 L-15,-45 Z" fill="#ffe066" transform="rotate(315)"/>
+    </g>
+
+    <circle cx="0" cy="0" r="40" fill="#fff" stroke="#fcc419" stroke-width="6" filter="url(#shadow)"/>
+    <text x="0" y="-5" font-family="'Jua', sans-serif" font-size="20" fill="#343a40" text-anchor="middle" font-weight="bold">최종정답</text>
+    <text x="0" y="20" font-family="'Jua', sans-serif" font-size="24" fill="#f03e3e" text-anchor="middle" font-weight="bold">$Y$ (판매량)</text>
+  </g>
+
+  <!-- Formula Summary Bubble -->
+  <g transform="translate(480, 410)">
+    <path d="M0,0 Q120,-30 240,0 Q260,30 240,60 Q120,90 0,60 Q-20,30 0,0" fill="#fff3cd" stroke="#ffe066" stroke-width="3" filter="drop-shadow(2px 2px 4px rgba(0,0,0,0.1))"/>
+    <text x="120" y="25" font-family="'Jua', sans-serif" font-size="16" fill="#d9480f" text-anchor="middle" font-weight="bold">"모든 입력 재료($X$)들이 각자의</text>
+    <text x="120" y="45" font-family="'Jua', sans-serif" font-size="16" fill="#d9480f" text-anchor="middle" font-weight="bold">능력치($\beta$)만큼 합쳐져서 완성!"</text>
+  </g>
+
+</svg>

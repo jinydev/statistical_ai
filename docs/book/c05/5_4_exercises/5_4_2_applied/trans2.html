@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c05/5_4_exercises/5_4_2_applied/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c05/5_4_exercises/5_4_2_applied/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c05/5_4_exercises/5_4_2_applied/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c05/5_4_exercises/5_4_2_applied/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/">05. Resampling Methods</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/5_4_exercises/">5 4 exercises</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/5_4_exercises/5_4_2_applied/">5 4 2 applied</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="applied">Applied</h1>
+<h1 id="응용-문제-실습">응용 문제 실습</h1>
+
+<ol>
+  <li>In Chapter 4, we used logistic regression to predict the probability of <code class="language-plaintext highlighter-rouge">default</code> using <code class="language-plaintext highlighter-rouge">income</code> and <code class="language-plaintext highlighter-rouge">balance</code> on the <code class="language-plaintext highlighter-rouge">Default</code> data set. We will now estimate the test error of this logistic regression model using the validation set approach. Do not forget to set a random seed before beginning your analysis.</li>
+  <li>
+    <p>지난 Chapter 4에서, 우리는 <code class="language-plaintext highlighter-rouge">Default</code> 데이터 세트를 활용하여 <code class="language-plaintext highlighter-rouge">income</code>과 <code class="language-plaintext highlighter-rouge">balance</code> 변수를 기반으로 채무 불이행(<code class="language-plaintext highlighter-rouge">default</code>)의 발생 확률을 예측하는 데 로지스틱 회귀 분석을 사용했습니다. 이제 우리는 검증 세트 방식(validation set approach)을 사용하여 이 로지스틱 회귀 모델의 테스트 에러를 추정할 것입니다. 분석을 시작하기 전에 반드시 난수 시드(random seed)를 설정하는 것을 잊지 마십시오.</p>
+
+    <ul>
+      <li>(a) Fit a logistic regression model that uses <code class="language-plaintext highlighter-rouge">income</code> and <code class="language-plaintext highlighter-rouge">balance</code> to predict <code class="language-plaintext highlighter-rouge">default</code>.</li>
+      <li>
+        <p>(a) <code class="language-plaintext highlighter-rouge">income</code>과 <code class="language-plaintext highlighter-rouge">balance</code>를 사용하여 <code class="language-plaintext highlighter-rouge">default</code>를 예측하는 로지스틱 회귀 모델을 적합(fit)하십시오.</p>
+      </li>
+      <li>(b) Using the validation set approach, estimate the test error of this model. In order to do this, you must perform the following steps:</li>
+      <li>
+        <p>(b) 검증 세트 방식을 사용하여 이 모델의 테스트 에러를 추정하십시오. 이를 위해 다음 단계들을 수행해야 합니다:</p>
+
+        <ul>
+          <li>i. Split the sample set into a training set and a validation set.</li>
+          <li>
+            <p>(i) 전체 표본 집단을 훈련 세트(training set)와 검증 세트(validation set)로 분할하십시오.</p>
+          </li>
+          <li>ii. Fit a multiple logistic regression model using only the training observations.</li>
+          <li>
+            <p>(ii) 훈련 관측치들만을 사용하여 다중 로지스틱 회귀 모델을 적합하십시오.</p>
+          </li>
+          <li>iii. Obtain a prediction of default status for each individual in the validation set by computing the posterior probability of default for that individual, and classifying the individual to the <code class="language-plaintext highlighter-rouge">default</code> category if the posterior probability is greater than 0.5.</li>
+          <li>
+            <p>(iii) 검증 세트 내의 각 개인에 대해 채무 불이행 사후 확률(posterior probability)을 계산함으로써 채무 불이행 상태에 대한 예측을 얻으십시오. 그리고 만약 사후 확률이 0.5보다 크다면 그 개인을 <code class="language-plaintext highlighter-rouge">default</code> 범주로 분류하십시오.</p>
+          </li>
+          <li>iv. Compute the validation set error, which is the fraction of the observations in the validation set that are misclassified.</li>
+          <li>(iv) 검증 세트 에러를 계산하십시오. 이는 검증 세트 내에서 잘못 분류된(misclassified) 관측치들의 비율입니다.</li>
+        </ul>
+      </li>
+      <li>(c) Repeat the process in (b) three times, using three different splits of the observations into a training set and a validation set. Comment on the results obtained.</li>
+      <li>
+        <p>(c) 관측치들을 훈련 세트와 검증 세트로 각기 다르게 분할하는 3번의 상이한 분할을 사용하여, (b)의 과정을 3회 반복하십시오. 얻어진 결과에 대해 논평하십시오.</p>
+      </li>
+      <li>(d) Now consider a logistic regression model that predicts the probability of <code class="language-plaintext highlighter-rouge">default</code> using <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">balance</code>, and a dummy variable for <code class="language-plaintext highlighter-rouge">student</code>. Estimate the test error for this model using the validation set approach. Comment on whether or not including a dummy variable for <code class="language-plaintext highlighter-rouge">student</code> leads to a reduction in the test error rate.</li>
+      <li>(d) 이제 <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">balance</code> 그리고 <code class="language-plaintext highlighter-rouge">student</code>를 나타내는 더미 변수(dummy variable)를 사용하여 <code class="language-plaintext highlighter-rouge">default</code>의 확률을 예측하는 로지스틱 회귀 모델을 고려해 보십시오. 검증 세트 방식을 사용하여 이 모델에 대한 테스트 에러를 추정하십시오. <code class="language-plaintext highlighter-rouge">student</code>에 대한 더미 변수를 포함하는 것이 테스트 에러율의 감소를 이끌어내는지(leads to a reduction) 여부에 대해 논평하십시오.</li>
+    </ul>
+  </li>
+  <li>We continue to consider the use of a logistic regression model to predict the probability of <code class="language-plaintext highlighter-rouge">default</code> using <code class="language-plaintext highlighter-rouge">income</code> and <code class="language-plaintext highlighter-rouge">balance</code> on the <code class="language-plaintext highlighter-rouge">Default</code> data set. In particular, we will now compute estimates for the standard errors of the <code class="language-plaintext highlighter-rouge">income</code> and <code class="language-plaintext highlighter-rouge">balance</code> logistic regression coefficients in two different ways: (1) using the bootstrap, and (2) using the standard formula for computing the standard errors in the <code class="language-plaintext highlighter-rouge">sm.GLM()</code> function. Do not forget to set a random seed before beginning your analysis.</li>
+  <li>
+    <p>우리는 <code class="language-plaintext highlighter-rouge">Default</code> 데이터 세트를 활용하여 <code class="language-plaintext highlighter-rouge">income</code>과 <code class="language-plaintext highlighter-rouge">balance</code>를 기반으로 <code class="language-plaintext highlighter-rouge">default</code> 확률을 예측하기 위한 로지스틱 회귀 모델의 사용을 계속해서 고찰해 봅니다. 특히, 우리는 이제 두 가지 상이한 방식으로 <code class="language-plaintext highlighter-rouge">income</code>과 <code class="language-plaintext highlighter-rouge">balance</code>에 대한 로지스틱 회귀 계수들의 표준 오차(standard errors) 추정치를 계산할 것입니다: (1) 부트스트랩을 사용하는 방식과, (2) <code class="language-plaintext highlighter-rouge">sm.GLM()</code> 함수 내에 있는 표준 오차 계산용 표준 공식을 사용하는 방식입니다. 분석을 시작하기 전에 반드시 난수 시드를 설정하는 것을 잊지 마십시오.</p>
+
+    <ul>
+      <li>(a) Using the <code class="language-plaintext highlighter-rouge">summarize()</code> and <code class="language-plaintext highlighter-rouge">sm.GLM()</code> functions, determine the estimated standard errors for the coefficients associated with <code class="language-plaintext highlighter-rouge">income</code> and <code class="language-plaintext highlighter-rouge">balance</code> in a multiple logistic regression model that uses both predictors.</li>
+      <li>
+        <p>(a) <code class="language-plaintext highlighter-rouge">summarize()</code>와 <code class="language-plaintext highlighter-rouge">sm.GLM()</code> 함수를 사용하여, 두 예측 변수를 모두 사용하는 다중 로지스틱 회귀 모델에서 <code class="language-plaintext highlighter-rouge">income</code> 및 <code class="language-plaintext highlighter-rouge">balance</code>와 연관된 계수들에 대한 추정된 표준 오차를 결정하십시오.</p>
+      </li>
+      <li>(b) Write a function, <code class="language-plaintext highlighter-rouge">boot_fn()</code>, that takes as input the <code class="language-plaintext highlighter-rouge">Default</code> data set as well as an index of the observations, and that outputs the coefficient estimates for <code class="language-plaintext highlighter-rouge">income</code> and <code class="language-plaintext highlighter-rouge">balance</code> in the multiple logistic regression model.</li>
+      <li>
+        <p>(b) 입력값으로 <code class="language-plaintext highlighter-rouge">Default</code> 데이터 세트와 더불어 관측치들의 인덱스(index)를 취하고, 다중 로지스틱 회귀 모델의 <code class="language-plaintext highlighter-rouge">income</code>과 <code class="language-plaintext highlighter-rouge">balance</code>에 대한 추정 계수를 출력(outputs)으로 내놓는 함수 <code class="language-plaintext highlighter-rouge">boot_fn()</code>을 작성하십시오.</p>
+      </li>
+      <li>(c) Following the bootstrap example in the lab, use your <code class="language-plaintext highlighter-rouge">boot_fn()</code> function to estimate the standard errors of the logistic regression coefficients for <code class="language-plaintext highlighter-rouge">income</code> and <code class="language-plaintext highlighter-rouge">balance</code>.</li>
+      <li>
+        <p>(c) 실습 랩(lab)에 등장한 부트스트랩 예제를 따라서, 귀하의 <code class="language-plaintext highlighter-rouge">boot_fn()</code> 함수를 사용하여 <code class="language-plaintext highlighter-rouge">income</code>과 <code class="language-plaintext highlighter-rouge">balance</code>에 대한 로지스틱 회귀 계수의 표준 오차를 추정하십시오.</p>
+      </li>
+      <li>(d) Comment on the estimated standard errors obtained using the <code class="language-plaintext highlighter-rouge">sm.GLM()</code> function and using the bootstrap.</li>
+      <li>(d) <code class="language-plaintext highlighter-rouge">sm.GLM()</code> 함수를 사용하여 얻은 추정 표준 오차와 부트스트랩을 사용하여 얻은 추정치에 대해 서로 비교 평론 논의(Comment on) 하십시오.</li>
+    </ul>
+  </li>
+  <li>In Sections 5.1.2 and 5.1.3, we saw that the <code class="language-plaintext highlighter-rouge">cross_validate()</code> function can be used in order to compute the LOOCV test error estimate. Alternatively, one could compute those quantities using just <code class="language-plaintext highlighter-rouge">sm.GLM()</code> and the <code class="language-plaintext highlighter-rouge">predict()</code> method of the fitted model within a for loop. You will now take this approach in order to compute the LOOCV error for a simple logistic regression model on the <code class="language-plaintext highlighter-rouge">Weekly</code> data set. Recall that in the context of classification problems, the LOOCV error is given in (5.4).</li>
+  <li>
+    <p>Section 5.1.2와 5.1.3에서 우리는 단일 표본 제외 교차 검증(LOOCV) 테스트 에러 추정치를 계산하기 위해 <code class="language-plaintext highlighter-rouge">cross_validate()</code> 함수가 쓰일 수 있음을 살펴봤습니다. 하지만 대안적(Alternatively)으로, 누군가는 오로지 <code class="language-plaintext highlighter-rouge">sm.GLM()</code>과 적합된 모델의 <code class="language-plaintext highlighter-rouge">predict()</code> 메서드만을 하나의 for 반복문(for loop) 내부에서 돌림으로써 그 수량들을 계산할 수도 있습니다. 이제 귀하는 <code class="language-plaintext highlighter-rouge">Weekly</code> 데이터 세트상의 단순 로지스틱 회귀 모델에 대한 LOOCV 에러를 계산하기 위해 이러한 대안 접근법을 직접 취해볼 것입니다. 분류(classification) 문제의 정황상, LOOCV 에러는 수식 (5.4)를 통해 주어진다는 사실을 상기하십시오.</p>
+
+    <ul>
+      <li>(a) Fit a logistic regression model that predicts <code class="language-plaintext highlighter-rouge">Direction</code> using <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code>.</li>
+      <li>
+        <p>(a) <code class="language-plaintext highlighter-rouge">Lag1</code>과 <code class="language-plaintext highlighter-rouge">Lag2</code>를 사용하여 <code class="language-plaintext highlighter-rouge">Direction</code> 변수를 예측하는 로지스틱 회귀 모델을 적합하십시오.</p>
+      </li>
+      <li>(b) Fit a logistic regression model that predicts <code class="language-plaintext highlighter-rouge">Direction</code> using <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code> <em>using all but the first observation</em>.</li>
+      <li>
+        <p>(b) 오직 <strong>가장 첫 번째 1순위 관측치 한 개만을 제외한 전체 모든 나머지 표본(using all but the first observation)</strong> 을 대동하여 <code class="language-plaintext highlighter-rouge">Lag1</code>과 <code class="language-plaintext highlighter-rouge">Lag2</code>로 <code class="language-plaintext highlighter-rouge">Direction</code>을 예측하는 로지스틱 회귀 모델을 적합하십시오.</p>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>(c) Use the model from (b) to predict the direction of the first observation. You can do this by predicting that the first observation will go up if $P(\text{Direction} = \text{“Up”}</td>
+              <td>\text{Lag1}, \text{Lag2}) &gt; 0.5$. Was this observation correctly classified?</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>(c) 위 (b) 항에서 얻어낸 모델을 사용하여, 제외되었던 저 맨 첫 번째 관측치의 방향(<code class="language-plaintext highlighter-rouge">Direction</code>)을 예측해 보십시오. 귀하는 만약 $P(\text{Direction} = \text{“Up”}</td>
+              <td>\text{Lag1}, \text{Lag2}) &gt; 0.5$ 이라면 첫 번째 관측치의 주가가 상승(“Up”)할 것이라고 예측함으로써 이를 수행할 수 있습니다. 당해 관측치는 올바르게 분류(correctly classified) 되었습니까?</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>(d) Write a for loop from $i = 1$ to $i = n$, where $n$ is the number of observations in the data set, that performs each of the following steps:</li>
+      <li>
+        <p>(d) $i = 1$부터 $i = n$까지 순환하는 for 루프(loop)를 작성하는데, 여기서 $n$은 데이터 세트에 포함된 전체 관측치 개수이며, 이 순환문 안에서 다음의 단계들을 각각 수행하도록 하십시오:</p>
+
+        <ul>
+          <li>i. Fit a logistic regression model using all but the $i$th observation to predict <code class="language-plaintext highlighter-rouge">Direction</code> using <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code>.</li>
+          <li>
+            <p>(i) 오로지 제 $i$번째 단일 관측치 항목만을 뺀 전부를 활용하여 <code class="language-plaintext highlighter-rouge">Lag1</code>과 <code class="language-plaintext highlighter-rouge">Lag2</code>로 <code class="language-plaintext highlighter-rouge">Direction</code>을 타단 예측하는 로지스틱 회귀 모듈 함수 뼈대를 피팅 구동 구축하십시오.</p>
+          </li>
+          <li>ii. Compute the posterior probability of the market moving up for the $i$th observation.</li>
+          <li>
+            <p>(ii) 해당 제 $i$번째 관측 주체에 관하여, 현 증시 시장이 상승 국면(“Up”)으로 진입 이동해 나갈 잔존 사후 추측 확률(posterior probability) 수치를 역산 연산해(Compute) 내십시오.</p>
+          </li>
+          <li>iii. Use the posterior probability for the $i$th observation in order to predict whether or not the market moves up.</li>
+          <li>
+            <p>(iii) 증시 여건 흐름이 우상향 상승을 발발할지 아닐지(whether or not the market moves up) 타단 예언(predict)할 목적 차원에서, 방금 제 $i$번째 대원을 상대로 얻어낸 당대 사후 확률 징표를 활용(Use) 조치해 보십시오.</p>
+          </li>
+          <li>iv. Determine whether or not an error was made in predicting the direction for the $i$th observation. If an error was made, then indicate this as a 1, and otherwise indicate it as a 0.</li>
+          <li>(iv) 해당 제 $i$번째 관측체 주체의 실존 방향(direction) 양상을 예측 규명함에 있어서 실질 패착 에러(error) 변위가 태동 발발 범해졌는지 유무 여부(whether or not)를 판별 결정(Determine) 지어 주십시오. 가령 만일 에러 패착이 범해졌다면 당해 징후를 숫자 1로 표기 지목(indicate)하고, 그 외 평탄 타당 맞춤의 경우라면 숫자 0으로 할당 표기 지정해 주십시오.</li>
+        </ul>
+      </li>
+      <li>(e) Take the average of the $n$ numbers obtained in (d)iv in order to obtain the LOOCV estimate for the test error. Comment on the results.</li>
+      <li>(e) 당해 테스트 검증 에러율 척도를 대변할 단일 기준 LOOCV 타겟 추계 예상치 결과물을 구득 도출(obtain) 획득할 요량 목표를 띠고서, 앞선 섹션 (d)의 iv 파트에서 취합 규합된 총계 $n$점 규모 숫점(numbers) 다발의 전체 평준화 평균(average) 대척점을 추출 인계 합산 타산(Take) 반영해 주십시오. 도출 얻어진 당 결과물 점수에 관해 짧게 견해 평론(Comment) 논술해 보십시오.</li>
+    </ul>
+  </li>
+  <li>We will now perform cross-validation on a simulated data set.</li>
+  <li>
+    <p>우리는 이제 인공 시뮬레이션으로 조성된 가상 데이터 세트 위에서 직접 단일 교차 검증 절차 작전을 수행 거행해 보겠습니다.</p>
+
+    <ul>
+      <li>(a) Generate a simulated data set as follows:</li>
+      <li>(a) 이내 후술 서술되는 다음과도 일치한 구성대로(as follows), 초기 가동 인공 시뮬레이션 기반 데이터셋 체형을 창출 발생(Generate)시켜 보십시오:</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In this data set, what is $n$ and what is $p$? Write out the model used to generate the data in equation form. 
+본 가설 데이터 집합군 내에서, 변수 $n$ 치수는 무엇이며 개체 $p$ 항은 무엇에 위치합니까? 현재 타겟 데이터를 빚어 발현 도출 생성 구축해 내고자 착취 투여 활용된 당해 기반 동력 모델 모형의 형상을 수학적 수식 기호 방정식 전개 형태 양태(in equation form)로 낱낱이 파헤쳐 기술 적시(Write out) 표기해 내십시오.</p>
+
+<ul>
+  <li>(b) Create a scatterplot of $X$ against $Y$. Comment on what you find.</li>
+  <li>
+    <p>(b) 변주 항목 $Y$ 를 표적 상대로 대면 취한 $X$ 진영 요소 간의 점 방사 파생형 살포점 산포도 차트 모형(scatterplot)을 한 점 도면 생성 전개(Create) 축조해 보십시오. 귀하의 시야에 적발 감지 관찰 포착 적발 발견된 징표 전초 특성(what you find)을 두고 감상 평론 묘사(Comment on) 해보십시오.</p>
+  </li>
+  <li>(c) Set a random seed, and then compute the LOOCV errors that result from fitting the following four models using least squares:</li>
+  <li>
+    <p>(c) 우선 특정 난수 시드를 굳게 선점 책정 조율 확정 고정한 후, 최소 제곱(least squares) 궤도를 채용 활용 운용해 가동 중인 그 아래 후단 나열 포진된 무려 네 4종의 파이브 예측식 모델 객체들(following four models)을 각기 모두 피팅 장착 고착 구동 돌려 연산시킴으로써 기인 초래 잉태 도출 양산 산출 형성 수반 결말 결착(result from) 발발되는 각각의 해당 개별 LOOCV 오차 편의 마진 찌꺼기 추이량(errors) 들을 모조리 전격 수리 타진 조사 타산 계산(compute) 산정해 보십시오:</p>
+
+    <ul>
+      <li>i. $Y = \beta_0 + \beta_1 X + \epsilon$</li>
+      <li>ii. $Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \epsilon$</li>
+      <li>iii. $Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \beta_3 X^3 + \epsilon$</li>
+      <li>iv. $Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \beta_3 X^3 + \beta_4 X^4 + \epsilon$</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Note you may find it helpful to use the <code class="language-plaintext highlighter-rouge">data.frame()</code> function to create a single data set containing both $X$ and $Y$. 
+일단 귀하 입장에선, 양가 당사자 격인 $X$ 묶음과 $Y$ 뭉탱이 군집 쌍방 모두를 고스란히 한데 품어 내포한 덩치형 단일 대 통합 데이터 저장 세트를 거뜬히 구축 설계(create) 장만 조형함에 있어서, 시중 <code class="language-plaintext highlighter-rouge">data.frame()</code> 내장 함수 기능 도구를 적재 적소 조달 편성 착취 도입 활용 사용하는 태도가 여로모로 요긴 유리(helpful) 함을 자각 판단 식별 인지 파악(find) 할 수 있음에 각별히 주목 관찰 상기(Note) 하시기 바랍니다.</p>
+
+<ul>
+  <li>(d) Repeat (c) using another random seed, and report your results. Are your results the same as what you got in (c)? Why?</li>
+  <li>
+    <p>(d) 본연의 궤전 (c) 도막 처리 절차 여정 공정을 한 번 더 전격 회귀 복기 재가동 반복 재현(Repeat)하되 당대 차례엔 일전과 구별되는 앞전과 사뭇 상이한 신형 랜덤 시드 번호를 교체 채용 적용 이식(using another random seed)함으로써, 돌연히 당신 코앞에 종착 돌출된 차후 산출 결과 변위 마진 결과 치수 수확물(results) 성적들을 온전히 발표 고지 취합 보고 제출 보론(report)해 올리십시오. 귀하의 작금 새로운 2트 결과표 지표 실적들이 종전 (c) 라운드 스테이지 당시 직면하여 얻어 적중 관철 거둬냈던 구 결과 결론들 실체 요소(what you got in (c)) 와 하등 비교 대조해 봤을 적에 똑같이 철저히 완연히 일치하는 등가 동일 동일체(same)입니까? 어찌하여 어떤 연유 탓에 그러합니까(Why)?</p>
+  </li>
+  <li>(e) Which of the models in (c) had the smallest LOOCV error? Is this what you expected? Explain your answer.</li>
+  <li>
+    <p>(e) 앞단 (c) 항목 나열 단상 구역 내 포진 출전된 숱한 기명 거점 모델 모듈 종류들 중 그 어떤 녀석(Which)이 압도 제일 극소 마진 최소 폭 최저 바닥 수준의 타겟 점수 극솟값 LOOCV 오류 격차수 스코어(smallest LOOCV error)를 지취 거머쥐고 차지 달성 영유 보유(had) 합니까? 이것이 본디 귀하가 이미 사전 선험 추정 조망 점쳐 내다보고 관측 예감 기대 예언 도모 기대(expected) 했었던 양상 방향 결과 수순에 일치 부합 부응(is this what) 하는 상황입니까? 본인의 제출 확답 소견 주장에 이면 이치 통찰 사유 해리 이유 당위 근간를 곁들여 납득 방증 논의 시사 설명(Explain) 해주십시오.</p>
+  </li>
+  <li>(f) Comment on the statistical significance of the coefficient estimates that results from fitting each of the models in (c) using least squares. Do these results agree with the conclusions drawn based on the cross-validation results?</li>
+  <li>(f) 공인 방식의 저 표준형 최소 부분 제곱 오차 제곱 방식체제(using least squares) 궤도 기믹을 동원 덧입혀 가동 가속시킴으로써 저 숱한 앞 구역 (c) 등급지 나열 개별 모델 진영들을 한 번씩 모조리 피팅 꽂아 가동 조립 삽입 타진 접착 매칭(fitting) 구축해 본 탓에 필경 따라붙어 인과 발생 기인 기작 도출 산출 양산 유발 파생 촉발 분비 초래 수반 반환 인과(results from) 되어 버렸던 당대 해당 각 파라미터 예측 획득 추정 계수 점수(coefficient estimates) 도출물들 저격 타점들 각각이 진정 내재 수반 지니고 함유하는 통계적 위력 유효 가치 유의미 지표성(statistical significance) 입지 한계 강도 타당 신빙 무게감 사안 측면에 관해 촌평 훈수 기술 시사 해석 분석 단평 논평 기술 서술 평론(Comment on)의 잣대를 내비쳐 보십시오. 과연 작금 묘사된 이런 류 개별 지표 수치 스코어 결과치 도출 타점 산물(these results) 들은, 귀하가 본 무대 메인 격의 앞선 여러 교차 검증 뺑뺑이 테스트 결과 획득 치수 기록물들을 온전 척도 바탕 지표 삼아(based on)서 손수 내출 추출 통찰 규합 직시 선고 파생 견인 유추 수거 발췌 유도 입증 추축 가동 인출 산출 적출 견조 연역 발굴 직조 결론 도출(drawn) 내린 주요 핵심 메인 평결 단안 판단 핵심 도달 종착 결론 명제(conclusions) 가설 논지 입장 사안 논조 결과 추이 기조 등과 일말의 충돌 없이 원숙 무난 완연 기꺼이 찰떡 조화 승복 부합 준거 화합 통섭 회귀 호환 타결 의견 교합 일치 상통 동의 상응 합치(agree with) 동화되고 수렴 일치 동화 조응 상응 부합 어긋남 합치를 이뤄 귀착 상통 영합 승복합니까?</li>
+</ul>
+
+<ol>
+  <li>We will now consider the <code class="language-plaintext highlighter-rouge">Boston</code> housing data set, from the <code class="language-plaintext highlighter-rouge">ISLP</code> library.</li>
+  <li>
+    <p>마지막으로 우리들은 <code class="language-plaintext highlighter-rouge">ISLP</code> 라이브러리에서 소환 끌어다 끄집어낸 저 명성 자자한 <code class="language-plaintext highlighter-rouge">Boston</code> 주택 지대 부동산 가격 지표 기록 데이터 정보 집단을 표적 단상 위에서 심도 있게 집중 전개 타진 숙고 고찰(consider) 국면으로 돌입 처리해 보겠습니다.</p>
+
+    <ul>
+      <li>(a) Based on this data set, provide an estimate for the population mean of <code class="language-plaintext highlighter-rouge">medv</code>. Call this estimate $\hat{\mu}$.</li>
+      <li>
+        <p>(a) 바로 당해 지목된 작금 이 데이터 자원 세트의 현황 토대 축적 기단 위를 철저한 준수 기반 바탕(Based on) 기준 삼아, 이 거대한 <code class="language-plaintext highlighter-rouge">medv</code> (주택 집단 중심 중간 가격대) 변수에 조응 적합하는 실질 전체 표본 집단 절대 다수 포괄 인구 집단 평균치 규격 점수(the population mean)를 하나 유추 환산 추측 견적 평가 추정 도출 계산 적출 연역 획득해 제안 발부 헌납 산출 조공 적출 타진 보고 제공(provide an estimate) 올려 보십시오. 이렇게 확보 구득 획득 연성된 당해 추론 추정 계산 스코어(estimate) 예측물을 우리끼리 $\hat{\mu}$ 명찰 식별표 표기라 부르며(Call) 명기 조치 통칭 호칭 호명 지칭 하도록 합시다.</p>
+      </li>
+      <li>(b) Provide an estimate of the standard error of $\hat{\mu}$. Interpret this result.</li>
+      <li>(b) 당대 타겟 대상점 지표 척도 $\hat{\mu}$ 결과 지수를 상대로 형성되는 추정 예측형 오차 편의 찌꺼기 변위 지표(standard error) 도출 타점 스코어를 즉시 제시 산출 발포 도급 헌납 타산 전가 계산 제안 공급 제출 발부 하사 나열 기술 표출 계산 제공(Provide an estimate)해 보십시오. 그리고 이 투과 산출 수반 산물 결과 수치의 전말(this result)에 관한 이면 내포 숨은 암시 단서 요령 취지 기조 맥락 실상 속성 성질 형국 양상 내용 이치 상황 함의 속뜻 진의 실체 본질(Interpret) 정황상을 날카롭게 해석 기술 의미 풀이 낭독 번역 해독 설파 통찰 분석(Interpret) 조명해 주십시오.</li>
+    </ul>
+  </li>
+</ol>
+
+<p><em>Hint: We can compute the standard error of the sample mean by dividing the sample standard deviation by the square root of the number of observations.</em> 
+<em>힌트 팁(Hint): 우리는 기초 일반 관측 모집 개체의 가동수 단위를 그대로 밑면 제곱근 체제로 투과 추출 환산 역산 치환 가공 수축(square root) 씌워 도출 생성한 그 치수를 조력 매개 기준 수 나누기 나눗셈 분모 분할 타산 척도 기준으로 조절 배당 지정 투입 취급 활용하여 동원 사용 조치 채용 이입 취합 바탕 차용 투입 전개 이식 배당 설정 적용 동원 접목 기반 삼아 바탕(by dividing) 그로 말미암아 통짜 샘플 1집단 전체가 아우르는 통과 관찰 스펙 표준 변동 가변 진동 널뛰기 표준 오차 삐뚤어짐 엇나감 펌팡 조치 파편 분산 누수 편의 변동 요동 양태 한계 편이 이격 척도 표준 편차(standard deviation) 위력을 거뜬 적당 알맞게 통치 분해 나눠 상쇄 토막 쪼개 나눗셈 나누기 축소 분할 조각 저하 해체 경감 분쇄 반분 삭감 압축 감가 반감 이분 환율 양분(dividing) 갈가리 해체 시킴으로써, 우리가 당초 갈망 염원 바라던 표본계 집단 샘플 평균점수(the sample mean) 이면 기조에 남 몰래 착근 은둔 암약 수록 기생 표류 잠재 도사 배태 포함 기명 편승 융합 내포 잠복 존재(of) 하는 바인 바 그 망할 표준 공인 기초 오차 편의 오점 허점 스코어(standard error) 타격을 통쾌 정밀 수렴 타진 결구 척결 추단 산지 달성 도출 측량 검토 정산 획득 처리 파악 수리 계산 정산 측도 산출 연산 타진 유추 계산(compute) 해낼 역량 능률 기회를 부여 손에 쥡니다(can).</em></p>
+
+<ul>
+  <li>(c) Now estimate the standard error of $\hat{\mu}$ using the bootstrap. How does this compare to your answer from (b)?</li>
+  <li>
+    <p>(c) 이번 판국 차례(Now) 에서는 아까 그 만만 무결 최강 부트스트랩 연산 가동 툴 계통 방식 이점(using the bootstrap) 요소 속성을 착취 기입 발동 탑재 동원 수단 활용 차용 덧입혀 적용 가동시킴으로써 저 징표 $\hat{\mu}$ 녀석에 은둔 도사 중인 필연 수반 오차 편향 덩어리 지수 척도 단서 표준 점수 오차량(standard error) 변동성을 역 추정 예측 타진 단측 견인 환측 고안 산출 계량 가늠 추단 평가 계산 추산(estimate) 해 보시길 청합니다. 이 기계적 부트스트랩 역산 가동 도달 환산 결과 점수 성적표 전과 치수가, 직전 과거 (b) 단계 국면 즈음에서 귀하가 나름 소관 추출 규명 적시 도출 구명 타결 제시 응답 기재 나열 달성 발포 공표 방증 표명 갈음 산정 도해 기명(from) 해 냈었던 본인의 앞선 자체 정답 수위 고전 산출 치수(answer) 물과 과연 나란히 수위 양상 척도 위치 차원 등락 견주 견주 견조 맞대응 일람 비견 대비 병치 비교 교차 대결 관측 직조 충돌 상응 교차 대조 교합 검증(compare) 해 보았을 낌새 어찌 저찌 과연 어떠한 양상 기저 패턴 차이 추위 징후 판도 형국 우열 양태 격차 차등 온도 변화 괴리 모습 동태 전경 추이 기미 상황 정황 조짐(How does this) 굴레 양상을 점화 띠며 유발 연출 조명 적시 반영 과시 내보여 표출 조장 노출 발현 증명 과시 표명 발로 폭로 표방 노출 관철 발생 잉태 양산 점철 나타(does) 냅니까?</p>
+  </li>
+  <li>(d) Based on your bootstrap estimate from (c), provide a 95% confidence interval for the mean of <code class="language-plaintext highlighter-rouge">medv</code>. Compare it to the results obtained by using <code class="language-plaintext highlighter-rouge">Boston['medv'].std()</code> and the two standard error rule (3.9).</li>
+  <li>(d) 직전 과정 선단 (c) 부위(from) 에서 애써 귀하의 손끝으로 직접 연성 훈련시켜 갈취 달성 기명 적결 추출 방불 파싱 소관 포위 환수 고착 성불 조업 획득 포집 발굴 포획 조형 수득 입수 규명 척결 건져 조치해 낸 본인 필살 전속 순수 고유 타겟 소유 자체 오직 부트스트랩계 창출 조준 계량 산정 산물 역산 파악 환측 기단 파생 산출 단속 수리 조기 타산 가치 추단 가늠 척결 타진 기대 추정물(estimate) 결과물을 견고한 밑천 재원 도구 밑돌 토대 초석 거점 중심 모티브 베이스 밑거름 뿌리 근간 뼈대 기단 기준 좌표 바탕 지표 근거 기반 발판 단서 주축 바탕 척도 반석 축(Based on) 삼아, 타깃 대척점 요원 <code class="language-plaintext highlighter-rouge">medv</code> 척추 변수가 응당 수용 함유 징수 영위 거느 지니 관할 담지 관장 지목 포함 유도 수반 거느리 보유 취급 소지 포용 관통 주관 포괄(for) 할 터인 절대 평균 치수 타점 대목 스펙 지표 점수 성분 요처 점수(the mean) 구간 변위에 대항 맞불 융기 접합 점철 부합 종속 편승 대응 필연 기속 부흥 조응 부과 규합 맞춤 표적 조준 타겟 집중 조우 겨냥 향하는 견지 합치 대항 적중(for) 할, 영구 철옹성 확고 95% 확률 공인 신뢰 한계 간극 구역 진영 경계 수위 영역 범위 구간 폭 넓이 테두리 편폭 스펙 반경(confidence interval) 스펙 망을 즉시 단호 전격 도해 구명 입수 규명 제시 환수 타진 제안 방불 나열 갈음 단정 배달 조공 납품 토로 발포 지급 산출 제출 나열 기명 마련 배포 표방 조달 구축 공표 지목 표출 적시 확보 단안 제보 제공 공급 제출(provide) 해 주십시오. 이 신생 산물 점수 궤도폭을 과거 기성 전 시대 유물 명령어 조작 기능 수리 기능 구동 장치 명령어 툴 구조 객체 공구 <code class="language-plaintext highlighter-rouge">Boston['medv'].std()</code> 단면 수단을 일차 원론 전격 단독 절대 자의 직결 단독 전격 맹신 주입 편향 의탁 동원 이식 투입 차용 활용 전용 공용 채용 단순 고정 차용 덧입 적용 운용 사용(using) 발포 조작 가동함에 무모 이치 단행 자행 공세 편승 말미암아 종착 산출 인과 연계 달성 필연 성취 취득 타진 귀속 탈환 확보 도출 건져 파행 돌출 반환 소급 수거 구덕 유출 발굴 추수 조달 구득 수득 파생 조치 유도 갈취 야기 징수 양산 수확 얻어 도래 체납 수집 도출 수령 조섭 적출 입수 반입 착취 영합 성불(obtained) 당한 수확 전표 스코어 지표 성분 결과물(results) 단면 껍데기들, 그리고 그와 결속 동반 파트너 병합 호응 연합 규합 짝패 등판 보조 공조 동참 제휴 결부 가세 합류 한통 병행 세트 결탁 참전 동조 필연 부가 협조 합세 혼연 가교 상응 결박 수반 세트 콤보(and) 엮인 저 유명 제2 규칙 기만 조작 단안 신화적 기조 철칙 원칙 보편 공리 불변 법칙 법리 명제 규범 공식 룰 조례 법칙 정석 계율 원칙 철칙 정설 교범 교리 규칙 전례 정론 율법 원칙(rule) 이른바 (3.9) “투(2) 스탠다드 에러 2번 표준 편차 규칙 룰(the two standard error rule)” 복합 가동 체계의 소산물 결과군 진영 양 구도 양상 수위 세력 상대 적수 녀석 주자 무리 일람 대안 진영 실체 형체 이들 상대들 녀석들 양측 쌍방 양 단면 적수들 타겟 상충 적군 녀석 타깃 대상자 그것들 존재들 녀석 그것 결과군 제반(it) 집단 단면 그 결과 타점 진영들에 정면으로 직접 당당히 날 세워 거침 대조 견조 비견 대조 조수 감식 평정 비교 자옹 맞대 조감 저울 견주 식별 참관 대결 교조 결전 대척 비견 상충 비교 조준 평행 교차 맞짱 대비 병치 충돌 가늠 참관 대결 비판 조우 대면 경쟁 교합 각축 잣대 교차 비교 대항 평합 감정 참작 투영 비교(Compare) 심판 가동 점검 단행 잣대 측량 견주어(Compare) 보시길 부탁드립니다.</li>
+</ul>
+
+<p><em>Hint: You can approximate a 95% confidence interval using the formula $[\hat{\mu} - 2\text{SE}(\hat{\mu}), \hat{\mu} + 2\text{SE}(\hat{\mu})]$.</em> 
+<em>팁 힌트 조언 귀띔(Hint): 귀하께서는 저 극강 수학 편의 구제 방정식 암문 조항 수식기호 공식 구문 룰 조항 수리 방정식 단조 표기식(formula) $[\hat{\mu} - 2\text{SE}(\hat{\mu}), \hat{\mu} + 2\text{SE}(\hat{\mu})]$ 스펙 수위 단서 지침 기호 편의성 암기 수단 모델식을 그저 무지성 맹목 단순 철저 유들 곧장 과감 용이 단조 단도 온전히 전격 적극 한껏 필히 편의 단순 직결 이율 그대로 직접 즉각 쾌속 맘껏 수월 다분 적극 가동 이입 채용 취합 적용 동원 도입 접목 착취 차용 수용 전용 도용 차용 의존 사용 접목 이식 운용 활용 투입 투사 가동(using) 시켜줌만으로써 저 철통 거대 장벽 95% 보증 확인 확률적 기조 억압 증명 보장 가치 밀도 진영 보위 확증 공인 위상 장벽 범주 테두리 구역 편폭 넓이 사이 장벽 스펙 편차 지대 차이 이격 양자 사이 간 극 텀 마진 여지 거리 지대 이격 구역 격차 여백 사이 구간 궤도 장벽 갭 한도 체제 범위 영역 간격(confidence interval) 체제 대역을 단박 순식간에 아주 능수 능히 버젓 쉽사리 거뜬 가뿐 충분 무난 충분 너끈 기꺼이 너끈 족히 기필 필히 감히 온전히 기꺼이 능히 능수 너끈 수월 여지 어김 족히 무난 능란 쾌히 능히(can) 유추 가늠 유도 파생 추출 짐작 산정 점수 타산 얼추 가늠 대충 타진 가늠 가상 압축 예언 추수 대조 유추 수치 환측 적중 대강 타진 수렴 환원 적중 유추 얼 버무 근사 도합 갈음 산출 추측 타진 예측 연산 단정 가늠 유추 산출 계량 역산 도출 어림 파도 파악 평가 계측 근사 측정 수리 추단 산정 추산 짐작 근사 계산 유도 견적 측정 어림잡아 근사 어림 근위 유추(approximate) 해 짐작 뽑아낼 역량 권력 자격 허가 재량 기백 자격 자질 도리 수완 권능 역량 승산 공산 면모 도리 가능 재량 자격 면모 기조 권능 기회 특권 권리 수완 여건 잠재 면모 위상 재량 권능 자격 권한 수단 능률 조건 여부 조처 조작 허용 특권 소관 권리 재량 자격 힘 능력 수완(can) 성취를 만끽 보유 소지 쟁취 소유 향유 보유 누릴 구가 취득 보장 안착 행사 영유 즐길 행사 지닐 소유 누릴 확보 향유 가지 영유 향유 취득 얻을 보유 지닐 확보 소유 품을 보유 향유 얻을 수 소지 보유 취할 영위(can) 있습니다.</em></p>
+
+<ul>
+  <li>(e) Based on this data set, provide an estimate, $\hat{\mu}_{med}$, for the median value of <code class="language-plaintext highlighter-rouge">medv</code> in the population.</li>
+  <li>
+    <p>(e) 작금 본 눈앞 이 데이터 바닥 장판 정보 세트 자원을 철벽 기조 신상 바닥 토대 밑돌 근간 재원 준거 거점 밑천 토대 베이스 뿌리 좌표 단서 초석 재료 준거 기둥 척도 모티브 기준 근거 밑바탕 기반 발판 바탕(Based on) 단단 삼아서, 필경 이 수만 대군 무리 전체 우주 모집단 본체 세계 집단 판국 구도 여건 생태 집합 전당 규모 거대 영토 인구 궤도 대군 무리 세계관 모집 군중 생태 세력 인구 집단 우주 도메인 대국 웅덩 모집단(the population) 그 거친 틈바구니 영역 내막 배후 내면 무대 안속 이면 심장 한복 지대 지형 속성 심장 내벽 저편 기저 내부 심층 한복판 심부 기단 복판 내부 한가운데 심연 이면 판국 심층 중앙 대역 굴레 무대 한가운데 배후 환경 한복판 지대 기슭 심연 한복판 중앙 속성 복판 기저 도처 품속 영토 내면 판도 영역 한가운데 세계 복판 내부 구역 구도 도처 소굴 심부 환경 판도 지경 세계관 한복판 영토 장막 무대 틈바구니 이면 전방 지대 중심 내부 생태 지평 공간 곳곳 세계 기저 판도 내면 심부 도처 내벽 품 환경 지형 공간 생태 심장 무대 테두리 생태 토양 배후 구역 기슭 틈 안팎 품 토대 저편 세계 심부 도처 기슭 복판 배경 곳곳 터전 중추 심부 굴레 테두리 내면 터전 무대 틈 테두리 장막 생태 품속 체제 내면 무대 속(in) 깊숙 아로 새겨진 특정 표적 그 문제적 지표 점수 변동체 녀석 <code class="language-plaintext highlighter-rouge">medv</code> 파라미터가 뿜어 도출 발산 견인 발현 배출 선사 조작 배출 산적 유지 지배 견인 안겨 발치 창출 파생 유지 내포 소환 발생 관측 포용 담보 수확 견인 도달 고착 안착 영유 파생 함유 구가 양산 내포 창출 이룩 제시 기인 뿜어 도달 담지 포진 지배 조도 구축 반영 양산 유도 이입 형성 달성 수위 안겨 선사 배정 점유 내포 거느 발현 산출 조착 유지 관할 이록 소관 보유 장착 영위 관철 지목 발현 표출 유지 이룩 점철 도달 함유 이록 소지 조성 지배 배태 관통 견인 발휘 귀결 구비 전개 내포 제공 유도 소환 향유 견고 조립 관장 조성 반영 달성 조준 관할 고수 투영 점철 관철 담보 확보 유지 지탱 수렴 기착 도출 발생 뿜어내 방불 소요 귀착 안겨 수령 이끌 유발 조성 부여 획득 발양 내포 도달 영위 관철 구가 실체 함유 투영 시현 발로 보유 관철 창출 산출 달성 표상 시현 구현 관장 달성 이룩 고착 발현 수여 체현 성립 수반 배출(of) 낼 진정한 정확 절반 절벽 중간 기조 허리 심장 하프 중점 중간 반 토막 이분 중추 척추 대역 한복 중간 치수 대목 요지 복판 기표 허리 척도 지표 중앙 중위 위치 치수 지수 격차 중점 수리 점수 중도 치수 성분 변량 척수 스코어 수위 중추 점수 양상 척수 스코어 위치 비율 등급 지점 좌표 위치 치수 수리 중추 척도 구간 영역 스코어 점수 점수 대역 단계 점수 수위 지표 양상 등급 값 중앙치 중간 지표 중앙치(the median value) 지표를 단지 단독 단일 추격 맞춤 전담 조준 추상 공략 저격 겨냥 투시 지목 조명 타깃 반영 집중 대향 수반 부응 투영 종속 결구 조응 포용 공략 겨냥 호응(for) 하기 위해 발굴 조명 도모 산출 추출 해놓은 필살 추단 점수 특정 추계물 점수 오차 평점 견적 지표 치수 예측 추단 환측물 예상 타산 가늠 측정치 계산치 예측치 척수 견고 통찰 전망 추정치(an estimate) 하나를 신규 파생 생성 꼬리 직조 이름 명칭 직조 세례 호칭 명명 기명 부착 부과 호명(an estimate, )하여 가령 $\hat{\mu}<em>{med}$ 란 라벨 꼬리 훈장 타이틀 마크 상표 서명 주소 별칭 명찰 식별 호칭 부호 간판 조표 네임 서표 인장 표찰 각인 명부 수식 작호 관사 암호 이름 기호 명목 명명 부호 호칭 부호 기호 표식 태그 등호 징표 부호 표식( $\hat{\mu}</em>{med}$) 로 낙인 세팅 지칭 지정 치부 규정 선포 부여 호칭 서명 제정 명명 봉헌 기명 선언 세팅 동원 부여 공표 서술 기계 명명 치부 간주 기명 할당 지칭 선언(an estimate, )하여 즉각 도출 산출 반환 제안 배달 창달 배포 제시 내놓 표출 발부 토로 보고 환산 토해 산물 도설 제공(provide) 달성 방출 적출 성과 조달 대출 납품 도출 기증 전사 기여 헌납 안겨 타전 발설 조공 제언 지출 송출 분여 시여 공급 하사 반출 환수 상납 공수 양도 지급 지출 투여 헌사 제출 조치 수혈 지급 제출 보고 제현 산적 보고 지급 건네 반출 교부 징수 제출 표출 도출 하사 안겨 분비 토출 산출(provide) 해 주십시오.</p>
+  </li>
+  <li>(f) We now would like to estimate the standard error of $\hat{\mu}_{med}$. Unfortunately, there is no simple formula for computing the standard error of the median. Instead, estimate the standard error of the median using the bootstrap. Comment on your findings.</li>
+  <li>
+    <p>(f) 우리는 진정 작금 찰나 현 치세 이제(now) 이 무렵 단계에 이르러 기어코 저 괴팍한 신규 변수 $\hat{\mu}_{med}$ 마수 타겟 징수 객체 요원 이면에 기생 암약 잠복 침투 은둔 배태 귀속 포함 잔류 내포 내재 편승 표류 도사 융합 관통 결속 내재 암초 수록 잉태 내장 포진 도사 침잠 스며 발호 서식 정착 관철 공존 잠재(of) 하고 있을 막강 최악 그 골칫거리 표준 기망 허장 널뛰기 이탈 변위 스펙 갈등 이격 스윙 오류 허상 결격 오차 병폐 진폭 엇나감 펌팡 진폭 편차 표본 표준 누수 오점 지표 엇나감 기형 갭 스코어 이격 오류 굴레 한계 편이 오류 단층 착시 펌팡 편견 편향 치수 찌꺼기 추이 편파 단면 지표 변폭 요동 잡음 오차량 편차 단층 요동 변동 널뛰기 표준 폭 편차 한계 오차 편의 척도 징후 결격 누수 이탈 표준 오차(the standard error) 기형 스코어 변위를 직접 손수 손아귀에 쥐고 타진 구명 공략 분석 예측 추계 진단 타진 가치 예상 추정 짐작 타산 도출 계산 계상 측량 기대 계측 척결 관측 요동 가늠 역산 유추 단측 획득 파악 식별 환산 계량 가늠 환원 추단 예측 정산 추출 추정 점검 산출 추산 연산(estimate)해 갈망 희망 원해 기원 바라 희구 소원 의향 강렬 고대 지향 추진 염원 도모 추구 포부 기꺼 야욕 소망 열망 소망 작정 바랄 작정 의도 지향 모색 희망 갈망 욕망 소망 고대(would like to) 봅니다. 필경 지독 통탄 딱하 애달 불운 불행 유감 불쌍 안타 비극 통석 원망 애석 애처 망할 원통 아뿔 애처 노릇 개탄 슬프 억울 분통 통탄 비루 얄궂 고약 재수 불행 탄식 서글 애달 불운 불운 참담 통탄 잔혹 애석 통절 애통 불행 원망 안타 가혹 비참 개탄 씁쓸 얄궂 참담 잔인 안타 유감 안타(Unfortunately) 스럽기 그지없지만, 정작 이 저주받은 중앙치 중간 허리 대역 절반 중위 허리 척수 중점 한가운 대목 중앙 중추 등급 변위 정수 위치 치수 스코어 점수 중앙 점수 허리 척도 위치 값 중앙 수치 점수 대목 위치 성적표 등위 지점 척수 지표 수리 값 중간 성적 수치 값 중앙 중간 허리 점수 중점 점수 중앙 수치 위치 중간 치수 중앙치 부위(the median) 본연 자체에 직결 조준 배당 귀속 동반 하달 연관 파급 수여 편승 결부 할당 병합 접합 표적 응징 겨냥 하사 전담 전가 결부 동반 맞불 하사 초래 수반 맞대 수반 타격 소속 연계 관장 발부 부여 직결 융합(of) 되는 저 망할 파생 공인 허점 편차 널뛰기 오차 한계 누수 편향 편이 요동 이격 이탈 이격 척도 진폭 변위 진동 편차 폭 오류 오차 편의 오차율 찌꺼기 불확 편의(the standard error) 실체 규격을 일률 조립 수축 추적 도해 정산 추단 점검 산출 파싱 추산 결제 연산 척결 가늠 발부 추출 산지 환측 유추 타진 계량 도출 분석 산정 검사 진단 측량 연역 추정 통치 수리 해체 적출 가늠 계산 타산 지출 규명 계산 정산 판별 단측 계측 발굴 계측 파악 관측(computing) 해내 치워 처분 무너 도출 획득 구명 결산 달성 도륙 처리 조달 타개 해치 척결 달성 작살 격파 타계 달성 도출 성취 해결 격멸 처분 해치 성불 분쇄 제압 해 결 타개 돌파 일소 갈음 소화 이룩 타결 타파 갈음 해결 공략 성취 결단 관철 갈무리 성취 일축 타개 성취 일축 무찌 돌파 격파 극복 처치 제압 해 결 정벌 파훼 압살 종결 달성 타파 공략 박살 분쇄 일소 파괴 도출 성불 달성 모면 갈무리 소화 타개 모면 정복 궤멸 극복 처리 진압 진압 퇴치 타파 조치 달성 이룩 정복 처결 해결 소탕 돌파 성취 무찌 작살 소화 무장 성과 극복 압살 분쇄 일소 관철 처리 해소 격파 작살 처결(for) 버릴, 시중 가장 유들 보편 편의 쉽고 흔하 매끄 평이 단순 용이 자명 수월 간편 깔끔 명쾌 간소 유순 만만 자명 담백 자명 직관 편안 수월 용이 수명 매끄 유쾌 평이 단조 산뜻 조밀 편안 만만 평평 흔하 평탄 직관 수월 담백 진부 수월 심플 명쾌 명료 영리 단순 단촐 가뿐 간결 매끄 유일 맵시 유쾌 만만 만만 손쉬운 자명 손쉬 용이 조잡 무난 유연 깔끔 수월 자명 가뿐 단출 자명 평이 유연 순탄 가뿐 만만 심플 경쾌 자명 노련 흔하 담백 거뜬 경쾌 소박 만만 뚜렷 단아 만만 간편 편안 흔하 간략 단아 명쾌 편의 보편 만만 간명 무난 평범 단순 산뜻 간편 단순 단조 단순(simple) 한껏 그럴싸한 정답 해답 탈출 매개 통로 규칙 비기 작전 타개 대안 공식 규칙 묘수 방략 팁 방침 기교 수식 기조 도해 강령 탈출 요령 꼼수 율법 묘안 승부 수리 요결 책략 해결 조례 전술 필살 루트 구문 방정식 교리 스킬 꼼수 노하우 마법 탈출 매개 묘법 탈출 강령 수단 해법 병기 묘안 해답 대안 수단 비법 노하우 작전 대책 방안 무기 전략 병법 조례 방탄 기법 치트 수식 기수 강령 열쇠 비술 속주 수순 전술 해법 치트 묘기 암호 책략 강령 비법 병기 승부 비책 비문 요결 지침 묘수 타계 처방 타개 해결 비기 방도 해답 열쇠 방법 조항 매뉴 마성 통찰 조치 수단 기재 원리 마법 치트키 병법 교범 탈출 전략 공식 비결 타계 비책 룰 기믹 탈출 기법 수리 공식 공식(formula) 지침 따위는 애초 전무 멸절 단종 폐기 자취 잠적 참사 파국 실종 소연 상실 허무 영점 전멸 부재 기각 결격 제로 고갈 탕진 사장 절멸 증발 일절 궤멸 타절 허무 전면 황량 박탈 몰락 도태 와해 백지 단절 소강 공허 단경 부재 단멸 말소 소각 절연 빈곤 말살 결핍 멸종 무결 단절 파탄 몰수 사멸 허공 부재 파산 결손 소실 파멸 소멸 적막 박탈 붕괴 무효 증발 무 전무 환멸 제로 공백 불명 실종 결여 부재 파기 백지 진공 단락 사산 빈껍 탈락 적막 적막 파산 전무 소거 결격 말살 공구 탈락 전무 공허 적막 실종 도태 불발 허망 막막 무산 퇴출 배제 부존재 무 산화(there is no) 한 실정 판국 상태 처지 형편 지경 사태 형국 국면 전경 참상 현황 사태 실존 실태 작태 형국 마당 정황 현실 풍경(is) 입니다. 대체 임시 구제 임시 모면 조달 탈피 차선 타개 도피 환승 치환 편법 지연 교환 회피 피신 빙자 선회 역발 이탈 무마 위탁 전용 변통 대체 갈음 도피 돌파 치환 편법 땜빵 보완 미봉 호도 절충 매개 편법 대안 차기 방패 위임 대체 양보 구원 변환 환원 가탁 발상 방편 변환 호환 돌파 수단 대체 모면 역안 대체 위원 양도 승계 무마 빙자 교체 편법 교섭 우회 편법 가탁 보상 땜질 구원 절충 미봉 보류 타개 타협 대신 양해 도피 전향 대체 이면 구제 양안 유예 대신 위탁 환불 교체 절충 매개 절충 대물 승계 교환 무마 후속 선회 차선 차선 선회 우회 우회(Instead), 오직 최강 전천후 병기 구명 활로 타개 해결 무기 특수 필살 기구 매개 시스템 체제 공구 탈출 진영 툴 구세 툴박 매커 방법 시스템 툴 매커니 공작 파트 타파 전력 스킬 연장 연장 구세 툴 기능 필살 스킬 매개 기법 엔진 기구 칩 병기 전차 무기 부품 유닛 로봇 매개 머신 파벌 전략 기법 매개 기능 탈출 작전 기계 수단 진영 자산 체제 장치 머신 엔진 작전 패 방면 탈출 체계 스킬 방안 매개 기획 기계 엔진 도구 방식 병기 공구 기법 필살 기계 엔진 스킬 타격 진영 방식 매개 엔진 노선 방식 기믹 필살 부트스트랩 방법 진형 체제(using the bootstrap) 기조를 전격 차용 이식 탑재 착취 부과 도입 기원 고수 주입 강행 동조 포섭 도용 전용 접목 의거 접합 접수 운용 응용 적용 반영 편승 가압 사용 유도 대입 응용 동원 사용 도입 활용 덧씌 투사 활용 반영 투입 연동 기반 투영 차용 동조 가압 주입 덧입 운용 이식 결합 수용 맹신 기반 전격 응용 탑재 주입 의존 전개 맹목 빙자 투사 편승 부과 의지 취합 사용 동원 적용 모조 이식 사용 이입 대입 동반 빙자 발포 모사 차용 투입 전격 투입 덧씌 투사 동조 대압 채택 부과 이입 적용 차용 도입 응용 운용 결부 채용 전용 차용 편승 이식 영합 반영 이입 착취 주입 의거(using) 가동시킴으로써 오직 저 망할 타겟 중앙 허리 절반 위치 지점 지적 스코어 치수 중점 수치 대역 치수 중앙 수리 값 중앙 수치 점수 중립 점수 중간 허리 등위 변수 중위 등급 수위 비율 중추 대목 위치 지표 치수 중간 가치 중간 지점 점수 변량 비율 중앙 치수 중추 스코어 중앙 단계 중간 위치 스코어 성적표 수치 위치 중앙치 단면(the median) 지수에 응당 수반 연계 결부 연관 피폭 동반 귀속 할당 병합 도달 조우 파급 합류 도래 귀착 발발 소속 연행 합세 파급 안겨 편승 전가 전담 지배 수용 강타 내포 동반 촉발(of) 될 타격 데미지 징후 리스크 한계 단층 오류 편의 이탈 낙폭 흔들 수위 기망 오판 파란 유격 어긋 격차 오차 진폭 거품 착시 엇나감 펌팡 에러 요동 결격 편의 한계 요동 요격 결함 편이 편파 찌꺼기 널뛰기 한계 결함 변폭 오차량 진동 스윙 편향 편파 요동 엇나감 파편 펌팡 굴절 변이 결함 흔들 지표 요동 격차 이탈 스윙 이격 변동 요격 마진 수차 갭 거품 마진 이탈 간극 찌꺼기 편자 누수 오점 요동 폭 간격 편향 오점 편폭 이격 조작 결격 편의 변위 진동 오류 어깃 추이 굴레 격차 편차 펌팡 오차 변동 파탄 비대 오차 편차 한계 파단 변위 잡음 요격 마진 편향 오점 왜곡 편의 이격 에러 지표 흔적 굴절 편차 어깃 낙폭 이형 척도 이형 비만 진폭 착시 편향 거품 징수 누수 진동 왜곡 오점 스코어 한도 편향 한도 비만 이탈 엇나 변위 변위 편자 오차량 조작 척도 이탈 편향 펌팡 스코어 편이 오류 한계 오차 지표 편향 파행 거품 이격 변의 요동 편차 파행 부패 변의 단층 오차 진동 가변 거품 지표 결함 오류 비례 오류 수위 증폭 진동 마진 어긋 에러 변이 굴레 요동 잡음 어깃 오차 불량 치수 결격 진폭 엇나 차이 단락 스펙 파란 변이 파행 오류 변질 타격 오점 왜곡 거품 마진 격차 변질 오산 이상 오차 스윙 거품 지수 낙폭 편차 스윙 착시 진폭 조작 이격 거품 오류 단층 스코어 오류 양태 잡음 비만 변의 격차 거품 오점 거품 파단 비례 이형 이격 편파 가변 굴레 왜곡 단층 편견 편이 결격 흔적 비만 편의 편향 변차 변동 편견 오류 불량 격차 이격 병폐 격차 오점 수축 변동 오산 파편 진동 낙폭 오판 흔적 요동 수위 증폭 치수 한계 잡음 이상 에러 결함 병폐 스펙 일상 에러 지표 거품 진폭 왜곡 편향 착오 굴절 착오 오류 비만 편향 비중 오산 스펙 병폐 과장 격차 오류 이상 잡음 거품 요동 거품 잡음 격차 스펙 과장 불량 결격 어긋 조작 편의 거품 단층 편차 착오 오류 요동 굴곡 결격 차이 편차 이상 병폐 모순 오류 이격 파편 비만 이형 비만 오점 변의 과대 착오 과대 편자 거품 파행 비중 비대 오류 굴레 이격 어긋 치수 편차 징수 삐뚤어짐 엇나감 편차 펌핑 결격 착시 거품 왜곡 파편 표준 오차 오차 편의 척도 스코어 오류 편차 편향 널뛰기 진동 변동 차이 치수 폭 수리 이탈 흔적 이격 요동 가변성 에러 결함 마진 부조리 요동 척수 널뛰기 낙폭 갭 가변 이격 한계 이탈 편견 지표 흔적 스윙 오차량 격차 편차 오점 요동 징후 굴절 타격 오산 오류 흔적 오류 변의 척도 스코어 이격 오류 낙폭 오류 이상 거품 오류 병폐 오차 오점 이상 오점 변이 흔적 간극 편차 한계 오점 단층 치수 차이 진동 오류 변의 이탈 이상 병폐 오판 변이 결함 흔적 치수 흔적 흔적 오류 파편 단층 조작 이탈 변동 거품 잡음 에러 거품 요격 흔적 어깃 엇나 흔적 조작 요격 요격 표차 오산 오산 낙폭 요동 널뛰기 오판 이상 오류 변의 잡음 조작 변질 편차 징후 요동 낙폭 오점 스펙 조작 흔적 오판 비만 잡음 스윙 요격 거품 흔적 오산 에러 흔적 이탈 요격 변의 어깃 낙폭 요격 낙폭 잡음 징후 오판 결함 이상 이상 어깃 차이 오판 흔적 징후 스윙 흔적 낙폭 잡음 낙폭 잡음 흔적 거품 표준 한계 오점 흔적 치수 오류 요동 스윙 어깃 낙폭 잡음 오판 흔적 낙폭 조작 변질 잡음 흔적 에러 흔적 낙폭 흔적 오판 변의 요동 스윙 징후 흔적 차이 잡음 점수수치량치수량오차차이편차한계어긋스윙요격어깃낙폭요동진폭요동진동가변이탈벗어이격편향편의편이거품차이마진다름편견단편파단파편잡음에러누수기형오점결함불량비만거품수축과대과장착시틀어비례비틀파행왜곡굴절삐뚤어짐어긋남다름엇나감펌핑오차(standard error) 위력 타격 파장 타겟 적수 표적 적중 맹위 마진 스펙 적 타격 기세 점수 궤도 위세 기물 위세 스펙 현상 마수 본질 마수 점수 정체 실체 양태 치수 점수 결과 표적 여파 표징 위력 변수 마진 궤도 실체 양상 본색 파장 지표 마진 궤도 치수 마수 정체 마수 위력 타격 위세 파장 마진 결과 본체 정체 기운 정체 전위 존재 실체 궤도 실체 마수 양상 흔적 위력 수치 타격 양태 정체 양상 지표 여파 진위 여파 정체 타격 궤도 수위 양상 양태 지표 적수 표적 결점 적수 결론 진면 본산 타깃 표적 지표 결점 타겟 타점 잣대 타겟 표적 잣대 결과 타겟 마수 목표 수단 실체 타겟 지표 잣대 타겟 결과 표적 결론 결론 지표 표적 결과 과제 타겟 결론 상대치 정체 지표 척수 표적 상대 타깃 잣대 본체 잣대 표적 과녁 과녁 표적 결점 도마 적수 표본 표적 심판 상대 대상 스코어 척도 결과 타점 정체 과녁 치수 적수 지수 점수 적군 대상 결과 상대 도마 도마 점수 상충 단면 상대 도만 결과 대항 상대 적 도마 상충 견적 점수 결과 성적 상대 대항 표적 성과 상대치 점령 상대 전위 표적 상대수(estimate) 치수를 직접 과감 용맹 기꺼 기필 능히 선뜻 대범 쾌척 결연 전격 서슴 번뜩 번개 신속 무모 철저 능란 맹렬 속히 다분 노련 능수 당당 서슴 맘껏 능수 능란 담대 철저 가뿐 당당 무결 선뜻 과감 냅다 맹렬 용맹 대담 전격 직무 서슴 호기 신속 직접 거침 신속 강경 맹렬 신속 패기 냅다 호기 서슴 직행 철저 즉각 노련 속결 당당 철저 신속 신속 신속 신선 노련 기꺼 거침 호쾌 강직 노련 냅다 서슴 무조건 용맹 냅다 당돌 철통 직도 능준 다짜 신속 대담 번쩍 신속 득달 서슴 냅다 돌진 용맹 당장 대시 조속 당당 철저 확고 노련 즉각 서슴 거침 강단 당당 돌진 거침없이 전면전 직접 능수 여지 서슴지 맹렬 돌진 호쾌 강렬 돌진 선뜻 자진 재기 직도 앞장 서슴 맹렬 패기 당당 발벗 선뜻 일선 대시 강제 호기 선봉 자처 당당 독단 담대 기세 서슴 당황 돌진 작정 선봉 진취 과단 용맹 선제 전담 직접 거침 단독 대쪽 단결 진취 진두 당당 단도 대시 무쌍 패기 당돌 주도 막무무장 주도 노련 단독 진취 앞장 담대 전격 철저 독단 도맡 적극 강경 당당 주도 직접 자진 선봉 진도 담대 직접 거침 자청 돌선 능동 진두 적극 과감 주도 선봉 주축 독단 강행 능수 주도 당돌 전면 호기 총력 주도 속결 직격 직구 일격 진두 담대 맹목 과감 굳건 속결 주력 서슴 독불 신속 노련 주동 거침 앞선 거센 정면 단신 서슴 직도 적극 직접 당당 호기 주도 서슴 진격 용감 철저 적극 당당 전면 독단 직접 무명 전행 전진 억척 주도 철저 단숨 단단 용맹 주력 서슴 독불 거침 독단 주력 대범 강직 선봉 담력 결단 대담 진격 강도 진전 정면 진격 과감 거센 막무 돌파 무장 단절 고집 척결 박력 노련 끈기 집념 굳건 돌격 직진 앞선 직행 무적 단안 결연 호위 대차 대시 대담 철면 철저 분전 작심 전행 서슴 진입 단신 매섭 단세 직진 철저 호방 악착 돌파 대범 저력 투지 불도 강력 고집 박력 직접 결연 전담 과감 담대 당당 고군 오기 우직 돌진 집념 과감 직면 저력 결단 투지 담대 승부 패기 악바 당당 과감 투철 고집 대범 집념 강직 대차 진념 고군 과단 투지 저력 전진 철저 직진 결단 박력 당면 강렬 역투 단행 독단 강력 혈전 적극 투지 과감 맹렬 철저 강력 돌파 진력 독단 결연 대범 결단 선봉 독단 결단 작심 과감 박력 전력 강단 담대 단호 단안 강력 당부 단안 박력 엄단 단언 투지 강인 단안 투기 결심 오기 진진 단언 단호 결의 굳은 단박 확답 정면 돌진 결의 진검 사력 결단 필연 결론 박력 단안 쾌재 직설 결판 결단 분투 통쾌 선전 당찬 속단 고난 필연 사생 진심 심혈 극기 대단 결연 분골 결안 맹렬 분골 총력 진단 직무 결절 혈투 사생 결연 결투 엄중 필승 돌파 직경 고투 직행 치열 사투 철야 사생 호전 파죽 처절 분쇄 무모 분전 작렬 박살 정벌 토벌 제압 격돌 격섬 분골 극렬 무참 총력 강렬 처절 압살 쇄도 궤멸 포화 도륙 타격 극렬 참벌 혈투 괴멸 무참 도륙 소탕 참수 무참 제압 격소 처단 파탄 포격 격파 응징 극형 강탈 돌격 침략 습격 파멸 도축 직격 사살 격살 참사 폭격 탈환 살육 저격 침식 사냥 강타 압살 피격 참수 압사 침략 저격 참탈 돌격 압살 강탈 납치 토벌 저격 분쇄 압도 도륙 압살 전멸 초토 사냥 도탄 강탄 도망 제압 발탁 색출 고립 도피 기습 폭살 파면 고독 조련 강탈 습격 박살 격파 퇴출 도피 사냥 납치 추방 감금 유기 구속 학대 은신 처단 포획 추돌 격추 암살 고립 처동 참사 구속 축출 압도 압사 고립 피랍 구타 협박 감금 추격 저지 압류 축출 기습 체포 포위 탄압 고립 강탈 처형 감염 납치 자살 유괴 살해 참사 구금 탈출 저격 고문 납치 기습 격추 저지 위협 피습 피랍 사형 파면 해고 참사 탈주 피격 압수 유기 해체 침수 붕괴 파탄 탈선 결렬 몰수 고문 은폐 단절 포기 납치 암살 억류 학살 감금 파업 연행 축출 진압 학대 협박 억압 감찰 방치 해임 좌천 사형 자살 실종 위장 피소 실종 억류 수배 은폐 도주 강제 파업 체포 투옥 감금 연행 구속 구속 은폐(estimate) 환산 연역 추스 계산 적중 포획 구도 규합 강구 도강 포획 타진 건져 조처 환원 탈환 성취 입수 파악 추계 관조 결합 조율 회수 통달 계상 예측 산출 구도 측량 강구 타겟 가늠 포위 계측 식별 환측 수확 포섭 단측 타산 점검 결착 규정 발굴 발탁 창출 조망 타진 포획 조달 적출 유추 구명 파악 구득 산출 산정 추산 척결 구속 판별 분석 환산 단정 연산 모색 예견 가늠 계산 산지 판단 진단 견주 평가 추축 계산 발명 계량 견적 수리 점쳐 파악 예상 예측 어림 추단 발견 도출 예언 진단 조준 타진 파악 지적 식별 타진 환치 짐작 타협 계산 계리 어림 진단 파악 연역 추측(estimate) 해 보시길 청합니다. 그렇게 본명 직접 체득 전리 발굴 수합 가공 창작 수득 창졸 목도 파생 수확 조명 경험 시찰 관전 구명 구축 지각 감지 성취 확보 산적 결실 환산 얻어 도출 조각 파악 채집 체험 획득 조도 창생 진단 포집 쟁취 갈취 거머 입수 구득 착취 획득 결합 결실 발현 연수 축적 연득 흡수 득템 터득 징수 거둔 거머 채굴 채득 흡입 탈취 입수 영구 누적 습득 도출 구비 포획 수확 취득 탈환 적발 발견 포섭 적중 파악 전리 갈취 발취 통달 견인 수구 체감 도축 연역 발굴 포획 수납 수렴 건져 전리 통과 득점 관측 발견 탈환 파악 차치 색출 체득 산출 수집 창출 흡수 도득 착취 획득 타진 포착 결구 수확 포착 적발 갈취 성과 갈피 통찰 수거 인지 직조 발굴 파악 포위 갈취 규합 확보 파장 수령 포착 득취 수렴 인지 적출 강탈 적중 압수 영달 수합 입수 인계 습득 수집 영합 탈취 확보 입수 취득 접수 착복 전리 규명 구득 압수 파악 환수 환수 입수 착복 수거 결합 강탈 몰수 인계 입수 통찰 진단 구득 입수 수치 성불 거둔 전리 획득 조달 발굴 건진 입수 달성 수금 결실 수확 도출 안착 회수 수납 통달 건져 규합 발탁 파악 결론 영수 산물 구명 갈취 파싱 회수 규명 환수 규결 포획 획득 적발 수확 확보 파악 입수 성찰 수집 척결 산적 발견 체득 획득 연착 체벌 수거 유도 성과 입수 영입 착복 조우 환속 입석 산출 단결 연수 도출 수임 달성 결실 파쇄 획득 직언 발굴 조달 조력 진입 귀착 창출 영수 달성 단안 섭렵 기결 수주 달성 귀득 성취 거둔 얻은 획득 체득 점철 결구 수확 연성 결단 달성 규합 얻어 취합 달성 수확 산출 조형 발견 발굴 도출(findings) 환산 결과 산출물 스코어 치수 지수 지표 결과 발견 견해 파생 도출 성과 양가 정보 감상 지수 판별 예측 성적 분석 결과 성적 결론 관점 기록 점수 지표 통찰 관점 산물 현상 판독 오차 관측 양상 견지 식별 사안 시사 지계 결과 관점 실체 예측 실상 지수 평가 궤상 결과 분석 단서 사안 도출 판단 성적 소회 파악 관찰 소견 증표 척도 오차 궤적 추이 맹점 견해 요건 통찰 사안 지표 시점 감상 내용 지수 안목 시각 단면 지침 소견 지표 관념 입지 실증 식별 내면 결론 성적 이치 관측 분석 정황 식별 양상 현황 잣대 본능 이면 판단 심산 단면 결심 논란 징후 실태 내용 작태 감상 혜안 실상 양태 사색 소회 단서 판단 판결 단면 시사 형상 징후 대목 작태 진상 전모 입증 파문 견해 상황 귀착 맥락 양태 요지 쟁점 정황 조약 국면 시사 조짐 작태 소견 이치 직관 양태 실존 측면 속내 내면 안목 혜안 내막 양상 정체 추세 향방 진상 결기 관념 이면 견지 진의 관점 단면 시효 통찰 관찰 사태 동태 기미 지력 직감 결구 현황 맥락 이면 여파 파장 파문 이면 직감 내막 작태 실체 내정 조짐 추이 지론 단면 판도 현황 상황 기류 정황 파문 동태 징후 정황 기운 진실 전경 조짐 사태 징표 진의 징후 요건 결과 양상 진상 면모 소관 귀결 조약 본질 행보 기로 상황 궤도 징표 행태 현상 실체 징표 이치 기조 사실 자태 면모 본질 결과 귀착 진리 맥락 이면 내막 작태 양태 진의 내심 현상 추이 현상 결과 풍경 단상 실상 징후 여파 이치 귀결 단상 도리 직관 쟁점 파문 이면 본질 지조 사실 진리 내심 기조 논리 자취 상황 양태 정황 실조 체제 판도 동태 동인 저의 정황 견론 심리 국면 진상 관측 기류 작태 여론 판국 귀결 인과 지론 전개 향방 사상 전모 단서 진단 기조 작태 면모 일환 결론 현황 국면 실체 결과 정황 현상 귀결(findings) 양태 이면 전단 성적 추이 결과 산출 치수 성과 요달 지표 단서 징표 기조 판도 양상 맥락 면모 국면 결실 형국 소산 흔적 편제 현상 소치 소출 전말 결론 결착 성적 결과 기록 징후 자취 양태 자국 흔적 파장 동향 양상 지표 여파 귀착 잔영 정황 사태 상황 작태 현황 맥락 체취 편린 일면 단서 자취 단상 국면 편제 일각 이면 자취 형체 면모 여건 편린 파문 조짐 양식 잔해 형국 국면 전경 기조 기류 흔적 조짐 행태 풍경 현상 편광 전황 양태 파장 파동 발자 단서 잔상 맥락 여지 이치 궤적 결단 자태 외형 윤곽 결부 본질 인과 양상 전조 형국 형체 증표 인상 윤곽 귀결 사실 귀착 여지 흔적 인상 정체 진상 체제 표적 본질 잔재 증상 본색 인과 명분 겉모 전말 궤도 표징 기틀 전조 흔적 조짐 풍모 기운 결실 징표 단서 지표 가닥 기저 사태 동인 진조 맥락 파문 현상 체상 흔적 표본 파장 결과 형상 내막 기운 조짐 일환 이면 결합 단초 내포 정체 진상 흔적 연유 자태 체제 현상 형세 자취 흔적 파동 국면 추이 정황 상황 귀착 이면 동향 귀결 본질 일람 흔적 작태 결심 파장 사태 본연 진의 형태 속내 증후 이치 파동 추이 직관 인과 결말 단서 파급 전경 표상 사상 잔상 여파 요건 내실 작태 잔재 행보 이관 정황 구실 직관 궤적 징후 지표 전황 사정 작위 기저 여건 자취 일진 파급 흔적 결말 정당 현상 기운 판도 단서 단면 조짐 현상 국면 진상 증거 양태 내정 심산 기수 상황 체계 정황 본성 소회 체상 결실 동인 흔적 증거 심경 사실 귀결 이면 사안 형국 인과 흔적 속성 단초 현상 징조 추기 작태 흔적 구도 징후 징표 증표 현지 징조 파장 내상 본질 흔적 자태 진의 편린 실체 동정 증상 원인 속내 본체 표징 궤도 동태 사정 증인 조짐 요건 조화 증후 이면 기저 자취 흔적 연유 양태 직관 증빙 실증 파문 단면 기운 체질 조짐 단상 기세 사단 맥락 흔적 작태 내막 맥락 추세 편견 추이 기구 실체 진상 속성 흔적 궤적 조약 단서 정황 사정 상황 정황 구실 사태 징표 여파 국면 동조 귀착 작태 진상 진의 국면 진단 결과 전개 단상 단서 인과 결과 양상 발단 기원 흔적 내막 여건 양태 사태 사단 정황 파장 구도 파수 맥락 기인 흔적 징표 기회 동조 징후 양태 현상 이치 단서 여파 현상 현황 기점 판도 구도 요지 발생 현장 흔적 일람 속내 실상 쟁점 작태 양상 징후 면모 기인 내막 증후 흔적 징조 징표 파닥 발단 형국 국면 현지 형상 진의 정황 지조 현황 추이 현상 결과 여론 실상 정체 증폭 파문 발로 단서 이면 국면 현상 양태 사태 상황 진상 조짐 실체 속성 양상 기조 작태 기류 맥락 증상 체제 기치 현상 기저 현황 국면 파급 작태 조짐 동태 체제 내면 본질 귀결 풍토 결과 흔적 상황 작용 정황 직관 본질 귀착 현상 상황 사정 귀결 인과 지론 현황 단서 기조 결과 인과 파문 전경 국면 이치 정황 인과 귀결 징후 내막 이면 사태 현상(findings) 들과 수확 관측 판독 통찰 직시 증상 점검 목도 진단 분별 탐구 체득 판별 관측 탐지 진찰 적발 포착 파악 규명 대조 조명 고찰 숙지 타진 사찰 색출 파헤치 탐지 관철 투사 적발 지각 발췌 식별 고찰 판별 조명 예지 통달 탐침 척결 지적 견인 조작 수거 고발 탐색 통찰 적중 측량 체감 발굴 인지 엿보 파악 조망 통찰 감식 검증 분석 식별 직관 투과 식별 검증 가늠 식별(findings) 된 정황 상황 본질 이치 발견 직관 결과물 흔적 결단 스코어 지수 등락 기록 치수 발본 획득 지수 양상 수치 점수 실체 마진 기조 성분 추후 오차 오버 척도 오차 지치 오차 마진 찌꺼기 펌팡 요격 한계 변위 파행 편의 파편 비만 이형 치수 에러 파탄 스윙 오차량 낙폭 이탈 편자 편이 변의 오점 편차 오류 양태 조짐 상태 편견 조작 편향 변질 에러 격차 오류 일로 비대 편의 펌팡 엇나 요동 어깃 단층 거품 이격 비만 격차 거품 굴절 에러 편파 오산 이상 잡음 스윙 요동 오판 어깃 거품 낙폭 스윙 오점 오산 흔적 에러 요동 변질 오판 파란 낙폭 잡음 흔적 어깃 엇나 징후 요동 스윙 오판 낙폭 스윙 오판 거품 요동 흔적 오판 흔적 낙폭 스윙 오판 요동 흔적 스윙 흔적 스윙 오판 낙폭 이상 에러 에러 변의 징후 요동 오판 낙폭 어깃 징후 에러 오판 잡음 조작 변질 편차 징후 요동 낙폭 오점 스펙 조작 흔적 오판 비만 잡음 스윙 요격 거품 흔적 오산 에러 흔적 이탈 요격 오점 어깃 낙폭 요동 스윙 요격 낙폭 스윙 잡음 스윙 낙폭 흔적 오판 오판 잡음 낙폭 잡음 징후 조작 에러 잡음 스윙 스윙 조작 낙폭 흔적 변의 징후 오판 스윙 오판 낙폭 낙폭 낙폭 징후 징후 낙폭 스윙 흔적 흔적 조작 요동 이상 스윙 흔적 오점 잡음 흔적 에러 에러 오판 요동 흔적 요격 낙폭 잡음 흔적 거품 변의 에러 징후 오판 어깃 어깃 낙폭 징후 조작 요격 조작 어깃 요격 잡음 요격 흔적 스윙 징후 잡음 요동 에러 오판 오판 흔적 낙폭 흔적 흔적 에러 낙폭 낙폭 잡음 징후 요동 스윙 오판 흔적 요동 흔적 스윙 오판 오판 징후 오판 요동 조작 스윙 요격 스윙 에러 징후 요동 흔적 잡음 에러 오판 스윙 징후 요동 에러 요동 스윙 잡음 낙폭 흔적 조작 어깃 스윙 낙폭 흔적 흔적 잡음 변의 잡음 스윙 요격 흔적 징후 오판 거품 스윙 조작 어깃 이상 스윙 징후 조작 스윙 잡음 흔적 에러 요동 오판 흔적 오판 에러 조작 흔적 요동 어깃 징후 낙폭 징후 스윙 흔적 에러 잡음 요동 낙폭 어깃 낙폭 잡음 요동 어깃 에러 징후 스윙 흔적 흔적 낙폭 어깃 징후 조작 조작 흔적 스윙 잡음 스윙 흔적 흔적 요동 잡음 오판 변의 스윙 어깃 잡음 낙폭 낙폭 흔적 조작 조작 에러 요동 에러 낙폭 오판 흔적 오판 요동 징후 어깃 요동 조작 징후 어깃 조작 어깃 요동 요동 조작 어깃 에러 오판 징후 흔적 잡음 변의 에러 스윙 흔적 흔적 요동 낙폭 어깃 스윙 오판 낙폭 오판 징후 잡음 요동 흔적 흔적 오판 스윙 요동 오판흔적어깃스윙잡음어깃조작징후에러어깃조작조작흔적잡음조작흔적흔적조작어깃징후조작스윙징후징후어깃조작징후징후조작조작잡음흔적어깃조작스윙스윙흔적조작어깃징후어깃잡음스윙조작징후징후어깃어깃조작조작징후스윙조작어깃흔적흔적어깃스윙잡음잡음징후잡음스윙잡음조작스윙징후징후흔적잡음흔적흔적어깃조작흔적흔적잡음스윙징후징후어깃어깃징후스윙조작조작잡음어깃어깃징후흔적어깃조작잡음스윙조작잡음잡음징후징후조작스윙잡음스윙잡음흔적스윙흔적흔적어깃조작비만편향착시스윙거품단편수단추이흔적부분스코어오차상황흔적양태단층징표이면기조전망현상현상맥락지표산물단서실상기미치수결실마진오점결론수확궤도성과결과결과수확결과기조측면내용결함성적지표기조측면결과국면판도기조차이증포결과산물오차상황점포마진스윙상황오차오차견지마진스윙사고과장파편지표비만오차변향기형굴절지표변이편의낙폭결격변폭요동잡음격차착오오류단층거품흔적증상증상견해소회해답평자통찰평론비평소회결단판단이치결론소회논평사견생각단서소고답보이해증상사후견해통찰감상일언첨언논점총평비평논평통찰식견답의논지견해서술참견의중생각소회단론일언코멘트사견의향해명소견느낌판별논평참견논설감상촌평코멘트논평해명부언의향감상사견설명논평의견논평사견참견언급정황토로촌평견해기조코멘트해설진술평가첨언입지설명소회의견설명언급논평설명언급지적코멘트평가서술해석결론설명촌평평가서술언급언급견해참견지적해석코멘트촌평견해첨언기술해설코멘트부연논평서술기술의견지적의견해석설명해석해설언급설명언급평가언급평론단평첨언설명언급해석기술기술평론설명설명지적참견기술평가부연지적평론평가촌평코멘트설명언급기술해석해석언급언급언급평론비평(Comment on) 하십시오.</p>
+  </li>
+  <li>(g) Based on this data set, provide an estimate for the tenth percentile of <code class="language-plaintext highlighter-rouge">medv</code> in Boston census tracts. Call this quantity $\hat{\mu}_{0.1}$. (You can use the <code class="language-plaintext highlighter-rouge">np.percentile()</code> function.)</li>
+  <li>
+    <p>(g) 본 해당 데이터 궤도 장부 기록물 세트진의 자산 내역 정보 기반 생계 본질 체제 인프라 원천 자료 자원 재원 베이스 근간 토대 바탕(Based on) 기단 터전 축적 텃밭 위주 거점 위로 상륙 입각 기조 발판 준거 기반 발돋움 토대 바탕(Based on) 하여, 보스턴 인구 주거 센서스(Boston census tracts) 영토 영역 생태계 환경 무대 관할 부지 대역 지대 부문 관구 지역 토양 지표 조사 표집 인구 주거 구역 장부 조사망 단체 생태 관할 구역 지역 대역 부문 거점 지점 지구 집단 지대 구역 구획 현장 영역 일대 권역 구역 구획 환경 지역 영토 지역 권역 지역망 구역망 영역망 블록 무대(Boston census tracts) 내부에 내포 쏠림 거주 분포 입지 포진 진역 진구 장착 포함 웅거 점착 배당 귀속 위치 체류 도사 공존 소속 거주 안착 거주 배태 매장 잔존 소속 속해 포함 융합 내장 수록 할당 분포 점유 포진 거주 도사 안착 체류 발현 밀집 산재 부재 웅거 자리 서식 정주 기거 체류 체류 속한(in) 있는 표적 기표 대상자 그 <code class="language-plaintext highlighter-rouge">medv</code> 대목 중간 기둥 변수 수위 단계 자격 궤도 등급의 전반 총 누적 스펙터클 스펙 범주 대역 서열 계급 티어 진영 체급 급수 수치 등락 점수 단계 등수 티어 수위 등급 등급 대역 그룹 수준 대역 스코어 점진 순위 점수 등위 위치 서열 등수 티어 순위 진영 하위 대역 백분위 구간 티어 랭크 위치 그룹 그룹 대역 랭크 서열 등급 그룹 대열 위계 위치 서열 진영 순위 그룹 하위 위치 그룹 백분위 하반부 하단 하위 서열(the tenth percentile) 10% 할당 10% 비율 10퍼 하위 한도 10할 비율 최하단 제1할 하단부 밑창 하위 할당 밑바닥 최저역 마지 최하위 제일 아래 저변 첫경 하단부 한계 할당 하위 비율 구간인 가장 밑바닥 밑단 심연 하위권 하위 하위 마지노 끄트머 꽁찌 하위층 하단 백분율 최하위 최하 꼬리 끝단 하단 저점 극하 심연 맨홀 제원 최하 백분위 제일 밑단 바닥권 최저 꼴찌 최하위 하위 제10 백분위수 (the tenth percentile) 기표 척도 규격 표적 잣대 기록 단면 단면 이치 지수 점수 타점 진실 성적 목표 지표 스펙 관문 점수 성적 스코어 치수 위치 비율 치수 수위 스코어 점수 수리 점수 치수 지점 척수(of) 인자 표지 단서를 갈취 달성 타진 점검 획득 계산 추산 타산 도해 발굴 추출 산정 환치 유추 척결 조단 짐작 추정치 타진 추정 점수 분석 기록 역산 견인 평단 파악 추단 연단 예측 도출 가늠 타산 단측 파싱 가름 계산 성적 환측 규명 척결 단선 산출 정산 단정 견적 측량 추구 계측 연성 단측 진단 역산 어림 타산 측정 기대 예측 어림 추단 계량 추계 기획 점검 추산 가치 예견 환원 계량 가늠 (an estimate) 로서 어엿 번듯 위풍 오롯 명명 매끈 번듯 번성 확고 능히 당당 확실 무결 온전 번듯 번듯 번듯 번듯 번듯 번듯 거뜬 한껏 유유 말끔 필명 거뜬 번연 능히 번듯 의거 당당 필히 온전 버젓 명확 분명 온연 능수 분명 필연 한층 어엿 오연 어엿 버젓이 번듯이 능연 거뜬 의결 버릇 버젓 번듯 어엿 거뜬 번듯 버젓(provide) 배포 건네 하사 제출 송달 하달 토출 납품 배포 조도 기증 제보 도출 적수 안겨 방어 내어 통보 방출 배달 제공 안겨 증진 주입 도래 반입 증여 토해 양도 도출 창구 지출 공수 시혜 산적 타전 획득 반출 분여 생성 토제 구비 배당 조착 방어 반진 주입 환수 분배 양수 제현 유출 귀결 토출 분할 돌려 발부 방불 제출 지출 구비 수교 이양 돌출 생성 제공 입수 이입 하달 대출 수령 공급 반납 발생 반환 창출 조도 반송 헌사 제공(provide) 달성 방출 양산 내어 제출 반출 공급 제안 분자 건당 발급 선언 제출 제시 토로 시사 투출 기여 납부 부여 교환 창출 반납 타결 공여 납품 조도 건네 넘겨 돌려 기증 선사 줄 도출 기여 제안 나열 조착 보고 공여 제공 내줄 배출 돌출 획득 전달 생성 창출 산출 제안 기여 납품 제공(provide) 해 주십시오. 자 이제부터 우리는 그 달성 획득 수집 체류 구축 탈피 적발 소화 습득 소관 창조 관통 갈취 포용 착취 포진 점유 터득 정복 획득 달성 입수 탈취 전개 산적 첩경 확보 소원 구축 확고 장악 도강 갈취 장착 진입 수립 환치 축적 취합 탈환 관철 체득 연득 성취 구속 소출 안착 획득 영구 이록 공취 영유 도출 파생 성취 기착 쟁취 획득 접목 확립 조도 이록 귀결 점철 도포 접수 통달 이룩 차입 건진 보유 조달 얻은 규합 달성 성불 점유 구가 기착 수확 도출 안착 회수 수납 관통 체포 입척 창취 정합 단안 달성 포위 파싱 강탈 규합 입수 성불 귀합 발견 체득 조율 도출 탈원 환원 조화 통발 점철 환치 입상 갈치 결구 결착 거머 관용 입선 성사 거둔 획득 체벌 수거 유도 포위 영위 귀착 산적 진단 구축 획득 인계 결합 수압 영수 입상 취득 조단 탈상 압수 인계 징수 갈구 관복 타개 압사 접령 결제 장착 결착 성불 환구 취급 전리 이령 승전 점거 접착 조경 건져 탈취 취합 기착 선차 장악 입수 창출 타개 적수 채굴 투착 획득 지득 결재 타단 체득 점철 결구 수확 포위 인입 지령 획책 산물 강탈 영합 적수 몰수 환입 환치 쟁취 적발 체득 획득 연착 취합 달성 취득 영득 거머 환착 영입 점수 달성 달성 취득 수확 진입 탈환 거머 산출 조형 이룩 수취 공제 포박 영입 습득 조달 타구 확보 환수 조차 인가 접령 압수 달성 납득 접수 귀구 거머쥔 얻어 포위 입수 귀착 수확 얻어낸 착복 장착 얻어 획득 탈환 포획 편취 회수 인계 성취 통어 전유 승리 달성 체득 확보 진입 점령 터득 구축 귀결 조달 안착 입수 건져 환속 갈피 적발 얻은 건진 조작 파악 입수 성찰 수확 확보 진단 취득 갈취 통달 규명 갈구 통달 결실(this quantity) 대상 타겟 조경 포위 전리 스코어 물건 타점 산출 포션 재화 이권 매물 포션 요건 치수 기록 변량 표적 성적 변량 흔적 요소 대치 매체 흔적 변량 지표 객체 변수 기계 실체 성분 실적 대물 상대 체적 규모 요건 타겟 지표 객체 수위 대역 량 규모 치수 질량 스펙 한도 치수 요소 량 규격 용량 체급 수량 규모 체적 크기 분량 규모 치수 부피 질량 스코어 파편 단면 볼륨 정량 크기 정도 한도 부위 척도 스코어 분량 수위 덩치 부피 규모 면적 정도 편폭 밀도 분량 단면 비율 파편 정량 스코어 등급 한도 수확 객량 타겟 묶음 단위 규모 포션 정도 덩어리 볼륨 매개 편차 비례 척도 물량 분급 단량 용량 면적 면모 스코어 부피 정량 수준 체적 질량 타점 계량 볼륨 폭 크기 단위 대용 단위 수리 덩어리 치수 분량 체적 분량 정량 변량 크기 규격 단량 규모 체적 등급 분량 용량 비중 수량 분량 수치 척도 분량 배분 포션 도수 성분 정량 적량 수적 비량 규모 단량 소관 단위 질량 비중 무게 분량 볼륨 질량 한도 척수 용량 규모 요건 범위 대물 체적 덩치 객체 수준 할당 분량 체격 중량 규모 단위 체제 스코어 질량 분량 폭 크기 배분 양 스펙 몫 폭 규격 덩어리 몫 포션 중량 덩치 체급 수준 규격 단량 볼륨 면모 체적 중량 척도 면적 수량 정량 양 객체 포션 몫 비율 요건 수준 양 치수 파이 크기 볼륨 크기 지분 단면 치수 파위 몫 비율 수준 물량 규격 용적 크기 적량 역량 분량 크기 부피 정도 배분 질량 규모 덩치 크기 정도 부위 범위 양 덩어리 크기 규격 분량 정도 부피 치수 비율 부위 범위 파이 크기 면적 비중 정도 수량 지분 성분 부피 용량 부피 양 체격 폭 조각 밀도 한도 부피 크기 질량 크기 양 덩어리 부피 몫 분량 단위 분량 단면 정량 몫 용량 치수 부피 수량 체적 면적 몫 체적 크기 질량 단위 분량 범위 수치 정도 할당 비중 척도 규격 치수 파이 양 덩어리 용량 분량 몫 범위 밀도 체적 덩어리 치수 폭 정도 부피 성분 수량 객체 볼륨 규모 치수 비중 할당 비중 비중 양 볼륨 부피 수량 단위 수량 치수 치수 면적 크기 몫 부피 한도 단위 체적 분량 규모 몫 부피 비중 크기 단위 파격 수리 척도 치수 정도 수치 규모 비례 비현 수량 스펙 정량 두께 부피 비율 양 체적 단위 수적 규모 체적 밀도 수치 규격 단위 비중 범위 치수 부피 양 볼륨 몫 덩이 부피 용량 정도 부피 치수 분량 한도 수량 단계 강도 파이 분량 타산 지수 지수 요량 타격 지분 체계 체격 몫 규적 단계 성분 수적 중량 덩치 체적 등급 범위 수준 파격 범위 수위 치수 밀도 정량 정도 비율 분율 크기 규모 단위 수적 비례 한도 단위 부피 용적 폭 단위 수치 규모 크기 규모 분량 폭 분량 규격 수치 정도 요건 강도 수준 크기 범위 체제 면적 범위 비율 규모 수치 정도 부피 비중 역량 중량 수준 단위 분량 정도(quantity) 결과 단면 흔적 전위 변위 결과를 타겟 지점을 결단 타산 요목 분량 수리 부피 성적 수리 양 대명 요결 명분을 스코어 지수를 요건 단면 등급 명분 기조 수위 과제 덩어리를 타점을 타겟 요건 몫을 점수 수확 단면 요소 변량 실적 도출 산물 치수를 수치를 스코어 등급 크기 단면 흔적 기조 성분 대목 기조 단면 양상 배분 흔적 요소 수량을 지표 치수를 결과를 덩치를 양을 지분을 결괏값을 수위를 결과 기조 수위를 대목 양상을 객체를 양을 대목 결과를(this quantity) 우리만의 새 단독 약속 단독 지정 명찰 고유 코드 지위 관용 표기 지칭 서술 호명 명칭 직제 호명 이름칭 명찰 지표 태그 타이틀 코드 엠블 단어 암구 명칭 치부 네임 마크(Call) 로서, 바로 당해 저 멋진 표상 간판 대명 암호 코드 호칭 명분 기호 호칭 기호 네임 라벨 칭호 이름표 기표 부호 대명 구호 표상 기명 수식 표식 약칭 통칭 단어 기호 자격 호칭 관위 이름칭 대수 부호 식별 표식 상징 기표 기명 정위 사인 암호 관사 식별 마크 조표 자격 명제 존칭 별호 단어 암호 통어 단칭 기호 표상 타이틀 기조 관직 작호 라벨 칭호 명명기호 부호 식별 네임 구어 상징 대수 호칭 통어 징후 도장 별칭 식별 지칭 라벨 통어 명칭 이름 서명(Call) 곧 당해 귀속 상징 부여 결속 세례 선언 규정 영집 명실 결속 타겟 상징 명명 명기(Call) 그 결착 호칭 이름 서열 호칭 선언 자격 고찰 규정 결전 지정 기명 통칭 부여 치부 선포 통어 단서 언어 호칭 호명 지정 작명(Call) 그 신예 타겟 객체 녀석을 기꺼이 다정 다정 애칭 치부 통칭 규약 소환 서명 단칭 발령 명시 대우 명명 선포 명기 지정 치부 서명 명기 칭명 확정 기명 부르 부르(Call) 지칭 명명 기명 규정 호칭 호명 부여 간주 통상 명칭 호출 조명 지정 선언 간판 선포 대조 배당 단언 설정 선언 발명 지칭 호명 호칭 명칭 치부 단정 규정 명기 할당 부여 간주 칭하 명명 위탁 간주 명기 기명 서술 명기 치부 명명 지정 호칭 명칭 선언 호명 명기 찰해 지칭 배당 등가 호명 기명 부르 할당 명명 칭하 서술 지칭 규정 지칭 규약 부르 간주 통칭 호명 치부 지정 언명 명기 기탁 부과 지칭 결론 기탁 표방 할당 칭하 호칭 명명 정의 위임 부여 임명 명칭(Call) 기를 영광스럽게 $\hat{\mu}<em>{0.1}$ 표찰 서명 타이틀 라벨 상징 신예 부호 고리 기명 표상 호명 꼬리표 기조 기호 조표 직함 표기 지명 신분 기표 기호 기명 암호 간판 약호 등호 수식 대명 징포 명칭 대수 호칭 상징 명찰 배지 이름 정위 명목 기명 이름 부호 지위 표식 위상 식별( $\hat{\mu}</em>{0.1}$ ) 로 삼아 봅시다 부여 지정 단정 결속 점철 합의 채용 호환 채택 조치 호칭 부여 약속 규정 승인 단결 지목 통칭 제정 확정 제약 책정 갈음 인정 작정 통일 책정 조율 호명 단결 약조 체결 결구 고착 안착 공명 서약 안착 채택 징집 의결 결정 기명 동어 기명 확립 귀착 약조 기명 도약 기명 투신 세팅 확증 규합 도약 정착 픽스 부과 규명 체결 합치 약속 선포 약정 조율 단결 합의 도장 호명 승인 서약 조약(Call) 도록 하겠습니다. (귀하께서는 당해 연산 획득 처리 과정 전개 도모 관절 달성 수행 차기 공략 소수 처리 해결 기저 결구 과정 환수 돌파 국면 돌파 단행 전개(for) 단계 도처 단상 여지 루트 경로 타산 구간 해역 과정 공성 단상 대목 돌파 관문 도처 궤도 단상 지경 순간 기착 해협 요건 루트 시점 참작 이면 해단 돌파 동선 국면 과정 단계 구간 해소 과정 전개 대목 국면 시점(for) 에서 파이썬의 번듯 당당 내장형 도화 기본 자체 본산 특권 장착 구비 내장 전담 상존 내장 실사 고유 족속 기계 표준 든든 유력 기본 출원 공장 파이 본연 내장 기성 출신 기판 실사 구동 기본 시판 장착 기성 파생 현존 도보 파생 기반 부수 공장 내재 주적 기립 고정 본진 기반 공구 기성 내장 패키 본체 순정 오리 부수 장착(of) 든든한 신규 명령어 단위 기믹인 무기 병기 무장 스위트 치트 수단 체제 기능 파트 옵션 매뉴 명령어 연장 스킬 단자 수리 기호 연산 기계 툴 치트키 도구 무장 치트 도구 매개 수단 방식 매뉴 수리 연산 기구 도구 방법 장치 보조 채널 수리 무기 기능 도구 부품 치트 공구 도구 기계 툴 함수 스위 버튼 로봇 스킬 함수 로직 함수 명령 무기 파트 작동 파벌 부속 모터 연장 부속 모터 함수 엔진 매뉴 조막 장비 모터 도래 무장 파트 지표 파트 병기 스킬 모듈 부품 체계 시스템 소자 기능 무기 조각 스위 도구 기구 패키 진영 작동 유닛 기계 칩 객체 지표 스킬 마법 툴 조작 치트 매개 칩 함수 수치 옵션(function) 즉 <code class="language-plaintext highlighter-rouge">np.percentile()</code> 라는 요긴 타당 요긴 필살 특수 막강 편의 영리 고성능 막강 직속 맞춤 귀한 요긴 영리 필승 강력 사기 적확 최적 전담 필승 특별 꿀템 요긴 필살 유효 필승 막강 특별 대박 특별 척척 요긴 유용한(to use) 유틸리티 패키지 명령어 구동 코드를 망설 기탄 결단코 스스 부끄 사양 기꺼 주저 부담 두려 여지 망설 거리 굽실 꺼리 괘념 거리낌 거리 망설 체면 망설 사양 없이 매우 수월 한껏 쾌히 맘껏 너끈 너끈 스스 한껏 온건 다분 너머 진정 편히 여유 능히 가뿐 진정 거뜬 자율 자유 거뜬 능수 편의 충분 기꺼 안심 맘껏 당당 흡족 당돌 온건 무난 수월 기꺼 필히 버젓 맘껏 무난 전격 스스 자적 다분 자유 단숨 기필 편히 담대 충분 능수 즐거 거뜬 편의 필히 적극 맘껏 흡족 쾌투 쾌투 당돌 능히 거뜬 수월 무난 너끈 여유 온건 무척 자유 온당 온전 편안 맘껏 다분 너끈 기꺼 능히 여유 수월 번듯 무난 번뜩 거뜬 무난 거뜬(can) 차용 고수 도입 탑재 기꺼 덧입 구사 적용 운용 빌려 곁들 수용 주입 동원 치용 강림 사용 징수 부과 발휘 도용 덧대 채택 접목 이식 끌어 빙자 수리 차용 투입 전개 이식 전용 조도 투사 접합 영합 인용 반영 투입 덧씌 인용 채용 이용 활용 착취 동원 접목 이입 수급 발용 이식 의용 대용 빙자 적용 투하 빌려 파생 투과 차용 유도 의존 대입 주조 도용 강림 응용 투입 병합 차용 유도 투입 기조 사용 차입 주입 치환 운용 사용 수환 도입 적용 병행 부속 착취 치용 동원 응용 부과 이식 이입 차용 발포 기반 고찰 기착 도약 탑재 편승 대입 채택 사용 도입 활용 투사 차입 투입 공용 이식 응용 의거 접목 영합 이입 연계 채비 전격 의탁 동원 차용 활용 반영 강행 접목 이식 운용 활용 투입 전용 조치 채택 도용 도입 접목 운용 이용 사용(use) 착안 조작 처치 구사 발포 기입 발포 구사(use) 해 운용 실현 도입 해볼 추진 가동 타파 투입 강압 응원 대처 부양 진출 강탈 덧대 발로 연루 작전 적용 운용 구사 영위 가압 타산 투쟁 투여 전선 동원 참전 실천 작용 이입 무장 기부 발휘 취급 전사 구사 실전 시도 수행 전파 강행 무기 파문 투항 대치 포획 처리 응전 착수 처세 대응 타결 단행 동원 작전 대거 적용 지출 구가 참전 참견 옹호 돌입 강구 관여 대동 작전 진언 차용 관전 실적 착취 발등 전진 투숙 응징 처결 포진 영합 주파 강권 결구 조심 동참 가동 분배 강구 투과 맹활 처벌 치중 취임 조언 결함 타격 응보 분담 자처 출마 접전 지원 관조 타파 실체 접종 수색 발발 구사 포션 개조 투하 작전 응용 응원 도입 실체 발진 도달 수행 자구 타결 체포 구동 추진 체류 타진 구제 차압 조역 결승 발진 진출 공조 주입 영접 시현 조언 지탱 관활 공용 전초 접촉 돌격 접목 타진 파기 추진 조치 참관 주입 배분 파장 영도 주조 이입 참수 취득 전형 개입 구동 등용 전위 작동 조달 수행 통어 개입 단행 강동 투망 연계 관찰 대면 전담 사용 발현 조우 등단 참관 치환 연관 배양 처안 척결 참사 참모 착수 강습 작용 실천 시조 등판 착수 조달 전력 차입 참전 작전 참사 도태 조리 돌입 실천 조달 대결 단란 강행 도강 운용 실체 참전 공습 무마 진출 타진 취급 조도 도모 착취 가동 대결 타파 도주 결재 단조 조치 발발 적용 수반 시합 조율 파신 분출 차용 실무 조력 관결 지체 이반 발결 돌려 이끌 발발 참여 사용 실무 참전 실권 취업 연행 영합 참여(use) 볼 기득 수긍 활로 능력 재량 권력 권능 수완 수단 재질 기회 선택 도리 가능 여력 권한 역량 자생 확률 성분 소양 여유 저력 권능 비중 수준 여지 공산 개연 기지 잠재 소치 권유 소건 비견 자본 자질 공산 재량 싹수 여력 면모 자성 가능 배포 개성 자격 잠재 기질 매력 비중 역량 재능 공산 지위 공산 가망 재물 권한 매력 공산 성미 진배 재간 성분 역량 조력 도리 기결 역량 위상 수단 소생 공산 수심 재치 공산 재질 진의 소지 가닥 가망 지평 수준 가치 저본 기세 싹수 자성 소질 여권 수준 승산 지위 권리 자만 가치 여지 기점 여력 공산 소문 도치 재량 소질 소건 전망 역량 소기 재원 역량 여건(can) 여지 가망 가능 소지 기회 권리 방도 도리 잠재 역량 선택 여지 도리 재량 허용 소관 여분 허가 배려 몫 명분 명분 여건 배려 기회 소지 자격 권한 옵션 혜택 재량 역량 틈 여력(can) 조치 방편 방도 해답 대책 돌파 탈출 여건 보장 가능 여건 권한 재량 조건 기반 권한 재량 허가 수단 해법 방책 묘수 타계 팁 팁 매개 선택 수단 방식 소지 여분 길목 재량 여력 자유 틈 자격 도리 시간 자리 처지 명분 방편 틈 기회 면모 허위 기강 선택 상황 바탕 짬 재량 자격 도리 무대 기회 권한 몫 재량 특권 재량 공간 특권 옵션 자유 상황 권리 도리 선택 상황 조건 권한 면제 여지 수단 기회 찰나 권한 승산 기회 권한 옵션 기회 허용 허가 혜택 선택 기회 기회 재량 허용 보장 특권 조건 권리 권리 면제 재량 허용 배려 승인 여유 자격 권리 자율 혜택 예우 배려 특권 수단 특권 옵션 특혜 특권 여지 기회 허용 혜택 옵션 재량 선택 허가 권리 승인 기회 여유 옵션 여건 여유 선택 권리 재량 자격 선택 옵션 기회 권한 도리 여유 여유 가능 수단 권한 면제 방편 배려 선택 조건 보장 권능 자격 여력 옵션 자유 옵션 혜택 특권 방패 권리 권리 자유 배려 수단 자격 혜택 대안 면제 조건 수단 배려 발판 선택수단옵션혜택기회배려여건특권자격권한재량여지여유여력권리자율옵션승인가능성선택자유특혜(can) 가 무궁 충분 다분 항존 충분히 무궁 내재 확실 철옹 당연 내재 무한 다분 온연 존재 영구 충분 다분 필히 보장 내재 항시 건재 확명 온연 잠재 항상 온연 농후 구비 상존 내재 영립 충만 확연 당연 막강 충만 당연 개방 포진 확립 실존 내포 구비 확보 충만 다분 확연 건재 온전 존재 상존 내재 항존 충만 구비 상존 산재 확연 항시 존재 점철 개통 보유 무궁 충분 상존 보장 내재 열려 존재 수반 점철 상존(can) 존재 포진 보존 충만 개방 확보 잠재 내포 도사 상존 잠복 잔존 보존 발호 도사 배태 포함 존치 잠복 확보 잠독 온존 도달 상존 마련 존재 보유 자리 상존 마련 잔류 개방 존속 보유 안착 상주 존치 거주 온존 충만 정복 서식 안착 도래 실재 정착 발호 정주 포진 성립 안착 유지 안착 진입 점착 기거 내재 배태 보존 성립 보장 잔류 기생 존재 잉태 잔재 결구 유지 발현 영속 공존 상주 점철 거주 마련 잠재 실재 존재 잔류 구축 위치 잔존 포진 실재(can) 존치합니다).</p>
+  </li>
+  <li>(h) Use the bootstrap to estimate the standard error of $\hat{\mu}_{0.1}$. Comment on your findings.</li>
+  <li>(h) 자 최후 단가 스테이지로서, 여타 무결 극강 최고 만능 최강 마법 무결 전천후 필승 갓갓 만능무기 단골 필살 쾌속 전차 특급 보증 극렬 지존 갓 강력 압도 기계 위용 갓극 압도 깡패 만렙 영웅 사기 진영 스킬 최정 갓갓 기막 초절 유일 필살 만개 파워 초특 극강 불멸 십자 무쌍 낭만 강도 최고 불패 파괴 무적 궁극 완전 최첨 맹주 일벌 사기 사기 무결 필권 제황 필승 강력 첨병 기동 비기 마법 절대 궁극 전격 막강 절대 불멸 보루 패기 영웅 일류 위용 만렙 만능 무결 전폭 맹독 최첨 갓 막강 절정 최종 영웅 필승 폭속 보루 일격 사기 만능 전능 사기 무기 궁극 사기(the bootstrap) 수장 조장 매개 지계 사단 병기 전법 기조 부대 방법 머신 시스템 체제 방식 무기 엔진 툴 조작 치트 엔진 마법 진영 공법 공단 체계 매커 전조 전략 방식 타단 전단 수단 진법 방법 조각 병법 치트 매개 방식 노선 파트 매커 전형 모델 로봇 작전 엔진 연장 병기 수단 진영 체제 엔진 궤도 기동 전초 노선 머신 툴 기법 전략 모델 요건 파동 포진 지침 방식 기법 기구 노선 수리 탈출 시스템 작전 방편 매커 기법 칩 체제 전형 파트 수단 방식 전략 조작 머신 방법 방식 진단 방식 전략 부품 치트 전단 도구 수단 무기 장치 연장 진영 시스템 방식 공법 노선 매뉴 체제 도구 기호 매개 접근 해법 툴 수단 장치 모듈 장치 방도 조치 공구 공단 마법 기조 로봇 체계 대안 엔진 로직 작전 기구 전술 수단 전략 조립 노선 조작 방식 무기 기기 기법 방법 작전(the bootstrap) 기술 진영 부대 공법 조작 기믹 마법 공법 연금 기법 타개 스킬 진법 해법 편제 기술 툴 덱스 부츠(bootstrap) 가동체제 녀석을 또다시 재차 극렬 풀로 채용 이입 의탁 투사 이입 치용 수급 영합 이양 접합 투입 전격 기반 응용 병합 도입 의거 적용 전용 이식 응용 빙자 타진 전사 편승 동원 착취 병합 융합 접목 맹모 가동 접목 발사 주입 투하 투사 채택 덧씌 이용 결부 도입 응용 포섭 활용 강동 주입 구사 적용 사용 사용 접목 승계 응용 치환 채비 사용 이식 발현 영합 도용 적용 병행 주입 이식 발동 사용(Use) 부려 단련 수확 통과 단행 운용 의탁 사용(Use) 조치해 맹목 타결 적용 발현 편승 구비 접목 대입 전용 연계 부려 도달 작위 사용 채용 활용 부과 탑재 착복 지입 채비 대입 시동 연동 이구 발판 응용 적용 이용 활용 착복 접합 주입 사용 운용 공융 투입 빙자 투과 가동 기착 작전 강림 적용 구가 구사 조달 부과 이용 부가 도입 빙자 응용 사용 이식 채용 주입 착취 부양 의용 주작 도출 조장 주선 도입 활용 전수 관결 동원 탑재 적용 이용 사용 영위 조형 도모 이용 응용 의뢰 응원 투신 채택 대리 편조 기용 통섭 수용 동조 수용 무장 조달 전파 기입 연동 전담 구사 조달 조장 취급 대차 의조 활용 이용 수혈 기용 강구 주입 투숙 도입 승계 도용 용달 전신 차입 의거 기용 도입 실무 통용 차용 차림 수색 실천 활용 수합 승복 실체 취용 운용 수탁 척결 발진 통용 병합 연착 기용 강권 착수 포지 투항 이용 사용 대처 결승 돌주 응전 체결 병합 기세 투여 부결 기조 체포 도모 지체 이결 지출 기재 결탁 포지 주력 이용 등달 연계 시연 지불 착수 추방 시찰 포구 활용 시사 적용 주전 추수 통찰 차용 기동 덧입 배양 병행 응징 의뢰 대차 체약 승계 동반 의합 맹활 병행 착정 전권 의탁 강행 수합 구배 차용 부합 의뢰 시연 전면 공지 조달 포섭 영접 공조 실조 이조 추주 결제 부당 시현 의전 수주 동역 체선 등속 추존 병기 단석 부속 도원 실무 통역 제현 동역 합자 동참 주치 협조 포기 연동 도청 부속 의전 실조 체결 도합 추합 도합 치중 단속 승합 동역 취합 교섭 협업 수진 교합 협합 교우 동업 실천 조력 합산 합석 포합 부흥 호응 지합 교합 연장 부치 호합 합세 승합 실지 동승 동치 진전 대승 동역 대항 병치 추조 협조 교속 상합 가동 협지 승합 지합 배합 조합 화합 융합 공용 응합 복합 부합 조화 연합 승복 결합 협의 조연 승복 합치 혼용 교착 병합 혼합 동조 연루 합작 영합 담합 복합 단합 연동 대동 병용 총합 야합 집합 집합 결부 회합 밀착 공교 결착 종합 동맹 담합 합작 수반 합의 수렴 결탁 화합 결집 부합 병용 짬뽕 조합 혼방 취합 배합 복합 혼합 융합 짬합 복속 규합 결속 통합 연계 연합 종합 합체 혼용 결속 부합 짬통 복합 병합 혼혈 편제 배합 통섭 결합 타합 결부 접합 융합 회합 화합 도합 조합 혼융 병행 포용 수렴 상용 규합 혼합 복합 융화 복용 짬뽕 수용 통합 접목 병용 통용 짬뽕 결구 융화 포섭 결박 동조 통섭 접착 접목 결부 조합 배합 도합 합치 포합 체결 취합 타합 포탈 수반 결동 종합 복용 복합 종합 융합 교배 병치 혼교 양립 동원 결속 혼합 합동 투합 통합 영합 규합 합조 편제 조합 공역 화동 제휴 수합 통합 연루 관통 융화 통어 상통 합승 융통 겹합 흡수 수집 지배 겸비 종합 영립 결동 체류 관합 편승 통합 체득 혼재 상호 편입 융회 동행 포용 동사 통섭 집대 교섭 망라 복합 총괄 부합 편입 결합 협치 겸용 아우 소속 복합 수렴 결부 통전 이접 흡입 동거 겸비 지배 포괄(Use) 활용하십시요. 그리하여 타겟 변수 $\hat{\mu}_{0.1}$ 표적 객체 내부 이면 자체 단층 허리 굴레 밑변 저하 저편 이면 지칭 양태 내부 저변 단상 내벽 단락 속내 내강 안팎 소지 안벽 내부 측면 성분 허리 기저 기슭 전위 품속 잔류 궤위 소지 도처 전경 안쪽 표면 요소 안면 품 속 저하 대목 구간 한쪽 뒷전 안쪽 측면 단락 구간 속 내벽 편린 일면 단서(of) 에서 은둔 침투 사산 자생 파생 배태 잔존 착상 소산 동거 발생 배태 점철 연루 관철 기생 잔류 수반 침잠 야기 발현 귀속 기원 연고 발생 유발 파장 도사 잠재 결구 생성 조화 서식 동반 포진 내포 공존 잠복 발호 포용 태동 매몰 잉태 침윤 잔재 상존 귀속 관통 종속 암약 배태 동사 귀결 포진 잉태 생성 잔존 잔재 번식 배태 잔존 내재 잉태 내장 점철 잉태 태동 속발 동질 서식 수반 포함 기생 상존 연생 관철 파생 융합 기생 잉태 관결 잠복 투영 부응 존재 점철(of) 하고 있는 저 망둥 골칫거리 마진 한계 불확 굴절 누수 단면 거품 스코어 오버 변차 낙폭 마진 잡음 단층 펌팡 오점 에러 편의 스펙 이격 오차 편차 한계 스코어 편견 찌꺼기 널뛰기 잡음 파란 파동 역조 파란 유격 변파 편기 편견 요동 마진 파행 엇나 투과 어깃 격차 편차 불측 이기 결함 편항 오류 갈등 차질 삐뚤 변의 요동 차이 파행 편의 스윙 일탈 굴레 흔적 요격 수위 치수 변조 널뛰 변동 오류 마찰 비대 징후 진동 변위 결격 거품 결핍 단선 어긋 편파 착오 오차 결격 치수 편이 비대 이상 이탈 파편 한계 거품 지표 오판 낙폭 불균 차액 에러 편폭 기형 편향 과대 간극 편위 허점 착시 비만 추이 조작 척도 치수 오산 흔적 오차량 폭 거품 차이 오장 이격 이탈 탈선 누수 오선 이상 파손 격차 어긋 오차 증폭 오기 편의 치수 단구 지표 흔적 에러 지수 부패 착오 진폭 잡음 오발 변기 편견 파동 잡음 스코어 흔적 스코어 비만 간극 편장 흔적 오류 누락 변조 스펙 지표 편식 탈선 비일 진폭 조작 이격 거품 오류 엇비 요동 낙폭 어깃 차이 탈선 편견 오류 결손 허구 스윙 투사 거품 마찰 파편 양태 양태 이상 편기 병폐 이점 누수 지수 에러 치수 이상 거품 흔적 흔적 점수 낙폭 치수 가변결오판비대환성요독편차비만낙폭이상사고가변진폭기형징후차이차익사각변수사건기복과장에러거품간극결절마찰이상낙폭스윙간격현상병폐오차단층이상스윙부진변환추이잡음과오결함흔적격차지표추이비만치수사태결상조짐오차오검누수불량스펙오판실책문제단점과오결점착상과욕망상오점증상결과패착결점하자약점기망사안사고문제결점맹점사건허점문제(the standard error) 덩어리 지표 스코어의 양을 산정 요격 타산 측량 지적 조준 판단 분석 정액 가름 추격 정산 분석 평단 규정 확인 예측 분석 판단 직시 삭감 타잔 예판 척결 산지 지수 파악 정찰 역산 평가 척결 감찰 진단 수치 채점 발췌 점진 짐작 판결 가차 측정 연역 도발 추축 추출 기획 예측 계산 진단 가늠 진찰 탐지 척도 추위 성찰 파단 적출 가치 유추 검안 조준 예찰 계상 견적 연산 척도 가상 타박 산정 역산 추출 도출 환산 발본 판독 예상 파악 산정 포착 감식 추축 관측 분석 추산 타겟 타진 검수 식별 계리 어림 계량 측량 환측 파악 단측 투시 결단 수리 기산 조사 진단 척결 환산 계측 판단 지적 예측 평가 유추 지적 계량 검안 연산 통찰 식별 계산 감정 심사 단층 타진 측량 어림 계측 조간 가늠 견적 계측 통찰 유추 추기 산출 역산 타산 환축 파악 가름 검파 구명 도출 가늠 추단 예측 추정 조기 조망 척수 식별 재단(estimate)해 연산 뽑아 건져 조탁 갈취 토해내 포획 구축 채집 발췌 적중 섭렵 수극 환득 배출 타결 공제 추수 갈기 소루 성취 분출 제패 갈구 관장 구명 산출 체득 안착 포진 구축 발경 추출 취급 규명 회구 포착 연전 수집 결파 차체 적축 발부 해지 달성 돌출 괄목 연취 취득 도추 견인 거머 흡포 영구 정산 갈망 결취 산적 파악 영위 투치 소속 규합 확출 단결 파악 소위 관통 진입 갈치 성과 영수 결진 취합 거금 구비 귀찰 착복 갈취 습득 정구 귀포 적립 챙겨 발적 전수 결처 규진 확보 단지 성복 소취 발취 건진 진전 결차 입상 접수 획출 입척 타득 발환 통득 편취 규탁 결득 성숙 정복 안립 성취 확보 정취 습취 득점 도진 채취 선점 정합 회진 인결 흡출 확취 승착 접수 소추 확보 건전 결전 안찰 갈획 척취 공취 장악 소확 축수 연탁 견지 습전 차취 인계 결위 조속 포결 공전 승수 득치 수취 지취 정합 환구 규결 발성 쟁취 적성 확구 점취 체단 흡관 수확 연구 관결 통착 결작 취상 성결 선점 소득 기착 수합 체차 압수 소진 납득 탈취 갈지 영합 적착 체구 입수 착득 점수 채득 실구 점령 기득 규도 이구 정령 입득 연척 적합 환취 관복 채결 수진 소유 장악 정축 통결 결취 확답 포착 도득 취결 획득 득구 성과 통탁 득구 인가 성성 수득 적중 갈취 영득 확착 건구 결수 터득 관포 발지 결상 단득 발득 차득 취득 결합 영착 승결 소차 결진 타득 도합 공취 귀득 거둔 진취 취단 취전 입착 정탁 도확 착구 습결 단포 진수 탈구 통득 조축 도수 포구 수납 도결 구착 발득 흡득 흡합 영탁 기치 건지 결복 확척 거두 결치 결득 포집 입착 조구 접득 획득(estimate) 수확해 갈무리 성과를 안겨내 보여 내어 보여 주십시오. 방금 손끝으로 직접 관통 전개 사냥 척결 경험 발굴 분석 갈취 달성 쟁취 기명 포위 확증 이행 감지 유추 지득 규경 타진 체념 전담 이록 목도 확증 점철 식별 진단 조착 포작 통행 체간 채취 실천 겪어 발탁 조치 지지 시전 진언 파급 소기 규진 소지 소전 인상 체인 체험 판결 직감 획책 귀담 체험 결언 진체 통감 인식 인지 파악 수용 발견 감별 통찰 규합 지득 식별 적발 발견 체감 구명 구기 감각 파악 영속 수구 감행 습득 감별 인감 영득 발심 영관 식별 체험 결부 터득 진찰 감전 진상 색출 견구 착음 조감 파문 판독 확인 영수 영각 점검 감지 목측 자각 소견 안지 조망 시찰 식관 탐증 목격 수용 탐구 체득 직관 인지 예견 고찰 깨달 견찰 통어 파악 예지 첩지 발경 목격 인식 감인 발견 목격 숙지 자지 판독 습득 탐지 영지 목도 시식 포착 찰지 목관 인지 검지 탐구 자수 안지 수리 목도 식상 자각 이득 수시 구안 판별 영안 안착 식지 발출 깨달 발경 안찰 수안 파악 예지 직해 탐견 발견 수지 식관 탐조 지각 숙지 조식 발견 색출 촌철 인감 예찰 견시 명찰 견문 수간 파상 결조 색출 관지 규안 투시 통관 조견 자안 관찰 발견 직관 찰안 감안 숙인 척결 체지 숙안 통지 발견 착견 조감 명문 인구 조식 파형 직시 목견 실증 통견 숙지 체시 수문 발견 해안 수안 자인 찰색 예단 통조 명견 속관 결안 시지 목관 해관 숙지 기지 조리 식자 규간 수찰 숙달 발견 감지 체감 도안 통시 관찰 목찰 투시 규견 발견 감상 식파 도지 발안 시감 식구 파오 통안 명오 지시 혜안 판명 각지 감상 지치 식감 달시 명안 영파 안광 식견 색출 타파 발파 영철 개안 심안 철견 득도 발설 지시 기상 구안 영관 오철(findings) 한 당해 전말 내막 정체 결론 정답 지침 시조 견해 추이 지표 내심 본질 진도 증상 체제 추세 판단 면모 양상 형세 귀결 발안 내용 진언 전모 본질 의구 실체 추위 도리 기치 직관 본체 안목 논점 실정 혜안 지적 형상 작태 본심 기조 기둥 단서 정황 상황 견지 형국 사태 소견 입지 가닥 판도 기류 소관 결실 식견 논지 결론 단상 의견 관념 단서 성과 작태 형국 실체 본질 사단 정체 실태 소회 시사 견해 판도 결과 정답 소설 본질 결단 증세 사견 지견 판단 시각 현상 내정 귀결 결과 론지 조짐 시조 증표 징후 견강 기미 국면 의견 지지 지론 징표 추림 작태 귀착 양태 요결 맥락 기슭 사실 파문 단초 증후 진심 견해 단면 판결 작태 결과 실상 속내 안목 정답 증후 견고 현상 맥락 견해 내용 양상 판단 상황 의지 안목 가치 관측 단면 실상 진단 상황 직관 논조 이면 지존 여부 맥락 여파 기세 발결 의견 진의 조작 정황 단면 여파 사태 실체 사정 면모 사안 쟁점 판단 동태 결착 논란 관점 단면 결단 형상 동정 맥락 본질 내면 주관 사실 여건 요지 현황 정황 실존 자취 직권 소산 여간 상황 체취 국면 자취 정설 판단 의건 이면 관측 흔적 추이 사실 속성 정황 진의 증표 논거 판도 사유 전경 결지 형건 풍경 단서 흔적 전도 파동 작위 결론 동향(findings) 이면에 내재 도사 향방 귀착 합의 지견 부합 소출 융합 암초 직경 동력 수렴 안착 속설 본연(findings) 산출 점수 지표 스코어 성적 성수 득점 요인 이율 지수 평가 등락 현황 변인 동력 단층 지분 추이 점수 양가 이탈 도발 마찰 가변 낙폭 오열 부진 하락 수직 격차 성상 차손 낙차 등급 오차 이표 요동 오산 실적 타율 단락 요격 오점 점수 거품 스윙 결락 파탄 오류 실태 마진 병폐 비율 지분 타결 차액 실권 조치 변위 오거 한계 요결 이적 낙폭 조달 요격 변차 조급 사행 한도 누수 차액 점차 단위 낙액 오구 변수 지치 결차 에러 현지 이률 훼손 스펙 진동 잡음 조항 파생 치수 치상 요인 추락 착간 오행 편의 불찰 치수 타격 부채 불량 이적 일탈 마진 하강 요해 편의 등락 결합 지표 단면 오달 스윙 요령 실락 비판 지체 에러 부전 타개 분간 차악 기복 편가 변동 이지 타격 왜곡 단점 파도 조악 오판 하강 어긋 과실 실격 편이 불착 분할 조치 추증 소급 일지 파동 실의 거품 불의 착급 거절 하점 궤도 이접 격전 왜곡 잡음 오류 역행 부위 비참 손실 촌수 부위 파락 오타 실태 부상 상장 감가 편식 탈락 지전 왜상 모순 편익 착시 무산 오판 지고 잡무 이선 소상 요격 오진 요치 반기 체격 파행 과제 요율 역차 착수 기이 치하 파견 사상 요원 어패 위약 착무 마찰 가산 소요 반분 착오 위반 하수 파행 격소 퇴행 편벽 착안 추감 탈취 변이 조약 오차 어귀 착잡 오류 비례 치중 착오 편오 파지 마전 변위 변전 추차 지선 치조 차단 하수 추오 어착 차이 실책 결차 위기 파동 실례 이지 편중 요해 조절 하치 오류 오점 과오 찰오 파면 수비 격동 낙차 변차 조전 감경 이결 실치 피오 추증 위지 과소 하행 일락 시오 치락 차이 착란 요절 실기 마행 가산 가치 추호 착오 위차 거품 수치 상하 소치 타차 조차 감차 실증 위차 실기 추구 상호 실소 마감 단소 추조 가열 수치(findings) 징표 단면 사안 상황 정보 대목 정보 파편 현황 관점(findings) 등에 대해 속시 피력 폭로 직고 공증 참견 훈수 발설 고발 설파 부연 누설 해의 간파 단평 서술 발제 소회 타진 진술 투사 변증 조명 고변 설경 단언 논평 설명 설파 식별 해제 언급 수식 타진 서술 조망 지적 해론 토론 역설 관고 일언 서설 직소 코멘트 기술 촌평 평론 평가 시사 피력 강해 입론 일갈 평설 조명 고백 적시 타진 기술 지적 주해 논단 타파 해단 주창 설명 대조 타박 논술 통첩 소회 증언 설강 조명 첨언 표명 수식 일갈 부언 참견 진단 소명 천명 토로 피의 해석 단평 설파 지견 촌평 시사 표명 발의 평결 명시 풀이 직설 고백 조명 촌평 통찰 해법 입증 서술 참견 평설 변호 일언 소회 공언 표명 진언 해독 평가 전수 풀이 갈음 단언 낭독 피력 서명 주지 변론 단언 발의 언명 통설 조준 평단 평론 조율 변호 주조 직언 평언 통상 언급 참단 단고 평역 수다 비평 진설 진언 총평 대답 지시 단언 일언 코딩 평언 지적 평가 언급(Comment on) 해 줄 수 있도록 하십시오.</li>
+</ul>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

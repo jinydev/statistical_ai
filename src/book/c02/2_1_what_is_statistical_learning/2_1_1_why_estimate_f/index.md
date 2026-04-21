@@ -3,23 +3,25 @@ layout: default
 title: "index"
 ---
 
-# 2.1.1 Why Estimate f ?
-# 2.1.1 왜 f를 추정해야 하는가?
+[< 2.1 What Is Statistical Learning](../index.html) | [2.1.1.1 Prediction >](2_1_1_1_prediction/index.html)
 
-There are two main reasons that we may wish to estimate _f_ : _prediction_ and _inference_ .
 
-우리가 목적 함수 _f_ 를 온전히 추정하고자 하는 이유는 흔히 크게 두 가지 메인 범주로 요약됩니다: 바로 그것은 정확성에 초점을 맞춘 예측(prediction) 및 데이터 원인 파악을 위한 추론(inference)입니다.
+> 💡 **학습 팁:** 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 [📖 직역본 보기](./trans1.html)를 추천합니다!
 
-We discuss each in turn.
+# 2.1.1 Why Estimate _f_ ?
 
-이제부터 우리는 이 각각의 구체적 사항들에 관해 순차적인 논의를 펼쳐 나가겠습니다.
+There are two main reasons that we may wish to estimate _f_: _prediction_ and _inference_. We discuss each in turn.
 
 ---
 
-## Sub-Chapters (하위 목차)
+### Prediction and Inference
 
-### Prediction (예측)
-* [문서로 이동하기](./2_1_1_1_prediction/)
+Focuses on the goal of most accurately matching the value of the unobserved response variable based on given features.
+Understand the distinct concepts of reducible error and irreducible error to grasp the limits of modeling.
 
-주어진 특성을 기반으로 아직 관측되지 않은 반응 변수의 값을 가장 정확하게 맞추는 목표를 집중적으로 다룹니다.
-결정론적 오류와 허용 불가능한 오류(Irreducible Error)의 개념을 구분하여 모델의 한계를 숙지합니다.
+---
+
+## Sub-Chapters
+
+
+[< 2.1 What Is Statistical Learning](../index.html) | [2.1.1.1 Prediction >](2_1_1_1_prediction/index.html)

@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -493,47 +492,137 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="34-the-marketing-plan">3.4 The Marketing Plan</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_3_other_considerations_in_the_regression_model/3_3_3_potential_problems/6_6._collinearity/index.html">&lt; 6 6. Collinearity</a></td>
+      <td><a href="../3_5_comparison_of_linear_regression_with_k_nearest_neighbors/index.html">3.5 Comparison Of Linear Regression With K Nearest Neighbors &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="34-the-marketing-plan">3.4 The Marketing Plan</h1>
 
 <p>We now briefly return to the seven questions about the <code class="language-plaintext highlighter-rouge">Advertising</code> data that we set out to answer at the beginning of this chapter.</p>
 
 <ol>
-  <li>
-    <p><em>Is there a relationship between sales and advertising budget?</em> This question can be answered by fitting a multiple regression model of <code class="language-plaintext highlighter-rouge">sales</code> onto <code class="language-plaintext highlighter-rouge">TV</code> , <code class="language-plaintext highlighter-rouge">radio</code> , and <code class="language-plaintext highlighter-rouge">newspaper</code> , as in (3.20), and testing the hypothesis $H_0$ : <em>β</em> <code class="language-plaintext highlighter-rouge">TV</code> = <em>β</em> <code class="language-plaintext highlighter-rouge">radio</code> = <em>β</em> <code class="language-plaintext highlighter-rouge">newspaper</code> = 0. In Section 3.2.2, we showed that the $F$-statistic can be used to determine whether or not we should reject this null hypothesis. In this case the $p$-value corresponding to the $F$-statistic in Table 3.6 is very low, indicating clear evidence of a relationship between advertising and sales.</p>
-  </li>
-  <li>
-    <p><em>How strong is the relationship?</em> We discussed two measures of model accuracy in Section 3.1.3. First, the RSE estimates the standard deviation of the response from the population regression line. For the <code class="language-plaintext highlighter-rouge">Advertising</code> data, the RSE is 1 <em>.</em> 69 units while the mean value for the response is 14 <em>.</em> 022, indicating a percentage error of roughly 12 %. Second, the $R^2$ statistic records the percentage of variability in the response that is explained by the predictors. The predictors explain almost 90 % of the variance in <code class="language-plaintext highlighter-rouge">sales</code> . The RSE and $R^2$ statistics are displayed in Table 3.6.</p>
-  </li>
-  <li>
-    <p><em>Which media are associated with sales?</em> To answer this question, we can examine the $p$-values associated with each predictor’s $t$-statistic (Section 3.1.2). In the multiple linear regression displayed in Table 3.4, the $p$-values for <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> are low, but the $p$-value for <code class="language-plaintext highlighter-rouge">newspaper</code> is not. This suggests that only <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> are related to <code class="language-plaintext highlighter-rouge">sales</code> . In Chapter 6 we explore this question in greater detail.</p>
-  </li>
+  <li><em>Is there a relationship between sales and advertising budget?</em></li>
 </ol>
 
-<p>110 3. Linear Regression</p>
+<p>This question can be answered by fitting a multiple regression model of <code class="language-plaintext highlighter-rouge">sales</code> onto <code class="language-plaintext highlighter-rouge">TV</code>, <code class="language-plaintext highlighter-rouge">radio</code>, and <code class="language-plaintext highlighter-rouge">newspaper</code>, as in (3.20), and testing the hypothesis $H_0 : \beta_\text{TV} = \beta_\text{radio} = \beta_\text{newspaper} = 0$.</p>
+
+<p>In Section 3.2.2, we showed that the $F$-statistic can be used to determine whether or not we should reject this null hypothesis.</p>
+
+<p>In this case the $p$-value corresponding to the $F$-statistic in Table 3.6 is very low, indicating clear evidence of a relationship between advertising and sales.</p>
 
 <ol>
-  <li><em>How large is the association between each medium and sales?</em> We saw in Section 3.1.2 that the standard error of \hat{\beta} <em>j</em> can be used to construct confidence intervals for $\beta_j$ . For the <code class="language-plaintext highlighter-rouge">Advertising</code> data, we can use the results in Table 3.4 to compute the 95 % confidence intervals for the coefficients in a multiple regression model using all three media budgets as predictors. The confidence intervals are as follows: (0 <em>.</em> 043 <em>,</em> 0 <em>.</em> 049) for <code class="language-plaintext highlighter-rouge">TV</code> , (0 <em>.</em> 172 <em>,</em> 0 <em>.</em> 206) for <code class="language-plaintext highlighter-rouge">radio</code> , and ( <em>−</em> 0 <em>.</em> 013 <em>,</em> 0 <em>.</em> 011) for <code class="language-plaintext highlighter-rouge">newspaper</code> . The confidence intervals for <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> are narrow and far from zero, providing evidence that these media are related to <code class="language-plaintext highlighter-rouge">sales</code> . But the interval for <code class="language-plaintext highlighter-rouge">newspaper</code> includes zero, indicating that the variable is not statistically significant given the values of <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> .</li>
+  <li><em>How strong is the relationship?</em></li>
 </ol>
 
-<p>We saw in Section 3.3.3 that collinearity can result in very wide standard errors. Could collinearity be the reason that the confidence interval associated with <code class="language-plaintext highlighter-rouge">newspaper</code> is so wide? The VIF scores are 1 <em>.</em> 005, 1 <em>.</em> 145, and 1 <em>.</em> 145 for <code class="language-plaintext highlighter-rouge">TV</code> , <code class="language-plaintext highlighter-rouge">radio</code> , and <code class="language-plaintext highlighter-rouge">newspaper</code> , suggesting no evidence of collinearity.</p>
+<p>We discussed two measures of model accuracy in Section 3.1.3.</p>
 
-<p>In order to assess the association of each medium individually on sales, we can perform three separate simple linear regressions. Results are shown in Tables 3.1 and 3.3. There is evidence of an extremely strong association between <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">sales</code> and between <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">sales</code> . There is evidence of a mild association between <code class="language-plaintext highlighter-rouge">newspaper</code> and <code class="language-plaintext highlighter-rouge">sales</code> , when the values of <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> are ignored.</p>
+<p>First, the RSE estimates the standard deviation of the response from the population regression line.</p>
+
+<p>For the <code class="language-plaintext highlighter-rouge">Advertising</code> data, the RSE is $1.69$ units while the mean value for the response is $14.022$, indicating a percentage error of roughly $12\%$.</p>
+
+<p>Second, the $R^2$ statistic records the percentage of variability in the response that is explained by the predictors.</p>
+
+<p>The predictors explain almost $90\%$ of the variance in <code class="language-plaintext highlighter-rouge">sales</code>.</p>
+
+<p>The RSE and $R^2$ statistics are displayed in Table 3.6.</p>
 
 <ol>
-  <li>
-    <p><em>How accurately can we predict future sales?</em> The response can be predicted using (3.21). The accuracy associated with this estimate depends on whether we wish to predict an individual response, Y = $f(X)$ + \epsilon , or the average response, $f(X)$ (Section 3.2.2). If the former, we use a prediction interval, and if the latter, we use a confidence interval. Prediction intervals will always be wider than confidence intervals because they account for the uncertainty associated with \epsilon , the irreducible error.</p>
-  </li>
-  <li>
-    <p><em>Is the relationship linear?</em> In Section 3.3.3, we saw that residual plots can be used in order to identify non-linearity. If the relationships are linear, then the residual plots should display no pattern. In the case of the <code class="language-plaintext highlighter-rouge">Advertising</code> data, we observe a non-linear effect in Figure 3.5, though this effect could also be observed in a residual plot. In Section 3.3.2, we discussed the inclusion of transformations of the predictors in the linear regression model in order to accommodate non-linear relationships.</p>
-  </li>
-  <li>
-    <p><em>Is there synergy among the advertising media?</em> The standard linear regression model assumes an additive relationship between the predictors and the response. An additive model is easy to interpret because the association between each predictor and the response is unrelated to the values of the other predictors. However, the additive assumption may be unrealistic for certain data sets. In Section 3.3.2, we showed how to include an interaction term</p>
-  </li>
+  <li><em>Which media are associated with sales?</em></li>
 </ol>
 
-<p>3.5 Comparison of Linear Regression with <em>K</em> -Nearest Neighbors 111</p>
+<p>To answer this question, we can examine the $p$-values associated with each predictor’s $t$-statistic (Section 3.1.2).</p>
 
-<p>in the regression model in order to accommodate non-additive relationships. A small $p$-value associated with the interaction term indicates the presence of such relationships. Figure 3.5 suggested that the <code class="language-plaintext highlighter-rouge">Advertising</code> data may not be additive. Including an interaction term in the model results in a substantial increase in $R^2$ , from around 90 % to almost 97 %.</p>
+<p>In the multiple linear regression displayed in Table 3.4, the $p$-values for <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> are low, but the $p$-value for <code class="language-plaintext highlighter-rouge">newspaper</code> is not.</p>
+
+<p>This suggests that only <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> are related to <code class="language-plaintext highlighter-rouge">sales</code>.</p>
+
+<p>In Chapter 6 we explore this question in greater detail.</p>
+
+<ol>
+  <li><em>How large is the association between each medium and sales?</em></li>
+</ol>
+
+<p>We saw in Section 3.1.2 that the standard error of $\hat{\beta}_j$ can be used to construct confidence intervals for $\beta_j$.</p>
+
+<p>For the <code class="language-plaintext highlighter-rouge">Advertising</code> data, we can use the results in Table 3.4 to compute the $95\%$ confidence intervals for the coefficients in a multiple regression model using all three media budgets as predictors.</p>
+
+<p>The confidence intervals are as follows: $(0.043, 0.049)$ for <code class="language-plaintext highlighter-rouge">TV</code>, $(0.172, 0.206)$ for <code class="language-plaintext highlighter-rouge">radio</code>, and $(-0.013, 0.011)$ for <code class="language-plaintext highlighter-rouge">newspaper</code>.</p>
+
+<p>The confidence intervals for <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> are narrow and far from zero, providing evidence that these media are related to <code class="language-plaintext highlighter-rouge">sales</code>.</p>
+
+<p>But the interval for <code class="language-plaintext highlighter-rouge">newspaper</code> includes zero, indicating that the variable is not statistically significant given the values of <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code>.</p>
+
+<p>We saw in Section 3.3.3 that collinearity can result in very wide standard errors.</p>
+
+<p>Could collinearity be the reason that the confidence interval associated with <code class="language-plaintext highlighter-rouge">newspaper</code> is so wide?</p>
+
+<p>The VIF scores are $1.005$, $1.145$, and $1.145$ for <code class="language-plaintext highlighter-rouge">TV</code>, <code class="language-plaintext highlighter-rouge">radio</code>, and <code class="language-plaintext highlighter-rouge">newspaper</code>, suggesting no evidence of collinearity.</p>
+
+<p>In order to assess the association of each medium individually on sales, we can perform three separate simple linear regressions.</p>
+
+<p>Results are shown in Tables 3.1 and 3.3.</p>
+
+<p>There is evidence of an extremely strong association between <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">sales</code> and between <code class="language-plaintext highlighter-rouge">radio</code> and <code class="language-plaintext highlighter-rouge">sales</code>.</p>
+
+<p>There is evidence of a mild association between <code class="language-plaintext highlighter-rouge">newspaper</code> and <code class="language-plaintext highlighter-rouge">sales</code>, when the values of <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> are ignored.</p>
+
+<ol>
+  <li><em>How accurately can we predict future sales?</em></li>
+</ol>
+
+<p>The response can be predicted using (3.21).</p>
+
+<p>The accuracy associated with this estimate depends on whether we wish to predict an individual response, $Y = f(X) + \epsilon$, or the average response, $f(X)$ (Section 3.2.2).</p>
+
+<p>If the former, we use a prediction interval, and if the latter, we use a confidence interval.</p>
+
+<p>Prediction intervals will always be wider than confidence intervals because they account for the uncertainty associated with $\epsilon$, the irreducible error.</p>
+
+<ol>
+  <li><em>Is the relationship linear?</em></li>
+</ol>
+
+<p>In Section 3.3.3, we saw that residual plots can be used in order to identify non-linearity.</p>
+
+<p>If the relationships are linear, then the residual plots should display no pattern.</p>
+
+<p>In the case of the <code class="language-plaintext highlighter-rouge">Advertising</code> data, we observe a non-linear effect in Figure 3.5, though this effect could also be observed in a residual plot.</p>
+
+<p>In Section 3.3.2, we discussed the inclusion of transformations of the predictors in the linear regression model in order to accommodate non-linear relationships.</p>
+
+<ol>
+  <li><em>Is there synergy among the advertising media?</em></li>
+</ol>
+
+<p>The standard linear regression model assumes an additive relationship between the predictors and the response.</p>
+
+<p>An additive model is easy to interpret because the association between each predictor and the response is unrelated to the values of the other predictors.</p>
+
+<p>However, the additive assumption may be unrealistic for certain data sets.</p>
+
+<p>In Section 3.3.2, we showed how to include an interaction term</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_3_other_considerations_in_the_regression_model/3_3_3_potential_problems/6_6._collinearity/index.html">&lt; 6 6. Collinearity</a></td>
+      <td><a href="../3_5_comparison_of_linear_regression_with_k_nearest_neighbors/index.html">3.5 Comparison Of Linear Regression With K Nearest Neighbors &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

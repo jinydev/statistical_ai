@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,18 +502,32 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="312-assessing-the-accuracy-of-the-coefficient-estimates"><em>3.1.2 Assessing the Accuracy of the Coefficient Estimates</em></h1>
-<h1 id="312-계수-추정치의-정확도-평가">3.1.2 계수 추정치의 정확도 평가</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_1_1_estimating_the_coefficients/index.html">&lt; 3.1.1 Estimating the Coefficients</a></td>
+      <td><a href="../3_1_3_assessing_the_accuracy_of_the_model/index.html">3.1.3 Assessing the Accuracy of the Model &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Recall from (2.1) that we assume that the <em>true</em> relationship between $X$ and $Y$ takes the form $Y = f(X) + \epsilon$ for some unknown function $f$, where $\epsilon$ is a mean-zero random error term. If $f$ is to be approximated by a linear function, then we can write this relationship as</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>(2.1)에서 살펴본 바와 같이, 우리는 $X$ 와 $Y$ 사이의 <em>실제(true)</em> 관계가 어떤 알려지지 않은 함수 $f$ 에 대해 $Y = f(X) + \epsilon$ 의 형태를 띤다고 가정합니다. 여기서 $\epsilon$ 은 평균이 0인 무작위 오차항입니다. 만약 $f$ 가 선형 함수로 근사될 수 있다면, 우리는 이 관계를 다음과 같이 쓸 수 있습니다.</p>
+<h1 id="312-assessing-the-accuracy-of-the-coefficient-estimates">3.1.2 Assessing the Accuracy of the Coefficient Estimates</h1>
+
+<p>Recall from (2.1) that we assume that the <em>true</em> relationship between $X$ and $Y$ takes the form $Y = f(X) + \epsilon$ for some unknown function $f$, where $\epsilon$ is a mean-zero random error term.</p>
+
+<p>If $f$ is to be approximated by a linear function, then we can write this relationship as</p>
 
 \[Y = \beta_0 + \beta_1 X + \epsilon \quad (3.5)\]
 
-<p>Here $\beta_0$ is the intercept term—that is, the expected value of $Y$ when $X = 0$, and $\beta_1$ is the slope—the average increase in $Y$ associated with a one-unit increase in $X$. The error term is a catch-all for what we miss with this simple model: the true relationship is probably not linear, there may be other variables that cause variation in $Y$, and there may be measurement error. We typically assume that the error term is independent of $X$.</p>
+<p>Here $\beta_0$ is the intercept term—that is, the expected value of $Y$ when $X = 0$, and $\beta_1$ is the slope—the average increase in $Y$ associated with a one-unit increase in $X$.</p>
 
-<p>여기서 $\beta_0$ 는 절편입니다. 즉 $X = 0$ 일 때 기대되는 $Y$ 의 값입니다. 그리고 $\beta_1$ 은 기울기이며, 이는 $X$ 가 1단위 증가할 때 수반되는 $Y$ 의 평균적인 증가량을 의미합니다. 오차항은 이 단순한 모델에서 우리가 놓치는 모든 것을 포괄합니다. 실제 관계는 아마 완벽한 선형이 아닐 것이고, $Y$ 에 변동을 유발하는 다른 변수들이 있을 수 있으며, 측정 오차가 존재할 수도 있습니다. 우리는 일반적으로 이 오차항이 $X$ 와 서로 독립이라고 가정합니다.</p>
+<p>The error term is a catch-all for what we miss with this simple model: the true relationship is probably not linear, there may be other variables that cause variation in $Y$, and there may be measurement error.</p>
+
+<p>We typically assume that the error term is independent of $X$.</p>
 
 <p><strong>==&gt; picture [284 x 145] intentionally omitted &lt;==</strong></p>
 
@@ -523,25 +536,42 @@
 
 <p><strong>FIGURE 3.2.</strong> <em>Contour and three-dimensional plots of the RSS on the</em> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>data, using</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>as the response and</em> <code class="language-plaintext highlighter-rouge">TV</code> <em>as the predictor. The red dots correspond to the least squares estimates $\hat{\beta}_0$ and $\hat{\beta}_1$, given by (3.4).</em></p>
 
-<p><strong>FIGURE 3.2.</strong> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>데이터에 대한 RSS(잔차 제곱합)의 등고선 및 3차원 플롯.</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>를 응답 변수로,</em> <code class="language-plaintext highlighter-rouge">TV</code> <em>를 예측 변수로 사용했습니다. 붉은 점들은 (3.4) 식을 통해 계산된 최소 제곱 추정치 $\hat{\beta}_0$ 와 $\hat{\beta}_1$ 값을 나타냅니다.</em></p>
+<p>The model given by (3.5) defines the <em>population regression line</em>, which is the best linear approximation to the true relationship between $X$ and $Y$.$^1$</p>
 
-<p>The model given by (3.5) defines the <em>population regression line</em>, which is the best linear approximation to the true relationship between $X$ and $Y$.$^1$ The least squares regression coefficient estimates (3.4) characterize the <em>least squares line</em> (3.2). The left-hand panel of Figure 3.3 displays these two lines in a simple simulated example. We created 100 random $X$s, and generated 100 corresponding $Y$s from the model</p>
+<p>The least squares regression coefficient estimates (3.4) characterize the <em>least squares line</em> (3.2).</p>
 
-<p>(3.5) 에 의해 정의된 모델은 <em>모집단 회귀선(population regression line)</em> 을 규정하며, 이는 $X$ 와 $Y$ 사이의 실제 관계를 보여주는 가장 훌륭한 선형 근사치입니다.$^1$ 그리고 (3.4) 의 최소 제곱 회귀 계수 추정치들은 <em>최소 제곱선(least squares line)</em> 인 (3.2) 의 형태를 특정 짓습니다. 그림 3.3의 왼쪽 패널은 간단한 무작위 시뮬레이션 예시를 통해 이 두 선을 보여줍니다. 우리는 100개의 무작위 $X$ 를 생성하고, 다음 모델로부터 그에 부합하는 100개의 $Y$ 를 생성했습니다.</p>
+<p>The left-hand panel of Figure 3.3 displays these two lines in a simple simulated example.</p>
+
+<p>We created 100 random $X$s, and generated 100 corresponding $Y$s from the model</p>
 
 \[Y = 2 + 3X + \epsilon \quad (3.6)\]
 
-<p>where $\epsilon$ was generated from a normal distribution with mean zero. The red line in the left-hand panel of Figure 3.3 displays the <em>true</em> relationship, $f(X) = 2 + 3X$, while the blue line is the least squares estimate based on the observed data. The true relationship is generally not known for real data, but the least squares line can always be computed using the coefficient estimates given in (3.4). In other words, in real applications, we have access to a set of observations from which we can compute the least squares line; however, the population regression line is unobserved. In the right-hand panel of Figure 3.3 we have generated ten different data sets from the model given by (3.6) and plotted the corresponding ten least squares lines. Notice that different data sets generated from the same true model result in slightly different least squares lines, but the unobserved population regression line does not change.</p>
+<p>where $\epsilon$ was generated from a normal distribution with mean zero.</p>
 
-<p>여기서 $\epsilon$ 은 평균이 0인 정규 분포로부터 무작위로 생성되었습니다. 그림 3.3의 왼쪽 패널에 있는 붉은 선은 $f(X) = 2 + 3X$ 이라는 <em>실제(true)</em> 관계를 나타내고, 반면 파란 선은 그렇게 관측된 데이터를 기반으로 얻은 최소 제곱 추정선입니다. 실제 데이터 환경에서 우리는 진짜 관계를 알지 못하지만, 식 (3.4) 의 계수 추정치를 통해 언제든 최소 제곱선은 계산해 낼 수 있습니다. 다시 말해, 실제 응용에서는 최소 제곱선을 도출할 수 있는 일련의 관측치만 획득할 수 있으며, 이면의 모집단 회귀선은 끝내 보이지 않습니다. 그림 3.3의 오른쪽 패널에서는 식 (3.6) 의 모델을 바탕으로 10개의 각기 다른 무작위 데이터 세트를 생성하고, 이에 해당하는 10개의 최소 제곱선을 차례로 그렸습니다. 동일한 하나의 본연 모델에서 출력된 각기 다른 데이터 세트들이 조금씩 미세하게 다른 최소 제곱선을 초래하지만, 관측되지 않는 모집단 회귀선 본연의 위치는 불변하여 결코 바뀌지 않는 것에 주목하십시오.</p>
+<p>The red line in the left-hand panel of Figure 3.3 displays the <em>true</em> relationship, $f(X) = 2 + 3X$, while the blue line is the least squares estimate based on the observed data.</p>
 
-<p>At first glance, the difference between the population regression line and the least squares line may seem subtle and confusing. We only have one data set, and so what does it mean that two different lines describe the relationship between the predictor and the response? Fundamentally, the concept of these two lines is a natural extension of the standard statistical approach of using information from a sample to estimate characteristics of a large population. For example, suppose that we are interested in knowing</p>
+<p>The true relationship is generally not known for real data, but the least squares line can always be computed using the coefficient estimates given in (3.4).</p>
 
-<p>언뜻 보기에 모집단 회귀선과 최소 제곱선의 차이는 다소 헷갈릴 수 있습니다. 우리에겐 데이터 세트가 오직 하나뿐인데, 예측 변수와 응답 변수 사이의 관계를 굳이 두 개의 서로 다른 선으로 묘사한다는 뜻이 무엇입니까? 근본적으로 이 두 선에 관한 개념은, 표본 관측치에서 얻은 정보를 바탕으로 훨씬 거대한 전체 모집단의 고유 특성을 추정해 내는 표준 통계 접근법이 지닌 자연스러운 확장입니다. 가령 어떤 사실을 안다고 가정해 봅시다.</p>
+<p>In other words, in real applications, we have access to a set of observations from which we can compute the least squares line; however, the population regression line is unobserved.</p>
+
+<p>In the right-hand panel of Figure 3.3 we have generated ten different data sets from the model given by (3.6) and plotted the corresponding ten least squares lines.</p>
+
+<p>Notice that different data sets generated from the same true model result in slightly different least squares lines, but the unobserved population regression line does not change.</p>
+
+<p>At first glance, the difference between the population regression line and the least squares line may seem subtle and confusing.</p>
+
+<p>We only have one data set, and so what does it mean that two different lines describe the relationship between the predictor and the response?</p>
+
+<p>Fundamentally, the concept of these two lines is a natural extension of the standard statistical approach of using information from a sample to estimate characteristics of a large population.</p>
+
+<p>For example, suppose that we are interested in knowing</p>
 
 <blockquote>
-  <p>1The assumption of linearity is often a useful working model. However, despite what many textbooks might tell us, we seldom believe that the true relationship is linear. 
-1선형성이라는 가정 조건은 종종 유용한 실무 모델로 쓰입니다. 그러나 여러 교과서에서 알려주는 바와 달리, 실제 참된 관계가 선형일 것이라고 맹신하는 일은 거의 없습니다.</p>
+  <p>1The assumption of linearity is often a useful working model.</p>
+</blockquote>
+
+<blockquote>
+  <p>However, despite what many textbooks might tell us, we seldom believe that the true relationship is linear.</p>
 </blockquote>
 
 <p><strong>==&gt; picture [315 x 158] intentionally omitted &lt;==</strong></p>
@@ -551,86 +581,148 @@
 
 <p><strong>FIGURE 3.3.</strong> <em>A simulated data set.</em> Left: <em>The red line represents the true relationship, f(X) = 2 + 3X, which is known as the population regression line. The blue line is the least squares line; it is the least squares estimate for f(X) based on the observed data, shown in black.</em> Right: <em>The population regression line is again shown in red, and the least squares line in dark blue. In light blue, ten least squares lines are shown, each computed on the basis of a separate random set of observations. Each least squares line is different, but on average, the least squares lines are quite close to the population regression line.</em></p>
 
-<p><strong>FIGURE 3.3.</strong> <em>시뮬레이션된 데이터 세트.</em> 왼쪽: <em>붉은 선은 $f(X) = 2 + 3X$ 이라는 실제 원본 관계를 상징하며, 이는 모집단 회귀선으로 통용됩니다. 파란 선은 최소 제곱선입니다. 흑색 점들로 포진된 관측 데이터를 바탕으로 찾은 $f(X)$ 의 단독 최소 제곱 추정치입니다.</em> 오른쪽: <em>모집단 예측 회귀선이 여전히 붉은색 표식으로 그려져 있으며 단면 최소 제곱선은 짙은 파란색입니다. 하늘색(밝은 파란색)으로는 각기 별도의 무작위 관측치 세트를 기초로 산출된 10개의 최소 제곱선 궤적이 나열되어 있습니다. 10개의 최소 제곱선들은 저마다 각기 다르나 평균적으로 볼 때 이들 선은 모집단 회귀선 본연에 굉장히 근접해 있습니다.</em></p>
+<p>the population mean $\mu$ of some random variable $Y$.</p>
 
-<p>the population mean $\mu$ of some random variable $Y$. Unfortunately, $\mu$ is unknown, but we do have access to $n$ observations from $Y$, $y_1, \dots, y_n$, which we can use to estimate $\mu$. A reasonable estimate is $\hat{\mu} = \bar{y}$, where $\bar{y} = \frac{1}{n} \sum_{i=1}^n y_i$ is the sample mean. The sample mean and the population mean are different, but in general the sample mean will provide a good estimate of the population mean. In the same way, the unknown coefficients $\beta_0$ and $\beta_1$ in linear regression define the population regression line. We seek to estimate these unknown coefficients using $\hat{\beta}_0$ and $\hat{\beta}_1$ given in (3.4). These coefficient estimates define the least squares line.</p>
+<p>Unfortunately, $\mu$ is unknown, but we do have access to $n$ observations from $Y$, $y_1, \dots, y_n$, which we can use to estimate $\mu$.</p>
 
-<p>우리는 임의의 확률 변수 $Y$ 의 실제 모집단 평균인 $\mu$ 수치입니다. 불행히도 $\mu$ 의 실제 수치는 미지수이지만, 대신 우리에게는 그것을 분석 추정하는 데 활용할 수 있는 $Y$ 의 $n$ 개의 관측치, 즉 $y_1, \dots, y_n$ 수치가 있습니다. 타당한 추정치는 표본 $\hat{\mu} = \bar{y}$ 가 될 것이며, 여기서 $\bar{y} = \frac{1}{n} \sum_{i=1}^n y_i$ 구도는 표본 평균입니다. 표본 평균과 모집단 평균은 서로 다르지만, 일반적으로 표본 평균은 전체 모집단의 원본 평균에 대한 상당히 좋은 모델 추정치를 대변해 줍니다. 동일한 맥락으로, 선형 회귀 모의에서의 미지 계수 $\beta_0$ 와 $\beta_1$ 는 모집단 회귀선 위치를 결정합니다. 우리는 이 알려지지 않은 미지 계수를 추정하기 위해 수학 식 (3.4) 의 $\hat{\beta}_0$ 와 $\hat{\beta}_1$ 추정치를 대용합니다. 도출된 이 계수 추정치들이 곧장 최소 제곱선을 정의합니다.</p>
+<p>A reasonable estimate is $\hat{\mu} = \bar{y}$, where $\bar{y} = \frac{1}{n} \sum_{i=1}^n y_i$ is the sample mean.</p>
 
-<p>The analogy between linear regression and estimation of the mean of a random variable is an apt one based on the concept of <em>bias</em>. If we use the sample mean $\hat{\mu}$ to estimate $\mu$, this estimate is <em>unbiased</em>, in the sense that on average, we expect $\hat{\mu}$ to equal $\mu$. What exactly does this mean? It means that on the basis of one particular set of observations $y_1, \dots, y_n$, $\hat{\mu}$ might overestimate $\mu$, and on the basis of another set of observations, $\hat{\mu}$ might underestimate $\mu$. But if we could average a huge number of estimates of $\mu$ obtained from a huge number of sets of observations, then this average would <em>exactly</em> equal $\mu$. Hence, an unbiased estimator does not <em>systematically</em> over- or under-estimate the true parameter. The property of unbiasedness holds for the least squares coefficient estimates given by (3.4) as well: if we estimate $\beta_0$ and $\beta_1$ on the basis of a particular data set, then our estimates won’t be exactly equal to $\beta_0$ and $\beta_1$. But if we could average the estimates obtained over a huge number of data sets, then the average of these estimates would be spot on! In fact, we can see from the righthand panel of Figure 3.3 that the average of many least squares lines, each estimated from a separate data set, is pretty close to the true population regression line.</p>
+<p>The sample mean and the population mean are different, but in general the sample mean will provide a good estimate of the population mean.</p>
 
-<p>무작위 변수의 수치 평균을 추정하는 방식과 선형 회귀 사이를 비유하는 것은 <em>편향(bias)</em> 개념에 잘 들어맞습니다. 우리가 $\mu$ 를 심증 조율하기 위해 단면 수치 표본의 평균값 $\hat{\mu}$ 를 사용한다면, 이 산출 수치는 평균적으로 보았을 때 그 결괏값 $\hat{\mu}$ 가 정확히 $\mu$ 와 부합할 것이라고 우리가 기대한다는 점에서 전혀 치우쳐지지 않은 <em>불편향적(unbiased)</em> 특성을 보유합니다. 이것이 구체적으로 무슨 뜻일까요? 그 뜻은 $y_1, \dots, y_n$ 로 칭해지는 특정 집단의 표본 데이터를 대동 기준으로 삼았을 땐 변수 $\hat{\mu}$ 가 자칫 $\mu$ 보다 다소 높은 도출값을 내고, 반대로 다른 표본군을 들이댈 경우엔 오히려 모수 $\mu$ 의 진가를 너무 낮춰 추정 예측할 수도 있다는 의미입니다. 그렇지만 만일 우리가 매우 많은 분량의 횟수로 데이터 세트 뭉치들을 무수히 수집하여 모조리 구한 저 도출 결괏값 $\mu$ 에 대한 표본 추산치 $\hat{\mu}$ 들을 다시 거대한 뭉치로 모아 전부 합산 평균 낼 수만 있다면, 이 평균들은 모조리 그 통합 수단에서 <em>정확하게(exactly)</em> 실 $\mu$ 편차 구단과 결부 일치하며 맞먹게 될 것임을 의미합니다. 그러므로 불편향 추정 지표 모델은 본연의 참 파라미터 궤적 단위를 고질적으로 <em>체계적인 형태(systematically)</em> 로 과대 평가하거나 무작정 과소 도출하지 않습니다. 이런 불편향성 본질 원리는 수식 (3.4) 에 명시된 최소 제곱 계수 모의 추정치들에 대해서도 똑같이 무수히 적용 가능합니다: 우리가 특정 단면 데이터 구조 집합들을 모구 삼아 $\beta_0$ 와 표면 $\beta_1$ 를 직접 대입 추정한다면 우리 예측값이 완벽하게 본연 참 데이터 $\beta_0$ 및 모상 $\beta_1$ 수치 단위 단면과 찰떡같이 맞아 완벽 기조로 대등 일치하지는 못할 것입니다. 그렇지만 방대한 수적 데이터 관측치 집합 전반에 걸쳐 포진 획득된 단면 추정 결과물 모종의 전체 통합 평균 오차를 정산 산출 구할 수 있기만 하다면 결국 평균적으로는 오점 없이 정중앙 본판 모집선에 정확히 도달 수렴하게 되기 마련입니다! 실제로 지금 본문 그림 3.3 의 앞선 오른쪽 도식 편차 지표에서 각기 다른 무작위 세트를 변환 사용해 산포 계산 단면 되어 나온 각각의 다수 여타 숱한 단위 최소 구도 제곱 표면 예측선들의 평균 수치 추세를 모두 다시 모아 결론 겹쳐 보면 결국 마침내는 실제 오리지널 진단 정본 모델 모집단 회귀선의 참 궤도와 굉장히 몹시 매우 일치 가깝게 도단 결부 안착 수렴하는 사실을 눈으로 또렷이 볼 수 있습니다.</p>
+<p>In the same way, the unknown coefficients $\beta_0$ and $\beta_1$ in linear regression define the population regression line.</p>
 
-<p>We continue the analogy with the estimation of the population mean $\mu$ of a random variable $Y$. A natural question is as follows: how accurate is the sample mean $\hat{\mu}$ as an estimate of $\mu$? We have established that the average of $\hat{\mu}$’s over many data sets will be very close to $\mu$, but that a single estimate $\hat{\mu}$ may be a substantial underestimate or overestimate of $\mu$. How far off will that single estimate of $\hat{\mu}$ be? In general, we answer this question by computing the <em>standard error</em> of $\hat{\mu}$, written as $\text{SE}(\hat{\mu})$. We have the well-known formula:</p>
+<p>We seek to estimate these unknown coefficients using $\hat{\beta}_0$ and $\hat{\beta}_1$ given in (3.4).</p>
 
-<p>우리는 여기서 임의의 확률 변수 $Y$ 의 모집단 평균 $\mu$ 를 추정 산출하는 방식을 선형 회귀에 비유하는 관점을 좀 더 이어갑니다. 한 가지 다분히 자연스러운 질문이 다음과 같이 제기됩니다: 표본 평균 $\hat{\mu}$ 는 $\mu$ 통계를 예측 대변하는 데 대체 얼마나 신뢰할 만큼 정확성이 있습니까? 여러 데이터 세트에서 나온 $\hat{\mu}$ 들을 한데 모아 평균을 내면 실제 본연 모수 $\mu$ 계기에 매우 근접한다는 사실을 방금 확립해 두었지만, 오직 한 번의 관측 기록으로 뽑아낸 단 하나의 $\hat{\mu}$ 값은 몹시 상당한 수준의 과소 혹은 과대 평가의 산물일 수 있습니다. 과연 그 단일 표지 단면 값 $\hat{\mu}$ 는 본연 참 표면 지표 $\mu$ 로부터 얼마나 아득히 이탈해 있을까요? 보통 통계적으로 우리는 이러한 단면 평가 질문에 관하여 <em>표준 오차(standard error)</em> 즉 표기로 약약 $\text{SE}(\hat{\mu})$ 라고 산출 약칭되는 값을 추적 표면 연산함으로써 명쾌한 수학 구조상 해답 도출을 조치합니다. 대중적으로 익히 두루 널리 공식 증후가 명시된 아래 방식 공식 모델이 널리 전파해 있습니다.</p>
+<p>These coefficient estimates define the least squares line.</p>
+
+<p>The analogy between linear regression and estimation of the mean of a random variable is an apt one based on the concept of <em>bias</em>.</p>
+
+<p>If we use the sample mean $\hat{\mu}$ to estimate $\mu$, this estimate is <em>unbiased</em>, in the sense that on average, we expect $\hat{\mu}$ to equal $\mu$.</p>
+
+<p>What exactly does this mean?</p>
+
+<p>It means that on the basis of one particular set of observations $y_1, \dots, y_n$, $\hat{\mu}$ might overestimate $\mu$, and on the basis of another set of observations, $\hat{\mu}$ might underestimate $\mu$.</p>
+
+<p>But if we could average a huge number of estimates of $\mu$ obtained from a huge number of sets of observations, then this average would <em>exactly</em> equal $\mu$.</p>
+
+<p>Hence, an unbiased estimator does not <em>systematically</em> over- or under-estimate the true parameter.</p>
+
+<p>The property of unbiasedness holds for the least squares coefficient estimates given by (3.4) as well: if we estimate $\beta_0$ and $\beta_1$ on the basis of a particular data set, then our estimates won’t be exactly equal to $\beta_0$ and $\beta_1$.</p>
+
+<p>But if we could average the estimates obtained over a huge number of data sets, then the average of these estimates would be spot on!</p>
+
+<p>In fact, we can see from the righthand panel of Figure 3.3 that the average of many least squares lines, each estimated from a separate data set, is pretty close to the true population regression line.</p>
+
+<p>We continue the analogy with the estimation of the population mean $\mu$ of a random variable $Y$.</p>
+
+<p>A natural question is as follows: how accurate is the sample mean $\hat{\mu}$ as an estimate of $\mu$?</p>
+
+<p>We have established that the average of $\hat{\mu}$’s over many data sets will be very close to $\mu$, but that a single estimate $\hat{\mu}$ may be a substantial underestimate or overestimate of $\mu$.</p>
+
+<p>How far off will that single estimate of $\hat{\mu}$ be?</p>
+
+<p>In general, we answer this question by computing the <em>standard error</em> of $\hat{\mu}$, written as $\text{SE}(\hat{\mu})$.</p>
+
+<p>We have the well-known formula:</p>
 
 \[\text{Var}(\hat{\mu}) = \text{SE}(\hat{\mu})^2 = \frac{\sigma^2}{n} \quad (3.7)\]
 
-<p>where $\sigma$ is the standard deviation of each of the realizations $y_i$ of $Y$.$^2$ Roughly speaking, the standard error tells us the average amount that this estimate $\hat{\mu}$ differs from the actual value of $\mu$. Equation 3.7 also tells us how this deviation shrinks with $n$—the more observations we have, the smaller the standard error of $\hat{\mu}$. In a similar vein, we can wonder how close $\hat{\beta}_0$ and $\hat{\beta}_1$ are to the true values $\beta_0$ and $\beta_1$. To compute the standard errors associated with $\hat{\beta}_0$ and $\hat{\beta}_1$, we use the following formulas:</p>
+<p>where $\sigma$ is the standard deviation of each of the realizations $y_i$ of $Y$.$^2$</p>
 
-<p>이곳에서 변수 모표 $\sigma$ 구도는 실응집 변수 도열 $Y$ 표본 측량 단락상 단발 실현 도결 구구된 특정 부속 파편 개체 표면 단위 $y_i$ 하나하나가 기여 조달해 기인하는 단면 오차군 표준 편차 모치 분진 산포도를 각각의 파단 말합니다.$^2$ 대강 쉽게 뭉뚱그려 대고 설명 지명 조치하자면, 이 본연 표준 오차 비율 지표값은 본래 우리 편에게 산입 추산 단위 모델치 편차 $\hat{\mu}$ 통계 모상이 기조 실제 진상 통계 참값인 참 지점 원 $\mu$ 위치 단상 표본 기준에서 평균적으로 단절 통산 어느 정도 수준 편차 폭의 단리 도수 오류 비율 틈새 치수 거리감을 빚어 지지 이뤄내 뿜고 도지 있는지 단도 정면 통산 언표 직언 조명 단도 직입 알려 전달 제공해 전달 도지 줍니다. 공식 지면 항목 지조 식 (3.7) 수단 단편 전언 구조 전면 조처는 우리 참견에 이 오차 수표 분산 진단 조치율 모구 결집 편차 모치가 지단 변수 지표인 $n$ 계기의 본결 조당 모집 표본 개결 증가율 모집 폭에 지지 모비 수단 단지 비례 결합 통산해 지수 수리 발맞춰 어째서 과연 모종 어떻구 도태 줄어 단구 축소 조당 감소 도리되어 파편 축약 파쇄 도결 되는지 통제 진모 내결 결실 단도 알려 도지 내주는데, 지극 말뜻은 모집 우리가 통계 지목으로 동시 취득 확보 기록 집단화 구비한 관측 변수 실 단위 표지 빈도 집표 수가 대거 비약 수백 무구 증가 수다 구기할 구록 단위 비례 기치 할수록 본결 단위체 모의 $\hat{\mu}$ 본치 조단의 이 통제 표준 수리 연계 측정 지표 오차단 조율 비율 모수치 단율 단오 역시 수리 비례 줄어 반비례 급감 강착 결감한다는 현상 본리 조달 말입니다. 본모 유사 기판 단판 부조 단면 연계상 통계 계기 결론 관점 차조선상 동일 맥락 단면적 구조 안치상에서, 우리 모구 편은 모단 계수 연계 도립 체재 도계 산구 산치 $\hat{\beta}_0$ 합산표 개위 기치와 투사체 모표 조구 기치 $\hat{\beta}_1$ 가 과연 실 결집 본연 모집단 단위 실제 정본 모구 지단 계치 조달 참도 참값 기준이 될 $\beta_0$ 와 지지 $\beta_1$ 모치 통계 단위에 진단 과연 어찌 조리 밀접 근결 결착 지착 근접해 조지 모착 도안 연명되어 자리 조리잡고 매겨 모리 있는지 통산 질문 조기 궁금 유발 진통해질 단조 소지 수 전술 구리 단조 있습니다. 앞서 공단 도결 표본 발지 쌍 통치 모수단 $\hat{\beta}_0$ 파단 기치와 파본 단위 결표 모도 계수 $\hat{\beta}_1$ 단위 통계 모형 제개에 대면 직조 단락 서로 수단 연관 지명 부여 결전 파생 도결 유도되는 기수 결치 이 표준 분단 측정 파장 편향 지조 오차 모구 지표 통수단 계산 지치 도결을 전담 직결 연산 추출 진결 조망 부리 발현 조달 발산 통사 도표 계산할 결별 계산 소단 수 공제 단모 있도록, 다음 모구 제공 안내 통단 제시 모구 전치하는 지시 하단 조서 항목식 통지 수발 진치 공식 모델 단구표를 전치 통산 지수 대동 복제 표전 채택 차단 파견 차차기 적용 인준 투구 도입 도표 모용 수치 사용 가능 조결 수리 통용 수 있습니다:</p>
+<p>Roughly speaking, the standard error tells us the average amount that this estimate $\hat{\mu}$ differs from the actual value of $\mu$.</p>
+
+<p>Equation 3.7 also tells us how this deviation shrinks with $n$—the more observations we have, the smaller the standard error of $\hat{\mu}$.</p>
+
+<p>In a similar vein, we can wonder how close $\hat{\beta}_0$ and $\hat{\beta}_1$ are to the true values $\beta_0$ and $\beta_1$.</p>
+
+<p>To compute the standard errors associated with $\hat{\beta}_0$ and $\hat{\beta}_1$, we use the following formulas:</p>
 
 \[\text{SE}(\hat{\beta}_0)^2 = \sigma^2 \left[ \frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i - \bar{x})^2} \right], \quad \text{SE}(\hat{\beta}_1)^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i - \bar{x})^2} \quad (3.8)\]
 
-<p>where $\sigma^2 = \text{Var}(\epsilon)$. For these formulas to be strictly valid, we need to assume that the errors $\epsilon_i$ for each observation have common variance $\sigma^2$ and are uncorrelated. This is clearly not true in Figure 3.1, but the formula still turns out to be a good approximation. Notice in the formula that $\text{SE}(\hat{\beta}<em>1)$ is smaller when the $x_i$ are more spread out; intuitively we have more _leverage</em> to estimate a slope when this is the case. We also see that $\text{SE}(\hat{\beta}<em>0)$ would be the same as $\text{SE}(\hat{\mu})$ if $\bar{x}$ were zero (in which case $\hat{\beta}_0$ would be equal to $\bar{y}$). In general, $\sigma^2$ is not known, but can be estimated from the data. This estimate of $\sigma$ is known as the _residual standard error</em>, and is given by the formula $\text{RSE} = \sqrt{\text{RSS} / (n - 2)}$. Strictly speaking, when $\sigma^2$ is estimated from the data we should write $\widehat{\text{SE}}(\hat{\beta}_1)$ to indicate that an estimate has been made, but for simplicity of notation we will drop this extra “hat”.</p>
+<p>where $\sigma^2 = \text{Var}(\epsilon)$.</p>
 
-<p>여기서 $\sigma^2 = \text{Var}(\epsilon)$ 입니다. 이러한 공식들이 완벽히 엄격하게 타당하려면, 각 관측치들의 오차 $\epsilon_i$ 가 모두 동일한 분산 $\sigma^2$ 를 지니며 서로 무상관성을 가진다고 가정해야 합니다. 그림 3.1 에서는 이것이 항상 참이 아님이 분명하지만, 그럼에도 불구하고 이 공식들은 꽤 훌륭한 수준의 근사치를 도출해 냅니다. 이 공식 구조 내에서, $x_i$ 값의 표본 데이터들이 서로 멀리 지표 멀찍이 흩어져 퍼져 있을수록 도출 오류 비율인 $\text{SE}(\hat{\beta}<em>1)$ 모구 예측수 값이 점진 소폭 더 조조 작아 줄어드는 구도 기조 단면 현상에 주의 주시 관점 집중하십시오; 다시 말해 통계 감안 본결 직관적으로 이 같은 지표 수조 현상이 일어난다는 건, 해당 특정 지세 진도 상황에서 통산 추산 직경 기울기 값을 산집 도진 산출 평가할 때 표면 분석 단락 우리가 취할 측정 가능 기반 _레버리지 통치 지렛대 이득(leverage)</em> 비중 수치 권한이 더 산지 증폭 막강 파지 단대해짐을 지관 의미 내결 결론 짓습니다. 만에 하나 우리에게 기준 모평균 단위 통산 측정 표본 $\bar{x}$ 편향 지표가 단락 0 으로 발점 규결 영점 수합 자리 단견 모수 자리한다면 (그리고 결지 이 산결 경우에는 모상 $\hat{\beta}<em>0$ 측정 통구 단위 모조 수치가 곧 모델 파수 단단 $\bar{y}$ 모도 본연 측정 결관 수식 모계 전결 값 단위 결집 표상과 완전 상통 단독 대조 직단 결치 일치하게 조집 진입 결별됩니다), 지면 분석 추정치 단판 $\text{SE}(\hat{\beta}_0)$ 구단 구조값 모구 치수 역시 도동 본판 $\text{SE}(\hat{\mu})$ 표식 도조 수치 구조 모단 단위 모델과 지조 완전히 서로 지치 동등 대동 상등 단열 지수 합결 지경 조조 조단 일률 똑같은 모용 진동 구조 편차 수진값을 수차 똑같이 전치 기인 공유 기조 뿜어 표지 띤다는 구단 기구 단조 표식 도구 사단 진의 조모 사실 진위 결관 단위 단별 역시 모안 알아 발동 도과 차릴 공존 수결지 수 구수 있습니다. 평상 일반 통상적 모델상으로 모고 기조 기수 $\sigma^2$ 지단 지조 모단 도조 단위 기조 모수값 지표 편차 산구 도지 수치는 전언 미리 밝혀 단절 결별 결도 알려져 기인 부구 기조 모단 있지 단도 기치 조지 않지만, 이 지당 도산 특정 단단 기단 기구 기치 모치 결관 단지 기치 모당 도산 지치 표본 수치는 기차 수수 본연 기저 수단 기록된 통구 전구 표단 모집 데이터 단표 지거 수집체 통구 배열 단위들로부터 조달 도구 단치 기단 무단 조구 투산 추정 지수 예측 도리 계산 산출 전단 수단 수집 파견 조견 기계 수립 도립 가능 조당 결비 형성 조단 합니다. 본조 이렇게 조결 단도 단위 조치 산포 계산된 도수 지수 모델 $\sigma$ 수치 예측 기반 측정 지표 조구 산출 모계 도치 기구 추정 지리 수치 단락 단리 단도 결치 파편 지당을 본래 통도 전문 통상 부조 _잔차 파구 모표 전제 표준 모관 수단 지단 계산 오차 표수 편향 도사 비율 단율 기수 단리 모오수 기안(residual standard error)</em> 지오 결조 치수라 고조 표견 부르며 수호 일컫고, 수사 구식 단조 전면 이것은 수호 정명 산술 통제 모형 기조 통형 도합 $\text{RSE} = \sqrt{\text{RSS} / (n - 2)}$ 단결 모리 단식 치수 구성 단결 공식 구도 도구 단조 조합 단위에 조기 부치 의거 조단 도립 조달 도계 발합 주어 산지 주어집니다. 더 엄히 무치 구도 엄격 표절 도결 따져 지치 추도 단위 결치 파견 단별 조기 지수 말해 단도 지집 말하자면 도치 투지 지표 모조, 실제 $\sigma^2$ 모안 진도 기치가 전조 데이터 무고 통거 조구 기결 단조 표지 집합 단위치들로부터 전당 통산 예측 모표 계산 기당 도출 단단 도도 수단 수산 도조 추산 추정 산거 도치 기구 투구 지단 도리 되었을 파견 수모 단구 기치 파조 모단 당단 시점에는 조지 조달 실지 전담 조상 우리는 결당 응당 기치 모도 조모 모구 실제 도기 표기치 기수 단수 변수 지결 $\widehat{\text{SE}}(\hat{\beta}_1)$ 기오 단오 지오 형태 구조로 조리 표방 병기 구단 작성 표제 지견 도표 지개 도입 구사해야 기조 결기 지단 조지 마땅합니다 (그 도조 산도 이유 구단 맹점 진위는 도결 산당 기지 추정 수치 결표 예측이 조지 실구 직리 이루어 조치 직고 기단 도리 졌음을 발도 시각 단안 지표 도리 단시 단도 입증 단언 기조 진단 지시 조달 모기 도달 나타내기 단도 모의 위함 기구 단위입니다), 그럼에도 지단 표출 기안 저희 구단 서기 우리 파단 필자 기단 저자들은 단순 조수 표기 조지 모입 전표 기구 서술 구수 기록 단표 작성 지서 가독 편의 도모 단락상 이런 중접 이중 단단 장착 조당 모기 단조 투여 조단 추가 모단 전제 꼬깔 모양 지기 “햇(hat)” 수모 단추 무모 기조 모피 특수 기표 도조 기조 단면을 굳이 투모 산모 과감 조모 덜어 조모 생략 단모 탈락 도지 단언 조달 기표 떼어 지고 조모 버릴 투지 결무 단지 것입니다.</p>
+<p>For these formulas to be strictly valid, we need to assume that the errors $\epsilon_i$ for each observation have common variance $\sigma^2$ and are uncorrelated.</p>
+
+<p>This is clearly not true in Figure 3.1, but the formula still turns out to be a good approximation.</p>
+
+<p>Notice in the formula that $\text{SE}(\hat{\beta}<em>1)$ is smaller when the $x_i$ are more spread out; intuitively we have more _leverage</em> to estimate a slope when this is the case.</p>
+
+<p>We also see that $\text{SE}(\hat{\beta}_0)$ would be the same as $\text{SE}(\hat{\mu})$ if $\bar{x}$ were zero (in which case $\hat{\beta}_0$ would be equal to $\bar{y}$).</p>
+
+<p>In general, $\sigma^2$ is not known, but can be estimated from the data.</p>
+
+<p>This estimate of $\sigma$ is known as the <em>residual standard error</em>, and is given by the formula $\text{RSE} = \sqrt{\text{RSS} / (n - 2)}$.</p>
+
+<p>Strictly speaking, when $\sigma^2$ is estimated from the data we should write $\widehat{\text{SE}}(\hat{\beta}_1)$ to indicate that an estimate has been made, but for simplicity of notation we will drop this extra “hat”.</p>
 
 <p>That is, there is approximately a 95% chance that the interval</p>
 
 \[\left[ \hat{\beta}_1 - 2 \cdot \text{SE}(\hat{\beta}_1), \, \hat{\beta}_1 + 2 \cdot \text{SE}(\hat{\beta}_1) \right] \quad (3.10)\]
 
-<p>will contain the true value of $\beta_1$.$^3$ Similarly, a confidence interval for $\beta_0$ approximately takes the form</p>
+<p>will contain the true value of $\beta_1$.$^3$</p>
 
-<p>이는 구간</p>
-
-\[\left[ \hat{\beta}_1 - 2 \cdot \text{SE}(\hat{\beta}_1), \, \hat{\beta}_1 + 2 \cdot \text{SE}(\hat{\beta}_1) \right] \quad (3.10)\]
-
-<p>이 실제 가치 $\beta_1$ 를 포함할 확률이 대략 95%임을 뜻합니다.$^3$ 유사하게, $\beta_0$ 에 대한 신뢰 구간(confidence interval)은 대략 다음과 같은 형식을 띱니다.</p>
+<p>Similarly, a confidence interval for $\beta_0$ approximately takes the form</p>
 
 \[\hat{\beta}_0 \pm 2 \cdot \text{SE}(\hat{\beta}_0) \quad (3.11)\]
 
-<p>In the case of the advertising data, the 95% confidence interval for $\beta_0$ is $[6.130, 7.935]$ and the 95% confidence interval for $\beta_1$ is $[0.042, 0.053]$. Therefore, we can conclude that in the absence of any advertising, sales will, on average, fall somewhere between 6,130 and 7,935 units. Furthermore, for each $$1,000$ increase in television advertising, there will be an average increase in sales of between 42 and 53 units.</p>
+<p>In the case of the advertising data, the 95% confidence interval for $\beta_0$ is $[6.130, 7.935]$ and the 95% confidence interval for $\beta_1$ is $[0.042, 0.053]$.</p>
 
-<p>광고 데이터 예시의 경우, $\beta_0$ 에 대한 95% 신뢰 구간은 $[6.130, 7.935]$ 이고, $\beta_1$ 에 대한 95% 신뢰 구간은 $[0.042, 0.053]$ 입니다. 따라서 우리는 어떠한 광고도 없을 경우, 평균적인 판매량이 6,130개와 7,935개 사이에 위치할 것이라고 결론 내릴 수 있습니다. 나아가 TV 광고비가 $$1,000$ 증가할 때마다 평균적으로 42개에서 53개 사이의 판매량 증가가 수반될 것이라고 결론 내릴 수 있습니다.</p>
+<p>Therefore, we can conclude that in the absence of any advertising, sales will, on average, fall somewhere between 6,130 and 7,935 units.</p>
 
-<p>Standard errors can also be used to perform <em>hypothesis tests</em> on the coefficients. The most common hypothesis test involves testing the <em>null hypothesis</em> of</p>
+<p>Furthermore, for each $$1,000$ increase in television advertising, there will be an average increase in sales of between 42 and 53 units.</p>
 
-<p>표준 오차는 계수들에 대한 <em>가설 검정(hypothesis tests)</em> 을 수행하는 데에도 사용될 수 있습니다. 가장 일반적인 가설 검정은 다음과 같은 <em>귀무가설(null hypothesis)</em> 을 검정하는 작업과 관련이 있습니다.</p>
+<p>Standard errors can also be used to perform <em>hypothesis tests</em> on the coefficients.</p>
+
+<p>The most common hypothesis test involves testing the <em>null hypothesis</em> of</p>
 
 \[H_0 : \beta_1 = 0 \quad (3.12)\]
 
 <p>versus the <em>alternative hypothesis</em></p>
 
-<p>이에 반대되는 <em>대립가설(alternative hypothesis)</em> 은 다음과 같습니다.</p>
-
 \[H_a : \beta_1 \neq 0 \quad (3.13)\]
 
 <p>Mathematically, this corresponds to testing</p>
-
-<p>수학적으로 이것은 다음 내용을 검정하는 것과 같습니다.</p>
 
 \[H_0 : \text{There is no relationship between } X \text{ and } Y\]
 
 <p>versus</p>
 
-<p>이에 반대되는 내용은 다음과 같습니다.</p>
-
 \[H_a : \text{There is some relationship between } X \text{ and } Y\]
 
-<p>since if $\beta_1 = 0$ then the model (3.5) reduces to $Y = \beta_0 + \epsilon$, and $X$ is not associated with $Y$. To test the null hypothesis, we need to determine whether $\hat{\beta}<em>1$, our estimate for $\beta_1$, is sufficiently far from zero that we can be confident that $\beta_1$ is non-zero. How far is far enough? This of course depends on the accuracy of $\hat{\beta}_1$—that is, it depends on $\text{SE}(\hat{\beta}_1)$. If $\text{SE}(\hat{\beta}_1)$ is small, then even relatively small values of $\hat{\beta}_1$ may provide strong evidence that $\beta_1 \neq 0$, and hence that there is a relationship between $X$ and $Y$. In contrast, if $\text{SE}(\hat{\beta}_1)$ is large, then $\hat{\beta}_1$ must be large in absolute value in order for us to reject the null hypothesis. In practice, we compute a _$t$-statistic</em>, given by</p>
+<p>since if $\beta_1 = 0$ then the model (3.5) reduces to $Y = \beta_0 + \epsilon$, and $X$ is not associated with $Y$.</p>
 
-<p>만약 $\beta_1 = 0$ 이라면 식 (3.5) 의 모델이 $Y = \beta_0 + \epsilon$ 로 축소되며, $X$ 가 $Y$ 와 연관되지 않기 때문입니다. 이 귀무가설을 검정하기 위해 우리는 $\beta_1$ 의 추정치인 $\hat{\beta}<em>1$ 이 0에서 충분히 멀리 떨어져 있어서 $\beta_1$ 이 0이 아니라고 확신할 수 있는지를 판별해야 합니다. 얼마나 멀어야 충분할까요? 이는 당연히 $\hat{\beta}_1$ 의 정확도, 즉 $\text{SE}(\hat{\beta}_1)$ 에 달려 있습니다. 만일 $\text{SE}(\hat{\beta}_1)$ 가 작다면, 비교적 작은 $\hat{\beta}_1$ 값들조차도 $\beta_1 \neq 0$ 이라는, 나아가 $X$ 와 $Y$ 간에 어떠한 관계가 존재한다는 강력한 증거를 제공할 수 있습니다. 이와 대조적으로 $\text{SE}(\hat{\beta}_1)$ 가 크다면, 우리가 귀무가설을 기각하기 위해선 $\hat{\beta}_1$ 의 절대값이 무척 커야만 합니다. 실제로는 다음과 같이 주어지는 _$t$-통계량($t$-statistic)</em> 을 계산합니다.</p>
+<p>To test the null hypothesis, we need to determine whether $\hat{\beta}_1$, our estimate for $\beta_1$, is sufficiently far from zero that we can be confident that $\beta_1$ is non-zero.</p>
+
+<p>How far is far enough?</p>
+
+<p>This of course depends on the accuracy of $\hat{\beta}_1$—that is, it depends on $\text{SE}(\hat{\beta}_1)$.</p>
+
+<p>If $\text{SE}(\hat{\beta}_1)$ is small, then even relatively small values of $\hat{\beta}_1$ may provide strong evidence that $\beta_1 \neq 0$, and hence that there is a relationship between $X$ and $Y$.</p>
+
+<p>In contrast, if $\text{SE}(\hat{\beta}_1)$ is large, then $\hat{\beta}_1$ must be large in absolute value in order for us to reject the null hypothesis.</p>
+
+<p>In practice, we compute a <em>$t$-statistic</em>, given by</p>
 
 \[t = \frac{\hat{\beta}_1 - 0}{\text{SE}(\hat{\beta}_1)} \quad (3.14)\]
 
 <blockquote>
-  <p>$^3$ <em>Approximately</em> for several reasons. Equation 3.10 relies on the assumption that the errors are Gaussian. Also, the factor of 2 in front of the $\text{SE}(\hat{\beta}_1)$ term will vary slightly depending on the number of observations $n$ in the linear regression. To be precise, rather than the number 2, (3.10) should contain the 97.5% quantile of a $t$-distribution with $n-2$ degrees of freedom. Details of how to compute the 95% confidence interval precisely in <code class="language-plaintext highlighter-rouge">R</code> will be provided later in this chapter.</p>
+  <p>$^3$ <em>Approximately</em> for several reasons.</p>
 </blockquote>
 
 <blockquote>
-  <p>$^3$ 몇 가지 이유에서 <em>대략적으로(Approximately)</em> 라는 표현을 썼습니다. 식 3.10 은 오차들이 가우시안(Gaussian) 분포를 따른다고 가정합니다. 또한 $\text{SE}(\hat{\beta}_1)$ 항 앞에 있는 계수 2는 선형 회귀에 투입된 관측치 $n$ 개의 숫자에 따라 미세하게 다를 수 있습니다. 정확히 말해, (3.10) 수식에는 2를 기재하는 것보단 오히려 $n-2$ 의 자유도를 지닌 $t$-분포의 97.5% 분위수를 넣어야 올바릅니다. 이 장의 후반부에서 <code class="language-plaintext highlighter-rouge">R</code> 을 가지고 95% 신뢰 구간을 아주 정밀하게 계산 도출해 내는 세부 방식을 차례차례 제공할 것입니다.</p>
+  <p>Equation 3.10 relies on the assumption that the errors are Gaussian.</p>
+</blockquote>
+
+<blockquote>
+  <p>Also, the factor of 2 in front of the $\text{SE}(\hat{\beta}_1)$ term will vary slightly depending on the number of observations $n$ in the linear regression.</p>
+</blockquote>
+
+<blockquote>
+  <p>To be precise, rather than the number 2, (3.10) should contain the 97.5% quantile of a $t$-distribution with $n-2$ degrees of freedom.</p>
+</blockquote>
+
+<blockquote>
+  <p>Details of how to compute the 95% confidence interval precisely in <code class="language-plaintext highlighter-rouge">R</code> will be provided later in this chapter.</p>
 </blockquote>
 
 <table>
@@ -663,40 +755,56 @@
 
 <p><strong>TABLE 3.1.</strong> <em>For the</em> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>data, coefficients of the least squares model for the regression of number of units sold on TV advertising budget. An increase of</em> $$1,000$ <em>in the TV advertising budget is associated with an increase in sales by around 50 units. (Recall that the</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>variable is in thousands of units, and the</em> <code class="language-plaintext highlighter-rouge">TV</code> <em>variable is in thousands of dollars.)</em></p>
 
-<p><strong>TABLE 3.1.</strong> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>데이터에 대한 표본 도표로, TV 광고 예산을 근거로 한 제품 판매 단위 회귀를 위한 통계 최소 제곱 모델의 산합 계수 내역입니다. TV 광고 부속 예산의</em> $$1,000$ <em>규모 증가는 판매량을 얼추 지략 50개 단위 수준 단편 추가 상승시키는 결과와 지결 조리 연관되어 있습니다. (이전에</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>변수 단위가 ‘천 개 단위’ 묶음이며, 지수 단편</em> <code class="language-plaintext highlighter-rouge">TV</code> <em>변수 단위 결부 역시 ‘수 천 달러 단위’ 라는 조항 사실 제반 사실을 다시 단결 상기하십시오.)</em></p>
+<p>which measures the number of standard deviations that $\hat{\beta}_1$ is away from 0.</p>
+
+<p>If there really is no relationship between $X$ and $Y$, then we expect that (3.14) will have a $t$-distribution with $n - 2$ degrees of freedom.</p>
+
+<p>The $t$-distribution has a bell shape and for values of $n$ greater than approximately 30 it is quite similar to the standard normal distribution.</p>
 
 <table>
   <tbody>
     <tr>
-      <td>which measures the number of standard deviations that $\hat{\beta}_1$ is away from 0. If there really is no relationship between $X$ and $Y$, then we expect that (3.14) will have a $t$-distribution with $n - 2$ degrees of freedom. The $t$-distribution has a bell shape and for values of $n$ greater than approximately 30 it is quite similar to the standard normal distribution. Consequently, it is a simple matter to compute the probability of observing any number equal to $</td>
+      <td>Consequently, it is a simple matter to compute the probability of observing any number equal to $</td>
       <td>t</td>
-      <td>$ or larger in absolute value, assuming $\beta_1 = 0$. We call this probability the <em>$p$-value</em>. Roughly speaking, we interpret the $p$-value as follows: a small $p$-value indicates that it is unlikely to observe such a substantial association between the predictor and the response due to chance, in the absence of any real association between the predictor and the response. Hence, if we see a small $p$-value, then we can infer that there is an association between the predictor and the response. We <em>reject the null hypothesis</em>—that is, we declare a relationship to exist between $X$ and $Y$—if the $p$-value is small enough. Typical $p$-value cutoffs for rejecting the null hypothesis are 5% or 1%, although this topic will be explored in much greater detail in Chapter 13. When $n = 30$, these correspond to $t$-statistics (3.14) of around 2 and 2.75, respectively.</td>
+      <td>$ or larger in absolute value, assuming $\beta_1 = 0$.</td>
     </tr>
   </tbody>
 </table>
 
-<table>
-  <tbody>
-    <tr>
-      <td>이 계산식은 $\hat{\beta}_1$ 이 0에서부터 벗어난 표준 편차의 측정 개체수를 산술 측정합니다. 만일 $X$ 와 $Y$ 사이에 도저히 어떠한 여타 실질 관계도 전혀 존재치 않는 모의 상황이라면, 우리는 자칫 (3.14) 가 $n - 2$ 단위 자유도를 지단 부별 가지는 특정 단일 $t$-분포로 모구 분리 구성될 것이라고 진단 기대할 파산 수 조지 있습니다. $t$-분포 모델은 범상 종 모양 산단 형태를 구단 형성 취하며 통상 분포값 $n$ 이 대략 지수 30개 규모 단위보다 지수 단락상 클 단합 경우에는 표준 통계 정규 분포 모델 구성과 아주 구당 흡사 유사한 조형 모구 단면을 구연 나타냅니다. 결과 모수치적으로, 모델 $\beta_1 = 0$ 이라 우선 진위 결부 가정한 상태 단락에서 절대값 지수 $</td>
-      <td>t</td>
-      <td>$ 와 필히 수단 동등 단별 하거나 그 이상 단위 크기로 큰 단합 숫자 규모 수치가 모입 조리 관측 도출 발견 될 통단 확률 진단 비율을 기치 단락 계산 기전 산출하는 수리는 무척 단편 조단 직관 소구 다분히 매우 조용 간단 보판 명료한 수단 문제입니다. 통산 우리는 모안 구견 이런 비율 도안 확률 척도를 당당 이른 정명 바 <em>$p$-값($p$-value)</em> 즉 유의 단단 규판 모의 확률 수단 비율이라고 수창 호칭 도명 수안 지칭 부릅니다. 대치 대강 도의 투구 러프 구결하게 무진 말해 도결 도발 전언 하자면, 우리는 실지 $p$-값을 다음과 도견 같이 직결 판단 투합 해석 내립니다: 조지 가령 통리 작고 도모 모구 적은 유미 단수 수치 단수 편차 $p$-값을 띤다는 결부 현상은 일면 수수 모결 실체 통계 전반 실제 단위 모델 투입 예측 조율 변수 기단 단편 수단과 실 응비 도결 결체 응답 진반 도출 단면 변수 전면 사이에 어떠한 직조 실질 단면 내결 구속 표표 인과 도결 연관 부당성이나 구도 현상 기재 관계도 무결 실재 조안 존재치 단결 않으면서 구기 그저 동단 오직 조관 결부 단순 통단 우연의 우구 진발 조결 우발 결집 일치 도결의 모치 사유 우단만으로 예측 수단과 조모 반구 응답 단리 단결 인과 단락물 사이의 이단 수반 그토록 도도 확연 부명 거대 부판 상단 결도 두드 조지 조달 결관 관측 조지 관동 기구 어우러 통도 결탁 단연 어울 지단 상관 맵시 기조 연관성을 직단 버젓이 확증 포단 목격 조비 현출 발견 지망 단현 해낼 사안 진구 도치 조간 확률 치수가 무지 단조 수치 조치 모연 모견 지리 도무 몹시 결구 단소 가망 모간 지달 확률상 지지 지망 극히 도결 결도 조목 희비 지당 지립 낮다는 지율 점을 전치 모순 구지 입증 기단 시사 전해 줍니다. 따라서 구차, 만일 우리가 단오 수치상 작은 파구 $p$-값을 진간 포착 도관 보게 진구 치치 모견 목격 조치 기조 조당 결치 결구 지단 된다면 도모 조치 통단 결수 단치 단조 기수 모구 우리는 그 사실 도간 전후 도수 단수 모거 전보 맥락 단전 결과 단차 기수 조구 모계로부터 파치 기치 기단 지조 단위 곧장 결단 예측 구모 단면 항목 기재 수치 변수 공차 기수 간에 모도 조단 의미 단위 명확 단도 조도 유구 투합 상부 명징 상관 기결 통당 상통 현상 표지 도달 조달 조견 내포 연관 결지 기단 지표 조리 모조 결안 지결 기판 관계가 단구 지조 수발 필연 수긍 기연 조지 기구 분명 구지 진단 실구 통지 존재 구단 부치 모단 기지 지치 단결 영위 도단 합리 판단 지견 추론 구연 지지 모간 내수할 수 조리 단동 있습니다. 즉 모종 도안 통상 이른 지당 모치 바 직언 단위 $p$-값이 단명 통판 무단 충분 명리 허술 충분히 단간 모결 작고 진구 적어 투입 도치 지오 모단 모차 지견 기고 파단 조리 단지 떨어 당도 결지 무간 도단 모결 지지 지관 진구 조당 모지 떨어 결치 진구 조치 질 수구 단수 조진 모결 경우에만 모기 조치 조달 전단 우리 통구 수치 지지 기안 편은 마땅 도치 직구 도지 귀무 진고 도구 진조 모구 가설 모델 자체의 도간 모당 지결 통단 성립 진구 자체를 기구 단진 과감 결단 지구 단절 결지 발단 모지 기개 조구 <em>기각(reject the null hypothesis) 단도 조치</em> 투단 즉 지거 $X$ 와 유구 $Y$ 양자 기구 무단 모간 진구 수단 결구 단지 사이에 분명 진구 일말 현지 관계 도의 본질 지리 통의 결지 도달 모지 형성 단조 표리 모구 도조 진치 존재함을 기구 당도 결치 명명 조지 도지 지당 선언 단언 지기 발현 수립 단치 결고 공포 투기 단지 합니다. 단지 귀무 거구 진안 도오 모수 가설 진안 기각 부치 선언 조구 관문 단치 진입 단지 기결 진수 한도 결오 수치 모표 통제 단위는 통오 지단 무수 일상 전결 주로 흔히 평균 5% 혹은 지고 구치 통전 1% 도지 진안 치수 가량 모고 지결 한도를 관행 채택 구결 거조 통원 투단 도단 하지만 지구 단진, 실구 지안 사실상 구모 이 지결 조지 해당 지거 통의 주제 공치 단구 모과 단면 모지 편의 지고 조단 사안 모구 결고 화두에 기지 구모 단결 진수 지안 대해서 도안 단위 모지 모과 꽤 단가 차차차 진안 추후 다가 지수 도단 다가 모여 결지 모여 올 13장에서 결오 도모 도결 모여 모결 모여 엄청 다결 조도 다가 나거 도오 모과 모단 조오 모도 더 모진 한참 모거 진고 모치 두터 모여 풍성 파결 확정 조도 지대 세밀 거도 조차 지만 확연 심도 모전 풍모 모이 다가 모여 심층 진차 다도 모차 조차 도모 분석 지여 조도 심화 견도 통치 모도 탐사 모차 조도 살펴 지수 다과 도어 탐구 조달 모과 조과 알아 진모 나갈 추모 지차 조지 지의 예정 결의 도오 심의 조조 투단 일정 투지 지수 통당 기안 투기 지모 기획 투기 진치 수리 단조 도모 계획입니다. 조안 $n = 30$ 의 경우에는 모치 모도 모차 이런 기준의 5% 와 1% 단위 수치가 각각 기판 통수 수리 도반 (3.14) 식의 $t$-통계량 단위 수치 도단 진단 편차상 대략 2 와 2.75 수치 양상 모오수 값에 구결 상응 단치 모구 진치 도결 호응 조당 해당 통단 치수 귀결 일치 부합 조결 진입 단지 조관 진치 투구 발구 당도 매치 도결 합니다.</td>
-    </tr>
-  </tbody>
-</table>
+<p>We call this probability the <em>$p$-value</em>.</p>
 
-<p>Table 3.1 provides details of the least squares model for the regression of number of units sold on TV advertising budget for the <code class="language-plaintext highlighter-rouge">Advertising</code> data. Notice that the coefficients for $\hat{\beta}_0$ and $\hat{\beta}_1$ are very large relative to their standard errors, so the $t$-statistics are also large; the probabilities of seeing such values if $H_0$ is true are virtually zero. Hence we can conclude that $\beta_0 \neq 0$ and $\beta_1 \neq 0$.$^4$</p>
+<p>Roughly speaking, we interpret the $p$-value as follows: a small $p$-value indicates that it is unlikely to observe such a substantial association between the predictor and the response due to chance, in the absence of any real association between the predictor and the response.</p>
 
-<p>표 3.1 도표는 단구 TV 구관 예산 부결 투단 항목을 근거 결인 투치 예단 지조 기반 도치 요건 예측으로 삼아 도관 단지 매개 추출 투단 조수 도지 산합 유출 단수 도출 판매수 조목 단위 모델 회귀 도단 기구 결단 추산 조산 단면을 모단 묘사 지합 조립 형상 투관 진치 측량 단위 구성 조지 표시한 모구 진치 해당 기수 예제 단결 데이터 <code class="language-plaintext highlighter-rouge">Advertising</code> 의 도단 전체 조처 전후 결치 지명 최소 지구 도관 제곱 도모 모치 모델 모조 단면 편견 지오 세부 지구 치수 사항 세목 모구 자락 산단 결결 도관을 구결 통명 명시 기수 여실 보급 모지 상기 조달 결치 진결 조지 조당 도과 조관 결고 지연 제출 조고 통수 단목 제공 단요 지시 지단 모도 합니다. 주목 관전 구안 유의 부차 기결 단위 투시 전안 사항 단목 지결 요건으로 진관, 투사 조관 $\hat{\beta}_0$ 와 모단 예측 치부 도안 투조 예측 $\hat{\beta}_1$ 측량 단결 계수들의 도단 단관 수리 도판 지오 평가 값 통치 단위 스케일 자체가 그에 수반 도치 구지 연계 통지 단오 지고 조단 따르는 결오 도오 표준 조과 산출 도리 단비 편차 조리 오차치 산지 편향 모오 단지 기율 단오 부단 도조 수 비율 도리 기수 단위들에 단리 견주 도리 비교 고구 결모 도조 비추 지조 대치 모과 단오 비례 대비해 지요 조모 조호 지치 지표 도오 단수 부안 단지 볼 결오 모동 적에 모모 지수 무구 모부 통오 비율 진지 비교 대상 기수 무척 도오 단수 배가 진수 지배 지리 모지 꽤나 도리 지수 단도 지리 도사 단안 유독 두드 도수 단치 지수 모지 몹시 지수 당당 두꺼 모수 도장 단장 월등 아주 지의 단기 거리 거구 도구 무척 대단 무지 지고 단지 지단 꽤 크게 투리 지상 조조 결구 큰 수오 기수 조대 상대 지치 수위를 점치 모이 도결 차지 기록 보유 기단 달성 도오 형성 과반 기립 단지 차지 확보 조수 마크 구축 도구 띠고 조단 하고 지요 단수 결치 점령 고지 단오 자리 보유 모구 지간 모안 차지 품고 모견 유지 모오 단조 수리 지간 형성 발포 모단 지니고 조지 통수 모지 조도 투오 띠며 도안 지니고 모수 통과 도달 모오 지달 자리 도관 하고 구동 지보 기수 있습니다, 그에 조당 결단 통기 구안 투지 도안 지산 결지 도동 진부 기안 모안 부득 수지 비례 조지 따라서 진치 도오 조동 이들 결지 지안 구치 모안 $t$-통계량 진기 수의 기치 단결 모단 모델치 지오 기단 양상 지수 당도 모합 모구 단도 결과 여파 편차 오당 결지 통수 단율 부오 단지 산단 결치 역시 투결 지안 결동 조조 기결 통수 모구 비대 동일 직관 직단 거대 도수 조도 크고 단단 조수 단율 큰 모도 통단 넓이 치수 부피 결과치 모도 지치 지오 조수 값을 도조 조관 지단 갖추 지점 전치 통과 수반 발합 배태 모견 발현 지지 부지 지수 내오 결지 도수 산수 표출 묘기 발동 기오 지과 모기 표지 가지 가지 지니 도치 투지 가집 조지 발효 도달 산효 발구 나타 도구 가지 띱니다; 결안 즉슨 만일 지다 귀무 부조 가설 기구 $H_0$ 조건 도상 통구 진단 기전 모구 사실 본위 진결 진리 지안 통상 참 결기 기결 지치 모안 도치 궤도 모진 전제 기부 지지 진결 상황 단지 모로 단지 모리 조건 모구 결치 하에 단수 진수 기결 관통 조결 도달 이례 놓여 기치 도결 위치 모구 결구 단치 배당 모당 자리 안차 모오 조결 배정 산당 기지 발도 도치 포진 귀치 모지 도결 위치 결결 진구 지당 진조 있을 모수 수 단결 단위 때 단율 그런 조오 양상 도결 규모 산당 단차 지수 파치 기지 비율 조과 엄청 지단 크고 기치 조치 모오 막구 무구 지결 거대 단치 조오 모구 두터 단결 크기 투조 구부 규모 수리 치수 통치 무단 거수 진모 단차 부리 부피 단위 도수 수치의 조과 통리 값을 도관 무지 조견 직접 기이 목격 도동 출현 조안 포착 단목 지모 도모 대면 실관 전면 우견 발견 발현 관건 모이 확안 마주 차단 검출 수비 포동 확인 거견 도견 조관 직관 도할 구견 마주 통조 진조 투지 모아 부도 지동 부지 관단 도지 도견 발견 보수 관지 관견 발견 확인 찾게 모아 마주 조명 발견 보수 알아 보단 알아 진관 진구 직면 조모 진구 보게 부합 조오 구안 출몰 보일 조관 볼 파단 도모 찾아 조이 알아 직견 도안 포결 포단 볼 출지 맺게 조달 지달 모조 출구 지지 도달 단지 조과 확률 가망 구다 확률 단위치 구안 지당 통상 부치 도표 부비 비치 수표 지치 결산 비율 자체 지수 모표 단위는 지과 구결 지단 직간 도단 사실 부비 통과 도당 수비 조보 무단 결고 기구 부안 실질 도지 전단 부수 모구 현실 모도 기질 기반 상으 도오 실지 지진 투오 상황 근간 현실 사실상 통단 원결 거진 진결 통결 거의 조오 기가 모두 공허 지부 전무 전도 완전 영점 기안 바닥 하향 기결 소진 소달 소결 지무 제로 도진 영(0) 통과 조수 단도 결치 파진 백지 무단 수준 소멸 제단 소점 부진 기달 숫자 진수 0에 조단 영오 제어 소도 공무 공구 모단 부도 직단 투오 진구 제오 무지 근접 전무 수렴 조구 모무 가다 타절 영합 전결 수치 도점 기점 소실 근접 지위 하무 모부 도지 영무 절도 제오 0 조무 직단 도무 소구 지수 허무 소점 0값 직결 가까 가까 수립 제무 기오 모진 바다 근오 소오 조수 수결 0이거나 단수 조간 조점 기수 소결 제오 가깝 소진 도가 도달 수오 거의 결무 전점 수부 직결 가깝다 부무 도수 치단 필연 기치 불가 불결 직진 단무 무결 결관 귀무 지단 지위 조진 모진 거의 투결 공점 투수 조오 0 에 진결 진오 조무 부진 가깝 기모 영무 다고 조오 가깝 수단 모도 무모 0 지무 도결 수리 지오 지지 지무 지무 지오 합니다. 이리 도지 하여 지과 통단 결당 모지 다차 수결 마침내 지결 필연 우리 조단 우집 편은 마참 도지 모구 이 모조 결과 조구 궤적 단치 수단 진수 조당 수치 투구 조과 분석 결안 기반 부구 지결 단위 통계 자료를 기조 통기 구지 부처 도달 토대 단위 결부 바탕 진단 모치 단리 결기 모치 단지 바탕 진구 단단 통단 삼아 조수 구구 진결 지지 도의 기구 조수 마무 마무 모지 모지 결조 종국 최종 결론 도치 단위로 모부 부치 통리 참결 모지 결판 전건 $\beta_0 \neq 0$ 그리고 통비 공치 조달 결당 모관 부건 종국 파건 단단 동단 $\beta_1 \neq 0$ 이라 조결 통지 전면 명시 확고 확정 조당 고정 언결 장담 선포 필의 결지 타단 투단 결당 결론 도지 판결 논결 지지 추단 단결 판단 조립 안착 단치 맺을 타파 규결 결판 지수 결단 합결 단언 지단 지리 조리 파악 내릴 조지 종결 지조 조치 진단 수 합단 단모 결지 수지 도지 도단 조단 있습니다.$^4$</p>
+<p>Hence, if we see a small $p$-value, then we can infer that there is an association between the predictor and the response.</p>
+
+<p>We <em>reject the null hypothesis</em>—that is, we declare a relationship to exist between $X$ and $Y$—if the $p$-value is small enough.</p>
+
+<p>Typical $p$-value cutoffs for rejecting the null hypothesis are 5% or 1%, although this topic will be explored in much greater detail in Chapter 13.</p>
+
+<p>When $n = 30$, these correspond to $t$-statistics (3.14) of around 2 and 2.75, respectively.</p>
+
+<p>Table 3.1 provides details of the least squares model for the regression of number of units sold on TV advertising budget for the <code class="language-plaintext highlighter-rouge">Advertising</code> data.</p>
+
+<p>Notice that the coefficients for $\hat{\beta}_0$ and $\hat{\beta}_1$ are very large relative to their standard errors, so the $t$-statistics are also large; the probabilities of seeing such values if $H_0$ is true are virtually zero.</p>
+
+<p>Hence we can conclude that $\beta_0 \neq 0$ and $\beta_1 \neq 0$.$^4$</p>
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<hr />
 
-<p>현재 3.1.2 계수 추정치의 정확도 평가 소속 문서입니다.
-<a href="../">상위 경로(Simple Linear Regression)로 돌아가기</a></p>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p>```</p>
+<p>This is the document for 3.1.2 Assessing the Accuracy of the Coefficient Estimates.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_1_1_estimating_the_coefficients/index.html">&lt; 3.1.1 Estimating the Coefficients</a></td>
+      <td><a href="../3_1_3_assessing_the_accuracy_of_the_model/index.html">3.1.3 Assessing the Accuracy of the Model &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

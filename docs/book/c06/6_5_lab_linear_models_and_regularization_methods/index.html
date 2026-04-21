@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -497,33 +496,29 @@
 
 <p>In this lab we implement many of the techniques discussed in this chapter. We import some of our libraries at this top level.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [1]:importnumpyasnp
-importpandasaspd
-frommatplotlib.pyplotimportsubplots
-fromstatsmodels.apiimportOLS
-importsklearn.model_selectionasskm
-importsklearn.linear_modelasskl
-fromsklearn.preprocessingimportStandardScaler
-fromISLPimportload_data
-fromISLP.modelsimportModelSpecasMS
-fromfunctoolsimportpartial
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="n">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">subplots</span>
+<span class="kn">from</span> <span class="n">statsmodels.api</span> <span class="kn">import</span> <span class="n">OLS</span>
+<span class="kn">import</span> <span class="n">sklearn.model_selection</span> <span class="k">as</span> <span class="n">skm</span>
+<span class="kn">import</span> <span class="n">sklearn.linear_model</span> <span class="k">as</span> <span class="n">skl</span>
+<span class="kn">from</span> <span class="n">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="n">ISLP</span> <span class="kn">import</span> <span class="n">load_data</span>
+<span class="kn">from</span> <span class="n">ISLP.models</span> <span class="kn">import</span> <span class="n">ModelSpec</span> <span class="k">as</span> <span class="n">MS</span>
+<span class="kn">from</span> <span class="n">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 </code></pre></div></div>
 
 <p>We again collect the new imports needed for this lab.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [2]:fromsklearn.pipelineimportPipeline
-fromsklearn.decompositionimportPCA
-</code></pre></div></div>
-
-<p>268 6. Linear Model Selection and Regularization</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fromsklearn.cross_decompositionimportPLSRegression
-fromISLP.modelsimport\
-(Stepwise,
-sklearn_selected ,
-sklearn_selection_path)
-!pipinstalll0bnb
-froml0bnbimportfit_path
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">from</span> <span class="n">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="n">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="n">sklearn.cross_decomposition</span> <span class="kn">import</span> <span class="n">PLSRegression</span>
+<span class="kn">from</span> <span class="n">ISLP.models</span> <span class="kn">import</span> \
+    <span class="p">(</span><span class="n">Stepwise</span><span class="p">,</span>
+     <span class="n">sklearn_selected</span><span class="p">,</span>
+     <span class="n">sklearn_selection_path</span><span class="p">)</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">l0bnb</span>
+<span class="kn">from</span> <span class="n">l0bnb</span> <span class="kn">import</span> <span class="n">fit_path</span>
 </code></pre></div></div>
 
 <p>We have installed the package <code class="language-plaintext highlighter-rouge">l0bnb</code> on the fly. Note the escaped <code class="language-plaintext highlighter-rouge">!pip install</code> — this is run as a separate system command.</p>

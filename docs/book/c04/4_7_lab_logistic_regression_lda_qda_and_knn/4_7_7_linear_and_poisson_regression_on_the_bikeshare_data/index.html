@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,51 +502,54 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="477-linear-and-poisson-regression-on-the-bikeshare-data"><em>4.7.7 Linear and Poisson Regression on the Bikeshare Data</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_6_k-nearest_neighbors/index.html">&lt; 4.7.6 K-Nearest Neighbors</a></td>
+      <td><a href="4_7_7_1_out69_1.53e-20/index.html">4.7.7.1 Out69 1.53E-20 &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="477-linear-and-poisson-regression-on-the-bikeshare-data"><em>4.7.7 Linear and Poisson Regression on the Bikeshare Data</em></h1>
 
 <p>Here we fit linear and Poisson regression models to the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data, as described in Section 4.6. The response <code class="language-plaintext highlighter-rouge">bikers</code> measures the number of bike rentals per hour in Washington, DC in the period 2010–2012.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [64]:Bike=load_data('Bikeshare')
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">64</span><span class="p">]:</span> <span class="n">Bike</span> <span class="o">=</span> <span class="nf">load_data</span><span class="p">(</span><span class="sh">'</span><span class="s">Bikeshare</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Let’s have a peek at the dimensions and names of the variables in this dataframe.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [65]:Bike.shape,Bike.columns
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">65</span><span class="p">]:</span> <span class="n">Bike</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Bike</span><span class="p">.</span><span class="n">columns</span>
 </code></pre></div></div>
 
-<p>4.7 Lab: Logistic Regression, LDA, QDA, and KNN</p>
-
-<p>189</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[65]:((8645,15),
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Index(['season','mnth','day','hr','holiday','weekday',
-'workingday','weathersit','temp','atemp','hum',
-'windspeed','casual','registered','bikers'],
-dtype='object'))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">65</span><span class="p">]:</span> <span class="p">((</span><span class="mi">8645</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+          <span class="nc">Index</span><span class="p">([</span><span class="sh">'</span><span class="s">season</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">mnth</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">day</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">hr</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">holiday</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">weekday</span><span class="sh">'</span><span class="p">,</span>
+                 <span class="sh">'</span><span class="s">workingday</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">weathersit</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">temp</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">atemp</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">hum</span><span class="sh">'</span><span class="p">,</span>
+                 <span class="sh">'</span><span class="s">windspeed</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">casual</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">registered</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">bikers</span><span class="sh">'</span><span class="p">],</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="sh">'</span><span class="s">object</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Linear Regression</p>
 
 <p>We begin by fitting a linear regression model to the data.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [66]:X=MS(['mnth',
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="n">X</span> <span class="o">=</span> <span class="nc">MS</span><span class="p">([</span><span class="sh">'</span><span class="s">mnth</span><span class="sh">'</span><span class="p">,</span>
+                 <span class="sh">'</span><span class="s">hr</span><span class="sh">'</span><span class="p">,</span>
+                 <span class="sh">'</span><span class="s">workingday</span><span class="sh">'</span><span class="p">,</span>
+                 <span class="sh">'</span><span class="s">temp</span><span class="sh">'</span><span class="p">,</span>
+                 <span class="sh">'</span><span class="s">weathersit</span><span class="sh">'</span><span class="p">]).</span><span class="nf">fit_transform</span><span class="p">(</span><span class="n">Bike</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">Bike</span><span class="p">[</span><span class="sh">'</span><span class="s">bikers</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">M_lm</span> <span class="o">=</span> <span class="n">sm</span><span class="p">.</span><span class="nc">OLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">).</span><span class="nf">fit</span><span class="p">()</span>
+<span class="nf">summarize</span><span class="p">(</span><span class="n">M_lm</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'hr',
-'workingday',
-'temp',
-'weathersit']).fit_transform(Bike)
-Y=Bike['bikers']
-M_lm=sm.OLS(Y,X).fit()
-summarize(M_lm)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">66</span><span class="p">]:</span>
 </code></pre></div></div>
 
 <table>
   <thead>
     <tr>
-      <th><strong><code class="language-plaintext highlighter-rouge">Out[66]:</code></strong></th>
       <th> </th>
       <th><code class="language-plaintext highlighter-rouge">coef</code></th>
       <th><code class="language-plaintext highlighter-rouge">std err</code></th>
@@ -557,15 +559,13 @@ summarize(M_lm)
   </thead>
   <tbody>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">intercept</code></td>
       <td><code class="language-plaintext highlighter-rouge">-68.6317</code></td>
-      <td><code class="language-plaintext highlighter-rouge">5.307 </code></td>
+      <td><code class="language-plaintext highlighter-rouge">5.307</code></td>
       <td><code class="language-plaintext highlighter-rouge">-12.932</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">mnth[Feb]</code></td>
       <td><code class="language-plaintext highlighter-rouge">6.8452</code></td>
       <td><code class="language-plaintext highlighter-rouge">4.287</code></td>
@@ -573,7 +573,6 @@ summarize(M_lm)
       <td><code class="language-plaintext highlighter-rouge">0.110</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">mnth[March]</code></td>
       <td><code class="language-plaintext highlighter-rouge">16.5514</code></td>
       <td><code class="language-plaintext highlighter-rouge">4.301</code></td>
@@ -581,7 +580,6 @@ summarize(M_lm)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">mnth[April]</code></td>
       <td><code class="language-plaintext highlighter-rouge">41.4249</code></td>
       <td><code class="language-plaintext highlighter-rouge">4.972</code></td>
@@ -589,95 +587,6 @@ summarize(M_lm)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[May]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">72.5571</code></td>
-      <td><code class="language-plaintext highlighter-rouge">5.641</code></td>
-      <td><code class="language-plaintext highlighter-rouge">12.862</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[June]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">67.8187</code></td>
-      <td><code class="language-plaintext highlighter-rouge">6.544</code></td>
-      <td><code class="language-plaintext highlighter-rouge">10.364</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[July]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">45.3245</code></td>
-      <td><code class="language-plaintext highlighter-rouge">7.081</code></td>
-      <td><code class="language-plaintext highlighter-rouge">6.401</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[Aug]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">53.2430</code></td>
-      <td><code class="language-plaintext highlighter-rouge">6.640</code></td>
-      <td><code class="language-plaintext highlighter-rouge">8.019</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[Sept]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">66.6783</code></td>
-      <td><code class="language-plaintext highlighter-rouge">5.925</code></td>
-      <td><code class="language-plaintext highlighter-rouge">11.254</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[Oct]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">75.8343</code></td>
-      <td><code class="language-plaintext highlighter-rouge">4.950</code></td>
-      <td><code class="language-plaintext highlighter-rouge">15.319</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[Nov]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">60.3100</code></td>
-      <td><code class="language-plaintext highlighter-rouge">4.610</code></td>
-      <td><code class="language-plaintext highlighter-rouge">13.083</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[Dec]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">46.4577</code></td>
-      <td><code class="language-plaintext highlighter-rouge">4.271</code></td>
-      <td><code class="language-plaintext highlighter-rouge">10.878</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">hr[1]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-14.5793</code></td>
-      <td><code class="language-plaintext highlighter-rouge">5.699</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-2.558</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.011</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">hr[2]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-21.5791</code></td>
-      <td><code class="language-plaintext highlighter-rouge">5.733</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-3.764</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">hr[3]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-31.1408</code></td>
-      <td><code class="language-plaintext highlighter-rouge">5.778</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-5.389</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">.....</code></td>
       <td><code class="language-plaintext highlighter-rouge">.......</code></td>
       <td><code class="language-plaintext highlighter-rouge">.....</code></td>
@@ -687,34 +596,32 @@ summarize(M_lm)
   </tbody>
 </table>
 
-<p>There are 24 levels in <code class="language-plaintext highlighter-rouge">hr</code> and 40 rows in all, so we have truncated the summary. In <code class="language-plaintext highlighter-rouge">M_lm</code> , the first levels <code class="language-plaintext highlighter-rouge">hr[0]</code> and <code class="language-plaintext highlighter-rouge">mnth[Jan]</code> are treated as the baseline values, and so no coefficient estimates are provided for them: implicitly, their coefficient estimates are zero, and all other levels are measured relative to these baselines. For example, the Feb coefficient of 6 <em>.</em> 845 signifies that, holding all other variables constant, there are on average about 7 more riders in February than in January. Similarly there are about 16.5 more riders in March than in January.</p>
+<p>There are 24 levels in <code class="language-plaintext highlighter-rouge">hr</code> and 40 rows in all, so we have truncated the summary. In <code class="language-plaintext highlighter-rouge">M_lm</code>, the first levels <code class="language-plaintext highlighter-rouge">hr[0]</code> and <code class="language-plaintext highlighter-rouge">mnth[Jan]</code> are treated as the baseline values, and so no coefficient estimates are provided for them: implicitly, their coefficient estimates are zero, and all other levels are measured relative to these baselines. For example, the Feb coefficient of $6.845$ signifies that, holding all other variables constant, there are on average about 7 more riders in February than in January. Similarly there are about 16.5 more riders in March than in January.</p>
 
-<p>The results seen in Section 4.6.1 used a slightly different coding of the variables <code class="language-plaintext highlighter-rouge">hr</code> and <code class="language-plaintext highlighter-rouge">mnth</code> , as follows:</p>
+<p>The results seen in Section 4.6.1 used a slightly different coding of the variables <code class="language-plaintext highlighter-rouge">hr</code> and <code class="language-plaintext highlighter-rouge">mnth</code>, as follows:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [67]:hr_encode=contrast('hr','sum')
-mnth_encode=contrast('mnth','sum')
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="n">hr_encode</span> <span class="o">=</span> <span class="nf">contrast</span><span class="p">(</span><span class="sh">'</span><span class="s">hr</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">sum</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">mnth_encode</span> <span class="o">=</span> <span class="nf">contrast</span><span class="p">(</span><span class="sh">'</span><span class="s">mnth</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">sum</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Refitting again:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [68]:X2=MS([mnth_encode ,
-hr_encode,
-'workingday',
-'temp',
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">68</span><span class="p">]:</span> <span class="n">X2</span> <span class="o">=</span> <span class="nc">MS</span><span class="p">([</span><span class="n">mnth_encode</span><span class="p">,</span>
+                  <span class="n">hr_encode</span><span class="p">,</span>
+                  <span class="sh">'</span><span class="s">workingday</span><span class="sh">'</span><span class="p">,</span>
+                  <span class="sh">'</span><span class="s">temp</span><span class="sh">'</span><span class="p">,</span>
+                  <span class="sh">'</span><span class="s">weathersit</span><span class="sh">'</span><span class="p">]).</span><span class="nf">fit_transform</span><span class="p">(</span><span class="n">Bike</span><span class="p">)</span>
+<span class="n">M2_lm</span> <span class="o">=</span> <span class="n">sm</span><span class="p">.</span><span class="nc">OLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X2</span><span class="p">).</span><span class="nf">fit</span><span class="p">()</span>
+<span class="n">S2</span> <span class="o">=</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">M2_lm</span><span class="p">)</span>
+<span class="n">S2</span>
 </code></pre></div></div>
 
-<p>190 4. Classification</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'weathersit']).fit_transform(Bike)
-M2_lm=sm.OLS(Y,X2).fit()
-S2=summarize(M2_lm)
-S2
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">68</span><span class="p">]:</span>
 </code></pre></div></div>
 
 <table>
   <thead>
     <tr>
-      <th><strong><code class="language-plaintext highlighter-rouge">Out[68]:</code></strong></th>
       <th> </th>
       <th><code class="language-plaintext highlighter-rouge">coef</code></th>
       <th><code class="language-plaintext highlighter-rouge">std err</code></th>
@@ -724,7 +631,6 @@ S2
   </thead>
   <tbody>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">intercept</code></td>
       <td><code class="language-plaintext highlighter-rouge">73.5974</code></td>
       <td><code class="language-plaintext highlighter-rouge">5.132</code></td>
@@ -732,145 +638,53 @@ S2
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">mnth[Jan]</code></td>
       <td><code class="language-plaintext highlighter-rouge">-46.0871</code></td>
-      <td><code class="language-plaintext highlighter-rouge">4.085 </code></td>
+      <td><code class="language-plaintext highlighter-rouge">4.085</code></td>
       <td><code class="language-plaintext highlighter-rouge">-11.281</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">mnth[Feb]</code></td>
       <td><code class="language-plaintext highlighter-rouge">-39.2419</code></td>
-      <td><code class="language-plaintext highlighter-rouge">3.539 </code></td>
+      <td><code class="language-plaintext highlighter-rouge">3.539</code></td>
       <td><code class="language-plaintext highlighter-rouge">-11.088</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[March]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-29.5357</code></td>
-      <td><code class="language-plaintext highlighter-rouge">3.155</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-9.361</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[April]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-4.6622</code></td>
-      <td><code class="language-plaintext highlighter-rouge">2.741</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-1.701</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.089</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[May]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">26.4700</code></td>
-      <td><code class="language-plaintext highlighter-rouge">2.851</code></td>
-      <td><code class="language-plaintext highlighter-rouge">9.285</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[June]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">21.7317</code></td>
-      <td><code class="language-plaintext highlighter-rouge">3.465</code></td>
-      <td><code class="language-plaintext highlighter-rouge">6.272</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[July]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-0.7626</code></td>
-      <td><code class="language-plaintext highlighter-rouge">3.908</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-0.195</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.845</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[Aug]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">7.1560</code></td>
-      <td><code class="language-plaintext highlighter-rouge">3.535</code></td>
-      <td><code class="language-plaintext highlighter-rouge">2.024</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.043</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[Sept]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">20.5912</code></td>
-      <td><code class="language-plaintext highlighter-rouge">3.046</code></td>
-      <td><code class="language-plaintext highlighter-rouge">6.761</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[Oct]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">29.7472</code></td>
-      <td><code class="language-plaintext highlighter-rouge">2.700</code></td>
-      <td><code class="language-plaintext highlighter-rouge">11.019</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">mnth[Nov]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">14.2229</code></td>
-      <td><code class="language-plaintext highlighter-rouge">2.860</code></td>
-      <td><code class="language-plaintext highlighter-rouge">4.972</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">hr[0]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-96.1420</code></td>
-      <td><code class="language-plaintext highlighter-rouge">3.955 </code></td>
-      <td><code class="language-plaintext highlighter-rouge">-24.307</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">hr[1]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-110.7213</code></td>
-      <td><code class="language-plaintext highlighter-rouge">3.966 </code></td>
-      <td><code class="language-plaintext highlighter-rouge">-27.916</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">hr[2]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">-117.7212</code></td>
-      <td><code class="language-plaintext highlighter-rouge">4.016 </code></td>
-      <td><code class="language-plaintext highlighter-rouge">-29.310</code></td>
-      <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
-    </tr>
-    <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">.....</code></td>
       <td><code class="language-plaintext highlighter-rouge">.......</code></td>
       <td><code class="language-plaintext highlighter-rouge">.....</code></td>
-      <td><code class="language-plaintext highlighter-rouge">......</code></td>
+      <td><code class="language-plaintext highlighter-rouge">.....</code></td>
       <td><code class="language-plaintext highlighter-rouge">.....</code></td>
     </tr>
   </tbody>
 </table>
 
-<p>What is the difference between the two codings? In <code class="language-plaintext highlighter-rouge">M2_lm</code> , a coefficient estimate is reported for all but level <code class="language-plaintext highlighter-rouge">23</code> of <code class="language-plaintext highlighter-rouge">hr</code> and level <code class="language-plaintext highlighter-rouge">Dec</code> of <code class="language-plaintext highlighter-rouge">mnth</code> . Importantly, in <code class="language-plaintext highlighter-rouge">M2_lm</code> , the (unreported) coefficient estimate for the last level of <code class="language-plaintext highlighter-rouge">mnth</code> is not zero: instead, it equals the negative of the sum of the coefficient estimates for all of the other levels. Similarly, in <code class="language-plaintext highlighter-rouge">M2_lm</code> , the coefficient estimate for the last level of <code class="language-plaintext highlighter-rouge">hr</code> is the negative of the sum of the coefficient estimates for all of the other levels. This means that the coefficients of <code class="language-plaintext highlighter-rouge">hr</code> and <code class="language-plaintext highlighter-rouge">mnth</code> in <code class="language-plaintext highlighter-rouge">M2_lm</code> will always sum to zero, and can be interpreted as the difference from the mean level. For example, the coefficient for January of <em>−</em> 46 <em>.</em> 087 indicates that, holding all other variables constant, there are typically 46 fewer riders in January relative to the yearly average.</p>
+<p>What is the difference between the two codings? In <code class="language-plaintext highlighter-rouge">M2_lm</code>, a coefficient estimate is reported for all but level <code class="language-plaintext highlighter-rouge">23</code> of <code class="language-plaintext highlighter-rouge">hr</code> and level <code class="language-plaintext highlighter-rouge">Dec</code> of <code class="language-plaintext highlighter-rouge">mnth</code>. Importantly, in <code class="language-plaintext highlighter-rouge">M2_lm</code>, the (unreported) coefficient estimate for the last level of <code class="language-plaintext highlighter-rouge">mnth</code> is not zero: instead, it equals the negative of the sum of the coefficient estimates for all of the other levels. Similarly, in <code class="language-plaintext highlighter-rouge">M2_lm</code>, the coefficient estimate for the last level of <code class="language-plaintext highlighter-rouge">hr</code> is the negative of the sum of the coefficient estimates for all of the other levels. This means that the coefficients of <code class="language-plaintext highlighter-rouge">hr</code> and <code class="language-plaintext highlighter-rouge">mnth</code> in <code class="language-plaintext highlighter-rouge">M2_lm</code> will always sum to zero, and can be interpreted as the difference from the mean level. For example, the coefficient for January of $-46.087$ indicates that, holding all other variables constant, there are typically 46 fewer riders in January relative to the yearly average.</p>
 
 <p>It is important to realize that the choice of coding really does not matter, provided that we interpret the model output correctly in light of the coding used. For example, we see that the predictions from the linear model are the same regardless of coding:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [69]:np.sum((M_lm.fittedvalues-M2_lm.fittedvalues)**2)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">((</span><span class="n">M_lm</span><span class="p">.</span><span class="n">fittedvalues</span> <span class="o">-</span> <span class="n">M2_lm</span><span class="p">.</span><span class="n">fittedvalues</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="mf">5.166710408544458e-09</span>
 </code></pre></div></div>
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<hr />
 
-<h3 id="glm-output-포아송-분석-결과">GLM Output (포아송 분석 결과)</h3>
-<ul>
-  <li><a href="./4_7_7_1_poisson_regression/">문서로 이동하기</a></li>
-</ul>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p>GLM 결과 안보드에서 계수 유의성을 입증하는 잔차 로그 수치와 P-value 들을 파싱해 점검합니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_6_k-nearest_neighbors/index.html">&lt; 4.7.6 K-Nearest Neighbors</a></td>
+      <td><a href="4_7_7_1_out69_1.53e-20/index.html">4.7.7.1 Out69 1.53E-20 &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

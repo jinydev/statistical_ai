@@ -1,0 +1,1192 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_7_exercises/3_7_2_applied/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c03/3_7_exercises/3_7_2_applied/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_7_exercises/3_7_2_applied/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c03/3_7_exercises/3_7_2_applied/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/">03. Linear Regression</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_7_exercises/">3 7 exercises</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_7_exercises/3_7_2_applied/">3 7 2 applied</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <blockquote>
+  <p>💡 <strong>학습 팁:</strong> 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 <a href="./trans2.html">📖 파이썬 랩(Lab) 해설판보기</a>를 추천합니다! (직역본은 <a href="./trans1.html">📖 직역본 보기</a> 메뉴를 활용하세요!)</p>
+</blockquote>
+
+<p><a href="../3_7_1_conceptual/trans2.html">&lt; 3.7.1 Conceptual</a></p>
+
+<h1 id="applied"><em>Applied</em></h1>
+<h1 id="응용-실습-문제-파이썬-켜고-땀-흘려보기">응용 실습 문제: 파이썬 켜고 땀 흘려보기!</h1>
+
+<ol>
+  <li>This question involves the use of simple linear regression on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.
+<strong>8번 문제.</strong> 자, 자동차 연비 데이터인 <code class="language-plaintext highlighter-rouge">Auto</code> 데이터셋을 파이썬에 불러오세요. 단순 1차 선형 회귀 분석의 기초 근력을 단련해 보겠습니다.</li>
+</ol>
+
+<ul>
+  <li>(a) Use the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to perform a simple linear regression with <code class="language-plaintext highlighter-rouge">mpg</code> as the response and <code class="language-plaintext highlighter-rouge">horsepower</code> as the predictor.
+<em>(a) <code class="language-plaintext highlighter-rouge">sm.OLS()</code> 함수 믹서기를 써서, 마력(<code class="language-plaintext highlighter-rouge">horsepower</code>) 데이터 쪼가리를 쑥 밀어넣어 연비(<code class="language-plaintext highlighter-rouge">mpg</code>)라는 정답 목푯값을 예측해 내는 1차 단순 선형 회귀 모델을 시원하게 돌려보십시오!</em></li>
+</ul>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">summarize()</code> function to print the results.
+<em>그다음엔 <code class="language-plaintext highlighter-rouge">.summarize()</code> 함수를 호출해서 모델이 받아온 성적표를 화면에 떡 하니 띄워주세요.</em></p>
+
+<p>Comment on the output.
+<em>그 출력 결과를 뚫어지게 쳐다보고 여러분의 날카로운 분석을 코멘트로 남겨보세요.</em></p>
+
+<p>For example:
+<em>예를 들어 다음 질문들에 집중해 보세요:</em></p>
+
+<ul>
+  <li>
+    <p>i. Is there a relationship between the predictor and the response?
+<em>i. 마력 빵빵한 차와 연비 사이에 과연 연관성이 눈곱만큼이라도 진짜 통계적으로 존재할까요? (P-값을 확인해 보세요!)</em></p>
+  </li>
+  <li>
+    <p>ii. How strong is the relationship between the predictor and the response?
+<em>ii. 둘의 관계가 얼마나 질기게 막강합니까? (결정계수 $R^2$ 점수를 봐서 얼마나 설명이 되는지 보세요!)</em></p>
+  </li>
+  <li>
+    <p>iii. Is the relationship between the predictor and the response positive or negative?
+<em>iii. 둘의 관계는 비례(양)입니까 아니면 반비례(음)입니까? (상식적으로 마력이 셀수록 연비는 개판이 되겠죠? 계수 부호를 확인하세요!)</em></p>
+  </li>
+  <li>
+    <p>iv. What is the predicted <code class="language-plaintext highlighter-rouge">mpg</code> associated with a <code class="language-plaintext highlighter-rouge">horsepower</code> of 98?
+<em>iv. 만약 여러분이 98마력을 내는 구형 차를 샀다면, 이 똑똑한 모델은 여러분 차의 연비(<code class="language-plaintext highlighter-rouge">mpg</code>)가 도대체 얼마쯤 나올 거라고 예측할까요?</em></p>
+  </li>
+</ul>
+
+<p>What are the associated 95 % confidence and prediction intervals?
+<em>그 예측값을 중심으로, 진짜 정답이 숨어있을 만한 95% 신뢰 구간과 예측 허용 범위(예측 구간) 방어막을 양옆으로 시원하게 쳐보세요!</em></p>
+
+<ul>
+  <li>(b) Plot the response and the predictor in a new set of axes <code class="language-plaintext highlighter-rouge">ax</code> .
+<em>(b) 파이썬 matplotlib 도구를 써서 가로축에 마력, 세로축에 연비를 두는 점박이 산점도(scatterplot)를 예쁜 새 캔버스(<code class="language-plaintext highlighter-rouge">ax</code>) 위에 그려보세요.</em></li>
+</ul>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">ax.axline()</code> method or the <code class="language-plaintext highlighter-rouge">abline()</code> function defined in the lab to display the least squares regression line.
+<em>그리고 우리가 이전 랩 실습에서 배웠던 <code class="language-plaintext highlighter-rouge">ax.axline()</code>이나 <code class="language-plaintext highlighter-rouge">abline()</code> 마법을 부려서, 방금 뽑아낸 일직선 예측 모델 선(최소 제곱 회귀선)을 붉은색 펜으로 쫙! 하나 그어보세요.</em></p>
+
+<ul>
+  <li>(c) Produce some of diagnostic plots of the least squares regression fit as described in the lab.
+<em>(c) 모델이 진정 잘 들어맞는지 뼈를 때리는 ‘불량 검사 플롯 진단 그림’ 4종 세트(아까 랩 실습에서 배웠죠?)를 가차 없이 찍어내 보세요.</em></li>
+</ul>
+
+<p>Comment on any problems you see with the fit.
+<em>그림을 요리조리 살피면서, 방금 만든 이 직선 모델이 도대체 뭐가 불량하고 어디서 엉망인지 여러분만의 날카로운 눈썰미로 문제점들을 지적질해 보십시오.</em></p>
+
+<ol>
+  <li>This question involves the use of multiple linear regression on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.
+<strong>9번 문제.</strong> 방금 한 <code class="language-plaintext highlighter-rouge">Auto</code> 데이터셋의 진짜 진가를 뽐내보죠! 변수를 여러 개 한꺼번에 욱여넣는 ‘다중 선형 회귀’로 판을 본격적으로 키웁니다.</li>
+</ol>
+
+<ul>
+  <li>
+    <p>(a) Produce a scatterplot matrix which includes all of the variables in the data set.
+<em>(a) 데이터 안의 모든 열들을 한 번에 자기들끼리 십자포화로 교차 비교하는 무시무시한 전체 통판 산점도 행렬(scatterplot matrix, 예를 들면 <code class="language-plaintext highlighter-rouge">sns.pairplot</code> 같은 것) 표를 하나 대차게 뽑아보세요.</em></p>
+  </li>
+  <li>
+    <p>(b) Compute the matrix of correlations between the variables using the <code class="language-plaintext highlighter-rouge">DataFrame.corr()</code> method.
+<em>(b) 점 그림만 보면 빙글빙글 헷갈리니까 파이썬의 <code class="language-plaintext highlighter-rouge">DataFrame.corr()</code> 함수를 떡하니 호출해서, 변수들끼리 누가 누구랑 끈적하게 짝짜꿍하고 엮였는지 전부 가로세로 십자표 숫자로 계산해 내세요.</em></p>
+  </li>
+  <li>
+    <p>(c) Use the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to perform a multiple linear regression with <code class="language-plaintext highlighter-rouge">mpg</code> as the response and all other variables except <code class="language-plaintext highlighter-rouge">name</code> as the predictors.
+<em>(c) 자! 이제 <code class="language-plaintext highlighter-rouge">sm.OLS()</code> 용광로에 연비(<code class="language-plaintext highlighter-rouge">mpg</code>)를 정답 목푯값으로 냅두고, 텍스트라 귀찮은 자동차 이름(<code class="language-plaintext highlighter-rouge">name</code>) 하나만 쏙 빼고 나머지 잡다한 제반 변수들을 깡그리 몽땅 다 집어넣어 회귀 모델을 시원하게 돌려버리십시오.</em></p>
+  </li>
+</ul>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">summarize()</code> function to print the results.
+<em>그리고 <code class="language-plaintext highlighter-rouge">.summarize()</code> 함수를 통해 이 거대한 다변수 모델의 종합 성적표를 뿜어내게 하세요.</em></p>
+
+<p>Comment on the output.
+<em>결과물에 대해 여러분의 촌철살인 코멘트를 달아보세요.</em></p>
+
+<p>For instance:
+<em>예를 들어:</em></p>
+
+<ul>
+  <li>i. Is there a relationship between the predictors and the response?
+<em>i. 저 변수 떼거지와 연비 사이에 전체적으로 무슨 연관성이 통계적으로 있기는 합니까?</em></li>
+</ul>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">anova_lm()</code> function from <code class="language-plaintext highlighter-rouge">statsmodels</code> to answer this question.
+<em><code class="language-plaintext highlighter-rouge">statsmodels</code>의 <code class="language-plaintext highlighter-rouge">anova_lm()</code> (F-통계량)의 막강한 힘을 빌려 이 질문에 속 시원히 답해 보세요.</em></p>
+
+<ul>
+  <li>
+    <p>ii. Which predictors appear to have a statistically significant relationship to the response?
+<em>ii. 저 잡다한 변수 떼거지 중에서, 도대체 연비랑 통계적으로 <strong>진짜 실질적(유의미한)</strong> 관계가 있는 핵심 에이스 예측 변수는 누구누구입니까? (P-값이 0.05보다 작은 범인들을 색출하세요!)</em></p>
+  </li>
+  <li>
+    <p>iii. What does the coefficient for the <code class="language-plaintext highlighter-rouge">year</code> variable suggest?
+<em>iii. 생산 연도(<code class="language-plaintext highlighter-rouge">year</code>) 변수 계수 조각은 우리에게 무슨 희망적인 힌트를 암시합니까? (해가 갈수록 차 연비가 기술 발달로 좋아집니까? 숫자는 거짓말을 하지 않죠!)</em></p>
+  </li>
+  <li>
+    <p>(d) Produce some of diagnostic plots of the linear regression fit as described in the lab.
+<em>(d) 다시 한번 종합 병원 불량 진단 플롯(잔차 그래프)들을 돌려보세요.</em></p>
+  </li>
+</ul>
+
+<p>Comment on any problems you see with the fit.
+<em>이 다변수 모델은 또 뭐가 문제인지 신랄하게 씹어보십시오.</em></p>
+
+<p>Do the residual plots suggest any unusually large outliers?
+<em>혹시 잔차 산점도 그래프에서 남몰래 동떨어진 왕따 이상치(outliers) 점이 괴물처럼 솟아 보이지 않나요?</em></p>
+
+<p>Does the leverage plot identify any observations with unusually high leverage?
+<em>레버리지 표에서 남들 다 찌그러져 있는데 혼자 위세 부리면서 모델 전체를 쥐락펴락하는 무시무시한 고위험 점이 혹시 감지되셨습니까?</em></p>
+
+<ul>
+  <li>(e) Fit some models with interactions as described in the lab.
+<em>(e) 위에서 찾은 유효한 변수들을 가지고 이번엔 재밌게 ‘시너지 효과(상호 작용 항, 예: <code class="language-plaintext highlighter-rouge">weight*year</code>)’들을 섞어서 억지로 곱해 주는 모델들을 만들어보세요.</em></li>
+</ul>
+
+<p>Do any interactions appear to be statistically significant?
+<em>그렇게 삽질(?)을 해본 결과, 혹시 통계적으로 대박 터진 유의미한 시너지 꿀조합 상호작용이 하나라도 등장했습니까?</em></p>
+
+<ul>
+  <li>(f) Try a few different transformations of the variables, such as $\log(X)$, $\sqrt{X}$, $X^2$.
+<em>(f) 더 변태같이 파고들어 볼까요? 변수들을 억지로 $\log(X)$ 씌우거나, 제곱근 루트($\sqrt{X}$) 씌우고, 2차 다항 조미료($X^2$)로 꼬아보세요.</em></li>
+</ul>
+
+<p>Comment on your findings.
+<em>그렇게 변수를 고문했더니 모델 예측이 훨씬 날카로워졌는지, 여러분이 겪은 충격적인 관찰 후기를 서술해 주십시오.</em></p>
+
+<ol>
+  <li>This question should be answered using the <code class="language-plaintext highlighter-rouge">Carseats</code> data set.
+<strong>10번 문제.</strong> 자, 자동차 연비는 덮고 상업적인 냄새가 물씬 풍기는 카시트(<code class="language-plaintext highlighter-rouge">Carseats</code>) 판매량 데이터로 넘어갑시다!</li>
+</ol>
+
+<ul>
+  <li>
+    <p>(a) Fit a multiple regression model to predict <code class="language-plaintext highlighter-rouge">Sales</code> using <code class="language-plaintext highlighter-rouge">Price</code> , <code class="language-plaintext highlighter-rouge">Urban</code> , and <code class="language-plaintext highlighter-rouge">US</code> .
+<em>(a) 카시트 판매 성과(<code class="language-plaintext highlighter-rouge">Sales</code>)를 목표 정답지로 삼고, 오직 가격(<code class="language-plaintext highlighter-rouge">Price</code>), 도심 여부(<code class="language-plaintext highlighter-rouge">Urban</code>), 국내 여부(<code class="language-plaintext highlighter-rouge">US</code>)라는 딱 3가지 변조 변수만 투입해 소박한 다변 회귀 모델을 하나 굴려 적합시켜 보십시오.</em></p>
+  </li>
+  <li>
+    <p>(b) Provide an interpretation of each coefficient in the model.
+<em>(b) 튀어나온 성적표의 계수(coefficient) 값들을 유심히 보고, 영업 사장님께 “이건 이런 뜻입니다”라고 브리핑해 보세요.</em></p>
+  </li>
+</ul>
+
+<p>Be careful—some of the variables in the model are qualitative!
+<em>주의보 발령! <code class="language-plaintext highlighter-rouge">Urban</code>이나 <code class="language-plaintext highlighter-rouge">US</code>는 숫자가 아닌 ‘분류성 글자 변수(질적 변수)’라는 얄궂은 사실을 절대 잊지 말고, 더미 처리를 감안해서 눈치껏 말조심 해석하십시오!</em></p>
+
+<ul>
+  <li>
+    <p>(c) Write out the model in equation form, being careful to handle the qualitative variables properly.
+<em>(c) 방금 그 파이썬 코드를 실제 중학교 수학 공식 펜글씨 형태로($\text{Sales} = \beta_0 + …$) 예쁘게 적어 보세요! 저 질적 더미 변수(Yes/No 변수)들을 수식에 어떻게 곱하기 1, 0으로 센스 있게 투입할지 솜씨를 발휘하십시오.</em></p>
+  </li>
+  <li>
+    <p>(d) For which of the predictors can you reject the null hypothesis $H_0 : \beta_j = 0$?
+<em>(d) 투입된 저 3가지 예측 변수 후보 중에, 과연 누구누구가 “나 빼면 안 돼! 나 완전 필수야!”라며 위풍당당하게 쓸모없다는 귀무 가설 $H_0$를 통계적으로 타파(reject)해 버렸습니까?</em></p>
+  </li>
+  <li>
+    <p>(e) On the basis of your response to the previous question, fit a smaller model that only uses the predictors for which there is evidence of association with the outcome.
+<em>(e) 방금 그 훌륭한(d)번 대답을 바탕으로… 증거도 없고 밥값 못 하는 쓸데없는 변수는 가차 없이 모가지를 쳐서 빼버리고, 오직 찐 에이스 증거형 변수만 남기는 더 날렵하고 심플한 축소(다이어트) 모델을 다시 깔끔히 적합(fit)해 살려보십쇼.</em></p>
+  </li>
+  <li>
+    <p>(f) How well do the models in (a) and (e) fit the data?
+<em>(f) 아까 거추장스럽던 3인방 원조 모델(a)과 다이어트한 에이스 소수정예 모델(e), 둘 다 성적표를 까서 데이터 설명력($R^2$, 잔차 오차 등)을 맞대어 냉혹하게 비교해 보세요. 몸집을 줄였는데 설명력에 큰 타격이 없었다면 우리가 이긴 거겠죠?</em></p>
+  </li>
+  <li>
+    <p>(g) Using the model from (e), obtain 95 % confidence intervals for the coefficient(s).
+<em>(g) 이 심플 에이스 모델(e)이 뽑아낸 엑기스 계수들에 대해 “제가 95% 장담하는데, 향후 이 요인들의 실제 가중치들은 이 숫자 범위(신뢰 구간) 사이에 백퍼 있을 겁니다!”라고 당당하게 오차 방어막 범위를 산출해 쳐보십시오.</em></p>
+  </li>
+  <li>
+    <p>(h) Is there evidence of outliers or high leverage observations in the model from (e)?
+<em>(h) 에이스 모델(e)이라고 무조건 완벽할쏘냐! 진단 플롯을 차분히 그려서, “저 미친 이상치 놈 잡아라!” 할 만한 괴상망측한 아웃라이어 점이나 혼자 훌쩍 방방 뜨는 고도의 고위험 레버리지 데이터가 혹시 잠복해 있는지 셜록 홈즈처럼 샅샅이 뒤져보십시오.</em></p>
+  </li>
+</ul>
+
+<ol>
+  <li>In this problem we will investigate the $t$-statistic for the null hypothesis $H_0 : \beta = 0$ in simple linear regression without an intercept.
+<strong>11번 문제.</strong> 이번 문제에서는 조금 하드코어하게, “아예 절편(상수항)이 존재하지 않는” 아주 극단적인 단순 선형 회귀의 뼈대에 숨겨진 귀무 가설 $H_0 : \beta = 0$의 $t$-통계량(t-statistic) 비밀 구조를 파헤쳐보려 합니다.</li>
+</ol>
+
+<p>To begin, we generate a predictor <code class="language-plaintext highlighter-rouge">x</code> and a response <code class="language-plaintext highlighter-rouge">y</code> as follows.
+<em>시작하기 앞서 눈속임 없이, 다음과 같은 파이썬 코드로 신이 된 것처럼 우리 마음대로 난수를 뿌려 원인 <code class="language-plaintext highlighter-rouge">x</code>와 결과 <code class="language-plaintext highlighter-rouge">y</code> 데이터를 창조해 내겠습니다.</em></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>(a) Perform a simple linear regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> , <em>without</em> an intercept.
+<em>(a) 절편 항(intercept)을 무정하게 <strong>잘라낸 채</strong> 온전히 <code class="language-plaintext highlighter-rouge">x</code>만으로 <code class="language-plaintext highlighter-rouge">y</code>를 예언하는 순수 단순 선형 회귀에 돌입하십시오!</em></li>
+</ul>
+
+<p>Report the coefficient estimate $\hat{\beta}$ , the standard error of this coefficient estimate, and the $t$-statistic and $p$-value associated with the null hypothesis $H_0 : \beta = 0$.
+<em>(저항 제로 상태인 이 모델이 예측해낸) 계수 추정치 $\hat{\beta}$, 이 자그마한 녀석이 얼마나 떨어댈지를 말해주는 표준 오차, 그리고 귀무 가설을 개박살 낼 수 있을지를 재는 $t$-통계량 수치와 운명의 $p$-값 등을 주르륵 읊어 제출해 주십시오.</em></p>
+
+<p>Comment on these results.
+<em>그리고 튀어나온 이 숫자들의 의미에 대해 뼈대 있는 논평을 덧붙이세요.</em></p>
+
+<p>(You can perform regression without an intercept using the keywords argument <code class="language-plaintext highlighter-rouge">intercept=False</code> to <code class="language-plaintext highlighter-rouge">ModelSpec()</code> .)
+<em>(당황하지 마십시오! <code class="language-plaintext highlighter-rouge">ModelSpec()</code> 함수 안에서 마법의 주문인 <code class="language-plaintext highlighter-rouge">intercept=False</code> 옵션을 때려 박으면 파이썬이 알아서 절편을 증발시킬 것입니다.)</em></p>
+
+<ul>
+  <li>(b) Now perform a simple linear regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> without an intercept, and report the coefficient estimate, its standard error, and the corresponding $t$-statistic and $p$-values associated with the null hypothesis $H_0 : \beta = 0$.
+<em>(b) 이번엔 미친 짓을 해볼까요? 입장을 정반대로 쓱 뒤집어서 <code class="language-plaintext highlighter-rouge">y</code> 데이터를 투입해 원인 <code class="language-plaintext highlighter-rouge">x</code>를 맞춰보는, 역시 절편 없는 기이한 선형 회귀 실험을 해봅니다. 똑같이 계수 추정치, 표준 오차, $t$-통계량, $p$-값을 뽑아내서 보고하십시오.</em></li>
+</ul>
+
+<p>Comment on these results.
+<em>저 역발상 실험의 결과가 아까 것과 비교해 여러분을 어떻게 당혹시키는지 논평해 보세요.</em></p>
+
+<ul>
+  <li>
+    <p>(c) What is the relationship between the results obtained in (a) and (b)?
+<em>(c) 자, 위에서 나온 두 쌍의 결과물 (a)와 (b)를 매의 눈으로 노려보십시오. 둘 사이에 어떤 신비한 수학적 관계망이나 데칼코마니 같은 거울상 법칙이 포착되지 않습니까?</em></p>
+  </li>
+  <li>
+    <p>(d) For the regression of Y onto X without an intercept, the $t$-statistic for $H_0 : \beta = 0$ takes the form $\hat{\beta} / \text{SE}(\hat{\beta})$, where $\hat{\beta}$ is given by (3.38), and where
+<em>(d) 절편 없는 야생의 수식 세계에서 Y를 X에 회귀시킬 때, $H_0 : \beta = 0$에 대항하는 $t$-통계량은 $\hat{\beta} / \text{SE}(\hat{\beta})$의 다부진 폼플릿을 갖춥니다. 여기서 $\hat{\beta}$ 은 옛날 교재 (3.38)번 공식에서 훔쳐 온 것이고, 바로 다음 요상한 분모 모양과 한 세트입니다:</em></p>
+  </li>
+</ul>
+
+<p><strong>==&gt; picture [133 x 31] intentionally omitted &lt;==</strong>
+<strong>==&gt; picture [133 x 31] intentionally omitted &lt;==</strong></p>
+
+<p>(These formulas are slightly different from those given in Sections 3.1.1 and 3.1.2, since here we are performing regression without an intercept.)
+<em>(참고로 이 기이한 공식들은 앞서 3장에서 뒹굴던 공통 공식들이랑 미세하게 표정이 다릅니다. 왜냐면 우린 지금 절편 항이라는 무거운 닻줄을 끊어내 버렸기 때문이죠!)</em></p>
+
+<p>Show algebraically, and confirm numerically in <code class="language-plaintext highlighter-rouge">Python</code> , that the $t$-statistic can be written as
+<em>자, 이제 종이와 펜을 들고 중학교 대수학 실력을 뽐내어 위 수식이 궁극적으로 아래처럼 멋진 대칭을 이루는 형태로 변신할 수 있음을 손으로 증명하고, 동시에 파이썬 코드로 실제 숫자를 때려 넣어 이 마법을 증명해 내십시오!</em></p>
+
+<p><strong>==&gt; picture [181 x 32] intentionally omitted &lt;==</strong>
+<strong>==&gt; picture [181 x 32] intentionally omitted &lt;==</strong></p>
+
+<ul>
+  <li>
+    <p>(e) Using the results from (d), argue that the $t$-statistic for the regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> is the same as the $t$-statistic for the regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> .
+<em>(e) 기가 막히게 증명해 낸 위 (d)번의 대칭 공식 형태를 쓱 훑어보면서, “어? 보아하니 이거 <code class="language-plaintext highlighter-rouge">y</code>로 <code class="language-plaintext highlighter-rouge">x</code>를 맞추나, <code class="language-plaintext highlighter-rouge">x</code>로 <code class="language-plaintext highlighter-rouge">y</code>를 맞추나 $t$-통계량 평가 점수는 토씨 하나 안 틀리고 완전히 쌍둥이처럼 똑같네!”라는 소름 돋는 주장을 멋들어진 말발로 설득시켜 보십시오.</em></p>
+  </li>
+  <li>
+    <p>(f) In <code class="language-plaintext highlighter-rouge">Python</code> , show that when regression is performed <em>with</em> an intercept, the $t$-statistic for $H_0 : \beta_1 = 0$ is the same for the regression of <code class="language-plaintext highlighter-rouge">y</code> onto <code class="language-plaintext highlighter-rouge">x</code> as it is for the regression of <code class="language-plaintext highlighter-rouge">x</code> onto <code class="language-plaintext highlighter-rouge">y</code> .
+<em>(f) 이번엔 억제기를 풉니다! 다시 절편이 버젓이 <strong>존재하는</strong> 정상적인 회귀로 파이썬 코드를 굴려 보십시오. 그랬을 때조차도 <code class="language-plaintext highlighter-rouge">y</code>를 <code class="language-plaintext highlighter-rouge">x</code>로 맞추든 <code class="language-plaintext highlighter-rouge">x</code>를 <code class="language-plaintext highlighter-rouge">y</code>로 맞추든 핵심 변수의 $t$-통계량($H_0 : \beta_1 = 0$ 용)은 데스매치 무승부처럼 똑같게 나온다는 숨은 진실을 코드로 낱낱이 파헤쳐 보여주세요.</em></p>
+  </li>
+</ul>
+
+<ol>
+  <li>This problem involves simple linear regression without an intercept.
+<strong>12번 문제.</strong> 계속해서 절편 없이 벌거벗은 ‘원점 통과 단순 선형 회귀’의 오묘한 세계에서 놀아보는 문제 되겠습니다.</li>
+</ol>
+
+<ul>
+  <li>(a) Recall that the coefficient estimate $\hat{\beta}$ for the linear regression of Y onto X without an intercept is given by (3.38).
+<em>(a) 앞선 시련에서 맛보았던 절편 없는 Y를 X에 때려 맞추는 회귀 계수 공식(3.38) $\hat{\beta}$을 잠시 뇌 속에서 소환해 볼까요.</em></li>
+</ul>
+
+<p>Under what circumstance is the coefficient estimate for the regression of X onto Y the same as the coefficient estimate for the regression of Y onto X?
+<em>도대체 세상이 어떻게 미쳐 돌아가야, 반대로 엎어 치는 ‘X의 Y에 대한 역회귀 계수’랑 ‘Y의 X에 대한 정방향 회귀 계수’ 녀석이 소름 돋게 똑같은 쌍둥이 숫자가 되어버릴 귀이한 현상이 벌어질 수 있을까요? 바로 그 극적인 상황의 성립 조건을 수학 통찰력으로 풀어내 보십시오.</em></p>
+
+<ul>
+  <li>
+    <p>(b) Generate an example in <code class="language-plaintext highlighter-rouge">Python</code> with $n = 100$ observations in which the coefficient estimate for the regression of X onto Y is <em>different from</em> the coefficient estimate for the regression of Y onto X .
+<em>(b) 입으로만 떠들지 말고 손을 더럽힙시다! 파이썬을 켜서, 가짜 짝퉁 데이터 100알을 막 버무려 만들어, 이른바 ‘역방향과 정방향의 회귀 계수가 철저하게 <strong>안 맞고 다른</strong>’ 아주 흔해 빠진 반례 상황을 코드로 창조해 보세요.</em></p>
+  </li>
+  <li>
+    <p>(c) Generate an example in <code class="language-plaintext highlighter-rouge">Python</code> with $n = 100$ observations in which the coefficient estimate for the regression of X onto Y is <em>the same as</em> the coefficient estimate for the regression of Y onto X .
+<em>(c) 이번엔 신기(神技)를 부려 보세요. 파이썬 마력을 총동원해, 데이터 100알을 아주 절묘하게 오만가지 조작해 내어 아까 (a)에서 예언했던 ‘역방향 회귀 계수와 정방향 회귀 계수의 값이 완벽하게 <strong>대동단결 똑같아지는</strong>’ 마법 같은 특수한 찰나를 코드로 시연해 내십시오!</em></p>
+  </li>
+</ul>
+
+<ol>
+  <li>In this exercise you will create some simulated data and will fit simple linear regression models to it.
+<strong>13번 문제.</strong> 이 랩 실습의 백미! 우리는 직접 창조주가 되어 시뮬레이터로 가짜 세상(데이터)을 뚝딱 만들고 거기다 단순 선형 회귀의 밧줄을 칭칭 감아 볼 것입니다.</li>
+</ol>
+
+<p>Make sure to use the default random number generator with seed set to 1 prior to starting part (a) to ensure consistent results.
+<em>시작 파트 (a)를 건드리기 전에 딱 하나 주의사항! 파이썬 뽑기 기계(난수 생성기)의 비밀 고정 핀인 시드(seed)를 <code class="language-plaintext highlighter-rouge">1</code>로 못 박아 두세요. 그래야 당신이나 나나 똑같은 우주 결과를 보면서 채점할 수 있으니 말입니다.</em></p>
+
+<ul>
+  <li>(a) Using the <code class="language-plaintext highlighter-rouge">normal()</code> method of your random number generator, create a vector, <code class="language-plaintext highlighter-rouge">x</code> , containing 100 observations drawn from a $N(0, 1)$ distribution.
+<em>(a) 통계 뽑기 마법 <code class="language-plaintext highlighter-rouge">normal()</code> 스킬을 질러서, 표준 정규 분포 $N(0, 1)$ (평균 0, 표준 편차 1짜리 종 모양) 우물에서 무작위로 관측치 100개의 알보석을 퍼 올려 <code class="language-plaintext highlighter-rouge">x</code>라는 길쭉한 벡터 그릇에 담으세요.</em></li>
+</ul>
+
+<p>This represents a feature, X .
+<em>아, 이 <code class="language-plaintext highlighter-rouge">x</code>는 이제 선형 회귀판의 영원한 들러리 변수 역할을 할 특성 X입니다.</em></p>
+
+<ul>
+  <li>
+    <p>(b) Using the <code class="language-plaintext highlighter-rouge">normal()</code> method, create a vector, <code class="language-plaintext highlighter-rouge">eps</code> , containing 100 observations drawn from a $N(0, 0.25)$ distribution—a normal distribution with mean zero and variance $0.25$.
+<em>(b) 또다시 <code class="language-plaintext highlighter-rouge">normal()</code> 마법을 발동! 이번엔 평균 0짜리는 맞지만 분산을 $0.25$로 확 줄여 살포시 흩뿌려지는 정규 분포 $N(0, 0.25)$에서, 100개의 미세 오차 먼지 먼지를 퍼 담아 <code class="language-plaintext highlighter-rouge">eps</code> 벡터 그릇에 만드세요.</em></p>
+  </li>
+  <li>
+    <p>(c) Using <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">eps</code> , generate a vector <code class="language-plaintext highlighter-rouge">y</code> according to the model
+<em>(c) 위에서 애써 빚은 원인 찰흙 <code class="language-plaintext highlighter-rouge">x</code>에다가 잡음 먼지 <code class="language-plaintext highlighter-rouge">eps</code>를 섞어, 아래와 같은 진짜 세상의 모델 공식을 대입하여 100개의 결과물 그릇 <code class="language-plaintext highlighter-rouge">y</code> 벡터를 완성하십시오.</em></p>
+  </li>
+</ul>
+
+<p><strong>==&gt; picture [182 x 11] intentionally omitted &lt;==</strong>
+<strong>==&gt; picture [182 x 11] intentionally omitted &lt;==</strong></p>
+
+<p>What is the length of the vector <code class="language-plaintext highlighter-rouge">y</code> ?
+<em>질문 하나! 이따위로 버무려 만든 벡터 <code class="language-plaintext highlighter-rouge">y</code> 꼬챙이의 전체 길이는 과연 몇 알입니까?</em></p>
+
+<p>What are the values of $\beta_0$ and $\beta_1$ in this linear model?
+<em>우리가 이 세상에 부여한 진정한 조물주 수치(실제 모집단 파라미터), 즉 $\beta_0$(절편)과 $\beta_1$(기울기 선형 계수) 값은 각각 누구입니까? (공식을 잘 째려보면 답이 있습니다.)</em></p>
+
+<ul>
+  <li>(d) Create a scatterplot displaying the relationship between <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> .
+<em>(d) 우리가 창조한 저 원인 <code class="language-plaintext highlighter-rouge">x</code> 녀석과 결과 <code class="language-plaintext highlighter-rouge">y</code> 결과물들이 이 세상에 어떻게 터 잡고 사는지 한눈에 보이게 밤하늘의 산점도 점그림으로 예쁘게 흩뿌려 직관해 보세요.</em></li>
+</ul>
+
+<p>Comment on what you observe.
+<em>그 흩뿌려진 별자리(점)의 패턴을 멀찍이서 감상하고 논리적인 촌평을 갈겨주세요.</em></p>
+
+<ul>
+  <li>(e) Fit a least squares linear model to predict <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x</code> .
+<em>(e) 좋고요, 이제 인간의 관점! 우리가 이미 정답($\beta$)을 다 꿰고서 조작해 낸 우주인 걸 모르는 순진무구한 최소 제곱 선형 모델을 투입해 <code class="language-plaintext highlighter-rouge">x</code>로 <code class="language-plaintext highlighter-rouge">y</code>를 눈치껏 알아맞히게 적합(학습) 훈련을 굴려버립시다.</em></li>
+</ul>
+
+<p>Comment on the model obtained.
+<em>과연 이 순진한 예측 모델 녀석이 얼마나 똑똑한 예측선을 뽑아냈는지 가볍게 입을 놀려 평을 해보십시오.</em></p>
+
+<p>How do $\hat{\beta}_0$ and $\hat{\beta}_1$ compare to $\beta_0$ and $\beta_1$?
+<em>제일 재밌는 관전 포인트! 이 녀석이 엉겁결에 내놓은 추정치 $\hat{\beta}_0, \hat{\beta}_1$ 숫자가 우리가 미리 창조 단계에 심어둔 신의 정답 $\beta_0, \beta_1$ 숫자와 얼마나 오싹하게 맞아떨어지거나 어긋났는지 대조해 보세요.</em></p>
+
+<ul>
+  <li>(f) Display the least squares line on the scatterplot obtained in (d).
+<em>(f) 아까 (d)번에서 그렸던 별자리(산점도) 화면 위에, 순진한 모델이 뱉어낸 ‘인간 최선의 최소 제곱 예측 회귀선’ 일직선을 쭉 하고 하나 그어봐 주세요.</em></li>
+</ul>
+
+<p>Draw the population regression line on the plot, in a different color.
+<em>거기에 대비되게, “아이고 모델아 네가 아무리 발버둥 쳐도 신이 짜놓은 진짜 이 세계 선은 바로 이거란다!” 하고, 아까 (c)에서 만든 진짜배기 조물주 회귀선(모집단 선)을 확 튀는 별색 펜으로 교차시켜 그려 넣으십시오.</em></p>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">legend()</code> method of the axes to create an appropriate legend.
+<em>마지막으로 어떤 선이 진짜 신의 선이고 어떤 선이 모델이 발버둥 친 인간의 선인지 나중에 봐도 안 헷갈리게 <code class="language-plaintext highlighter-rouge">legend()</code> 기법으로 정갈한 지도 범례표를 구석에 박아주세요.</em></p>
+
+<ul>
+  <li>(g) Now fit a polynomial regression model that predicts <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x</code> and $x^2$ .
+<em>(g) 밋밋하게 선만 그으니 심심하죠? 이번엔 괜히 “이거 곡선 아닙니까요?”라며 뽐내보려는 다항 회귀 모델 녀석을 출전시켜 <code class="language-plaintext highlighter-rouge">x</code>뿐만 아니라 얍삽한 $x^2$ (제곱) 재료까지 양손에 쥐여주고 억지로 선을 적합시켜 보게 만드십시오.</em></li>
+</ul>
+
+<p>Is there evidence that the quadratic term improves the model fit?
+<em>과연 저 얄팍한 이차항 $x^2$ 꼼수가 모델의 설명력(피팅)을 진정 통계적으로 유의미하게 레벨업시켜줬다는 객관적 증거(P-값 등)가 쥐뿔만큼이라도 나타났습니까?</em></p>
+
+<p>Explain your answer.
+<em>왜 그랬는지 이유를 데이터 조물주 시점에서 당차게 파헤쳐 설명하십시오.</em></p>
+
+<ul>
+  <li>(h) Repeat (a)–(f) after modifying the data generation process in such a way that there is <em>less</em> noise in the data.
+<em>(h) 데이터 조물주가 밸런스 패치에 들어갑니다! 아까 실습했던 전체 파트 (a)-(f) 과정을 처음부터 싹 다 다시 돌리되, 이번에는 피조물 데이터들의 혼란(잡음)이 훨씬 <strong>적어지도록</strong> 우주 규칙을 클린하게 수정해서 굴려보십시오.</em></li>
+</ul>
+
+<p>The model (3.39) should remain the same.
+<em>(단, 뼈대가 되는 (3.39)번 조물주 공식 자체는 손대면 안 됩니다. 게임 룰은 그대로예요!)</em></p>
+
+<p>You can do this by decreasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b).
+<em>(팁: 이 짓을 어떻게 하느냐? 아까 (b) 파트에서 잡음 먼지 흩뿌리던 마법진의 정규 분포 분산을 과감하게 확 조여서 짓이기면 오차 $\epsilon$이 개미 눈물만 해집니다.)</em></p>
+
+<p>Describe your results.
+<em>공기가 맑아진 클린 버전 우주에서 얻어낸 당신의 빛나는 결과를 술술 서술해 보십시오.</em></p>
+
+<ul>
+  <li>(i) Repeat (a)–(f) after modifying the data generation process in such a way that there is <em>more</em> noise in the data.
+<em>(i) 이번에는 극마라맛 하드코어 패치 발동! 파트 (a)-(f) 과정을 전부 다시 무식하게 돌리되, 데이터 세계관에 혼란한 <strong>잡음이 미친 듯이 소용돌이치도록</strong> 꼬아보십시오.</em></li>
+</ul>
+
+<p>The model (3.39) should remain the same.
+<em>(역시, 저 튼튼한 (3.39) 뼈대 공식 자체는 손가락 하나 대면 안 됩니다!)</em></p>
+
+<p>You can do this by increasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b).
+<em>(아까 잡음 먼지 생성기 (b) 마법진의 분산 수치를 뻥튀기하면, 회오리바람 돌듯 오차 $\epsilon$ 지진이 미쳐 날뛸 겁니다.)</em></p>
+
+<p>Describe your results.
+<em>시야가 썩어문드러진 이 대혼란 막장 우주에서 건져 올린 당신의 참혹한(?) 결과를 스릴 넘치게 묘사해 보십시오.</em></p>
+
+<ul>
+  <li>(j) What are the confidence intervals for $\beta_0$ and $\beta_1$ based on the original data set, the noisier data set, and the less noisy data set?
+<em>(j) 자, 이제 최종 심판의 날! ‘원년 오리지널 맛 데이터’, ‘미쳐 돌아가는 마라맛 극성 잡음 데이터’, 그리고 ‘초순수 청정 안심 맛 데이터’. 이 세 가지 평행 우주 모델들이 토해낸 $\beta_0, \beta_1$ 계수의 95% 신뢰 구간 방어막 폭스홀(크기 범위) 값을 쫙 전시해 보세요.</em></li>
+</ul>
+
+<p>Comment on your results.
+<em>잡음의 강도에 따라 신뢰 구간 울타리가 어떻게 처참히 오만상을 찌푸리는지 촌철살인의 총정리 감상평을 때려 넣어 주십시오.</em></p>
+
+<ol>
+  <li>This problem focuses on the <em>collinearity</em> problem.
+<strong>14번 문제.</strong> 대망의 빌런 출현! 이 문제는 회귀 분석의 흉악범, 변수들끼리 목을 졸라대며 자멸하는 ‘<em>공선성(collinearity)의 저주</em>’ 문제에 칼집을 쑤셔 넣습니다.</li>
+</ol>
+
+<ul>
+  <li>(a) Perform the following commands in <code class="language-plaintext highlighter-rouge">Python</code> :
+<em>(a) 먼저, 당신의 불쌍한 파이썬 IDE 쉘 창에 다음의 조작된 마법 저주 코드들을 타이핑해 밀어 넣으십시오:</em></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">default_rng</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">rng</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The last line corresponds to creating a linear model in which <code class="language-plaintext highlighter-rouge">y</code> is a function of <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> .
+<em>유심히 보시면 맨 밑의 파멸의 마지막 줄 수식이, <code class="language-plaintext highlighter-rouge">y</code>를 희생양으로 삼아 기어이 <code class="language-plaintext highlighter-rouge">x1</code>과 <code class="language-plaintext highlighter-rouge">x2</code>라는 놈들을 교묘히 꼬아버려 한 모델 함수로 엮고 있다는 걸 깨달으실 겁니다.</em></p>
+
+<p>Write out the form of the linear model.
+<em>그렇다면 조물주인 당신이 창조한 저 파이썬 코드를 뜯어보고, 수학적 선형 모델의 뼈대 형태가 도대체 어떻게 꼬여 생겨 먹었는지 종이에 적나라하게 밝혀 적어보세요.</em></p>
+
+<p>What are the regression coefficients?
+<em>그리고 이 악의 소굴에 숨어있는 조물주의 진짜배기 회귀 계수(진짜 $\beta$) 숫자는 까놓고 몇인지 수사해 내십시오.</em></p>
+
+<ul>
+  <li>(b) What is the correlation between <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> ?
+<em>(b) 이 빌런 변수 듀오 <code class="language-plaintext highlighter-rouge">x1</code>과 <code class="language-plaintext highlighter-rouge">x2</code> 사이에서 도대체 얼마나 더러운 결탁(상관관계) 숫자가 도출될까요? 계산해 보세요.</em></li>
+</ul>
+
+<p>Create a scatterplot displaying the relationship between the variables.
+<em>그 두 놈이 얼마나 서로를 탐욕스럽게 쫓아다니는지(결탁했는지) 눈으로 까발릴 수 있도록 잔잔한 산점도로 관계를 폭로해 주십쇼.</em></p>
+
+<ul>
+  <li>(c) Using this data, fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> .
+<em>(c) 자, 이제 경찰차 번쩍! 아까 이 썩은 데이터로 <code class="language-plaintext highlighter-rouge">x1</code>, <code class="language-plaintext highlighter-rouge">x2</code>를 공동 범죄자로 몰아 지지고 볶고 추궁해서 무고한 <code class="language-plaintext highlighter-rouge">y</code>를 밝혀내는 최소 제곱 회귀 모델을 풀가동 시키십시오.</em></li>
+</ul>
+
+<p>Describe the results obtained.
+<em>경찰(모델) 수사 결과표를 쭉 들이밀며 어떤 미친 숫자들이 튀어나왔는지 보고해 보십시오.</em></p>
+
+<p>What are $\hat{\beta}_0$, $\hat{\beta}_1$, and $\hat{\beta}_2$?
+<em>범퍼인간 경찰 모델이 어설프게 지레짐작으로 찍어낸 $\hat{\beta}_0$, $\hat{\beta}_1$, $\hat{\beta}_2$ 숫자들은 과연 무엇입니까?</em></p>
+
+<p>How do these relate to the true $\beta_0$, $\beta_1$, and $\beta_2$?
+<em>아까 (a) 파트에서 조물주 모드로 내려다본 진짜 정답 $\beta_0$, $\beta_1$, $\beta_2$랑 비교했을 때… 이 결과들이 얼마나 웃음거리가 되는 헛스윙을 날렸는지 낭만적으로 묘사해 보시죠.</em></p>
+
+<p>Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
+<em>모델의 허접한 수사력으로 이 난장판에서 귀무 가설 $H_0 : \beta_1 = 0$을 찍어 누르고(기각하고) 유의미하다 우길 수 있는 깡다구가 생겼습니까?</em></p>
+
+<p>How about the null hypothesis $H_0 : \beta_2 = 0$?
+<em>그 똑똑하던 모델이 귀무 가설 $H_0 : \beta_2 = 0$ 놈한텐 어떻게 벌벌 떨든지 상황을 고발해보세요.</em></p>
+
+<ul>
+  <li>(d) Now fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using only <code class="language-plaintext highlighter-rouge">x1</code> .
+<em>(d) 짜증 나서 특단의 수사 조치! 이번엔 불쌍한 <code class="language-plaintext highlighter-rouge">x2</code>를 방출해 버리고, 철저하게 독불장군 <code class="language-plaintext highlighter-rouge">x1</code> 혼자만 불러서 <code class="language-plaintext highlighter-rouge">y</code>를 심문하는 단순 최소 제곱 회귀 독대 심문을 때려보십시오.</em></li>
+</ul>
+
+<p>Comment on your results.
+<em>홀딱 벗은 <code class="language-plaintext highlighter-rouge">x1</code>의 진술 결과에 대해 당신만의 맵고 짠 논평을 퍼부으십시오.</em></p>
+
+<p>Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
+<em>이번 심문에서는 과연 당당하게 귀무 가설 $H_0 : \beta_1 = 0$ 카드를 가뿐히 씹어먹고(기각하고) 유의미를 선포할 수 있었습니까?</em></p>
+
+<ul>
+  <li>(e) Now fit a least squares regression to predict <code class="language-plaintext highlighter-rouge">y</code> using only <code class="language-plaintext highlighter-rouge">x2</code> .
+<em>(e) 이번엔 이판사판, <code class="language-plaintext highlighter-rouge">x1</code>을 골방에 처박아 빼버리고 오롯이 <code class="language-plaintext highlighter-rouge">x2</code> 혼자만을 심문실에 던져 넣어 <code class="language-plaintext highlighter-rouge">y</code>를 취조하는 최소 제곱 심문을 굴려보십시오.</em></li>
+</ul>
+
+<p>Comment on your results.
+<em>이 녀석 혼자 있을 때는 판세가 또 어떻게 미쳐 돌아가는지 어이없는 결과를 맛깔나게 묘사해 보세요.</em></p>
+
+<p>Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
+<em>이 녀석은 과연 귀무 가설을 통쾌하게 부숴버리고(기각하고) “나 유의미해!”라고 당당하게 빼액 소리칠 수 있게 되었습니까? (참고 원문에선 오타로 $\beta_1$이라 적혀있지만 여기선 사실 $\beta_2$에 대한 검정입니다)</em></p>
+
+<ul>
+  <li>(f) Do the results obtained in (c)–(e) contradict each other?
+<em>(f) 파트 (c)에서 두 놈을 같이 심문했을 때의 완전 거지 같은 헛발질 결과랑, 파트 (d), (e)에서 각각 독립 심문했을 때의 결과가 서로 모순되고 충돌하면서 상식 밥 말아 먹은 논리 역설이 폭발합니까?</em></li>
+</ul>
+
+<p>Explain your answer.
+<em>도대체 왜 이런 기가 막힌 블랙 코미디 모순 사태가 통계 모델을 덮쳐버린 것인지, 공선성의 저주 관점에서 그 속사정을 확 파헤쳐 조리 있게 설명하십시오.</em></p>
+
+<ul>
+  <li>(g) Suppose we obtain one additional observation, which was unfortunately mismeasured.
+<em>(g) 자, 수사 현장에 초짜 형사가 아주 개판으로 잘못 재어 온 거지 같은 단 1개의 ‘쓰레기 짝퉁 추가 데이터 측정치’ 난입 사고가 벌어졌다고 상상합시다.</em></li>
+</ul>
+
+<p>We use the function <code class="language-plaintext highlighter-rouge">np.concatenate()</code> to add this additional observation to each of <code class="language-plaintext highlighter-rouge">x1</code> , <code class="language-plaintext highlighter-rouge">x2</code> and <code class="language-plaintext highlighter-rouge">y</code> .
+<em>그 쓰레기 한 조각을 파이썬의 접착제 함수 <code class="language-plaintext highlighter-rouge">np.concatenate()</code> 우왁스러운 손길로 우리 안방 데이터 목록인 <code class="language-plaintext highlighter-rouge">x1</code>, <code class="language-plaintext highlighter-rouge">x2</code>, 그리고 <code class="language-plaintext highlighter-rouge">y</code> 꼬리에 무식하게 덕지덕지 붙여버리겠습니다.</em></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]])</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">x2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">concatenate</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>Re-fit the linear models from (c) to (e) using this new data.
+<em>오물이 한 방울 떨어진 이 치명타 데이터 웅덩이를 다시 박박 긁어모아, 아까 전 (c)부터 (e)까지 빙빙 돌려본 눈물겨운 선형 모델들을 처음부터 다시 학습(적합) 시켜보십시오.</em></p>
+
+<p>What effect does this new observation have on the each of the models?
+<em>과연 이 미꾸라지 한 마리 관측치가 연못(각 모델)의 수질을 어떻게 구정물로 확 오염시켜 망쳐버렸는지 그 파급 효과를 고발하십시오.</em></p>
+
+<p>In each model, is this observation an outlier?
+<em>각 모델이 바라보는 입장에서, 이 추가 관측치가 위아래로 동떨어진 미친 궤도의 이상치(outlier) 판정을 받습니까?</em></p>
+
+<p>A high-leverage point?
+<em>아니면 모델 예측선을 멱살 잡고 꺾어버리는 고위험 무법자 레버리지 포인트(고도 뻥튀기 지점)로 악명을 떨칩니까?</em></p>
+
+<p>Both?
+<em>어차피 수사 개판인데 아예 쌍방울로 두 뱃지를 훈장처럼 동시에 달아버리는 괴물입니까?</em></p>
+
+<p>Explain your answers.
+<em>도대체 왜 오염된 데이터 한 톨에 그 난리가 나는지 진단 플롯을 그려보고 당당하게 당신의 논거를 변호하십시오.</em></p>
+
+<ol>
+  <li>This problem involves the <code class="language-plaintext highlighter-rouge">Boston</code> data set, which we saw in the lab for this chapter.
+<strong>15번 문제.</strong> 긴 여정의 피날레! 이번 장 랩 실습의 맛집이었던, 아련한 <code class="language-plaintext highlighter-rouge">Boston</code> 부동산 데이터셋으로 우리의 마지막 탐정 놀이를 시작합니다.</li>
+</ol>
+
+<p>We will now try to predict per capita crime rate using the other variables in this data set.
+<em>여기서 우리는, 이 방대한 동네 데이터셋 골목골목 지천에 널린 다른 모든 변수에 기대어 동네의 뒷골목 1인당 범죄율(per capita crime rate)을 점쟁이처럼 예언하는 무리수에 도전하겠습니다.</em></p>
+
+<p>In other words, per capita crime rate is the response, and the other variables are the predictors.
+<em>다시 말해 타겟 과녁판(반응 변수)은 1인당 범죄율이고, 다른 남아도는 곁가지 정보들이 기출 문제집(예측 변수) 역할을 하는 판다.</em></p>
+
+<ul>
+  <li>(a) For each predictor, fit a simple linear regression model to predict the response.
+<em>(a) 일단 장인 스피릿! 저 모든 예측 변조 예언자 후보들을 일일이 줄 세워서 1:1로 범죄율과 엮어 단물만 빼먹는 소박한 ‘단순 선형 회귀 모델’ 수십 통을 아주 지독하게 따로따로 하나씩 돌려 맞춰보십시오.</em></li>
+</ul>
+
+<p>Describe your results.
+<em>그렇게 노가다를 돌린 전체 결과의 흥망성쇠를 짧게 브리핑하십시오.</em></p>
+
+<p>In which of the models is there a statistically significant association between the predictor and the response?
+<em>그 수많은 단순 모델 잡탕 중에, 과연 어느 예측 변수들만이 범죄율과 통계의 신성한 P-값 인증을 받은 유의미한 결탁(연관성)을 드러냈습니까?</em></p>
+
+<p>Create some plots to back up your assertions.
+<em>입으로만 털지 말고 당신의 그 강력한 주장을 찍어 누를 수 있게 증명하는 뽀대나는 차트 플롯 몇 장을 만들어 무기처럼 뒤에 세워두십시오.</em></p>
+
+<ul>
+  <li>(b) Fit a multiple regression model to predict the response using all of the predictors.
+<em>(b) 이제 진정한 패싸움! 저 곁가지 예측 변수들을 하나도 남김없이 통째로 아구창에 쓸어 담아넣고, 이 동네 범죄율을 집단 다굴로 예측하는 거대한 괴물 다변 회귀 모델 하나를 통렬하게 가동해 보십시오.</em></li>
+</ul>
+
+<p>Describe your results.
+<em>이 어벤져스급 단체 폭행 다중 예측 모델에서 나온 기겁할 만한 결과 보고서를 읊어 보시죠.</em></p>
+
+<p>For which predictors can we reject the null hypothesis $H_0 : \beta_j = 0$?
+<em>단체로 심문했더니, 도대체 저 잘난 척하는 예측 변수 용의자들 중 과연 누구누구만이 결백을 주장하던 쓸모없단 핑계(귀무 가설 $H_0$)를 강제로 부숴버리고, 집단 내 진정한 에이스로 살아남았습니까?</em></p>
+
+<ul>
+  <li>(c) How do your results from (a) compare to your results from (b)?
+<em>(c) (a) 파트의 1:1 뒷골목 예선전 싸움에서 거둔 성적과 (b) 파트의 통짜 본선 집단 패싸움 성적을 나란히 한 책상에 올려놓고 둘 사이의 배신과 모순을 비교 분석해 보십시오.</em></li>
+</ul>
+
+<p>Create a plot displaying the univariate regression coefficients from (a) on the <em>x</em> -axis, and the multiple regression coefficients from (b) on the <em>y</em> -axis.
+<em>그 둘의 엇갈림을 한 방에 시각화해 봅시다! 가로 _x_ 축에는 (a)에서 뽑힌 1:1 단독 출전 회귀 계수(단순 모델 계수) 성적을 나열하고, 세로 _y_ 축에는 (b)에서 뽑힌 단체 출전 회귀 계수(다중 모델 계수) 성적을 크로스로 매칭 시키는 앙증맞은 산점도를 엮어내 보세요.</em></p>
+
+<p>That is, each predictor is displayed as a single point in the plot.
+<em>즉, 요 녀석들은 화면 상에서 저마다의 매력을 품은 점 하나하나로 영광스럽게 빛날 것입니다.</em></p>
+
+<p>Its coefficient in a simple linear regression model is shown on the <em>x</em> -axis, and its coefficient estimate in the multiple linear regression model is shown on the <em>y</em> -axis.
+<em>(다시 말해 점의 좌우 위치는 단독 캐리 할 때의 힘이고, 위아래 위치는 단체로 팀플 할 때의 조화로운 기여도를 낱낱이 고해바친다는 뉘앙스입니다!)</em></p>
+
+<ul>
+  <li>(d) Is there evidence of non-linear association between any of the predictors and the response?
+<em>(d) 잠깐, 우리는 왜 세상사가 무조건 일직선(선형)으로 흘러간다고 순진하게 믿고 있었죠? 혹시 저 예측 변수들 사이에 뭔가 꾸불텅 우동 사리 굴러가듯 곡선을 띠는 비선형적인 짬짜미가 존재한다는 증후군 결산의 신호가 있었습니까?</em></li>
+</ul>
+
+<p>To answer this question, for each predictor X , fit a model of the form
+<em>이 뼈를 때리는 철학적 질문에 답하기 위해, 각 용의자 예측 변수 $X$에 관해 아래 수식과도 같이 능글맞게 꺾이는 이차항, 삼차항 모델 형태를 직접 뒤집어씌워서 통렬히 돌려보며 진실을 심문해 보세요!</em></p>
+
+<p><strong>==&gt; picture [154 x 11] intentionally omitted &lt;==</strong>
+<strong>==&gt; picture [154 x 11] intentionally omitted &lt;==</strong></p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<p><a href="../3_7_1_conceptual/trans2.html">&lt; 3.7.1 Conceptual</a></p>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

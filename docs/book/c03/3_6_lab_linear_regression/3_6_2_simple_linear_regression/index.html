@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,51 +502,76 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="362-simple-linear-regression"><em>3.6.2 Simple Linear Regression</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_1_importing_packages/index.html">&lt; 3.6.1 Importing Packages</a></td>
+      <td><a href="3_6_2_1_out24_374/index.html">3.6.2.1 Out24 374 &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>In this section we will construct model matrices (also called design matrices) using the <code class="language-plaintext highlighter-rouge">ModelSpec()</code> transform from <code class="language-plaintext highlighter-rouge">ISLP.models</code> .</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>We will use the <code class="language-plaintext highlighter-rouge">Boston</code> housing data set, which is contained in the <code class="language-plaintext highlighter-rouge">ISLP</code> package. The <code class="language-plaintext highlighter-rouge">Boston</code> dataset records <code class="language-plaintext highlighter-rouge">medv</code> (median house value) for 506 neighborhoods around Boston. We will build a regression model to predict <code class="language-plaintext highlighter-rouge">medv</code> using 13 predictors such as <code class="language-plaintext highlighter-rouge">rmvar</code> (average number of rooms per house), <code class="language-plaintext highlighter-rouge">age</code> (proportion of owner-occupied units built prior to 1940), and <code class="language-plaintext highlighter-rouge">lstat</code> (percent of households with low socioeconomic status). We will use <code class="language-plaintext highlighter-rouge">statsmodels</code> for this task, a <code class="language-plaintext highlighter-rouge">Python</code> package that implements several commonly used regression methods.</p>
+<h1 id="362-simple-linear-regression"><em>3.6.2 Simple Linear Regression</em></h1>
 
-<p>We have included a simple loading function <code class="language-plaintext highlighter-rouge">load_data()</code> in the <code class="language-plaintext highlighter-rouge">ISLP</code> pack- <code class="language-plaintext highlighter-rouge">load_data()</code> age:</p>
+<p>In this section we will construct model matrices (also called design matrices) using the <code class="language-plaintext highlighter-rouge">ModelSpec()</code> transform from <code class="language-plaintext highlighter-rouge">ISLP.models</code>.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [8]:Boston=load_data("Boston")
+<p>We will use the <code class="language-plaintext highlighter-rouge">Boston</code> housing data set, which is contained in the <code class="language-plaintext highlighter-rouge">ISLP</code> package.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Boston</code> dataset records <code class="language-plaintext highlighter-rouge">medv</code> (median house value) for 506 neighborhoods around Boston.</p>
+
+<p>We will build a regression model to predict <code class="language-plaintext highlighter-rouge">medv</code> using 13 predictors such as <code class="language-plaintext highlighter-rouge">rmvar</code> (average number of rooms per house), <code class="language-plaintext highlighter-rouge">age</code> (proportion of owner-occupied units built prior to 1940), and <code class="language-plaintext highlighter-rouge">lstat</code> (percent of households with low socioeconomic status).</p>
+
+<p>We will use <code class="language-plaintext highlighter-rouge">statsmodels</code> for this task, a <code class="language-plaintext highlighter-rouge">Python</code> package that implements several commonly used regression methods.</p>
+
+<p>We have included a simple loading function <code class="language-plaintext highlighter-rouge">load_data()</code> in the <code class="language-plaintext highlighter-rouge">ISLP</code> package:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [8]: Boston = load_data("Boston")
 Boston.columns
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[8]:Index(['crim','zn','indus','chas','nox','rm','age','dis',
-'rad','tax','ptratio','black','lstat','medv'],
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[8]: Index(['crim', 'zn', 'indus', 'chas', 'nox', 'rm', 'age', 'dis',
+'rad', 'tax', 'ptratio', 'black', 'lstat', 'medv'],
 dtype='object')
 </code></pre></div></div>
 
-<p>118 3. Linear Regression</p>
+<p>Type <code class="language-plaintext highlighter-rouge">Boston?</code> to find out more about these data.</p>
 
-<p>Type <code class="language-plaintext highlighter-rouge">Boston?</code> to find out more about these data. We start by using the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to fit a simple linear regression <code class="language-plaintext highlighter-rouge">sm.OLS()</code> model. Our response will be <code class="language-plaintext highlighter-rouge">medv</code> and <code class="language-plaintext highlighter-rouge">lstat</code> will be the single predictor. For this model, we can create the model matrix by hand.</p>
+<p>We start by using the <code class="language-plaintext highlighter-rouge">sm.OLS()</code> function to fit a simple linear regression model.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [9]:X=pd.DataFrame({'intercept':np.ones(Boston.shape[0]),
-'lstat':Boston['lstat']})
+<p>Our response will be <code class="language-plaintext highlighter-rouge">medv</code> and <code class="language-plaintext highlighter-rouge">lstat</code> will be the single predictor.</p>
+
+<p>For this model, we can create the model matrix by hand.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [9]: X = pd.DataFrame({'intercept': np.ones(Boston.shape[0]),
+'lstat': Boston['lstat']})
 X[:4]
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[9]:interceptlstat
-01.04.98
-11.09.14
-21.04.03
-31.02.94
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[9]:    intercept  lstat
+0        1.0   4.98
+1        1.0   9.14
+2        1.0   4.03
+3        1.0   2.94
 </code></pre></div></div>
 
 <p>We extract the response, and fit the model.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [10]:y=Boston['medv']
-model=sm.OLS(y,X)
-results=model.fit()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [10]: y = Boston['medv']
+model = sm.OLS(y, X)
+results = model.fit()
 </code></pre></div></div>
 
 <p>Note that <code class="language-plaintext highlighter-rouge">sm.OLS()</code> does not fit the model; it specifies the model, and then <code class="language-plaintext highlighter-rouge">model.fit()</code> does the actual fitting.</p>
 
-<p>Our <code class="language-plaintext highlighter-rouge">ISLP</code> function <code class="language-plaintext highlighter-rouge">summarize()</code> produces a simple table of the parame- <code class="language-plaintext highlighter-rouge">summarize()</code> ter estimates, their standard errors, $t$-statistics and p-values. The function takes a single argument, such as the object <code class="language-plaintext highlighter-rouge">results</code> returned here by the <code class="language-plaintext highlighter-rouge">fit</code> method, and returns such a summary.</p>
+<p>Our <code class="language-plaintext highlighter-rouge">ISLP</code> function <code class="language-plaintext highlighter-rouge">summarize()</code> produces a simple table of the parameter estimates, their standard errors, $t$-statistics and p-values.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [11]:summarize(results)
+<p>The function takes a single argument, such as the object <code class="language-plaintext highlighter-rouge">results</code> returned here by the <code class="language-plaintext highlighter-rouge">fit</code> method, and returns such a summary.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [11]: summarize(results)
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[11]:
@@ -581,69 +605,73 @@ results=model.fit()
   </tbody>
 </table>
 
-<p>Before we describe other methods for working with fitted models, we outline a more useful and general framework for constructing a model matrix <code class="language-plaintext highlighter-rouge">X</code> .</p>
+<p>Before we describe other methods for working with fitted models, we outline a more useful and general framework for constructing a model matrix <code class="language-plaintext highlighter-rouge">X</code>.</p>
 
-<p>Using Transformations: Fit and Transform</p>
+<p>A transform is an object that is created with some parameters as arguments.</p>
 
-<p>Our model above has a single predictor, and constructing <code class="language-plaintext highlighter-rouge">X</code> was straightforward. In practice we often fit models with more than one predictor, typically selected from an array or data frame. We may wish to introduce transformations to the variables before fitting the model, specify interactions between variables, and expand some particular variables into sets of variables (e.g. polynomials). The <code class="language-plaintext highlighter-rouge">sklearn</code> package has a particular notion <code class="language-plaintext highlighter-rouge">sklearn</code> for this type of task: a <em>transform</em> . A transform is an object that is created with some parameters as arguments. The object has two main methods: <code class="language-plaintext highlighter-rouge">fit()</code> and <code class="language-plaintext highlighter-rouge">transform()</code> .</p>
+<p>The object has two main methods: <code class="language-plaintext highlighter-rouge">fit()</code> and ``.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.fit()
-.transform()
+.
 </code></pre></div></div>
 
-<p>We provide a general approach for specifying models and constructing <code class="language-plaintext highlighter-rouge">.transform()</code> the model matrix through the transform <code class="language-plaintext highlighter-rouge">ModelSpec()</code> in the <code class="language-plaintext highlighter-rouge">ISLP</code> library. <code class="language-plaintext highlighter-rouge">ModelSpec() ModelSpec()</code> (renamed <code class="language-plaintext highlighter-rouge">MS()</code> in the preamble) creates a transform object, and then a pair of methods <code class="language-plaintext highlighter-rouge">transform()</code> and <code class="language-plaintext highlighter-rouge">fit()</code> are used to construct a corresponding model matrix.</p>
+<p>We provide a general approach for specifying models and constructing the model matrix through the transform <code class="language-plaintext highlighter-rouge">ModelSpec()</code> in the <code class="language-plaintext highlighter-rouge">ISLP</code> library.</p>
 
-<p>3.6 Lab: Linear Regression 119</p>
+<p><code class="language-plaintext highlighter-rouge">ModelSpec()</code> (renamed <code class="language-plaintext highlighter-rouge">MS()</code> in the preamble) creates a transform object, and then a pair of methods `` and <code class="language-plaintext highlighter-rouge">fit()</code> are used to construct a corresponding model matrix.</p>
 
-<p>We first describe this process for our simple regression model using a single predictor <code class="language-plaintext highlighter-rouge">lstat</code> in the <code class="language-plaintext highlighter-rouge">Boston</code> data frame, but will use it repeatedly in more complex tasks in this and other labs in this book. In our case the transform is created by the expression <code class="language-plaintext highlighter-rouge">design = MS(['lstat'])</code> .</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">fit()</code> method takes the original array and may do some initial computations on it, as specified in the transform object. For example, it may compute means and standard deviations for centering and scaling. The <code class="language-plaintext highlighter-rouge">transform()</code> method applies the fitted transformation to the array of data, and produces the model matrix.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [12]:design=MS(['lstat'])
-design=design.fit(Boston)
-X=design.transform(Boston)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [12]: design = MS(['lstat'])
+design = design.fit(Boston)
+X = design.transform(Boston)
 X[:4]
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[12]:interceptlstat
-01.04.98
-11.09.14
-21.04.03
-31.02.94
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[12]:    intercept  lstat
+0        1.0   4.98
+1        1.0   9.14
+2        1.0   4.03
+3        1.0   2.94
 </code></pre></div></div>
 
-<p>In this simple case, the <code class="language-plaintext highlighter-rouge">fit()</code> method does very little; it simply checks that the variable <code class="language-plaintext highlighter-rouge">'lstat'</code> specified in <code class="language-plaintext highlighter-rouge">design</code> exists in <code class="language-plaintext highlighter-rouge">Boston</code> . Then <code class="language-plaintext highlighter-rouge">transform()</code> constructs the model matrix with two columns: an <code class="language-plaintext highlighter-rouge">intercept</code> and the variable <code class="language-plaintext highlighter-rouge">lstat</code> .</p>
+<p>In this simple case, the <code class="language-plaintext highlighter-rouge">fit()</code> method does very little; it simply checks that the variable <code class="language-plaintext highlighter-rouge">'lstat'</code> specified in <code class="language-plaintext highlighter-rouge">design</code> exists in <code class="language-plaintext highlighter-rouge">Boston</code>.</p>
 
-<p>These two operations can be combined with the <code class="language-plaintext highlighter-rouge">fit_transform()</code> method. <code class="language-plaintext highlighter-rouge">.fit_</code></p>
+<p>Then `` constructs the model matrix with two columns: an <code class="language-plaintext highlighter-rouge">intercept</code> and the variable <code class="language-plaintext highlighter-rouge">lstat</code>.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [13]:design=MS(['lstat'])
-X=design.fit_transform(Boston)
+<p>These two operations can be combined with the <code class="language-plaintext highlighter-rouge">fit_</code> method.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [13]: design = MS(['lstat'])
+X = design.fit_transform(Boston)
 X[:4]
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>transform()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[13]:interceptlstat
-01.04.98
-11.09.14
-21.04.03
-31.02.94
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[13]:    intercept  lstat
+0        1.0   4.98
+1        1.0   9.14
+2        1.0   4.03
+3        1.0   2.94
 </code></pre></div></div>
 
-<p>Note that, as in the previous code chunk when the two steps were done separately, the <code class="language-plaintext highlighter-rouge">design</code> object is changed as a result of the <code class="language-plaintext highlighter-rouge">fit()</code> operation. The power of this pipeline will become clearer when we fit more complex models that involve interactions and transformations.</p>
+<p>Note that, as in the previous code chunk when the two steps were done separately, the <code class="language-plaintext highlighter-rouge">design</code> object is changed as a result of the <code class="language-plaintext highlighter-rouge">fit()</code> operation.</p>
 
-<p>Let’s return to our fitted regression model. The object <code class="language-plaintext highlighter-rouge">results</code> has several methods that can be used for inference. We already presented a function <code class="language-plaintext highlighter-rouge">summarize()</code> for showing the essentials of the fit. For a full and somewhat exhaustive summary of the fit, we can use the <code class="language-plaintext highlighter-rouge">summary()</code> method (output not shown).</p>
+<p>The power of this pipeline will become clearer when we fit more complex models that involve interactions and transformations.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [14]:results.summary()
+<p>Let’s return to our fitted regression model.</p>
+
+<p>The object <code class="language-plaintext highlighter-rouge">results</code> has several methods that can be used for inference.</p>
+
+<p>We already presented a function <code class="language-plaintext highlighter-rouge">summarize()</code> for showing the essentials of the fit.</p>
+
+<p>For a full and somewhat exhaustive summary of the fit, we can use the <code class="language-plaintext highlighter-rouge">summary()</code> method (output not shown).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [14]: results.summary()
 </code></pre></div></div>
 
-<p>The fitted coefficients can also be retrieved as the <code class="language-plaintext highlighter-rouge">params</code> attribute of <code class="language-plaintext highlighter-rouge">results</code> .</p>
+<p>The fitted coefficients can also be retrieved as the <code class="language-plaintext highlighter-rouge">params</code> attribute of <code class="language-plaintext highlighter-rouge">results</code>.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [15]:results.params
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [15]: results.params
 </code></pre></div></div>
-
-<p>120 3. Linear Regression</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[15]:
 </code></pre></div></div>
@@ -653,110 +681,130 @@ lstat-0.950049
 dtype:float64
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">get_prediction()</code> method can be used to obtain predictions, and <code class="language-plaintext highlighter-rouge">.get_</code> produce confidence intervals and prediction intervals for the prediction of <code class="language-plaintext highlighter-rouge">prediction() medv</code> for given values of <code class="language-plaintext highlighter-rouge">lstat</code> .</p>
+<p>The <code class="language-plaintext highlighter-rouge">get_prediction()</code> method can be used to obtain predictions, and produce confidence intervals and prediction intervals for the prediction of <code class="language-plaintext highlighter-rouge">medv</code> for given values of <code class="language-plaintext highlighter-rouge">lstat</code>.</p>
 
-<p>We first create a new data frame, in this case containing only the variable <code class="language-plaintext highlighter-rouge">lstat</code> , with the values for this variable at which we wish to make predictions. We then use the <code class="language-plaintext highlighter-rouge">transform()</code> method of <code class="language-plaintext highlighter-rouge">design</code> to create the corresponding model matrix.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [16]:new_df=pd.DataFrame({'lstat':[5,10,15]})
-newX=design.transform(new_df)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [16]: new_df = pd.DataFrame({'lstat': [5, 10, 15]})
+newX = design.transform(new_df)
 newX
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[16]:interceptlstat
-01.05
-11.010
-21.015
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[16]:    intercept  lstat
+0        1.0     5.0
+1        1.0    10.0
+2        1.0    15.0
 </code></pre></div></div>
 
-<p>Next we compute the predictions at <code class="language-plaintext highlighter-rouge">newX</code> , and view them by extracting the <code class="language-plaintext highlighter-rouge">predicted_mean</code> attribute.</p>
+<p>Next we compute the predictions at <code class="language-plaintext highlighter-rouge">newX</code>, and view them by extracting the <code class="language-plaintext highlighter-rouge">predicted_mean</code> attribute.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [17]:new_predictions=results.get_prediction(newX);
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [17]: new_predictions = results.get_prediction(newX)
 new_predictions.predicted_mean
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[17]:array([29.80359411,25.05334734,20.30310057])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[17]: array([29.80359411, 25.05334734, 20.30310057])
 </code></pre></div></div>
 
 <p>We can produce confidence intervals for the predicted values.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [18]:new_predictions.conf_int(alpha=0.05)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [18]: new_predictions.conf_int(alpha=0.05)
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[18]:array([[29.00741194,30.59977628],
-[24.47413202,25.63256267],
-[19.73158815,20.87461299]])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[18]: array([[29.00741194, 30.59977628],
+       [24.47413202, 25.63256267],
+       [19.73158815, 20.87461299]])
 </code></pre></div></div>
 
-<p>Prediction intervals are computing by setting <code class="language-plaintext highlighter-rouge">obs=True</code> :</p>
+<p>Prediction intervals are computing by setting <code class="language-plaintext highlighter-rouge">obs=True</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [19]:new_predictions.conf_int(obs=True,alpha=0.05)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [19]: new_predictions.conf_int(obs=True, alpha=0.05)
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[19]:array([[17.56567478,42.04151344],
-[12.82762635,37.27906833],
-[8.0777421,32.52845905]])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[19]: array([[17.56567478, 42.04151344],
+       [12.82762635, 37.27906833],
+       [8.0777421 , 32.52845905]])
 </code></pre></div></div>
 
-<p>For instance, the 95% confidence interval associated with an <code class="language-plaintext highlighter-rouge">lstat</code> value of 10 is (24.47, 25.63), and the 95% prediction interval is (12.82, 37.28). As expected, the confidence and prediction intervals are centered around the same point (a predicted value of 25.05 for <code class="language-plaintext highlighter-rouge">medv</code> when <code class="language-plaintext highlighter-rouge">lstat</code> equals 10), but the latter are substantially wider.</p>
+<p>For instance, the 95% confidence interval associated with an <code class="language-plaintext highlighter-rouge">lstat</code> value of 10 is (24.47, 25.63), and the 95% prediction interval is (12.82, 37.28).</p>
 
-<p>Next we will plot <code class="language-plaintext highlighter-rouge">medv</code> and <code class="language-plaintext highlighter-rouge">lstat</code> using <code class="language-plaintext highlighter-rouge">DataFrame.plot.scatter()</code> , and <code class="language-plaintext highlighter-rouge">.plot.</code> wish to add the regression line to the resulting plot. <code class="language-plaintext highlighter-rouge">scatter()</code></p>
+<p>As expected, the confidence and prediction intervals are centered around the same point (a predicted value of 25.05 for <code class="language-plaintext highlighter-rouge">medv</code> when <code class="language-plaintext highlighter-rouge">lstat</code> equals 10), but the latter are substantially wider.</p>
+
+<p>Next we will plot <code class="language-plaintext highlighter-rouge">medv</code> and <code class="language-plaintext highlighter-rouge">lstat</code> using <code class="language-plaintext highlighter-rouge">DataFrame.plot.scatter()</code>, and wish to add the regression line to the resulting plot.</p>
 
 <p>3.6 Lab: Linear Regression 121</p>
 
-<p>Defining Functions</p>
-
-<p>While there is a function within the <code class="language-plaintext highlighter-rouge">ISLP</code> package that adds a line to an existing plot, we take this opportunity to define our first function to do so. <code class="language-plaintext highlighter-rouge">def</code></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [20]:defabline(ax,b,m):
-"Addalinewithslopemandinterceptbtoax"
-xlim=ax.get_xlim()
-ylim=[m*xlim[0]+b,m*xlim[1]+b]
-ax.plot(xlim,ylim)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [20]: def abline(ax, b, m):
+    "Add a line with slope m and intercept b to ax"
+    xlim = ax.get_xlim()
+    ylim = [m * xlim[0] + b, m * xlim[1] + b]
+    ax.plot(xlim, ylim)
 </code></pre></div></div>
 
-<p>A few things are illustrated above. First we see the syntax for defining a function: <code class="language-plaintext highlighter-rouge">def funcname(...)</code> . The function has arguments <code class="language-plaintext highlighter-rouge">ax, b, m</code> where <code class="language-plaintext highlighter-rouge">ax</code> is an axis object for an exisiting plot, <code class="language-plaintext highlighter-rouge">b</code> is the intercept and <code class="language-plaintext highlighter-rouge">m</code> is the slope of the desired line. Other plotting options can be passed on to <code class="language-plaintext highlighter-rouge">ax.plot</code> by including additional optional arguments as follows:</p>
+<p>A few things are illustrated above.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [21]:defabline(ax,b,m,*args,**kwargs):
-"Addalinewithslopemandinterceptbtoax"
-xlim=ax.get_xlim()
-ylim=[m*xlim[0]+b,m*xlim[1]+b]
-ax.plot(xlim,ylim,*args,**kwargs)
+<p>First we see the syntax for defining a function: <code class="language-plaintext highlighter-rouge">def funcname(...)</code>.</p>
+
+<p>The function has arguments <code class="language-plaintext highlighter-rouge">ax, b, m</code> where <code class="language-plaintext highlighter-rouge">ax</code> is an axis object for an exisiting plot, <code class="language-plaintext highlighter-rouge">b</code> is the intercept and <code class="language-plaintext highlighter-rouge">m</code> is the slope of the desired line.</p>
+
+<p>Other plotting options can be passed on to <code class="language-plaintext highlighter-rouge">ax.plot</code> by including additional optional arguments as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [21]: def abline(ax, b, m, *args, **kwargs):
+    "Add a line with slope m and intercept b to ax"
+    xlim = ax.get_xlim()
+    ylim = [m * xlim[0] + b, m * xlim[1] + b]
+    ax.plot(xlim, ylim, *args, **kwargs)
 </code></pre></div></div>
 
-<p>The addition of <code class="language-plaintext highlighter-rouge">*args</code> allows any number of non-named arguments to <code class="language-plaintext highlighter-rouge">abline</code> , while <code class="language-plaintext highlighter-rouge">*kwargs</code> allows any number of named arguments (such as <code class="language-plaintext highlighter-rouge">linewidth=3</code> ) to <code class="language-plaintext highlighter-rouge">abline</code> . In our function, we pass these arguments verbatim to <code class="language-plaintext highlighter-rouge">ax.plot</code> above. Readers interested in learning more about functions are referred to the section on defining functions in docs.python.org/tutorial.</p>
+<p>The addition of <code class="language-plaintext highlighter-rouge">*args</code> allows any number of non-named arguments to <code class="language-plaintext highlighter-rouge">abline</code>, while <code class="language-plaintext highlighter-rouge">*kwargs</code> allows any number of named arguments (such as <code class="language-plaintext highlighter-rouge">linewidth=3</code>) to <code class="language-plaintext highlighter-rouge">abline</code>.</p>
 
-<p>Let’s use our new function to add this regression line to a plot of <code class="language-plaintext highlighter-rouge">medv</code> vs. <code class="language-plaintext highlighter-rouge">lstat</code> .</p>
+<p>In our function, we pass these arguments verbatim to <code class="language-plaintext highlighter-rouge">ax.plot</code> above.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [22]:ax=Boston.plot.scatter('lstat','medv')
+<p>Readers interested in learning more about functions are referred to the section on defining functions in docs.python.org/tutorial.</p>
+
+<p>Let’s use our new function to add this regression line to a plot of <code class="language-plaintext highlighter-rouge">medv</code> vs. <code class="language-plaintext highlighter-rouge">lstat</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [22]: ax = Boston.plot.scatter('lstat', 'medv')
 abline(ax,
-results.params[0],
-results.params[1],
-'r--',
-linewidth=3)
+       results.params[0],
+       results.params[1],
+       'r--',
+       linewidth=3)
 </code></pre></div></div>
 
-<p>Thus, the final call to <code class="language-plaintext highlighter-rouge">ax.plot()</code> is <code class="language-plaintext highlighter-rouge">ax.plot(xlim, ylim, 'r--', linewidth=3)</code> . We have used the argument <code class="language-plaintext highlighter-rouge">'r--'</code> to produce a red dashed line, and added an argument to make it of width 3. There is some evidence for non-linearity in the relationship between <code class="language-plaintext highlighter-rouge">lstat</code> and <code class="language-plaintext highlighter-rouge">medv</code> . We will explore this issue later in this lab.</p>
+<p>Thus, the final call to <code class="language-plaintext highlighter-rouge">ax.plot()</code> is <code class="language-plaintext highlighter-rouge">ax.plot(xlim, ylim, 'r--', linewidth=3)</code>.</p>
+
+<p>We have used the argument <code class="language-plaintext highlighter-rouge">'r--'</code> to produce a red dashed line, and added an argument to make it of width 3.</p>
+
+<p>There is some evidence for non-linearity in the relationship between <code class="language-plaintext highlighter-rouge">lstat</code> and <code class="language-plaintext highlighter-rouge">medv</code>.</p>
+
+<p>We will explore this issue later in this lab.</p>
 
 <p>As mentioned above, there is an existing function to add a line to a plot — <code class="language-plaintext highlighter-rouge">ax.axline()</code> — but knowing how to write such functions empowers us to create more expressive displays.</p>
 
-<p>Next we examine some diagnostic plots, several of which were discussed in Section 3.3.3. We can find the fitted values and residuals of the fit as attributes of the <code class="language-plaintext highlighter-rouge">results</code> object. Various influence measures describing the regression model are computed with the <code class="language-plaintext highlighter-rouge">get_influence()</code> method. As we <code class="language-plaintext highlighter-rouge">.get_</code> will not use the <code class="language-plaintext highlighter-rouge">fig</code> component returned as the first value from <code class="language-plaintext highlighter-rouge">subplots()</code> , <code class="language-plaintext highlighter-rouge">influence()</code> we simply capture the second returned value in <code class="language-plaintext highlighter-rouge">ax</code> below.</p>
+<p>Next we examine some diagnostic plots, several of which were discussed in Section 3.3.3.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [23]:ax=subplots(figsize=(8,8))[1]
+<p>We can find the fitted values and residuals of the fit as attributes of the <code class="language-plaintext highlighter-rouge">results</code> object.</p>
+
+<p>Various influence measures describing the regression model are computed with the <code class="language-plaintext highlighter-rouge">get_influence()</code> method.</p>
+
+<p>As we will not use the <code class="language-plaintext highlighter-rouge">fig</code> component returned as the first value from <code class="language-plaintext highlighter-rouge">subplots()</code>, we simply capture the second returned value in <code class="language-plaintext highlighter-rouge">ax</code> below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [23]: ax = subplots(figsize=(8, 8))[1]
 </code></pre></div></div>
 
-<p>122 3. Linear Regression</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ax.scatter(results.fittedvalues ,results.resid)
-ax.set_xlabel('Fittedvalue')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ax.scatter(results.fittedvalues, results.resid)
+ax.set_xlabel('Fitted value')
 ax.set_ylabel('Residual')
-ax.axhline(0,c='k',ls='--');
+ax.axhline(0, c='k', ls='--')
 </code></pre></div></div>
 
-<p>We add a horizontal line at 0 for reference using the <code class="language-plaintext highlighter-rouge">ax.axhline()</code> method, <code class="language-plaintext highlighter-rouge">.axhline()</code> indicating it should be black ( <code class="language-plaintext highlighter-rouge">c='k'</code> ) and have a dashed linestyle ( <code class="language-plaintext highlighter-rouge">ls='--'</code> ). On the basis of the residual plot (not shown), there is some evidence of non-linearity. Leverage statistics can be computed for any number of predictors using the <code class="language-plaintext highlighter-rouge">hat_matrix_diag</code> attribute of the value returned by the <code class="language-plaintext highlighter-rouge">get_influence()</code> method.</p>
+<p>We add a horizontal line at 0 for reference using the <code class="language-plaintext highlighter-rouge">ax.axhline()</code> method, indicating it should be black (<code class="language-plaintext highlighter-rouge">c='k'</code>) and have a dashed linestyle (<code class="language-plaintext highlighter-rouge">ls='--'</code>).</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [24]:infl=results.get_influence()
-ax=subplots(figsize=(8,8))[1]
-ax.scatter(np.arange(X.shape[0]),infl.hat_matrix_diag)
+<p>On the basis of the residual plot (not shown), there is some evidence of non-linearity.</p>
+
+<p>Leverage statistics can be computed for any number of predictors using the <code class="language-plaintext highlighter-rouge">hat_matrix_diag</code> attribute of the value returned by the <code class="language-plaintext highlighter-rouge">get_influence()</code> method.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [24]: infl = results.get_influence()
+ax = subplots(figsize=(8, 8))[1]
+ax.scatter(np.arange(X.shape[0]), infl.hat_matrix_diag)
 ax.set_xlabel('Index')
 ax.set_ylabel('Leverage')
 np.argmax(infl.hat_matrix_diag)
@@ -764,15 +812,20 @@ np.argmax(infl.hat_matrix_diag)
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<hr />
 
-<h3 id="jupyter-notebook-output-출력-예시">Jupyter Notebook Output (출력 예시)</h3>
-<ul>
-  <li><a href="./3_6_2_1_out24_374/">문서로 이동하기</a></li>
-</ul>
+<hr />
 
-<p>Jupyter Notebook 셀에서 통계 모델 객체 혹은 변수의 길이/형태를 출력했을 때 콘솔에 어떻게 표시되는지 확인합니다.
-코드의 작동 상태를 점검하는 중간 디버깅 예시입니다.</p>
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_1_importing_packages/index.html">&lt; 3.6.1 Importing Packages</a></td>
+      <td><a href="3_6_2_1_out24_374/index.html">3.6.2.1 Out24 374 &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

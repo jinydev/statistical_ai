@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_2_assessing_model_accuracy/2_2_3_the_classification_setting/2_2_3_1_k_nearest_neighbors/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c02/2_2_assessing_model_accuracy/2_2_3_the_classification_setting/2_2_3_1_k_nearest_neighbors/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_2_assessing_model_accuracy/2_2_3_the_classification_setting/2_2_3_1_k_nearest_neighbors/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c02/2_2_assessing_model_accuracy/2_2_3_the_classification_setting/2_2_3_1_k_nearest_neighbors/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/">02. Statistical Learning</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_2_assessing_model_accuracy/">2 2 assessing model accuracy</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_2_assessing_model_accuracy/2_2_3_the_classification_setting/">2 2 3 the classification setting</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_2_assessing_model_accuracy/2_2_3_the_classification_setting/2_2_3_1_k_nearest_neighbors/">2 2 3 1 k nearest neighbors</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../trans2.html">&lt; 2.2.3 The Classification Setting</a></td>
+      <td><a href="../../../2_3_lab_introduction_to_python/trans2.html">2.3 Lab Introduction To Python &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 조금 더 쉽고 재미있게 공부하고 싶으신가요? 이 페이지는 중학생도 이해할 수 있는 친절한 ‘쉬운 해설판’입니다! 영어 원문을 문장 단위로 꼼꼼하게 번역한 느낌을 원하신다면 <a href="./trans1.html">📖 직역본 보기</a> 메뉴를 활용하세요!</p>
+</blockquote>
+
+<h1 id="k--nearest-neighbors"><em>K</em> -Nearest Neighbors</h1>
+<h1 id="k--최근접-이웃-다수결의-원칙을-따르는-투표-로봇"><em>K</em> -최근접 이웃 (다수결의 원칙을 따르는 투표 로봇)</h1>
+
+<p>In theory we would always like to predict qualitative responses using the Bayes classifier.
+솔직히 말해서 교과서적인 이상향(이론)만 따지자면, 우리는 오답 방어율 1위인 갓벽한 ‘베이즈 분류기’ 형님만 평생 모시며 팀 고르기(질적 응답) 퀴즈를 풀고 싶습니다.</p>
+
+<p>But for real data, we do not know the conditional distribution of $Y$ given $X$, and so computing the Bayes classifier is impossible.
+하지만 현실은 지옥이죠. 실제 더러운 데이터 판에서는 “이 아저씨가 암일 확률($X$ 일 때 $Y$ 의 조건부 분포)” 그딴 건 조물주 빼고 아무도 모릅니다. 그래서 통계 확률표가 싹 다 박살 나있기 때문에, 진짜 베이즈 분류기를 계산기로 두들겨서 만드는 건 완전히 불가능한 개꿈입니다.</p>
+
+<p>Therefore, the Bayes classifier serves as an unattainable gold standard against which to compare other methods.
+그러니까 베이즈 분류기는 “아, 저렇게만 되면 소원이 없겠네!” 하면서 다른 기계들의 성적을 깎아내릴 때 쓰는, 하늘에 떠 있는 닿지 않는 ‘황금 잣대(gold standard)’ 같은 전설의 포켓몬 역할만 합니다.</p>
+
+<p>Many approaches attempt to estimate the conditional distribution of $Y$ given $X$, and then classify a given observation to the class with highest <em>estimated</em> probability.
+그래서 인간들은 삐까뻔쩍한 기계들을 수없이 만들어 내서, 어떻게든 어떻게든 진짜 확률 분포를 ‘추정’하려고 발악합니다. 그리고는 “아마 이쪽이 확률이 젤 높을 거야!” 하고 자신들이 <em>어림잡아 계산한(추정한)</em> 확률을 믿고 사람들을 가장 높은 확률 부서로 때려 박습니다(분류).</p>
+
+<p>One such method is the <em>K-nearest neighbors</em> (KNN) classifier.
+그 수백 가지 꼼수 기법들 중에서 가장 직관적이고 널리 쓰이는 녀석이 바로 <strong><em>‘K-최근접 이웃(K-nearest neighbors, 약칭 KNN)’</em></strong> 분류기입니다.</p>
+
+<p>Given a positive integer $K$ and a test observation $x_0$, the KNN classifier first identifies the $K$ points in the training data that are closest to $x_0$, represented by $\mathcal{N}_0$.
+이름부터 감이 오죠? 우리가 머릿수로 $K$ (예: 정수 3)를 정해주고 낯선 새로운 아저씨($x_0$)를 딱 데려오면, 이 KNN 로봇은 다짜고짜 훈련장 데이터 더미 속을 뒤져서 지금 이 아저씨($x_0$)랑 얼굴 힌트나 몸무게가 <strong>가장 소름 돋게 똑같이 생긴(가장 가까운) 도플갱어 $K$ 명</strong>을 딱 잡아와서 방($\mathcal{N}_0$ 그룹)을 만듭니다.</p>
+
+<p>It then estimates the conditional probability for class $j$ as the fraction of points in $\mathcal{N}_0$ whose response values equal $j$:
+그리고 그 방 안에 납치해 온 $K$ 명 한테 물어봅니다. “야, 너희들 중에 혹시 당뇨병(클래스 $j$) 걸린 놈 손들어!” 그렇게 손을 든 놈들의 머릿수 비율을 가지고, 이걸 아예 “새로 온 아저씨가 당뇨병일 확률”이라고 통치고(추정치 계산) 뻔뻔하게 질러버립니다. 수식으로 쓰면 이렇습니다:</p>
+
+\[Pr(Y = j|X = x_0) = \frac{1}{K} \sum_{i \in \mathcal{N}_0} I(y_i = j) \tag{2.12}\]
+
+<p>Finally, KNN classifies the test observation $x_0$ to the class with the largest probability from (2.12).
+마지막으로, KNN 로봇은 저 다수결 투표(2.12 수식 비율) 결과에 따라 “당뇨라고 손 든 놈이 더 많네? 그럼 새로 온 저 아저씨도 당뇨병($j$ 팀) 확정!”이라며 가장 투표수가 많은(확률 짱) 부서로 쿨하게 낙인을 찍어(분류) 버립니다.</p>
+
+<p>Figure 2.14 provides an illustrative example of the KNN approach.
+그림 2.14가 바로 이 무식하고도 직관적인 다수결 KNN 원리를 유치원생도 이해하게 보여주는 예절 주입기입니다.</p>
+
+<p>In the left-hand panel, we have plotted a small training data set consisting of six blue and six orange observations.
+왼쪽 도화지를 볼까요? 조촐하게 블루베리(파란 점) 6알이랑 귤(주황 점) 6알이 훈련 연습용으로 흩어져 있습니다.</p>
+
+<p>Our goal is to make a prediction for the point labeled by the black cross.
+우리의 퀘스트는 정중앙에 뜬금없이 나타난 정체불명의 ‘검은색 십자가’ 아저씨가 블루베리인지 귤인지 다수결로 때려 맞추는(예측) 겁니다.</p>
+
+<p>Suppose that we choose $K = 3$.
+자, 우리가 다수결 투표에 참가할 이웃의 쪽수(정수)를 <strong>K=3 (가장 가까운 3명)</strong> 으로 세팅했다고 칩시다.</p>
+
+<p>Then KNN will first identify the three observations that are closest to the cross.
+그럼 KNN 로봇은 자나 깨나 거리를 재면서 십자가에서 코 닿을 만큼 가장 가까이 붙어 앉아있는 3명의 도플갱어 찡구들을 콕 짚어냅니다.</p>
+
+<p>This neighborhood is shown as a circle.
+그 다수결 투표에 동원된 3명의 이웃 구역이 한가운데 그려진 점선 ‘동그라미’로 표시되어 있죠.</p>
+
+<p>It consists of two blue points and one orange point, resulting in estimated probabilities of $2/3$ for the blue class and $1/3$ for the orange class.
+원 안을 살짝 들여다보면 블루베리 2알과 귤 1알이 포위되어 있습니다. 자, 다수결 투표 결과! 블루베리 지지율은 $3명 중 2명(2/3)$, 귤 지지율은 고작 $1/3$ 로 계산(추정)되어 나왔습니다!</p>
+
+<p>Hence KNN will predict that the black cross belongs to the blue class.
+빼박 다수결 승리죠! 그러므로 우람한 KNN 기계는 “음, 블루베리가 2표로 이겼군. 고로 이 검은 십자가 녀석은 파란색 블루베리 소속이다!” 라고 우렁차게 판결(예측)을 때립니다.</p>
+
+<p>In the right-hand panel of Figure 2.14 we have applied the KNN approach with $K = 3$ at all of the possible values for $X_1$ and $X_2$, and have drawn in the corresponding KNN decision boundary.
+오른쪽 도화지는 뭐냐고요? 방금 그 십자가 퀴즈를 그냥 이 우주의 세상 모든 바닥 타일($X_1, X_2$ 좌표) 위에서 하나하나 다 K=3인 로봇을 밀어 넣고 투표를 시켜서, “어디서부터가 블루베리 땅이고 어디서부터가 귤 땅인지(KNN 결정 경계)” 삐뚤빼뚤한 검은 마커 국경선을 쫙~ 그어본 겁니다.</p>
+
+<p>Despite the fact that it is a very simple approach, KNN can often produce classifiers that are surprisingly close to the optimal Bayes classifier.
+사실 이 KNN이라는 놈은 수식 하나 없이 거리 재고 친구 수만 세는 동네 꼬마 같은 알량하고 무식한 방식인데, 이 녀석이 현장에서는 종종 신의 경지인 ‘최적의 베이즈 분류기’랑 소름 돋게 똑같은 예측 능력(결정 경계)을 뽑아내는 미친 기적을 일으키곤 합니다!</p>
+
+<p>Figure 2.15 displays the KNN decision boundary, using $K = 10$, when applied to the larger simulated data set from Figure 2.13.
+그림 2.15를 보시면 아주 적나라합니다. 아까 2.13에서 피 터지던 그 대규모 전투판에다가 이번엔 이웃 투표수를 $K=10$ (10명 다수결)으로 키운 KNN 로봇을 방생해서 검은 점선 국경선(KNN 결정 경계)을 그어봤습니다.</p>
+
+<p>Notice that even though the true distribution is not known by the KNN classifier, the KNN decision boundary is very close to that of the Bayes classifier.
+놀라운 건 뭡니까! 비록 이 멍청한 KNN 기계는 신이 숨겨놓은 진짜 귤 확률표(진정한 분포)를 1도 모르는데, 기계가 발로 그린 삐뚤빼뚤한 ‘검은 국경선(KNN)’이, 우리가 아까 절을 하며 떠받든 조물주의 완벽한 보라색 ‘베이즈 국경선’과 미치도록 흡사하게 겹쳐서 진행되고(very close) 있다는 사실입니다!</p>
+
+<p>The test error rate using KNN is $0.1363$, which is close to the Bayes error rate of $0.1304$.
+실전 수능 성적 오답률도 볼까요? 이 멍청한 KNN의 시험 오차율은 $0.1363$ 인데, 이건 우주 최강 절대 한계선인 베이즈 오차율 $0.1304$ 에 불과 0.005 차이로 아찔하게 후방을 위협하며 바짝 쫓아가고(close) 있습니다.</p>
+
+<p>The choice of $K$ has a drastic effect on the KNN classifier obtained.
+하지만 이웃을 몇 명이나 부를 거냐, 즉 방장 맘대로 정하는 투표수 <strong>$K$ (K의 선택)</strong> 를 몇으로 튜닝하냐에 따라 이 KNN 로봇은 천사가 되기도 하고 미친 좀비가 되기도 하는 극단적인 롤러코스터 부작용(drastic effect)을 겪습니다.</p>
+
+<p>Figure 2.16 displays two KNN fits to the simulated data from Figure 2.13, using $K = 1$ and $K = 100$.
+그림 2.16이 그 참사의 현장입니다. 이번엔 극단적으로 다수결을 달랑 1명($K=1$)한테만 묻는 KNN 로봇과, 동네방네 100명($K=100$)이나 끌어 모아서 투표하는 로봇 두 마리를 굴려서 그린 검은 국경선 꼬라지를 비교해 보세요.</p>
+
+<p>When $K = 1$, the decision boundary is overly flexible and finds patterns in the data that don’t correspond to the Bayes decision boundary.
+다수결 인원이 고작 <strong>$K=1$</strong> 명일 때 꼴을 보세요. 기계의 관절 조종이 완전 고장 나서 너무 고무줄처럼 미치도록 유연해져 버렸습니다! 그래서 그냥 땅에 떨어진 귤 하나만 봐도 흥분해서 신이 그려놓은 보라색 베이즈 국경선을 완전히 씹어먹으면서 저 혼자 지독하게 구불구불 발작하는 패턴(오버핏)을 그려대고 있죠.</p>
+
+<p>This corresponds to a classifier that has low bias but very high variance.
+우리가 아까 배웠듯, 이런 애들은 자존심 똥고집(편향)은 쓰레기통에 버렸지만 귀가 너무 얇아서 먼지만 한 귤 하나에도 선을 뒤틀어버리는 <strong>전형적인 ‘매우 높은 분산(팔랑귀 폭주)’</strong> 환자입니다.</p>
+
+<p>As $K$ grows, the method becomes less flexible and produces a decision boundary that is close to linear.
+반대로 투표수를 쭉쭉 늘려서 $K$ 가 왕창 커지면 어떻게 될까요? 사공이 백 명($K=100$)이나 되다 보니, 소수의 의견 따윈 개나 주면서 기계가 융통성(유연성)을 확 잃고 노잼이 됩니다. 그래서 그림처럼 국경선이 구불거리지도 못하고 그냥 판자처럼 거의 직선(선형)으로 무식하고 뻣뻣하게 찍~ 그어져 버립니다.</p>
+
+<p>This corresponds to a low-variance but high-bias classifier.
+백 명이나 오합지졸로 물어보니 귀가 얇은 기질(낮은 분산)은 싹 나았는데, 대신 선이 일자로 뻣뻣해지면서 자존심만 오지게 센 <strong>구제불능의 똥고집(높은 편향)</strong> 분류기가 탄생한 셈이죠.</p>
+
+<p>On this simulated data set, neither $K = 1$ nor $K = 100$ give good predictions: they have test error rates of $0.1695$ and $0.1925$, respectively.
+결과적으로 이 전쟁터 위에선 관절이 고장 난 K=1 발작 로봇이나, 너무 뻣뻣하고 뚱뚱한 K=100 로봇이나 둘 다 실전에서 아주 더럽게 똥볼을 찼습니다(좋지 못한 예측). 수능 점수가 각각 $0.1695$ 와 $0.1925$ 로 둘 다 망해버렸거든요.</p>
+
+<p>Just as in the regression setting, there is not a strong relationship between the training error rate and the test error rate.
+여기서도 숫자 맞추기(회귀) 때 숱하게 들었던 절대 법칙은 죽지 않았습니다. “집구석 연습장 오답률(훈련 오차율) 좋다고, 실전 수능 오차율(시험 오차율)도 좋을 거란 강한 환상은 버려라!”</p>
+
+<p>With $K=1$, the KNN training error rate is 0, but the test error rate may be quite high.
+$K=1$ (가장 가까운 자기 자신만 보고 투표) 일 때를 상상해 보세요. 자기가 자기 정답을 베끼니까 연습 모의고사(훈련 오차) 성적은 항상 기가 막히게 무조건 퍼펙트 <strong>0</strong>입니다. 하지만 낯선 수능장에 풀어놓으면 저 발작하는 선 때문에 실전 오차율(수능 점수)은 우주 밖으로 떡상해 버리게 되는 최악의 헛똑똑이가 되죠.</p>
+
+<p>In general, as we use more flexible classification methods, the training error rate will decline but the test error rate may not.
+정리하자면, 팀 고르기(분류) 세계에서도 기계를 말랑말랑하게 풀어줄수록 연습장 에러 점수는 신나게 수직 낙하하겠지만, 실전 수능 에러는 어느 순간 배신을 때리고 저 멀리 통수를 치러 갈 수 있다는 겁니다.</p>
+
+<p>In Figure 2.17, we have plotted the KNN test and training errors as a function of $1/K$.
+이 현기증 나는 널뛰기를 한눈에 보라고 준비한 마지막 그림 2.17! 가로축에 기계의 유연성을 담당하는 게이지인 <strong>‘$1/K$’</strong> 를 깔아두고 모의고사(훈련 에러)와 수능(시험 에러) 선이 서로 어떻게 멱살을 잡나 그려봤습니다.</p>
+
+<p>As $1/K$ increases, the method becomes more flexible.
+조심하세요, $K$ 값이 아니라 분모로 들어간 <strong>$1/K$</strong> 가 증가할수록(즉, 투표수 $K$ 가 1명으로 확 쪼그라들수록) 기계는 귀가 얇아져서 선을 요동치며 그리는 <strong>‘더욱 무지막지하게 유연한 형태’</strong> 로 진화합니다.</p>
+
+<p>As in the regression setting, the training error rate consistently declines as the flexibility increases.
+회귀 때랑 똑같죠? 가로축이 커져서 로봇이 유연함에 미쳐 날뛸수록 모의고사 치팅을 기가 막히게 하면서 파란 줄(훈련 오차율)은 0점을 향해 바닥으로 냅다 꽂히며 일관되게 하락 성적을 자랑합니다.</p>
+
+<p>However, the test error exhibits a characteristic U-shape, declining at first (with a minimum at approximately $K=10$) before increasing again when the method becomes excessively flexible and overfits.
+하지만 우리의 잔혹한 빨간 수능 선(시험 에러)! 요 녀석은 유연성을 살짝 주면 초반엔 사이좋게 에러가 깎여나가며 $K=10$ 언저리에서 황금 계곡(최저 오차점)을 찍더니, 로봇이 쓸데없이 $K=1$ 급으로 극성맞게 유연해져 버리면서(오버핏, 과적합) 갑자기 하늘로 고개를 쳐드는 <strong>‘그놈의 소름 돋는 U자 미끄럼틀 미들 고개 형상’</strong> 을 여지없이 또 똑같이 재현해 내고 말았습니다.</p>
+
+<p><img src="./img/Image_028.png" alt="Figure 2.14" /></p>
+
+<p><strong>FIGURE 2.14.</strong> <em>The KNN approach, using K</em> = 3 <em>, is illustrated in a simple situation with six blue observations and six orange observations.</em> Left: <em>a test observation at which a predicted class label is desired is shown as a black cross. The three closest points to the test observation are identified, and it is predicted that the test observation belongs to the most commonly-occurring class, in this case blue.</em> Right: <em>The KNN decision boundary for this example is shown in black. The blue grid indicates the region in which a test observation will be assigned to the blue class, and the orange grid indicates the region in which it will be assigned to the orange class.</em></p>
+
+<p><strong>그림 2.14.</strong> <em>다수결 KNN 3명($K=3$)으로 돌려본 모의 배틀 투표장.</em> 왼쪽 도화지: <em>정체불명 십자가 뉴비가 가운데 떨어졌죠. 잽싸게 자 들고 제일 가까운 3놈을 동그라미로 묶어 봤더니 파란 놈이 다수결로 이겼습니다! “넌 파란 팀이다!” 하고 쿨하게 땅땅 예측(판결)해 버리는 현장이죠.</em> 오른쪽 도화지: <em>기계가 도화지 바닥 전체를 돌면서 “여기서부터 귤, 저기는 블루베리!” 하고 K=3짜리 규칙으로 그어본 삐뚤어지고 좀비 같은 검은 잉크 바닥 (결정) 국경선입니다.</em></p>
+
+<p><img src="./img/Image_030.png" alt="Figure 2.15" /></p>
+
+<p><strong>FIGURE 2.15.</strong> <em>The black curve indicates the KNN decision boundary on the data from Figure 2.13, using K</em> = 10 <em>. The Bayes decision boundary is shown as a purple dashed line. The KNN and Bayes decision boundaries are very similar.</em></p>
+
+<p><strong>그림 2.15.</strong> <em>KNN의 다수결을 10명($K=10$)으로 튜닝해서, 아까 대규모 전장판을 다시 휘저으며 그어본 꼬불 검은 선(결정 경계). 그런데 뒤에 점선 보이나요? 저게 조물주의 정답(베이즈 경계)인데 둘이 형제처럼 똑같이 포개져(very similar) 기적의 경계선을 달성한 모습이 압권입니다.</em></p>
+
+<p>In both the regression and classification settings, choosing the correct level of flexibility is critical to the success of any statistical learning method.
+결론 돌직구 날려드립니다! 당신이 집값(숫자)을 찍든 암 진단을 갈라치기(분류)하든, 이 세상 어느 통계 판이든 기계의 ‘관절 꺾기 유연도 레벨’을 꿀단지 타이밍에 맞춰 딱 좋게 조절하는 것이야말로 당신 프로젝트의 목숨줄을 쥐락펴락(필수적) 하는 결정타입니다!</p>
+
+<p>The bias-variance tradeoff, and the resulting U-shape in the test error, can make this a difficult task.
+왜 골 때리냐고요? 이 두 얼굴의 악마인 편향-분산 눈치 게임 트레이드오프와, 뒤통수를 후려 갈기는 그 지긋지긋한 실전 오차 U자 미끄럼틀 패턴이 그 꿀단지 좌표 튜닝 퀘스트를 피 토하게 빡센(difficult) 지옥 난이도 과제물로 영원히 박제해버리기 때문이죠.</p>
+
+<p><img src="./img/Image_033.png" alt="Figure 2.16" /></p>
+
+<p><strong>FIGURE 2.16.</strong> <em>A comparison of the KNN decision boundaries (solid black curves) obtained using $K=1$ and $K=100$ on the data from Figure 2.13. With $K=1$, the decision boundary is overly flexible, while with $K=100$ it is not sufficiently flexible. The Bayes decision boundary is shown as a purple dashed line.</em></p>
+
+<p><strong>그림 2.16.</strong> <em>환장의 KNN 국경선 뇌절 파티 콜라보. K=1 로 돌리면(위) 기계가 미쳐서 먼지 하나에도 선을 요동치며 베이즈 보라 점선을 다 씹어먹는 팔랑귀가 되고, 반대로 K=100 (아래)으로 늙은 꼰대 스위치를 켜면 선형 판자처럼 국경이 뻗뻗해져 똥고집을 부려 망해버리는 끔찍한 실전 실패 예시들입니다.</em></p>
+
+<p><img src="./img/Image_035.png" alt="Figure 2.17" /></p>
+
+<p><strong>FIGURE 2.17.</strong> <em>The KNN training error rate (blue, 200 observations) and test error rate (orange, 5,000 observations) on the data from Figure 2.13, as the level of flexibility (assessed using $1/K$ on the log scale) increases, or equivalently as the number of neighbors $K$ decreases. The black dashed line indicates the Bayes error rate. The jumpiness of the curves is due to the small size of the training data set.</em></p>
+
+<p><strong>그림 2.17.</strong> <em>가로축은 기계의 관절 꺾기 게이지($1/K$ 증가 = 더 고무줄 유연해짐 = $K$ 쪽수 감소). 유연해질수록 파란 오답 노트 곡선은 0으로 땅굴을 파지만, 주황빛의 찐 수능 오차 점수 선은 어느 순간 하늘 높은 줄 모르고 고개를 쳐드는 또 그 ‘망할 U자 공포’를 재확인 시켜줍니다. 검은 점선은 우주 한계 바닥인 베이즈 에러율이죠! 곡선이 지저분하게 튕구는 것(불규칙성)은 연습장이 달랑 200장밖에 안 돼서 잡음이 낀 탓입니다.</em></p>
+
+<p>In Chapter 5, we return to this topic and discuss various methods for estimating test error rates and thereby choosing the optimal level of flexibility for a given statistical learning method.
+이 지옥 같은 고난은 여기서 끝이 아닙니다. 저~ 뒤 5장으로 시간 이동하면 우린 이 빌어먹을 주제로 다시 좀비처럼 귀환합니다. 거기서 미래 시험지가 없을 때 어떻게든 실전 성적(시험 오차율)을 꼼수로 추정해서 꿀단지 최적 유연성 다이얼을 돌리는 기상천외한 잡기술 방법론들을 피 터지게 토론할 것입니다. 기대하세요!</p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../trans2.html">&lt; 2.2.3 The Classification Setting</a></td>
+      <td><a href="../../../2_3_lab_introduction_to_python/trans2.html">2.3 Lab Introduction To Python &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

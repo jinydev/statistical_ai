@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_5_lab_linear_models_and_regularization_methods/6_5_1_subset_selection_methods/6_5_1_1_ax.setylim50000250000/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c06/6_5_lab_linear_models_and_regularization_methods/6_5_1_subset_selection_methods/6_5_1_1_ax.setylim50000250000/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_5_lab_linear_models_and_regularization_methods/6_5_1_subset_selection_methods/6_5_1_1_ax.setylim50000250000/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c06/6_5_lab_linear_models_and_regularization_methods/6_5_1_subset_selection_methods/6_5_1_1_ax.setylim50000250000/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/">06. Linear Model Selection</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_5_lab_linear_models_and_regularization_methods/">6 5 lab linear models and regularization methods</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_5_lab_linear_models_and_regularization_methods/6_5_1_subset_selection_methods/">6 5 1 subset selection methods</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_5_lab_linear_models_and_regularization_methods/6_5_1_subset_selection_methods/6_5_1_1_ax.setylim50000250000/">6 5 1 1 ax.setylim50000250000</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="axset_ylim50000-250000"><code class="language-plaintext highlighter-rouge">ax.set_ylim([50000, 250000]);</code></h1>
+
+<p>Notice the expression <code class="language-plaintext highlighter-rouge">None</code> in <code class="language-plaintext highlighter-rouge">Y[:, None]</code> above. This adds an axis (dimension) to the one-dimensional array <code class="language-plaintext highlighter-rouge">Y</code> , which allows it to be recycled when subtracted from the two-dimensional <code class="language-plaintext highlighter-rouge">Yhat_in</code> .
+방금 사용했던 앞선 코드 수식 <code class="language-plaintext highlighter-rouge">Y[:, None]</code> 내부에 기재된 <code class="language-plaintext highlighter-rouge">None</code> 키워드 표현식을 눈여겨보십시오. 이 조작은 1차원 형태 배열에 불과했던 기존 <code class="language-plaintext highlighter-rouge">Y</code> 객체에 새로운 결합 축(차원, dimension) 하나를 몰래 끼워 추가해 주는 역할을 수행하며, 이로 인해 우리는 2차원 매트릭스 형태인 <code class="language-plaintext highlighter-rouge">Yhat_in</code> 배열에서 수치 감산을 연산할 때 오류 없이 차원 재활용 연산이 가능해지게 됩니다.</p>
+
+<p>We are now ready to use cross-validation to estimate test error along the model path. We must use <em>only the training observations</em> to perform all aspects of model-fitting — including variable selection. Therefore, the determination of which model of a given size is best must be made using <em>only the training observations</em> in each training fold. This point is subtle but important. If the full data set is used to select the best subset at each step, then the validation set errors and cross-validation errors that we obtain will not be accurate estimates of the test error.
+자, 이제 우리는 앞선 전진 선택 모델 궤도를 훑고 지나가며 테스트 단면의 오차 예측을 연산해 내기 위해 십자 교차 검증(cross-validation) 기법을 들이댈 준비가 되었습니다. 여기서 대전제가 하나 있습니다. 우리는 변수 선택(variable selection) 과정마저 포함한 모든 모형 적합 단계 절차의 모든 측면을 반드시 <em>오직 훈련된 독립 관측치들로만(only the training observations)</em> 단독 수행해야 한다는 점입니다. 따라서 특정 크기로 주어진 한계 모델 중 도대체 어떤 녀석이 가장 최고 실적의 모델인지 평가 결정을 내리는 일도 오로지 각 독립 훈련 폴드(training fold) 단계 내부에 갇힌 <em>순수 훈련용 종속 관측치들만을 이용해</em> 평가 내려져야만 합니다. 이 주의사항은 미묘해 보이지만 굉장히 중요합니다. 만약 전체 투입 데이터 세트 묶음 그 자체가 오염되어, 각 선택별 단계에서 최고의 독립 부분집합을 뽑아내는 과정에 슬쩍 투입 쓰였다면, 그렇게 도출해 얻은 검증용 세트 차원의 오차율 결과나 십자 교차 검증 오차율 점수 지표들 따위는 실전 테스트 단 오차를 예측해 내는 무결한 정확 신뢰 통계 지표가 되지 못할 것입니다.</p>
+
+<p>We now compute the cross-validated predicted values using 5-fold crossvalidation.
+그러므로 우리는 엄격하게 5-겹(5-fold) 교차 검사 절차를 통해 연산 도출된 순수 교차-예측 결괏값 도출 연산을 지금 수행하겠습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">kfold</span> <span class="o">=</span> <span class="n">skm</span><span class="p">.</span><span class="nc">KFold</span><span class="p">(</span><span class="n">K</span><span class="p">,</span>
+                  <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                  <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">Yhat_cv</span> <span class="o">=</span> <span class="n">skm</span><span class="p">.</span><span class="nf">cross_val_predict</span><span class="p">(</span><span class="n">full_path</span><span class="p">,</span>
+                                <span class="n">Hitters</span><span class="p">,</span>
+                                <span class="n">Y</span><span class="p">,</span>
+                                <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">)</span>
+<span class="n">Yhat_cv</span><span class="p">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[14]: (263, 20)
+</code></pre></div></div>
+
+<p>The prediction matrix <code class="language-plaintext highlighter-rouge">Yhat_cv</code> is the same shape as <code class="language-plaintext highlighter-rouge">Yhat_in</code> ; the difference is that the predictions in each row, corresponding to a particular sample index, were made from models fit on a training fold that did not include that row.
+예측치 배열 매트릭스 <code class="language-plaintext highlighter-rouge">Yhat_cv</code>는 모델 궤적 결괏값인 <code class="language-plaintext highlighter-rouge">Yhat_in</code>의 형상(shape)과 완전히 동일합니다 ; 그러나 이 둘의 핵심적 차이는 이 배열의 각 특정 행렬 단면(row), 즉 특정 샘플 인덱스 좌표에 대치 상응하는 예측 결과치 결괏값들의 경우, 절대적으로 그 해당 연산 표본 행을 배합 포함하지 않은 채 오직 훈련(training) 독립 폴드(fold)에만 맞춰 따로 적합 구축 파생된 모델들을 이용해서 뱉어낸 순수 별개 결괏값이라는 사실입니다.</p>
+
+<p>At each model along the path, we compute the $\text{MSE}$ in each of the crossvalidation folds. These we will average to get the mean MSE, and can also use the individual values to compute a crude estimate of the standard error of the mean.<sup id="fnref:9"><a href="#fn:9" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> Hence we must know the test indices for each cross-validation split. This can be found by using the <code class="language-plaintext highlighter-rouge">split()</code> method of <code class="language-plaintext highlighter-rouge">kfold</code>. Because we fixed the random state above, whenever we split any array with the same number of rows as Y we recover the same training and test indices, though we simply ignore the training indices below.
+우리는 이 도출 궤도를 통과하는 각 단계 모델들에서 각자의 교차 검증 폴드 단 $\text{MSE}$를 도출 일일 계산합니다. 우리는 이 개별 평가 점수 결괏값을 평균으로 통계 수합해 ‘평균 통계 MSE’ 수치를 무사히 얻어낼 것이며, 또한 이렇게 쌓인 각각의 개별 연산 결괏값을 ‘평균 수치의 표준 오차’를 미루어 예측 짐작하는 다소 거친 방식의 추론<sup id="fnref:9:1"><a href="#fn:9" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>에 써먹을 수도 있습니다. 따라서, 우린 이 모든 과정 세팅을 위해 반드시 각각의 교차-검토 분할(cross-validation split)에 할당 맵핑될 테스트 묶음 인덱스 위치를 알아야만 합니다. 이는 조금 전 써먹었던 저 파이썬 내장 <code class="language-plaintext highlighter-rouge">kfold</code> 객체의 강력한 <code class="language-plaintext highlighter-rouge">split()</code> 메서드를 구동 사용하면 가볍게 찾아 나눌 수 있습니다. 위 연산 구역에서 난수 발생 스드(random state) 값을 의도적으로 0으로 고정해 두었으므로, Y 변수 매트릭스와 동일한 열 길이 크기를 가진 배열을 쪼개 돌릴 때마다 항상 늘 정확히 동일한 훈련 및 테스트 인덱스 위치 좌표를 일관 복구(recover) 반복 도출하게 됩니다 (물론 여기서 우린 기껏 얻은 훈련 인덱스 좌표 번호 배열은 아래 코드에서 그냥 편히 버려 무시하겠지만 말입니다).</p>
+
+<p>We now add the cross-validation error estimates to our $\text{MSE}$ plot. We include the mean error across the five folds, and the estimate of the standard error of the mean.
+이제 우리는 갓 얻어낸 이 십자 교차 분할 검증용 오류 추정치 그래프 도표를 앞선 표본 도출 $\text{MSE}$ 차트 데이터 라인에 당당히 덧그려 포갭니다. 이렇게 갱신된 그래프엔 5개의 개별 폴드를 가로지르는 평균 전체 오차율 추정선과 평균 분포상 추산 표준 오차 수치 곡선 범위 또한 한데 포함될 것입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">cv_mse</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="ow">in</span> <span class="n">kfold</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="n">Y</span><span class="p">):</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">(</span><span class="n">Yhat_cv</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">Y</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="bp">None</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">cv_mse</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">errors</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1"># column means
+</span><span class="n">cv_mse</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">cv_mse</span><span class="p">).</span><span class="n">T</span>
+<span class="n">cv_mse</span><span class="p">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[15]: (20, 5)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">ax</span><span class="p">.</span><span class="nf">errorbar</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="n">n_steps</span><span class="p">),</span>
+                     <span class="n">cv_mse</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+                     <span class="n">cv_mse</span><span class="p">.</span><span class="nf">std</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">K</span><span class="p">),</span>
+                     <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">Cross-validated</span><span class="sh">'</span><span class="p">,</span>
+                     <span class="n">c</span><span class="o">=</span><span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="c1"># color red
+</span><span class="n">ax</span><span class="p">.</span><span class="nf">set_ylim</span><span class="p">([</span><span class="mi">50000</span><span class="p">,</span> <span class="mi">250000</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">legend</span><span class="p">()</span>
+<span class="n">mse_fig</span>
+</code></pre></div></div>
+
+<p>To repeat the above using the validation set approach, we simply change our <code class="language-plaintext highlighter-rouge">cv</code> argument to a validation set: one random split of the data into a test and training. We choose a test size of 20%, similar to the size of each test set in 5-fold cross-validation.
+검증 세트 접근법 규칙 잣대를 대입 응용하여 이 과정을 수식 반복하기 위해, 우리는 그저 기존 사용된 <code class="language-plaintext highlighter-rouge">cv</code> 파라미터 매개 변수를, 검증 세트 환경 (단 한 번, 데이터를 훈련 세트와 시험 세트로 기립 무작위 분할하는 작업 처리) 모델 구조로 똑 잘라 바꿔 교체만 해주면 됩니다. 한 번의 지정에서 저희는 5-폴드 교차 세팅 평가 구조 검증 환경에 속해 있는 각 개별 분할 테스트 블록 세트 객체의 규격 사이즈와 똑같이 아주 흡사하게 통일 대응토록, 지정 테스트 세트 크기를 20% 규격으로 단일 채택 고정하겠습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">validation</span> <span class="o">=</span> <span class="n">skm</span><span class="p">.</span><span class="nc">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                       <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                                       <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="ow">in</span> <span class="n">validation</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="n">Y</span><span class="p">):</span>
+    <span class="n">full_path</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">Hitters</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span>
+                  <span class="n">Y</span><span class="p">[</span><span class="n">train_idx</span><span class="p">])</span>
+    <span class="n">Yhat_val</span> <span class="o">=</span> <span class="n">full_path</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">Hitters</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">])</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">(</span><span class="n">Yhat_val</span> <span class="o">-</span> <span class="n">Y</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="bp">None</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">validation_mse</span> <span class="o">=</span> <span class="n">errors</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>As for the in-sample $\text{MSE}$ case, the validation set approach does not provide standard errors.
+앞선 표본 내 오류 $\text{MSE}$ 산출 경우 사례와 동일 무사하게, 이처럼 외부 별도 단일 검증 진단 세트 무대를 이용한 접근 계산 연산법 방식에서는 딱히 별도의 계산 결괏값 표준 오차(standard errors) 추산 정보 자체를 제공하지 않습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="n">ax</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="n">n_steps</span><span class="p">),</span>
+                 <span class="n">validation_mse</span><span class="p">,</span>
+                 <span class="sh">'</span><span class="s">b--</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># color blue, broken line
+</span>                 <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">Validation</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="n">n_steps</span><span class="p">)[::</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">set_ylim</span><span class="p">([</span><span class="mi">50000</span><span class="p">,</span> <span class="mi">250000</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">legend</span><span class="p">()</span>
+<span class="n">mse_fig</span>
+</code></pre></div></div>
+
+<h2 id="최적-부분집합-탐색-자동-선택-best-subset-selection">최적 부분집합 탐색 자동 선택 (Best Subset Selection)</h2>
+
+<p>Forward stepwise is a <em>greedy</em> selection procedure; at each step it augments the current set by including one additional variable. We now apply best subset selection to the <code class="language-plaintext highlighter-rouge">Hitters</code> data, which for every subset size, searches for the best set of predictors.
+조금 전 써먹은 전진식 단계 예측 선택법은 아주 탐욕적(greedy) 알고리즘 성향 절차입니다 ; 매 작동 스텝마다 기존 데이터 세트 뭉치에 단 하나의 한 가지 변수식을 더 우겨 결합 포함시켜서 모델을 점점 거대하게 증강시켜버립니다. 우리는 이제 이에 반발 대응해 <code class="language-plaintext highlighter-rouge">Hitters</code> 데이터셋 실험 무대에 이른바 ‘최적 부분집합 선택법(best subset selection)’을 시도 적용 가동해 보겠습니다. 이 방식은 구획된 모든 한계 부분 집합 사이즈 한도 내에서 가장 최상의 예측 적합 변수 무리 세트 조합만을 핀셋으로 탐색 선별해 냅니다.</p>
+
+<p>We will use a package called <code class="language-plaintext highlighter-rouge">l0bnb</code> to perform best subset selection. Instead of constraining the subset to be a given size, this package produces a path of solutions using the subset size as a penalty rather than a constraint. Although the distinction is subtle, the difference comes when we crossvalidate.
+이 훌륭한 최선 부분 객체 선별 절차를 무사 완수하기 위해 저희는 외부에서 <code class="language-plaintext highlighter-rouge">l0bnb</code>라고 불리는 호출 패키지 모듈을 수입해 응용 접목 사용할 것입니다. 무작정 부분 분할 집합 세트의 사이즈 한계 크기를 억지로 제약 고정시켜 지정 부여하는 일반적 무식한 방식 대신, 이 훌륭한 구조 패키지 객체 모듈은 평가 도출될 부분 분할 집합 체계 사이즈 수치를 단순 ‘강제 한도 제약(constraint)’ 기법보단 성과 점수에 감점 벌금을 부여해 찍어누르는 일종의 ‘패널티(penalty) 보상 장치’로 모델 평가 점수에 활용하여 정답 판별 모델 결괏값이 진행되는 일련의 이행 궤적 패스 결괏값을 무사 생성해 파생 산출해 줍니다. 이 차이 조건은 무척 미묘하지만, 우리가 이 결과 모델의 단계를 교차검열(crossvalidate)할 때만큼은 비로소 그 결정적 차이가 확연히 벌어지며 드러나게 됩니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">design</span><span class="p">.</span><span class="nf">fit_transform</span><span class="p">(</span><span class="n">Hitters</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="sh">'</span><span class="s">intercept</span><span class="sh">'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">asarray</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Here we excluded the first column corresponding to the intercept, as <code class="language-plaintext highlighter-rouge">l0bnb</code> will fit the intercept separately. We can find a path using the <code class="language-plaintext highlighter-rouge">fit_path()</code> function.
+여기서 저희는 편향 상숫값 기점인 절편(intercept)에 상응하며 대응하는 1번 첫 번째 열 기둥 세로열을 데이터 프레임 체계에서 강제 삭제 배제시켜 도출했습니다. 이는 <code class="language-plaintext highlighter-rouge">l0bnb</code> 패키지 모듈 함수가 그 자신의 평가 적합 절차 수행 시, 절편 위치는 독자 모의 무대에서 따로 계산 적합시키며 챙길 기능이 내장되어 있기 때문입니다. 이제 준비가 끝났으니 우린 아주 무난히 파생 함수인 <code class="language-plaintext highlighter-rouge">fit_path()</code> 명령 모듈 객체를 응용 호출함으로써 이 모델의 변화 궤적 패스를 가동해 도출해 낼 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">path</span> <span class="o">=</span> <span class="nf">fit_path</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+                         <span class="n">Y</span><span class="p">,</span>
+                         <span class="n">max_nonzeros</span><span class="o">=</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>The function <code class="language-plaintext highlighter-rouge">fit_path()</code> returns a list whose values include the fitted coefficients as <code class="language-plaintext highlighter-rouge">B</code> , an intercept as <code class="language-plaintext highlighter-rouge">B0</code> , as well as a few other attributes related to the particular path algorithm used. Such details are beyond the scope of this book.
+이 훌륭 연산 패키지 함수인 <code class="language-plaintext highlighter-rouge">fit_path()</code> 모듈 툴은 그저 단순히 배열이 아니라, 일종의 리스트 묶음 세트를 산출 결과값으로 반환 복귀시킵니다. 그리고 이 무단 도출된 종합 세트 결괏값 안에는 <code class="language-plaintext highlighter-rouge">B</code>라는 꼬리표 키값 명찰을 달고 도출된 최종 모델의 모델 적합 계수 값 산출치들과 함께, <code class="language-plaintext highlighter-rouge">B0</code>라고 딱지가 붙어 파생된 모델 절편 계산 수치 정보, 그리고 나아가 조금 더 추가된 특정 연산 파생 모델 알고리즘 작동 궤도 계산식에 결부 연관된 알 수 없는 몇몇 특성 데이터 조각 단면들이 속해 산출되어 기재 포트폴리오로 나옵니다. 덧붙여 그러한 내부 연산 작동 부속품들의 세세한 논리 사항 이치들을 꿰뚫어 해석하는 작업은 이 통계 예측 기법 책이 다루고자 했던 교육 과정 기본 소화 범주(scope) 영역을 벗어나므로 과감히 무시하셔도 됩니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">path</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="p">{</span><span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">:</span> <span class="nf">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">3.254844</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span>
+                      <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span>
+                      <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.677753</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span>
+                      <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span>
+ <span class="sh">'</span><span class="s">B0</span><span class="sh">'</span><span class="p">:</span> <span class="o">-</span><span class="mf">38.98216739555494</span><span class="p">,</span>
+ <span class="sh">'</span><span class="s">lambda_0</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.011416248027450194</span><span class="p">,</span>
+ <span class="sh">'</span><span class="s">M</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.5829861733382011</span><span class="p">,</span>
+ <span class="sh">'</span><span class="s">Time_exceeded</span><span class="sh">'</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>In the example above, we see that at the fourth step in the path, we have two nonzero coefficients in <code class="language-plaintext highlighter-rouge">'B'</code> , corresponding to the value 0.114 for the penalty parameter <code class="language-plaintext highlighter-rouge">lambda_0</code> . We could make predictions using this sequence of fits on a validation set as a function of <code class="language-plaintext highlighter-rouge">lambda_0</code> , or with more work using cross-validation.
+방금 출력된 위 실질 결과 아웃풋 실습 관측 예시 단락 무대를 통해, 모형 작동 궤도 경로의 네 번째 (4th step) 통과 단계 시점 컷 결과에서 산출 결괏값 <code class="language-plaintext highlighter-rouge">'B'</code> 배열 기호 안에 속한 총 스무 개의 예측 수치 요소 객체 중 오직 숫자 0이 아닌 유의미한 변수 객체 계수 생존 결과가 단 2개만 살아 도출 잔존해 있음을 확인할 수 있습니다. 그리고 이 결과 도출 상태는 평가 점수를 찍어 누를 당시 투입 적용된 모의 패널티 통제 파라미터 매개 변수 <code class="language-plaintext highlighter-rouge">lambda_0</code>의 0.114 수치 값에 정확히 대응 반응해 나타난 결과치 파생 현상입니다. 우리는 도출된 이 파라미터 함수 척도 <code class="language-plaintext highlighter-rouge">lambda_0</code> 변수를 기준 통제 함수 잣대로 삼아 단일 검증 진단 데이터 세트 모의 무대 위에서 이 기가 막히게 적합된 회귀 계수들의 연결고리 순환 과정 궤도를 이용 예측 도출을 연산 단행할 수 있으며, 더 나아가 여기에 수고를 약간 더 가미하고 교차-진동 검수 점검 기법인 교차 검증을 응용 동원함으로써 한층 고도화된 정답 예측 결과를 시도 산출 도출 얻어낼 수도 있을 것입니다.</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:9">
+      <p>5개의 에러 오차 추정치 통계 단면이 상호 중복되어 겹쳐진 훈련용 세트 기반 하에 산출 기반되었으므로 이 추정 연산 방식은 결코 상호 완전 독립적이지 않으며, 그로 인해 본 추산치 평가 방식은 거친 측면이 있습니다. <a href="#fnref:9" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:9:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+  </ol>
+</div>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,13 +502,26 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="366-non-linear-transformations-of-the-predictors"><em>3.6.6 Non-linear Transformations of the Predictors</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_5_interaction_terms/index.html">&lt; 3.6.5 Interaction Terms</a></td>
+      <td><a href="3_6_6_1_in_33_anovalmresults1_results3/index.html">3.6.6.1 In 33 Anovalmresults1 Results3 &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>The model matrix builder can include terms beyond just column names and interactions. For instance, the <code class="language-plaintext highlighter-rouge">poly()</code> function supplied in <code class="language-plaintext highlighter-rouge">ISLP</code> specifies <code class="language-plaintext highlighter-rouge">poly()</code> that columns representing polynomial functions of its first argument are added to the model matrix.</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [32]:X=MS([poly('lstat',degree=2),'age']).fit_transform(Boston)
-model3=sm.OLS(y,X)
-results3=model3.fit()
+<h1 id="366-non-linear-transformations-of-the-predictors"><em>3.6.6 Non-linear Transformations of the Predictors</em></h1>
+
+<p>The model matrix builder can include terms beyond just column names and interactions.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [32]: X = MS([poly('lstat', degree=2), 'age']).fit_transform(Boston)
+model3 = sm.OLS(y, X)
+results3 = model3.fit()
 summarize(results3)
 </code></pre></div></div>
 
@@ -519,8 +531,7 @@ summarize(results3)
 <table>
   <thead>
     <tr>
-      <th> </th>
-      <th> </th>
+      <th><strong><code class="language-plaintext highlighter-rouge">Out[32]:</code></strong></th>
       <th><code class="language-plaintext highlighter-rouge">coef</code></th>
       <th><code class="language-plaintext highlighter-rouge">std err</code></th>
       <th><code class="language-plaintext highlighter-rouge">t</code></th>
@@ -529,7 +540,6 @@ summarize(results3)
   </thead>
   <tbody>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">intercept</code></td>
       <td><code class="language-plaintext highlighter-rouge">17.7151</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.781</code></td>
@@ -537,23 +547,20 @@ summarize(results3)
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">poly(lstat, </code></td>
-      <td><code class="language-plaintext highlighter-rouge">degree=2)[0]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">poly(lstat, degree=2)[0]</code></td>
       <td><code class="language-plaintext highlighter-rouge">-179.2279</code></td>
       <td><code class="language-plaintext highlighter-rouge">6.733</code></td>
       <td><code class="language-plaintext highlighter-rouge">-26.620</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">poly(lstat, </code></td>
-      <td><code class="language-plaintext highlighter-rouge">degree=2)[1]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">poly(lstat, degree=2)[1]</code></td>
       <td><code class="language-plaintext highlighter-rouge">72.9908</code></td>
       <td><code class="language-plaintext highlighter-rouge">5.482</code></td>
       <td><code class="language-plaintext highlighter-rouge">13.315</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.000</code></td>
     </tr>
     <tr>
-      <td> </td>
       <td><code class="language-plaintext highlighter-rouge">age</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.0703</code></td>
       <td><code class="language-plaintext highlighter-rouge">0.011</code></td>
@@ -565,21 +572,22 @@ summarize(results3)
 
 <p>The effectively zero $p$-value associated with the quadratic term (i.e. the third row above) suggests that it leads to an improved model.</p>
 
-<p>By default, <code class="language-plaintext highlighter-rouge">poly()</code> creates a basis matrix for inclusion in the model matrix whose columns are <em>orthogonal polynomials</em> , which are designed for sta- orthogonal ble least squares computations.[13] Alternatively, had we included an argupolynomial ment <code class="language-plaintext highlighter-rouge">raw=True</code> in the above call to <code class="language-plaintext highlighter-rouge">poly()</code> , the basis matrix would consist simply of <code class="language-plaintext highlighter-rouge">lstat</code> and <code class="language-plaintext highlighter-rouge">lstat**2</code> . Since either of these bases represent quadratic polynomials, the fitted values would not change in this case, just the polynomial coefficients. Also by default, the columns created by <code class="language-plaintext highlighter-rouge">poly()</code> do not include an intercept column as that is automatically added by <code class="language-plaintext highlighter-rouge">MS()</code> .</p>
-
-<p>We use the <code class="language-plaintext highlighter-rouge">anova_lm()</code> function to further quantify the extent to which <code class="language-plaintext highlighter-rouge">anova_lm()</code> the quadratic fit is superior to the linear fit.</p>
+<p>By default, <code class="language-plaintext highlighter-rouge">poly()</code> creates a basis matrix for inclusion in the model matrix whose columns are <em>orthogonal polynomials</em> , which are designed for sta- orthogonal ble least squares computations. [13]</p>
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<hr />
 
-<h3 id="model-comparison-분산분석을-통한-모델-비교">Model Comparison (분산분석을 통한 모델 비교)</h3>
-<ul>
-  <li><a href="./3_6_6_1_in_33_anovalmresults1_results3/">문서로 이동하기</a></li>
-</ul>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p><code class="language-plaintext highlighter-rouge">anova_lm()</code> 함수를 사용해 선형 모델과 비선형 모델 간의 잔차를 분석하고 추가 계수가 기여하는 통계적 유의성을 검증하는 프로세스입니다.
-두 모델 중 어느 것이 더 우수한가 분산분석(ANOVA)으로 확인합니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_5_interaction_terms/index.html">&lt; 3.6.5 Interaction Terms</a></td>
+      <td><a href="3_6_6_1_in_33_anovalmresults1_results3/index.html">3.6.6.1 In 33 Anovalmresults1 Results3 &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

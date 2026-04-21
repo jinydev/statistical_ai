@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -493,97 +492,61 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="44-generative-models-for-classification">4.4 Generative Models for Classification</h1>
-
-<table>
+            <table>
   <tbody>
     <tr>
-      <td>Logistic regression involves directly modeling Pr( $Y=$ _k</td>
-      <td>X_ = <em>x</em> ) using the logistic function, given by (4.7) for the case of two response classes. In statistical jargon, we model the conditional distribution of the response $Y$, given the predictor(s) $X$. We now consider an alternative and less direct approach to estimating these probabilities. In this new approach, we model the distribution of the predictors $X$separately in each of the response classes (i.e. for each value of $Y$). We then use Bayes’ theorem to flip these around into estimates for Pr( $Y=$ _k</td>
-      <td>X_ = <em>x</em> ). When the distribution of $X$within each class is assumed to be normal, it turns out that the model is very similar in form to logistic regression.</td>
+      <td><a href="../4_3_logistic_regression/4_3_5_multinomial_logistic_regression/index.html">&lt; 4.3.5 Multinomial Logistic Regression</a></td>
+      <td><a href="4_4_1_linear_discriminant_analysis_for_p_1/index.html">4.4.1 Linear Discriminant Analysis For P 1 &gt;</a></td>
     </tr>
   </tbody>
 </table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="44-generative-models-for-classification">4.4 Generative Models for Classification</h1>
+
+<p>Logistic regression involves directly modeling $\text{Pr}(Y = k \mid X = x)$ using the logistic function, given by (4.7) for the case of two response classes. In statistical jargon, we model the conditional distribution of the response $Y$, given the predictor(s) $X$. We now consider an alternative and less direct approach to estimating these probabilities. In this new approach, we model the distribution of the predictors $X$ separately in each of the response classes (i.e. for each value of $Y$). We then use Bayes’ theorem to flip these around into estimates for $\text{Pr}(Y = k \mid X = x)$. When the distribution of $X$ within each class is assumed to be normal, it turns out that the model is very similar in form to logistic regression.</p>
 
 <p>Why do we need another method, when we have logistic regression? There are several reasons:</p>
 
 <ul>
-  <li>
-    <p>When there is substantial separation between the two classes, the parameter estimates for the logistic regression model are surprisingly unstable. The methods that we consider in this section do not suffer from this problem.</p>
-  </li>
-  <li>
-    <p>If the distribution of the predictors $X$is approximately normal in each of the classes and the sample size is small, then the approaches in this section may be more accurate than logistic regression.</p>
-  </li>
-  <li>
-    <p>The methods in this section can be naturally extended to the case of more than two response classes. (In the case of more than two response classes, we can also use multinomial logistic regression from Section 4.3.5.)</p>
-  </li>
+  <li>When there is substantial separation between the two classes, the parameter estimates for the logistic regression model are surprisingly unstable. The methods that we consider in this section do not suffer from this problem.</li>
+  <li>If the distribution of the predictors $X$ is approximately normal in each of the classes and the sample size is small, then the approaches in this section may be more accurate than logistic regression.</li>
+  <li>The methods in this section can be naturally extended to the case of more than two response classes. (In the case of more than two response classes, we can also use multinomial logistic regression from Section 4.3.5.)</li>
 </ul>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Suppose that we wish to classify an observation into one of $K$ classes, where <em>K ≥</em> 2. In other words, the qualitative response variable $Y$can take on $K$ possible distinct and unordered values. Let <em>πk</em> represent the overall or <em>prior</em> probability that a randomly chosen observation comes from the prior $k$ th class. Let <em>fk</em> ( $X$) <em>≡</em> Pr( _X</td>
-      <td>Y_ = $k$ )[1] denote the <em>density function</em> of $X$for an observation that comes from the $k$ th class. In other words, <em>fk</em> ( <em>x</em> ) is relatively large if there is a high probability that an observation in the $k$ th class has <em>X ≈ x</em> , and <em>fk</em> ( <em>x</em> ) is small if it is very unlikely that an observation in the $k$ th class has <em>X ≈ x</em> . Then <em>Bayes’ theorem</em> states that</td>
-    </tr>
-  </tbody>
-</table>
+<p>Suppose that we wish to classify an observation into one of $K$ classes, where $K \ge 2$. In other words, the qualitative response variable $Y$ can take on $K$ possible distinct and unordered values. Let $\pi_k$ represent the overall or <em>prior</em> probability that a randomly chosen observation comes from the $k$th class. Let $f_k(x) \equiv \text{Pr}(X = x \mid Y = k)$ denote the <em>density function</em> of $X$ for an observation that comes from the $k$th class. In other words, $f_k(x)$ is relatively large if there is a high probability that an observation in the $k$th class has $X \approx x$, and $f_k(x)$ is small if it is very unlikely that an observation in the $k$th class has $X \approx x$. Then <em>Bayes’ theorem</em> states that</p>
 
-<p>density function</p>
+\[\text{Pr}(Y = k \mid X = x) = \frac{\pi_k f_k(x)}{\sum_{l=1}^{K} \pi_l f_l(x)} \quad (4.15)\]
 
-<p>Bayes’ theorem</p>
+<p>In accordance with our earlier notation, we will use the abbreviation $p_k(x) = \text{Pr}(Y = k \mid X = x)$; this is the <em>posterior</em> probability that an observation $X = x$ belongs to the $k$th class. That is, it is the probability that the observation belongs to the $k$th class, <em>given</em> the predictor value for that observation.</p>
 
-<blockquote>
-  <p>1Technically, this definition is only correct if $X$is a qualitative random variable. If $X$is quantitative, then <em>fk</em> ( <em>x</em> ) <em>dx</em> corresponds to the probability of $X$falling in a small region <em>dx</em> around <em>x</em> .</p>
-</blockquote>
-
-<p>4.4 Generative Models for Classification 147</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>In accordance with our earlier notation, we will use the abbreviation <em>pk</em> ( <em>x</em> ) = Pr( $Y=$ _k</td>
-      <td>X_ = <em>x</em> ); this is the <em>posterior</em> probability that an observation posterior $X$= <em>x</em> belongs to the $k$ th class. That is, it is the probability that the observation belongs to the $k$ th class, <em>given</em> the predictor value for that observation.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Equation 4.15 suggests that instead of directly computing the posterior probability <em>pk</em> ( <em>x</em> ) as in Section 4.3.1, we can simply plug in estimates of <em>πk</em> and <em>fk</em> ( <em>x</em> ) into (4.15). In general, estimating <em>πk</em> is easy if we have a random sample from the population: we simply compute the fraction of the training observations that belong to the $k$ th class. However, estimating the density function <em>fk</em> ( <em>x</em> ) is much more challenging. As we will see, to estimate <em>fk</em> ( <em>x</em> ), we will typically have to make some simplifying assumptions.</p>
-
-<p>We know from Chapter 2 that the Bayes classifier, which classifies an observation <em>x</em> to the class for which <em>pk</em> ( <em>x</em> ) is largest, has the lowest possible error rate out of all classifiers. (Of course, this is only true if all of the terms in (4.15) are correctly specified.) Therefore, if we can find a way to estimate <em>fk</em> ( <em>x</em> ), then we can plug it into (4.15) in order to approximate the Bayes classifier.</p>
-
-<p>In the following sections, we discuss three classifiers that use different estimates of <em>fk</em> ( <em>x</em> ) in (4.15) to approximate the Bayes classifier: <em>linear discriminant analysis, quadratic discriminant analysis,</em> and <em>naive Bayes</em> .</p>
+<p>We know from Chapter 2 that the Bayes classifier, which classifies an observation $x$ to the class for which $p_k(x)$ is largest, has the lowest possible error rate out of all classifiers. In the following sections, we discuss three classifiers that use different estimates of $f_k(x)$ in (4.15) to approximate the Bayes classifier: <em>linear discriminant analysis, quadratic discriminant analysis,</em> and <em>naive Bayes</em>.</p>
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<h3 id="441-linear-discriminant-analysis-for-p--1">4.4.1 Linear Discriminant Analysis for p = 1</h3>
 
-<h3 id="441-linear-discriminant-analysis-for-p--1-p1인-경우의-선형-판별-분석">4.4.1 Linear Discriminant Analysis for p = 1 (p=1인 경우의 선형 판별 분석)</h3>
-<ul>
-  <li><a href="./4_4_1_linear_discriminant_analysis_for_p_1/">문서로 이동하기</a></li>
-</ul>
+<h3 id="442-linear-discriminant-analysis-for-p--1">4.4.2 Linear Discriminant Analysis for p &gt; 1</h3>
 
-<p>예측 변수가 단 1개일 때 정규 분포 기반으로 각 클래스의 평균과 통일된 분산을 추정하여 집단을 판별(LDA)하는 과정입니다.</p>
+<h3 id="443-quadratic-discriminant-analysis">4.4.3 Quadratic Discriminant Analysis</h3>
 
-<h3 id="442-linear-discriminant-analysis-for-p--1-p1인-경우의-선형-판별-분석">4.4.2 Linear Discriminant Analysis for p &gt; 1 (p&gt;1인 경우의 선형 판별 분석)</h3>
-<ul>
-  <li><a href="./4_4_2_linear_discriminant_analysis_for_p_1/">문서로 이동하기</a></li>
-</ul>
+<h3 id="444-naive-bayes">4.4.4 Naive Bayes</h3>
 
-<p>여러 개의 차원 특성이 존재할 때 다변량 정규 분포를 가정하여, 클래스 간 선형 경계를 세우는 보편적 LDA 확장 파트입니다.</p>
+<hr />
 
-<h3 id="443-quadratic-discriminant-analysis-이차-판별-분석">4.4.3 Quadratic Discriminant Analysis (이차 판별 분석)</h3>
-<ul>
-  <li><a href="./4_4_3_quadratic_discriminant_analysis/">문서로 이동하기</a></li>
-</ul>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p>각 클래스가 공통된 행렬이 아닌 고유한 개별 분산/공분산 행렬을 가진다고 가정함으로써, 경계를 다소 유연한 2차 곡선(QDA)으로 유도합니다.</p>
-
-<h3 id="444-naive-bayes-나이브-베이즈">4.4.4 Naive Bayes (나이브 베이즈)</h3>
-<ul>
-  <li><a href="./4_4_4_naive_bayes/">문서로 이동하기</a></li>
-</ul>
-
-<p>모든 차원의 변수들이 클래스 내에서 서로 완벽히 독립적이라는 강력한 가정하에 곱 확률로 쉽고 빠르게 연산하는 고전 분류기입니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_3_logistic_regression/4_3_5_multinomial_logistic_regression/index.html">&lt; 4.3.5 Multinomial Logistic Regression</a></td>
+      <td><a href="4_4_1_linear_discriminant_analysis_for_p_1/index.html">4.4.1 Linear Discriminant Analysis For P 1 &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,37 +502,47 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="461-linear-regression-on-the-bikeshare-data"><em>4.6.1 Linear Regression on the Bikeshare Data</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4.6 Generalized Linear Models</a></td>
+      <td><a href="../4_6_2_poisson_regression_on_the_bikeshare_data/index.html">4.6.2 Poisson Regression On The Bikeshare Data &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>To begin, we consider predicting <code class="language-plaintext highlighter-rouge">bikers</code> using linear regression. The results are shown in Table 4.10.</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>We see, for example, that a progression of weather from clear to cloudy results in, on average, 12 <em>.</em> 89 fewer bikers per hour; however, if the weather progresses further to rain or snow, then this further results in 53 <em>.</em> 60 fewer bikers per hour. Figure 4.13 displays the coefficients associated with <code class="language-plaintext highlighter-rouge">mnth</code></p>
+<h1 id="461-linear-regression-on-the-bikeshare-data">4.6.1 Linear Regression on the Bikeshare Data</h1>
 
-<p>168 4. Classification</p>
-
-<p><img src="./img/4_13.png" alt="Figure 4.13" /></p>
-
-<p><strong>FIGURE 4.13.</strong> <em>A least squares linear regression model was fit to predict</em> <code class="language-plaintext highlighter-rouge">bikers</code> <em>in the</em> <code class="language-plaintext highlighter-rouge">Bikeshare</code> <em>data set.</em> Left: <em>The coefficients associated with the month of the year. Bike usage is highest in the spring and fall, and lowest in the winter.</em> Right: <em>The coefficients associated with the hour of the day. Bike usage is highest during peak commute times, and lowest overnight.</em></p>
-
-<p>and the coefficients associated with <code class="language-plaintext highlighter-rouge">hr</code> . We see that bike usage is highest in the spring and fall, and lowest during the winter months. Furthermore, bike usage is greatest around rush hour (9 AM and 6 PM), and lowest overnight. Thus, at first glance, fitting a linear regression model to the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set seems to provide reasonable and intuitive results.</p>
+<p>To begin, we consider predicting <code class="language-plaintext highlighter-rouge">bikers</code> using linear regression. The results are shown in Table 4.10. We see, for example, that a progression of weather from clear to cloudy results in, on average, 12.89 fewer bikers per hour; however, if the weather progresses further to rain or snow, then this further results in 53.60 fewer bikers per hour. We see that bike usage is highest in the spring and fall, and lowest during the winter months. Furthermore, bike usage is greatest around rush hour (9 AM and 6 PM), and lowest overnight. Thus, at first glance, fitting a linear regression model to the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set seems to provide reasonable and intuitive results.</p>
 
 <p>But upon more careful inspection, some issues become apparent. For example, 9.6% of the fitted values in the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data set are negative: that is, the linear regression model predicts a <em>negative</em> number of users during 9.6% of the hours in the data set. This calls into question our ability to perform meaningful predictions on the data, and it also raises concerns about the accuracy of the coefficient estimates, confidence intervals, and other outputs of the regression model.</p>
 
-<p>Furthermore, it is reasonable to suspect that when the expected value of <code class="language-plaintext highlighter-rouge">bikers</code> is small, the variance of <code class="language-plaintext highlighter-rouge">bikers</code> should be small as well. For instance, at 2 AM during a heavy December snow storm, we expect that extremely few people will use a bike, and moreover that there should be little variance associated with the number of users during those conditions. This is borne out in the data: between 1 AM and 4 AM, in December, January, and February, when it is raining, there are 5 <em>.</em> 05 users, on average, with a standard deviation of 3 <em>.</em> 73. By contrast, between 7 AM and 10 AM, in April, May, and June, when skies are clear, there are 243 <em>.</em> 59 users, on average, with a standard deviation of 131 <em>.</em> 7. The mean-variance relationship is displayed in the left-hand panel of Figure 4.14. This is a major violation of the assumptions of a linear model, which state that $Y=$[�] <em>[p] j</em> =1 <em>[X][j][β][j]</em>[ +] <em>[ϵ]</em>[,] where <em>ϵ</em> is a mean-zero error term with variance <em>σ</em>[2] that is <em>constant</em> , and not a function of the covariates. Therefore, the heteroscedasticity of the data calls into question the suitability of a linear regression model.</p>
+<p>Furthermore, it is reasonable to suspect that when the expected value of <code class="language-plaintext highlighter-rouge">bikers</code> is small, the variance of <code class="language-plaintext highlighter-rouge">bikers</code> should be small as well. For instance, at 2 AM during a heavy December snow storm, we expect that extremely few people will use a bike, and moreover that there should be little variance associated with the number of users during those conditions. By contrast, between 7 AM and 10 AM, in April, May, and June, when skies are clear, there are 243.59 users, on average, with a standard deviation of 131.7. This is a major violation of the assumptions of a linear model, which state that $Y = \sum_{j=1}^{p} X_j \beta_j + \epsilon$, where $\epsilon$ is a mean-zero error term with variance $\sigma^2$ that is <em>constant</em>, and not a function of the covariates. Therefore, the heteroscedasticity of the data calls into question the suitability of a linear regression model.</p>
 
-<p>Finally, the response <code class="language-plaintext highlighter-rouge">bikers</code> is integer-valued. But under a linear model, $Y=$ <em>β</em> 0 +[�] <em>[p] j</em> =1 <em>[X][j][β][j]</em>[+] <em>[ ϵ]</em>[,][where] <em>[ϵ]</em>[is][a][continuous-valued][error][term.][This] means that in a linear model, the response $Y$is necessarily continuousvalued (quantitative). Thus, the integer nature of the response <code class="language-plaintext highlighter-rouge">bikers</code> suggests that a linear regression model is not entirely satisfactory for this data set.</p>
-
-<p>4.6 Generalized Linear Models 169</p>
-
-<p><img src="./img/4_14.png" alt="Figure 4.14" /></p>
-
-<p><strong>FIGURE 4.14.</strong> Left: <em>On the</em> <code class="language-plaintext highlighter-rouge">Bikeshare</code> <em>dataset, the number of bikers is displayed on the y-axis, and the hour of the day is displayed on the x-axis. Jitter was applied for ease of visualization. For the most part, as the mean number of bikers increases, so does the variance in the number of bikers. A smoothing spline fit is shown in green.</em> Right: <em>The log of the number of bikers is now displayed on the y-axis.</em></p>
+<p>Finally, the response <code class="language-plaintext highlighter-rouge">bikers</code> is integer-valued. But under a linear model, $Y = \beta_0 + \sum_{j=1}^{p} X_j \beta_j + \epsilon$, where $\epsilon$ is a continuous-valued error term. This means that in a linear model, the response $Y$ is necessarily continuous-valued (quantitative). Thus, the integer nature of the response <code class="language-plaintext highlighter-rouge">bikers</code> suggests that a linear regression model is not entirely satisfactory for this data set.</p>
 
 <p>Some of the problems that arise when fitting a linear regression model to the <code class="language-plaintext highlighter-rouge">Bikeshare</code> data can be overcome by transforming the response; for instance, we can fit the model</p>
 
-\[\log(Y) = eta_0 + eta_1 X_1 + \dots + eta_p X_p + \epsilon\]
+\[\log(Y) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p + \epsilon \quad (4.38)\]
 
-<p>Transforming the response avoids the possibility of negative predictions, and it overcomes much of the heteroscedasticity in the untransformed data, as is shown in the right-hand panel of Figure 4.14. However, it is not quite a satisfactory solution, since predictions and inference are made in terms of the log of the response, rather than the response. This leads to challenges in interpretation, e.g. <em>“a one-unit increase in Xj is associated with an increase in the mean of the log of Y by an amount βj”</em> . Furthermore, a log transformation of the response cannot be applied in settings where the response can take on a value of 0. Thus, while fitting a linear model to a transformation of the response may be an adequate approach for some count-valued data sets, it often leaves something to be desired. We will see in the next section that a Poisson regression model provides a much more natural and elegant approach for this task.</p>
+<p>Transforming the response avoids the possibility of negative predictions, and it overcomes much of the heteroscedasticity in the untransformed data. However, it is not quite a satisfactory solution, since predictions and inference are made in terms of the log of the response, rather than the response. Furthermore, a log transformation of the response cannot be applied in settings where the response can take on a value of 0. We will see in the next section that a Poisson regression model provides a much more natural and elegant approach for this task.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4.6 Generalized Linear Models</a></td>
+      <td><a href="../4_6_2_poisson_regression_on_the_bikeshare_data/index.html">4.6.2 Poisson Regression On The Bikeshare Data &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_4_graphics/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_4_graphics/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_4_graphics/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c02/2_3_lab_introduction_to_python/2_3_4_graphics/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/">02. Statistical Learning</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_3_lab_introduction_to_python/">2 3 lab introduction to python</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c02/2_3_lab_introduction_to_python/2_3_4_graphics/">2 3 4 graphics</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../2_3_3_introduction_to_numerical_python/trans1.html">&lt; 2.3.3 Introduction To Numerical Python</a></td>
+      <td><a href="../2_3_5_sequences_and_slice_notation/trans1.html">2.3.5 Sequences And Slice Notation &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 통계 수식과 용어가 낯설고 어렵다면? 아주 쉽게 풀어쓴 <a href="./trans2.html">📖 쉬운 해설(의역본) 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="234-graphics">2.3.4 Graphics</h1>
+
+<h1 id="234-그래픽스">2.3.4 그래픽스</h1>
+
+<p>In <code class="language-plaintext highlighter-rouge">Python</code>, common practice is to use the library <code class="language-plaintext highlighter-rouge">matplotlib</code> for graphics.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Python</code>에서, 그래픽스를 위해 <code class="language-plaintext highlighter-rouge">matplotlib</code> 라이브러리를 사용하는 것이 흔한 관행입니다.</p>
+
+<p>However, since <code class="language-plaintext highlighter-rouge">Python</code> was not written with data analysis in mind, the notion of plotting is not intrinsic to the language.</p>
+
+<p>그러나, <code class="language-plaintext highlighter-rouge">Python</code>이 데이터 분석을 마음에 두고 작성되지 않았기 때문에, 플로팅(plotting)의 개념은 언어에 본질적이지 않습니다.</p>
+
+<p>We will use the <code class="language-plaintext highlighter-rouge">subplots()</code> function from <code class="language-plaintext highlighter-rouge">matplotlib.pyplot</code> to create a figure and the axes onto which we plot our data.</p>
+
+<p>우리는 하나의 피겨(figure)와 우리가 우리의 데이터를 플롯팅할 축들(axes)을 생성하기 위해 <code class="language-plaintext highlighter-rouge">matplotlib.pyplot</code> 으로부터 <code class="language-plaintext highlighter-rouge">subplots()</code> 함수를 사용할 것입니다.</p>
+
+<p>For many more examples of how to make plots in <code class="language-plaintext highlighter-rouge">Python</code>, readers are encouraged to visit <code class="language-plaintext highlighter-rouge">matplotlib.org/stable/gallery/</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Python</code>에서 플롯(plot)들을 만드는 방법에 대한 더 많은 예시들을 위해, 독자들은 <code class="language-plaintext highlighter-rouge">matplotlib.org/stable/gallery/</code> 를 방문하도록 권장됩니다.</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">matplotlib</code>, a plot consists of a <em>figure</em> and one or more <em>axes</em>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">matplotlib</code>에서, 하나의 플롯은 하나의 <em>피겨(figure)</em> 와 하나 또는 그 이상의 <em>축들(axes)</em> 로 구성됩니다.</p>
+
+<p>You can think of the figure as the blank canvas upon which one or more plots will be displayed: it is the entire plotting window.</p>
+
+<p>당신은 피겨를 하나 혹은 하나보다 더 많은 플롯들이 그 위에 표시될 빈 캔버스로서 생각할 수 있습니다: 이것은 전체 플로팅 창(window)입니다.</p>
+
+<p>The <em>axes</em> contain important information about each plot, such as its $x$- and $y$-axis labels, title, and more.</p>
+
+<p><em>축들(axes)</em> 은 그것의 $x$- 및 $y$-축 라벨들, 제목, 그리고 더 많은 것들과 같이, 각각의 플롯에 단연 중요한 정보들을 포함합니다.</p>
+
+<p>(Note that in <code class="language-plaintext highlighter-rouge">matplotlib</code>, the word <em>axes</em> is not the plural of <em>axis</em>: a plot’s <em>axes</em> contains much more information than just the $x$-axis and the $y$-axis.)</p>
+
+<p>(<code class="language-plaintext highlighter-rouge">matplotlib</code> 안에서, <em>축들(axes)</em> 이라는 단어는 <em>축(axis)</em> 의 복수형이 아님에 유의하십시오: 한 플롯의 <em>축들</em> 은 단지 $x$-축 및 $y$-축보다 더 많은 그 이상의 정보를 담습니다.)</p>
+
+<p>We begin by importing the <code class="language-plaintext highlighter-rouge">subplots()</code> function from <code class="language-plaintext highlighter-rouge">matplotlib</code>.</p>
+
+<p>우리는 <code class="language-plaintext highlighter-rouge">matplotlib</code> 으로부터 <code class="language-plaintext highlighter-rouge">subplots()</code> 함수를 임포트(import)함으로써 시작합니다.</p>
+
+<p>We use this function throughout when creating figures.</p>
+
+<p>우리는 피겨들을 생성할 때 내내 이 함수를 사용합니다.</p>
+
+<p>The function returns a tuple of length two: a figure object as well as the relevant axes object.</p>
+
+<p>이 함수는 길이 2의 하나의 튜플을 반환합니다: 하나의 피겨 객체와 아울러 관련된 축들 객체입니다.</p>
+
+<p>We will typically pass <code class="language-plaintext highlighter-rouge">figsize</code> as a keyword argument.</p>
+
+<p>우리는 전형적으로 <code class="language-plaintext highlighter-rouge">figsize</code> 를 키워드 인자로서 전달할 것입니다.</p>
+
+<p>Having created our axes, we attempt our first plot using its <code class="language-plaintext highlighter-rouge">plot()</code> method.</p>
+
+<p>우리의 축들을 생성하고서, 우리는 그것의 <code class="language-plaintext highlighter-rouge">plot()</code> 메서드를 사용하여 우리의 첫 번째 플롯을 시도합니다.</p>
+
+<p>To learn more about it, type <code class="language-plaintext highlighter-rouge">ax.plot?</code>.</p>
+
+<p>그것에 관해 더 많이 알기 위해서, <code class="language-plaintext highlighter-rouge">ax.plot?</code> 을 타이핑하십시오.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">39</span><span class="p">]:</span> <span class="kn">from</span> <span class="n">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">subplots</span>
+         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+         <span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">standard_normal</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+         <span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="nf">standard_normal</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>We pause here to note that we have <em>unpacked</em> the tuple of length two returned by <code class="language-plaintext highlighter-rouge">subplots()</code> into the two distinct variables <code class="language-plaintext highlighter-rouge">fig</code> and <code class="language-plaintext highlighter-rouge">ax</code>.</p>
+
+<p>우리는 여기서 우리가 <code class="language-plaintext highlighter-rouge">subplots()</code> 에 의해 반환된 길이 2의 그 튜플을 두 개의 구별되는 변수들인 <code class="language-plaintext highlighter-rouge">fig</code> 와 <code class="language-plaintext highlighter-rouge">ax</code> 안으로 <em>풀어헤쳤다(unpacked)</em> 는 것을 주목하기 위해 잠시 멈춥니다.</p>
+
+<p>Unpacking is typically preferred to the following equivalent but slightly more verbose code:</p>
+
+<p>풀어헤치기(unpacking)는 이어지는 다음의 동일하지만 약간 더 장황한(verbose) 코드보다 전형적으로 선호되어집니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">40</span><span class="p">]:</span> <span class="n">output</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+         <span class="n">fig</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+         <span class="n">ax</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>We see that our earlier cell produced a line plot, which is the default.</p>
+
+<p>우리는 우리의 이전 셀이 하나의 선(line) 플롯을 생산했음을 봅니다, 그리고 그것은 기본값(default)입니다.</p>
+
+<p>To create a scatterplot, we provide an additional argument to <code class="language-plaintext highlighter-rouge">ax.plot()</code>, indicating that circles should be displayed.</p>
+
+<p>하나의 산점도(scatterplot)를 생성하기 위해, 우리는 원들이 표시되어야만 한다는 것을 가리키도록 하나의 부가적인 인자를 <code class="language-plaintext highlighter-rouge">ax.plot()</code> 에 제공합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">41</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Different values of this additional argument can be used to produce different colored lines as well as different linestyles.</p>
+
+<p>이러한 부가적 인자의 상이한 값들은 이내 상이한 선-스타일들(linestyles) 뿐 만 아니라 상이하게 색칠된 선들을 생산하도록 사용될 수 있습니다.</p>
+
+<p>As an alternative, we could use the <code class="language-plaintext highlighter-rouge">ax.scatter()</code> function to create a scatterplot.</p>
+
+<p>하나의 대안으로서, 우리는 산점도를 생성하기 위하여 <code class="language-plaintext highlighter-rouge">ax.scatter()</code> 함수를 사용할 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">42</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Notice that in the code blocks above, we have ended the last line with a semicolon.</p>
+
+<p>위 코드 블록들 안에서, 우리가 마지막 줄을 하나의 세미콜론(semicolon)으로 끝맺었음에 주의하십시오.</p>
+
+<p>This prevents <code class="language-plaintext highlighter-rouge">ax.plot(x, y)</code> from printing text to the notebook.</p>
+
+<p>이것은 <code class="language-plaintext highlighter-rouge">ax.plot(x, y)</code> 가 그 노트북에 텍스트를 출력하는 것을 막아 줍니다.</p>
+
+<p>However, it does not prevent a plot from being produced.</p>
+
+<p>그러나, 이것은 플롯이 생산되는 것을 막지는 않습니다.</p>
+
+<p>If we omit the trailing semi-colon, then we obtain the following output:</p>
+
+<p>만약 우리가 그 뒤따르는(trailing) 세미-콜론을 생략한다면, 그러면 우리는 다음 출력을 반환 획득합니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">43</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">43</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">matplotlib</span><span class="p">.</span><span class="n">collections</span><span class="p">.</span><span class="n">PathCollection</span> <span class="n">at</span> <span class="mh">0x7fb3d9c8f310</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>In what follows, we will use trailing semicolons whenever the text that would be output is not germane to the discussion at hand.</p>
+
+<p>다음에 따르는 내용들에서, 우리는 출력될 텍스트가 당면한 토론과 더이상 관련이 없는 경우마다 뒤따르는 세미콜론들을 사용할 것입니다.</p>
+
+<p>To label our plot, we make use of the <code class="language-plaintext highlighter-rouge">set_xlabel()</code>, <code class="language-plaintext highlighter-rouge">set_ylabel()</code>, and <code class="language-plaintext highlighter-rouge">set_title()</code> methods of <code class="language-plaintext highlighter-rouge">ax</code>.</p>
+
+<p>우리의 플롯을 명목 지칭 라벨하기 위해, 우리는 <code class="language-plaintext highlighter-rouge">ax</code> 의 <code class="language-plaintext highlighter-rouge">set_xlabel()</code>, <code class="language-plaintext highlighter-rouge">set_ylabel()</code>, 그리고 <code class="language-plaintext highlighter-rouge">set_title()</code> 메서드들을 사용합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">44</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">)</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">set_xlabel</span><span class="p">(</span><span class="sh">"</span><span class="s">this is the x-axis</span><span class="sh">"</span><span class="p">)</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">set_ylabel</span><span class="p">(</span><span class="sh">"</span><span class="s">this is the y-axis</span><span class="sh">"</span><span class="p">)</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">"</span><span class="s">Plot of X vs Y</span><span class="sh">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Having access to the figure object <code class="language-plaintext highlighter-rouge">fig</code> itself means that we can go in and change some aspects and then redisplay it.</p>
+
+<p>피겨(figure) 객체 <code class="language-plaintext highlighter-rouge">fig</code> 그 자체에 접근 권한을 갖는다는 것은 곧 우리가 내부로 들어가서 몇 가지 측면들을 변경하고 그런 다음 그것을 재-표시(redisplay)할 수 있음을 의미합니다.</p>
+
+<p>Here, we change the size from <code class="language-plaintext highlighter-rouge">(8, 8)</code> to <code class="language-plaintext highlighter-rouge">(12, 3)</code>.</p>
+
+<p>여기서, 우리는 크기를 <code class="language-plaintext highlighter-rouge">(8, 8)</code> 에서 <code class="language-plaintext highlighter-rouge">(12, 3)</code> 으로 변경합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span><span class="p">.</span><span class="nf">set_size_inches</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">fig</span>
+</code></pre></div></div>
+
+<p>Occasionally we will want to create several plots within a figure.</p>
+
+<p>때때로 우리는 하나의 피겨 내부에 여러 플롯들을 생성하길 원할 것입니다.</p>
+
+<p>This can be achieved by passing additional arguments to <code class="language-plaintext highlighter-rouge">subplots()</code>.</p>
+
+<p>이것은 추가적인 단락 부과 인자들을 <code class="language-plaintext highlighter-rouge">subplots()</code> 측에 전달함으로써 실현 도달 성취 달성될 수 있습니다.</p>
+
+<p>Below, we create a $2 \times 3$ grid of plots in a figure of size determined by the <code class="language-plaintext highlighter-rouge">figsize</code> argument.</p>
+
+<p>아래에서, 우리는 <code class="language-plaintext highlighter-rouge">figsize</code> 인자에 의해 결정된 크기의 하나의 피겨 안에 $2 \times 3$ 격자의 플롯들을 생성합니다.</p>
+
+<p>In such situations, there is often a relationship between the axes in the plots.</p>
+
+<p>그러한 상황들 속에서, 플롯들 내의 축들 사이에는 매우 종종 하나의 매개 관계성이 있습니다.</p>
+
+<p>For example, all plots may have a common $x$-axis.</p>
+
+<p>예를 들어, 모든 제반 플롯들은 다같이 한 단면의 공통된 $x$-축을 가질 수도 있습니다.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">subplots()</code> function can automatically handle this situation when passed the keyword argument <code class="language-plaintext highlighter-rouge">sharex=True</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">subplots()</code> 함수는 키워드 인자 <code class="language-plaintext highlighter-rouge">sharex=True</code> 가 넘겨 전달될 때 이러한 상황들을 단연 자동으로 조치 처리할 수 있습니다.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">axes</code> object below is an array pointing to different plots in the figure.</p>
+
+<p>아래 지표 <code class="language-plaintext highlighter-rouge">axes</code> 변수 객체는 당 피겨(figure) 안의 다분 상이한 여러 플롯들을 전면 각각 가리키는 하나의 배열입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">45</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                              <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                              <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>We now produce a scatter plot with <code class="language-plaintext highlighter-rouge">'o'</code> in the second column of the first row and a scatter plot with <code class="language-plaintext highlighter-rouge">'+'</code> in the third column of the second row.</p>
+
+<p>우리는 이제 첫 번째 행의 두 번째 열 안에서 <code class="language-plaintext highlighter-rouge">'o'</code> 기호를 구비한 하나의 산점도를 생성하고, 두 번째 행의 세 번째 열 안에서 <code class="language-plaintext highlighter-rouge">'+'</code> 인표를 구비한 하나의 산점도를 생산 산출합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">46</span><span class="p">]:</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="sh">'</span><span class="s">o</span><span class="sh">'</span><span class="p">)</span>
+         <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">].</span><span class="nf">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="sh">'</span><span class="s">+</span><span class="sh">'</span><span class="p">)</span>
+         <span class="n">fig</span>
+</code></pre></div></div>
+
+<p>Type <code class="language-plaintext highlighter-rouge">subplots?</code> to learn more about <code class="language-plaintext highlighter-rouge">subplots()</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">subplots()</code> 에 관해 더 폭넓게 알기 위해 <code class="language-plaintext highlighter-rouge">subplots?</code> 구문을 타이핑하십시오.</p>
+
+<p>To save the output of <code class="language-plaintext highlighter-rouge">fig</code>, we call its <code class="language-plaintext highlighter-rouge">savefig()</code> method.</p>
+
+<p><code class="language-plaintext highlighter-rouge">fig</code> 의 출력을 저장 보관하기 위해, 우리는 그것의 <code class="language-plaintext highlighter-rouge">savefig()</code> 메서드를 호출합니다.</p>
+
+<p>The argument <code class="language-plaintext highlighter-rouge">dpi</code> is the dots per inch, used to determine how large the figure will be in pixels.</p>
+
+<p>그 인자 <code class="language-plaintext highlighter-rouge">dpi</code> 는 1인치당 지정 점들(dots per inch)로써, 픽셀들 상에서 해당 단일 피겨 크기가 과연 얼마나 클지 여부를 결정하기 위해 쓰이고 사용됩니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">47</span><span class="p">]:</span> <span class="n">fig</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">Figure.png</span><span class="sh">"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+         <span class="n">fig</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">Figure.pdf</span><span class="sh">"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>We can continue to modify <code class="language-plaintext highlighter-rouge">fig</code> using step-by-step updates; for example, we can modify the range of the $x$-axis, re-save the figure, and even re-display it.</p>
+
+<p>우리는 단계-별(step-by-step) 업데이트들을 조작 사용하여 이 <code class="language-plaintext highlighter-rouge">fig</code> 대상을 계속해서 변형 수정할 여력이 있습니다; 가령 예를 들어, 우리는 $x$-축의 구간 범위를 전면 수정하고, 해당 피겨를 재-저장(re-save)하며, 및 나아가 심지어 그것을 재-표시(re-display)할 수 조차 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">48</span><span class="p">]:</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">].</span><span class="nf">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+         <span class="n">fig</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">Figure_updated.jpg</span><span class="sh">"</span><span class="p">)</span>
+         <span class="n">fig</span>
+</code></pre></div></div>
+
+<p>We now create some more sophisticated plots.</p>
+
+<p>우리는 이제 약간의 더 섬세하고 정교한 플롯들을 생성합니다.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ax.contour()</code> method produces a <em>contour plot</em> in order to represent three-dimensional data, similar to a topographical map.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ax.contour()</code> 메서드는 어느 지형도(topographical map)와 무척 유사하게 3-차원적 관련 데이터를 나타내기 위해 하나의 <em>등고선 플롯(contour plot)</em> 을 생산합니다.</p>
+
+<p>It takes three arguments:</p>
+
+<p>그것은 다음의 세 가지 인자들을 취해 가집니다:</p>
+
+<ul>
+  <li>
+    <p>A vector of <code class="language-plaintext highlighter-rouge">x</code> values (the first dimension),</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">x</code> 값들의 하나의 벡터 객체 (첫 번째 차원 단락),</p>
+  </li>
+  <li>
+    <p>A vector of <code class="language-plaintext highlighter-rouge">y</code> values (the second dimension), and</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">y</code> 지정 값들의 하나의 벡터 객체 (두 번째 차원 면모), 그리고</p>
+  </li>
+  <li>
+    <p>A matrix whose elements correspond to the <code class="language-plaintext highlighter-rouge">z</code> value (the third dimension) for each pair of <code class="language-plaintext highlighter-rouge">(x, y)</code> coordinates.</p>
+  </li>
+  <li>
+    <p>그 이면 구성 원소들이 각각의 <code class="language-plaintext highlighter-rouge">(x, y)</code> 여러 쌍 지표 좌표 위치에 대한 기준 <code class="language-plaintext highlighter-rouge">z</code> 값(세 번째 조작 차원)에 직후 개별 상응하는 하나의 매트릭스 행렬 단위.</p>
+  </li>
+</ul>
+
+<p>To create <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>, we’ll use the command <code class="language-plaintext highlighter-rouge">np.linspace(a, b, n)</code>, which returns a vector of <code class="language-plaintext highlighter-rouge">n</code> numbers starting at <code class="language-plaintext highlighter-rouge">a</code> and ending at <code class="language-plaintext highlighter-rouge">b</code>.</p>
+
+<p>단위 <code class="language-plaintext highlighter-rouge">x</code> 와 <code class="language-plaintext highlighter-rouge">y</code> 양방을 생성하기 위해, 우리는 명령어 조치 <code class="language-plaintext highlighter-rouge">np.linspace(a, b, n)</code> 구문을 사용할 터인데, 그것은 곧 기점 <code class="language-plaintext highlighter-rouge">a</code> 에서 일순 시작하고 종단 <code class="language-plaintext highlighter-rouge">b</code> 에서 거듭 끝나는 무려 총 <code class="language-plaintext highlighter-rouge">n</code> 개의 숫자들의 하나의 객체적 벡터 덩이를 필시 반환합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">49</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+         <span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+         <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">multiply</span><span class="p">.</span><span class="nf">outer</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>We can increase the resolution by adding more levels to the image.</p>
+
+<p>우리는 대상 조작 이미지 상에 한결 더 여러 많은 도출 레벨들(levels)을 가미하고 더함으로써 시야 해상도를 당면 가중치 증가 시킬 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">50</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">45</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>To fine-tune the output of the <code class="language-plaintext highlighter-rouge">ax.contour()</code> function, take a look at the help file by typing <code class="language-plaintext highlighter-rouge">?plt.contour</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ax.contour()</code> 단위 함수의 결과물 단면 출력을 더 미세-조정(fine-tune)하기 위해서, 기입 <code class="language-plaintext highlighter-rouge">?plt.contour</code> 구문을 수동 타이핑함으로써 딸린 도움말 참고 파일을 한 번 훑어보아 살펴보십시오.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ax.imshow()</code> method is similar to <code class="language-plaintext highlighter-rouge">ax.contour()</code>, except that it produces a color-coded plot whose colors depend on the <code class="language-plaintext highlighter-rouge">z</code> value.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ax.imshow()</code> 당 메서드는 오직 그것 결과물이 <code class="language-plaintext highlighter-rouge">z</code> 변수 단면 값에 의지하는 색깔들로 일체 색상-코드된(color-coded) 플롯을 거둔다는 오직 이 한 사실을 제외하고는, <code class="language-plaintext highlighter-rouge">ax.contour()</code> 구문 체제 작동과 매우 유사합니다.</p>
+
+<p>This is known as a <em>heatmap</em>, and is sometimes used to plot temperature in weather forecasts.</p>
+
+<p>이것은 일종의 하나의 <em>히트맵(heatmap)</em> 으로서 일컫어 알려져 있으며, 때때로 기상 주간 일기예보 등 내에서 체감 온도를 모름지기 플로팅 그리기 위해 간혹 사용됩니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">51</span><span class="p">]:</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="nf">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+         <span class="n">ax</span><span class="p">.</span><span class="nf">imshow</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../2_3_3_introduction_to_numerical_python/trans1.html">&lt; 2.3.3 Introduction To Numerical Python</a></td>
+      <td><a href="../2_3_5_sequences_and_slice_notation/trans1.html">2.3.5 Sequences And Slice Notation &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

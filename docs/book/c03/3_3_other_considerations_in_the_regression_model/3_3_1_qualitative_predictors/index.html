@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,23 +502,55 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="331-qualitative-predictors"><em>3.3.1 Qualitative Predictors</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.3 Other Considerations In The Regression Model</a></td>
+      <td><a href="3_3_1_1_predictors_with_only_two_levels/index.html">3.3.1.1 Predictors With Only Two Levels &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>In our discussion so far, we have assumed that all variables in our linear regression model are <em>quantitative</em> . But in practice, this is not necessarily the case; often some predictors are <em>qualitative</em> .</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>For example, the <code class="language-plaintext highlighter-rouge">Credit</code> data set displayed in Figure 3.6 records variables for a number of credit card holders. The response is <code class="language-plaintext highlighter-rouge">balance</code> (average credit card debt for each individual) and there are several quantitative predictors: <code class="language-plaintext highlighter-rouge">age</code> , <code class="language-plaintext highlighter-rouge">cards</code> (number of credit cards), <code class="language-plaintext highlighter-rouge">education</code> (years of education), <code class="language-plaintext highlighter-rouge">income</code> (in thousands of dollars), <code class="language-plaintext highlighter-rouge">limit</code> (credit limit), and <code class="language-plaintext highlighter-rouge">rating</code> (credit rating). Each panel of Figure 3.6 is a scatterplot for a pair of variables whose identities are given by the corresponding row and column labels. For example, the scatterplot directly to the right of the word “Balance” depicts <code class="language-plaintext highlighter-rouge">balance</code> versus <code class="language-plaintext highlighter-rouge">age</code> , while the plot directly to the right of “Age” corresponds to <code class="language-plaintext highlighter-rouge">age</code> versus <code class="language-plaintext highlighter-rouge">cards</code> . In addition to these quantitative variables, we also have four qualitative variables: <code class="language-plaintext highlighter-rouge">own</code> (house ownership), <code class="language-plaintext highlighter-rouge">student</code> (student status), <code class="language-plaintext highlighter-rouge">status</code> (marital status), and <code class="language-plaintext highlighter-rouge">region</code> (East, West or South).</p>
+<h1 id="331-qualitative-predictors">3.3.1 Qualitative Predictors</h1>
+
+<p>In our discussion so far, we have assumed that all variables in our linear regression model are <em>quantitative</em>.</p>
+
+<p>But in practice, this is not necessarily the case; often some predictors are <em>qualitative</em>.</p>
+
+<p>For example, the <code class="language-plaintext highlighter-rouge">Credit</code> data set displayed in Figure 3.6 records variables for a number of credit card holders.</p>
+
+<p>The response is <code class="language-plaintext highlighter-rouge">balance</code> (average credit card debt for each individual) and there are several quantitative predictors: <code class="language-plaintext highlighter-rouge">age</code>, <code class="language-plaintext highlighter-rouge">cards</code> (number of credit cards), <code class="language-plaintext highlighter-rouge">education</code> (years of education), <code class="language-plaintext highlighter-rouge">income</code> (in thousands of dollars), <code class="language-plaintext highlighter-rouge">limit</code> (credit limit), and <code class="language-plaintext highlighter-rouge">rating</code> (credit rating).</p>
+
+<p>Each panel of Figure 3.6 is a scatterplot for a pair of variables whose identities are given by the corresponding row and column labels.</p>
+
+<p>For example, the scatterplot directly to the right of the word “Balance” depicts <code class="language-plaintext highlighter-rouge">balance</code> versus <code class="language-plaintext highlighter-rouge">age</code>, while the plot directly to the right of “Age” corresponds to <code class="language-plaintext highlighter-rouge">age</code> versus <code class="language-plaintext highlighter-rouge">cards</code>.</p>
+
+<p>In addition to these quantitative variables, we also have four qualitative variables: <code class="language-plaintext highlighter-rouge">own</code> (house ownership), <code class="language-plaintext highlighter-rouge">student</code> (student status), <code class="language-plaintext highlighter-rouge">status</code> (marital status), and <code class="language-plaintext highlighter-rouge">region</code> (East, West or South).</p>
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<hr />
 
-<h3 id="predictors-with-only-two-levels-수준이-2개인-예측-변수">Predictors with Only Two Levels (수준이 2개인 예측 변수)</h3>
-<ul>
-  <li><a href="./3_3_1_1_predictors_with_only_two_levels/">문서로 이동하기</a></li>
-</ul>
+<h3 id="predictors-with-only-two-levels">Predictors with Only Two Levels</h3>
 
-<p>남성/여성과 같이 단 두 가지 범주만 갖는 단순한 질적 변수를 0과 1의 값으로 매핑해 기초적인 회귀 분석을 수행하는 방법을 봅니다.
-각 더미 코딩이 계수 해석에 미치는 영향을 확인합니다.</p>
+<h3 id="qualitative-predictors-with-more-than-two-levels">Qualitative Predictors with More than Two Levels</h3>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.3 Other Considerations In The Regression Model</a></td>
+      <td><a href="3_3_1_1_predictors_with_only_two_levels/index.html">3.3.1.1 Predictors With Only Two Levels &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

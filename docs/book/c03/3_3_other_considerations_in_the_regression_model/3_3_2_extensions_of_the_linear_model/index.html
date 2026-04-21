@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,23 +502,28 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="332-extensions-of-the-linear-model"><em>3.3.2 Extensions of the Linear Model</em></h1>
-
-<p>The standard linear regression model (3.19) provides interpretable results and works quite well on many real-world problems. However, it makes several highly restrictive assumptions that are often violated in practice. Two of the most important assumptions state that the relationship between the predictors and response are <em>additive</em> and <em>linear</em> . The additivity assumption additive means that the association between a predictor <em>Xj</em> and the response Y does linear not depend on the values of the other predictors. The linearity assumption states that the change in the response Y associated with a one-unit change in <em>Xj</em> is constant, regardless of the value of <em>Xj</em> . In later chapters of this book, we examine a number of sophisticated methods that relax these two</p>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_3_1_qualitative_predictors/3_3_1_1_predictors_with_only_two_levels/index.html">&lt; 3.3.1.1 Predictors With Only Two Levels</a></td>
+      <td><a href="3_3_2_1_non-linear_relationships/index.html">3.3.2.1 Non-Linear Relationships &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <blockquote>
-  <p>12There could still in theory be a difference between South and West, although the data here does not suggest any difference.</p>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
 </blockquote>
+
+<h1 id="332-extensions-of-the-linear-model"><em>3.3.2 Extensions of the Linear Model</em></h1>
+
+<p>The standard linear regression model (3.19) provides interpretable results and works quite well on many real-world problems. However, it makes several highly restrictive assumptions that are often violated in practice. Two of the most important assumptions state that the relationship between the predictors and response are <em>additive</em> and <em>linear</em> . The additivity assumption additive means that the association between a predictor <em>Xj</em> and the response Y does linear not depend on the values of the other predictors. The linearity assumption states that the change in the response Y associated with a one-unit change in <em>Xj</em> is constant, regardless of the value of <em>Xj</em> . In later chapters of this book, we examine a number of sophisticated methods that relax these two</p>
 
 <p>3.3 Other Considerations in the Regression Model 95</p>
 
 <p>assumptions. Here, we briefly examine some common classical approaches for extending the linear model.</p>
 
-<p>Removing the Additive Assumption</p>
-
 <p>In our previous analysis of the <code class="language-plaintext highlighter-rouge">Advertising</code> data, we concluded that both <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> seem to be associated with <code class="language-plaintext highlighter-rouge">sales</code> . The linear models that formed the basis for this conclusion assumed that the effect on <code class="language-plaintext highlighter-rouge">sales</code> of increasing one advertising medium is independent of the amount spent on the other media. For example, the linear model (3.20) states that the average increase in <code class="language-plaintext highlighter-rouge">sales</code> associated with a one-unit increase in <code class="language-plaintext highlighter-rouge">TV</code> is always \beta_1, regardless of the amount spent on <code class="language-plaintext highlighter-rouge">radio</code> .</p>
-
-<p>However, this simple model may be incorrect. Suppose that spending money on radio advertising actually increases the effectiveness of TV advertising, so that the slope term for <code class="language-plaintext highlighter-rouge">TV</code> should increase as <code class="language-plaintext highlighter-rouge">radio</code> increases. In this situation, given a fixed budget of $100\,000, spending half on <code class="language-plaintext highlighter-rouge">radio</code> and half on <code class="language-plaintext highlighter-rouge">TV</code> may increase <code class="language-plaintext highlighter-rouge">sales</code> more than allocating the entire amount to either <code class="language-plaintext highlighter-rouge">TV</code> or to <code class="language-plaintext highlighter-rouge">radio</code> . In marketing, this is known as a <em>synergy</em> effect, and in statistics it is referred to as an <em>interaction</em> effect. Figure 3.5 suggests that such an effect may be present in the advertising data. Notice that when levels of either <code class="language-plaintext highlighter-rouge">TV</code> or <code class="language-plaintext highlighter-rouge">radio</code> are low, then the true <code class="language-plaintext highlighter-rouge">sales</code> are lower than predicted by the linear model. But when advertising is split between the two media, then the model tends to underestimate <code class="language-plaintext highlighter-rouge">sales</code> .</p>
 
 <p>Consider the standard linear regression model with two variables,</p>
 
@@ -611,15 +615,24 @@ student<br />non−student<br />0 50 100 150 0 50 100 150<br />Income Income<br 
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<hr />
 
-<h3 id="non-linear-relationships-비선형-관계">Non-linear Relationships (비선형 관계)</h3>
-<ul>
-  <li><a href="./3_3_2_1_non-linear_relationships/">문서로 이동하기</a></li>
-</ul>
+<h3 id="removing-the-additive-assumption">Removing the Additive Assumption</h3>
 
-<p>예측 변수와 반응 변수 간의 관계가 곡선 형태를 띌 때 잔차도 분석으로 이를 파악하고 다항식(Polynomial) 회귀로 유연하게 적합하는 방법을 소개합니다.
-이를 통해 단순 선형 회귀보다 복잡한 트렌드를 추적할 수 있습니다.</p>
+<h3 id="non-linear-relationships">Non-linear Relationships</h3>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_3_1_qualitative_predictors/3_3_1_1_predictors_with_only_two_levels/index.html">&lt; 3.3.1.1 Predictors With Only Two Levels</a></td>
+      <td><a href="3_3_2_1_non-linear_relationships/index.html">3.3.2.1 Non-Linear Relationships &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

@@ -3,13 +3,14 @@ layout: default
 title: "index"
 ---
 
+[< 4.4.1 Linear Discriminant Analysis For P 1](../4_4_1_linear_discriminant_analysis_for_p_1/index.html) | [4.4.2.1 Roc Curve >](4_4_2_1_roc_curve/index.html)
+
+
 # _4.4.2 Linear Discriminant Analysis for p >1_ 
 
 We now extend the LDA classifier to the case of multiple predictors. To do this, we will assume that $X$= ( $X_1$ _, X_ 2 _, . . . , Xp_ ) is drawn from a _multivariate Gaussian_ (or multivariate normal) distribution, with a class-specific multivariate mean vector and a common covariance matrix. We begin with a brief review Gaussian of this distribution. 
 
 The multivariate Gaussian distribution assumes that each individual predictor follows a one-dimensional normal distribution, as in (4.16), with some correlation between each pair of predictors. Two examples of multivariate Gaussian distributions with _p_ = 2 are shown in Figure 4.5. The height of the surface at any particular point represents the probability that both $X_1$ and $X_2$ fall in a small region around that point. In either panel, if the surface is cut along the $X_1$ axis or along the $X_2$ axis, the resulting cross-section will have the shape of a one-dimensional normal distribution. The left-hand panel of Figure 4.5 illustrates an example in which Var( $X_1$) = Var( $X_2$) and Cor( $X_1$ _, X_ 2) = 0; this surface has a characteristic _bell shape_ . However, the bell shape will be distorted if the predictors are correlated or have unequal variances, as is illustrated in the right-hand panel of Figure 4.5. In this situation, the base of the bell will have an elliptical, rather than circular, shape. To indicate that a _p_ -dimensional random variable $X$has a multivariate Gaussian distribution, we write _X ∼ N_ ( _µ,_ **Σ** ). Here E( $X$) = _µ_ is the mean of $X$(a vector with _p_ components), and Cov( $X$) = **Σ** is the _p × p_ covariance matrix of $X$. Formally, the multivariate Gaussian density is defined as 
-
-
 
 In the case of _p >_ 1 predictors, the LDA classifier assumes that the observations in the $k$ th class are drawn from a multivariate Gaussian distribution _N_ ( _µk,_ **Σ** ), where _µk_ is a class-specific mean vector, and **Σ** is a covariance matrix that is common to all $K$ classes. Plugging the density function for the $k$ th class, _fk_ ( $X$= _x_ ), into (4.15) and performing a little bit of algebra reveals that the Bayes classifier assigns an observation $X$= _x_ 
 
@@ -21,13 +22,9 @@ In the case of _p >_ 1 predictors, the LDA classifier assumes that the observati
 
 to the class for which 
 
-
-
 is largest. This is the vector/matrix version of (4.18). 
 
 An example is shown in the left-hand panel of Figure 4.6. Three equallysized Gaussian classes are shown with class-specific mean vectors and a common covariance matrix. The three ellipses represent regions that contain 95 % of the probability for each of the three classes. The dashed lines are the Bayes decision boundaries. In other words, they represent the set of values _x_ for which _δk_ ( _x_ ) = _δℓ_ ( _x_ ); i.e. 
-
-
 
 for $k$ = _l_ . (The log _πk_ term from (4.24) has disappeared because each of the three classes has the same number of training observations; i.e. _πk_ is the same for each class.) Note that there are three lines representing the Bayes decision boundaries because there are three _pairs of classes_ among the three classes. That is, one Bayes decision boundary separates class 1 from class 2, one separates class 1 from class 3, and one separates class 2 from class 3. These three Bayes decision boundaries divide the predictor space into three regions. The Bayes classifier will classify an observation according to the region in which it is located. 
 
@@ -40,8 +37,6 @@ Once again, we need to estimate the unknown parameters _µ_ 1 _, . . . , µK_ , 
 |||_True default status_<br>No<br>Yes<br>Total||
 |_Predicted_<br>_default status_|No<br>Yes|9644<br>252<br>23<br>81|9896<br>104|
 ||Total|9667<br>333|10000|
-
-
 
 **TABLE 4.4.** _A confusion matrix compares the LDA predictions to the true default statuses for the_ 10 _,_ 000 _training observations in the_ `Default` _data set. Elements on the diagonal of the matrix represent individuals whose default statuses were correctly predicted, while off-diagonal elements represent individuals that were misclassified. LDA made incorrect predictions for_ 23 _individuals who did not default and for_ 252 _individuals who did default._ 
 
@@ -69,11 +64,7 @@ Why does LDA do such a poor job of classifying the customers who default? In oth
 
 The Bayes classifier works by assigning an observation to the class for which the posterior probability _pk_ ( $X$) is greatest. In the two-class case, this amounts to assigning an observation to the _default_ class if 
 
-
-
 Thus, the Bayes classifier, and by extension LDA, uses a threshold of 50 % for the posterior probability of default in order to assign an observation to the _default_ class. However, if we are concerned about incorrectly predicting the default status for individuals who default, then we can consider lowering this threshold. For instance, we might label any customer with a posterior probability of default above 20 % to the _default_ class. In other words, instead of assigning an observation to the _default_ class if (4.26) holds, we could instead assign an observation to this class if 
-
-
 
 The error rates that result from taking this approach are shown in Table 4.5. Now LDA predicts that 430 individuals will default. Of the 333 individuals who default, LDA correctly predicts all but 138, or 41 _._ 4 %. This is a vast 
 
@@ -86,8 +77,6 @@ The error rates that result from taking this approach are shown in Table 4.5. No
 |||_True default status_<br>No<br>Yes<br>Total||
 |_Predicted_<br>_default status_|No<br>Yes|9432<br>138<br>235<br>195|9570<br>430|
 ||Total|9667<br>333|10000|
-
-
 
 **TABLE 4.5.** _A confusion matrix compares the LDA predictions to the true default statuses for the_ 10 _,_ 000 _training observations in the_ `Default` _data set, using a modified threshold value that predicts default for any individuals whose posterior default probability exceeds_ 20 _%._ 
 
@@ -105,9 +94,9 @@ The _ROC curve_ is a popular graphic for simultaneously displaying the ROC curve
 
 ---
 
-## Sub-Chapters (하위 목차)
+---
 
-### ROC Curve (ROC 곡선)
-* [문서로 이동하기](./4_4_2_1_roc_curve/)
+## Sub-Chapters
 
-분류 판별에서 임계값(Threshold)을 변화시켰을 때 민감도(Sensitivity)와 1-특이성(Specificity) 관계가 변하는 것을 보여주는 성능 확인용 곡선입니다.
+
+[< 4.4.1 Linear Discriminant Analysis For P 1](../4_4_1_linear_discriminant_analysis_for_p_1/index.html) | [4.4.2.1 Roc Curve >](4_4_2_1_roc_curve/index.html)

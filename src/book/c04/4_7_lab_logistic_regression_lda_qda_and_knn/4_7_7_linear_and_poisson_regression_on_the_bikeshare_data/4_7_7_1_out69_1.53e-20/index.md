@@ -3,6 +3,9 @@ layout: default
 title: "index"
 ---
 
+[< 4.7.7 Linear And Poisson Regression On The Bikeshare Data](../index.html) | [4.7.7.1 Poisson Regression >](../4_7_7_1_poisson_regression/index.html)
+
+
 # **`Out[69]:`** `1.53e-20` 
 
 The sum of squared differences is zero. We can also see this using the `np.allclose()` function: 
@@ -111,3 +114,10 @@ ax_hr.set_xticklabels(range(24)[::2],fontsize=20)
 ax_hr.set_xlabel('Hour',fontsize=20)
 ax_hr.set_ylabel('Coefficient',fontsize=20);
 ```
+
+---
+
+## Sub-Chapters
+
+
+[< 4.7.7 Linear And Poisson Regression On The Bikeshare Data](../index.html) | [4.7.7.1 Poisson Regression >](../4_7_7_1_poisson_regression/index.html)

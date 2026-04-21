@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,159 +502,96 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="applied"><em>Applied</em></h1>
+            <p><a href="../4_8_1_conceptual/index.html">&lt; 4.8.1 Conceptual</a></p>
+
+<h1 id="applied"><em>Applied</em></h1>
 
 <ol>
-  <li>This question should be answered using the <code class="language-plaintext highlighter-rouge">Weekly</code> data set, which is part of the <code class="language-plaintext highlighter-rouge">ISLP</code> package. This data is similar in nature to the <code class="language-plaintext highlighter-rouge">Smarket</code> data from this chapter’s lab, except that it contains 1 <em>,</em> 089 weekly returns for 21 years, from the beginning of 1990 to the end of 2010.</li>
+  <li>This question should be answered using the <code class="language-plaintext highlighter-rouge">Weekly</code> data set, which is part of the <code class="language-plaintext highlighter-rouge">ISLP</code> package. This data is similar in nature to the <code class="language-plaintext highlighter-rouge">Smarket</code> data from this chapter’s lab, except that it contains 1,089 weekly returns for 21 years, from the beginning of 1990 to the end of 2010.
+    <ul>
+      <li>(a) Produce some numerical and graphical summaries of the <code class="language-plaintext highlighter-rouge">Weekly</code> data. Do there appear to be any patterns?</li>
+      <li>(b) Use the full data set to perform a logistic regression with <code class="language-plaintext highlighter-rouge">Direction</code> as the response and the five lag variables plus <code class="language-plaintext highlighter-rouge">Volume</code> as predictors. Use the summary function to print the results. Do any of the predictors appear to be statistically significant? If so, which ones?</li>
+      <li>(c) Compute the confusion matrix and overall fraction of correct predictions. Explain what the confusion matrix is telling you about the types of mistakes made by logistic regression.</li>
+      <li>(d) Now fit the logistic regression model using a training data period from 1990 to 2008, with <code class="language-plaintext highlighter-rouge">Lag2</code> as the only predictor. Compute the confusion matrix and the overall fraction of correct predictions for the held out data (that is, the data from 2009 and 2010).</li>
+      <li>(e) Repeat (d) using LDA.</li>
+      <li>(f) Repeat (d) using QDA.</li>
+      <li>(g) Repeat (d) using KNN with $K = 1$.</li>
+      <li>(h) Repeat (d) using naive Bayes.</li>
+      <li>(i) Which of these methods appears to provide the best results on this data?</li>
+      <li>(j) Experiment with different combinations of predictors, including possible transformations and interactions, for each of the methods. Report the variables, method, and associated confusion matrix that appears to provide the best results on the held out data. Note that you should also experiment with values for $K$ in the KNN classifier.</li>
+    </ul>
+  </li>
+  <li>In this problem, you will develop a model to predict whether a given car gets high or low gas mileage based on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.
+    <ul>
+      <li>(a) Create a binary variable, <code class="language-plaintext highlighter-rouge">mpg01</code>, that contains a 1 if <code class="language-plaintext highlighter-rouge">mpg</code> contains a value above its median, and a 0 if <code class="language-plaintext highlighter-rouge">mpg</code> contains a value below its median. You can compute the median using the <code class="language-plaintext highlighter-rouge">median()</code> method of the data frame. Note you may find it helpful to add a column <code class="language-plaintext highlighter-rouge">mpg01</code> to the data frame by assignment. Assuming you have stored the data frame as <code class="language-plaintext highlighter-rouge">Auto</code>, this can be done as follows:</li>
+    </ul>
+  </li>
 </ol>
 
-<ul>
-  <li>(a) Produce some numerical and graphical summaries of the <code class="language-plaintext highlighter-rouge">Weekly</code> data. Do there appear to be any patterns?</li>
-</ul>
-
-<p>4.8 Exercises 197</p>
-
-<ul>
-  <li>
-    <p>(b) Use the full data set to perform a logistic regression with <code class="language-plaintext highlighter-rouge">Direction</code> as the response and the five lag variables plus <code class="language-plaintext highlighter-rouge">Volume</code> as predictors. Use the summary function to print the results. Do any of the predictors appear to be statistically significant? If so, which ones?</p>
-  </li>
-  <li>
-    <p>(c) Compute the confusion matrix and overall fraction of correct predictions. Explain what the confusion matrix is telling you about the types of mistakes made by logistic regression.</p>
-  </li>
-  <li>
-    <p>(d) Now fit the logistic regression model using a training data period from 1990 to 2008, with <code class="language-plaintext highlighter-rouge">Lag2</code> as the only predictor. Compute the confusion matrix and the overall fraction of correct predictions for the held out data (that is, the data from 2009 and 2010).</p>
-  </li>
-  <li>
-    <p>(e) Repeat (d) using LDA.</p>
-  </li>
-  <li>
-    <p>(f) Repeat (d) using QDA.</p>
-  </li>
-  <li>
-    <p>(g) Repeat (d) using KNN with $K$ = 1.</p>
-  </li>
-  <li>
-    <p>(h) Repeat (d) using naive Bayes.</p>
-  </li>
-  <li>
-    <p>(i) Which of these methods appears to provide the best results on this data?</p>
-  </li>
-  <li>
-    <p>(j) Experiment with different combinations of predictors, including possible transformations and interactions, for each of the methods. Report the variables, method, and associated confusion matrix that appears to provide the best results on the held out data. Note that you should also experiment with values for $K$ in the KNN classifier.</p>
-  </li>
-</ul>
-
-<ol>
-  <li>In this problem, you will develop a model to predict whether a given car gets high or low gas mileage based on the <code class="language-plaintext highlighter-rouge">Auto</code> data set.</li>
-</ol>
-
-<ul>
-  <li>(a) Create a binary variable, <code class="language-plaintext highlighter-rouge">mpg01</code> , that contains a 1 if <code class="language-plaintext highlighter-rouge">mpg</code> contains a value above its median, and a 0 if <code class="language-plaintext highlighter-rouge">mpg</code> contains a value below its median. You can compute the median using the <code class="language-plaintext highlighter-rouge">median()</code> method of the data frame. Note you may find it helpful to add a column <code class="language-plaintext highlighter-rouge">mpg01</code> to the data frame by assignment. Assuming you have stored the data frame as <code class="language-plaintext highlighter-rouge">Auto</code> , this can be done as follows:</li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Auto['mpg01']=mpg01
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">mpg01</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mpg01</span>
 </code></pre></div></div>
 
 <ul>
-  <li>
-    <p>(b) Explore the data graphically in order to investigate the association between <code class="language-plaintext highlighter-rouge">mpg01</code> and the other features. Which of the other features seem most likely to be useful in predicting <code class="language-plaintext highlighter-rouge">mpg01</code> ? Scatterplots and boxplots may be useful tools to answer this question. Describe your findings.</p>
-  </li>
-  <li>
-    <p>(c) Split the data into a training set and a test set.</p>
-  </li>
-  <li>
-    <p>(d) Perform LDA on the training data in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code> using the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What is the test error of the model obtained?</p>
-  </li>
-</ul>
-
-<p>198 4. Classification</p>
-
-<ul>
-  <li>
-    <p>(e) Perform QDA on the training data in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code> using the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What is the test error of the model obtained?</p>
-  </li>
-  <li>
-    <p>(f) Perform logistic regression on the training data in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code> using the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What is the test error of the model obtained?</p>
-  </li>
-  <li>
-    <p>(g) Perform naive Bayes on the training data in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code> using the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What is the test error of the model obtained?</p>
-  </li>
-  <li>
-    <p>(h) Perform KNN on the training data, with several values of $K$ , in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code> . Use only the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What test errors do you obtain? Which value of $K$ seems to perform the best on this data set?</p>
-  </li>
+  <li>(b) Explore the data graphically in order to investigate the association between <code class="language-plaintext highlighter-rouge">mpg01</code> and the other features. Which of the other features seem most likely to be useful in predicting <code class="language-plaintext highlighter-rouge">mpg01</code>? Scatterplots and boxplots may be useful tools to answer this question. Describe your findings.</li>
+  <li>(c) Split the data into a training set and a test set.</li>
+  <li>(d) Perform LDA on the training data in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code> using the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What is the test error of the model obtained?</li>
+  <li>(e) Perform QDA on the training data in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code> using the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What is the test error of the model obtained?</li>
+  <li>(f) Perform logistic regression on the training data in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code> using the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What is the test error of the model obtained?</li>
+  <li>(g) Perform naive Bayes on the training data in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code> using the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What is the test error of the model obtained?</li>
+  <li>(h) Perform KNN on the training data, with several values of $K$, in order to predict <code class="language-plaintext highlighter-rouge">mpg01</code>. Use only the variables that seemed most associated with <code class="language-plaintext highlighter-rouge">mpg01</code> in (b). What test errors do you obtain? Which value of $K$ seems to perform the best on this data set?</li>
 </ul>
 
 <ol>
-  <li>This problem involves writing functions.</li>
-</ol>
-
-<ul>
-  <li>
-    <p>(a) Write a function, <code class="language-plaintext highlighter-rouge">Power()</code> , that prints out the result of raising 2 to the 3rd power. In other words, your function should compute 2[3] and print out the results.</p>
-
+  <li>This problem involves writing functions.
     <ul>
-      <li><em>Hint: Recall that</em> <code class="language-plaintext highlighter-rouge">x**a</code> <em>raises</em> <code class="language-plaintext highlighter-rouge">x</code> <em>to the power</em> <code class="language-plaintext highlighter-rouge">a</code> <em>. Use the</em> <code class="language-plaintext highlighter-rouge">print()</code> <em>function to display the result.</em></li>
+      <li>(a) Write a function, <code class="language-plaintext highlighter-rouge">Power()</code>, that prints out the result of raising 2 to the 3rd power. In other words, your function should compute $2^3$ and print out the results.</li>
+    </ul>
+    <ul>
+      <li><em>Hint: Recall that</em> <code class="language-plaintext highlighter-rouge">x**a</code> <em>raises</em> <code class="language-plaintext highlighter-rouge">x</code> <em>to the power</em> <code class="language-plaintext highlighter-rouge">a</code>. <em>Use the</em> <code class="language-plaintext highlighter-rouge">print()</code> <em>function to display the result.</em> 
+       - (b) Create a new function, <code class="language-plaintext highlighter-rouge">Power2()</code>, that allows you to pass <em>any</em> two numbers, <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">a</code>, and prints out the value of <code class="language-plaintext highlighter-rouge">x**a</code>. You can do this by beginning your function with the line</li>
     </ul>
   </li>
-  <li>
-    <p>(b) Create a new function, <code class="language-plaintext highlighter-rouge">Power2()</code> , that allows you to pass <em>any</em> two numbers, <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">a</code> , and prints out the value of <code class="language-plaintext highlighter-rouge">x**a</code> . You can do this by beginning your function with the line</p>
-  </li>
-</ul>
+</ol>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defPower2(x,a):
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">Power2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
 </code></pre></div></div>
 
 <p>You should be able to call your function by entering, for instance,</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Power2(3,8)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Power2</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>on the command line. This should output the value of 3[8] , namely, 6 <em>,</em> 561.</p>
+<p>on the command line. This should output the value of $3^8$, namely, $6,561$.</p>
 
 <ul>
-  <li>
-    <p>(c) Using the <code class="language-plaintext highlighter-rouge">Power2()</code> function that you just wrote, compute 10[3] , 8[17] , and 131[3] .</p>
-  </li>
-  <li>
-    <p>(d) Now create a new function, <code class="language-plaintext highlighter-rouge">Power3()</code> , that actually <em>returns</em> the result <code class="language-plaintext highlighter-rouge">x**a</code> as a <code class="language-plaintext highlighter-rouge">Python</code> object, rather than simply printing it to the screen. That is, if you store the value <code class="language-plaintext highlighter-rouge">x**a</code> in an object called <code class="language-plaintext highlighter-rouge">result</code> within your function, then you can simply <code class="language-plaintext highlighter-rouge">return return</code> this result, using the following line:</p>
-  </li>
+  <li>(c) Using the <code class="language-plaintext highlighter-rouge">Power2()</code> function that you just wrote, compute $10^3, 8^{17}$, and $131^3$.</li>
+  <li>(d) Now create a new function, <code class="language-plaintext highlighter-rouge">Power3()</code>, that actually <em>returns</em> the result <code class="language-plaintext highlighter-rouge">x**a</code> as a <code class="language-plaintext highlighter-rouge">Python</code> object, rather than simply printing it to the screen. That is, if you store the value <code class="language-plaintext highlighter-rouge">x**a</code> in an object called <code class="language-plaintext highlighter-rouge">result</code> within your function, then you can simply <code class="language-plaintext highlighter-rouge">return</code> this result, using the following line:</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>returnresult
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="n">result</span>
 </code></pre></div></div>
 
 <p>Note that the line above should be the last line in your function, and it should be indented 4 spaces.</p>
-
 <ul>
-  <li>
-    <p>(e) Now using the <code class="language-plaintext highlighter-rouge">Power3()</code> function, create a plot of <em>f</em> ( <em>x</em> ) = <em>x</em>[2] . The <em>x</em> -axis should display a range of integers from 1 to 10, and the <em>y</em> -axis should display <em>x</em>[2] . Label the axes appropriately, and use an appropriate title for the figure. Consider displaying either the <em>x</em> -axis, the <em>y</em> -axis, or both on the log-scale. You can do this by using the <code class="language-plaintext highlighter-rouge">ax.set_xscale()</code> and <code class="language-plaintext highlighter-rouge">ax.set_yscale()</code> methods of <code class="language-plaintext highlighter-rouge">.set_xscale()</code></p>
-  </li>
-  <li>
-    <p>the axes you are plotting to.</p>
-  </li>
+  <li>(e) Now using the <code class="language-plaintext highlighter-rouge">Power3()</code> function, create a plot of $f(x) = x^2$. The $x$-axis should display a range of integers from 1 to 10, and the $y$-axis should display $x^2$. Label the axes appropriately, and use an appropriate title for the figure. Consider displaying either the $x$-axis, the $y$-axis, or both on the log-scale. You can do this by using the <code class="language-plaintext highlighter-rouge">ax.set_xscale()</code> and <code class="language-plaintext highlighter-rouge">ax.set_yscale()</code> methods of the axes you are plotting to.</li>
+  <li>(f) Create a function, <code class="language-plaintext highlighter-rouge">PlotPower()</code>, that allows you to create a plot of <code class="language-plaintext highlighter-rouge">x</code> against <code class="language-plaintext highlighter-rouge">x**a</code> for a fixed <code class="language-plaintext highlighter-rouge">a</code> and a sequence of values of x. For instance, if you call</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.set_yscale()
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">PlotPower</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>4.8 Exercises 199</p>
-
-<ul>
-  <li>(f) Create a function, <code class="language-plaintext highlighter-rouge">PlotPower()</code> , that allows you to create a plot of <code class="language-plaintext highlighter-rouge">x</code> against <code class="language-plaintext highlighter-rouge">x**a</code> for a fixed <code class="language-plaintext highlighter-rouge">a</code> and a sequence of values of x. For instance, if you call</li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PlotPower(np.arange(1,11),3)
-</code></pre></div></div>
-
-<ul>
-  <li>then a plot should be created with an <em>x</em> -axis taking on values 1 <em>,</em> 2 <em>, . . . ,</em> 10, and a <em>y</em> -axis taking on values 1[3] <em>,</em> 2[3] <em>, . . . ,</em> 10[3] .</li>
-</ul>
+<p>then a plot should be created with an $x$-axis taking on values $1, 2, \dots, 10$, and a $y$-axis taking on values $1^3, 2^3, \dots, 10^3$.</p>
 
 <ol>
-  <li>Using the <code class="language-plaintext highlighter-rouge">Boston</code> data set, fit classification models in order to predict whether a given suburb has a crime rate above or below the median. Explore logistic regression, LDA, naive Bayes, and KNN models using various subsets of the predictors. Describe your findings.</li>
+  <li>Using the <code class="language-plaintext highlighter-rouge">Boston</code> data set, fit classification models in order to predict whether a given suburb has a crime rate above or below the median. Explore logistic regression, LDA, naive Bayes, and KNN models using various subsets of the predictors. Describe your findings. 
+<em>Hint: You will have to create the response variable yourself, using the variables that are contained in the</em> <code class="language-plaintext highlighter-rouge">Boston</code> <em>data set.</em></li>
 </ol>
 
-<p><em>Hint: You will have to create the response variable yourself, using the variables that are contained in the</em> <code class="language-plaintext highlighter-rouge">Boston</code> <em>data set.</em></p>
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<p><a href="../4_8_1_conceptual/index.html">&lt; 4.8.1 Conceptual</a></p>
 
 
             <!-- 구글 애드센스 출력 -->

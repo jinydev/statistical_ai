@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -513,33 +512,48 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="predictors-with-only-two-levels">Predictors with Only Two Levels</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.3.1 Qualitative Predictors</a></td>
+      <td><a href="../../3_3_2_extensions_of_the_linear_model/index.html">3.3.2 Extensions Of The Linear Model &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Suppose that we wish to investigate differences in credit card balance between those who own a house and those who don’t, ignoring the other variables for the moment. If a qualitative predictor (also known as a <em>factor</em> ) factor only has two <em>levels</em> , or possible values, then incorporating it into a regres- level sion model is very simple. We simply create an indicator or <em>dummy variable</em> dummy that takes on two possible numerical values.[10] For example, based on the variable <code class="language-plaintext highlighter-rouge">own</code> variable, we can create a new variable that takes the form</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>variable</p>
+<h1 id="predictors-with-only-two-levels">Predictors with Only Two Levels</h1>
 
-\[x_i = \begin{cases} 
-1 &amp; \text{if } i\text{th person owns house} \\ 
+<p>Suppose that we wish to investigate differences in credit card balance between those who own a house and those who don’t, ignoring the other variables for the moment.</p>
+
+<p>If a qualitative predictor (also known as a <em>factor</em>) only has two <em>levels</em>, or possible values, then incorporating it into a regression model is very simple.</p>
+
+<p>We simply create an indicator or <em>dummy variable</em> that takes on two possible numerical values.[10]</p>
+
+<p>For example, based on the <code class="language-plaintext highlighter-rouge">own</code> variable, we can create a new variable that takes the form</p>
+
+\[x_i = \begin{cases}
+1 &amp; \text{if } i\text{th person owns house} \\
 0 &amp; \text{if } i\text{th person does not own house}
 \end{cases}\]
 
-<p>and use this variable as a predictor in the regression equation. This results in the model</p>
+<p>and use this variable as a predictor in the regression equation.</p>
 
-\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases} 
-\beta_0 + \beta_1 + \epsilon_i &amp; \text{if } i\text{th person owns house} \\ 
+<p>This results in the model</p>
+
+\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases}
+\beta_0 + \beta_1 + \epsilon_i &amp; \text{if } i\text{th person owns house} \\
 \beta_0 + \epsilon_i &amp; \text{if } i\text{th person does not own house}
 \end{cases} \quad (3.27)\]
 
 <p>Now \beta_0 can be interpreted as the average credit card balance among those who do not own, \beta_0 + \beta_1 as the average credit card balance among those who do own their house, and \beta_1 as the average difference in credit card balance between owners and non-owners.</p>
 
-<p>Table 3.7 displays the coefficient estimates and other information associated with the model (3.27). The average credit card debt for non-owners is estimated to be $509 <em>.</em> 80, whereas owners are estimated to carry $19 <em>.</em> 73 in additional debt for a total of $509 <em>.</em> 80 + $19 <em>.</em> 73 = $529 <em>.</em> 53. However, we</p>
-
 <blockquote>
-  <p>10In the machine learning community, the creation of dummy variables to handle qualitative predictors is known as “one-hot encoding”.</p>
+  <p>[10] In the machine learning community, the creation of dummy variables to handle qualitative predictors is known as “one-hot encoding”.</p>
 </blockquote>
-
-<p>92 3. Linear Regression</p>
 
 <p><strong>==&gt; picture [300 x 300] intentionally omitted &lt;==</strong></p>
 
@@ -550,17 +564,23 @@
 
 <p>notice that the $p$-value for the dummy variable is very high. This indicates that there is no statistical evidence of a difference in average credit card balance based on house ownership.</p>
 
-<p>The decision to code owners as 1 and non-owners as 0 in (3.27) is arbitrary, and has no effect on the regression fit, but does alter the interpretation of the coefficients. If we had coded non-owners as 1 and owners as 0, then the estimates for \beta_0 and \beta_1 would have been 529 <em>.</em> 53 and <em>−</em> 19 <em>.</em> 73, respectively, leading once again to a prediction of credit card debt of $529 <em>.</em> 53 <em>−</em> $19 <em>.</em> 73 = $509 <em>.</em> 80 for non-owners and a prediction of $529 <em>.</em> 53 for owners. Alternatively, instead of a 0 <em>/</em> 1 coding scheme, we could create a dummy variable</p>
+<p>The decision to code owners as $1$ and non-owners as $0$ in (3.27) is arbitrary, and has no effect on the regression fit, but does alter the interpretation of the coefficients.</p>
 
-\[x_i = \begin{cases} 
-1 &amp; \text{if } i\text{th person owns house} \\ 
+<p>If we had coded non-owners as $1$ and owners as $0$, then the estimates for $\beta_0$ and $\beta_1$ would have been $529.53$ and $-19.73$, respectively, leading once again to a prediction of credit card debt of $$529.53 - $19.73 = $509.80$ for non-owners and a prediction of $$529.53$ for owners.</p>
+
+<p>Alternatively, instead of a $0 / 1$ coding scheme, we could create a dummy variable</p>
+
+\[x_i = \begin{cases}
+1 &amp; \text{if } i\text{th person owns house} \\
 -1 &amp; \text{if } i\text{th person does not own house}
 \end{cases}\]
 
-<p>and use this variable in the regression equation. This results in the model</p>
+<p>and use this variable in the regression equation.</p>
 
-\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases} 
-\beta_0 + \beta_1 + \epsilon_i &amp; \text{if } i\text{th person owns house} \\ 
+<p>This results in the model</p>
+
+\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases}
+\beta_0 + \beta_1 + \epsilon_i &amp; \text{if } i\text{th person owns house} \\
 \beta_0 - \beta_1 + \epsilon_i &amp; \text{if } i\text{th person does not own house}
 \end{cases} \quad (3.28)\]
 
@@ -591,11 +611,23 @@
 
 <p><strong>TABLE 3.7.</strong> <em>Least squares coefficient estimates associated with the regression of</em> <code class="language-plaintext highlighter-rouge">balance</code> <em>onto</em> <code class="language-plaintext highlighter-rouge">own</code> <em>in the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set. The linear model is given in (3.27). That is, ownership is encoded as a dummy variable, as in (3.26).</em></p>
 
-<p>Now \beta_0 can be interpreted as the overall average credit card balance (ignoring the house ownership effect), and \beta_1 is the amount by which house owners and non-owners have credit card balances that are above and below the average, respectively.[11] In this example, the estimate for \beta_0 is $519 <em>.</em> 665, halfway between the non-owner and owner averages of $509 <em>.</em> 80 and $529 <em>.</em> 53. The estimate for \beta_1 is $9 <em>.</em> 865, which is half of $19 <em>.</em> 73, the average difference between owners and non-owners. It is important to note that the final predictions for the credit balances of owners and non-owners will be identical regardless of the coding scheme used. The only difference is in the way that the coefficients are interpreted.</p>
+<p>Now $\beta_0$ can be interpreted as the overall average credit card balance (ignoring the house ownership effect), and $\beta_1$ is the amount by which house owners and non-owners have credit card balances that are above and below the average, respectively.[11]</p>
+
+<p>In this example, the estimate for $\beta_0$ is $$519.665$, halfway between the non-owner and owner averages of $$509.80$ and $$529.53$.</p>
+
+<p>The estimate for $\beta_1$ is $$9.865$, which is half of $$19.73$, the average difference between owners and non-owners.</p>
+
+<p>It is important to note that the final predictions for the credit balances of owners and non-owners will be identical regardless of the coding scheme used.</p>
+
+<p>The only difference is in the way that the coefficients are interpreted.</p>
 
 <p>Qualitative Predictors with More than Two Levels</p>
 
-<p>When a qualitative predictor has more than two levels, a single dummy variable cannot represent all possible values. In this situation, we can create additional dummy variables. For example, for the <code class="language-plaintext highlighter-rouge">region</code> variable we create two dummy variables. The first could be</p>
+<p>When a qualitative predictor has more than two levels, a single dummy variable cannot represent all possible values.</p>
+
+<p>In this situation, we can create additional dummy variables.</p>
+
+<p>For example, for the <code class="language-plaintext highlighter-rouge">region</code> variable we create two dummy variables. The first could be</p>
 
 <p><strong>==&gt; picture [268 x 31] intentionally omitted &lt;==</strong></p>
 
@@ -609,23 +641,19 @@
 
 <p>(3.30)</p>
 
-<p>Now \beta_0 can be interpreted as the average credit card balance for individuals from the East, \beta_1 can be interpreted as the difference in the average balance between people from the South versus the East, and \beta_2 can be interpreted as the difference in the average balance between those from the West versus the East. There will always be one fewer dummy variable than the number of levels. The level with no dummy variable—East in this example—is known as the <em>baseline</em> .</p>
+<p>Now $\beta_0$ can be interpreted as the average credit card balance for individuals from the East, $\beta_1$ can be interpreted as the difference in the average balance between people from the South versus the East, and $\beta_2$ can be interpreted as the difference in the average balance between those from the West versus the East.</p>
+
+<p>There will always be one fewer dummy variable than the number of levels.</p>
+
+<p>The level with no dummy variable — East in this example — is known as the __.</p>
 
 <blockquote>
-  <p>11Technically \beta_0 is half the sum of the average debt for house owners and the average debt for non-house owners. Hence, \beta_0 is exactly equal to the overall average only if the two groups have an equal number of members.</p>
+  <p>[11] Technically $\beta_0$ is half the sum of the average debt for house owners and the average debt for non-house owners. Hence, $\beta_0$ is exactly equal to the overall average only if the two groups have an equal number of members.</p>
 </blockquote>
-
-<p>baseline</p>
 
 <p>94 3. Linear Regression</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>3. Linear Regression</th>
-      <th>3. Linear Regression</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
       <td> </td>
@@ -644,11 +672,30 @@
 
 <p><strong>TABLE 3.8.</strong> <em>Least squares coefficient estimates associated with the regression of</em> <code class="language-plaintext highlighter-rouge">balance</code> <em>onto</em> <code class="language-plaintext highlighter-rouge">region</code> <em>in the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set. The linear model is given in (3.30). That is, region is encoded via two dummy variables (3.28) and (3.29).</em></p>
 
-<p>From Table 3.8, we see that the estimated <code class="language-plaintext highlighter-rouge">balance</code> for the baseline, East, is $531 <em>.</em> 00. It is estimated that those in the South will have $18 <em>.</em> 69 less debt than those in the East, and that those in the West will have $12 <em>.</em> 50 less debt than those in the East. However, the $p$-values associated with the coefficient estimates for the two dummy variables are very large, suggesting no statistical evidence of a real difference in average credit card balance between South and East or between West and East.[12] Once again, the level selected as the baseline category is arbitrary, and the final predictions for each group will be the same regardless of this choice. However, the coefficients and their $p$-values do depend on the choice of dummy variable coding. Rather than rely on the individual coefficients, we can use an <em>F</em> -test to test $H_0$ : \beta_1 = \beta_2 = 0; this does not depend on the coding. This <em>F</em> -test has a $p$-value of 0 <em>.</em> 96, indicating that we cannot reject the null hypothesis that there is no relationship between <code class="language-plaintext highlighter-rouge">balance</code> and <code class="language-plaintext highlighter-rouge">region</code> .</p>
+<p>From Table 3.8, we see that the estimated <code class="language-plaintext highlighter-rouge">balance</code> for the , East, is $531 <em>.</em> 00. It is estimated that those in the South will have $18 <em>.</em> 69 less debt than those in the East, and that those in the West will have $12 <em>.</em> 50 less debt than those in the East. However, the $p$-values associated with the coefficient estimates for the two dummy variables are very large, suggesting no statistical evidence of a real difference in average credit card balance between South and East or between West and East.[12] Once again, the level selected as the  category is arbitrary, and the final predictions for each group will be the same regardless of this choice. However, the coefficients and their $p$-values do depend on the choice of dummy variable coding. Rather than rely on the individual coefficients, we can use an <em>F</em> -test to test $H_0$ : \beta_1 = \beta_2 = 0; this does not depend on the coding. This <em>F</em> -test has a $p$-value of 0 <em>.</em> 96, indicating that we cannot reject the null hypothesis that there is no relationship between <code class="language-plaintext highlighter-rouge">balance</code> and <code class="language-plaintext highlighter-rouge">region</code> .</p>
 
-<p>Using this dummy variable approach presents no difficulties when incorporating both quantitative and qualitative predictors. For example, to regress <code class="language-plaintext highlighter-rouge">balance</code> on both a quantitative variable such as <code class="language-plaintext highlighter-rouge">income</code> and a qualitative variable such as <code class="language-plaintext highlighter-rouge">student</code> , we must simply create a dummy variable for <code class="language-plaintext highlighter-rouge">student</code> and then fit a multiple regression model using <code class="language-plaintext highlighter-rouge">income</code> and the dummy variable as predictors for credit card balance.</p>
+<p>Using this dummy variable approach presents no difficulties when incorporating both quantitative and qualitative predictors.</p>
 
-<p>There are many different ways of coding qualitative variables besides the dummy variable approach taken here. All of these approaches lead to equivalent model fits, but the coefficients are different and have different interpretations, and are designed to measure particular <em>contrasts</em> . This topic contrast is beyond the scope of the book.</p>
+<p>For example, to regress <code class="language-plaintext highlighter-rouge">balance</code> on both a quantitative variable such as <code class="language-plaintext highlighter-rouge">income</code> and a qualitative variable such as <code class="language-plaintext highlighter-rouge">student</code>, we must simply create a dummy variable for <code class="language-plaintext highlighter-rouge">student</code> and then fit a multiple regression model using <code class="language-plaintext highlighter-rouge">income</code> and the dummy variable as predictors for credit card balance.</p>
+
+<p>There are many different ways of coding qualitative variables besides the dummy variable approach taken here.</p>
+
+<p>All of these approaches lead to equivalent model fits, but the coefficients are different and have different interpretations, and are designed to measure particular <em>contrasts</em>.</p>
+
+<p>This topic is beyond the scope of the book.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.3.1 Qualitative Predictors</a></td>
+      <td><a href="../../3_3_2_extensions_of_the_linear_model/index.html">3.3.2 Extensions Of The Linear Model &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

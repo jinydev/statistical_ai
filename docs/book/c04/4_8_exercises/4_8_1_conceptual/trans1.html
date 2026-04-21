@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c04/4_8_exercises/4_8_1_conceptual/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c04/4_8_exercises/4_8_1_conceptual/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c04/4_8_exercises/4_8_1_conceptual/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c04/4_8_exercises/4_8_1_conceptual/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c04/">04. Classification</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c04/4_8_exercises/">4 8 exercises</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c04/4_8_exercises/4_8_1_conceptual/">4 8 1 conceptual</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../trans1.html">&lt; 4.8 Exercises</a></td>
+      <td><a href="../4_8_2_applied/trans1.html">4.8.2 Applied &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 이 페이지는 원문 형식을 최대한 존중한 <strong>직역본</strong>입니다. 내용이 어렵거나 수학적 설명이 딱딱하게 느껴진다면, 더 쉽고 비유적으로 풀어쓴 <a href="./trans2.html">🏄‍♂️ Vibe Coding 버전보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="481-conceptual">4.8.1 Conceptual</h1>
+<h1 id="481-개념-문제">4.8.1 개념 문제</h1>
+
+<ol>
+  <li>Using a little bit of algebra, prove that (4.2) is equivalent to (4.3). In other words, the logistic function representation and logit representation for the logistic regression model are equivalent.</li>
+  <li>
+    <p>약간의 대수학(algebra)을 사용하여 (4.2)가 (4.3)과 동등함(equivalent)을 증명하십시오. 다시 말해, 로지스틱 회귀 모델에 대한 로지스틱 함수(logistic function) 표현과 로짓(logit) 표현은 동등합니다.</p>
+  </li>
+  <li>It was stated in the text that classifying an observation to the class for which (4.17) is largest is equivalent to classifying an observation to the class for which (4.18) is largest. Prove that this is the case. In other words, under the assumption that the observations in the $k$th class are drawn from a $N(\mu_k, \sigma^2)$ distribution, the Bayes classifier assigns an observation to the class for which the discriminant function is maximized.</li>
+  <li>
+    <p>본문에서 관측치를 (4.17)이 가장 큰 클래스로 분류하는 것은 (4.18)이 가장 큰 클래스로 관측치를 분류하는 것과 동일하다고 명시되었습니다. 이것이 사실임을 증명하십시오. 다시 말해, $k$번째 클래스의 관측치가 $N(\mu_k, \sigma^2)$ 분포에서 추출(drawn)되었다는 가정 하에, 베이즈 분류기(Bayes classifier)는 판별 함수(discriminant function)가 최대화되는 클래스에 관측치를 할당합니다.</p>
+  </li>
+  <li>This problem relates to the QDA model, in which the observations within each class are drawn from a normal distribution with a class-specific mean vector and a class-specific covariance matrix. We consider the simple case where $p = 1$; i.e. there is only one feature.</li>
+  <li>이 문제는 각 클래스 내의 관측치가 클래스별 평균 벡터(class-specific mean vector)와 클래스별 공분산 행렬(class-specific covariance matrix)을 갖는 정규 분포에서 추출되는 QDA 모델과 관련이 있습니다. 우리는 특성이 오직 하나뿐인 간단한 경우($p=1$)를 고려합니다.
+    <ul>
+      <li>Suppose that we have $K$ classes, and that if an observation belongs to the $k$th class then $X$ comes from a one-dimensional normal distribution, $X \sim N(\mu_k, \sigma_k^2)$. Recall that the density function for the one-dimensional normal distribution is given in (4.16). Prove that in this case, the Bayes classifier is <em>not</em> linear. Argue that it is in fact quadratic.</li>
+      <li>우리가 $K$개의 클래스를 가지고 있고, 어떤 관측치가 $k$번째 클래스에 속한다면 $X$가 1차원 정규 분포 $X \sim N(\mu_k, \sigma_k^2)$에서 온다고 가정합시다. 1차원 정규 분포에 대한 밀도 함수(density function)가 (4.16)에 주어졌음을 상기하십시오. 이 경우 베이즈 분류기가 비선형(<em>not</em> linear)임을 증명하십시오. 그것이 사실상 이차원(quadratic)이라고 주장하십시오(Argue).</li>
+      <li><em>Hint: For this problem, you should follow the arguments laid out in Section 4.4.1, but without making the assumption that $\sigma_1^2 = \dots = \sigma_K^2$.</em></li>
+      <li><em>힌트: 이 문제의 경우 Section 4.4.1에 제시된 논거(arguments)를 따라야 하지만, $\sigma_1^2 = \dots = \sigma_K^2$ 라는 가정은 하지 않아야 합니다.</em></li>
+    </ul>
+  </li>
+  <li>When the number of features $p$ is large, there tends to be a deterioration in the performance of KNN and other <em>local</em> approaches that perform prediction using only observations that are <em>near</em> the test observation for which a prediction must be made. This phenomenon is known as the <em>curse of dimensionality</em>, and it ties into the fact that non-parametric approaches often perform poorly when $p$ is large. We will now investigate this curse.</li>
+  <li>특성의 수 $p$가 클 때, 예측이 이루어져야 하는 테스트 관측값 <em>근처(near)</em> 에 있는 관측값만 이용하여 예측을 수행하는 KNN 및 여타 <em>국소적(local)</em> 접근 방식의 성능이 저하되는 경향이 있습니다. 이 현상은 <em>차원의 저주(curse of dimensionality)</em> 로 알려져 있으며, $p$가 클 때 비모수적(non-parametric) 접근 방식이 자주 저조한 성과를 보인다는 사실과 연관됩니다. 우리는 이제 이 저주를 조사할 것입니다.
+    <ul>
+      <li>(a) Suppose that we have a set of observations, each with measurements on $p=1$ feature, $X$. We assume that $X$ is uniformly (evenly) distributed on $[0, 1]$. Associated with each observation is a response value. Suppose that we wish to predict a test observation’s response using only observations that are within 10% of the range of $X$ closest to that test observation. For instance, in order to predict the response for a test observation with $X = 0.6$, we will use observations in the range $[0.55, 0.65]$. On average, what fraction of the available observations will we use to make the prediction?</li>
+      <li>(a) $p=1$차원의 특성 $X$에 대한 측정값이 있는 관측치 집합이 있다고 가정합시다. 우리는 $X$가 $[0, 1]$ 상에 균등하게(uniformly) 분포되어 있다고 가정합니다. 각 관측치와 연관된 반응 값(response value)이 있습니다. 해당 테스트 관측치에 가장 가까운 $X$ 범위의 10% 이내에 있는 관측치만 사용하여 테스트 관측치의 반응을 예측하고자 한다고 가정시합시다. 예를 들어 $X = 0.6$인 테스트 관측치의 반응을 예측하기 위해 $[0.55, 0.65]$ 범위의 관측치를 사용합니다. 평균적으로 우리는 예측을 내리기 위해 가용한 관측치의 얼마만큼의 비율(fraction)을 사용할까요?</li>
+      <li>(b) Now suppose that we have a set of observations, each with measurements on $p=2$ features, $X_1$ and $X_2$. We assume that $(X_1, X_2)$ are uniformly distributed on $[0, 1] \times [0, 1]$. We wish to predict a test observation’s response using only observations that are within 10% of the range of $X_1$ <em>and</em> within 10% of the range of $X_2$ closest to that test observation. On average, what fraction of the available observations will we use to make the prediction?</li>
+      <li>(b) 이제 $p=2$차원의 특성 $X_1$ 및 $X_2$ 에 대한 측정값이 있는 관측치 집합이 있다고 가정합니다. 우리는 $(X_1, X_2)$ 가 $[0, 1] \times [0, 1]$ 상에 균등하게 분포되어 있다고 가정합니다. 해당 테스트 관측치에 가장 가까운 $X_1$ 범위의 10% 이내 <em>그리고(and)</em> $X_2$ 범위의 10% 이내에 있는 관측치만 사용하여 테스트 관측치의 반응을 예측하고자 합니다. 평균적으로 예측을 내리기 위해 가용 관측치의 어느 정도 비율을 사용할 것입니까?</li>
+      <li>(c) Now suppose that we have a set of observations on $p=100$ features. Again the observations are uniformly distributed on each feature, and again each feature ranges in value from 0 to 1. We wish to predict a test observation’s response using observations within the 10% of each feature’s range that is closest to that test observation. What fraction of the available observations will we use to make the prediction?</li>
+      <li>(c) 이제 특성이 $p=100$ 인 관측치 집합이 있다고 가정합시다. 또 다시(Again) 관측치는 각 특성 상에 균등하게 분포되며, 각 특성 값의 범위는 0에서 1까지입니다. 해당 테스트 관측치와 가장 가까운 각 특성 범위의 10% 이내의 관측치를 사용하여 테스트 관측치의 반응을 예측하려고 합니다. 예측을 내리기 위해 사용할 수 있는 관측치의 비율은 얼마입니까?</li>
+      <li>(d) Using your answers to parts (a)–(c), argue that a drawback of KNN when $p$ is large is that there are very few training observations “near” any given test observation.</li>
+      <li>(d) 파트 (a)-(c) 의 답을 사용하여 $p$가 클 때 KNN의 단점은 임의의 주어진 테스트 관측치 “근처(near)” 에 훈련 관측치가 거의 없다는 점임을 주장하십시오.</li>
+      <li>(e) Now suppose that we wish to make a prediction for a test observation by creating a $p$-dimensional hypercube centered around the test observation that contains, on average, 10% of the training observations. For $p=1, 2$, and $100$, what is the length of each side of the hypercube? Comment on your answer.</li>
+      <li>(e) 이제 우리는 테스트 관측치를 중심으로 평균적으로 훈련 관측치의 10%를 포함하는 $p$-차원 하이퍼큐브(hypercube)를 생성함으로써 테스트 관측치에 대한 예측을 내리고자 한다고 가정합시다. $p=1, 2$ 및 $100$ 에 대하여 하이퍼큐브 각 변의 길이는 얼마입니까? 여러분의 답에 대해 코멘트하세요.
+<em>Note: A hypercube is a generalization of a cube to an arbitrary number of dimensions. When $p=1$, a hypercube is simply a line segment, when $p=2$ it is a square, and when $p=100$ it is a 100-dimensional cube.</em>
+<em>참고: 하이퍼큐브는 정육면체를 임의의 차원 수로 일반화(generalization) 시킨 것입니다. $p=1$ 일 때 하이퍼큐브는 단순히 선분(line segment) 이고, $p=2$ 이면 정사각형, $p=100$ 이면 100차원 정육면체입니다.</em></li>
+    </ul>
+  </li>
+  <li>We now examine the differences between LDA and QDA.</li>
+  <li>우리는 이제 LDA와 QDA 간의 차이점을 검토합니다.
+    <ul>
+      <li>(a) If the Bayes decision boundary is linear, do we expect LDA or QDA to perform better on the training set? On the test set?</li>
+      <li>(a) 베이즈 결정 경계가 선형인 경우 LDA와 QDA 중 어느 것이 훈련 세트에서 더 나은 성능을 낼 것이라 예상합니까? 테스트 세트에서는 어떻습니까?</li>
+      <li>(b) If the Bayes decision boundary is non-linear, do we expect LDA or QDA to perform better on the training set? On the test set?</li>
+      <li>(b) 베이즈 결정 경계가 비선형인 경우 LDA와 QDA 중 어느 것이 훈련 세트에서 더 나은 성능을 낼 것이라 예상합니까? 테스트 세트에서는 어떻습니까?</li>
+      <li>(c) In general, as the sample size $n$ increases, do we expect the test prediction accuracy of QDA relative to LDA to improve, decline, or be unchanged? Why?</li>
+      <li>(c) 일반적으로 표본 크기 $n$ 이 증가함에 따라 LDA에 대한 QDA의 테스트 예측 정확도가 개선될 것이라 예상합니까, 감소할 것이라 혹은 변함없을 것이라 예상합니까? 이유는 무엇입니까?</li>
+      <li>(d) True or False: Even if the Bayes decision boundary for a given problem is linear, we will probably achieve a superior test error rate using QDA rather than LDA because QDA is flexible enough to model a linear decision boundary. Justify your answer.</li>
+      <li>(d) 참 또는 거짓: 특정 문제에 대한 베이즈 결정 경계가 선형일지라도, 우리는 QDA가 선형 결정 경계를 모델링할 만큼 충분히 유연하기 때문에 LDA보다 QDA를 사용하는 것이 우월한(superior) 테스트 에러율을 달성할 확률이 높습니다(probably). 여러분의 답을 정당화하시오.</li>
+    </ul>
+  </li>
+  <li>Suppose we collect data for a group of students in a statistics class with variables $X_1 =$ hours studied, $X_2 =$ undergrad GPA, and $Y =$ receive an A. We fit a logistic regression and produce estimated coefficient, $\hat{\beta}_0 = -6, \hat{\beta}_1 = 0.05, \hat{\beta}_2 = 1$.</li>
+  <li>통계학 수업을 듣는 학생 그룹을 위해 다음 변수들을 사용하여 데이터를 수집했다고 가정해 보겠습니다. $X_1 =$ 공부한 시간, $X_2 =$ 학부 GPA, $Y =$ A학점 수령 여부. 우리는 로지스틱 회귀를 피팅하고 추정된 계수인 $\hat{\beta}_0 = -6, \hat{\beta}_1 = 0.05, \hat{\beta}_2 = 1$ 을 산출합니다.
+    <ul>
+      <li>(a) Estimate the probability that a student who studies for 40 h and has an undergrad GPA of 3.5 gets an A in the class.</li>
+      <li>(a) 40시간 동안 공부하고 학부 GPA가 3.5 인 학생이 수업에서 A를 받을 확률을 추정하십시오.</li>
+      <li>(b) How many hours would the student in part (a) need to study to have a 50% chance of getting an A in the class?</li>
+      <li>(b) 파트(a)의 학생이 수업에서 A를 받을 확률이 50% 가 되려면 몇 시간을 공부해야 합니까?</li>
+    </ul>
+  </li>
+  <li>Suppose that we wish to predict whether a given stock will issue a dividend this year (“Yes” or “No”) based on $X$, last year’s percent profit. We examine a large number of companies and discover that the mean value of $X$ for companies that issued a dividend was $\bar{X} = 10$, while the mean for those that didn’t was $\bar{X} = 0$. In addition, the variance of $X$ for these two sets of companies was $\sigma^2 = 36$. Finally, 80% of companies issued dividends. Assuming that $X$ follows a normal distribution, predict the probability that a company will issue a dividend this year given that its percentage profit was $X = 4$ last year.</li>
+  <li>
+    <p>전년도 수익률(percent profit)인 $X$ 를 바탕으로 주어진 주식이 올해 배당금(dividend)을 발행할지 여부(“Yes” 또는 “No”)를 예측하고자 한다고 가정해 보겠습니다. 우리는 수많은 회사를 조사해 배당금을 실시한 회사의 $X$ 평균값이 $\bar{X} = 10$ 이고, 그렇지 않은 회사의 평균은 $\bar{X} = 0$ 임을 발견했습니다. 이와 더불어 이 두 회사 집단에 대한 $X$ 의 분산은 $\sigma^2 = 36$ 이었습니다. 최종적으로 80% 의 회사가 배당금을 발행했습니다. $X$ 가 정규 분포를 따른다고 가정하고, 어떤 회사의 작년 수익 비율이 $X=4$ 일 때 이 회사가 올해 배당금을 발행할 확률을 예측하십시오.
+<em>Hint: Recall that the density function for a normal random variable is $f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x-\mu)^2 / 2\sigma^2}$. You will need to use Bayes’ theorem.</em> 
+<em>힌트: 정규 확률 변수에 대한 밀도 함수가 $f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x-\mu)^2 / 2\sigma^2}$ 임을 상기하십시오. 여러분은 베이즈 정리(Bayes’ theorem)를 사용해야 할 것입니다.</em></p>
+  </li>
+  <li>Suppose that we take a data set, divide it into equally-sized training and test sets, and then try out two different classification procedures. First we use logistic regression and get an error rate of 20% on the training data and 30% on the test data. Next we use 1-nearest neighbors (i.e. $K=1$) and get an average error rate (averaged over both test and training data sets) of 18%. Based on these results, which method should we prefer to use for classification of new observations? Why?</li>
+  <li>
+    <p>우리가 데이터 세트를 가져와서 동일한 크기의 훈련 및 테스트 세트로 나눈 다음, 두 가지 서로 다른 분류 절차를 시험해 본다고 가정합시다. 먼저 우리는 로지스틱 회귀를 사용하고 훈련 데이터에서 20%, 테스트 데이터에서 30% 의 오류율을 얻습니다. 다음으로 우리는 1-최근접 이웃(즉, $K=1$)을 사용하고 18%의 평균 오류율(테스트 및 훈련 데이터 세트 모두에 걸쳐 평균 낸)을 얻습니다. 이 결과를 토대로 볼 때, 우리는 새로운 관측치(new observations)를 분류하기 위해 어떤 방법을 사용하는 편을 선호해야 합니까? 이유는 무엇입니까?</p>
+  </li>
+  <li>This problem has to do with <em>odds</em>.</li>
+  <li>이 문제는 <em>오즈(odds)</em> 와 관련이 있습니다.
+    <ul>
+      <li>(a) On average, what fraction of people with an odds of 0.37 of defaulting on their credit card payment will in fact default?</li>
+      <li>(a) 신용카드 대금 채무 불이행(defaulting)에 대한 오즈가 0.37 인 사람들 중, 평균적으로 얼마의 비율이 실제로 채무를 불이행하게 될까요?</li>
+      <li>(b) Suppose that an individual has a 16% chance of defaulting on her credit card payment. What are the odds that she will default?</li>
+      <li>(b) 특정 개인이 신용카드 대금을 채무 불이행할 확률(chance)이 16% 라고 가정합시다. 그녀가 채무를 불이행할 오즈는 얼마입니까?</li>
+    </ul>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Equation 4.32 derived an expression for $\log(\text{Pr}(Y=k</td>
+          <td>X=x) / \text{Pr}(Y=K</td>
+          <td>X=x))$ in the setting where $p &gt; 1$, so that the mean for the $k$th class, $\mu_k$ is a $p$-dimensional vector, and the shared covariance $\Sigma$ is a $p \times p$ matrix. However, in the setting with $p=1$, (4.32) takes a simpler form, since the means $\mu_1, \dots, \mu_K$ and the variance $\sigma^2$ are scalars. In this simpler setting, repeat the calculation in (4.32), and provide expressions for $a_k$ and $b_{kj}$ in terms of $\pi_k, \pi_K, \mu_k, \mu_K$, and $\sigma^2$.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>등식(Equation) 4.32 는 $p &gt; 1$ 인 설정에서 $\log(\text{Pr}(Y=k</td>
+          <td>X=x) / \text{Pr}(Y=K</td>
+          <td>X=x))$ 에 대한 식(expression)을 유도(derived)했으며, 그로 인해 $k$번째 클래스의 평균 $\mu_k$는 $p$차원 벡터이고, 공유 공분산 $\Sigma$ 는 $p \times p$ 행렬입니다. 하지만 $p=1$ 인 설정의 경우, 모델의 평균 $\mu_1, \dots, \mu_K$ 와 분산 $\sigma^2$ 이 스칼라(scalars) 이므로 (4.32)는 더 단순한 형태를 취합니다. 이 보다 단순한 설정에서 (4.32)의 계산을 반복하고, $\pi_k, \pi_K, \mu_k, \mu_K$ 및 $\sigma^2$ 의 관점(in terms of)에서 $a_k$ 와 $b_{kj}$ 에 대한 수식을 제공하십시오.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Work out the detailed forms of $a_k, b_{kj}$, and $b_{kjl}$ in (4.33). Your answer should involve $\pi_k, \pi_K, \mu_k, \mu_K, \Sigma_k$, and $\Sigma_K$.</li>
+  <li>
+    <p>(4.33)의 $a_k, b_{kj}$, 및 $b_{kjl}$ 의 상세 형태를 계산해 내십시오(Work out). 여러분의 답변에는 $\pi_k, \pi_K, \mu_k, \mu_K, \Sigma_k$ 및 $\Sigma_K$ 가 포함되어야(involve) 합니다.</p>
+  </li>
+  <li>Suppose that you wish to classify an observation $X \in \mathbb{R}$ into <code class="language-plaintext highlighter-rouge">apples</code> and <code class="language-plaintext highlighter-rouge">oranges</code>. You fit a logistic regression model and find that</li>
+  <li>관측치 $X \in \mathbb{R}$ 를 <code class="language-plaintext highlighter-rouge">apples</code>(사과) 와 <code class="language-plaintext highlighter-rouge">oranges</code>(오렌지) 로 분류하고자 한다고 가정시합시다. 로지스틱 회귀 모델을 피팅하고 다음을 찾아냅니다:</li>
+</ol>
+
+\[\text{Pr}(Y = \text{orange} \mid X = x) = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}\]
+
+<p>Your friend fits a logistic regression model to the same data using the <em>softmax</em> formulation in (4.13), and finds that 
+여러분의 친구가 (4.13)의 <em>소프트맥스(softmax)</em> 형태(formulation)를 사용해 동일한 데이터에 로지스틱 회귀 모델을 피팅하여 다음을 찾아냅니다.</p>
+
+\[\text{Pr}(Y = \text{apple} \mid X = x) = \frac{e^{ \alpha_{\text{apple} 0} + \alpha_{\text{apple} 1} x}}{e^{ \alpha_{\text{orange} 0} + \alpha_{\text{orange} 1} x} + e^{ \alpha_{\text{apple} 0} + \alpha_{\text{apple} 1} x}}\]
+
+\[\text{Pr}(Y = \text{orange} \mid X = x) = \frac{e^{ \alpha_{\text{orange} 0} + \alpha_{\text{orange} 1} x}}{e^{ \alpha_{\text{orange} 0} + \alpha_{\text{orange} 1} x} + e^{ \alpha_{\text{apple} 0} + \alpha_{\text{apple} 1} x}}\]
+
+<ul>
+  <li>(a) What is the log odds of <code class="language-plaintext highlighter-rouge">orange</code> versus <code class="language-plaintext highlighter-rouge">apple</code> in your model?</li>
+  <li>(a) 당신의 모델에서 <code class="language-plaintext highlighter-rouge">apple</code> 대비 <code class="language-plaintext highlighter-rouge">orange</code> 의 로그 오즈(log odds)는 무엇입니까?</li>
+  <li>(b) What is the log odds of <code class="language-plaintext highlighter-rouge">orange</code> versus <code class="language-plaintext highlighter-rouge">apple</code> in your friend’s model?</li>
+  <li>(b) 당신 친구의 모델에서 <code class="language-plaintext highlighter-rouge">apple</code> 대비 <code class="language-plaintext highlighter-rouge">orange</code> 의 로그 오즈는 무엇입니까?</li>
+  <li>(c) Suppose that in your model, $\hat{\beta}_0 = 2$ and $\hat{\beta}_1 = -1$. What are the coefficient estimates in your friend’s model? Be as specific as possible.</li>
+  <li>(c) 여러분의 모델에서 $\hat{\beta}_0 = 2$ 이고 $\hat{\beta}_1 = -1$ 이라 가정합시다. 친구의 모델에서 계수 추정치들은 무엇입니까? 가능한 자세하게 명시하십시오.</li>
+  <li>(d) Now suppose that you and your friend fit the same two models on a different data set. This time, your friend gets the coefficient estimates $\hat{\alpha}<em>{\text{orange} 0} = 1.2, \hat{\alpha}</em>{\text{orange} 1} = -2, \hat{\alpha}<em>{\text{apple} 0} = 3, \hat{\alpha}</em>{\text{apple} 1} = 0.6$. What are the coefficient estimates in your model?</li>
+  <li>(d) 이제 당신과 당신 친구가 서로 다른 데이터 세트에 같은 두 모델을 피팅한다고 가정해 봅시다. 이번에 당신 친구는 계수 추정치로 $\hat{\alpha}<em>{\text{orange} 0} = 1.2, \hat{\alpha}</em>{\text{orange} 1} = -2, \hat{\alpha}<em>{\text{apple} 0} = 3, \hat{\alpha}</em>{\text{apple} 1} = 0.6$ 를 얻습니다. 당신 모델 안의 계수 추정치는 얼마입니까?</li>
+  <li>(e) Finally, suppose you apply both models from (d) to a data set with 2,000 test observations. What fraction of the time do you expect the predicted class labels from your model to agree with those from your friend’s model? Explain your answer.</li>
+  <li>(e) 마지막으로, (d)로부터 두 가지 모델 모두를 테스트 관측치가 2,000개인 데이터 세트에 적용한다고 가정해 봅시다. 여러분 모델의 예측된 클래스 레이블이 친구의 모델에서 산출된 것들과 어느 정도의 시간/비율 동안 동의할(agree with) 것으로 예상합니까? 여러분의 답을 설명하십시오.</li>
+</ul>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../trans1.html">&lt; 4.8 Exercises</a></td>
+      <td><a href="../4_8_2_applied/trans1.html">4.8.2 Applied &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

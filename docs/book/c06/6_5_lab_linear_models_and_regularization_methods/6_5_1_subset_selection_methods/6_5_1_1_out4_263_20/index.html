@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -515,7 +514,7 @@
         <div class="bd-content ps-lg-4">
             <h1 id="out4-263-20"><strong><code class="language-plaintext highlighter-rouge">Out[4]:</code></strong> <code class="language-plaintext highlighter-rouge">(263, 20)</code></h1>
 
-<p>We first choose the best model using forward selection based on <em>Cp</em> (6.2). This score is not built in as a metric to <code class="language-plaintext highlighter-rouge">sklearn</code> . We therefore define a function to compute it ourselves, and use it as a scorer. By default, <code class="language-plaintext highlighter-rouge">sklearn</code> tries to maximize a score, hence our scoring function computes the negative <em>Cp</em> statistic.</p>
+<p>We first choose the best model using forward selection based on Cp (6.2). This score is not built in as a metric to <code class="language-plaintext highlighter-rouge">sklearn</code> . We therefore define a function to compute it ourselves, and use it as a scorer. By default, <code class="language-plaintext highlighter-rouge">sklearn</code> tries to maximize a score, hence our scoring function computes the negative <em>Cp</em> statistic.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [5]:defnCp(sigma2,estimator,X,Y):
 "NegativeCpstatistic"
@@ -527,7 +526,7 @@ return-(RSS+2*p*sigma2)/n
 
 <p>6.5 Lab: Linear Models and Regularization Methods 269</p>
 
-<p>We need to estimate the residual variance <em>σ</em>[2] , which is the first argument in our scoring function above. We will fit the biggest model, using all the variables, and estimate <em>σ</em>[2] based on its MSE.</p>
+<p>We need to estimate the residual variance $\sigma^2$ , which is the first argument in our scoring function above. We will fit the biggest model, using all the variables, and estimate $\sigma^2$ based on its MSE.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [6]:design=MS(Hitters.columns.drop('Salary')).fit(Hitters)
 Y=np.array(Hitters['Salary'])
@@ -535,7 +534,7 @@ X=design.transform(Hitters)
 sigma2=OLS(Y,X).fit().scale
 </code></pre></div></div>
 
-<p>The function <code class="language-plaintext highlighter-rouge">sklearn_selected()</code> expects a scorer with just three arguments — the last three in the definition of <code class="language-plaintext highlighter-rouge">nCp()</code> above. We use the function <code class="language-plaintext highlighter-rouge">partial()</code> first seen in Section 5.3.3 to freeze the first argument with our estimate of <em>σ</em>[2] .</p>
+<p>The function <code class="language-plaintext highlighter-rouge">sklearn_selected()</code> expects a scorer with just three arguments — the last three in the definition of <code class="language-plaintext highlighter-rouge">nCp()</code> above. We use the function <code class="language-plaintext highlighter-rouge">partial()</code> first seen in Section 5.3.3 to freeze the first argument with our estimate of $\sigma^2$ .</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [7]:neg_Cp=partial(nCp,sigma2)
 </code></pre></div></div>
@@ -549,7 +548,7 @@ sigma2=OLS(Y,X).fit().scale
 max_terms=len(design.terms))
 </code></pre></div></div>
 
-<p>We now fit a linear regression model with <code class="language-plaintext highlighter-rouge">Salary</code> as outcome using forward selection. To do so, we use the function <code class="language-plaintext highlighter-rouge">sklearn_selected()</code> from the <code class="language-plaintext highlighter-rouge">sklearn_ ISLP.models</code> package. This takes a model from <code class="language-plaintext highlighter-rouge">statsmodels</code> along with a search strategy and selects a model with its <code class="language-plaintext highlighter-rouge">fit</code> method. Without specifying a <code class="language-plaintext highlighter-rouge">scoring</code> argument, the score defaults to MSE, and so all 19 variables will be selected (output not shown).</p>
+<p>We now fit a linear regression model with <code class="language-plaintext highlighter-rouge">Salary</code> as outcome using forward selection. To do so, we use the function <code class="language-plaintext highlighter-rouge">sklearn_selected()</code> from the <code class="language-plaintext highlighter-rouge">ISLP.models</code> package. This takes a model from <code class="language-plaintext highlighter-rouge">statsmodels</code> along with a search strategy and selects a model with its <code class="language-plaintext highlighter-rouge">fit</code> method. Without specifying a <code class="language-plaintext highlighter-rouge">scoring</code> argument, the score defaults to MSE, and so all 19 variables will be selected (output not shown).</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>selected()
 </code></pre></div></div>
@@ -589,7 +588,7 @@ hitters_Cp.selected_state_
 
 <p>Choosing Among Models Using the Validation Set Approach and Cross-Validation</p>
 
-<p>As an alternative to using <em>Cp</em> , we might try cross-validation to select a model in forward selection. For this, we need a method that stores the full path of models found in forward selection, and allows predictions for each of these. This can be done with the <code class="language-plaintext highlighter-rouge">sklearn_selection_path()</code> estima- <code class="language-plaintext highlighter-rouge">sklearn_</code> tor from <code class="language-plaintext highlighter-rouge">ISLP.models</code> . The function <code class="language-plaintext highlighter-rouge">cross_val_predict()</code> from <code class="language-plaintext highlighter-rouge">ISLP.models</code> computes the cross-validated predictions for each of the models along the <code class="language-plaintext highlighter-rouge">path()</code> path, which we can use to evaluate the cross-validated $\text{MSE}$ along the path. Here we define a strategy that fits the full forward selection path. While <code class="language-plaintext highlighter-rouge">predict()</code> there are various parameter choices for <code class="language-plaintext highlighter-rouge">sklearn_selection_path()</code> , we use the defaults here, which selects the model at each step based on the biggest reduction in RSS.</p>
+<p>As an alternative to using Cp, we might try cross-validation to select a model in forward selection. For this, we need a method that stores the full path of models found in forward selection, and allows predictions for each of these. This can be done with the <code class="language-plaintext highlighter-rouge">sklearn_selection_path()</code> estima- <code class="language-plaintext highlighter-rouge">sklearn_</code> tor from <code class="language-plaintext highlighter-rouge">ISLP.models</code> . The function <code class="language-plaintext highlighter-rouge">cross_val_predict()</code> from <code class="language-plaintext highlighter-rouge">ISLP.models</code> computes the cross-validated predictions for each of the models along the <code class="language-plaintext highlighter-rouge">path()</code> path, which we can use to evaluate the cross-validated $\text{MSE}$ along the path. Here we define a strategy that fits the full forward selection path. While <code class="language-plaintext highlighter-rouge">predict()</code> there are various parameter choices for <code class="language-plaintext highlighter-rouge">sklearn_selection_path()</code> , we use the defaults here, which selects the model at each step based on the biggest reduction in RSS.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>selection_
 path()

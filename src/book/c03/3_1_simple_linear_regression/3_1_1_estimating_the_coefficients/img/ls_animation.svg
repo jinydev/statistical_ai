@@ -1,0 +1,65 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .bg { fill: #1e1e2f; }
+      .axis { stroke: #555; stroke-width: 2; }
+      .point { fill: #4facfe; stroke: #fff; stroke-width: 2; }
+      .line { stroke: #f093fb; stroke-width: 4; stroke-linecap: round; }
+      .residual { stroke: #fff; stroke-width: 2; stroke-dasharray: 4; opacity: 0.8; }
+      .square { fill: rgba(240, 147, 251, 0.3); stroke: #f093fb; stroke-width: 1; }
+      .text { font-family: 'Pretendard', sans-serif; fill: #fff; font-size: 16px; }
+      .title { font-size: 24px; font-weight: bold; fill: #4facfe; }
+      
+      @keyframes wiggle {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(3deg); }
+      }
+      .anim-group { transform-origin: 400px 200px; animation: wiggle 5s infinite ease-in-out; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" rx="10" class="bg" />
+  
+  <!-- Axes -->
+  <line x1="50" y1="350" x2="750" y2="350" class="axis" />
+  <line x1="50" y1="350" x2="50" y2="50" class="axis" />
+  
+  <text x="730" y="380" class="text" font-weight="bold">X (광고비)</text>
+  <text x="20" y="30" class="text" font-weight="bold">Y (판매량)</text>
+
+  <!-- Title -->
+  <text x="50" y="40" class="title">✨ 선형 회귀와 최소 제곱법 (Least Squares) 알아보기</text>
+
+  <g class="anim-group">
+      <!-- Regression Line -->
+      <line x1="100" y1="300" x2="700" y2="100" class="line" />
+      
+      <!-- Example Point 1 -->
+      <line x1="200" y1="266.6" x2="200" y2="150" class="residual" />
+      <rect x="200" y="150" width="116.6" height="116.6" class="square" />
+      <circle cx="200" cy="150" r="8" class="point" />
+      
+      <!-- Example Point 2 -->
+      <line x1="400" y1="200" x2="400" y2="280" class="residual" />
+      <rect x="320" y="200" width="80" height="80" class="square" />
+      <circle cx="400" cy="280" r="8" class="point" />
+
+      <!-- Example Point 3 -->
+      <line x1="600" y1="133.3" x2="600" y2="80" class="residual" />
+      <rect x="600" y="80" width="53.3" height="53.3" class="square" />
+      <circle cx="600" cy="80" r="8" class="point" />
+  </g>
+
+  <!-- Fixed Points Base Shadow to show movement -->
+  <circle cx="200" cy="150" r="8" fill="#4facfe" opacity="0.3" />
+  <circle cx="400" cy="280" r="8" fill="#4facfe" opacity="0.3" />
+  <circle cx="600" cy="80" r="8" fill="#4facfe" opacity="0.3" />
+
+  <!-- Explanation Text -->
+  <rect x="420" y="240" width="350" height="90" rx="8" fill="#2a2a40" />
+  <text x="435" y="265" class="text" font-weight="bold">💡 움직이는 선을 보세요!</text>
+  <text x="435" y="285" class="text">흩어진 파란 점(실제 데이터)들과 핑크색</text>
+  <text x="435" y="305" class="text">예측선 사이의 거리를 제곱한 '투명한 네모'들!</text>
+  <text x="435" y="325" class="text">저 면적의 합이 가장 작아지는 자리가 정답입니다.</text>
+</svg>

@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,27 +502,49 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="365-interaction-terms"><em>3.6.5 Interaction Terms</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_4_multivariate_goodness_of_fit/3_6_4_1_list_comprehension/index.html">&lt; 3.6.4.1 List Comprehension</a></td>
+      <td><a href="../3_6_6_non-linear_transformations_of_the_predictors/index.html">3.6.6 Non-Linear Transformations Of The Predictors &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>It is easy to include interaction terms in a linear model using <code class="language-plaintext highlighter-rouge">ModelSpec()</code> . Including a tuple <code class="language-plaintext highlighter-rouge">("lstat","age")</code> tells the model matrix builder to include an interaction term between <code class="language-plaintext highlighter-rouge">lstat</code> and <code class="language-plaintext highlighter-rouge">age</code> .</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [31]:X=MS(['lstat',
-'age',
-('lstat','age')]).fit_transform(Boston)
-model2=sm.OLS(y,X)
+<h1 id="365-interaction-terms"><em>3.6.5 Interaction Terms</em></h1>
+
+<p>It is easy to include interaction terms in a linear model using <code class="language-plaintext highlighter-rouge">ModelSpec()</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [31]: X = MS(['lstat',
+                'age',
+                ('lstat', 'age')]).fit_transform(Boston)
+model2 = sm.OLS(y, X)
 summarize(model2.fit())
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[31]:coefstderrtP&gt;|t|
-intercept36.08851.47024.5530.000
-lstat-1.39210.167-8.3130.000
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[31]:           coef  std err       t  P&gt;|t|
+intercept 36.0885   1.470  24.553  0.000
+lstat     -1.3921   0.167  -8.313  0.000
+age       -0.0007   0.020  -0.036  0.971
+lstat:age  0.0042   0.002   2.244  0.025
 </code></pre></div></div>
 
-<p>3.6 Lab: Linear Regression</p>
+<hr />
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>age-0.00070.020-0.0360.971
-lstat:age0.00420.0022.2440.025
-</code></pre></div></div>
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_6_4_multivariate_goodness_of_fit/3_6_4_1_list_comprehension/index.html">&lt; 3.6.4.1 List Comprehension</a></td>
+      <td><a href="../3_6_6_non-linear_transformations_of_the_predictors/index.html">3.6.6 Non-Linear Transformations Of The Predictors &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

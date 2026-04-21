@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_3_other_considerations_in_the_regression_model/3_3_2_extensions_of_the_linear_model/3_3_2_1_non-linear_relationships/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c03/3_3_other_considerations_in_the_regression_model/3_3_2_extensions_of_the_linear_model/3_3_2_1_non-linear_relationships/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c03/3_3_other_considerations_in_the_regression_model/3_3_2_extensions_of_the_linear_model/3_3_2_1_non-linear_relationships/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c03/3_3_other_considerations_in_the_regression_model/3_3_2_extensions_of_the_linear_model/3_3_2_1_non-linear_relationships/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/">03. Linear Regression</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_3_other_considerations_in_the_regression_model/">3 3 other considerations in the regression model</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_3_other_considerations_in_the_regression_model/3_3_2_extensions_of_the_linear_model/">3 3 2 extensions of the linear model</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c03/3_3_other_considerations_in_the_regression_model/3_3_2_extensions_of_the_linear_model/3_3_2_1_non-linear_relationships/">3 3 2 1 non-linear relationships</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <blockquote>
+  <p>💡 <strong>학습 팁:</strong> 조금 더 쉽고 재미있게 공부하고 싶으신가요? 이 페이지는 중학생도 이해할 수 있는 친절한 ‘쉬운 해설판’입니다! 영어 원문을 문장 단위로 꼼꼼하게 직역한 느낌을 원하신다면 <a href="./trans1.html">📖 직역본 보기</a> 메뉴를 활용하세요!</p>
+</blockquote>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../trans2.html">&lt; 3.3.2 Extensions Of The Linear Model</a></td>
+      <td><a href="../../3_3_3_potential_problems/trans2.html">3.3.3 Potential Problems &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="non-linear-relationships">Non-linear Relationships</h1>
+
+<h1 id="비선형적-관계-뻣뻣한-직선의-족쇄를-끊은-구불구불-마법-곡선">비선형적 관계 (뻣뻣한 직선의 족쇄를 끊은 구불구불 마법 곡선)</h1>
+
+<p>As discussed previously, the linear regression model (3.19) assumes a linear relationship between the response and predictors.
+아까부터 귀에 못이 박히도록 씹어댔지만, 우리 꽉 막힌 선형 회귀 모범생 수식(3.19)은 힌트 재료(예측 변수)와 도출 타겟(응답 변수) 사이의 인과율 관계가 무조건 일자로 쫙 뻗은 “반듯한 평행 직선(Linear)이어야만 해!” 라는 결벽증적인 강박 관념(가정)을 앓고 있습니다.</p>
+
+<p>But in some cases, the true relationship between the response and the predictors may be nonlinear.
+하지만 속지 마세요. 막상 야생에서 실전 데이터를 까 뒤집어 보면 특정 재료 변수와 타겟 변수가 진짜로 맺고 얽혀 있는 그 실체적 진실 관계망은, 딱딱한 직선이 아니라 구불구불 S자 코스나 물수제비 뜨듯 파동치는 변덕스러운 비선형적(Non-linear) 곡선 굴레를 띠고 있는 경우가 태반입니다.</p>
+
+<p>Here we present a very simple way to directly extend the linear model to accommodate non-linear relationships, using <em>polynomial regression</em>.
+그래서 이 한계에 갇힌 가엾은 선형 모델에게 유연한 요가(비선형적 굴곡 관계 수용 능력)를 가르쳐 한 단계 외연을 직접 확장해버리는, 어이없을 정도로 치트키처럼 쉽고 허접한 야매 우회 기법 하나를 전수하고자 합니다. 이름하여 <strong><em>다항 회귀(Polynomial regression, 제곱 튀기기 마법)</em></strong> 수법입니다.</p>
+
+<p>In later chapters, we will present more complex approaches for performing non-linear fits in more general settings.
+물론 나중에 저 멀리 후반부 챕터 심화 과정에 당도하면, 이 다항 회귀 같은 원시적인 야매술을 넘어서 훨씬 더 거시기하고 현란한 비선형적 그물망 적합 곡선을 짤 수 있는 각양각색 고오급 접근 방식 무공들을 배울 테지만, 일단 지금은 이 기술로 만족합시다.</p>
+
+<p>Consider Figure 3.8, in which the <code class="language-plaintext highlighter-rouge">mpg</code> (gas mileage in miles per gallon) versus <code class="language-plaintext highlighter-rouge">horsepower</code> is shown for a number of cars in the <code class="language-plaintext highlighter-rouge">Auto</code> data set.
+자, 그 유명한 <code class="language-plaintext highlighter-rouge">Auto(자동차 스펙)</code> 장부 기록에서 수많은 똥차와 슈퍼카들을 모아놓고, 그놈의 차체 엔진 <strong><code class="language-plaintext highlighter-rouge">horsepower(마력)</code></strong> 대비 기름 먹는 하마 연비 수준 <strong><code class="language-plaintext highlighter-rouge">mpg(갤런당 주행거리)</code></strong> 의 치열한 힘겨루기 역학 구도를 적나라하게 찔러 그려본 그림 3.8의 도화지를 눈 번쩍 뜨고 구경해 보세요.</p>
+
+<p>The orange line represents the linear regression fit.
+도화지 한가운데 떡하니 막무가내 꼬챙이처럼 꽂혀 가로지르는 삐죽한 ‘주황색 선’이 바로… 꽉 막힌 모범생 ‘순정 선형 회귀 직선 타겟 적합 궤적’입니다. 기가 막히죠? 전혀 데이터 점도 안 맞추고 그냥 허공을 가릅니다.</p>
+
+<p>There is a pronounced relationship between <code class="language-plaintext highlighter-rouge">mpg</code> and <code class="language-plaintext highlighter-rouge">horsepower</code>, but it seems clear that this relationship is in fact non-linear: the data suggest a curved relationship.
+누가 봐도 연비(<code class="language-plaintext highlighter-rouge">mpg</code>)와 마력(<code class="language-plaintext highlighter-rouge">horsepower</code>) 간에는 엄청나게 노골적이고 지독한 원한 관계(음의 상관성)가 판을 치는데, 그 둘의 멱살잡이 궤도가 일직선 철로가 아니라 오목한 미끄럼틀 곡면 코스로 미끄러져 추락하는 <strong>비선형적 곡선 궤도(Curved relationship)</strong> 양태임이 그 흩뿌려진 데이터 좁쌀 점들의 형상만 봐도 너무나 자명하고 노골적으로 뽀록 나버렸습니다.</p>
+
+<p>A simple approach for incorporating non-linear associations in a linear model is to include transformed versions of the predictors.
+자, 이 꽉 막힌 철로 일직선 선형 모델을 찰흙처럼 말랑말랑하게 휘어 곡선 비선형 변곡점 굴레를 소화하도록 마개조 튜닝하는 가장 직관적이고 무지성 심플 마술법이 뭘까요? 그건 바로, 넣으려던 원래의 재료 힌트 변수 자체의 몸뚱아리를 거울상 조작 변환(다중 제곱 변환)해서 억지로 갈아 구겨 집어넣는 짓거리입니다.</p>
+
+<p>For example, the points in Figure 3.8 seem to have a <em>quadratic</em> shape, suggesting that a model of the quadratic form
+예를 들어 그림 3.8의 미끄럼틀 궤적 도면 점박이 좁쌀들의 궤도는 포물선 이차 함수와 같은 <em>2차 곡선형(Quadratic)</em> 밥그릇 형상의 처짐을 격하게 띠고 있습니다. 이 사실은, 우리가 억지로라도 고안해야 하는 수식 뼈대 자체가 다음과 같이 ‘2차식 제곱’ 포맷의 덩어리가 박혀야만
+<strong>==&gt; picture [285 x 11] intentionally omitted &lt;==</strong>
+may provide a better fit.
+그나마 지금 이 장부 점들과 우월하게 더 들어맞는 눈치 만랩 맞춤형 합당 적중 적합선(better fit)을 안겨줄 수 있다는 확신을 시사합니다.</p>
+
+<p>Equation 3.36 involves predicting <code class="language-plaintext highlighter-rouge">mpg</code> using a non-linear function of <code class="language-plaintext highlighter-rouge">horsepower</code>.
+저기 억지로 구겨 넣은 방정식 (3.36) 모양새를 보면, 우리가 노리는 타겟 연비 <code class="language-plaintext highlighter-rouge">mpg</code>의 환영을 예측하기 위해 무려 <code class="language-plaintext highlighter-rouge">horsepower(마력)</code>의 몸뚱아리를 비선형적 2차 함수 파츠로 뒤틀어 활용하고 있습니다.</p>
+
+<p><em>But it is still a linear model!</em> That is, (3.36) is simply a multiple linear regression model with $X_1 = \text{horsepower}$ and $X_2 = \text{horsepower}^2$.
+<strong>“우왘 혁명이다!! 곡선 비선형 모델을 찾았다!!”</strong> 라고 흥분하기엔 이릅니다. <em>놀랍게도 저놈의 근본은 아직 철저히 일직선 ‘선형 모델’입니다!</em> 눈치가 빠른 분이라면 억지 변형 꼼수 (3.36) 꼴 자체는 근본적으로 그저 원래부터 존재하던 다중 선형 회귀 기본 틀 속 세트에서 원래 $X_1$ 자리에 그냥 $\text{horsepower}$ 딱지 하나 꽂아놓고, 이어지는 두 번째 옆자리 칸 $X_2$ 자리에다가는 $\text{horsepower}$ 몸뚱아리를 자가 증식 제곱($^2$) 때려버린 엉망진창 돌연변이 항목 하나 더 쑤셔서 합쳐놓은 그냥 꼼수 덮어씌우기 짬뽕 조립 선형판에 지나지 않습니다. 한마디로 그냥 기존 선형 모델 공식을 가지고 말장난 친 거죠.</p>
+
+<p>So we can use standard linear regression software to estimate $\beta_0, \beta_1$, and $\beta_2$ in order to produce a non-linear fit.
+어쨌든 뼈대 자체는 근본 선형 모델 틀 구조라서 개이득인 점이 있습니다. 통계쟁이들이 저 비선형 곡률 포물선을 구경해 보고자 구해야 하는 저 귀찮은 파라미터 $\beta_0, \beta_1, \beta_2$ 덩어리들을 찾을 때, 별도의 복잡한 슈퍼컴퓨터 코딩을 짤 필요 없이 그냥 세상 흔해 빠진 ‘일반 보급형 표준 선형 회귀 소프트웨어 계산기(파이썬/R 일반 함수)’ 에다 휙 던져 밀어 넣기만 하면 고스란히 1초 만에 마법같이 짠 하고 곡률 적합 궤적이 도출 추산되어 튀어나옵니다!</p>
+
+<p>The blue curve in Figure 3.8 shows the resulting quadratic fit to the data. The quadratic fit appears to be substantially better than the fit obtained when just the linear term is included.
+저 도화지 위 그림 3.8 창문 가운데 멋지게 흐느적대며 누운 <strong>‘시퍼런 파란색 곡선 훌라후프’</strong>가 바로 이렇게 자가 증식 꼼수로 튀겨내 투사한 2차 제곱 방정식 타점 적합선입니다. 맨눈으로 딱 시각 견적만 내봐도, 이 ‘2차 포물선 곡선’의 어르고 달래는 꺾임 적합성은 기존의 융통성 제로의 팍팍한 ‘주황색 직진 일자 꼬챙이’ 단일 직선 항만을 억지로 박아 넣었을 때의 그 참사보다는 압도적이고 눈부시게 향상된 퍼펙트 타격 합치 타점을 기록하며 개선 구가합니다.</p>
+
+<p><strong>==&gt; picture [304 x 205] intentionally omitted &lt;==</strong></p>
+
+<p><strong>—– Start of picture text —–</strong><br />
+Linear(1차 꼬챙이)<br />Degree 2(2차 파란 훌라후프)<br />Degree 5(5차 녹색 괴물뱀)<br />50 100 150 200<br />Horsepower(마력)<br />50<br />40<br />30<br />Miles per gallon(갤런당 깡패 연비)<br />20<br />10<br /><strong>—– End of picture text —–</strong><br /></p>
+
+<p><strong>FIGURE 3.8.</strong> <em>The</em> <code class="language-plaintext highlighter-rouge">Auto</code> <em>data set. For a number of cars,</em> <code class="language-plaintext highlighter-rouge">mpg</code> <em>and</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>are shown. The linear regression fit is shown in orange. The linear regression fit for a model that includes</em> $\text{horsepower}^2$ <em>is shown as a blue curve. The linear regression fit for a model that includes all polynomials of</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>up to fifth-degree is shown in green.</em>
+<strong>FIGURE 3.8.</strong> <code class="language-plaintext highlighter-rouge">Auto(자동차 스펙)</code> <em>장부. 수많은 차들의</em> <code class="language-plaintext highlighter-rouge">horsepower(마력)</code> <em>힘과</em> <code class="language-plaintext highlighter-rouge">mpg(연비)</code> <em>사이 피 튀기는 전쟁터입니다. (주황색 선) 융통성 없는 1차원 순정 꼬챙이 선형 적합선. (파란색 곡선) 영리하게 마력을 2번 제곱($^2$)해서 덧씌운 2차 돌연변이 요가 곡선. (초록색 곡선) 뇌절을 쳐서 마력을 5번이나 미친 듯이 연타 제곱해 구겨 짠 5차 다항식 괴물 뱀입니다.</em></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Coefcient<br />Std. error<br /><em>t</em>-statistic<br />p-value</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Intercept(기본연비 출발점)</code><br /><code class="language-plaintext highlighter-rouge">horsepower(1차 일반 마력)</code><br /><code class="language-plaintext highlighter-rouge">horsepower^2(2차 빙글 제곱 마력)</code></td>
+      <td>56.9001<br />1.8004<br />31.6<br /><em>&lt;_0</em>.<em>0001<br /></em>−<em>0.4662<br />0.0311<br /></em>−<em>15.0<br /></em>&lt;<em>0</em>.<em>0001<br />0.0012<br />0.0001<br />10.1<br /></em>&lt;<em>0</em>._0001</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>TABLE 3.10.</strong> <em>For the</em> <code class="language-plaintext highlighter-rouge">Auto</code> <em>data set, least squares coefficient estimates associated with the regression of</em> <code class="language-plaintext highlighter-rouge">mpg</code> <em>onto</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>and</em> $\text{horsepower}^2$ <em>.</em>
+<strong>TABLE 3.10.</strong> <code class="language-plaintext highlighter-rouge">Auto</code> <em>장부를 바탕으로 고무장갑이 아닌</em> <code class="language-plaintext highlighter-rouge">horsepower(마력)</code> <em>과</em> <code class="language-plaintext highlighter-rouge">horsepower^2(제곱 마력)</code> <em>두 쌍포를 투하시켜 타겟 연비</em> <code class="language-plaintext highlighter-rouge">mpg</code> <em>를 사냥해 획득한 최소 제곱 전범 성적표 계수 추정치 결과물. 모든 $p$-값이 0에 수렴하며 완벽 대승을 거뒀습니다.</em></p>
+
+<p>The $R^2$ of the quadratic fit is $0.688$, compared to $0.606$ for the linear fit, and the $p$-value in Table 3.10 for the quadratic term is highly significant.
+눈대중이 아니라 찐 산술 전투력 스펙 수치만 찔러봐도 압살입니다. 예전 구닥다리 1차 꼬챙이 선형 적합 때 뱉어냈던 기염토할 결정 계수 성적 $R^2$ 수위가 겨우 $0.606$ 따리에 맴돌던 것에 비해, 방금 제곱 곡면으로 틀어박아 적중시킨 이번 2차 곡선 적합의 $R^2$ 점수는 영광스럽게도 무려 $0.688$ 타점을 터뜨리며 점핑 부스트했습니다. 덤으로 보너스 표 3.10 조서에 까발려진 저 2차 제곱 요주의 변환 항 $\text{horsepower}^2$ 꼬리표 $p$-값 체급을 구경해 보시죠! 소름 돋게도 아주 철저하고 완벽히 통계적 권위로 빛나는 극명 초월의 유의성 잣대 면갑을 두르고 “내가 바로 실세 곡선이다!” 라며 맹렬히 위세를 시현 중입니다.</p>
+
+<p>If including $\text{horsepower}^2$ led to such a big improvement in the model, why not include $\text{horsepower}^3$, $\text{horsepower}^4$, or even $\text{horsepower}^5$?
+여기서 갑자기 인간의 탐욕 뇌절 본능이 꿈틀댑니다! “야 ㅋㅋㅋ 야! 꼴랑 마력 변수를 한 번 더 증식시켜 $\text{horsepower}^2$ 제곱 하나 더 우겨넣은 요술 꼼수로 모델 능력치가 저렇게나 대폭발 부스트 혁명 펌핑을 이루었다면… 차라리 내친김에 $\text{horsepower}^3$ (3제곱), $\text{horsepower}^4$ (4제곱), 아니 아예 미친 척하고 $\text{horsepower}^5$ (5제곱) 같은 과잉 다중 돌연변이들까지 모조리 다 수식에 무지성으로 도배 편입 반죽해 때려버리면 타점 100%짜리 신의 장난감을 얻지 않겠냐?”</p>
+
+<p>The green curve in Figure 3.8 displays the fit that results from including all polynomials up to fifth degree in the model (3.36).
+저기 그림 3.8 도화지 바닥에 시퍼렇게 질주하다 못해 미친 듯이 징그럽게 도는 저 <strong>‘형광 초록색 꼬불 뱀 곡선’</strong>이 바로 인간의 그 끔찍한 뇌절 탐욕이 발현된 결과론적 망작 투사 도면입니다! 기존 방정식 틀 (3.36) 베이스에 감히 이성의 끈을 놓고 5차 한계 등급까지 전부 무자비하게 포스트 다항식 모의 곡선 성분들을 다변화 투사 짬뽕 스까 통폐합시켜 뽑아낸 최후의 광역 광기 적합 도출선 위용 꼬라지인 셈이죠.</p>
+
+<p>The resulting fit seems unnecessarily wiggly — that is, it is unclear that including the additional terms really has led to a better fit to the data.
+하지만 두 눈으로 결과물을 직접 뜯어보세요. 이 무식하게 기워낸 초록빛 5차 모의선 궤도의 자태는 진짜 헛구역질 날 만큼 좌우로 요동치고 꼬물꼬물(wiggly) 과도하게 발작하며 굽이치는 징그러운 기괴 뱀 지렁이 몸뚱아리에 불과합니다. 이게 과연 무슨 똥볼 찬 의미를 시사 반영할까요? 결국 아무리 과파생 거듭 제곱 무리수를 우겨넣듯 쓰잘떼기 없이 항을 부풀려 봤자, 그것이 실제 현존 관측 데이터 데이터 결 양상을 합리적 합목적 기조 속에서 진짜 더 나은 질 좋은 영양가 타점의 예측 적중 해답을 조달 안겨줬느냔 질문 앞엔 “도무지 객관 투명성이 조또 없고 미궁 속 모호 불투명 쓸모 쓰레기임!” 이라는 싸늘한 비웃음 확정 단언만이 판결로 떨어질 따름입니다. (이걸 통계 꼰대들은 <strong>오버피팅(과적합)</strong>이라 놀려댑니다.)</p>
+
+<p>The approach that we have just described for extending the linear model to accommodate non-linear relationships is known as <em>polynomial regression</em>, since we have included polynomial functions of the predictors in the regression model.
+방금 우리가 미친 듯이 썰을 풀며 주도적으로 까발린, “고집불통 1차 선형 로봇에 억지로 다중 제곱 곱셈 변기를 탑재 거부감 없이 끼워 융통성 넘치는 비선형 곡선 관계를 수용 감당토록 외변 개조하는” 이 기만적 전술 기법 수단을 통계 바닥 전문 용어로 아예 우아하게 칭송 격식을 갖춰 포장한 단어가 바로 <strong><em>다항 회귀(Polynomial regression)</em></strong> 입니다! 이 거창한 이름의 배경 연유는 단순 무식합니다! 그냥 우리가 애꿎은 힌트 회귀 모델 예측 변수 엉덩이에다가 다항식(거듭제곱 폴리노미얼) 함수 폭탄을 억지로 부가 개입 납치 내전 포함 감행 시켰다는 그 노골적인 만행 흔적을 그대로 직관 시사 까발렸기 때문입니다.</p>
+
+<p>We further explore this approach and other non-linear extensions of the linear model in Chapter 7.
+이후의 웅장한 지적 탐구 뒷맛은 나중 저기 한참 멀리 떨어진 챕터 7장 심해 구도 속으로 토스하겠습니다! 거기 도달하면 우리는 이 징그러운 다항 수법 기초 단계를 기포 삼아, 애초에 뼈다귀 기저 1차원 선형 모델을 요철 비선형 외계 변이 마개조 포맷들로 더욱 흉악하게 뒤바꿔 치환하는 훨씬 다양한 번외적 외연 변형 괴물 도구와 고차원 편제 접근 수법 요령 룰까지 죄다 우르르 싸잡아 한껏 광범위 파헤치며 논의할 부푼 원대한 설계 수립 계획을 기다리고 품을 것입니다!</p>
+
+<hr />
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../trans2.html">&lt; 3.3.2 Extensions Of The Linear Model</a></td>
+      <td><a href="../../3_3_3_potential_problems/trans2.html">3.3.3 Potential Problems &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

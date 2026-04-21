@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e3fafc"/>
+      <stop offset="100%" stop-color="#c5f6fa"/>
+    </linearGradient>
+
+    <!-- Report Card Gradient -->
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8f9fa"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-5%" y="-5%" width="120%" height="120%">
+      <feDropShadow dx="5" dy="5" stdDeviation="5" flood-opacity="0.15"/>
+    </filter>
+
+    <!-- Animations -->
+    <animate id="stampAnim1" xlink:href="#gradeA" attributeName="opacity" values="0;1" dur="0.3s" fill="freeze" begin="1s; loopReset.end+1s"/>
+    <animate id="stampScale1" xlink:href="#gradeA_g" attributeName="transform" type="scale" values="2;1" dur="0.3s" fill="freeze" begin="1s; loopReset.end+1s"/>
+    
+    <animate id="stampAnim2" xlink:href="#gradeEx" attributeName="opacity" values="0;1" dur="0.3s" fill="freeze" begin="2.5s; loopReset.end+2.5s"/>
+    <animate id="stampScale2" xlink:href="#gradeEx_g" attributeName="transform" type="scale" values="2;1" dur="0.3s" fill="freeze" begin="2.5s; loopReset.end+2.5s"/>
+    
+    <!-- Pencil drawing line -->
+    <animate id="drawLine" xlink:href="#pencilLine" attributeName="stroke-dashoffset" values="300;0" dur="1s" fill="freeze" begin="0s; loopReset.end"/>
+    
+    <animate id="loopReset" attributeName="visibility" from="visible" to="visible" dur="5s" begin="stampAnim2.end+2s"/>
+    
+    <animate xlink:href="#gradeA" attributeName="opacity" values="1;0;0" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="loopReset.begin"/>
+    <animate xlink:href="#gradeEx" attributeName="opacity" values="1;0;0" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="loopReset.begin"/>
+    <animate xlink:href="#pencilLine" attributeName="stroke-dashoffset" values="0;300;300" keyTimes="0;0.9;1" dur="0.1s" fill="freeze" begin="loopReset.begin"/>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)" rx="15"/>
+
+  <!-- Title -->
+  <g transform="translate(150, 40)">
+    <text x="250" y="0" font-family="'Jua', sans-serif" font-size="28" fill="#1098ad" text-anchor="middle" font-weight="bold">모델 성적표 (Model Fit Report Card)</text>
+    <text x="250" y="30" font-family="'Jua', sans-serif" font-size="16" fill="#868e96" text-anchor="middle">"탐정의 추리가 얼마나 완벽한지 평가하라!"</text>
+  </g>
+
+  <!-- Report Card Center -->
+  <g transform="translate(150, 100)" filter="url(#shadow)">
+    <rect width="500" height="350" fill="url(#cardBg)" rx="15" stroke="#ced4da" stroke-width="2"/>
+    
+    <!-- Clip Board Header -->
+    <path d="M 180,0 L 320,0 L 320,20 L 180,20 Z" fill="#495057" rx="5"/>
+    <ellipse cx="250" cy="10" rx="15" ry="5" fill="#f8f9fa"/>
+    <circle cx="250" cy="10" r="3" fill="#343a40"/>
+
+    <text x="250" y="60" font-family="'Jua', sans-serif" font-size="26" fill="#343a40" text-anchor="middle" font-weight="bold">수사 분석관 평가표</text>
+    
+    <path id="pencilLine" d="M 120,70 L 380,70" fill="none" stroke="#fa5252" stroke-width="3" stroke-dasharray="300" stroke-dashoffset="300"/>
+
+    <!-- Subject 1: R-Squared -->
+    <g transform="translate(40, 130)">
+      <rect width="420" height="80" fill="#e7f5ff" rx="10" stroke="#74c0fc" stroke-width="2"/>
+      <text x="20" y="30" font-family="'Jua', sans-serif" font-size="22" fill="#1864ab" font-weight="bold">과목 : 결정계수 (R²)</text>
+      <text x="20" y="60" font-family="'Jua', sans-serif" font-size="14" fill="#495057">"데이터를 얼마나 잘 설명해냈는가? (100점 만점)"</text>
+      <text x="280" y="50" font-family="'Arial', sans-serif" font-size="28" fill="#1864ab" font-weight="bold">0.897</text>
+      <text x="350" y="50" font-family="'Jua', sans-serif" font-size="16" fill="#868e96">/ 1.0 (최고)</text>
+
+      <!-- Stamp -->
+      <g id="gradeA" opacity="0" transform="translate(380, 40)">
+        <g id="gradeA_g">
+          <circle cx="0" cy="0" r="30" fill="none" stroke="#e03131" stroke-width="4"/>
+          <text x="0" y="8" font-family="'Arial', sans-serif" font-size="24" fill="#e03131" text-anchor="middle" font-weight="bold" transform="rotate(-15)">A+</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Subject 2: RSE -->
+    <g transform="translate(40, 230)">
+      <rect width="420" height="80" fill="#fff0f6" rx="10" stroke="#faa2c1" stroke-width="2"/>
+      <text x="20" y="30" font-family="'Jua', sans-serif" font-size="22" fill="#a61e4d" font-weight="bold">과목 : 잔차 오류 (RSE)</text>
+      <text x="20" y="60" font-family="'Jua', sans-serif" font-size="14" fill="#495057">"평균적으로 과녁에서 얼마나 불발 벗어나는가?"</text>
+      <text x="280" y="50" font-family="'Arial', sans-serif" font-size="28" fill="#a61e4d" font-weight="bold">1.69</text>
+      <text x="350" y="50" font-family="'Jua', sans-serif" font-size="16" fill="#868e96">오차 폭</text>
+
+      <!-- Stamp -->
+      <g id="gradeEx" opacity="0" transform="translate(380, 40)">
+        <g id="gradeEx_g">
+          <circle cx="0" cy="0" r="30" fill="none" stroke="#2b8a3e" stroke-width="4" stroke-dasharray="10,5"/>
+          <text x="0" y="8" font-family="'Jua', sans-serif" font-size="20" fill="#2b8a3e" text-anchor="middle" font-weight="bold" transform="rotate(10)">우수(낮음)</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -3,18 +3,16 @@ layout: default
 title: "index"
 ---
 
+[< 4.7.7.1 Poisson Regression](../4_7_lab_logistic_regression_lda_qda_and_knn/4_7_7_linear_and_poisson_regression_on_the_bikeshare_data/4_7_7_1_poisson_regression/index.html) | [4.8.1 Conceptual >](4_8_1_conceptual/index.html)
+
+
 # 4.8 Exercises 
 
 ---
 
-## Sub-Chapters (하위 목차)
+---
 
-### Conceptual (개념 문제)
-* [문서로 이동하기](./4_8_1_conceptual/)
+## Sub-Chapters
 
-로지스틱 식이 어떻게 선형 로그 오즈(Log-Odds) 방정식이 되는지 증명하고, 한쪽의 에러율만 보정하려 할 때 나타날 수리적 모순을 정리합니다.
 
-### Applied (응용 문제)
-* [문서로 이동하기](./4_8_2_applied/)
-
-새로운 현실 데이터 프레임을 자유롭게 조작하여 나이브 베이즈, 로지스틱 회귀 알고리즘들의 성능 비교 ROC 커브를 직접 도출하는 실전 검증 코스입니다.
+[< 4.7.7.1 Poisson Regression](../4_7_lab_logistic_regression_lda_qda_and_knn/4_7_7_linear_and_poisson_regression_on_the_bikeshare_data/4_7_7_1_poisson_regression/index.html) | [4.8.1 Conceptual >](4_8_1_conceptual/index.html)

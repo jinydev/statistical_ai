@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_2_shrinkage_methods/6_2_2_the_lasso/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c06/6_2_shrinkage_methods/6_2_2_the_lasso/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c06/6_2_shrinkage_methods/6_2_2_the_lasso/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c06/6_2_shrinkage_methods/6_2_2_the_lasso/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/">06. Linear Model Selection</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_2_shrinkage_methods/">6 2 shrinkage methods</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c06/6_2_shrinkage_methods/6_2_2_the_lasso/">6 2 2 the lasso</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="622-the-lasso"><em>6.2.2 The Lasso</em></h1>
+<h1 id="622-라쏘-the-lasso"><em>6.2.2 라쏘 (The Lasso)</em></h1>
+
+<p>Ridge regression does have one obvious disadvantage. Unlike best subset, forward stepwise, and backward stepwise selection, which will generally select models that involve just a subset of the variables, ridge regression will include all $p$ predictors in the final model. The penalty $\lambda \sum \beta_j^2$ in (6.5) will shrink all of the coefficients towards zero, but it will not set any of them exactly to zero (unless $\lambda = \infty$). This may not be a problem for prediction accuracy, but it can create a challenge in model interpretation in settings in which the number of variables $p$ is quite large. For example, in the <code class="language-plaintext highlighter-rouge">Credit</code> data set, it appears that the most important variables are <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">limit</code>, <code class="language-plaintext highlighter-rouge">rating</code>, and <code class="language-plaintext highlighter-rouge">student</code>. So we might wish to build a model including just these predictors. However, ridge regression will always generate a model involving all ten predictors. Increasing the value of $\lambda$ will tend to reduce the magnitudes of the coefficients, but will not result in exclusion of any of the variables. 
+릿지 회귀는 무척 뚜렷한 한 가지 맹점을 피할 수 없습니다. 일반적으로 오직 전체 변수 그룹 중 일부 부분집합만을 지닌 모형을 선별하기 마련인 최상 부분집합, 전진 단계적, 그리고 후진 단계적 분기 기법들과는 전혀 다르게, 릿지 회귀 모형은 최종 결론 모델 속에 모든 $p$개의 투입 예측 변수를 모조리 동반 포함시키게 됩니다. 위 공식 (6.5)에 명시된 $\lambda \sum \beta_j^2$ 페널티 징벌 조항은 산출된 파라미터들을 전부 0을 향해 점진적으로 수축시키긴 하겠지만, 모형 조율 파라미터가 $\lambda = \infty$ 극한인 기괴한 상황에 처하지 않는 한, 그중 그 어떤 계수 추정치 값도 정확하게 딱 0으로 완벽히 설정하지는 않습니다. 이러한 특성은 모델의 예측 정확성 측면에서는 별반 큰 문제로 변질되지 않을 수 있지만, 징집된 투입 예측 변수 $p$의 총 개수가 상당히 넓은 무수히 많은 특정 환경 무대에서는 모델의 직관적 해석 과정에 막강한 시련을 투입 유발할 수 있습니다. 예를 들어 거론하자면, <code class="language-plaintext highlighter-rouge">Credit</code> 데이터 셋 안에서는 <code class="language-plaintext highlighter-rouge">income</code>, <code class="language-plaintext highlighter-rouge">limit</code>, <code class="language-plaintext highlighter-rouge">rating</code>, 그리고 <code class="language-plaintext highlighter-rouge">student</code> 변수 파편들이 모델에 가장 막대한 영향을 투사하는 중요 관제 변수들인 양 관측됩니다. 따라서 우리는 이 핵심 예측 변수들만 단촐하게 포함하는 쾌적한 모델을 건축하고 싶을 지도 모릅니다. 하지만 애석하게도 릿지는 언제나 한치의 오차 없이 열 개의 예측 변수 모두를 가득 채운 무거운 모델을 출산해 낼 것입니다. $\lambda$ 계수 값의 크기를 크게 증폭시키는 조치는 결과적으로 파라미터들 상대적 부피 크기를 낮추어 줄이는 효과를 유발하겠지만 과연 어떤 변수 하나라도 모델에서 완전히 제거 축출 배제 퇴출(exclusion)시키는 절대적 결과 단절로 이어지지는 결단코 않을 것입니다.</p>
+
+<p>The <em>lasso</em> is a relatively recent alternative to ridge regression that overcomes this disadvantage. The lasso coefficients, $\hat{\beta}<em>{\lambda}^L$, minimize the quantity
+<strong>‘라쏘(lasso)’</strong> 는 이러한 단점을 훌륭하게 격파 극복하는 릿지의 비교적 최근 부상한 최신 대안 방책입니다. 특수 라쏘 계수 지표 $\hat{\beta}</em>{\lambda}^L$ 도출 집단은 다음 계산 분량을 완전 최소치로 낮춥니다:</p>
+
+\[\sum_{i=1}^n \left( y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 + \lambda \sum_{j=1}^p |\beta_j| = \text{RSS} + \lambda \sum_{j=1}^p |\beta_j| \quad (6.7)\]
+
+<table>
+  <tbody>
+    <tr>
+      <td>Comparing (6.7) to (6.5), we see that the lasso and ridge regression have similar formulations. The only difference is that the $\beta_j^2$ term in the ridge regression penalty (6.5) has been replaced by $</td>
+      <td>\beta_j</td>
+      <td>$ in the lasso penalty (6.7). In statistical parlance, the lasso uses an $\ell_1$ (pronounced “ell 1”) penalty instead of an $\ell_2$ penalty. The $\ell_1$ norm of a coefficient vector $\beta$ is given by $|\beta|_1 = \sum</td>
+      <td>\beta_j</td>
+      <td>$.</td>
+    </tr>
+    <tr>
+      <td>공식 (6.7)을 릿지의 특수 조건식 (6.5)와 서로 비교하여 노려보면, 라쏘와 릿지 모형 기법이 무척 상호 유사한 수리 구조를 가졌음을 발견할 수 있습니다. 이 두 기법이 지닌 단 하나의 태생 고유 차이점은 릿지 제재 공식 (6.5)에 명시되었던 페널티 조항 내 $\beta_j^2$ 제곱 인자 성분이 라쏘 수식 모델 (6.7)의 강제 페널티 조항에서는 $</td>
+      <td>\beta_j</td>
+      <td>$ 스케일 척도로 슬쩍 수리 치환(replaced) 변경 되었다는 사실 뿐입니다. 깊은 통계학계 집단의 언어 지식을 빌려 은어로 표현하자면, 라쏘 기판 구조는 $\ell_2$ 방식 페널티를 사용하는 기존 방식 대신 이른바 $\ell_1$ (발음은 “엘 원(ell 1)”) 부가 제재 조치 페널티를 특수 전용 사용합니다. 특정 계수 벡터 유닛인 $\beta$를 대상으로 취하는 특제 $\ell_1$ 놈(norm) 측도 수량 척도계는 단순 수리 공식 $|\beta|_1 = \sum</td>
+      <td>\beta_j</td>
+      <td>$ 로 산출 제공됩니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As with ridge regression, the lasso shrinks the coefficient estimates towards zero. However, in the case of the lasso, the $\ell_1$ penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero when the tuning parameter $\lambda$ is sufficiently large. Hence, much like best subset selection, the lasso performs <em>variable selection</em>. As a result, models generated from the lasso are generally much easier to interpret than those produced by ridge regression. We say that the lasso yields <em>sparse</em> models—that is, sparse models that involve only a subset of the variables. As in ridge regression, selecting a good value of $\lambda$ for the lasso is critical; we defer this discussion to Section 6.2.3, where we use cross-validation. 
+기존의 릿지 시스템처럼, 라쏘 역시도 모델 예측 계산 추정치 궤적들을 일제 0을 향하도록 점차 쪼그려 수축시킵니다. 그러나 릿지와는 확연히 구별 다르게, 모형 튜닝 전용 조율자 파라미터인 $\lambda$ 규모 수치가 충분하게 거대 폭증할 때 라쏘의 특제 $\ell_1$ 단위 페널티 제재량은 일부 통계 추정 파라미터치들을 가차 없이 아주 단호하게 정확히 딱 0 수치와 같아지도록 제로 베이스 강제 억압 압살 해 버리는 놀라운 강력 이펙트 효과를 촉진 단행 촉발시킵니다. 이런 고로 고원 원인 과정으로, 마치 최적 부분집합 탐색 기법의 여정과 진정 유사하게도 조율 라쏘는 능동적으로 <strong>‘변수 선택(variable selection)’</strong> 단계를 자연 동반 수행합니다. 그 짜릿한 귀결의 파급 조치 보상 결과로, 라쏘로부터 직접 설계 창출 획득된 타겟 성립 모형들은 상대적으로 무거운 거대 릿지 절차 통계 기법 기판상에서 생성 빚어진 고도 산출 모형들에 단연 비해서 해석 도출 직관성을 확보 판독 통찰 하기가 훨씬 유연 용이해집니다. 학계에서 우리는 고로 라쏘가 구조 속성상 내용이 비어 텅 빈 <strong>‘희소한(sparse)’</strong> 형태 기조의 절단 모형 무대를 양산 산출 한다고 입 모아 칭합니다 — 즉 번역시킬 시, 오직 솎아낸 일부 제한 특정 소수 변수들의 선별 우량 진성 부분집합들만 취합 보존 담고 유지 지탱 갖춘 희박 최소 기형 모형이란 의미입니다. 앞서 거쳐온 릿지 관문처럼 이 라쏘 설계 구조 시스템을 다룰 시에도 부합 적절히 훌륭한 튜닝용 최적 $\lambda$ 제어 인자 값 단서를 식별 선택 도출하는 고정 탐색 일고 숙고 작업 조치는 지극히 중대 필히 몹시 절실 심각 막중 중요(critical) 핵심 과제입니다; 이 조율 이슈 대목에 대해서 차후 거론 나눌 세부 논의 공론 분석은 우리가 훈련 테스트 교차 검증 평가론을 차용 접목 구사하는 다음 연계 파트 Section 6.2.3 배정 공백으로 잠깐 뒤로 단기 차기 보류(defer) 지연 이동해 미뤄 두겠습니다.</p>
+
+<p><img src="./img/6_6.png" alt="Figure 6.6" /></p>
+
+<p><strong>FIGURE 6.6.</strong> <em>The standardized lasso coefficients on the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set are shown as a function of $\lambda$ and $|\hat{\beta}</em>{\lambda}^L|<em>1 / |\hat{\beta}|_1$.</em>
+<strong>그림 6.6.</strong> <code class="language-plaintext highlighter-rouge">Credit</code> 제반 데이터 세트 영역에서 평가 확보된 변수 표준화 라쏘 파라미터 계수 궤적 지표 라인이 조율 제어 변수 $\lambda$ 그리고 그 상응 축 비율치 $|\hat{\beta}_{\lambda}^L|_1 / |\hat{\beta}|_1$ 의 종속 좌표 함수 형식으로 묘사 명시되어 화면 상 표출됩니다.</p>
+
+<p>As an example, consider the coefficient plots in Figure 6.6, which are generated from applying the lasso to the <code class="language-plaintext highlighter-rouge">Credit</code> data set. When $\lambda = 0$, then the lasso simply gives the least squares fit, and when $\lambda$ becomes sufficiently large, the lasso gives the null model in which all coefficient estimates equal zero. However, in between these two extremes, the ridge regression and lasso models are quite different from each other. Moving from left to right in the right-hand panel of Figure 6.6, we observe that at first the lasso results in a model that contains only the <code class="language-plaintext highlighter-rouge">rating</code> predictor. Then <code class="language-plaintext highlighter-rouge">student</code> and <code class="language-plaintext highlighter-rouge">limit</code> enter the model almost simultaneously, shortly followed by <code class="language-plaintext highlighter-rouge">income</code>. Eventually, the remaining variables enter the model. Hence, depending on the value of $\lambda$, the lasso can produce a model involving any number of variables. In contrast, ridge regression will always include all of the variables in the model, although the magnitude of the coefficient estimates will depend on $\lambda$.
+단순 하나의 예시 실증 사례로서, <code class="language-plaintext highlighter-rouge">Credit</code> 공공 데이터 기본 세트 환경에 이 강력 신규 라쏘 방법론 기법을 진정 강제 접목 적용 단행 개입하여 컴퓨터로 시각 산출 생성된 시연 정보인 바 그림 6.6의 예측 파라미터 계수 궤적 파동 플롯 궤도 도표를 한 번 눈여겨 관찰해 단면 고찰 보십시오. 만일 $\lambda = 0$ 이라 가정 설정 지정 주어지면, 구동 라쏘 체제 기법은 역시 그저 단순히 OLS 정통 기본 최소 오차 제곱합 평가 모델 최소 적합치 도출 통계 추정 진단 라인을 산순하게 그대로 제공 환원 도출 산출 반환(gives) 하며, 모형 $\lambda$ 제어 인자 크기가 한없이 한계 없이 충분 방대 거대 엄청하게 초월 팽창해 지면(becomes sufficiently large), 기동 라쏘 체계는 내부 모든 등록 산출 계산 계수 파라미터 평가 추정 결과치 값이 공평 단일 무참히 0으로 소멸 리셋 초기 영점화 수렴되는 극한의 극무 극단적 허무 맹랑 진공 상태 빈 깡통 무(無) 편향 기저 빈도 (null model) 을 단박 생산 기동 도출 산출 결과로 제공(gives) 조치 도출합니다. 그러나 참으로 흥미 애석 유감 안타깝게도 이 두 가지 거대한 상반 양 극단 극한 국면 상태의 한 중간 도중 사이 훈련 여정 전개 중간 도상 구간 시점 과정 맥락상에서(in between), 구조적 이 릿지 체계 모형과 저 라쏘 모델 두 모형 변동 진화 파생 진행 진화 도달 진행 형태 모습 양상 노선 전개도는 상호 간 서로 상당히 무척 아주 과히 꽤 뚜렷 막대 눈에 무색 생판 아주 전적 크게 확연 눈부 전혀 철저 극히 심도 확연 매우 크게 판이 몹시 별도 아주 진일 다릅니다(quite different). 이 가시 그림 도표 6.6의 오른쪽 분할 패널 시야 공간 배정 영역을 화면 상 좌측 맨 끝 지점에서 쭉 시선 따라 이어나가 우측 향한 방향 흐름 진행 따라 쭉 점차 선형 따라 가로 훑어 질러 진출 찬찬 시선 좇아 살펴보면(Moving from left to right), 가장 초기 기점 발단 선두 무렵에는 유독 라쏘 시스템 동기 제제 개입 결과는 놀랍 충격 유독 단연 직관 유일 오직 그 <code class="language-plaintext highlighter-rouge">rating</code> 하나의 단독 일개 예측 평가 기계 단일 예측 변동 유닛 변수만을 살아 보존 남긴 편파 희소 제제 특수 통제 단일 모델 도달 진입 형태 귀결 상태 산출에(results in) 즉각 귀결 지연 다다르게 즉결 성취 수렴(results in) 성립 됨을 포착 감지 시선 확인 목도 관측 파악 목격(observe) 엿볼 시야 포착 감지 추정(observe) 인지 할 수 있습니다. 그 이후 막간 찰라 무렵에는 연이어 거의 곧바로 이어 순차 <code class="language-plaintext highlighter-rouge">student</code> 및 <code class="language-plaintext highlighter-rouge">limit</code> 두 개체 변수 콤비가 서로 사실 동시 거의 막 간 유사 무방 차이 유사 간극 사실상 거의 대동 동시에 시차 격차 나란 겹쳐 무방 나란 거의 간발 비슷 거의 나란 동시 병행 유사 팽팽 막상 이변 차이 별간 동시에 (almost simultaneously) 동반 묶여 나란 직결 단숨 모델 통제 내부 영역 선상 내부 결계 울타 권역 허용 도달 내로 즉각 편입 입성 돌입 등판 편재 투합 조인(enter) 유입 편재 진입 도입 포함(enter) 안착 승선 유입(enter) 유입 되며, 그 등장 직후 약간의 단기 짧은 템포 시간 짧은 짤막 격차 지연 직후 후미 짧게 곧바로 미처 바짝 뒤이어 지체 매우 바짝 뒤이 단기 격차 머지 추후 직후 찰라 이어 곧장 즉각 뒤이 (shortly followed by) 가차 짧게 뒤미처 추후 격차 맹추 직후 뒤따 이내 연달 지체 잇따 직후 미처 짧게 바로 이어 직후 숨 돌 수반 미처 이내 (shortly followed by) 추격 시점 이내 틈 직후 간극 대거 이내 약간 시점 곧이 바로 콤팩 아주 바짝(shortly) 시점 차이 두고 잇달 간격 바짝 이내 연속 짧은 시점 미처 직후 이내 부리 뒤따 뒤이어 후미 차후 뒤를 바로 쫓아 뒤이 대기 편승 좇아 수반 덮쳐 가세 편승 편입 후속 바짝 연달 이내 뒤따 뒤이어 (followed by) 막강 <code class="language-plaintext highlighter-rouge">income</code> 요소 변수 항목도 신속 가세 편승 뒤이 뒤따 이어 등장 속속 등장(followed by) 동참 나타 납니다. 최종 종탑 종결 종착 종말 모임 결론 끝판 말미 끝내 언젠 마침 종막 결국 급기 도래 진상 언젠 마침 당도 마침 결단 마침 대단 필연 결국 종착 필경 종착 급기 결론 결점 끝끝 이르 언젠 필경 마침 도래 귀착(Eventually) 필경 당도 종결 최후 도래 결론 모임 필연 급기 마무 마침 결국 판국, 오매 고대 잔류 기다 숨죽 보류 잔여 소외 남은 버려 탈락 멈춘 버틴 제외 대기 유보 뒤 처 잔여 묶인 나머지 대외 밖 잔여 여분 그외 대기 남은 기다 유외 기타 계류 정체 대기 정박 잔류 도태 정체 체류 잔여 잔여 미완 정체 도래 잔류 남겨 남은 소속 (remaining) 그 남은 보류 그외 번외 밀린 부진 유보 대기 외곽 대기 후순 후열 배제 대기 대기 정박 정체 미진 그외 체류 예비 후순 떨거 소외 정체 나머지(remaining) 모든 주자 보조 잔여 떨거 후보 유닛 변수 군단들까지 일제 배제 수용 거둬 흡수 모델 안 허용 품안 품 안 안쪽 내측 내부 울타 내측 권역 내부 안쪽으로 완전 완전 모두 합류 일제 속속 전체 차차 흡수 가세 돌진 진군 속속 들어 승차 융합 입성 진입 등판 참전 투합 완전 입장 편입(enter) 승선 융합 완전 진입 합류 흡수 포함 결성 합류 통과 입장 (enter) 도달 투과 유입 안착 투입 편재(enter) 입성 편입 편재 합니다. 즉 이리 종합 이렇 고로 까닭 이리 요약 (Hence), 주어진 $\lambda$ 단위 강도 매개 지표 마커 수치 값이 직접 조율 배정 결정 지시 발동 지시 타협 통보 환산 통보 판결 결정 선고 하달 산출 통보 수치 분배 배당 선사 (depending on the value of) 관제 부여 시달 부여 결정 조작 부여 제시 책정 (depending on) 지명 척도 결과 보장 지령 지정 배당 판결 하달 (depending on) 지목 할당 수여 규정 배급 선사 (depending on) 내준 제시 결과 배정 크기에 오직 전적 무관 온전 맹종 착붙 맹신 무조건 수동 편승 철저 착붙 복종 완전 종속 투합 의지 입김 의도 (depending on) 결정 의존 기댐 무관 비례 연동 맹신 절대 온전 착붙 종속 따름 절대 좌우 (depending on) 따라 연동 입김 좌우 (depending on), 가공 라쏘 기판 기제 체제 동력 작동 통치 기제 엔진 수단 체재 공법 시스템은 우리 사용자 의지 여분 다중 아무 얼마 수수 무작 다채 자재 얼마 어떠 여러 무한 소수 개수 얼마 맘대 수대 (any number of) 임의 특정 몇몇 가용 다중 무작 일체 소수 제한 얼마 마음 (any number of) 제한 아무 갯수 여러 가지 원하 소속 임의 지정 개수 무방 한계 얼마 원하 특정 기량 어떤 (any number of) 몇 개 수량 변동 조작 얼마 한도 소속 (any number of) 어떤 할당 몇 개 규모 임의 분량 개수 할당 유창 조절 변동 한계 가용 (any number of) 수량 포진 숫자 한도 특정 포함 (any number of) 변수 자재 조율 자원 단위 개수 무작 개체 유닛 항목들을 동시 아우 구속 묶어 병합 담아 조합 엮어 모아 품은 끌어 편입 채비 지닌 끌어 갖춘 (involving) 망라 챙긴 두른 소화 수반 편재 둘러 편입 품은 넣은 동반 아우 삼킨 지닌 소속 지닌 (involving) 머금 포함 조화 투합 (involving) 시킨 섞은 감싼 탑재 다룬 조화 합친 묶은 두른 갖춘 아우 탑재 품은 (involving) 다채로운 창의 유연 임의 조합 구성 맞춤 타겟 자체 지향 특수 도출 신규 단독 별도 특수 (a model) 특정 변형 도출 임의 쾌적 기발 (a model) 구조 모델 유형 궤도 도면 모형 기판 버전 세팅 모형 (a model) 을 유창 탄력 자유 능란 원활 자재 우수 기발 가뿐 거뜬 마음 척척 탄탄 충분 요긴 요리 재주 능숙 탁월 가 능 유 강 발 유 자유 유 활 활 변 유 유 유 창 유 (can) 생 산 구 산 제 배 성 창 산 빚 배 (produce) 낼 발 제 생 출 양 발 조 창 빚 주 조 만 출 조 출 도 편 짜 작 구 시 주 양 자 출 고 도 도 주 방 방 제 부 출 고 주 도 출 가 능 합 할 (can produce) 생 작 생 파 제 지 주 도 산 제 자 직 (produce) 자 (can) (can produce) 조 생 지 제 양 낼 출 할 도 발 출 과 제 방 가 부 빚 창 직 제 제 작 작 발 낼 배 산 만 영 공 산 (produce) 편 출 (produce) 지 다 창 조 배 이 영 양 구 수 설 자 수 있 조 발 만 고 주 도 산 만 축 도 창 자 있 양 이 습 조 할 낼 창 산 조 이 이 있 도 성 기 생 기 제 성 발 출 구 발 방 산 만 부 지 치 위 산 배 만 영 가 력 양 빚 낼 도 부 방 기 생 부 할 저 조 축 설 생 출 공 방 고 제 도 수 부 습 진 낼 산 조 발 자 있 만 력 축 주 (produce) 할 (can produce) 도 도 방 주 제 직 영 있 방 수 빚 부 치 발 (produce) 이 부 능 가 생 영 발 산 자 저 위 출 력 발 이 만 발 배 낼 있 기 기 력 저 능 과 구 력 력 가 배 창 (produce) 다 력 조 도 수 저 발 조 부 도 성 이 과 (produce) 가 주 영 빚 력 과 공 부 방 치 도 위 저 기 력 산 가 기 이 위 제 니 치 제 양 과 (produce) 발 대 자 생 니 조 대 다 력 영 (can) 작 생 반 수 니 니 치 조 자 니 력 출 출 저 축 기 빚 배 낼 력 과 다 양 직 수 가 성 과 저 기 방 지 만 조 창 양 과 부 력 영 배 직 자 만 영 (produce) (can) 출 능 생 산 낼 낼 방 저 배 생 이 가 과 직 창 생 축 지 배 위 지 구 (produce) 반 빚 출 다 (produce) 도 다 저 창 자 만 치 (can produce) 배 생 치 도 작 도 부 위 주 지 방 조 만 이 능 지 기 가 대 수 편 기 력 영 조 배 공 (generate/produce) 축 창 축 직 (can produce) (can) 생 니 니 만 출 위 대 영 저 방 작 력 (can produce) 위 공 부 조 조 영 양 배 산 지 산 가 자 주 기 다 양 배 위 자 다 니 축 대 지 영 조 (produce) 과 위 니 방 공 다 (produce) 배 능 배 축 작 도 창 위 산 치 (produce) 기 산 배 출 영 동 배 과 지 이 다 공 산 구 만 성 공 지 위 다 (produce) 니 창 다 고 방 부 생 창 공 축 영 력 조 구 (can) 창 저 생 차 니 성 과 대 생 만 대 (produce) 위 반 다 직 있 니 능 영 생 주 구 부 저 영 능 제 직 기 직 빚 기 (can produce) 낼 양 창 제 방 (produce) 위 가 대 산 능 부 니 배 (produce) 자 조 치 과 방 작 차 력 이 영 지 생 (can) 도 발 낼 공 빚 배 능 수 축 기 대 조 력 축 낼 (produce) 자 대 생 대 빚 출 대 (produce) 위 니 구 동 생 성 이 직 작 력 제 창 창 배 출 수 니 니 자 공 치 공 빚 (give) 만 지 과 이 조 성 수 빚 직 반 편 저 산 방 저 능 위 가 영 위 직 능 동 (produce) (produce) 출 저 이 조 산 차 과 자 있 주 대 위 능 다 차 력 축 수 차 기 편 기 니 반 동 력 자 역 역 반 자 공 (can produce) 과 생 (can) 지 출 조 주 도 차 구 배 위 가 주 능 영 과 방 발 창 부 다 축 차 조 다 차 직 니 력 직 지 창 다 직 대 차 자 진 자 (can) 이 니 력 과 결 주 치 부 차 치 출 출 나 니 동 도 가 영 산 차 편 출 도 위 저 기 직 동 니 빚 가 자 창 과 자 배 니 편 출 빚 구. 반대로 (In contrast), 상반 극명 상반 편 극 대 타 대 (In contrast) (In contrast) 차 다 역 릿지 (ridge regression) 체 다 통 이 모 이 이 동 비 과 파 비 파 평 도 편 계 (magnitudes of the coefficient estimates) 지 지 지 영 기 조 표 의 성 상 평 이 부 조 속 비 조 환 크 위 가 가 크 력 편 배 동 기 비 지 이 양 크 부 지 평 모 결 가 표 영 (magnitudes) 상 환 자 가 거 위 지 기 치 의 형 량 수 영 도 부 속 배 기 양 속 성 파 환 체 량 양 차 비 도 량 영 모 두 영 두 의 의 크 배 결 자 가 크 (magnitudes) 파 적 영 가 속 지 두 성 량 속 수 다 배 거 표 조 상 이 차 자 적 기 가 크 적 도 기 의 수 편 체 형 위 량 영 부 지 조 체 지 자 기 적 차 비 조 위 표 배 양 상 의 두 두 이 량 (magnitude) 량 배 (magnitudes) 지 성 이 다 영 편 비 동 편 상 거 (although) 이 다 성 일 일 일 부 설 라 더 종 령 지 어 연 (although) 지 (although) 자 자 연 은 부 사 자 (although) 연 은 부 설 로 어 서 사 가 (although) 로 비 구 종 (although) 차 도 사 이 차 만 비 부 서 자 (although) 도 가 기 크 자 은 에 나 에 의 (depend on) (will depend on) 도 무 가 결 자 파 지 좌 의 위 가 동 무 지 파 종 려 영 지 자 전 지 의 순 비 따 지 묶 도 도 려 려 지 투 배 좌 대 투 통 조 좌 대 좌 동 영 투 차 대 좌 치 동 동 자 종 도 지 의 무 기 동 좌 지 조 연 동 종 무 지 의 좌 매 따 려 무 지 파 가 위 (will depend on) 조 따 정 좌 정 지 기 려 따 자 결 무 파 지 기 의 좌 위 지 따 결 무 결 비 자 연 치 지 영 종 결 위 배 대 투 부 파 전 전 순 좌 속 매 려 지 도 가 묶 려 동 종 위 파 의 도 무 전 좌 파 부 과 대 연 통 조 영 지 (will depend on) 지 결 좌 좌 가 무 연 파 에 도 종 (depends on) 기 의 가 지 위 투 매 통 조 전 (will depend on) 따 파 기 전 의 전 파 조 대 지 동 순 위 지 좌 가 종 따 치 위 과 과 (depend on) 의 결 지 라 동 파 의 결 지 순 도 가 자 결 로 도 배 가 무 지 따 의 지 대 (depend on) 지 의 연 종 조 전 대 속 좌 투 (will depend on) 도 결 려 매 에 치 의 연 치 도 조 배 따 대 동 매 파 지 의 투 의 기 의 좌 지 자 도 (will depend on) 동 려 도 자 속 무 시 에도 동 의 전 좌 대 배 무 지 조 파 의 좌 치 연 배 연 도 매 투 투 전 (depend on) 공 묶 위 지 전 도 불 구 하 지 도 (although … will depend on) 시 연 순 비 통 동 지 속 부 (although) 일지언정 자 (will depend on) 어 전 도 하 연 시 이 도 다 이 어 부 에도 은 가 부 만 구 성 은 무 다 영 설 정 조 동 치 릿 역 다 의 반 하 속 구 투 정 릿 다 역 동 형 비 에 의 환 다 은 설 정 위 나 과 대 파 통 편 대 통 이 부 성 차 도 (although) 나 이 어 연 자 동 좌 정 부 에 가 사 서 부 하 구 지 려 영 체 부 차 치 조 역 무 대 이 파 시 은 조 파 연 영 조 이 조 차 모 기 모 무 기 동 의 크 영 의 파 두 성 체 크 크 매 도 수 위 사 자 기 비 부 에 차 자 배 통 결 다 통 나 이 에 에 기 사 종 이 부 하 일 도 에 일 위 나 라 은 은 성 (depend on) 영 속 령 성 다 자 부 도 대 사 체 릿 영 이 과 과 이 어 가 조 릿 과 조 역 과 부 위 차 릿 과 편 비 나 과 무 다 과 릿 령 파 가 자 차 위 속 크 조 자 하 릿 모 다 과 과 릿 다 영 기 파 어 릿 은 종 역 무 체 종 두 의 위 하 릿 도 수 은 조 로 과 비 과 어 도 일 하 조 기 영 사 매 정 이 기 부 량 가 과 역 무 대 어 의 도 량 조 자 크 일 사 결 형 설 부 위 비 수 영 역 결 나 자 비 두 이 자 파 매 하 결 영 영 시 시 위 다 기 이 어 사 형 조 부 에 위 두 자 의 과 무 위 동 전 조 시 시 나 정 모 크 사 에 부 일 크 두 은 과 영 기 어 부 투 시 조 영 나 자 위 파 지 도 지 로 구 어 다 동 이 일 나 매 종 로 로 위 무 모 무 다 배 이 무 모 가 대 투 비 부 수 사 일 속 일 하 일 부 부 (although) 도 려 역 종 연 비 나 려 연 파 동 조 통 파 은 비 기 부 비 자 치 도 정 만 다 무 이 비 수 체 수 순 시 몯 부 구 체 의 전 부 구 자 형 조 전 의 연 무 모 성 양 형 동 하 통 어 부 체 구 위 령 동 시 역 영 에 어 과 기 이 위 파 역 다 사 도 부 이 배 파 투 속 사 영 나 나 수 두 수 전 에 이 의 배 도 환 자 전 크 전 령 다 라 시 시 로 자 파 연 위 구 조 정 어 만 다 전 형 도 차 연 모 수 과 사 하 구 편 매 위 부 량 배 매 수 역 모 전 정 에 종 전 구 은 편 기 수 통 파 정 역 편 어 일 통 속 자 비 동 다 파 전 은 지 시 도 다 도 치 하 나 파 양 양 통 로 역 대 (always) 시 동 조 시 (will always) 반 나 도 자 나 조 자 파 다 령 나 차 속 치 체 양 투 시 비 상 이 배 나 (will always include) 시 나 사 사 어 무 정 릿 시 기 통 동 만 위 일 로 투 연 차 위 파 상 이 연 모 도 결 크 시 사 다 역 결 차 (always) 하 모 제 차 통 에 결 (will always) 동 이 사 도 위 로 부 사 정 은 하 부 기 차 로 동 크 과 시 전 일 일 자 시 다 종 모 전 동 투 일 (always) 령 역 매 차 과 부 도 상 어 파 하 기 수 로 다 도 제 라 전 고 모 결 모 (does) 전 차 수 연 성 모 이 반 의 동 차 무 라 조 어 시 동 반 파 하 매 치 모 은 조 하 양 환 라 자 나 시 파 무 수 배 무 제 크 전 반 무 은 도 로 연 (does) 파 (in contrast) 이 반 파 이 연 제 기 조 결 도 동 반 만 이 다 모 시 치 로 제 로 자 라 부 조 시 양 정 반 반 어 차 도 배 자 기 로 정 도 조 매 파 조 공 어 구 구 부 공 결 구 위 비 통 치 어 위 제 두 역 조 모 무 조 반 파 배 체 과 반 모 가 력 시 도 의 하 (always) (always) 부 도 어 모 은 전 무 은 제 도 사 연 사 대 결 (will always) 도 구 에 은 일 부 시 자 성 공 로 나 반 시 사 제 파 파 은 부 하 과 공 은 이 무 구 전 만 통 역 조 결 나 차 기 조 시 전 이 (will always) 부 로 제 구 치 자 은 대 일 정 자 조 파 구 수 은 은 결 종 전 하 부 다 파 모 모 전 영 은 에 조 구 정 대 제 모 일 과 제 나 이 로 나 하 은 도 다 매 가 성 공 나 수 두 결 역 시 부 동 무 대 무 하 모 이 은 구 나 제 모 반 대 구 제 라 이 반 만 종 로 라 연 다 동 모 지 성 위 이 종 도 일 하 배 (in contrast) 하 반 무 제 무 자 시 구 수 라 수 반 일 치 다 은 시 하 구 연 이 파 조 수 로 성 조 다 결 이 조 다 라 전 모 성 립 무 대 은 자 공 은 라 로 이 은 다 사 하 일 배 나 위 투 배 (always) 어 치 은 모 공 로 다 치 연 정 일 에 제 두 연 도 로 동 모 무 구 연 조 로 공 동 릿지 회귀의 경우는 파라미터 계수 추정치의 상대적인 비중 크기가 비록 조율 인자 $\lambda$ 수치에 철저히 종속 의존되기는 하겠지만 어쨌든 언제나 변함없이 단 하나의 제외도 없이 전체 모든 $p$ 개의 데이터 변수 요소를 모델 속에 상시 모조리 가감 없이 동반 포함하게 됩니다(will always include).</p>
+
+<p>Another Formulation for Ridge Regression and the Lasso 
+릿지 회귀와 라쏘를 위한 또 다른 수식화 접근법</p>
+
+<p>One can show that the lasso and ridge regression coefficient estimates solve the problems
+더 깊게 수리를 탐미해 들어가면, 우리는 라쏘와 릿지 계수 지점 추정치들이 본질적으로 다음과 같은 쌍둥이 수학적 제약 조건 최적화 문제들을 푸는 것과 근본적으로 완벽히 동일 결과 도달임을 입증 명시할 수 있습니다.</p>
+
+\[\begin{align*}
+\underset{\beta}{\text{minimize}} \sum_{i=1}^n \left( y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 \quad &amp;\text{subject to} \quad \sum_{j=1}^p |\beta_j| \le s \quad (6.8) \\
+\underset{\beta}{\text{minimize}} \sum_{i=1}^n \left( y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 \quad &amp;\text{subject to} \quad \sum_{j=1}^p \beta_j^2 \le s \quad (6.9)
+\end{align*}\]
+
+<p>respectively. In other words, for every value of $\lambda$, there is some $s$ such that the Equations (6.7) and (6.8) will give the same lasso coefficient estimates. Similarly, for every value of $\lambda$ there is a corresponding $s$ such that Equations (6.5) and (6.9) will give the same ridge regression coefficient estimates. 
+차례대로 (6.8)은 라쏘를, (6.9)는 릿지를 뜻합니다. 이 깊은 구조 통찰력을 다른 방식으로 풀어 묘사하자면, 주어진 가용 $\lambda$ 의 어떠한 모든 단일 가용 인자 조작 값에 대하여, 저 위 정규 공식 (6.7)과 신규 제약 수식 (6.8) 쌍이 아주 완벽하게 서로 동일 정합된 라쏘 통계 계수 추정치 결론을 도달하게 만드는 특정 매개 제약 변수 $s$ 가 반드시 구조상 필연 어딘가 존재한다는 뜻입니다. 기하학적으로 아주 유사하게도, 어떠한 $\lambda$ 값 크기에 대해서든 원 공식 (6.5)와 제약 공식 (6.9) 가 같은 결과를 안겨줄 쌍둥이 대응 가능한 매치 짝꿍 변수 $s$ 가 역시나 존재합니다.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>When $p = 2$, then (6.8) indicates that the lasso coefficient estimates have the smallest RSS out of all points that lie within the diamond defined by $</td>
+      <td>\beta_1</td>
+      <td>+</td>
+      <td>\beta_2</td>
+      <td>\le s$. Similarly, the ridge regression estimates have the smallest RSS out of all points that lie within the circle defined by $\beta_1^2 + \beta_2^2 \le s$.</td>
+    </tr>
+    <tr>
+      <td>만일 예측 데이터 구성 차원이 $p = 2$ 라고 단순 가정한다면, 공식 수식 (6.8)의 제약 테두리는 구조상 결국 라쏘의 파라미터 결론 계수 추정치가 $</td>
+      <td>\beta_1</td>
+      <td>+</td>
+      <td>\beta_2</td>
+      <td>\le s$ 식에 의해 경계가 구획 정의 형성되는 기하학적 <strong>‘마름모 다이아몬드 지대(diamond)’</strong> 공간 경계 내부에 안착한 그 가용 모든 실재하는 접점 좌표 후보 지점들 중에서 가장 우등한 최저치 기본 단위의 RSS 평가 득점 비용 낭비를 갖는 우승 좌표 지점을 무조건 달성 확정 뜻한다는 사실을 명시합니다. 이와 똑같은 패턴 구조 속성을 전제 가져, 동일 논증 통찰 릿지 단위의 회귀 지향 도출 추정치 포인트 지표 좌표는 $\beta_1^2 + \beta_2^2 \le s$ 식 수학식에 의거해 외곽 테두리가 둥글게 원형 구획 공간 정의 형성되는 기하 실상 원형 곡선(circle) 내부 할당 영역의 가용 모든 포진 지점들 내에서 가장 압도 통치 제일 훌륭 최저치인 우승 RSS 득과 점수 좌표를 틀어쥐는 실측 고지를 무조건 달성 선점 확보 지목 하게 됩니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>We can think of (6.8) as follows. When we perform the lasso we are trying to find the set of coefficient estimates that lead to the smallest RSS, subject to the constraint that there is a <em>budget</em> $s$ for how large $\sum_{j=1}^p</td>
+      <td>\beta_j</td>
+      <td>$ can be. When $s$ is extremely large, then this budget is not very restrictive, and so the coefficient estimates can be large. In fact, if $s$ is large enough that the least squares solution falls within the budget, then (6.8) will simply yield the least squares solution. In contrast, if $s$ is small, then $\sum_{j=1}^p</td>
+      <td>\beta_j</td>
+      <td>$ must be small in order to avoid violating the budget. Similarly, (6.9) indicates that when we perform ridge regression, we seek a set of coefficient estimates such that the RSS is as small as possible, subject to the requirement that $\sum_{j=1}^p \beta_j^2$ not exceed the budget $s$. The formulations (6.8) and (6.9) reveal a close connection between the lasso, ridge regression, and best subset selection. Consider the problem</td>
+    </tr>
+    <tr>
+      <td>우리는 제약 수직 공식 (6.8)을 다음과 같은 비유 관점으로 해석할 수 있습니다. 우리가 라쏘 모의 실험 계산 과정을 진전 수행할 때, 사실 우리는 절대 합산량 $\sum_{j=1}^p</td>
+      <td>\beta_j</td>
+      <td>$ 단위 값이 최대로 허용될 수 있는 크기를 엄격 통제 규제하는 가용 제한 <strong>‘예산금(budget)’</strong> 제한 항목인 임계 $s$ 라는 엄격한 한계 제약 조건 한도 감시 테두리를 꼼꼼하게 의무 복종 따르는(subject to) 동시에, 가장 작은 RSS 손실값을 도달 도출(lead to) 해 보상해 내는 전설의 가용 최적 제왕 계수 집합 세트를 부단 발견해 내고자 안간힘을 쓰는 최적화 셈입니다. 만일 이 가용 예산금 한도 지표 $s$ 값이 무지막지하게 절대 거대하다면, 이 지출 한도 예산 구속 제약은 그다지 빡빡한 속박 제약 한계 조처 구속치로 전혀 작용하지 않으며, 고로 그 도출 결과 제제 계수 추산 통계 수치들은 자유롭게 충분히 한없이 커질 탄원 여력이 있습니다. 사실상 만약 예산금 액수 규모 한도고 $s$ 가 무척 풍족히 한없이 커서 저 보통 기본 통계 기저 체력인 기본 최소 오차 제곱합 해결책 파라미터 값 규모가 그 거대 자유 예산 제약 한도 경계선 인센티브 내에 풍족히 딱 안착 수렴 수용 구속 속하게(falls within) 포섭 된다면, 저항 규제 공식 (6.8)은 별다른 강력 제약 여지 충돌 없이 아주 단순 무방 단순하게 원래의 기존 정규 보통 최소 오차 제곱합 안착 기본 해(solution) 등가치 와 단일 같은 판박 결론값을 그대로 배출 도출 제공(yield) 반환 할 것입니다. 이와는 엄청 극명하게 확연 대조적으로 매우 판이 상반되게 자원의 빈곤 여부, 예산금 한도고 $s$ 지표가 무척 타이트 엄격 부족 빈곤 제한 소규모 축소 삭감 빈곤(small) 가동 하다면, 부여 할당 한정된 그 모형 제약 예산 자금 한도선을 모델이 함부로 초과 능가 넘지 오버 어기 위반(violating) 침해 회피 방지 준수 방어 지키기 파기 위해서 절대 필사 무조건 수학 산술 합계 $\sum_{j=1}^p</td>
+      <td>\beta_j</td>
+      <td>$ 양이 무조건 의무 필수 반드시 필히 소형 수축 강제로 작게 엄격 축소 감산 억압 통제 규격 되어야만 합니다. 전체 구조상 아주 판박이 비슷하게 똑같이 절대 유사 패턴 기조 전개 비슷하게, 한계 식 (6.9)은 우리가 강력 무비 제재 릿지의 억압 분석 과정을 진전 타결 시행 작동 단행할 적에, 우리는 한계 합 $\sum_{j=1}^p \beta_j^2$ 양 지표가 가용 규정 예산금 한도고 $s$를 함부로 파괴 상회 초과 능가 폭주 월권 초월 돌파(exceed) 범람 위반 하지 말아야 반드시 절대 통제 감내 한다는 무서 제약 한도 엄격 복종 임무 소명 의무 요구 규정에 절대 필수 종속 복종 감수 부합(subject to) 감금 예속 제한 종속되는 방지 선에서, RSS 도출 잔여 오차 에러 비용 피해 비용 누수가 지극히 무조건 강제 최소치 최적 최하 가급적 지극히 가장 작게 제일 낮아지게끔 강제 타협 필히 달성 양립 부합하게 일거 하는 그런 가용 지상 관제 계수 집계 세트 후보군 해집단 최고 후보 정예 최적 세트를 집요 치열하게 탐문 수색 모색 탐색 기용 조달 간구 파악 산출(seek) 찾고 탐구 물색 확인 탐지 발견한다는 통계 사실을 명백히 밝히 표명 시사(indicates) 노출 대변 나타냅니다. 깊은 통찰력 이 제약 공식 (6.8)과 쌍둥이 식 (6.9)의 기하 포뮬레이션 전개 수리식들은 모델 승자 최고의 모델 성능 정답을 치열 가리는 비교 척도인 최상 전진 부분집합 선정 변수 선택, 정규 라쏘, 그리고 저돌적 통계 릿지 기법 체제 사이에 아주 깊은 막역 은밀 밀접한 유착 이면 상관 상응 결부 직결 연결(connection) 유대 관여 연관점이 분명 존재함을 확연 대거 드러 밝혀 폭로 누설(reveal) 시사 합니다. 자, 다음 해결 문제 모의 관문 모형 최적 사례를 가만 고민 고찰 참작 조명 숙고 유념 직시 진단 주시 살펴 관조 참작 점검 숙지 들여 파악 확인합시다(Consider).</td>
+    </tr>
+  </tbody>
+</table>
+
+\[\underset{\beta}{\text{minimize}} \sum_{i=1}^n \left( y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 \quad \text{subject to} \quad \sum_{j=1}^p I(\beta_j \ne 0) \le s \quad (6.10)\]
+
+<p>Here $I(\beta_j \ne 0)$ is an indicator variable: it takes on a value of 1 if $\beta_j \ne 0$, and equals zero otherwise. Then (6.10) amounts to finding a set of coefficient estimates such that RSS is as small as possible, subject to the constraint that no more than $s$ coefficients can be nonzero. The problem (6.10) is equivalent to best subset selection. Unfortunately, solving (6.10) is computationally infeasible when $p$ is large, since it requires considering all $\binom{p}{s}$ models containing $s$ predictors. Therefore, we can interpret ridge regression and the lasso as computationally feasible alternatives to best subset selection that replace the intractable form of the budget in (6.10) with forms that are much easier to solve. Of course, the lasso is much more closely related to best subset selection, since the lasso performs feature selection for $s$ sufficiently small in (6.8), while ridge regression does not.
+여기서 $I(\beta_j \ne 0)$ 는 단순 지시 변수입니다: $\beta_j \ne 0$ 일 때 1의 값을 취하고, 그렇지 않으면 0이 됩니다. 그러면 (6.10)은 허용 0이 아닌 계수가 최대 $s$ 개를 넘지 않아야 한다는 제약 조건 하에서, RSS를 가능한 한 작게 만드는 계수 추정치 집합을 찾는 문제가 됩니다. 이 (6.10) 수식 문제는 본질적으로 최상 부분집합 선택 기법과 완전히 동일합니다. 하지만 불행히도 $p$ 가 클 때 (6.10)을 푸는 것은 컴퓨터 연산 상 실현 불가능합니다. 왜냐하면 $s$개의 예측 변수를 포함하는 모든 $\binom{p}{s}$ 가지의 방대한 모델 경우의 수를 모조리 다 고려해야만 하기 때문입니다. 그러므로, 우리는 릿지 회귀와 라쏘를 최상 부분집합 선택의 계산 현실성이 있는 대안 기법으로 해석할 수 있습니다. 즉 (6.10)에 등장한 다루기 힘들도록 까다로운 예산 형태를, 훨씬 풀기 편안한 다른 형태로 영리하게 교체 대체 치환 한 것이죠. 물론, 라쏘가 최상 부분집합 선택과 훨씬 더 밀접한 관련이 있는 것이 사실입니다. 왜냐하면 라쏘는 (6.8)에서 $s$ 가 충분히 극도로 작아질 때 기어코 특징을 도려내는 변수 선택을 당돌 동반 수행해 내지만, 안타깝지만 릿지 회귀는 그런 재주를 절대 부리지 못하기 때문입니다.</p>
+
+<hr />
+
+<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+
+<h3 id="the-variable-selection-property-of-the-lasso-라쏘의-변수-선택-특성-메커니즘">The Variable Selection Property of the Lasso (라쏘의 변수 선택 특성 메커니즘)</h3>
+<ul>
+  <li><a href="./6_2_2_1_the_variable_selection_property_of_the_lasso/">문서로 이동하기</a></li>
+</ul>
+
+<p>어떻게 라쏘가 계수를 정확히 0으로 타겟 쳐내주어 희소(Sparse)한 모델을 기하학적으로 생성하는지, 그 수학적 원리를 마름모 궤적으로 시각화하여 관찰합니다.</p>
+
+<h3 id="comparing-the-lasso-and-ridge-regression-라쏘와-릿지-회귀의-구조적-차이-비교">Comparing the Lasso and Ridge Regression (라쏘와 릿지 회귀의 구조적 차이 비교)</h3>
+<ul>
+  <li><a href="./6_2_2_2_comparing_the_lasso_and_ridge_regression/">문서로 이동하기</a></li>
+</ul>
+
+<p>소수의 변수만 반응에 유의미할 땐 라쏘가, 다수 변수들이 전반적으로 미세하게 얽혀 영향을 미칠 땐 릿지가 상대적으로 유리할 가능성이 높다는 구도를 설명합니다.</p>
+
+<h3 id="a-simple-special-case-for-ridge-regression-and-the-lasso-릿지와-라쏘의-특수한-교안-사례">A Simple Special Case for Ridge Regression and the Lasso (릿지와 라쏘의 특수한 교안 사례)</h3>
+<ul>
+  <li><a href="./6_2_2_3_a_simple_special_case_for_ridge_regression_and_the_lasso/">문서로 이동하기</a></li>
+</ul>
+
+<p>변수 행렬 데이터 디자인이 완벽한 상호 직교(Orthogonal) 구조라 가정할 때, 두 기법 방식이 원래 OLS 선형 회귀 계수 추정값을 어떻게 소프트/하드로 깎는지 단순화해 증명합니다.</p>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

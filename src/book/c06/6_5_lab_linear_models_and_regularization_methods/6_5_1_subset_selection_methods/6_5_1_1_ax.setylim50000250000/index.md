@@ -35,7 +35,7 @@ skm.cross_
 val_predict()
 ```
 
-At each model along the path, we compute the $\text{MSE}$ in each of the crossvalidation folds. These we will average to get the mean MSE, and can also use the individual values to compute a crude estimate of the standard error of the mean.[9] Hence we must know the test indices for each cross-validation split. This can be found by using the `split()` method of `kfold` . Because we fixed the random state above, whenever we split any array with the same number of rows as _Y_ we recover the same training and test indices, though we simply ignore the training indices below. 
+At each model along the path, we compute the $\text{MSE}$ in each of the crossvalidation folds. These we will average to get the mean MSE, and can also use the individual values to compute a crude estimate of the standard error of the mean.[^9] Hence we must know the test indices for each cross-validation split. This can be found by using the `split()` method of `kfold` . Because we fixed the random state above, whenever we split any array with the same number of rows as Y we recover the same training and test indices, though we simply ignore the training indices below. 
 
 ```
 In [15]:cv_mse=[]
@@ -50,7 +50,7 @@ cv_mse.shape
 Out[15]:(20,5)
 ```
 
-> 9The estimate is crude because the five error estimates are based on overlapping training sets, and hence are not independent. 
+[^9]: The estimate is crude because the five error estimates are based on overlapping training sets, and hence are not independent. 
 
 272 6. Linear Model Selection and Regularization 
 

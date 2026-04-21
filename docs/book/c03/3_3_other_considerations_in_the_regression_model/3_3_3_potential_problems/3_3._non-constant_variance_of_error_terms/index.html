@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -513,16 +512,63 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="3-non-constant-variance-of-error-terms">3. Non-constant Variance of Error Terms</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../2_2._correlation_of_error_terms/index.html">&lt; 2 2. Correlation Of Error Terms</a></td>
+      <td><a href="../4_4._outliers/index.html">4 4. Outliers &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Another important assumption of the linear regression model is that the error terms have a constant variance, Var( \epsilon_i ) = \sigma^2 . The standard errors, confidence intervals, and hypothesis tests associated with the linear model rely upon this assumption.</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>Unfortunately, it is often the case that the variances of the error terms are non-constant. For instance, the variances of the error terms may increase with the value of the response. One can identify non-constant variances in the errors, or <em>heteroscedasticity</em> , from the presence of a <em>funnel shape</em> in heterothe residual plot. An example is shown in the left-hand panel of Figure 3.11, in which the magnitude of the residuals tends to increase with the fitted values. When faced with this problem, one possible solution is to transform the response Y using a concave function such as log Y or <em>√Y</em> . Such a transformation results in a greater amount of shrinkage of the larger responses, leading to a reduction in heteroscedasticity. The right-hand panel of Figure 3.11 displays the residual plot after transforming the response using log Y . The residuals now appear to have constant variance, though there is some evidence of a slight non-linear relationship in the data.</p>
+<h1 id="3-non-constant-variance-of-error-terms">3. Non-constant Variance of Error Terms</h1>
 
-<p>scedasticity</p>
+<p>Another important assumption of the linear regression model is that the error terms have a constant variance, $\text{Var}(\epsilon_i) = \sigma^2$.</p>
 
-<p>Sometimes we have a good idea of the variance of each response. For example, the <em>i</em> th response could be an average of <em>ni</em> raw observations. If each of these raw observations is uncorrelated with variance \sigma^2 , then their average has variance <em>σi</em>[2][=] <em>[ σ]</em>[2] <em>[/n][i]</em>[.][In][this][case][a][simple][remedy][is][to][fit][our] model by <em>weighted least squares</em> , with weights proportional to the inverse weighted variances—i.e. <em>wi</em> = <em>ni</em> in this case. Most linear regression software allows least for observation weights.</p>
+<p>The standard errors, confidence intervals, and hypothesis tests associated with the linear model rely upon this assumption.</p>
 
+<p>Unfortunately, it is often the case that the variances of the error terms are non-constant.</p>
+
+<p>For instance, the variances of the error terms may increase with the value of the response.</p>
+
+<p>One can identify non-constant variances in the errors, or <em>hetero</em>, from the presence of a <em>funnel shape</em> in the residual plot.</p>
+
+<p>An example is shown in the left-hand panel of Figure 3.11, in which the magnitude of the residuals tends to increase with the fitted values.</p>
+
+<p>When faced with this problem, one possible solution is to transform the response $Y$ using a concave function such as $\log Y$ or $\sqrt{Y}$.</p>
+
+<p>Such a transformation results in a greater amount of shrinkage of the larger responses, leading to a reduction in hetero.</p>
+
+<p>The right-hand panel of Figure 3.11 displays the residual plot after transforming the response using $\log Y$.</p>
+
+<p>The residuals now appear to have constant variance, though there is some evidence of a slight non-linear relationship in the data.</p>
+
+<p>Sometimes we have a good idea of the variance of each response.</p>
+
+<p>For example, the $i$th response could be an average of $n_i$ raw observations.</p>
+
+<p>If each of these raw observations is uncorrelated with variance $\sigma^2$, then their average has variance $\sigma_i^2 = \sigma^2 / n_i$.</p>
+
+<p>In this case, a simple remedy is to fit our model by <em>weighted least squares</em>, with weights proportional to the inverse variances — i.e. $w_i = n_i$ in this case.</p>
+
+<p>Most linear regression software allows for observation weights.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../2_2._correlation_of_error_terms/index.html">&lt; 2 2. Correlation Of Error Terms</a></td>
+      <td><a href="../4_4._outliers/index.html">4 4. Outliers &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

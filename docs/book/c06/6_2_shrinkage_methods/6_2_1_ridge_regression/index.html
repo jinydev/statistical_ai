@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,27 +502,23 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="621-ridge-regression"><em>6.2.1 Ridge Regression</em></h1>
+            <h1 id="621-ridge-regression">6.2.1 Ridge Regression</h1>
 
-<p>Recall from Chapter 3 that the least squares fitting procedure estimates <em>β</em> 0 <em>, β</em> 1 <em>, . . . , βp</em> using the values that minimize</p>
+<p>Recall from Chapter 3 that the least squares fitting procedure estimates $\beta_0, \beta_1, \ldots, \beta_p$ using the values that minimize</p>
 
 \[\sum_{i=1}^n \left( y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 = \text{RSS}\]
 
-<p><em>Ridge regression</em> is very similar to least squares, except that the coefficients are estimated by minimizing a slightly different quantity. In particular, the ridge regression coefficient estimates <em>β</em>[ˆ] <em>[R]</em> are the values that minimize</p>
+<p><em>Ridge regression</em> is very similar to least squares, except that the coefficients are estimated by minimizing a slightly different quantity. In particular, the ridge regression coefficient estimates $\hat{\beta}^R$ are the values that minimize</p>
 
 \[\sum_{i=1}^n \left( y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 + \lambda \sum_{j=1}^p \beta_j^2 = \text{RSS} + \lambda \sum_{j=1}^p \beta_j^2 \quad (6.5)\]
 
-<p>where <em>λ ≥</em> 0 is a <em>tuning parameter</em> , to be determined separately. Equa- tuning tion 6.5 trades off two different criteria. As with least squares, ridge regresparameter sion seeks coefficient estimates that fit the data well, by making the RSS small. However, the second term, <em>λ</em>[�] <em>j[β] j</em>[2][,][called][a] <em>[shrinkage][penalty]</em>[,][is] shrinkage small when <em>β</em> 1 <em>, . . . , βp</em> are close to zero, and so it has the effect of <em>shrinking</em> penalty the estimates of <em>βj</em> towards zero. The tuning parameter <em>λ</em> serves to control</p>
-
-<p>6.2 Shrinkage Methods 241</p>
+<p>where $\lambda \ge 0$ is a <em>tuning parameter</em> , to be determined separately. Equation 6.5 trades off two different criteria. As with least squares, ridge regression seeks coefficient estimates that fit the data well, by making the RSS small. However, the second term, $\lambda \sum_j \beta_j^2$, called a <em>shrinkage penalty</em>, is small when $\beta_1, \ldots, \beta_p$ are close to zero, and so it has the effect of <em>shrinking</em> the estimates of $\beta_j$ towards zero. The tuning parameter $\lambda$ serves to control the relative impact of these two terms on the regression coefficient estimates. When $\lambda = 0$, the penalty term has no effect, and ridge regression will produce the least squares estimates. However, as $\lambda \to \infty$, the impact of the shrinkage penalty grows, and the ridge regression coefficient estimates will approach zero. Unlike least squares, which generates only one set of coefficient estimates, ridge regression will produce a different set of coefficient estimates, $\hat{\beta}_{\lambda}^R$, for each value of $\lambda$. Selecting a good value for $\lambda$ is critical; we defer this discussion to Section 6.2.3, where we use cross-validation.</p>
 
 <p><img src="./img/6_4.png" alt="Figure 6.4" /></p>
 
-<p><strong>FIGURE 6.4.</strong> <em>The standardized ridge regression coefficients are displayed for the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set, as a function of λ and ∥β</em>[ˆ] <em>λ[R][∥]</em>[2] <em>[/][∥][β]</em>[ˆ] <em>[∥]</em>[2] <em>[.]</em></p>
+<p><strong>FIGURE 6.4.</strong> <em>The standardized ridge regression coefficients are displayed for the</em> <code class="language-plaintext highlighter-rouge">Credit</code> <em>data set, as a function of $\lambda$ and $|\hat{\beta}</em>{\lambda}^R|<em>2 / |\hat{\beta}|_2$.</em></p>
 
-<p>the relative impact of these two terms on the regression coefficient estimates. When <em>λ</em> = 0, the penalty term has no effect, and ridge regression will produce the least squares estimates. However, as <em>λ →∞</em> , the impact of the shrinkage penalty grows, and the ridge regression coefficient estimates will approach zero. Unlike least squares, which generates only one set of coefficient estimates, ridge regression will produce a different set of coefficient estimates, <em>β</em>[ˆ] <em>λ[R]</em>[,][for][each][value][of] <em>[λ]</em>[.][Selecting][a][good][value][for] <em>[λ]</em>[is][critical;] we defer this discussion to Section 6.2.3, where we use cross-validation.</p>
-
-<p>Note that in (6.5), the shrinkage penalty is applied to <em>β</em> 1 <em>, . . . , βp</em> , but not to the intercept <em>β</em> 0. We want to shrink the estimated association of each variable with the response; however, we do not want to shrink the intercept, which is simply a measure of the mean value of the response when <em>xi</em> 1 = <em>xi</em> 2 = <em>. . .</em> = <em>xip</em> = 0. If we assume that the variables—that is, the columns of the data matrix <strong>X</strong> —have been centered to have mean zero before ridge regression is performed, then the estimated intercept will take the form <em>β</em>[ˆ] 0 = <em>y</em> ¯ =[�] <em>[n] i</em> =1 <em>[y][i][/n]</em>[.]</p>
+<p>Note that in (6.5), the shrinkage penalty is applied to $\beta_1, \ldots, \beta_p$, but not to the intercept $\beta_0$. We want to shrink the estimated association of each variable with the response; however, we do not want to shrink the intercept, which is simply a measure of the mean value of the response when $x_{i1} = x_{i2} = \ldots = x_{ip} = 0$. If we assume that the variables—that is, the columns of the data matrix $\mathbf{X}$—have been centered to have mean zero before ridge regression is performed, then the estimated intercept will take the form $\hat{\beta}<em>0 = \bar{y} = \sum</em>{i=1}^n y_i / n$.</p>
 
 <hr />
 

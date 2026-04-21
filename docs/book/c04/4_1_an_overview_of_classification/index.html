@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -493,33 +492,45 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="41-an-overview-of-classification">4.1 An Overview of Classification</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4. Classification</a></td>
+      <td><a href="../4_2_why_not_linear_regression/index.html">4.2 Why Not Linear Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="41-an-overview-of-classification">4.1 An Overview of Classification</h1>
 
 <p>Classification problems occur often, perhaps even more so than regression problems. Some examples include:</p>
 
-<p>© Springer Nature Switzerland AG 2023</p>
-
-<p>135</p>
-
-<p>G. James et al., <em>An Introduction to Statistical Learning</em> , Springer Texts in Statistics, https://doi.org/10.1007/978-3-031-38747-0_4</p>
-
-<p>136 4. Classification</p>
-
 <ol>
-  <li>
-    <p>A person arrives at the emergency room with a set of symptoms that could possibly be attributed to one of three medical conditions. Which of the three conditions does the individual have?</p>
-  </li>
-  <li>
-    <p>An online banking service must be able to determine whether or not a transaction being performed on the site is fraudulent, on the basis of the user’s IP address, past transaction history, and so forth.</p>
-  </li>
-  <li>
-    <p>On the basis of DNA sequence data for a number of patients with and without a given disease, a biologist would like to figure out which DNA mutations are deleterious (disease-causing) and which are not.</p>
-  </li>
+  <li>A person arrives at the emergency room with a set of symptoms that could possibly be attributed to one of three medical conditions. Which of the three conditions does the individual have?</li>
+  <li>An online banking service must be able to determine whether or not a transaction being performed on the site is fraudulent, on the basis of the user’s IP address, past transaction history, and so forth.</li>
+  <li>On the basis of DNA sequence data for a number of patients with and without a given disease, a biologist would like to figure out which DNA mutations are deleterious (disease-causing) and which are not.</li>
 </ol>
 
-<p>Just as in the regression setting, in the classification setting we have a set of training observations ( <em>x</em> 1 <em>, y</em> 1) <em>, . . . ,</em> ( <em>xn, yn</em> ) that we can use to build a classifier. We want our classifier to perform well not only on the training data, but also on test observations that were not used to train the classifier. In this chapter, we will illustrate the concept of classification using the simulated <code class="language-plaintext highlighter-rouge">Default</code> data set. We are interested in predicting whether an individual will default on his or her credit card payment, on the basis of annual income and monthly credit card balance. The data set is displayed in Figure 4.1. In the left-hand panel of Figure 4.1, we have plotted annual <code class="language-plaintext highlighter-rouge">income</code> and monthly credit card <code class="language-plaintext highlighter-rouge">balance</code> for a subset of 10 <em>,</em> 000 individuals. The individuals who defaulted in a given month are shown in orange, and those who did not in blue. (The overall default rate is about 3 %, so we have plotted only a fraction of the individuals who did not default.) It appears that individuals who defaulted tended to have higher credit card balances than those who did not. In the center and right-hand panels of Figure 4.1, two pairs of boxplots are shown. The first shows the distribution of <code class="language-plaintext highlighter-rouge">balance</code> split by the binary <code class="language-plaintext highlighter-rouge">default</code> variable; the second is a similar plot for <code class="language-plaintext highlighter-rouge">income</code> . In this chapter, we learn how to build a model to predict <code class="language-plaintext highlighter-rouge">default</code> ( $Y$) for any given value of <code class="language-plaintext highlighter-rouge">balance</code> ( $X_1$) and <code class="language-plaintext highlighter-rouge">income</code> ( $X_2$). Since $Y$is not quantitative, the simple linear regression model of Chapter 3 is not a good choice: we will elaborate on this further in Section 4.2.</p>
+<p>Just as in the regression setting, in the classification setting we have a set of training observations $(x_1, y_1), \dots , (x_n, y_n)$ that we can use to build a classifier. We want our classifier to perform well not only on the training data, but also on test observations that were not used to train the classifier. In this chapter, we will illustrate the concept of classification using the simulated <code class="language-plaintext highlighter-rouge">Default</code> data set. We are interested in predicting whether an individual will default on his or her credit card payment, on the basis of annual income and monthly credit card balance. The data set is displayed in Figure 4.1. In the left-hand panel of Figure 4.1, we have plotted annual <code class="language-plaintext highlighter-rouge">income</code> and monthly credit card <code class="language-plaintext highlighter-rouge">balance</code> for a subset of 10,000 individuals. The individuals who defaulted in a given month are shown in orange, and those who did not in blue. (The overall default rate is about 3 %, so we have plotted only a fraction of the individuals who did not default.) It appears that individuals who defaulted tended to have higher credit card balances than those who did not. In the center and right-hand panels of Figure 4.1, two pairs of boxplots are shown. The first shows the distribution of <code class="language-plaintext highlighter-rouge">balance</code> split by the binary <code class="language-plaintext highlighter-rouge">default</code> variable; the second is a similar plot for <code class="language-plaintext highlighter-rouge">income</code> . In this chapter, we learn how to build a model to predict <code class="language-plaintext highlighter-rouge">default</code> ($Y$) for any given value of <code class="language-plaintext highlighter-rouge">balance</code> ($X_1$) and <code class="language-plaintext highlighter-rouge">income</code> ($X_2$). Since $Y$ is not quantitative, the simple linear regression model of Chapter 3 is not a good choice: we will elaborate on this further in Section 4.2.</p>
 
-<p>It is worth noting that Figure 4.1 displays a very pronounced relationship between the predictor <code class="language-plaintext highlighter-rouge">balance</code> and the response <code class="language-plaintext highlighter-rouge">default</code> . In most real applications, the relationship between the predictor and the response will not be nearly so strong. However, for the sake of illustrating the classification procedures discussed in this chapter, we use an example in which the relationship between the predictor and the response is somewhat exaggerated.</p>
+<p>It is worth noting that Figure 4.1 displays a very pronounced relationship between the predictor <code class="language-plaintext highlighter-rouge">balance</code> and the response <code class="language-plaintext highlighter-rouge">default</code>. In most real applications, the relationship between the predictor and the response will not be nearly so strong. However, for the sake of illustrating the classification procedures discussed in this chapter, we use an example in which the relationship between the predictor and the response is somewhat exaggerated.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 4. Classification</a></td>
+      <td><a href="../4_2_why_not_linear_regression/index.html">4.2 Why Not Linear Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,202 +502,117 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="313-assessing-the-accuracy-of-the-model">3.1.3 Assessing the Accuracy of the Model</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_1_2_assessing_the_accuracy_of_the_coefficient_estimates/index.html">&lt; 3.1.2 Assessing the Accuracy of the Coefficient Estimates</a></td>
+      <td><a href="../../3_2_multiple_linear_regression/index.html">3.2 Multiple Linear Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<h1 id="313-모델의-정확도-평가">3.1.3 모델의 정확도 평가</h1>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="313-assessing-the-accuracy-of-the-model">3.1.3 Assessing the Accuracy of the Model</h1>
 
 <p>Once we have rejected the null hypothesis (3.12) in favor of the alternative hypothesis (3.13), it is natural to want to quantify <em>the extent to which the model fits the data</em>. The quality of a linear regression fit is typically assessed using two related quantities: the <em>residual standard error</em> (RSE) and the \(R^2\) statistic.</p>
-
-<p>대립가설 (3.13) 을 지지하여 귀무가설 (3.12) 를 기각하고 나면, <em>모델이 데이터에 적합한 정도</em> 를 정량화하고자 하는 것은 자연스러운 일입니다. 선형 회귀 적합의 품질은 일반적으로 두 가지 관련 수치를 사용하여 평가됩니다: <em>잔차 표준 오차(residual standard error, RSE)</em> 와 \(R^2\) 통계량입니다.</p>
 
 <blockquote>
   <p>$^4$ In Table 3.1, a small $p$-value for the intercept indicates that we can reject the null hypothesis that $\beta_0 = 0$, and a small $p$-value for <code class="language-plaintext highlighter-rouge">TV</code> indicates that we can reject the null hypothesis that $\beta_1 = 0$. Rejecting the latter null hypothesis allows us to conclude that there is a relationship between <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">sales</code>. Rejecting the former allows us to conclude that in the absence of <code class="language-plaintext highlighter-rouge">TV</code> expenditure, <code class="language-plaintext highlighter-rouge">sales</code> are non-zero.</p>
 </blockquote>
 
-<blockquote>
-  <p>$^4$ 표 3.1에서 절편에 대한 작은 $p$-값은 $\beta_0 = 0$ 이라는 귀무가설을 기각할 수 있음을 나타내며, <code class="language-plaintext highlighter-rouge">TV</code> 에 대한 작은 $p$-값은 $\beta_1 = 0$ 이라는 귀무가설을 기각할 수 있음을 나타냅니다. 후자의 귀무가설을 기각하면 <code class="language-plaintext highlighter-rouge">TV</code> 와 <code class="language-plaintext highlighter-rouge">sales</code> 간에 관계가 있다고 결론 내릴 수 있습니다. 전자의 귀무가설을 기각하면 <code class="language-plaintext highlighter-rouge">TV</code> 광고가 없을 때에도 <code class="language-plaintext highlighter-rouge">sales</code> 가 0이 아니라는 단론을 내릴 수 있습니다.</p>
-</blockquote>
-
 <table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Quantity</th>
-      <th style="text-align: left">Value</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Residual standard error</td>
-      <td style="text-align: left">3.26</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">\(R^2\)</td>
-      <td style="text-align: left">0.612</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">$F$-statistic</td>
-      <td style="text-align: left">312.1</td>
+      <td>Quantity</td>
+      <td>Value</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>TABLE 3.2.</strong> <em>For the</em> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>data, more information about the least squares model for the regression of number of units sold on TV advertising budget.</em></p>
+<table>
+  <tbody>
+    <tr>
+      <td>Residual standard error</td>
+      <td>3.26</td>
+    </tr>
+  </tbody>
+</table>
 
-<p><strong>TABLE 3.2.</strong> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>데이터에 대한, TV 광고 예산에 따른 판매 단위 수 회귀 추정을 위한 최소 제곱 모델의 추가 정보입니다.</em></p>
-
-<p>Table 3.2 displays the RSE, the \(R^2\) statistic, and the $F$-statistic (to be described in Section 3.2.2) for the linear regression of number of units sold on TV advertising budget.</p>
-
-<p>표 3.2는 TV 광고 예산에 따른 판매 단위 수의 선형 회귀에 대한 RSE, \(R^2\) 통계량, 그리고 $F$-통계량(3.2.2절에서 설명됨)을 보여줍니다.</p>
-
-<h2 id="residual-standard-error">Residual Standard Error</h2>
-
-<h2 id="잔차-표준-오차-residual-standard-error">잔차 표준 오차 (Residual Standard Error)</h2>
-
-<p>Recall from the model (3.5) that associated with each observation is an error term $\epsilon$. Due to the presence of these error terms, even if we knew the true regression line (i.e. even if $\beta_0$ and $\beta_1$ were known), we would not be able to perfectly predict $Y$ from $X$. The RSE is an estimate of the standard deviation of $\epsilon$. Roughly speaking, it is the average amount that the response will deviate from the true regression line. It is computed using the formula</p>
-
-<p>모델 (3.5) 에서 각 관측치에는 오차항 $\epsilon$ 이 수반됨을 떠올려 보십시오. 이러한 오차항의 존재로 인해, 설령 우리가 진짜 회귀선(즉, $\beta_0$ 와 $\beta_1$ 값)을 안다 해도 $X$ 로부터 $Y$ 를 완벽히 예측할 수는 없습니다. RSE 는 $\epsilon$ 의 표준 편차에 대한 추정치입니다. 대략적으로 말해, 이는 응답 변수가 진짜 회귀선으로부터 벗어날 평균적인 양입니다. 이는 다음 공식을 사용하여 계산됩니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td>$F$-statistic</td>
+      <td>312.1</td>
+    </tr>
+  </tbody>
+</table>
 
 \[\text{RSE} = \sqrt{\frac{1}{n-2}\text{RSS}} = \sqrt{\frac{1}{n-2}\sum_{i=1}^n(y_i-\hat{y}_i)^2} \quad (3.15)\]
 
 <p>Note that RSS was defined in Section 3.1.1, and is given by the formula</p>
 
-<p>RSS 는 앞서 3.1.1 절에서 정의되었으며, 다음 공식으로 주어짐에 유의하십시오.</p>
-
 \[\text{RSS} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 \quad (3.16)\]
 
 <p>In the case of the advertising data, we see from the linear regression output in Table 3.2 that the RSE is 3.26. In other words, actual sales in each market deviate from the true regression line by approximately 3,260 units, on average. Another way to think about this is that even if the model were correct and the true values of the unknown coefficients $\beta_0$ and $\beta_1$ were known exactly, any prediction of sales on the basis of TV advertising would still be off by about 3,260 units on average. Of course, whether or not 3,260 units is an acceptable prediction error depends on the problem context. In the advertising data set, the mean value of <code class="language-plaintext highlighter-rouge">sales</code> over all markets is approximately 14,000 units, and so the percentage error is $3,260 / 14,000 = 23\%$.</p>
 
-<p>광고 데이터 예제의 경우, 우리는 표 3.2 의 선형 회귀 출력에서 RSE 가 3.26 임을 알 수 있습니다. 다시 말해, 각 시장의 실제 판매량은 진짜 회귀선에서 평균적으로 약 3,260 개 단위만큼 벗어납니다. 다르게 생각해 보면, 설령 모델이 옳고 모르는 계수 $\beta_0$ 와 $\beta_1$ 의 참값을 정확히 안다 하더라도, TV 광고를 기반으로 한 판매량 예측값은 여전히 평균적으로 약 3,260 개가량 어긋나게 될 것이라는 의미입니다. 물론 3,260 개 단위가 수용 가능한 예측 오차인지 여부는 문제의 맥락에 달려 있습니다. 광고 데이터 세트에서 전체 시장에 대한 <code class="language-plaintext highlighter-rouge">sales</code> 의 평균값은 대략 14,000 단위이므로, 퍼센티지 오차는 $3,260 / 14,000 = 23\%$ 에 해당합니다.</p>
-
 <p>The RSE is considered a measure of the <em>lack of fit</em> of the model (3.5) to the data. If the predictions obtained using the model are very close to the true outcome values—that is, if $y_i \approx \hat{y}_i$ for $i = 1, \dots, n$—then (3.15) will be small, and we can conclude that the model fits the data very well. On the other hand, if $\hat{y}_i$ is very far from $y_i$ for one or more observations, then the RSE may be quite large, indicating that the model doesn’t fit the data well.</p>
-
-<p>RSE 는 모델 (3.5) 가 데이터에 <em>적합하지 않은 정도(lack of fit)</em> 를 측정하는 척도로 여겨집니다. 만약 모델을 사용하여 얻은 예측치가 진짜 결과값에 무척 가깝다면—즉 $i = 1, \dots, n$ 에 대해 $y_i \approx \hat{y}_i$ 라면—(3.15) 는 작아질 것이고, 우리는 이 모델이 데이터에 아주 잘 맞는다고 결론 내릴 수 있습니다. 그와 반대로, 하나 이상의 관측치에서 예측치 $\hat{y}_i$ 가 결과값 $y_i$ 에서 아주 멀리 동떨어져 있다면 RSE 는 꽤 커질 수 있으며, 이는 모델이 데이터에 잘 맞지 않음을 나타냅니다.</p>
 
 <h2 id="r2-statistic">\(R^2\) Statistic</h2>
 
-<h2 id="r2-통계량-r2-statistic">\(R^2\) 통계량 (\(R^2\) Statistic)</h2>
-
 <p>The RSE provides an absolute measure of lack of fit of the model (3.5) to the data. But since it is measured in the units of $Y$, it is not always clear what constitutes a good RSE. The \(R^2\) statistic provides an alternative measure of fit. It takes the form of a <em>proportion</em>—the proportion of variance explained—and so it always takes on a value between 0 and 1, and is independent of the scale of $Y$.</p>
-
-<p>RSE 는 모델 (3.5) 가 데이터에 적합하지 않은 정도를 절대적인 척도로 제공합니다. 그러나 이는 $Y$ 의 단위로 측정되기 때문에 항상 어느 정도가 좋은 RSE 인지 명확하지는 않습니다. \(R^2\) 통계량은 모델 적합성의 대안적인 척도를 제공합니다. 이는 설명된 분산의 비율이라는 <em>비율(proportion)</em> 형태를 취하므로, 항상 0 에서 1 사이의 값을 가지며 $Y$ 의 스케일과 무관합니다.</p>
 
 <p>To calculate \(R^2\), we use the formula</p>
 
-<p>\(R^2\) 를 계산하기 위해 다음 공식을 사용합니다.</p>
+\[\]
 
-\[R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}} \quad (3.17)\]
+<p>R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}} \quad (3.17)</p>
 
-<p>where $\text{TSS} = \sum (y_i - \bar{y})^2$ is the <em>total sum of squares</em>, and $\text{RSS}$ is defined in (3.16). $\text{TSS}$ measures the total variance in the response $Y$, and can be thought of as the amount of variability inherent in the response before the regression is performed. In contrast, $\text{RSS}$ measures the amount of variability that is left unexplained after performing the regression. Hence, $\text{TSS} - \text{RSS}$ measures the amount of variability in the response that is explained (or removed) by performing the regression, and \(R^2\) measures the <em>proportion of variability in $Y$ that can be explained using $X$</em>. An \(R^2\) statistic that is close to 1 indicates that a large proportion of the variability in the response is explained by the regression. A number near 0 indicates that the regression does not explain much of the variability in the response; this might occur because the linear model is wrong, or the error variance $\sigma^2$ is high, or both. In Table 3.2, the \(R^2\) was 0.61, and so just under two-thirds of the variability in <code class="language-plaintext highlighter-rouge">sales</code> is explained by a linear regression on <code class="language-plaintext highlighter-rouge">TV</code>.</p>
-
-<p>여기서 $\text{TSS} = \sum (y_i - \bar{y})^2$ 는 <em>총 제곱합(total sum of squares)</em> 이고, $\text{RSS}$ 는 (3.16) 에서 정의되었습니다. $\text{TSS}$ 는 응답 $Y$ 의 총 분산을 측정하며, 회귀가 수행되기 전에 응답에 내재된 변동성의 양으로 간주될 수 있습니다. 대조적으로 $\text{RSS}$ 는 회귀를 수행한 후에 설명되지 않은 채로 남겨진 변동성의 양을 측정합니다. 그러므로 $\text{TSS} - \text{RSS}$ 는 회귀를 수행함으로써 설명된(혹은 제거된) 응답의 변동성을 측정하며, \(R^2\) 는 <em>$X$ 를 사용하여 설명할 수 있는 $Y$ 의 변동성 비율</em> 을 측정합니다. 1에 가까운 \(R^2\) 통계량은 응답 변동성의 큰 비율이 회귀에 의해 설명됨을 뜻합니다. 0에 가까운 숫자는 회귀가 응답의 변동성을 그다지 설명하지 못함을 나타내며; 이는 아마도 선형 모델이 틀렸거나, 오차 분산 $\sigma^2$ 가 높거나, 아니면 두 가지 모두 해당하기 때문일 수 있습니다. 표 3.2 에서, \(R^2\) 는 0.61 이었으며, 따라서 <code class="language-plaintext highlighter-rouge">sales</code> 변위성의 대략 3분의 2 조금 못 미치는 수치가 <code class="language-plaintext highlighter-rouge">TV</code> 의 선형 회귀에 의해 설명됩니다.</p>
-
-<p>The \(R^2\) statistic (3.17) has an interpretational advantage over the RSE (3.15), since unlike the RSE, it always lies between 0 and 1. However, it can still be challenging to determine what is a <em>good \(R^2\)</em> value, and in general, this will depend on the application. For instance, in certain problems in physics, we may know that the data truly comes from a linear model with a small residual error. In this case, we would expect to see an \(R^2\) value that is extremely close to 1, and a substantially smaller \(R^2\) value might indicate a serious problem with the experiment in which the data were generated. On the other hand, in typical applications in biology, psychology, marketing, and other domains, the linear model (3.5) is at best an extremely rough approximation to the data, and residual errors due to other unmeasured factors are often very large. In this setting, we would expect only a very small proportion of the variance in the response to be explained by the predictor, and an \(R^2\) value well below 0.1 might be more realistic!</p>
-
-<p>\(R^2\) 통계량 (3.17) 은 RSE 와 달리 항상 0 과 1 사이에 수치가 존재하므로 RSE (3.15) 보다 해석에 이점이 있습니다. 그러나 여전히 어떤 지표가 <em>좋은 \(R^2\)</em> 값인지 결정하는 것은 어려울 수 있으며, 보편적으로 이는 적용되는 분야에 따라 달라질 것입니다. 예를 들어, 물리학 연구의 특정 문제에서는 데이터가 작은 잔차 오차를 가진 선형 모델에서 나옴을 이미 알 수 있습니다. 이 경우 우리는 \(R^2\) 값이 1에 극히 가까울 것으로 예상하게 되며, 이보다 현저히 작은 \(R^2\) 값은 데이터가 생성된 당초 실험에 심각한 문제가 있음을 나타내는 반증일 수 있습니다. 반면 생물학, 심리학, 마케팅 및 다른 분야의 일반적인 활용에서는, 선형 모델 (3.5) 이 기껏해야 데이터에 대한 극히 거친 근삿값에 그치며, 파악되지 않은 다른 요소로 인한 잔차 오차가 무척 큰 경우가 빈번합니다. 이런 환경에서라면 우리는 예측 변수에 의해 설명되는 응답 분산이 아주 적은 비율 수준일 것으로 기대해야 하고, 0.1 을 훨씬 밑도는 \(R^2\) 값이 오히려 더 현실적일 수 있습니다!</p>
+\[where $\text{TSS} = \sum (y_i - \bar{y})^2$ is the _total sum of squares_, and $\text{RSS}$ is defined in (3.16). $\text{TSS}$ measures the total variance in the response $Y$, and can be thought of as the amount of variability inherent in the response before the regression is performed. In contrast, $\text{RSS}$ measures the amount of variability that is left unexplained after performing the regression. Hence, $\text{TSS} - \text{RSS}$ measures the amount of variability in the response that is explained (or removed) by performing the regression, and R^2 measures the _proportion of variability in $Y$ that can be explained using $X$_. An R^2 statistic that is close to 1 indicates that a large proportion of the variability in the response is explained by the regression. A number near 0 indicates that the regression does not explain much of the variability in the response; this might occur because the linear model is wrong, or the error variance $\sigma^2$ is high, or both. In Table 3.2, the R^2 was 0.61, and so just under two-thirds of the variability in `sales` is explained by a linear regression on `TV`.
+The R^2 statistic (3.17) has an interpretational advantage over the RSE (3.15), since unlike the RSE, it always lies between 0 and 1. However, it can still be challenging to determine what is a _good R^2_ value, and in general, this will depend on the application. For instance, in certain problems in physics, we may know that the data truly comes from a linear model with a small residual error. In this case, we would expect to see an R^2 value that is extremely close to 1, and a substantially smaller R^2 value might indicate a serious problem with the experiment in which the data were generated. On the other hand, in typical applications in biology, psychology, marketing, and other domains, the linear model (3.5) is at best an extremely rough approximation to the data, and residual errors due to other unmeasured factors are often very large. In this setting, we would expect only a very small proportion of the variance in the response to be explained by the predictor, and an R^2 value well below 0.1 might be more realistic!\]
 
 <p>The \(R^2\) statistic is a measure of the linear relationship between $X$ and $Y$. Recall that <em>correlation</em>, defined as</p>
 
-<p>\(R^2\) 통계량은 $X$ 와 $Y$ 사이의 선형 관계를 측정하는 척도입니다. 다음과 같이 정의되는 <em>상관(correlation)</em> 계수를 상기해 보십시오.</p>
+\[\]
 
-\[r = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}} \quad (3.18)\]
+<p>r = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}} \quad (3.18)</p>
 
-<p>is also a measure of the linear relationship between $X$ and $Y$.$^5$ This suggests that we might be able to use $r = \text{Cor}(X, Y)$ instead of \(R^2\) in order to assess the fit of the linear model. In fact, it can be shown that in the simple</p>
-
-<p>이 상관 계수 역시 $X$ 와 $Y$ 사이 선형 관계의 척도입니다.$^5$ 이는 우리가 선형 모델의 부합성을 평가하기 위해 \(R^2\) 대신 $r = \text{Cor}(X, Y)$ 를 사용할 수도 있음을 뜻합니다. 사실 단순</p>
-
-<blockquote>
-  <p>$^5$ We note that in fact, the right-hand side of (3.18) is the sample correlation; thus, it would be more correct to write $\widehat{\text{Cor}}(X, Y)$; however, we omit the “hat” for ease of notation.</p>
-</blockquote>
-
-<blockquote>
-  <p>$^5$ 참고로 (3.18) 공식의 우변은 표본 상관입니다; 따라서 $\widehat{\text{Cor}}(X, Y)$ 라고 쓰는 편이 더 정확할 것입니다; 그러나 여기서 표기의 편의를 위해 “햇(hat, 모자 기호)” 을 생략합니다.</p>
-</blockquote>
-
-<p>80 3. Linear Regression</p>
-
-<p><br /></p>
-
-<p><strong>Simple regression of <code class="language-plaintext highlighter-rouge">sales</code> on <code class="language-plaintext highlighter-rouge">radio</code></strong></p>
-
-<p align="center"><b>`radio` 지출에 대한 `sales` 의 단순 회귀</b></p>
-<p><br /></p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left"> </th>
-      <th style="text-align: left">Coefficient</th>
-      <th style="text-align: left">Std. error</th>
-      <th style="text-align: left">$t$-statistic</th>
-      <th style="text-align: left">$p$-value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Intercept</code></td>
-      <td style="text-align: left">9.312</td>
-      <td style="text-align: left">0.563</td>
-      <td style="text-align: left">16.54</td>
-      <td style="text-align: left">$&lt; 0.0001$</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">radio</code></td>
-      <td style="text-align: left">0.203</td>
-      <td style="text-align: left">0.020</td>
-      <td style="text-align: left">9.92</td>
-      <td style="text-align: left">$&lt; 0.0001$</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Simple regression of <code class="language-plaintext highlighter-rouge">sales</code> on <code class="language-plaintext highlighter-rouge">newspaper</code></strong></p>
-
-<p align="center"><b>`newspaper` 지출에 대한 `sales` 의 단순 회귀</b></p>
-<p><br /></p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left"> </th>
-      <th style="text-align: left">Coefficient</th>
-      <th style="text-align: left">Std. error</th>
-      <th style="text-align: left">$t$-statistic</th>
-      <th style="text-align: left">$p$-value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Intercept</code></td>
-      <td style="text-align: left">12.351</td>
-      <td style="text-align: left">0.621</td>
-      <td style="text-align: left">19.88</td>
-      <td style="text-align: left">$&lt; 0.0001$</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">newspaper</code></td>
-      <td style="text-align: left">0.055</td>
-      <td style="text-align: left">0.017</td>
-      <td style="text-align: left">3.30</td>
-      <td style="text-align: left">$0.00115$</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>TABLE 3.3.</strong> <em>More simple linear regression models for the</em> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>data. Coefficients of the simple linear regression model for number of units sold on</em> Top: <em>radio advertising budget and</em> Bottom: <em>newspaper advertising budget. A $$1,000$ _increase in spending on radio advertising is associated with an average increase in sales by around 203 units, while the same increase in spending on newspaper advertising is associated with an average increase in sales by around 55 units. (Note that the</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>variable is in thousands of units, and the</em> <code class="language-plaintext highlighter-rouge">radio</code> <em>and</em> <code class="language-plaintext highlighter-rouge">newspaper</code> <em>variables are in thousands of dollars.)</em></p>
-
-<p><strong>TABLE 3.3.</strong> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>데이터에 대한 또 다른 단순 선형 모델입니다. 다음은 판매된 제품 단위 수에 대한 단순 선형 회귀 모델의 계수들입니다.</em> 위쪽 표: <em>라디오 광고 예산의 경우, 그리고</em> 아래쪽 표: <em>신문 광고 예산의 경우입니다. 라디오 광고에 대한 $$1,000$ 지출 증가는 평균적으로 약 203 개 단위의 매출 증가와 연관이 있는 반면, 신문 광고에 대한 동일한 예산 증가는 약 55 개 단위의 평균 매출 증가와 연관되어 있습니다. (앞서 언급했듯</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>변수는 수천 단위 묶음이고, 변수</em> <code class="language-plaintext highlighter-rouge">radio</code> <em>와</em> <code class="language-plaintext highlighter-rouge">newspaper</code> <em>수치는 수천 달러 단위임을 유의하십시오.)</em></p>
-
-<p>linear regression setting, \(R^2\) = $r^2$. In other words, the squared correlation and the \(R^2\) statistic are identical. However, in the next section we will discuss the multiple linear regression problem, in which we use several predictors simultaneously to predict the response. The concept of correlation between the predictors and the response does not extend automatically to this setting, since correlation quantifies the association between a single pair of variables rather than between a larger number of variables. We will see that \(R^2\) fills this role.</p>
-
-<p>선형 회귀 설정에서는 \(R^2\) = $r^2$ 이 성립합니다. 다시 말해 분산 상관 계수의 제곱수와 통계량 \(R^2\) 는 서로 동일합니다. 하지만 이어질 다음 절에서 우리는 다중 변수를 사용하는 다중 선형 회귀 문제를 다룰 것이며, 응답 결과를 도출하기 위해 여러 가지 예측 변인수들을 다발적으로 투입해 쓸 것입니다. 이 예측 변인들과 결과 응답 간의 다중 상관성 개념이 이런 환경까지 자동으로 연장되지는 않습니다. 왜냐하면 상관(correlation)이란 것이 많은 수의 복수 변수들 사이의 관계보단 특정 단일 변위 상수 한 쌍 간의 관계 지표를 수량화하는 측정법이기 때문입니다. 이런 빈자리의 역할마저 \(R^2\) 가 능히 채워 수행해 주는 것을 향후 계속 발견하게 될 것입니다.</p>
+\[is also a measure of the linear relationship between $X$ and $Y$.$^5$ This suggests that we might be able to use $r = \text{Cor}(X, Y)$ instead of R^2 in order to assess the fit of the linear model. In fact, it can be shown that in the simple
+&gt; $^5$ We note that in fact, the right-hand side of (3.18) is the sample correlation; thus, it would be more correct to write $\widehat{\text{Cor}}(X, Y)$; however, we omit the "hat" for ease of notation.
+80 3. Linear Regression
+&lt;br&gt;
+**Simple regression of `sales` on `radio`**
+&lt;br&gt;
+| | Coefficient | Std. error | $t$-statistic | $p$-value |
+| :--- | :--- | :--- | :--- | :--- |
+| `Intercept` | 9.312 | 0.563 | 16.54 | $&lt; 0.0001$ |
+| `radio` | 0.203 | 0.020 | 9.92 | $&lt; 0.0001$ |
+**Simple regression of `sales` on `newspaper`**
+&lt;br&gt;
+| | Coefficient | Std. error | $t$-statistic | $p$-value |
+| :--- | :--- | :--- | :--- | :--- |
+| `Intercept` | 12.351 | 0.621 | 19.88 | $&lt; 0.0001$ |
+| `newspaper` | 0.055 | 0.017 | 3.30 | $0.00115$ |
+**TABLE 3.3.** _More simple linear regression models for the_ `Advertising` _data. Coefficients of the simple linear regression model for number of units sold on_ Top: _radio advertising budget and_ Bottom: _newspaper advertising budget. A $\$1,000$ _increase in spending on radio advertising is associated with an average increase in sales by around 203 units, while the same increase in spending on newspaper advertising is associated with an average increase in sales by around 55 units. (Note that the_ `sales` _variable is in thousands of units, and the_ `radio` _and_ `newspaper` _variables are in thousands of dollars.)_
+linear regression setting, R^2 = $r^2$. In other words, the squared correlation and the R^2 statistic are identical. However, in the next section we will discuss the multiple linear regression problem, in which we use several predictors simultaneously to predict the response. The concept of correlation between the predictors and the response does not extend automatically to this setting, since correlation quantifies the association between a single pair of variables rather than between a larger number of variables. We will see that R^2 fills this role.
+---\]
 
 <hr />
 
-<h2 id="sub-chapters-하위-목차">Sub-Chapters (하위 목차)</h2>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p>현재 3.1.3 모델의 정확도 평가 소속 문서입니다.
-<a href="../">상위 경로(Simple Linear Regression)로 돌아가기</a></p>
+<p>This is the document for 3.1.3 Assessing the Accuracy of the Model.</p>
 
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_1_2_assessing_the_accuracy_of_the_coefficient_estimates/index.html">&lt; 3.1.2 Assessing the Accuracy of the Coefficient Estimates</a></td>
+      <td><a href="../../3_2_multiple_linear_regression/index.html">3.2 Multiple Linear Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

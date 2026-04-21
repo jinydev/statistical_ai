@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -513,32 +512,61 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="non-linear-relationships">Non-linear Relationships</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.3.2 Extensions Of The Linear Model</a></td>
+      <td><a href="../../3_3_3_potential_problems/index.html">3.3.3 Potential Problems &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>As discussed previously, the linear regression model (3.19) assumes a linear relationship between the response and predictors. But in some cases, the true relationship between the response and the predictors may be nonlinear. Here we present a very simple way to directly extend the linear model to accommodate non-linear relationships, using <em>polynomial regression</em> . In polynomial later chapters, we will present more complex approaches for performing regression non-linear fits in more general settings.</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>Consider Figure 3.8, in which the <code class="language-plaintext highlighter-rouge">mpg</code> (gas mileage in miles per gallon) versus <code class="language-plaintext highlighter-rouge">horsepower</code> is shown for a number of cars in the <code class="language-plaintext highlighter-rouge">Auto</code> data set. The orange line represents the linear regression fit. There is a pronounced relationship between <code class="language-plaintext highlighter-rouge">mpg</code> and <code class="language-plaintext highlighter-rouge">horsepower</code> , but it seems clear that this relationship is in fact non-linear: the data suggest a curved relationship. A simple approach for incorporating non-linear associations in a linear model is to include transformed versions of the predictors. For example, the points in Figure 3.8 seem to have a <em>quadratic</em> shape, suggesting that a model of the quadratic form</p>
+<h1 id="non-linear-relationships">Non-linear Relationships</h1>
+
+<p>As discussed previously, the linear regression model (3.19) assumes a linear relationship between the response and predictors.</p>
+
+<p>But in some cases, the true relationship between the response and the predictors may be nonlinear.</p>
+
+<p>Here we present a very simple way to directly extend the linear model to accommodate non-linear relationships, using <em>polynomial regression</em>.</p>
+
+<p>In later chapters, we will present more complex approaches for performing non-linear fits in more general settings.</p>
+
+<p>Consider Figure 3.8, in which the <code class="language-plaintext highlighter-rouge">mpg</code> (gas mileage in miles per gallon) versus <code class="language-plaintext highlighter-rouge">horsepower</code> is shown for a number of cars in the <code class="language-plaintext highlighter-rouge">Auto</code> data set.</p>
+
+<p>The orange line represents the linear regression fit.</p>
+
+<p>There is a pronounced relationship between <code class="language-plaintext highlighter-rouge">mpg</code> and <code class="language-plaintext highlighter-rouge">horsepower</code>, but it seems clear that this relationship is in fact non-linear: the data suggest a curved relationship.</p>
+
+<p>A simple approach for incorporating non-linear associations in a linear model is to include transformed versions of the predictors.</p>
+
+<p>For example, the points in Figure 3.8 seem to have a <em>quadratic</em> shape, suggesting that a model of the quadratic form</p>
 
 <p><strong>==&gt; picture [285 x 11] intentionally omitted &lt;==</strong></p>
 
-<p>may provide a better fit. Equation 3.36 involves predicting <code class="language-plaintext highlighter-rouge">mpg</code> using a non-linear function of <code class="language-plaintext highlighter-rouge">horsepower</code> . <em>But it is still a linear model!</em> That is, (3.36) is simply a multiple linear regression model with $X_1$ = <code class="language-plaintext highlighter-rouge">horsepower</code> and $X_2$ = <code class="language-plaintext highlighter-rouge">horsepower</code>[2] . So we can use standard linear regression software to estimate \beta_0 <em>, β</em> 1, and \beta_2 in order to produce a non-linear fit. The blue curve in Figure 3.8 shows the resulting quadratic fit to the data. The quadratic</p>
+<p>may provide a better fit.</p>
 
-<p>3.3 Other Considerations in the Regression Model 99</p>
+<p>Equation 3.36 involves predicting <code class="language-plaintext highlighter-rouge">mpg</code> using a non-linear function of <code class="language-plaintext highlighter-rouge">horsepower</code>.</p>
+
+<p><em>But it is still a linear model!</em> That is, (3.36) is simply a multiple linear regression model with $X_1 = \text{horsepower}$ and $X_2 = \text{horsepower}^2$.</p>
+
+<p>So we can use standard linear regression software to estimate $\beta_0, \beta_1$, and $\beta_2$ in order to produce a non-linear fit.</p>
+
+<p>The blue curve in Figure 3.8 shows the resulting quadratic fit to the data.</p>
+
+<p>The quadratic</p>
 
 <p><strong>==&gt; picture [304 x 205] intentionally omitted &lt;==</strong></p>
 
 <p><strong>—– Start of picture text —–</strong><br />
 Linear<br />Degree 2<br />Degree 5<br />50 100 150 200<br />Horsepower<br />50<br />40<br />30<br />Miles per gallon<br />20<br />10<br /><strong>—– End of picture text —–</strong><br /></p>
 
-<p><strong>FIGURE 3.8.</strong> <em>The</em> <code class="language-plaintext highlighter-rouge">Auto</code> <em>data set. For a number of cars,</em> <code class="language-plaintext highlighter-rouge">mpg</code> <em>and</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>are shown. The linear regression fit is shown in orange. The linear regression fit for a model that includes</em> <code class="language-plaintext highlighter-rouge">horsepower</code>[2] <em>is shown as a blue curve. The linear regression fit for a model that includes all polynomials of</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>up to fifth-degree is shown in green.</em></p>
+<p><strong>FIGURE 3.8.</strong> <em>The</em> <code class="language-plaintext highlighter-rouge">Auto</code> <em>data set. For a number of cars,</em> <code class="language-plaintext highlighter-rouge">mpg</code> <em>and</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>are shown. The linear regression fit is shown in orange. The linear regression fit for a model that includes</em> $\text{horsepower}^2$ <em>is shown as a blue curve. The linear regression fit for a model that includes all polynomials of</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>up to fifth-degree is shown in green.</em></p>
 
 <table>
-  <thead>
-    <tr>
-      <th><em>r a model that includes all polynomials of</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>up to ffth-deg</em><br /><em>n in green.</em></th>
-      <th><em>r a model that includes all polynomials of</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>up to ffth-deg</em><br /><em>n in green.</em></th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
       <td> </td>
@@ -555,15 +583,34 @@ Linear<br />Degree 2<br />Degree 5<br />50 100 150 200<br />Horsepower<br />50<b
   </tbody>
 </table>
 
-<p><strong>TABLE 3.10.</strong> <em>For the</em> <code class="language-plaintext highlighter-rouge">Auto</code> <em>data set, least squares coefficient estimates associated with the regression of</em> <code class="language-plaintext highlighter-rouge">mpg</code> <em>onto</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>and</em> <code class="language-plaintext highlighter-rouge">horsepower</code>[2] <em>.</em></p>
+<p><strong>TABLE 3.10.</strong> <em>For the</em> <code class="language-plaintext highlighter-rouge">Auto</code> <em>data set, least squares coefficient estimates associated with the regression of</em> <code class="language-plaintext highlighter-rouge">mpg</code> <em>onto</em> <code class="language-plaintext highlighter-rouge">horsepower</code> <em>and</em> $\text{horsepower}^2$ <em>.</em></p>
 
-<p>fit appears to be substantially better than the fit obtained when just the linear term is included. The $R^2$ of the quadratic fit is 0 <em>.</em> 688, compared to 0 <em>.</em> 606 for the linear fit, and the $p$-value in Table 3.10 for the quadratic term is highly significant.</p>
+<p>fit appears to be substantially better than the fit obtained when just the linear term is included.</p>
 
-<p>If including <code class="language-plaintext highlighter-rouge">horsepower</code>[2] led to such a big improvement in the model, why not include <code class="language-plaintext highlighter-rouge">horsepower</code>[3] , <code class="language-plaintext highlighter-rouge">horsepower</code>[4] , or even <code class="language-plaintext highlighter-rouge">horsepower</code>[5] ? The green curve in Figure 3.8 displays the fit that results from including all polynomials up to fifth degree in the model (3.36). The resulting fit seems unnecessarily wiggly—that is, it is unclear that including the additional terms really has led to a better fit to the data.</p>
+<p>The $R^2$ of the quadratic fit is $0.688$, compared to $0.606$ for the linear fit, and the $p$-value in Table 3.10 for the quadratic term is highly significant.</p>
 
-<p>The approach that we have just described for extending the linear model to accommodate non-linear relationships is known as <em>polynomial regression</em> , since we have included polynomial functions of the predictors in the regression model. We further explore this approach and other non-linear extensions of the linear model in Chapter 7.</p>
+<p>If including $\text{horsepower}^2$ led to such a big improvement in the model, why not include $\text{horsepower}^3$, $\text{horsepower}^4$, or even $\text{horsepower}^5$?</p>
 
-<p>100 3. Linear Regression</p>
+<p>The green curve in Figure 3.8 displays the fit that results from including all polynomials up to fifth degree in the model (3.36).</p>
+
+<p>The resulting fit seems unnecessarily wiggly — that is, it is unclear that including the additional terms really has led to a better fit to the data.</p>
+
+<p>The approach that we have just described for extending the linear model to accommodate non-linear relationships is known as <em>polynomial regression</em>, since we have included polynomial functions of the predictors in the regression model.</p>
+
+<p>We further explore this approach and other non-linear extensions of the linear model in Chapter 7.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 3.3.2 Extensions Of The Linear Model</a></td>
+      <td><a href="../../3_3_3_potential_problems/index.html">3.3.3 Potential Problems &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

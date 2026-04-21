@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,156 +502,79 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="474-quadratic-discriminant-analysis"><em>4.7.4 Quadratic Discriminant Analysis</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_3_linear_discriminant_analysis/4_7_3_1_out31_true/index.html">&lt; 4.7.3.1 Out31 True</a></td>
+      <td><a href="../4_7_5_naive_bayes/index.html">4.7.5 Naive Bayes &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>We will now fit a QDA model to the <code class="language-plaintext highlighter-rouge">Smarket</code> data. QDA is implemented via <code class="language-plaintext highlighter-rouge">QuadraticDiscriminantAnalysis()</code> in the <code class="language-plaintext highlighter-rouge">sklearn</code> package, which we ab- <code class="language-plaintext highlighter-rouge">Quadratic</code> breviate to <code class="language-plaintext highlighter-rouge">QDA()</code> . The syntax is very similar to <code class="language-plaintext highlighter-rouge">LDA()</code> .</p>
+<h1 id="474-quadratic-discriminant-analysis"><em>4.7.4 Quadratic Discriminant Analysis</em></h1>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Discriminant
-Analysis()
+<p>We will now fit a QDA model to the <code class="language-plaintext highlighter-rouge">Smarket</code> data. QDA is implemented via <code class="language-plaintext highlighter-rouge">QuadraticDiscriminantAnalysis()</code> in the <code class="language-plaintext highlighter-rouge">sklearn</code> package, which we abbreviate to <code class="language-plaintext highlighter-rouge">QDA()</code>. The syntax is very similar to <code class="language-plaintext highlighter-rouge">LDA()</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">33</span><span class="p">]:</span> <span class="n">qda</span> <span class="o">=</span> <span class="nc">QDA</span><span class="p">(</span><span class="n">store_covariance</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">qda</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">L_train</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [33]:qda=QDA(store_covariance=True)
-qda.fit(X_train,L_train)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">33</span><span class="p">]:</span> <span class="nc">QuadraticDiscriminantAnalysis</span><span class="p">(</span><span class="n">store_covariance</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[33]:QuadraticDiscriminantAnalysis(store_covariance=True)
+<p>The <code class="language-plaintext highlighter-rouge">QDA()</code> function will again compute <code class="language-plaintext highlighter-rouge">means_</code> and <code class="language-plaintext highlighter-rouge">priors_</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="n">qda</span><span class="p">.</span><span class="n">means_</span><span class="p">,</span> <span class="n">qda</span><span class="p">.</span><span class="n">priors_</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">QDA()</code> function will again compute <code class="language-plaintext highlighter-rouge">means_</code> and <code class="language-plaintext highlighter-rouge">priors_</code> .</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [34]:qda.means_,qda.priors_
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[34]:(array([[0.04279022,0.03389409],
-[-0.03954635,-0.03132544]]),
-array([0.49198397,0.50801603]))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="p">(</span><span class="nf">array</span><span class="p">([[</span> <span class="mf">0.04279022</span><span class="p">,</span>  <span class="mf">0.03389409</span><span class="p">],</span>
+                 <span class="p">[</span><span class="o">-</span><span class="mf">0.03954635</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.03132544</span><span class="p">]]),</span>
+          <span class="nf">array</span><span class="p">([</span><span class="mf">0.49198397</span><span class="p">,</span> <span class="mf">0.50801603</span><span class="p">]))</span>
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">QDA()</code> classifier will estimate one covariance per class. Here is the estimated covariance in the first class:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [35]:qda.covariance_[0]
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="n">qda</span><span class="p">.</span><span class="n">covariance_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[35]:array([[1.50662277,-0.03924806],
-[-0.03924806,1.53559498]])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([[</span> <span class="mf">1.50662277</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.03924806</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mf">0.03924806</span><span class="p">,</span>  <span class="mf">1.53559498</span><span class="p">]])</span>
 </code></pre></div></div>
 
 <p>The output contains the group means. But it does not contain the coefficients of the linear discriminants, because the QDA classifier involves a quadratic, rather than a linear, function of the predictors. The <code class="language-plaintext highlighter-rouge">predict()</code> function works in exactly the same fashion as for LDA.</p>
 
-<p>182 4. Classification</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [36]:qda_pred=qda.predict(X_test)
-confusion_table(qda_pred,L_test)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">36</span><span class="p">]:</span> <span class="n">qda_pred</span> <span class="o">=</span> <span class="n">qda</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nf">confusion_table</span><span class="p">(</span><span class="n">qda_pred</span><span class="p">,</span> <span class="n">L_test</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[36]:TruthDownUp
-Predicted
-Down3020
-Up81121
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span> <span class="n">Truth</span>      <span class="n">Down</span>   <span class="n">Up</span>
+<span class="n">Predicted</span>            
+<span class="n">Down</span>         <span class="mi">30</span>   <span class="mi">20</span>
+<span class="n">Up</span>           <span class="mi">81</span>  <span class="mi">121</span>
 </code></pre></div></div>
 
 <p>Interestingly, the QDA predictions are accurate almost 60% of the time, even though the 2005 data was not used to fit the model.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [37]:np.mean(qda_pred==L_test)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">37</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">qda_pred</span> <span class="o">==</span> <span class="n">L_test</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[37]:0.599
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">37</span><span class="p">]:</span> <span class="mf">0.5992063492063492</span>
 </code></pre></div></div>
 
 <p>This level of accuracy is quite impressive for stock market data, which is known to be quite hard to model accurately. This suggests that the quadratic form assumed by QDA may capture the true relationship more accurately than the linear forms assumed by LDA and logistic regression. However, we recommend evaluating this method’s performance on a larger test set before betting that this approach will consistently beat the market!</p>
 
-<p><em>4.7.5 Naive Bayes</em></p>
+<hr />
 
-<p>Next, we fit a naive Bayes model to the <code class="language-plaintext highlighter-rouge">Smarket</code> data. The syntax is similar to that of <code class="language-plaintext highlighter-rouge">LDA()</code> and <code class="language-plaintext highlighter-rouge">QDA()</code> . By default, this implementation <code class="language-plaintext highlighter-rouge">GaussianNB()</code> of the naive Bayes classifier models each quantitative feature using a Gaussian <code class="language-plaintext highlighter-rouge">GaussianNB()</code> distribution. However, a kernel density method can also be used to estimate the distributions.</p>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [38]:NB=GaussianNB()
-NB.fit(X_train,L_train)
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[38]:GaussianNB()
-</code></pre></div></div>
-
-<p>The classes are stored as <code class="language-plaintext highlighter-rouge">classes_</code> .</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [39]:NB.classes_
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[39]:array(['Down','Up'],dtype='&lt;U4')
-</code></pre></div></div>
-
-<p>The class prior probabilities are stored in the <code class="language-plaintext highlighter-rouge">class_prior_</code> attribute.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [40]:NB.class_prior_
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[40]:array([0.49,0.51])
-</code></pre></div></div>
-
-<p>The parameters of the features can be found in the <code class="language-plaintext highlighter-rouge">theta_</code> and <code class="language-plaintext highlighter-rouge">var_</code> attributes. The number of rows is equal to the number of classes, while the number of columns is equal to the number of features. We see below that the mean for feature <code class="language-plaintext highlighter-rouge">Lag1</code> in the <code class="language-plaintext highlighter-rouge">Down</code> class is 0.043.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [41]:NB.theta_
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[41]:array([[0.043,0.034],
-[-0.040,-0.031]])
-</code></pre></div></div>
-
-<p>4.7 Lab: Logistic Regression, LDA, QDA, and KNN 183</p>
-
-<p>Its variance is 1.503.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [42]:NB.var_
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[42]:array([[1.503,1.532],
-[1.514,1.487]])
-</code></pre></div></div>
-
-<p>How do we know the names of these attributes? We use <code class="language-plaintext highlighter-rouge">NB?</code> (or <code class="language-plaintext highlighter-rouge">?NB</code> ). We can easily verify the mean computation:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [43]:X_train[L_train=='Down'].mean()
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[43]:Lag10.042790
-Lag20.033894
-dtype:float64
-</code></pre></div></div>
-
-<p>Similarly for the variance:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [44]:X_train[L_train=='Down'].var(ddof=0)
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[44]:Lag11.503554
-Lag21.532467
-dtype:float64
-</code></pre></div></div>
-
-<p>The <code class="language-plaintext highlighter-rouge">GaussianNB()</code> function calculates variances using the 1 <em>/n</em> formula.[6] Since <code class="language-plaintext highlighter-rouge">NB()</code> is a classifier in the <code class="language-plaintext highlighter-rouge">sklearn</code> library, making predictions uses the same syntax as for <code class="language-plaintext highlighter-rouge">LDA()</code> and <code class="language-plaintext highlighter-rouge">QDA()</code> above.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [45]:nb_labels=NB.predict(X_test)
-confusion_table(nb_labels,L_test)
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[45]:TruthDownUp
-Predicted
-Down2920
-Up82121
-</code></pre></div></div>
-
-<p>Naive Bayes performs well on these data, with accurate predictions over 59% of the time. This is slightly worse than QDA, but much better than LDA.</p>
-
-<p>As for <code class="language-plaintext highlighter-rouge">LDA</code> , the <code class="language-plaintext highlighter-rouge">predict_proba()</code> method estimates the probability that each observation belongs to a particular class.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [46]:NB.predict_proba(X_test)[:5]
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Out[46]:array([[0.4873,0.5127],
-[0.4762,0.5238],
-[0.4653,0.5347],
-[0.4748,0.5252],
-[0.4902,0.5098]])
-</code></pre></div></div>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../4_7_3_linear_discriminant_analysis/4_7_3_1_out31_true/index.html">&lt; 4.7.3.1 Out31 True</a></td>
+      <td><a href="../4_7_5_naive_bayes/index.html">4.7.5 Naive Bayes &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f9fa"/>
+      <stop offset="100%" stop-color="#def2f1"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+
+    <!-- Animation Keys -->
+    <!-- 1. The Fake Arrow fades in -->
+    <animate id="fakeArrowIn" xlink:href="#fakeConnection" attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.1;0.4;0.9;1" dur="6s" repeatCount="indefinite"/>
+    <!-- 2. The Red X slashes over the Fake Arrow -->
+    <animate id="redXIn" xlink:href="#crossX" attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3;0.4;0.9;1" dur="6s" repeatCount="indefinite"/>
+    <!-- 3. The True Arrows from Sun animate -->
+    <animate id="trueArrowIn" xlink:href="#trueConnections" attributeName="opacity" values="0;0;0;1;0" keyTimes="0;0.3;0.5;0.9;1" dur="6s" repeatCount="indefinite"/>
+    
+    <animate xlink:href="#sunGlow" attributeName="r" values="45;55;45" dur="2s" repeatCount="indefinite"/>
+    
+    <!-- Arrowhead markers -->
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fa5252" />
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#40c057" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)" rx="15"/>
+
+  <!-- Title -->
+  <g transform="translate(100, 30)">
+    <rect width="600" height="50" fill="#ffffff" rx="25" filter="url(#shadow)"/>
+    <text x="300" y="32" font-family="'Jua', sans-serif" font-size="24" fill="#1c7ed6" text-anchor="middle" font-weight="bold">다중 선형 회귀 명탐정: 가짜 관계의 범인을 잡아라!</text>
+  </g>
+
+  <!-- Nodes Container -->
+  
+  <!-- Left Node (Ice Cream) -->
+  <g transform="translate(180, 360)">
+    <circle cx="0" cy="0" r="60" fill="#fff" stroke="#ffc078" stroke-width="5" filter="url(#shadow)"/>
+    <text x="0" y="-10" font-family="'Jua', sans-serif" font-size="22" fill="#d9480f" text-anchor="middle" font-weight="bold">아이스크림</text>
+    <text x="0" y="15" font-family="'Jua', sans-serif" font-size="16" fill="#868e96" text-anchor="middle">판매량 (X)</text>
+    <text x="0" y="45" font-family="'Apple Color Emoji', 'Segoe UI Emoji', sans-serif" font-size="30" text-anchor="middle">🍦</text>
+  </g>
+
+  <!-- Right Node (Shark) -->
+  <g transform="translate(620, 360)">
+    <circle cx="0" cy="0" r="60" fill="#fff" stroke="#74c0fc" stroke-width="5" filter="url(#shadow)"/>
+    <text x="0" y="-10" font-family="'Jua', sans-serif" font-size="22" fill="#1864ab" text-anchor="middle" font-weight="bold">상어 습격</text>
+    <text x="0" y="15" font-family="'Jua', sans-serif" font-size="16" fill="#868e96" text-anchor="middle">횟수 (Y)</text>
+    <text x="0" y="45" font-family="'Apple Color Emoji', 'Segoe UI Emoji', sans-serif" font-size="30" text-anchor="middle">🦈</text>
+  </g>
+
+  <!-- Top Node Boss (Temperature) -->
+  <g transform="translate(400, 160)">
+    <circle id="sunGlow" cx="0" cy="0" r="50" fill="#ffe066" opacity="0.4" filter="url(#shadow)"/>
+    <circle cx="0" cy="0" r="45" fill="#fff" stroke="#ff922b" stroke-width="6" filter="url(#shadow)"/>
+    <text x="0" y="-5" font-family="'Jua', sans-serif" font-size="24" fill="#e8590c" text-anchor="middle" font-weight="bold">여름 폭염</text>
+    <text x="0" y="20" font-family="'Jua', sans-serif" font-size="16" fill="#868e96" text-anchor="middle">기온 (Z / 숨은 진짜 원인)</text>
+    <text x="0" y="-35" font-family="'Apple Color Emoji', 'Segoe UI Emoji', sans-serif" font-size="30" text-anchor="middle">☀️</text>
+  </g>
+
+  <!-- Fake Association (Phase 1) -->
+  <g id="fakeConnection" opacity="0">
+    <line x1="260" y1="360" x2="540" y2="360" stroke="#fa5252" stroke-width="6" stroke-dasharray="10,5" marker-end="url(#arrowRed)"/>
+    <text x="400" y="340" font-family="'Jua', sans-serif" font-size="18" fill="#e03131" text-anchor="middle" font-weight="bold">단순 회귀의 착각: "아이스크림 냄새 맡고 옴??"</text>
+  </g>
+
+  <!-- Red Cross Out (Phase 2) -->
+  <g id="crossX" opacity="0" transform="translate(400, 360)">
+    <line x1="-30" y1="-30" x2="30" y2="30" stroke="#c92a2a" stroke-width="10" stroke-linecap="round"/>
+    <line x1="-30" y1="30" x2="30" y2="-30" stroke="#c92a2a" stroke-width="10" stroke-linecap="round"/>
+    <path d="M -80,40 Q -15,70 60,40" fill="none" stroke="#fa5252" stroke-width="3" stroke-dasharray="5,5"/>
+    <text x="0" y="70" font-family="'Jua', sans-serif" font-size="16" fill="#c92a2a" text-anchor="middle" font-weight="bold">거짓말! 직접적인 연관 없음 (다중 회귀 p-value 증명)</text>
+  </g>
+
+  <!-- True Connectons (Phase 3) -->
+  <g id="trueConnections" opacity="0">
+    <!-- To Ice Cream -->
+    <line x1="360" y1="210" x2="230" y2="310" stroke="#40c057" stroke-width="8" marker-end="url(#arrowGreen)"/>
+    <!-- To Sharks -->
+    <line x1="440" y1="210" x2="570" y2="310" stroke="#40c057" stroke-width="8" marker-end="url(#arrowGreen)"/>
+    
+    <!-- Explanation Box -->
+    <g transform="translate(260, 440)">
+      <rect width="280" height="40" fill="#eebefa" rx="10" filter="url(#shadow)"/>
+      <text x="140" y="25" font-family="'Jua', sans-serif" font-size="16" fill="#862e9c" text-anchor="middle" font-weight="bold">"둘 다 폭염(기온) 때문에 생긴 환상일 뿐!"</text>
+    </g>
+  </g>
+
+</svg>

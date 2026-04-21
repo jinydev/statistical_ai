@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans1</title>
+  <meta name="title" content="trans1" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans1"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c05/5_2_the_bootstrap/trans1.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans1" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c05/5_2_the_bootstrap/trans1.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c05/5_2_the_bootstrap/trans1.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans1","url":"https://statistical.jiny.dev/book/c05/5_2_the_bootstrap/trans1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/">05. Resampling Methods</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c05/5_2_the_bootstrap/">5 2 the bootstrap</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans1</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <h1 id="52-the-bootstrap">5.2 The Bootstrap</h1>
+<h1 id="52-부트스트랩">5.2 부트스트랩</h1>
+
+<p>The <em>bootstrap</em> is a widely applicable and extremely powerful statistical tool that can be used to quantify the uncertainty associated with a given estimator or statistical learning method. As a simple example, the bootstrap can be used to estimate the standard errors of the coefficients from a linear regression fit. In the specific case of linear regression, this is not particularly useful, since we saw in Chapter 3 that standard statistical software such as <code class="language-plaintext highlighter-rouge">R</code> outputs such standard errors automatically. However, the power of the bootstrap lies in the fact that it can be easily applied to a wide range of statistical learning methods, including some for which a measure of variability is otherwise difficult to obtain and is not automatically output by statistical software. 
+<em>부트스트랩(bootstrap)</em> 은 주어진 추정기(estimator) 또는 통계적 학습 방법과 관련된 불확실성을 정량화하는 데 사용할 수 있는 널리 적용 가능하고 매우 강력한 통계적 도구입니다. 간단한 예제로, 부트스트랩은 선형 회귀 핏에서 생성되는 계수들의 범용 오차(standard errors)를 추정하는 데 사용할 수 있습니다. 선형 회귀라는 구체적인 사례에 있어서 이것은 특별히(particularly) 유용하지 않은데, 왜냐하면 Chapter 3에서 보았듯 <code class="language-plaintext highlighter-rouge">R</code>과 같은 표준 통계 소프트웨어가 그러한 추정 오차를 자동으로 출력해주기 때문입니다. 하지만 부트스트랩의 진정한 힘(power)은 그것이 가변성(variability) 척도를 그렇지 않으면(otherwise) 획득하기 어렵거나 혹은 통계 소프트웨어에 의해 자동으로 돌출되지 않는 일부 방법들을 포함하여 넒은 범위의 통계적 학습 방법들에 걸쳐 손쉽게 적용될 수 있다는 사실에 놓여 있습니다(lies in).</p>
+
+<p>In this section we illustrate the bootstrap on a toy example in which we wish to determine the best investment allocation under a simple model. In Section 5.3 we explore the use of the bootstrap to assess the variability associated with the regression coefficients in a linear model fit. 
+본 섹션에서 우리는 단순한 모델 하에서 최고의 투자 할당(investment allocation)을 판단하고자 희망하는 장난감 예제(toy example)를 활용하여 부트스트랩을 일러스트레이트합니다. Section 5.3에서 우리는 선형 모델 핏 내부의 회귀 계수들과 연관된 가변성을 평가(assess)하기 위해 부트스트랩의 사용을 탐색할 것입니다.</p>
+
+<p>Suppose that we wish to invest a fixed sum of money in two financial assets that yield returns of $X$ and $Y$, respectively, where $X$ and $Y$ are random quantities. We will invest a fraction $\alpha$ of our money in $X$, and will invest the remaining $1 - \alpha$ in $Y$. Since there is variability associated with the returns on these two assets, we wish to choose $\alpha$ to minimize the total risk, or variance, of our investment. In other words, we want to minimize $\text{Var}(\alpha X + (1 - \alpha) Y)$. One can show that the value that minimizes the risk is given by 
+우리가 무작위적 수위(random quantities)로 주어지는 $X$ 와 $Y$ 의 수익(returns)을 각각 창출하는 두 개의 금융 자산(financial assets)에 대하여, 이미 고정된(fixed) 일정 금액의 투자를 추진한다고 가정해 보겠습니다. 이 상황에서 우리는 투자금 예산 중 일정 $\alpha$ 만큼의 비율(fraction)을 쪼개어 부분적으로 $X$ 쪽에 붓고 남은 잔여 비율인 $1 - \alpha$ 가량은 몽땅 $Y$ 쪽 자산에 털어 넣을 것입니다. 투입된 비용만큼 되돌아오는 양쪽 자산의 수입 수익 체계에는 근본적 변동성(variability)이란 게 속해 있기 때문에, 우리의 최종 소망은 나의 이런 무작위 자산 투자 활동에 연루된 전방위적 투자 위험수당, 다시 말해 분산성(variance) 피해를 최적 비율로 깎아 경감할 수 있는 $\alpha$ 값을 쏙 뽑아 골라내는 것입니다. 이 말을 환언하면(In other words), $\text{Var}(\alpha X + (1 - \alpha) Y)$ 수준의 최소화를 이룩하고 싶다는 것입니다. 다음과 같은 수식은 우리가 처한 본 위험 요소 파이를 극소화해 줄 비율을 정확히 내어준(show) 것입니다.</p>
+
+\[\alpha = \frac{\sigma_Y^2 - \sigma_{XY}}{\sigma_X^2 + \sigma_Y^2 - 2 \sigma_{XY}} \quad (5.6)\]
+
+<p>where $\sigma_X^2 = \text{Var}(X), \sigma_Y^2 = \text{Var}(Y)$, and $\sigma_{XY} = \text{Cov}(X, Y)$. In reality, the quantities $\sigma_X^2$, $\sigma_Y^2$, and $\sigma_{XY}$ are unknown. We can compute estimates for these quantities, $\hat{\sigma}<em>X^2$, $\hat{\sigma}_Y^2$, and $\hat{\sigma}</em>{XY}$, using a data set that contains past measurements for $X$ and $Y$. We can then estimate the value of $\alpha$ that minimizes the variance of our investment using 
+이 수식 안에서 $\sigma_X^2 = \text{Var}(X), \sigma_Y^2 = \text{Var}(Y)$, 그리고 $\sigma_{XY} = \text{Cov}(X, Y)$ 를 대변합니다. 그러나 실전의 상황(In reality)에서 이들이 상징하는 $\sigma_X^2$, $\sigma_Y^2$, 와 $\sigma_{XY}$ 의 치수들은 미궁 속에 감춰진 미지수(unknown)로 기능합니다. 그럼에도 우리는 과거 지난 시점에 실제 측정된 적 있는 $X$ 및 $Y$ 에 대한 측정 데이터를 바탕으로 하여 저 은폐된 실체 계량수들에 대응하는 대체적 기대 예측치 $\hat{\sigma}<em>X^2$, $\hat{\sigma}_Y^2$, 및 $\hat{\sigma}</em>{XY}$ 를 전산적으로 셈할 수 있게 됩니다(compute estimates). 그렇게만 된다면 우리는 곧바로 이 대체 수단을 차용하여 다음을 통해 우리의 자산 출자 분산을 하향 축소시킬 황금 $\alpha$ 수치를 역산출해 맞출 수 있습니다.</p>
+
+\[\hat{\alpha} = \frac{\hat{\sigma}_Y^2 - \hat{\sigma}_{XY}}{\hat{\sigma}_X^2 + \hat{\sigma}_Y^2 - 2 \hat{\sigma}_{XY}} \quad (5.7)\]
+
+<p>Figure 5.9 illustrates this approach for estimating $\alpha$ on a simulated data set. In each panel, we simulated $100$ pairs of returns for the investments $X$ and $Y$. We used these returns to estimate $\hat{\sigma}<em>X^2$, $\hat{\sigma}_Y^2$, and $\hat{\sigma}</em>{XY}$, which we then substituted into (5.7) in order to obtain estimates for $\alpha$. The value of $\hat{\alpha}$ resulting from each simulated data set ranges from $0.532$ to $0.657$. 
+Figure 5.9는 가상 시뮬레이션 데이터를 운용해 미지수 $\alpha$ 수위를 추산 평가하는 이러한 식의 연산 접근 방식을 시각적으로 해설합니다. 매 각각의 도식 패널 안에서 우리는 실 투자 대상물 $X$, $Y$ 가 쌍(pairs)으로 결합하여 일으키는 가짜수익 반환치 기록 100건을 연출해 냈습니다. 연이어 우리는 갓 조작 생산된 저 100개의 회수 수익분 가상 지수를 동원하여 $\hat{\sigma}<em>X^2$, $\hat{\sigma}_Y^2$, 및 $\hat{\sigma}</em>{XY}$ 이라는 추정 부품을 재조립해냈으며, 그 즉시 부품들을 본래 (5.7) 공식 안에 끼워 맞춰(substituted into) 치환시킴으로써 마침내 타겟 추산 $\alpha$ 변수를 추려 달성해 냅니다. 이 과정을 통해 각각의 고유 시뮬레이션 데이터 배포 판으로부터 역도출된 실질 연산 $\hat{\alpha}$ 값의 범주는 대략 최저 $0.532$ 지표선에서 출발하여 최고 $0.657$ 지표 영역에 이르기까지 펼쳐집니다.</p>
+
+<p>It is natural to wish to quantify the accuracy of our estimate of $\alpha$. To estimate the standard deviation of $\hat{\alpha}$, we repeated the process of simulating 100 paired observations of $X$ and $Y$, and estimating $\alpha$ using (5.7), 1,000 times. We thereby obtained 1,000 estimates for $\alpha$, which we can call $\hat{\alpha}<em>1, \hat{\alpha}_2, \dots, \hat{\alpha}</em>{1000}$. The left-hand panel of Figure 5.10 displays a histogram of the resulting estimates. For these simulations the parameters were set to $\sigma_X^2 = 1, \sigma_Y^2 = 1.25$, and $\sigma_{XY} = 0.5$, and so we know that the true value of $\alpha$ is $0.6$. We indicated this value using a solid vertical line on the histogram. 
+그렇다면 인간 본성상 바로 우리가 뽑아낸 저 $\alpha$ 예측물 자체의 판단 정밀 정확도(accuracy) 크기가 어떻게 되는지 궁금해하며 계량적 정량화를 소원하는 일은 어쩌면 매우 자연스럽기까지 합니다(natural). 실물 $\hat{\alpha}$ 지수치가 머금은 근본적인 표준 편차(standard deviation)의 깊이를 추적 계산하려는 일념하에, 우리들은 조금 전 가상 설계했던 변수 두 짝쌍의 수입 지표 100회분 실험 도출 방식과 그것을 공평 무사한 단일 공식 (5.7)을 매개로 하여 하나의 기대 분율 $\alpha$ 계수로 집약시켰던 해당 절차 일련 전반을 단숨에 연속 $1,000$ 십자포화 반복 구동시킴으로써, 그 일련의 과정 속에서 장기적 총체 1,000회분 $\alpha$ 투사 예측 결과의 산물, 즉 $\hat{\alpha}<em>1, \hat{\alpha}_2, \dots, \hat{\alpha}</em>{1000}$ 로 이름 붙여 불릴 일만 개의 흔적 군집을 긁어모았습니다. 도표 안 Figure 5.10 왼쪽 패널 측에 우뚝 선 히스토그램은 저 결집 결과 수치들의 시지각적 잔상물입니다. 본 허구적 데이터의 무대 조형에 있어서 핵심 속성 통제 요소 파라미터 계기 편향은 단단히 확정 조작되었는데, 이 매개 수위가 바로 $\sigma_X^2 = 1, \sigma_Y^2 = 1.25$ 와 공분산 $\sigma_{XY} = 0.5$ 환경으로 사전 픽스 설정(set)되었던 바, 그로 인한 철저한 논증 수학적 연산 회로 귀결상 실제 진리 $\alpha$ 정수 지수는 필연코 $0.6$ 이란 결론부지에 낙착됨을 이미 지식으로 파악하고 있습니다(we know). 해당 단호한 진실 절대치는 히스토그램 위에서 꼿꼿한 고형체 실선축 수직 라인(solid vertical line)에 투영 지시되어 나타납니다.</p>
+
+<p><img src="./img/5_9.png" alt="Figure 5.9" /></p>
+
+<p><strong>FIGURE 5.9.</strong> <em>Each panel displays $100$ simulated returns for investments X and Y . From left to right and top to bottom, the resulting estimates for $\alpha$ are $0.576, 0.532, 0.657$, and $0.651$.</em> 
+<strong>FIGURE 5.9.</strong> <em>각 측 패널 안에는 각각 $X$ 와 $Y$ 자산에 투신된 환수 데이터가 $100$ 단위로 가공 시뮬레이팅 도해됩니다. 상단부 왼쪽부터 출발해 우편 측 타일로 건너가는 하향식 순차에 의거하여, 각각의 시뮬 판도 개별 $\alpha$ 계산 추정 계수는 $0.576, 0.532, 0.657$ 이자, 마지막은 $0.651$ 수위치를 점령합니다.</em></p>
+
+<p>The mean over all $1,000$ estimates for $\alpha$ is 
+$1,000$ 개 전체를 아우르는 통산 $\alpha$ 투사 추정 결괏값의 모든 자산 평가 총균 평균 치수는</p>
+
+\[\bar{\alpha} = \frac{1}{1000} \sum_{r=1}^{1000} \hat{\alpha}_r = 0.5996\]
+
+<p>very close to $\alpha = 0.6$, and the standard deviation of the estimates is 
+진실점 $0.6$ 에 극도로 인접한 상황이며(very close to), 그 오차 유격 추정물들의 평균 표준 편차 널뛰기 치수는</p>
+
+\[\sqrt{\frac{1}{1000 - 1} \sum_{r=1}^{1000} (\hat{\alpha}_r - \bar{\alpha})^2 } = 0.083\]
+
+<p>This gives us a very good idea of the accuracy of $\hat{\alpha}$: $\text{SE}(\hat{\alpha}) \approx 0.083$. So roughly speaking, for a random sample from the population, we would expect $\hat{\alpha}$ to differ from $\alpha$ by approximately $0.08$, on average. 
+결과적으로 이것을 말미암아 우리들은 평가 산물 $\hat{\alpha}$ 정밀도 수준이 지니는 대단히 유효한 안목(good idea) 즉: 표준에러 수위 오차가 대략 $0.083$ 주변으로 포진함($\text{SE}(\hat{\alpha}) \approx 0.083$)을 직관적으로 관철합니다. 그렇다면 즉 이 말은 곧 어떤 전체 인구 속단 중 단지 하나의 표본 샘플만 추출한다 가정하면 우리들은 $\hat{\alpha}$ 가 대략적 수준 평균치 기준으로 대강 진짜 $\alpha$ 값에서 수치 $0.08$ 의 어간의 격차율로 어긋나는(differ from) 모습으로 발현되리라고 상기 내다보게 됨을 대략적(roughly speaking) 통계 소회로 피력할 수 있습니다.</p>
+
+<p>In practice, however, the procedure for estimating $\text{SE}(\hat{\alpha})$ outlined above cannot be applied, because for real data we cannot generate new samples from the original population. However, the bootstrap approach allows us to use a computer to emulate the process of obtaining new sample sets, so that we can estimate the variability of $\hat{\alpha}$ without generating additional samples. Rather than repeatedly obtaining independent data sets from the population, we instead obtain distinct data sets by repeatedly sampling observations <em>from the original data set</em> . 
+그러나 안타깝게도 현실 필드(In practice) 속에서 우리가 앞서 장구하게 외형을 빚어가며 일별 제시해 주었던 $\text{SE}(\hat{\alpha})$ 오차 측정의 이 화려한 전산 수속 과정은 차마 실질 데이터를 조우했을 때 차용할 수 없는(cannot be applied) 허울로 전파됩니다. 왜일까요? 진짜 자연 세계에서는 절대 최초 기저 바탕 인구 총집합 풀(original population)에서 무한 복제로 새 표본을 창조(generate) 발산 연성해 낼 조물주적 권능 따윈 없기 때문입니다! 이 막장적 단절 앞에서 바로 부트스트랩(bootstrap) 공정이 한 가닥 불빛 구원자처럼 하강해주고 이 컴퓨터 문명은 그것을 지렛대 삼아 새로운 다발성 인원 모집 과정의 절차 복붙 모방 시스템(emulate) 메커니즘 도구로 편승 활용합니다. 더는 무모하게 부가 표본 모집 창출에 연연하지 않되 무한 반복 교차 추정 $\hat{\alpha}$ 도출 진동 변동성 포착 분석을 성사시킬 방편을 고안한 것인데, 그건 허무맹랑한 우주 거대 외곽 원형 인구 풀 바깥에서 새 데이터 독립 파편을 찾아 계속 외곽 수급에 나서기보다 우리 호주머니수중에 원래 지니고 입수 확보했던 진짜 초기 최초 한정판(원형 기초 데이터) <em>본질 안에서만</em> 시선 이동 후, 내부의 인원들을 뺑뺑이 재복원 중복 모집시킴으로써 수많은 각기 고유한 파생 쪼가리들을 획득해 내는 꼼수 전략입니다.</p>
+
+<p>This approach is illustrated in Figure 5.11 on a simple data set, which we call $Z$, that contains only $n = 3$ observations. We randomly select $n$ observations from the data set in order to produce a bootstrap data set, $Z^{<em>1}$. The sampling is performed _with replacement_, which means that the same observation can occur more than once in the bootstrap data set. In this example, $Z^{</em>1}$ contains the third observation twice, the first observation once, and no instances of the second observation. Note that if an observation is contained in $Z^{<em>1}$, then both its $X$ and $Y$ values are included. We can use $Z^{</em>1}$ to produce a new bootstrap estimate for $\alpha$, which we call $\hat{\alpha}^{<em>1}$. This procedure is repeated $B$ times for some large value of $B$, in order to produce $B$ different bootstrap data sets, $Z^{</em>1}, Z^{<em>2}, \dots, Z^{</em>B}$, and $B$ corresponding $\alpha$ estimates, $\hat{\alpha}^{<em>1}, \hat{\alpha}^{</em>2}, \dots, \hat{\alpha}^{<em>B}$. We can compute the standard error of these bootstrap estimates using the formula 
+바로 이런 황당무계한 해결법을, 전체 요원이 고작 $n = 3$ 명의 관측물로 빈약하게 제한 구성된, 가칭 $Z$ 라고 이름 붙일 한 보잘것없는 초소형 시각 샘플 예제 데이터를 토대로 삼아 Figure 5.11 상에 묘사도 그려냅니다(illustrated). 이 구상 안에서 우리들은 부트스트랩 실험 세트인 이른바 신규 데이터 묶음인 $Z^{</em>1}$ 하나를 주조 연성해 뽑아낼 요량으로 전체 원본 풀에서 똑같은 수치인 $n$ 개의 개체를 뽑아 랜덤 무작위 소환 단행합니다. 이때 뽑기 행태의 규칙 기만점은 언제나 절대 무조건 과거 뽑혔던 카드도 본래 자리로 항시 재투입(with replacement) 뒤섞여 반복 투과 복원되면서 실시되는 기만성에 있습니다, 이 말뜻 인즉 같은 동일 타겟물이 차기 부트스트랩 구성진 모집 과정 도출에 걸쳐 얼마든지 계속 1차례를 상회해 빈번히 출몰 투입(occur) 복원 재사용될 수 있다는 걸 지칭합니다. 작금의 구체적 도식에서 $Z^{<em>1}$ 데이터 구조 결과 양상엔 3번째 멤버 표본 대상물이 그 자리를 두 번($2$) 꿰차고 1번 관측물이 고작 한 번($1$) 자리매김하고 안타까운 2번 관측 대상자는 그 어떤 발도 못 디민 채 흔적을 누락(no instances) 묘사합니다. 여기서 자각할 사안 한 가지: 어떤 관측치 존재물이 만에 하나 $Z^{</em>1}$ 내무에 입성하게 되면 반드시 거기에 얽매인 모든 해당 표본 개체의 $X$ 자산 그리고 $Y$ 자산 계량 점수 데이터도 쌍으로 엮어 모조리 통째 묶임 포함되어 딸려 옴을 상기하세요. 곧이어 우리는 본 파생 결집물 $Z^{<em>1}$ 조직 데이터를 엔진으로 가동시키면서 그로부터 $\alpha$ 를 파악 셈법 계산을 거쳐 신선한 첫술용 새 부트스트랩 예언 수치 $\hat{\alpha}^{</em>1}$ 라 자칭 명명하게 된 결과를 뽑을 자격을 얻습니다. 바로 이러한 판도의 복제 뺑뺑이 재생 노가다 과정을 거대한 무제한성 계수 지표 수량($B$)만큼 되먹여 $B$ 회전을 루틴 반복(repeated) 실시 조장하여 종단적으로 각기 분별되는 다수의 거대 부트스트랩 풀 조직체인 $Z^{<em>1}, Z^{</em>2}, \dots, Z^{<em>B}$ 더미군을 모래알처럼 구축 조성 산출하고 그 틈에서 병렬 생성 공정 대응(corresponding) 도출되는 총체 $B$ 번 분율 $\alpha$ 추정 산출 값의 열매체 $\hat{\alpha}^{</em>1}, \hat{\alpha}^{<em>2}, \dots, \hat{\alpha}^{</em>B}$ 지표들을 포획 추수 성공하게 되는 겁니다. 그러면 최종적으로 우리들은 앞선 공식 대입 조립만으로 방탄무구 철벽 신뢰성을 더해줄 이 다발적 신생 부트스트랩 결과들의 편차 파급 오류(standard error) 측정치를 수수하게 도출 계산 재현할 기지력을 확보(compute) 완료합니다:</p>
+
+\[\text{SE}_B(\hat{\alpha}) = \sqrt{\frac{1}{B - 1} \sum_{r=1}^B \left( \hat{\alpha}^{*r} - \frac{1}{B} \sum_{r'=1}^B \hat{\alpha}^{*r'} \right)^2} \quad (5.8)\]
+
+<p>This serves as an estimate of the standard error of $\hat{\alpha}$ estimated from the original data set. 
+이것은 곧 오리지널 원본 초기 배포 데이터 세트 구조 환경 차원에서 파생 추산 평가된 당해 $\hat{\alpha}$ 예측물의 표준편차 지표 파급 오차 한계망 추산치로서 훌륭하게 대응 기능(serves) 수행해나갑니다.</p>
+
+<p>The bootstrap approach is illustrated in the center panel of Figure 5.10, which displays a histogram of $1,000$ bootstrap estimates of $\alpha$, each computed using a distinct bootstrap data set. This panel was constructed on the basis of a single data set, and hence could be created using real data. Note that the histogram looks very similar to the left-hand panel, which displays the idealized histogram of the estimates of $\alpha$ obtained by generating $1,000$ simulated data sets from the true population. In particular the bootstrap estimate $\text{SE}(\hat{\alpha})$ from (5.8) is $0.087$, very close to the estimate of $0.083$ obtained using $1,000$ simulated data sets. The right-hand panel displays the information in the center and left panels in a different way, via boxplots of the estimates for $\alpha$ obtained by generating $1,000$ simulated data sets from the true population and using the bootstrap approach. Again, the boxplots have similar spreads, indicating that the bootstrap approach can be used to effectively estimate the variability associated with $\hat{\alpha}$. 
+이 위대하신 부트스트랩 접근 시야의 기법 효모는 Figure 5.10 중앙 허리 패널에서 절찬리에 공개 묘사되며, 이 그림 내부 막대 히스토그램은 앞선 구상 기반 각기 다른 파생 부트스트랩 꼬리 데이터군에 의해 각 별건 별 셈법 산출 통산해 일궈 모은 다발성 추정 표본 수량 $1,000$ 개 $\alpha$ 변수의 축적 통산 조형 형상을 입증 개시합니다. 해당 중축의 패널 그림이 그 옛날 찌질하고 비참한 단 한 건의 유일 데이터 실체(single data set) 하나를 기단(basis) 발판으로 솟은 산물임에 유의하면, 이런 경이로움 즉 필드 실전 데이터 속성에서도 능히 이런 복제 수치 마법 조작 산물이 빚어져 구성(created) 산출될 여지가 있음에 숙고합시다. 무엇보다 특기할 경천동지할 점으로서 본 해당 횡축 그래프의 구조 그림자는 마치 우측 절대 진계 하늘 창조주의 손길로 거대한 백성 무리 기원수(true population) 군집 원형 인구단 속에서 직접 한 땀 손수 복제 창조해 1,000건이나 짜내 획득 결집한 좌측 이데아 최고 이상(idealized)의 그림자와 소름돋을정도로 육안 구별이 얽힌 유사 분산 체형(looks very similar) 모양새를 방증 노출 중이란 대목입니다. 특히 위 수식 (5.8) 과정 결과의 산물로 떨어져 내린 본 자체 부트스트랩 기법 연산 예측기 $\text{SE}(\hat{\alpha})$ 수치가 고작 $0.087$ 점수에 준한다는 점과 그것은 가상으로 일궜던 1,000개 허상 데이터의 조작 맹신 예측 지름차 $0.083$ 주변 부근으로 흡인되어 맹렬히 파고든다는 사실 인접도(very close to) 자체에 귀 기울이십시오. 한편 맨 오른쪽 위치 구석 패널 무대는 지금껏 살펴왔던 두 방면 중앙, 좌측면 정보들의 함의 자체를, 부트스트랩 방식과 더불어 거대 실상 인구 무리 발췌 추출로 축적 누적 연산시켜 달성해 얻은 $\alpha$ 파라미터 예측 횡단 자료의 변위 폭 궤도 분산도를 다른 대안적 양상 투사 툴 즉 상자수염그림(박스 스캐치 boxplots) 형식을 등용시켜 변조 반영 재각인합니다. 언제나 그랬듯이 재차 검토 반복하더라도(Again), 쌍으로 병치된 두 상자 수염 조형 분산 전개 폭(spreads)은 대단히 닮아 흡사성을 공유 진동 유지함을 발견 가능하며 이 명쾌한 방증적 대변 사실 자체를 통하여 우리가 고작 쥐고 펴는 알량한 부트스트랩 재복제 기술 하나일지언정 곧 그것 단일로 우리가 필사적 타겟으로 표적화 삼은 가변성 지표인 $\hat{\alpha}$ 오차 변위의 널뛰기 심도 측정의 미션을 실로 기깔나게 매우 효과적으로 해결 적중 타격 관수시킬 용도로 쓰일 만하다(can be used to effectively) 라는 통계 확신으로 수렴 보장됨을 이 그림들이 대신 징후(indicating) 타전해 줍니다.</p>
+
+<p><img src="./img/5_11.png" alt="Figure 5.11" /></p>
+
+<p><strong>FIGURE 5.11.</strong> <em>A graphical illustration of the bootstrap approach on a small sample containing n</em> = 3 <em>observations. Each bootstrap data set contains n observations, sampled with replacement from the original data set. Each bootstrap data set is used to obtain an estimate of $\alpha$.</em> 
+<strong>FIGURE 5.11.</strong> <em>딸랑 3명($n=3$) 의 왜소 빈약 투입군으로 축조 구성된 왜소한 데이터 쪼가리 표본 위에서 자행된 거대한 복제 시스템 창조 부트스트랩 방법론 공방의 그래픽 설명도. 각각 구동되어 파편 축출 산물로 쏟아진 매 부트스트랩 샘플 단위 결과 세트체 그룹 내에는 여지없이 동일 규격 체적 $n$ 정량 개체수가 포화되며 그 발원 추출 조달 근원은 복원 추출 방식 체계(sampled with replacement) 를 끼고 오리지널 기저 데이터 표본에서 끊임없이 길어 부어 마련 취합됩니다. 그런 일련의 각각 뭉텅이 결과 집단 조작 소스군을 필두 조밀 거름막으로 이용 통과 분쇄시켜 최종 우리 타겟이던 $\alpha$ 예측 오차지표물을 일구어(obtain) 냅니다.</em></p>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

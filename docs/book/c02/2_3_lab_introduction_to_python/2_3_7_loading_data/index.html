@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -503,57 +502,44 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="237-loading-data"><em>2.3.7 Loading Data</em></h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../2_3_6_indexing_data/index.html">&lt; 2.3.6 Indexing Data</a></td>
+      <td><a href="../2_3_8_for_loops/index.html">2.3.8 For Loops &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<h1 id="237-데이터-불러오기"><em>2.3.7 데이터 불러오기</em></h1>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
+
+<h1 id="237-loading-data">2.3.7 Loading Data</h1>
 
 <p>Data sets often contain different types of data, and may have names associated with the rows or columns.</p>
 
-<p>데이터 세트들은 종종 상이한 유형들의 데이터를 포함하며, 행들 혹은 열들에 연관된 이름들을 가질 수 있습니다.</p>
-
 <p>For these reasons, they typically are best accommodated using a <em>data frame</em>.</p>
-
-<p>이러한 이유들로, 그것들은 전형적으로 하나의 <em>데이터 프레임(data frame)</em> 을 사용하여 가장 잘 수용됩니다.</p>
 
 <p>We can think of a data frame as a sequence of arrays of identical length; these are the columns.</p>
 
-<p>우리는 하나의 데이터 프레임을 동일한 길이의 배열들의 시퀀스로서 생각할 수 있습니다; 이것들이 열들입니다.</p>
-
 <p>Entries in the different arrays can be combined to form a row.</p>
-
-<p>상이한 배열들 안의 항목들은 하나의 행을 형성하기 위해 결합될 수 있습니다.</p>
 
 <p>The <code class="language-plaintext highlighter-rouge">pandas</code> library can be used to create and work with data frame objects.</p>
 
-<p><code class="language-plaintext highlighter-rouge">pandas</code> 라이브러리는 데이터 프레임 객체들을 생성하고 함께 작업하기 위해 사용될 수 있습니다.</p>
-
 <h2 id="reading-in-a-data-set">Reading in a Data Set</h2>
-
-<h2 id="데이터-세트-읽어-들이기">데이터 세트 읽어 들이기</h2>
 
 <p>The first step of most analyses involves importing a data set into <code class="language-plaintext highlighter-rouge">Python</code>.</p>
 
-<p>대부분의 분석들의 첫 번째 단계는 데이터 세트를 <code class="language-plaintext highlighter-rouge">Python</code> 안으로 임포트(importing)하는 것을 수반합니다.</p>
-
 <p>Before attempting to load a data set, we must make sure that <code class="language-plaintext highlighter-rouge">Python</code> knows where to find the file containing it.</p>
-
-<p>데이터 세트를 적재(load)하기를 시도하기 전에, 우리는 <code class="language-plaintext highlighter-rouge">Python</code> 이 그것을 포함하는 파일을 어디서 찾아야 할지 알고 있음을 확인해야만 합니다.</p>
 
 <p>If the file is in the same location as this notebook file, then we are all set.</p>
 
-<p>만약 그 파일이 이 노트북 파일과 동일한 위치에 있다면, 준비 완료된 것입니다.</p>
-
 <p>Otherwise, the command <code class="language-plaintext highlighter-rouge">os.chdir()</code> can be used to <em>change directory</em>. (You will need to call <code class="language-plaintext highlighter-rouge">import os</code> before calling <code class="language-plaintext highlighter-rouge">os.chdir()</code>.)</p>
-
-<p>그렇지 않다면, 디렉터리를 변경하기(change directory) 위해 <code class="language-plaintext highlighter-rouge">os.chdir()</code> 명령이 사용될 수 있습니다. (<code class="language-plaintext highlighter-rouge">os.chdir()</code> 을 호출하기 전에 <code class="language-plaintext highlighter-rouge">import os</code> 를 호출할 필요가 있을 것입니다.)</p>
 
 <p>We will begin by reading in <code class="language-plaintext highlighter-rouge">Auto.csv</code>, available on the book website.</p>
 
-<p>우리는 책 웹사이트에서 이용 가능한 <code class="language-plaintext highlighter-rouge">Auto.csv</code> 를 읽어 들임으로써 시작할 것입니다.</p>
-
 <p>This is a comma-separated file, and can be read in using <code class="language-plaintext highlighter-rouge">pd.read_csv()</code>:</p>
-
-<p>이것은 쉼표로-구분된(comma-separated) 파일이며, <code class="language-plaintext highlighter-rouge">pd.read_csv()</code> 를 사용하여 읽어 들여질 수 있습니다:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
          <span class="n">Auto</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">Auto.csv</span><span class="sh">'</span><span class="p">)</span>
@@ -562,26 +548,16 @@
 
 <p>The book website also has a whitespace-delimited version of this data, called <code class="language-plaintext highlighter-rouge">Auto.data</code>.</p>
 
-<p>그 책 웹사이트는 또한 <code class="language-plaintext highlighter-rouge">Auto.data</code> 라고 불리는, 이 데이터의 여백으로-구분된(whitespace-delimited) 버전을 가지고 있습니다.</p>
-
 <p>This can be read in as follows:</p>
-
-<p>이것은 다음과 같이 읽어 들여질 수 있습니다:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">74</span><span class="p">]:</span> <span class="n">Auto</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">Auto.data</span><span class="sh">'</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Both <code class="language-plaintext highlighter-rouge">Auto.csv</code> and <code class="language-plaintext highlighter-rouge">Auto.data</code> are simply text files.</p>
 
-<p><code class="language-plaintext highlighter-rouge">Auto.csv</code> 와 <code class="language-plaintext highlighter-rouge">Auto.data</code> 둘 모두 단순히 텍스트 파일들입니다.</p>
-
 <p>Before loading data into <code class="language-plaintext highlighter-rouge">Python</code>, it is a good idea to view it using a text editor or other software, such as Microsoft Excel.</p>
 
-<p>데이터를 <code class="language-plaintext highlighter-rouge">Python</code> 안으로 가져오기 이전에, 마이크로소프트 엑셀과 같은 텍스트 편집기나 다른 소프트웨어를 사용하여 그것을 보는 것은 좋은 생각입니다.</p>
-
 <p>We now take a look at the column of <code class="language-plaintext highlighter-rouge">Auto</code> corresponding to the variable <code class="language-plaintext highlighter-rouge">horsepower</code>:</p>
-
-<p>우리는 이제 <code class="language-plaintext highlighter-rouge">horsepower</code> 변수에 대응하는 <code class="language-plaintext highlighter-rouge">Auto</code> 의 열을 한 번 살펴봅니다:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">75</span><span class="p">]:</span> <span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">horsepower</span><span class="sh">'</span><span class="p">]</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">75</span><span class="p">]:</span> <span class="mi">0</span>       <span class="mf">130.0</span>
@@ -589,7 +565,7 @@
          <span class="mi">2</span>       <span class="mf">150.0</span>
          <span class="mi">3</span>       <span class="mf">150.0</span>
          <span class="mi">4</span>       <span class="mf">140.0</span>
-               <span class="p">...</span>  
+               <span class="bp">...</span>
          <span class="mi">392</span>      <span class="mf">86.0</span>
          <span class="mi">393</span>      <span class="mf">52.0</span>
          <span class="mi">394</span>      <span class="mf">84.0</span>
@@ -600,34 +576,20 @@
 
 <p>We see that the <code class="language-plaintext highlighter-rouge">dtype</code> of this column is <code class="language-plaintext highlighter-rouge">object</code>.</p>
 
-<p>우리는 이 열의 <code class="language-plaintext highlighter-rouge">dtype</code> 이 <code class="language-plaintext highlighter-rouge">object</code> 임을 봅니다.</p>
-
 <p>It turns out that all values of the <code class="language-plaintext highlighter-rouge">horsepower</code> column were interpreted as strings when reading in the data.</p>
 
-<p>데이터를 읽어 들일 때 <code class="language-plaintext highlighter-rouge">horsepower</code> 열의 모든 값들이 문자열들로서 해석된 것으로 판명됩니다.</p>
-
 <p>We can find out why by looking at the unique values.</p>
-
-<p>우리는 그 고유값(unique values)들을 봄으로써 왜 그런지 알 수 있습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">76</span><span class="p">]:</span> <span class="n">np</span><span class="p">.</span><span class="nf">unique</span><span class="p">(</span><span class="n">Auto</span><span class="p">[</span><span class="sh">'</span><span class="s">horsepower</span><span class="sh">'</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>To save space, we have omitted the output of the previous code block.</p>
 
-<p>공간을 절약하기 위해, 우리는 이전 코드 블록의 출력을 생략했습니다.</p>
-
 <p>We see the culprit is the value <code class="language-plaintext highlighter-rouge">?</code>, which is being used to encode missing values.</p>
-
-<p>우리는 그 범인이 <code class="language-plaintext highlighter-rouge">?</code> 값이라는 것을 보며, 이것은 결측치(missing values)를 인코드(encode)하기 위하여 사용되고 있습니다.</p>
 
 <p>To fix the problem, we must provide <code class="language-plaintext highlighter-rouge">pd.read_csv()</code> with an argument called <code class="language-plaintext highlighter-rouge">na_values</code>.</p>
 
-<p>그 문제를 고치기 위해, 우리는 <code class="language-plaintext highlighter-rouge">pd.read_csv()</code> 에 <code class="language-plaintext highlighter-rouge">na_values</code> 라고 불리는 하나의 인자를 제공해야 합니다.</p>
-
 <p>Now, each instance of <code class="language-plaintext highlighter-rouge">?</code> in the file is replaced with the value <code class="language-plaintext highlighter-rouge">np.nan</code>, which means <em>not a number</em>:</p>
-
-<p>이제, 파일 안의 <code class="language-plaintext highlighter-rouge">?</code> 의 각 사례는 <code class="language-plaintext highlighter-rouge">np.nan</code> 값으로 대체되며, 이는 <em>숫자가 아님(not a number)</em> 을 의미합니다:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [77]:Auto=pd.read_csv('Auto.data',
 na_values=['?'],
@@ -640,8 +602,6 @@ Auto['horsepower'].sum()
 
 <p>The <code class="language-plaintext highlighter-rouge">Auto.shape</code> attribute tells us that the data has 397 observations, or rows, and nine variables, or columns.</p>
 
-<p><code class="language-plaintext highlighter-rouge">Auto.shape</code> 속성은 데이터가 397 개의 관측치들 즉 행들, 그리고 아홉 개의 변수들 즉 열들을 가지고 있음을 말해 줍니다.</p>
-
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [78]:Auto.shape
 </code></pre></div></div>
 
@@ -650,11 +610,7 @@ Auto['horsepower'].sum()
 
 <p>There are various ways to deal with missing data.</p>
 
-<p>결측 데이터를 다루는 다양한 방법들이 있습니다.</p>
-
 <p>In this case, since only five of the rows contain missing observations, we choose to use the <code class="language-plaintext highlighter-rouge">Auto.dropna()</code> method to simply remove these rows.</p>
-
-<p>이 경우에, 행들 중 오직 다섯 개만이 누락된 관측치들을 포함하고 있기 때문에, 우리는 이 행들을 단순 제거하기 위해 <code class="language-plaintext highlighter-rouge">Auto.dropna()</code> 메서드를 사용합니다.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.dropna()
 </code></pre></div></div>
@@ -668,11 +624,7 @@ Auto_new.shape
 
 <h2 id="basics-of-selecting-rows-and-columns">Basics of Selecting Rows and Columns</h2>
 
-<h2 id="행들과-열들을-선택하기의-기본-지침">행들과 열들을 선택하기의 기본 지침</h2>
-
 <p>We can use <code class="language-plaintext highlighter-rouge">Auto.columns</code> to check the variable names.</p>
-
-<p>우리는 변수 이름들을 확인하기 위해 <code class="language-plaintext highlighter-rouge">Auto.columns</code> 를 사용할 수 있습니다.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [80]:Auto=Auto_new#overwritethepreviousvalue
 Auto.columns
@@ -685,32 +637,29 @@ dtype='object')
 
 <p>Accessing the rows and columns of a data frame is similar, but not identical, to accessing the rows and columns of an array.</p>
 
-<p>데이터 프레임의 행들과 열들에 접근하는 것은 배열의 행들과 열들에 접근하는 것과 유사하지만, 동일하지는 않습니다.</p>
-
 <p>Recall that the first argument to the <code class="language-plaintext highlighter-rouge">[]</code> method is always applied to the rows of the array.</p>
 
-<p><code class="language-plaintext highlighter-rouge">[]</code> 메서드에 대한 첫 번째 인자가 항상 그 배열의 행들에 적용됨을 상기하십시오.</p>
-
 <p>Similarly, passing in a slice to the <code class="language-plaintext highlighter-rouge">[]</code> method creates a data frame whose <em>rows</em> are determined by the slice:</p>
-
-<p>유사하게, <code class="language-plaintext highlighter-rouge">[]</code> 메서드 속으로 하나의 슬라이스를 전달하는 것은 그것의 <em>행들</em> 이 그 슬라이스에 의하여 결정되어지는 하나의 데이터 프레임을 생성합니다:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [81]:Auto[:3]
 </code></pre></div></div>
 
 <table>
-  <thead>
+  <tbody>
     <tr>
-      <th><strong><code class="language-plaintext highlighter-rouge">Out[81]:</code></strong></th>
-      <th> </th>
-      <th><code class="language-plaintext highlighter-rouge">mpg</code></th>
-      <th><code class="language-plaintext highlighter-rouge">cylinders</code></th>
-      <th><code class="language-plaintext highlighter-rouge">displacement</code></th>
-      <th><code class="language-plaintext highlighter-rouge">horsepower</code></th>
-      <th><code class="language-plaintext highlighter-rouge">weight</code></th>
-      <th><code class="language-plaintext highlighter-rouge">...</code></th>
+      <td><strong><code class="language-plaintext highlighter-rouge">Out[81]:</code></strong></td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">mpg</code></td>
+      <td><code class="language-plaintext highlighter-rouge">cylinders</code></td>
+      <td><code class="language-plaintext highlighter-rouge">displacement</code></td>
+      <td><code class="language-plaintext highlighter-rouge">horsepower</code></td>
+      <td><code class="language-plaintext highlighter-rouge">weight</code></td>
+      <td><code class="language-plaintext highlighter-rouge">...</code></td>
     </tr>
-  </thead>
+  </tbody>
+</table>
+
+<table>
   <tbody>
     <tr>
       <td> </td>
@@ -722,16 +671,11 @@ dtype='object')
       <td><code class="language-plaintext highlighter-rouge">3504.0</code></td>
       <td><code class="language-plaintext highlighter-rouge">...</code></td>
     </tr>
-    <tr>
-      <td> </td>
-      <td><code class="language-plaintext highlighter-rouge">1</code></td>
-      <td><code class="language-plaintext highlighter-rouge">15.0</code></td>
-      <td><code class="language-plaintext highlighter-rouge">8</code></td>
-      <td><code class="language-plaintext highlighter-rouge">350.0</code></td>
-      <td><code class="language-plaintext highlighter-rouge">165.0</code></td>
-      <td><code class="language-plaintext highlighter-rouge">3693.0</code></td>
-      <td><code class="language-plaintext highlighter-rouge">...</code></td>
-    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
     <tr>
       <td> </td>
       <td><code class="language-plaintext highlighter-rouge">2</code></td>
@@ -745,19 +689,11 @@ dtype='object')
   </tbody>
 </table>
 
-<p>Similarly, an array of Booleans can be used to subset the rows:</p>
-
-<p>유사하게, 불리언들(Booleans)의 하나의 배열은 행들을 부분집합 (subset) 화 하기 위해 사용될 수 있습니다:</p>
-
-<!-- 2.3 Lab: Introduction to Python 57 -->
-
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [82]:idx_80=Auto['year']&gt;80
 Auto[idx_80]
 </code></pre></div></div>
 
 <p>However, if we pass in a list of strings to the <code class="language-plaintext highlighter-rouge">[]</code> method, then we obtain a data frame containing the corresponding set of <em>columns</em> .</p>
-
-<p>그러나, 만약 우리가 <code class="language-plaintext highlighter-rouge">[]</code> 메서드에 문자열들의 하나의 리스트를 전달한다면, 그러면 우리는 해당 <em>열들(columns)</em> 의 상응하는 세트를 포함하는 데이터 프레임 하나를 획득합니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">83</span><span class="p">]:</span> <span class="n">Auto</span><span class="p">[[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">horsepower</span><span class="sh">'</span><span class="p">]]</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">83</span><span class="p">]:</span>       <span class="n">mpg</span>  <span class="n">horsepower</span>
@@ -772,13 +708,11 @@ Auto[idx_80]
          <span class="mi">394</span>  <span class="mf">32.0</span>        <span class="mf">84.0</span>
          <span class="mi">395</span>  <span class="mf">28.0</span>        <span class="mf">79.0</span>
          <span class="mi">396</span>  <span class="mf">31.0</span>        <span class="mf">82.0</span>
-         
+
          <span class="p">[</span><span class="mi">392</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">2</span> <span class="n">columns</span><span class="p">]</span>
 </code></pre></div></div>
 
 <p>Since we did not specify an <em>index</em> column when we loaded our data frame, the rows are labeled using integers 0 to 396.</p>
-
-<p>우리가 우리의 데이터 프레임을 적재했을 때 하나의 <em>인덱스(index)</em> 열을 명시하지 않았으므로, 그 행들은 0에서 396 정수들을 사용하여 라벨(label)되어 있습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">84</span><span class="p">]:</span> <span class="n">Auto</span><span class="p">.</span><span class="n">index</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">84</span><span class="p">]:</span> <span class="nc">Int64Index</span><span class="p">([</span>  <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>   <span class="mi">3</span><span class="p">,</span>   <span class="mi">4</span><span class="p">,</span>   <span class="mi">5</span><span class="p">,</span>   <span class="mi">6</span><span class="p">,</span>   <span class="mi">7</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span>   <span class="mi">9</span><span class="p">,</span>
@@ -788,8 +722,6 @@ Auto[idx_80]
 </code></pre></div></div>
 
 <p>We can use the <code class="language-plaintext highlighter-rouge">set_index()</code> method to re-name the rows using the contents of <code class="language-plaintext highlighter-rouge">Auto['name']</code>.</p>
-
-<p>우리는 <code class="language-plaintext highlighter-rouge">Auto['name']</code> 의 내용들을 사용하여 행들을 다시 이름 짓기 위해 <code class="language-plaintext highlighter-rouge">set_index()</code> 메서드를 사용할 수 있습니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">85</span><span class="p">]:</span> <span class="n">Auto_re</span> <span class="o">=</span> <span class="n">Auto</span><span class="p">.</span><span class="nf">set_index</span><span class="p">(</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">)</span>
          <span class="n">Auto_re</span>
@@ -809,141 +741,125 @@ Auto[idx_80]
 
 <p>We see that the column <code class="language-plaintext highlighter-rouge">'name'</code> is no longer there.</p>
 
-<p>우리는 <code class="language-plaintext highlighter-rouge">'name'</code> 열이 더 이상 그곳에 없음을 봅니다.</p>
-
 <p>Now that the index has been set to <code class="language-plaintext highlighter-rouge">name</code>, we can access rows of the data frame by <code class="language-plaintext highlighter-rouge">name</code> using the <code class="language-plaintext highlighter-rouge">loc[]</code> method of <code class="language-plaintext highlighter-rouge">Auto</code>:</p>
-
-<p>이제 그 인덱스가 <code class="language-plaintext highlighter-rouge">name</code> 으로 설정되었으므로, 우리는 <code class="language-plaintext highlighter-rouge">Auto</code> 의 <code class="language-plaintext highlighter-rouge">loc[]</code> 메서드를 사용하여 <code class="language-plaintext highlighter-rouge">name</code> 에 의해 데이터 프레임의 행들에 접근할 수 있습니다:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.loc[]
 ```python
+
 In [87]: rows = ['amc rebel sst', 'ford torino']
-         Auto_re.loc[rows]
+
 Out[87]:                mpg  cylinders  displacement  horsepower  ...
-         name                                                     ...
-         amc rebel sst  16.0          8         304.0       150.0  ...
-         ford torino    17.0          8         302.0       140.0  ...
+
+amc rebel sst  16.0          8         304.0       150.0  ...
+
 </code></pre></div></div>
 
 <p>As an alternative to using the index name, we could retrieve the 4th and 5th rows of <code class="language-plaintext highlighter-rouge">Auto</code> using the <code class="language-plaintext highlighter-rouge">iloc[]</code> method:</p>
 
-<p>해당 인덱스 이름을 사용하는 것에 대한 하나의 대안으로서, 우리는 <code class="language-plaintext highlighter-rouge">iloc[]</code> 메서드를 사용하여 <code class="language-plaintext highlighter-rouge">Auto</code> 의 4번째와 5번째 행들을 가져올 수 있습니다:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">In</span> <span class="p">[</span><span class="mi">88</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">88</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
 </code></pre></div></div>
 
 <p>We can also use it to retrieve the 1st, 3rd and and 4th columns of <code class="language-plaintext highlighter-rouge">Auto_re</code>:</p>
 
-<p>우리는 1번째, 3번째 그리고 4번째의 <code class="language-plaintext highlighter-rouge">Auto_re</code> 의 열들을 가져오기 위해 또한 그것을 사용할 수 있습니다:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">In</span> <span class="p">[</span><span class="mi">89</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">89</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
 </code></pre></div></div>
 
 <p>We can extract the 4th and 5th rows, as well as the 1st, 3rd and 4th columns, using a single call to <code class="language-plaintext highlighter-rouge">iloc[]</code>:</p>
 
-<p>우리는 <code class="language-plaintext highlighter-rouge">iloc[]</code> 에 대한 단일 호출을 사용하여 1번째, 3번째 및 4번째 열들은 물론 4번째와 5번째 행들을 추출할 수 있습니다:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">In</span> <span class="p">[</span><span class="mi">90</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">90</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">90</span><span class="p">]:</span>                <span class="n">mpg</span>  <span class="n">displacement</span>  <span class="n">horsepower</span>
-         <span class="n">name</span>                                        
-         <span class="n">amc</span> <span class="n">rebel</span> <span class="n">sst</span>  <span class="mf">16.0</span>         <span class="mf">304.0</span>       <span class="mf">150.0</span>
-         <span class="n">ford</span> <span class="n">torino</span>    <span class="mf">17.0</span>         <span class="mf">302.0</span>       <span class="mf">140.0</span>
+<span class="n">name</span>
+
+<span class="n">ford</span> <span class="n">torino</span>    <span class="mf">17.0</span>         <span class="mf">302.0</span>       <span class="mf">140.0</span>
+
 </code></pre></div></div>
 
 <p>Index entries need not be unique: there are several cars in the data frame named <code class="language-plaintext highlighter-rouge">ford galaxie 500</code>.</p>
 
-<p>인덱스 항목들은 유일 무이할 필요가 없습니다: 해당 데이터 프레임 안에는 <code class="language-plaintext highlighter-rouge">ford galaxie 500</code> 이라고 이름 지어진 여러 차들이 있습니다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">In</span> <span class="p">[</span><span class="mi">91</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="sh">'</span><span class="s">ford galaxie 500</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">origin</span><span class="sh">'</span><span class="p">]]</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">91</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="sh">'</span><span class="s">ford galaxie 500</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">origin</span><span class="sh">'</span><span class="p">]]</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">91</span><span class="p">]:</span>                    <span class="n">mpg</span>  <span class="n">origin</span>
-         <span class="n">name</span>                          
-         <span class="n">ford</span> <span class="n">galaxie</span> <span class="mi">500</span>  <span class="mf">15.0</span>       <span class="mi">1</span>
-         <span class="n">ford</span> <span class="n">galaxie</span> <span class="mi">500</span>  <span class="mf">14.0</span>       <span class="mi">1</span>
-         <span class="n">ford</span> <span class="n">galaxie</span> <span class="mi">500</span>  <span class="mf">14.0</span>       <span class="mi">1</span>
+<span class="n">name</span>
+
+<span class="n">ford</span> <span class="n">galaxie</span> <span class="mi">500</span>  <span class="mf">14.0</span>       <span class="mi">1</span>
+
 </code></pre></div></div>
 
 <h3 id="more-on-selecting-rows-and-columns">More on Selecting Rows and Columns</h3>
 
-<h3 id="행들과-열들을-선택하기에-대한-더-많은-사항들">행들과 열들을 선택하기에 대한 더 많은 사항들</h3>
-
 <p>Suppose now that we want to create a data frame consisting of the <code class="language-plaintext highlighter-rouge">weight</code> and <code class="language-plaintext highlighter-rouge">origin</code> of the subset of cars with <code class="language-plaintext highlighter-rouge">year</code> greater than 80 — i.e. those built after 1980.</p>
-
-<p>이제 우리가 80보다 큰 <code class="language-plaintext highlighter-rouge">year</code> 를 가진 차들의 부분집합 — 즉 1980년 이후에 만들어진 것들 —의 <code class="language-plaintext highlighter-rouge">weight</code> 와 <code class="language-plaintext highlighter-rouge">origin</code> 으로 구성된 데이터 프레임 하나를 생성하기 원한다고 가정해 봅시다.</p>
 
 <p>To do this, we first create a Boolean array that indexes the rows.</p>
 
-<p>이것을 행하기 위해, 우리는 우선 행들을 인덱스하는 불리언 배열 하나를 생성합니다.</p>
-
 <p>The <code class="language-plaintext highlighter-rouge">loc[]</code> method allows for Boolean entries as well as strings:</p>
 
-<p><code class="language-plaintext highlighter-rouge">loc[]</code> 메서드는 문자열들뿐만 아니라 불리언 항목들도 허용합니다:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">In</span> <span class="p">[</span><span class="mi">92</span><span class="p">]:</span> <span class="n">idx_80</span> <span class="o">=</span> <span class="n">Auto_re</span><span class="p">[</span><span class="sh">'</span><span class="s">year</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">92</span><span class="p">]:</span> <span class="n">idx_80</span> <span class="o">=</span> <span class="n">Auto_re</span><span class="p">[</span><span class="sh">'</span><span class="s">year</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span>
-         <span class="n">Auto_re</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx_80</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">origin</span><span class="sh">'</span><span class="p">]]</span>
 </code></pre></div></div>
 
 <p>To do this more concisely, we can use an anonymous function called a <code class="language-plaintext highlighter-rouge">lambda</code>:</p>
 
-<p>이것을 더 간결하게 행하기 위해, 우리는 <code class="language-plaintext highlighter-rouge">lambda</code> 라고 불리는 익명 함수(anonymous function)를 사용할 수 있습니다:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">In</span> <span class="p">[</span><span class="mi">93</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">year</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">origin</span><span class="sh">'</span><span class="p">]]</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">93</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">year</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">origin</span><span class="sh">'</span><span class="p">]]</span>
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">lambda</code> call creates a function that takes a single argument, here <code class="language-plaintext highlighter-rouge">df</code>, and returns <code class="language-plaintext highlighter-rouge">df['year'] &gt; 80</code>.</p>
 
-<p><code class="language-plaintext highlighter-rouge">lambda</code> 호출은 단일 인수, 여기서는 <code class="language-plaintext highlighter-rouge">df</code> 를 취하고, <code class="language-plaintext highlighter-rouge">df['year'] &gt; 80</code> 을 반환하는 함수 하나를 생성합니다.</p>
-
 <p>Since it is created inside the <code class="language-plaintext highlighter-rouge">loc[]</code> method for the dataframe <code class="language-plaintext highlighter-rouge">Auto_re</code>, that dataframe will be the argument supplied.</p>
-
-<p>그것은 <code class="language-plaintext highlighter-rouge">Auto_re</code> 데이터프레임을 위한 <code class="language-plaintext highlighter-rouge">loc[]</code> 메서드 안에서 생성되기 때문에, 그 데이터프레임이 제공되는 인수가 될 것입니다.</p>
 
 <p>As another example of using a <code class="language-plaintext highlighter-rouge">lambda</code>, suppose that we want all cars built after 1980 that achieve greater than 30 miles per gallon:</p>
 
-<p><code class="language-plaintext highlighter-rouge">lambda</code> 를 사용하는 또 다른 예제로서, 우리가 갤런 당 30 마일보다 큰 것을 달성하는 1980년 이후에 만들어진 모든 차들을 원한다고 가정해 봅시다:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">In</span> <span class="p">[</span><span class="mi">94</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">year</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">),</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">94</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">year</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">mpg</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">),</span>
-                     <span class="p">[</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">origin</span><span class="sh">'</span><span class="p">]</span>
-                    <span class="p">]</span>
+<span class="p">]</span>
+
 </code></pre></div></div>
 
 <p>The symbol <code class="language-plaintext highlighter-rouge">&amp;</code> computes an element-wise <em>and</em> operation.</p>
 
-<p>기호 <code class="language-plaintext highlighter-rouge">&amp;</code> 은 요소별(element-wise) <em>and</em> 연산을 계산합니다.</p>
-
 <p>As another example, suppose that we want to retrieve all <code class="language-plaintext highlighter-rouge">Ford</code> and <code class="language-plaintext highlighter-rouge">Datsun</code> cars with <code class="language-plaintext highlighter-rouge">displacement</code> less than 300.</p>
-
-<p>또 다른 예제로서, 우리가 300 보다 적은 <code class="language-plaintext highlighter-rouge">displacement</code> 를 가진 모든 <code class="language-plaintext highlighter-rouge">Ford</code> 와 <code class="language-plaintext highlighter-rouge">Datsun</code> 차들을 반환받기를 원한다고 가정해 봅시다.</p>
 
 <p>We check whether each <code class="language-plaintext highlighter-rouge">name</code> entry contains either the string <code class="language-plaintext highlighter-rouge">ford</code> or <code class="language-plaintext highlighter-rouge">datsun</code> using the <code class="language-plaintext highlighter-rouge">str.contains()</code> method of the <code class="language-plaintext highlighter-rouge">index</code> attribute of the dataframe:</p>
 
-<p>우리는 데이터프레임의 <code class="language-plaintext highlighter-rouge">index</code> 속성의 <code class="language-plaintext highlighter-rouge">str.contains()</code> 메서드를 사용하여 각 <code class="language-plaintext highlighter-rouge">name</code> 항목이 문자열 <code class="language-plaintext highlighter-rouge">ford</code> 또는 <code class="language-plaintext highlighter-rouge">datsun</code> 을 포함하는지 여부를 확인합니다:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">In</span> <span class="p">[</span><span class="mi">95</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">displacement</span><span class="sh">'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">)</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">95</span><span class="p">]:</span> <span class="n">Auto_re</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">displacement</span><span class="sh">'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">)</span>
-                                <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">index</span><span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="nf">contains</span><span class="p">(</span><span class="sh">'</span><span class="s">ford</span><span class="sh">'</span><span class="p">)</span>
-                                   <span class="o">|</span> <span class="n">df</span><span class="p">.</span><span class="n">index</span><span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="nf">contains</span><span class="p">(</span><span class="sh">'</span><span class="s">datsun</span><span class="sh">'</span><span class="p">)),</span>
-                     <span class="p">[</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">origin</span><span class="sh">'</span><span class="p">]</span>
-                    <span class="p">]</span>
+<span class="o">|</span> <span class="n">df</span><span class="p">.</span><span class="n">index</span><span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="nf">contains</span><span class="p">(</span><span class="sh">'</span><span class="s">datsun</span><span class="sh">'</span><span class="p">)),</span>
+
+<span class="p">]</span>
+
 </code></pre></div></div>
 
 <p>Here, the symbol <code class="language-plaintext highlighter-rouge">|</code> computes an element-wise <em>or</em> operation.</p>
 
-<p>여기서, <code class="language-plaintext highlighter-rouge">|</code> 기호는 요소별(element-wise) <em>or</em> 연산을 계산합니다.</p>
-
 <p>In summary, a powerful set of operations is available to index the rows and columns of data frames.</p>
-
-<p>요약하자면, 데이터 프레임들의 행들과 열들을 인덱스하기 위한 강력한 연산들의 세트가 이용 가능합니다.</p>
 
 <p>For integer based queries, use the <code class="language-plaintext highlighter-rouge">iloc[]</code> method.</p>
 
-<p>정수 기반 질의들에는, <code class="language-plaintext highlighter-rouge">iloc[]</code> 메서드를 사용하십시오.</p>
-
 <p>For string and Boolean selections, use the <code class="language-plaintext highlighter-rouge">loc[]</code> method.</p>
-
-<p>문자열 및 불리언 선택들에는, <code class="language-plaintext highlighter-rouge">loc[]</code> 메서드를 사용하십시오.</p>
 
 <p>For functional queries that filter rows, use the <code class="language-plaintext highlighter-rouge">loc[]</code> method with a function (typically a <code class="language-plaintext highlighter-rouge">lambda</code>) in the rows argument.</p>
 
-<p>행들을 필터하는 함수적 질의들에는, 행들 인수 안에 하나의 함수(전형적으로 하나의 <code class="language-plaintext highlighter-rouge">lambda</code>)와 함께 <code class="language-plaintext highlighter-rouge">loc[]</code> 메서드를 사용하십시오.</p>
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../2_3_6_indexing_data/index.html">&lt; 2.3.6 Indexing Data</a></td>
+      <td><a href="../2_3_8_for_loops/index.html">2.3.8 For Loops &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

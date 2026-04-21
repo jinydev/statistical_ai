@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -513,21 +512,66 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="three-model-fit">Three: Model Fit</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_2_2_1_two_deciding_on_important_variables/index.html">&lt; 3.2.2.1 Two Deciding On Important Variables</a></td>
+      <td><a href="../3_2_2_3_four_predictions/index.html">3.2.2.3 Four Predictions &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Two of the most common numerical measures of model fit are the RSE and $R^2$ , the fraction of variance explained. These quantities are computed and interpreted in the same fashion as for simple linear regression.</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>Recall that in simple regression, $R^2$ is the square of the correlation of the response and the variable. In multiple linear regression, it turns out that it equals ${	ext{Cor}(Y, \hat{Y})}^2$ , the square of the correlation between the response and the fitted linear model; in fact one property of the fitted linear model is that it maximizes this correlation among all possible linear models.</p>
+<h1 id="three-model-fit">Three: Model Fit</h1>
 
-<p>An $R^2$ value close to 1 indicates that the model explains a large portion of the variance in the response variable. As an example, we saw in Table 3.6 that for the <code class="language-plaintext highlighter-rouge">Advertising</code> data, the model that uses all three advertising media to predict <code class="language-plaintext highlighter-rouge">sales</code> has an $R^2$ of 0 <em>.</em> 8972. On the other hand, the model that uses only <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> to predict <code class="language-plaintext highlighter-rouge">sales</code> has an $R^2$ value of 0 <em>.</em> 89719. In other words, there is a <em>small</em> increase in $R^2$ if we include newspaper advertising in the model that already contains TV and radio advertising, even though we saw earlier that the $p$-value for newspaper advertising in Table 3.4 is not significant. It turns out that $R^2$ will always increase when more variables are added to the model, even if those variables are only weakly associated with the response. This is due to the fact that adding another variable always results in a decrease in the residual sum of squares on the training data (though not necessarily the testing data). Thus, the $R^2$ statistic, which is also computed on the training data, must increase. The fact that adding newspaper advertising to the model containing only TV and radio advertising leads to just a tiny increase in $R^2$ provides additional evidence that <code class="language-plaintext highlighter-rouge">newspaper</code> can be dropped from the model. Essentially, <code class="language-plaintext highlighter-rouge">newspaper</code> provides no real improvement in the model fit to the training samples, and its inclusion will likely lead to poor results on independent test samples due to overfitting.</p>
+<p>Two of the most common numerical measures of model fit are the RSE and $R^2$, the fraction of variance explained.</p>
 
-<p>By contrast, the model containing only <code class="language-plaintext highlighter-rouge">TV</code> as a predictor had an $R^2$ of 0 <em>.</em> 61 (Table 3.2). Adding <code class="language-plaintext highlighter-rouge">radio</code> to the model leads to a substantial improvement in $R^2$ . This implies that a model that uses TV and radio expenditures to predict sales is substantially better than one that uses only TV advertising. We could further quantify this improvement by looking at the $p$-value for the <code class="language-plaintext highlighter-rouge">radio</code> coefficient in a model that contains only <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> as predictors.</p>
+<p>These quantities are computed and interpreted in the same fashion as for simple linear regression.</p>
 
-<p>The model that contains only <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> as predictors has an RSE of 1.681, and the model that also contains <code class="language-plaintext highlighter-rouge">newspaper</code> as a predictor has an RSE of 1.686 (Table 3.6). In contrast, the model that contains only <code class="language-plaintext highlighter-rouge">TV</code> has an RSE of 3 <em>.</em> 26 (Table 3.2). This corroborates our previous conclusion that a model that uses TV and radio expenditures to predict sales is much more accurate (on the training data) than one that only uses TV spending. Furthermore, given that TV and radio expenditures are used as predictors, there is no point in also using newspaper spending as a predictor in the model. The observant reader may wonder how RSE can increase when <code class="language-plaintext highlighter-rouge">newspaper</code> is added to the model given that RSS must decrease. In general RSE is defined as</p>
+<p>Recall that in simple regression, $R^2$ is the square of the correlation of the response and the variable.</p>
+
+<p>In multiple linear regression, it turns out that it equals $\text{Cor}(Y, \hat{Y})^2$, the square of the correlation between the response and the fitted linear model; in fact one property of the fitted linear model is that it maximizes this correlation among all possible linear models.</p>
+
+<p>An $R^2$ value close to 1 indicates that the model explains a large portion of the variance in the response variable.</p>
+
+<p>As an example, we saw in Table 3.6 that for the <code class="language-plaintext highlighter-rouge">Advertising</code> data, the model that uses all three advertising media to predict <code class="language-plaintext highlighter-rouge">sales</code> has an $R^2$ of $0.8972$.</p>
+
+<p>On the other hand, the model that uses only <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> to predict <code class="language-plaintext highlighter-rouge">sales</code> has an $R^2$ value of $0.89719$.</p>
+
+<p>In other words, there is a <em>small</em> increase in $R^2$ if we include newspaper advertising in the model that already contains TV and radio advertising, even though we saw earlier that the $p$-value for newspaper advertising in Table 3.4 is not significant.</p>
+
+<p>It turns out that $R^2$ will always increase when more variables are added to the model, even if those variables are only weakly associated with the response.</p>
+
+<p>This is due to the fact that adding another variable always results in a decrease in the residual sum of squares on the training data (though not necessarily the testing data).</p>
+
+<p>Thus, the $R^2$ statistic, which is also computed on the training data, must increase.</p>
+
+<p>The fact that adding newspaper advertising to the model containing only TV and radio advertising leads to just a tiny increase in $R^2$ provides additional evidence that <code class="language-plaintext highlighter-rouge">newspaper</code> can be dropped from the model.</p>
+
+<p>Essentially, <code class="language-plaintext highlighter-rouge">newspaper</code> provides no real improvement in the model fit to the training samples, and its inclusion will likely lead to poor results on independent test samples due to overfitting.</p>
+
+<p>By contrast, the model containing only <code class="language-plaintext highlighter-rouge">TV</code> as a predictor had an $R^2$ of $0.61$ (Table 3.2).</p>
+
+<p>Adding <code class="language-plaintext highlighter-rouge">radio</code> to the model leads to a substantial improvement in $R^2$.</p>
+
+<p>This implies that a model that uses TV and radio expenditures to predict sales is substantially better than one that uses only TV advertising.</p>
+
+<p>We could further quantify this improvement by looking at the $p$-value for the <code class="language-plaintext highlighter-rouge">radio</code> coefficient in a model that contains only <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> as predictors.</p>
+
+<p>The model that contains only <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> as predictors has an RSE of 1.681, and the model that also contains <code class="language-plaintext highlighter-rouge">newspaper</code> as a predictor has an RSE of 1.686 (Table 3.6).</p>
+
+<p>In contrast, the model that contains only <code class="language-plaintext highlighter-rouge">TV</code> has an RSE of $3.26$ (Table 3.2).</p>
+
+<p>This corroborates our previous conclusion that a model that uses TV and radio expenditures to predict sales is much more accurate (on the training data) than one that only uses TV spending.</p>
+
+<p>Furthermore, given that TV and radio expenditures are used as predictors, there is no point in also using newspaper spending as a predictor in the model.</p>
+
+<p>The observant reader may wonder how RSE can increase when <code class="language-plaintext highlighter-rouge">newspaper</code> is added to the model given that RSS must decrease. In general RSE is defined as</p>
 
 \[\text{RSE} = \sqrt{\frac{1}{n-p-1} \text{RSS}} \quad (3.26)\]
-
-<p>3.2 Multiple Linear Regression 89</p>
 
 <p><strong>==&gt; picture [230 x 151] intentionally omitted &lt;==</strong></p>
 
@@ -536,9 +580,38 @@ Sales<br />TV<br />Radio<br /><strong>—– End of picture text —–</strong>
 
 <p><strong>FIGURE 3.5.</strong> <em>For the</em> <code class="language-plaintext highlighter-rouge">Advertising</code> <em>data, a linear regression fit to</em> <code class="language-plaintext highlighter-rouge">sales</code> <em>using</em> <code class="language-plaintext highlighter-rouge">TV</code> <em>and</em> <code class="language-plaintext highlighter-rouge">radio</code> <em>as predictors. From the pattern of the residuals, we can see that there is a pronounced non-linear relationship in the data. The positive residuals (those visible above the surface), tend to lie along the 45-degree line, where TV and Radio budgets are split evenly. The negative residuals (most not visible), tend to lie away from this line, where budgets are more lopsided.</em></p>
 
-<p>which simplifies to (3.15) for a simple linear regression. Thus, models with more variables can have higher RSE if the decrease in RSS is small relative to the increase in $p$ .</p>
+<p>which simplifies to (3.15) for a simple linear regression.</p>
 
-<p>In addition to looking at the RSE and $R^2$ statistics just discussed, it can be useful to plot the data. Graphical summaries can reveal problems with a model that are not visible from numerical statistics. For example, Figure 3.5 displays a three-dimensional plot of <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> versus <code class="language-plaintext highlighter-rouge">sales</code> . We see that some observations lie above and some observations lie below the least squares regression plane. In particular, the linear model seems to overestimate <code class="language-plaintext highlighter-rouge">sales</code> for instances in which most of the advertising money was spent exclusively on either <code class="language-plaintext highlighter-rouge">TV</code> or <code class="language-plaintext highlighter-rouge">radio</code> . It underestimates <code class="language-plaintext highlighter-rouge">sales</code> for instances where the budget was split between the two media. This pronounced non-linear pattern suggests a <em>synergy</em> or <em>interaction</em> effect between interaction the advertising media, whereby combining the media together results in a bigger boost to sales than using any single medium. In Section 3.3.2, we will discuss extending the linear model to accommodate such synergistic effects through the use of interaction terms.</p>
+<p>Thus, models with more variables can have higher RSE if the decrease in RSS is small relative to the increase in $p$.</p>
+
+<p>In addition to looking at the RSE and $R^2$ statistics just discussed, it can be useful to plot the data.</p>
+
+<p>Graphical summaries can reveal problems with a model that are not visible from numerical statistics.</p>
+
+<p>For example, Figure 3.5 displays a three-dimensional plot of <code class="language-plaintext highlighter-rouge">TV</code> and <code class="language-plaintext highlighter-rouge">radio</code> versus <code class="language-plaintext highlighter-rouge">sales</code>.</p>
+
+<p>We see that some observations lie above and some observations lie below the least squares regression plane.</p>
+
+<p>In particular, the linear model seems to overestimate <code class="language-plaintext highlighter-rouge">sales</code> for instances in which most of the advertising money was spent exclusively on either <code class="language-plaintext highlighter-rouge">TV</code> or <code class="language-plaintext highlighter-rouge">radio</code>.</p>
+
+<p>It underestimates <code class="language-plaintext highlighter-rouge">sales</code> for instances where the budget was split between the two media.</p>
+
+<p>This pronounced non-linear pattern suggests a <em>synergy</em> or <em>interaction</em> effect between the advertising media, whereby combining the media together results in a bigger boost to sales than using any single medium.</p>
+
+<p>In Section 3.3.2, we will discuss extending the linear model to accommodate such synergistic effects through the use of interaction terms.</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_2_2_1_two_deciding_on_important_variables/index.html">&lt; 3.2.2.1 Two Deciding On Important Variables</a></td>
+      <td><a href="../3_2_2_3_four_predictions/index.html">3.2.2.3 Four Predictions &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

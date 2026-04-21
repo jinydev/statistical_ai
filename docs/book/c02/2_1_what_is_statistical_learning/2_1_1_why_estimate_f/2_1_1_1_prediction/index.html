@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -513,306 +512,121 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="prediction">Prediction</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 2.1.1 Why Estimate F</a></td>
+      <td><a href="../../2_1_2_how_do_we_estimate_f/index.html">2.1.2 How Do We Estimate F &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<h1 id="예측">예측</h1>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>In many situations, a set of inputs <em>X</em> are readily available, but the output <em>Y</em> cannot be easily obtained.</p>
+<h1 id="prediction">Prediction</h1>
 
-<p>많은 상황에서 입력 세트 <em>X</em> 는 쉽게 이용할 수 있지만, 출력 세트 <em>Y</em> 는 쉽게 얻을 수 없습니다.</p>
-
-<p>In this setting, since the error term averages to zero, we can predict <em>Y</em> using</p>
-
-<p>이러한 설정에서는 오차 항의 평균이 0이 되므로, 우리는 다음을 사용하여 <em>Y</em> 를 예측할 수 있습니다.</p>
-
-\[\hat{Y} = \hat{f}(X) \tag{2.2}\]
+<p>In many situations, a set of inputs <em>X</em> are readily available, but the output <em>Y</em> cannot be easily obtained. In this setting, since the error term averages to zero, we can predict <em>Y</em> using 
+\(\hat{Y} = \hat{f}(X) \tag{2.2}\)</p>
 
 <p>where $\hat{f}$ represents our estimate for <em>f</em>, and $\hat{Y}$ represents the resulting prediction for <em>Y</em>.</p>
 
-<p>여기서 $\hat{f}$ 는 <em>f</em> 에 대한 우리의 추정치를 나타내며, $\hat{Y}$ 는 <em>Y</em> 에 대한 결과 예측값을 나타냅니다.</p>
-
 <p>In this setting, $\hat{f}$ is often treated as a <em>black box</em>, in the sense that one is not typically concerned with the exact form of $\hat{f}$, provided that it yields accurate predictions for <em>Y</em>.</p>
 
-<p>이 설정에서 <em>Y</em> 에 대해 정확한 예측을 제공하기만 한다면 일반적으로 $\hat{f}$ 의 정확한 형태에 관여하지 않는다는 점에서 $\hat{f}$ 는 종종 <em>블랙박스(black box)</em> 로 취급됩니다.</p>
+<p>As an example, suppose that $X_1, \dots, X_p$ are characteristics of a patient’s blood sample that can be easily measured in a lab, and <em>Y</em> is a variable encoding the patient’s risk for a severe adverse reaction to a particular drug. It is natural to seek to predict <em>Y</em> using <em>X</em>, since we can then avoid giving the drug in question to patients who are at high risk of an adverse reaction—that is, patients for whom the estimate of <em>Y</em> is high.</p>
 
-<p>As an example, suppose that $X_1, \dots, X_p$ are characteristics of a patient’s blood sample that can be easily measured in a lab, and <em>Y</em> is a variable encoding the patient’s risk for a severe adverse reaction to a particular drug.</p>
-
-<p>예를 들어, $X_1, \dots, X_p$ 가 실험실에서 쉽게 측정할 수 있는 환자 혈액 샘플의 특성이며, <em>Y</em> 가 특정 약물에 대한 환자의 심각한 부작용 위험을 인코딩하는 변수라고 가정해보겠습니다.</p>
-
-<p>It is natural to seek to predict <em>Y</em> using <em>X</em>, since we can then avoid giving the drug in question to patients who are at high risk of an adverse reaction—that is, patients for whom the estimate of <em>Y</em> is high.</p>
-
-<p>우리가 <em>X</em> 를 사용하여 <em>Y</em> 를 예측하고자 하는 것은 자연스럽습니다. 왜냐하면 부작용 위험이 높은 환자들, 즉 <em>Y</em> 추정치가 높은 환자들에게 문제의 약물을 투여하는 것을 피할 수 있기 때문입니다.</p>
-
-<p>The accuracy of $\hat{Y}$ as a prediction for <em>Y</em> depends on two quantities, which we will call the <em>reducible error</em> and the <em>irreducible error</em>.</p>
-
-<p><em>Y</em> 에 대한 예측으로서 $\hat{Y}$ 의 정확도는 두 가지 양에 의존하며, 우리는 이를 <em>축소 가능한 오차(reducible error)</em> 와 <em>축소 불가능한 오차(irreducible error)</em> 라고 부를 것입니다.</p>
-
-<p>In general, $\hat{f}$ will not be a perfect estimate for <em>f</em>, and this inaccuracy will introduce some error.</p>
-
-<p>일반적으로 $\hat{f}$ 는 <em>f</em> 에 대한 완벽한 추정치가 되지 않을 것이며, 이러한 부정확성은 약간의 오차를 발생시킵니다.</p>
-
-<p>This error is <em>reducible</em> because we can potentially improve the accuracy of $\hat{f}$ by using the most appropriate statistical learning technique to estimate <em>f</em>.</p>
-
-<p>우리가 <em>f</em> 를 추정하기 위해 가장 적절한 통계적 학습 기법을 사용하여 $\hat{f}$ 의 정확도를 잠재적으로 향상시킬 수 있기 때문에 이 오차는 <em>축소 가능(reducible)</em> 합니다.</p>
-
-<p>However, even if it were possible to form a perfect estimate for <em>f</em>, so that our estimated response took the form $\hat{Y} = f(X)$, our prediction would still have some error in it!</p>
-
-<p>그러나 만약 <em>f</em> 에 대한 완벽한 추정치를 형성하는 것이 가능하여 우리의 추정 반응값이 $\hat{Y} = f(X)$ 형태를 취하게 된다 하더라도, 우리의 예측 결과에는 여전히 약간의 오차가 있을 것입니다!</p>
-
-<p>This is because <em>Y</em> is also a function of $\epsilon$, which, by definition, cannot be predicted using <em>X</em>.</p>
-
-<p>이는 <em>Y</em> 가 $\epsilon$ 의 함수이기도 하기 때문이며, 정의상 이는 <em>X</em> 를 사용하여 예측될 수 없습니다.</p>
-
-<p>Therefore, variability associated with $\epsilon$ also affects the accuracy of our predictions.</p>
-
-<p>그러므로 $\epsilon$ 과 연관된 변동성은 우리 예측의 정확도에도 영향을 미칩니다.</p>
+<p>The accuracy of $\hat{Y}$ as a prediction for <em>Y</em> depends on two quantities, which we will call the <em>reducible error</em> and the <em>irreducible error</em>. In general, $\hat{f}$ will not be a perfect estimate for <em>f</em>, and this inaccuracy will introduce some error. This error is <em>reducible</em> because we can potentially improve the accuracy of $\hat{f}$ by using the most appropriate statistical learning technique to estimate <em>f</em>. However, even if it were possible to form a perfect estimate for <em>f</em>, so that our estimated response took the form $\hat{Y} = f(X)$, our prediction would still have some error in it! This is because <em>Y</em> is also a function of $\epsilon$, which, by definition, cannot be predicted using <em>X</em>. Therefore, variability associated with $\epsilon$ also affects the accuracy of our predictions.</p>
 
 <p>This is known as the <em>irreducible</em> error, because no matter how well we estimate <em>f</em>, we cannot reduce the error introduced by $\epsilon$.</p>
 
-<p>우리가 <em>f</em> 를 아무리 잘 예측한다 할지라도 $\epsilon$ 에 의해 도입된 오차를 줄일 수 없으므로 이것은 <em>축소 불가능한(irreducible)</em> 오차로 알려져 있습니다.</p>
-
-<p>Why is the irreducible error larger than zero?</p>
-
-<p>왜 축소 불가능한 오차는 0보다 큽니까?</p>
-
-<p>The quantity $\epsilon$ may contain unmeasured variables that are useful in predicting <em>Y</em>: since we don’t measure them, <em>f</em> cannot use them for its prediction.</p>
-
-<p>양 $\epsilon$ 은 <em>Y</em> 를 예측하는 데 유용하지만 측정되지 않은 변수들을 포함할 수 있습니다: 우리가 이를 측정하지 않기 때문에 <em>f</em> 는 예측을 위해 그 변수들을 사용할 수 없습니다.</p>
-
-<p><img src="./img/Image_017.png" alt="Figure 2.3" /></p>
+<p>Why is the irreducible error larger than zero? The quantity $\epsilon$ may contain unmeasured variables that are useful in predicting <em>Y</em>: since we don’t measure them, <em>f</em> cannot use them for its prediction. <img src="./img/Image_017.png" alt="Figure 2.3" /></p>
 
 <p><strong>FIGURE 2.3.</strong> <em>The plot displays</em> <code class="language-plaintext highlighter-rouge">income</code> <em>as a function of</em> <code class="language-plaintext highlighter-rouge">years of education</code> <em>and</em> <code class="language-plaintext highlighter-rouge">seniority</code> <em>in the</em> <code class="language-plaintext highlighter-rouge">Income</code> <em>data set. The blue surface represents the true underlying relationship between</em> <code class="language-plaintext highlighter-rouge">income</code> <em>and</em> <code class="language-plaintext highlighter-rouge">years of education</code> <em>and</em> <code class="language-plaintext highlighter-rouge">seniority</code>, <em>which is known since the data are simulated. The red dots indicate the observed values of these quantities for 30 individuals.</em></p>
 
-<p><strong>그림 2.3.</strong> <em>이 구성도는</em> <code class="language-plaintext highlighter-rouge">Income</code> <em>데이터 세트에서</em> <code class="language-plaintext highlighter-rouge">years of education(교육 연수)</code><em>과</em> <code class="language-plaintext highlighter-rouge">seniority(근속 연수)</code><em>의 함수로서</em> <code class="language-plaintext highlighter-rouge">income(소득)</code><em>을 보여줍니다. 파란색 표면은</em> <code class="language-plaintext highlighter-rouge">income</code><em>과</em> <code class="language-plaintext highlighter-rouge">years of education</code> <em>그리고</em> <code class="language-plaintext highlighter-rouge">seniority</code> <em>간의 진정한 기저 관계를 나타내며, 이는 데이터가 시뮬레이션 되었기 때문에 알려져 있습니다. 빨간색 점들은 30명의 개인에 대한 측정값을 나타냅니다.</em></p>
+<p>The quantity $\epsilon$ may also contain unmeasurable variation. For example, the risk of an adverse reaction might vary for a given patient on a given day, depending on manufacturing variation in the drug itself or the patient’s general feeling of well-being on that day.</p>
 
-<p>The quantity $\epsilon$ may also contain unmeasurable variation.</p>
+<p>Consider a given estimate $\hat{f}$ and a set of predictors <em>X</em>, which yields the prediction $\hat{Y} = \hat{f}(X)$. Assume for a moment that both $\hat{f}$ and <em>X</em> are fixed, so that the only variability comes from $\epsilon$. Then, it is easy to show that $$</p>
 
-<p>이러한 양 $\epsilon$ 에는 측정 불가능한 변동성이 포함되어 있을 수도 있습니다.</p>
-
-<p>For example, the risk of an adverse reaction might vary for a given patient on a given day, depending on manufacturing variation in the drug itself or the patient’s general feeling of well-being on that day.</p>
-
-<p>예를 들어, 부작용 위험은 약물 자체의 제조 변동성이나 당일 환자의 웰빙 컨디션에 따라 특정 날짜의 환자에게 다르게 나타날 수 있습니다.</p>
-
-<p>Consider a given estimate $\hat{f}$ and a set of predictors <em>X</em>, which yields the prediction $\hat{Y} = \hat{f}(X)$.</p>
-
-<p>예측 $\hat{Y} = \hat{f}(X)$ 를 산출하는 주어진 추정치 $\hat{f}$ 와 예측 변수 세트 <em>X</em> 를 고려해 보십시오.</p>
-
-<p>Assume for a moment that both $\hat{f}$ and <em>X</em> are fixed, so that the only variability comes from $\epsilon$.</p>
-
-<p>유일한 변동성이 $\epsilon$ 에서 오도록 잠시 $\hat{f}$ 와 <em>X</em> 양측 모두 고정되었다고 가정하겠습니다.</p>
-
-<p>Then, it is easy to show that</p>
-
-<p>그러면, 다음을 쉽게 보여줄 수 있습니다:</p>
-
-\[\begin{align*}
-E(Y - \hat{Y})^2 &amp;= E[f(X) + \epsilon - \hat{f}(X)]^2 \\
+<p>\begin{align<em>}
+E(Y - \hat{Y})^2 &amp;= E[f(X) + \epsilon - \hat{f}(X)]^2 <br />
 &amp;= [f(X) - \hat{f}(X)]^2 + \text{Var}(\epsilon)
-\end{align*} \tag{2.3}\]
+\end{align</em>} \tag{2.3}</p>
+
+<p>$$</p>
 
 <p>where $E(Y - \hat{Y})^2$ represents the average, or <em>expected value</em>, of the squared difference between the predicted and actual value of <em>Y</em>, and $\text{Var}(\epsilon)$ represents the <em>variance</em> associated with the error term $\epsilon$.</p>
 
-<p>여기서 $E(Y - \hat{Y})^2$ 는 <em>Y</em> 의 예측값과 실제값 사이 제곱된 차이의 평균, 즉 <em>기댓값(expected value)</em> 을 나타내며, $\text{Var}(\epsilon)$ 은 오차항 $\epsilon$ 과 연관된 <em>분산(variance)</em> 을 나타냅니다.</p>
-
-<p>The focus of this book is on techniques for estimating <em>f</em> with the aim of minimizing the reducible error.</p>
-
-<p>이 책의 초점은 축소 가능한 오차를 최소화할 목적으로 <em>f</em> 를 측정하기 위한 기법들에 있습니다.</p>
-
-<p>It is important to keep in mind that the irreducible error will always provide an upper bound on the accuracy of our prediction for <em>Y</em>.</p>
-
-<p>축소 불가능한 오차가 언제나 <em>Y</em> 에 대한 우리 예측의 정확도에 상한선을 제공할 것이라는 점을 반드시 유념해야 합니다.</p>
+<p>The focus of this book is on techniques for estimating <em>f</em> with the aim of minimizing the reducible error. It is important to keep in mind that the irreducible error will always provide an upper bound on the accuracy of our prediction for <em>Y</em>.</p>
 
 <p>This bound is almost always unknown in practice.</p>
 
-<p>이 상한선은 실제적으로 항상 미지수입니다.</p>
-
 <h1 id="inference">Inference</h1>
 
-<h1 id="추론">추론</h1>
-
-<p>We are often interested in understanding the association between <em>Y</em> and $X_1, \dots, X_p$.</p>
-
-<p>우리는 종종 <em>Y</em> 와 $X_1, \dots, X_p$ 사이의 연관성을 이해하는 것에 관심이 있습니다.</p>
-
-<p>In this situation we wish to estimate <em>f</em>, but our goal is not necessarily to make predictions for <em>Y</em>.</p>
-
-<p>이 상황에서 우리는 <em>f</em> 를 추정하기를 희망하지만, 목표가 반드시 <em>Y</em> 에 대한 예측을 하는 것만은 아닙니다.</p>
+<p>We are often interested in understanding the association between <em>Y</em> and $X_1, \dots, X_p$. In this situation we wish to estimate <em>f</em>, but our goal is not necessarily to make predictions for <em>Y</em>.</p>
 
 <p>Now $\hat{f}$ cannot be treated as a black box, because we need to know its exact form.</p>
 
-<p>이제 $\hat{f}$ 는 정확한 형태를 알아야 하므로 블랙박스로 취급할 수 없습니다.</p>
-
 <p>In this setting, one may be interested in answering the following questions:</p>
 
-<p>이러한 설정 하에서, 여러분은 다음 질문들에 대답하는 것에 관심이 있을 수 있습니다:</p>
-
 <ul>
-  <li>
-    <p><em>Which predictors are associated with the response?</em></p>
-  </li>
-  <li>
-    <p><em>어느 예측 변수들이 응답과 연관되어 있는가?</em></p>
-  </li>
+  <li><em>Which predictors are associated with the response?</em></li>
 </ul>
 
-<p>It is often the case that only a small fraction of the available predictors are substantially associated with <em>Y</em>.</p>
-
-<p>이용 가능한 예측 변수들 중에서 소수의 부분만이 실질적으로 <em>Y</em> 와 관련되는 경우가 흔합니다.</p>
-
-<p>Identifying the few <em>important</em> predictors among a large set of possible variables can be extremely useful, depending on the application.</p>
-
-<p>사용할 수 있는 무수히 많은 변수들 중에서 소수의 <em>중요한(important)</em> 예측 변수를 식별하는 것은 ứng용 분야에 따라 다르게 극히 유용할 수 있습니다.</p>
+<p>It is often the case that only a small fraction of the available predictors are substantially associated with <em>Y</em>. Identifying the few <em>important</em> predictors among a large set of possible variables can be extremely useful, depending on the application.</p>
 
 <ul>
-  <li>
-    <p><em>What is the relationship between the response and each predictor?</em></p>
-  </li>
-  <li>
-    <p><em>응답과 각 예측 변수 사이에는 어떤 관계가 있는가?</em></p>
-  </li>
+  <li><em>What is the relationship between the response and each predictor?</em></li>
 </ul>
 
-<p>Some predictors may have a positive relationship with <em>Y</em>, in the sense that larger values of the predictor are associated with larger values of <em>Y</em>.</p>
-
-<p>일부 예측 변수들은 값이 커지면 <em>Y</em> 값 또한 커진다는 점에서, <em>Y</em> 와 긍정적 관계를 가질 수 있습니다.</p>
-
-<p>Other predictors may have the opposite relationship.</p>
-
-<p>다른 예측 변수들은 반대되는 관계를 가질 수도 있습니다.</p>
-
-<p>Depending on the complexity of <em>f</em>, the relationship between the response and a given predictor may also depend on the values of the other predictors.</p>
-
-<p><em>f</em> 의 복잡성에 따라 응답과 특정 예측 변수 간의 관계성은 다른 예측 변수들의 값에 의존할 수도 있습니다.</p>
+<p>Some predictors may have a positive relationship with <em>Y</em>, in the sense that larger values of the predictor are associated with larger values of <em>Y</em>. Other predictors may have the opposite relationship. Depending on the complexity of <em>f</em>, the relationship between the response and a given predictor may also depend on the values of the other predictors.</p>
 
 <ul>
-  <li>
-    <p><em>Can the relationship between Y and each predictor be adequately summarized using a linear equation, or is the relationship more complicated?</em></p>
-  </li>
-  <li>
-    <p><em>Y 와 각 예측 변수 사이의 관계가 선형 방정식으로 적절히 요약될 수 있는가 아니면 더 복잡한 관계인가?</em></p>
-  </li>
+  <li><em>Can the relationship between Y and each predictor be adequately summarized using a linear equation, or is the relationship more complicated?</em></li>
 </ul>
 
-<p>Historically, most methods for estimating <em>f</em> have taken a linear form.</p>
-
-<p>역사적으로 <em>f</em> 를 추정하는 대다수의 방법들은 선형 형식을 취해 왔습니다.</p>
-
-<p>In some situations, such an assumption is reasonable or even desirable.</p>
-
-<p>일부 상황에서 이러한 가정은 합리적이거나 심지어 바람직합니다.</p>
-
-<p>But often the true relationship is more complicated, in which case a linear model may not provide an accurate representation of the relationship between the input and output variables.</p>
-
-<p>그러나 종종 참된 연관성은 조금 더 복잡하며, 이 경우 선형 모델이 입력과 출력 변수 사이 관계에 대한 정확한 표현을 제공하지 못할 수 있습니다.</p>
+<p>Historically, most methods for estimating <em>f</em> have taken a linear form. In some situations, such an assumption is reasonable or even desirable. But often the true relationship is more complicated, in which case a linear model may not provide an accurate representation of the relationship between the input and output variables.</p>
 
 <p>In this book, we will see a number of examples that fall into the prediction setting, the inference setting, or a combination of the two.</p>
 
-<p>이 책에서 우리는 예측 설정, 추론 설정 혹은 이 둘의 조합에 해당하는 몇 가지 사례들을 볼 것입니다.</p>
+<p>For instance, consider a company that is interested in conducting a direct-marketing campaign. The goal is to identify individuals who are likely to respond positively to a mailing, based on observations of demographic variables measured on each individual. In this case, the demographic variables serve as predictors, and response to the marketing campaign (either positive or negative) serves as the outcome. The company is not interested in obtaining a deep understanding of the relationships between each individual predictor and the response; instead, the company simply wants to accurately predict the response using the predictors. This is an example of modeling for prediction.</p>
 
-<p>For instance, consider a company that is interested in conducting a direct-marketing campaign.</p>
-
-<p>예를 들어, 다이렉트 마케팅 캠페인을 실시하는 데 관심이 있는 회사를 생각해보십시오.</p>
-
-<p>The goal is to identify individuals who are likely to respond positively to a mailing, based on observations of demographic variables measured on each individual.</p>
-
-<p>목표는 각 개인에 측정된 인구통계 변수들을 바탕으로, 메일링에 긍정적으로 반응할 개인들을 식별하는 것입니다.</p>
-
-<p>In this case, the demographic variables serve as predictors, and response to the marketing campaign (either positive or negative) serves as the outcome.</p>
-
-<p>이 경우 인구통계 변수들은 예측 변수로 작용하며, 마케팅 캠페인에 대한 반응(긍정이든 부정이든)이 결과 역할을 합니다.</p>
-
-<p>The company is not interested in obtaining a deep understanding of the relationships between each individual predictor and the response; instead, the company simply wants to accurately predict the response using the predictors.</p>
-
-<p>회사는 각 예측 변수와 반응 사이의 깊은 이해를 얻는 것에는 관심이 없습니다; 대신 회사는 단순히 예측 변수를 사용하여 반응을 정확하게 예측하고자 합니다.</p>
-
-<p>This is an example of modeling for prediction.</p>
-
-<p>이것은 예측 목적의 모델링 예시입니다.</p>
-
-<p>In contrast, consider the <code class="language-plaintext highlighter-rouge">Advertising</code> data illustrated in Figure 2.1.</p>
-
-<p>대조적으로 그림 2.1에 설명된 <code class="language-plaintext highlighter-rouge">Advertising</code> 데이터를 생각해 보십시오.</p>
-
-<p>One may be interested in answering questions such as:</p>
-
-<p>어떤 이는 다음과 같은 질문에 답하는 것에 호기심을 가질 수 있습니다:</p>
+<p>In contrast, consider the <code class="language-plaintext highlighter-rouge">Advertising</code> data illustrated in Figure 2.1. One may be interested in answering questions such as:</p>
 
 <ul>
   <li>
     <p><em>Which media are associated with sales?</em></p>
   </li>
   <li>
-    <p><em>어느 미디어가 판매와 연관되는가?</em></p>
-  </li>
-  <li>
     <p><em>Which media generate the biggest boost in sales?</em> or</p>
   </li>
   <li>
-    <p><em>어느 미디어가 매출에 가장 큰 증대를 발생시키는가?</em> 또는</p>
-  </li>
-  <li>
     <p><em>How large of an increase in sales is associated with a given increase in TV advertising?</em></p>
-  </li>
-  <li>
-    <p><em>TV 광고의 증가에 따라 얼마나 큰 판매 증가가 관련이 있는가?</em></p>
   </li>
 </ul>
 
 <p>This situation falls into the inference paradigm.</p>
 
-<p>이 상황은 추론 패러다임에 속합니다.</p>
+<p>Another example involves modeling the brand of a product that a customer might purchase based on variables such as price, store location, discount levels, competition price, and so forth. In this situation one might really be most interested in the association between each variable and the probability of purchase. For instance, <em>to what extent is the product’s price associated with sales?</em> This is an example of modeling for inference.</p>
 
-<p>Another example involves modeling the brand of a product that a customer might purchase based on variables such as price, store location, discount levels, competition price, and so forth.</p>
+<p>Finally, some modeling could be conducted both for prediction and inference. For example, in a real estate setting, one may seek to relate values of homes to inputs such as crime rate, zoning, distance from a river, air quality, schools, income level of community, size of houses, and so forth. In this case one might be interested in the association between each individual input variable and housing price—for instance, <em>how much extra will a house be worth if it has a view of the river?</em> This is an inference problem.</p>
 
-<p>다른 예시는 가격, 상점 위치, 할인 일수, 경쟁자 가격 등과 같은 예측 변수를 기반으로 고객이 구매할 제품 브랜드를 모델링하는 것과 관련됩니다.</p>
+<p>Alternatively, one may simply be interested in predicting the value of a home given its characteristics: <em>is this house under- or over-valued?</em> This is a prediction problem.</p>
 
-<p>In this situation one might really be most interested in the association between each variable and the probability of purchase.</p>
+<p>Depending on whether our ultimate goal is prediction, inference, or a combination of the two, different methods for estimating <em>f</em> may be appropriate. For example, <em>linear models</em> allow for relatively simple and interpretable inference, but may not yield as accurate predictions as some other approaches. In contrast, some of the highly non-linear approaches that we discuss in the later chapters of this book can potentially provide quite accurate predictions for <em>Y</em>, but this comes at the expense of a less interpretable model for which inference is more challenging.</p>
 
-<p>이러한 경우 사람들은 각 변수와 그 예상 구매 확률 사이 상관성에 대해 진정으로 가장 관심이 있을 것입니다.</p>
+<hr />
 
-<p>For instance, <em>to what extent is the product’s price associated with sales?</em></p>
+<h2 id="sub-chapters">Sub-Chapters</h2>
 
-<p>예를 들어, <em>그 산출 제품의 가격이 어느 한도까지 판매와 상관이 있는가?</em></p>
-
-<p>This is an example of modeling for inference.</p>
-
-<p>이것은 추론 목적의 모델링 예시입니다.</p>
-
-<p>Finally, some modeling could be conducted both for prediction and inference.</p>
-
-<p>마지막으로 일부 모델링은 예측과 추론 모두를 위해 수행될 수도 있습니다.</p>
-
-<p>For example, in a real estate setting, one may seek to relate values of homes to inputs such as crime rate, zoning, distance from a river, air quality, schools, income level of community, size of houses, and so forth.</p>
-
-<p>예를 들어, 부동산 현장에서 집의 가치들을 범죄율, 구역화, 강으로부터의 거리, 공기 품질, 학교, 이웃 소득 수준, 집 크기 등과 같은 요인과 관련시키려 할 수도 있습니다.</p>
-
-<p>In this case one might be interested in the association between each individual input variable and housing price—for instance, <em>how much extra will a house be worth if it has a view of the river?</em></p>
-
-<p>이 경우 이런 개별 입력 변수와 주택 가격의 연관성에 관심을 가질 수 있습니다—예를 들어, <em>강 전망이 있을 때 집이 얼마나 더 가치가 있을 것인가?</em></p>
-
-<p>This is an inference problem.</p>
-
-<p>이것은 추론 문제입니다.</p>
-
-<p>Alternatively, one may simply be interested in predicting the value of a home given its characteristics: <em>is this house under- or over-valued?</em></p>
-
-<p>달리 누군가는 주택의 특성이 주어졌을 때 단순히 가치를 예측하는 것에만 흥미가 있을 수 있습니다: <em>이 주택은 저평가되었나, 고평가되었나?</em></p>
-
-<p>This is a prediction problem.</p>
-
-<p>이것은 예측 문제입니다.</p>
-
-<p>Depending on whether our ultimate goal is prediction, inference, or a combination of the two, different methods for estimating <em>f</em> may be appropriate.</p>
-
-<p>우리의 궁극적인 도달 목표가 예측, 추론 혹은 두 가지의 조합이냐에 따라 <em>f</em> 를 추정하는 각기 다른 방식이 적합할 수 있습니다.</p>
-
-<p>For example, <em>linear models</em> allow for relatively simple and interpretable inference, but may not yield as accurate predictions as some other approaches.</p>
-
-<p>예를 들어, <em>선형 모델(linear models)</em> 은 비교적 간단하고 해석 가능한 추론을 허용하지만, 몇몇 다른 접근법들만큼 정확한 예측을 만들어 내지 못할 수 있습니다.</p>
-
-<p>In contrast, some of the highly non-linear approaches that we discuss in the later chapters of this book can potentially provide quite accurate predictions for <em>Y</em>, but this comes at the expense of a less interpretable model for which inference is more challenging.</p>
-
-<p>대조적으로, 이 책 후반부에서 논의할 수많은 비선형 접근 방식들은 <em>Y</em> 에 대해 상당히 정확한 예측을 잠재적으로 제공할 수 있지만, 이것은 추론이 더 어려워지는 해석이 덜 되는 모델의 대가를 치러야 합니다.</p>
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../index.html">&lt; 2.1.1 Why Estimate F</a></td>
+      <td><a href="../../2_1_2_how_do_we_estimate_f/index.html">2.1.2 How Do We Estimate F &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

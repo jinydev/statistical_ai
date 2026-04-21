@@ -122,8 +122,7 @@
       }
     };
   </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
 </head>
@@ -493,28 +492,73 @@
 </nav>
 
         <div class="bd-content ps-lg-4">
-            <h1 id="35-comparison-of-linear-regression-with-k--nearest-neighbors">3.5 Comparison of Linear Regression with <em>K</em> -Nearest Neighbors</h1>
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../3_4_the_marketing_plan/index.html">&lt; 3.4 The Marketing Plan</a></td>
+      <td><a href="../3_6_lab_linear_regression/index.html">3.6 Lab Linear Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>As discussed in Chapter 2, linear regression is an example of a <em>parametric</em> approach because it assumes a linear functional form for $f(X)$. Parametric methods have several advantages. They are often easy to fit, because one need estimate only a small number of coefficients. In the case of linear regression, the coefficients have simple interpretations, and tests of statistical significance can be easily performed. But parametric methods do have a disadvantage: by construction, they make strong assumptions about the form of $f(X)$. If the specified functional form is far from the truth, and prediction accuracy is our goal, then the parametric method will perform poorly. For instance, if we assume a linear relationship between X and Y but the true relationship is far from linear, then the resulting model will provide a poor fit to the data, and any conclusions drawn from it will be suspect.</p>
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 <a href="./trans1.html">📖 직역본 보기</a>를 추천합니다!</p>
+</blockquote>
 
-<p>In contrast, <em>non-parametric</em> methods do not explicitly assume a parametric form for $f(X)$, and thereby provide an alternative and more flexible approach for performing regression. We discuss various non-parametric methods in this book. Here we consider one of the simplest and best-known non-parametric methods, <em>K-nearest neighbors regression</em> (KNN regression). <em>K</em> -nearest The KNN regression method is closely related to the KNN classifier disneighbors cussed in Chapter 2. Given a value for <em>K</em> and a prediction point <em>x</em> 0, KNN regression regression first identifies the <em>K</em> training observations that are closest to <em>x</em> 0, represented by <em>N</em> 0. It then estimates f ( <em>x</em> 0) using the average of all the training responses in <em>N</em> 0. In other words,</p>
+<h1 id="35-comparison-of-linear-regression-with-k-nearest-neighbors">3.5 Comparison of Linear Regression with $K$-Nearest Neighbors</h1>
+
+<p>As discussed in Chapter 2, linear regression is an example of a <em>parametric</em> approach because it assumes a linear functional form for $f(X)$.</p>
+
+<p>Parametric methods have several advantages.</p>
+
+<p>They are often easy to fit, because one need estimate only a small number of coefficients.</p>
+
+<p>In the case of linear regression, the coefficients have simple interpretations, and tests of statistical significance can be easily performed.</p>
+
+<p>But parametric methods do have a disadvantage: by construction, they make strong assumptions about the form of $f(X)$.</p>
+
+<p>If the specified functional form is far from the truth, and prediction accuracy is our goal, then the parametric method will perform poorly.</p>
+
+<p>For instance, if we assume a linear relationship between X and Y but the true relationship is far from linear, then the resulting model will provide a poor fit to the data, and any conclusions drawn from it will be suspect.</p>
+
+<p>In contrast, <em>non-parametric</em> methods do not explicitly assume a parametric form for $f(X)$, and thereby provide an alternative and more flexible approach for performing regression.</p>
+
+<p>We discuss various non-parametric methods in this book.</p>
+
+<p>Here we consider one of the simplest and best-known non-parametric methods, <em>K-nearest neighbors regression</em> ().</p>
+
+<p>The  method is closely related to the KNN classifier discussed in Chapter 2.</p>
+
+<p>Given a value for $K$ and a prediction point $x_0$,  first identifies the $K$ training observations that are closest to $x_0$, represented by $N_0$.</p>
+
+<p>It then estimates $f(x_0)$ using the average of all the training responses in $N_0$. In other words,</p>
 
 <p><strong>==&gt; picture [87 x 27] intentionally omitted &lt;==</strong></p>
 
-<p>Figure 3.16 illustrates two KNN fits on a data set with $p$ = 2 predictors. The fit with <em>K</em> = 1 is shown in the left-hand panel, while the right-hand panel corresponds to <em>K</em> = 9. We see that when <em>K</em> = 1, the KNN fit perfectly interpolates the training observations, and consequently takes the form of a step function. When <em>K</em> = 9, the KNN fit still is a step function, but averaging over nine observations results in much smaller regions of constant prediction, and consequently a smoother fit. In general, the optimal value for <em>K</em> will depend on the <em>bias-variance tradeoff</em> , which we introduced in Chapter 2. A small value for <em>K</em> provides the most flexible fit, which will have low bias but high variance. This variance is due to the fact that the prediction in a given region is entirely dependent on just one observation.</p>
+<p>Figure 3.16 illustrates two KNN fits on a data set with $p=2$ predictors.</p>
 
-<p>112 3. Linear Regression</p>
+<p>The fit with $K=1$ is shown in the left-hand panel, while the right-hand panel corresponds to $K=9$.</p>
+
+<p>We see that when $K=1$, the KNN fit perfectly interpolates the training observations, and consequently takes the form of a step function.</p>
+
+<p>When $K=9$, the KNN fit still is a step function, but averaging over nine observations results in much smaller regions of constant prediction, and consequently a smoother fit.</p>
+
+<p>In general, the optimal value for $K$ will depend on the <em>bias-variance tradeoff</em>, which we introduced in Chapter 2.</p>
+
+<p>A small value for $K$ provides the most flexible fit, which will have low bias but high variance.</p>
+
+<p>This variance is due to the fact that the prediction in a given region is entirely dependent on just one observation.</p>
 
 <p><strong>==&gt; picture [311 x 76] intentionally omitted &lt;==</strong></p>
 
 <p><strong>—– Start of picture text —–</strong><br />
 y<br />y y<br />x1 x1<br />x2 x2<br />y y<br /><strong>—– End of picture text —–</strong><br /></p>
 
-<p><strong>FIGURE 3.16.</strong> <em>Plots of f</em>[ˆ] ( X ) <em>using KNN regression on a two-dimensional data set with</em> 64 <em>observations (orange dots).</em> Left: <em>K</em> = 1 <em>results in a rough step function fit.</em> Right: <em>K</em> = 9 <em>produces a much smoother fit.</em></p>
+<p><strong>FIGURE 3.16.</strong> <em>Plots of f</em>[ˆ] ( X ) <em>using  on a two-dimensional data set with</em> 64 <em>observations (orange dots).</em> Left: <em>K</em> = 1 <em>results in a rough step function fit.</em> Right: <em>K</em> = 9 <em>produces a much smoother fit.</em></p>
 
-<p>In contrast, larger values of <em>K</em> provide a smoother and less variable fit; the prediction in a region is an average of several points, and so changing one observation has a smaller effect. However, the smoothing may cause bias by masking some of the structure in $f(X)$. In Chapter 5, we introduce several approaches for estimating test error rates. These methods can be used to identify the optimal value of <em>K</em> in KNN regression.</p>
+<p>In contrast, larger values of <em>K</em> provide a smoother and less variable fit; the prediction in a region is an average of several points, and so changing one observation has a smaller effect. However, the smoothing may cause bias by masking some of the structure in $f(X)$. In Chapter 5, we introduce several approaches for estimating test error rates. These methods can be used to identify the optimal value of <em>K</em> in .</p>
 
-<p>In what setting will a parametric approach such as least squares linear regression outperform a non-parametric approach such as KNN regression? The answer is simple: <em>the parametric approach will outperform the nonparametric approach if the parametric form that has been selected is close to the true form of f</em> . Figure 3.17 provides an example with data generated from a one-dimensional linear regression model. The black solid lines represent $f(X)$, while the blue curves correspond to the KNN fits using <em>K</em> = 1 and <em>K</em> = 9. In this case, the <em>K</em> = 1 predictions are far too variable, while the smoother <em>K</em> = 9 fit is much closer to $f(X)$. However, since the true relationship is linear, it is hard for a non-parametric approach to compete with linear regression: a non-parametric approach incurs a cost in variance that is not offset by a reduction in bias. The blue dashed line in the lefthand panel of Figure 3.18 represents the linear regression fit to the same data. It is almost perfect. The right-hand panel of Figure 3.18 reveals that linear regression outperforms KNN for this data. The green solid line, plotted as a function of 1 <em>/K</em> , represents the test set mean squared error (MSE) for KNN. The KNN errors are well above the black dashed line, which is the test MSE for linear regression. When the value of <em>K</em> is large, then KNN performs only a little worse than least squares regression in terms of MSE. It performs far worse when <em>K</em> is small.</p>
+<p>In what setting will a parametric approach such as least squares linear regression outperform a non-parametric approach such as ? The answer is simple: <em>the parametric approach will outperform the nonparametric approach if the parametric form that has been selected is close to the true form of f</em> . Figure 3.17 provides an example with data generated from a one-dimensional linear regression model. The black solid lines represent $f(X)$, while the blue curves correspond to the KNN fits using <em>K</em> = 1 and <em>K</em> = 9. In this case, the <em>K</em> = 1 predictions are far too variable, while the smoother <em>K</em> = 9 fit is much closer to $f(X)$. However, since the true relationship is linear, it is hard for a non-parametric approach to compete with linear regression: a non-parametric approach incurs a cost in variance that is not offset by a reduction in bias. The blue dashed line in the lefthand panel of Figure 3.18 represents the linear regression fit to the same data. It is almost perfect. The right-hand panel of Figure 3.18 reveals that linear regression outperforms KNN for this data. The green solid line, plotted as a function of 1 <em>/K</em> , represents the test set mean squared error (MSE) for KNN. The KNN errors are well above the black dashed line, which is the test MSE for linear regression. When the value of <em>K</em> is large, then KNN performs only a little worse than least squares regression in terms of MSE. It performs far worse when <em>K</em> is small.</p>
 
 <p>In practice, the true relationship between X and Y is rarely exactly linear. Figure 3.19 examines the relative performances of least squares regression and KNN under increasing levels of non-linearity in the relationship between X and Y . In the top row, the true relationship is nearly linear. In this case we see that the test MSE for linear regression is still superior</p>
 
@@ -525,14 +569,14 @@ y<br />y y<br />x1 x1<br />x2 x2<br />y y<br /><strong>—– End of picture tex
 <p><strong>—– Start of picture text —–</strong><br />
 −1.0 −0.5 0.0 0.5 1.0 −1.0 −0.5 0.0 0.5 1.0<br />x x<br />4<br />4<br />3 3<br />y 2 y 2<br />1 1<br /><strong>—– End of picture text —–</strong><br /></p>
 
-<p><strong>FIGURE 3.17.</strong> <em>Plots of f</em>[ˆ] ( X ) <em>using KNN regression on a one-dimensional data set with</em> 50 <em>observations. The true relationship is given by the black solid line.</em> Left: <em>The blue curve corresponds to K</em> = 1 <em>and interpolates (i.e. passes directly through) the training data.</em> Right: <em>The blue curve corresponds to K</em> = 9 <em>, and represents a smoother fit.</em></p>
+<p><strong>FIGURE 3.17.</strong> <em>Plots of f</em>[ˆ] ( X ) <em>using  on a one-dimensional data set with</em> 50 <em>observations. The true relationship is given by the black solid line.</em> Left: <em>The blue curve corresponds to K</em> = 1 <em>and interpolates (i.e. passes directly through) the training data.</em> Right: <em>The blue curve corresponds to K</em> = 9 <em>, and represents a smoother fit.</em></p>
 
 <p><strong>==&gt; picture [316 x 146] intentionally omitted &lt;==</strong></p>
 
 <p><strong>—– Start of picture text —–</strong><br />
 −1.0 −0.5 0.0 0.5 1.0 0.2 0.5 1.0<br />x 1/K<br />4<br />0.15<br />3<br />y 0.10<br />2<br />Mean Squared Error<br />0.05<br />1<br />0.00<br /><strong>—– End of picture text —–</strong><br /></p>
 
-<p><strong>FIGURE 3.18.</strong> <em>The same data set shown in Figure 3.17 is investigated further.</em> Left: <em>The blue dashed line is the least squares fit to the data. Since f</em> ( X ) <em>is in fact linear (displayed as the black line), the least squares regression line provides a very good estimate of f</em> ( X ) <em>.</em> Right: <em>The dashed horizontal line represents the least squares test set MSE, while the green solid line corresponds to the MSE for KNN as a function of</em> 1 <em>/K (on the log scale). Linear regression achieves a lower test MSE than does KNN regression, since f</em> ( X ) <em>is in fact linear. For KNN regression, the best results occur with a very large value of K, corresponding to a small value of</em> 1 <em>/K.</em></p>
+<p><strong>FIGURE 3.18.</strong> <em>The same data set shown in Figure 3.17 is investigated further.</em> Left: <em>The blue dashed line is the least squares fit to the data. Since f</em> ( X ) <em>is in fact linear (displayed as the black line), the least squares regression line provides a very good estimate of f</em> ( X ) <em>.</em> Right: <em>The dashed horizontal line represents the least squares test set MSE, while the green solid line corresponds to the MSE for KNN as a function of</em> 1 <em>/K (on the log scale). Linear regression achieves a lower test MSE than does , since f</em> ( X ) <em>is in fact linear. For , the best results occur with a very large value of K, corresponding to a small value of</em> 1 <em>/K.</em></p>
 
 <p>114 3. Linear Regression</p>
 
@@ -565,6 +609,19 @@ p=1 p=2 p=3 p=4 p=10 p=20<br />0.2 0.5 1.0 0.2 0.5 1.0 0.2 0.5 1.0 0.2 0.5 1.0 0
 <p>Even when the dimension is small, we might prefer linear regression to KNN from an interpretability standpoint. If the test MSE of KNN is only slightly lower than that of linear regression, we might be willing to forego a little bit of prediction accuracy for the sake of a simple model that can be described in terms of just a few coefficients, and for which $p$-values are available.</p>
 
 <p>116 3. Linear Regression</p>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../3_4_the_marketing_plan/index.html">&lt; 3.4 The Marketing Plan</a></td>
+      <td><a href="../3_6_lab_linear_regression/index.html">3.6 Lab Linear Regression &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
 
 
             <!-- 구글 애드센스 출력 -->

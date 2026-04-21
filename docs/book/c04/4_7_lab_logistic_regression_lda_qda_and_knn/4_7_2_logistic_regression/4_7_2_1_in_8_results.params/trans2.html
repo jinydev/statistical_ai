@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 기본 메타데이터 --><meta name="description" content="Jiny linux"><meta name="author" content="HojinLee"><!-- 제목 설정 --><title>trans2</title>
+  <meta name="title" content="trans2" /><!-- 키워드 설정 --><!-- Open Graph 메타데이터 --><meta property="og:title" content="trans2"><meta property="og:description" content="Jiny linux"><meta property="og:type" content="website"><meta property="og:locale" content="ko">
+  <meta property="og:site_name" content="linux">
+  <meta property="og:url" content="https://statistical.jiny.dev/book/c04/4_7_lab_logistic_regression_lda_qda_and_knn/4_7_2_logistic_regression/4_7_2_1_in_8_results.params/trans2.html">
+
+  <!-- Twitter 카드 메타데이터 --><meta name="twitter:card" content="summary"><meta property="twitter:title" content="trans2"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="trans2" />
+<meta name="author" content="Hojin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="파이썬으로 배우는 통계적 학습 입문" />
+<meta property="og:description" content="파이썬으로 배우는 통계적 학습 입문" />
+<link rel="canonical" href="https://statistical.jiny.dev/book/c04/4_7_lab_logistic_regression_lda_qda_and_knn/4_7_2_logistic_regression/4_7_2_1_in_8_results.params/trans2.html" />
+<meta property="og:url" content="https://statistical.jiny.dev/book/c04/4_7_lab_logistic_regression_lda_qda_and_knn/4_7_2_logistic_regression/4_7_2_1_in_8_results.params/trans2.html" />
+<meta property="og:site_name" content="통계적 학습 (Statistical Learning)" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="trans2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hojin"},"description":"파이썬으로 배우는 통계적 학습 입문","headline":"trans2","url":"https://statistical.jiny.dev/book/c04/4_7_lab_logistic_regression_lda_qda_and_knn/4_7_2_logistic_regression/4_7_2_1_in_8_results.params/trans2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/highlight.css" rel="stylesheet" />
+
+  <style>
+    blockquote {
+      border-left: solid 5px #dee2e6;
+      padding: 5px 10px;
+      background-color: #f8f9fa;
+    }
+  </style>
+
+  <style>
+    h1 a {
+      text-decoration: none;
+    }
+
+    h2 a {
+      text-decoration: none;
+    }
+
+    h3 a {
+      text-decoration: none;
+    }
+
+    h4 a {
+      text-decoration: none;
+    }
+
+    h5 a {
+      text-decoration: none;
+    }
+
+    h6 a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: top
+    }
+
+    strong a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 스크롤바 커스텀 */
+    /* 임의의 영역 생성 */
+    .scrollBar {}
+
+    /* 아래의 모든 코드는 영역::코드로 사용 */
+    .scrollBar::-webkit-scrollbar {
+      width: 7px;
+      /* 스크롤바의 너비 */
+    }
+
+    .scrollBar::-webkit-scrollbar-thumb {
+      height: 30%;
+      /* 스크롤바의 길이 */
+      background: #cccccc;
+      /* 스크롤바의 색상 */
+
+      border-radius: 5px;
+    }
+
+    .scrollBar::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, .1);
+      /*스크롤바 뒷 배경 색상*/
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4VBPCT3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4VBPCT3CR');
+  </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg bd-navbar sticky-top">
+    <nav class="container bd-gutter flex-wrap flex-lg-nowrap position-relative" aria-label="Main navigation">
+
+      <!-- Mobile: Left Toggle (Browse) -->
+      <div class="bd-navbar-toggle d-lg-none">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
+          aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+            </path>
+          </svg>
+          <span class="d-none fs-6 pe-1">Browse</span>
+        </button>
+      </div>
+
+      <!-- Brand: Desktop (Static), Mobile (Absolute Center) -->
+      <a class="navbar-brand p-0 me-0 me-lg-2 ms-lg-0 d-none d-lg-inline-block" href="/" aria-label="jinydev">
+        <svg width="32" height="26" viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+        </svg>
+      </a>
+      <a class="navbar-brand p-0 me-0 position-absolute top-50 start-50 translate-middle d-lg-none" href="/"
+        aria-label="jinydev">
+        <svg width="100" height="26" viewBox="0 0 112 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M24.2746 5.33377C25.8486 7.33981 25.1183 11.1792 24.3961 13.0177C24.4028 13.0199 24.4094 13.0221 24.4161 13.0243L24.4013 13.0248L22.649 12.9082C22.649 12.9053 22.6488 12.9013 22.649 12.8993C22.9902 8.93373 22.5975 7.34575 22.2147 7.07677C17.6316 10.3896 13.5379 9.33658 12.2725 9.01111C11.928 8.9225 11.7932 8.88781 11.9152 9.00988C12.2872 9.38185 13.1336 9.82821 13.7371 10.1465H13.7372L13.7376 10.1467C13.8743 10.2188 13.9985 10.2843 14.1019 10.3409C9.12673 10.3984 7.12659 8.00279 6.53855 7.29846C6.47859 7.22664 6.4333 7.1724 6.40105 7.14015C6.11408 6.85318 4.49961 5.87252 3.99256 7.74227C3.50142 9.55335 3.81246 11.6775 3.97665 12.7988C3.99089 12.896 3.99257 12.8981 3.99257 12.9298L2.37635 13.0248L2.37213 13.0247C0.223493 8.05534 1.83854 5.26971 3.29536 4.2246C3.29536 1.78444 6.27428 -0.592359 10.0455 0.263262C14.8768 1.64043 16.3468 1.18409 18.0759 0.647278C18.774 0.430562 19.5143 0.200726 20.5351 0.073124C25.2219 -0.512739 26.7993 2.56612 27 4.16122C26.2141 3.70487 24.8556 4.73165 24.2746 5.33377ZM12.3374 1.5872C11.1225 1.16466 7.99257 0.717209 6.3478 2.41116C5.98397 2.78587 5.55554 3.48864 5.55554 3.48864C5.55554 3.48864 4.82665 4.81961 4.25622 4.24919C3.68579 3.67878 5.0168 1.96749 6.06259 1.46044C7.10838 0.953388 9.70703 0.0660505 12.3374 1.5872Z"
+            fill="currentColor" />
+          <path
+            d="M10.078 13.5002H3.10601C2.2309 13.5002 1.52148 14.2097 1.52148 15.0848V18.3172C1.52148 19.1923 2.2309 19.9018 3.10601 19.9018H10.078C10.9531 19.9018 11.6625 19.1923 11.6625 18.3172V15.0848C11.6625 14.2097 10.9531 13.5002 10.078 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M0.823513 14.6094H0.379847C0.187322 14.6094 0.03125 14.7654 0.03125 14.958V15.9721C0.03125 16.1646 0.187322 16.3207 0.379847 16.3207H0.823513C1.01604 16.3207 1.17211 16.1646 1.17211 15.9721V14.958C1.17211 14.7654 1.01604 14.6094 0.823513 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M16.7326 13.5002H23.7045C24.5796 13.5002 25.2891 14.2097 25.2891 15.0848V18.3172C25.2891 19.1923 24.5796 19.9018 23.7045 19.9018H16.7326C15.8575 19.9018 15.1481 19.1923 15.1481 18.3172V15.0848C15.1481 14.2097 15.8575 13.5002 16.7326 13.5002Z"
+            stroke="currentColor" stroke-width="1.26763" />
+          <path
+            d="M25.9861 14.6094H26.4297C26.6222 14.6094 26.7783 14.7654 26.7783 14.958V15.9721C26.7783 16.1646 26.6222 16.3207 26.4297 16.3207H25.9861C25.7935 16.3207 25.6375 16.1646 25.6375 15.9721V14.958C25.6375 14.7654 25.7935 14.6094 25.9861 14.6094Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M12.2954 15.5601H14.5137C14.7062 15.5601 14.8623 15.7161 14.8623 15.9087V16.9228C14.8623 17.1153 14.7062 17.2713 14.5137 17.2713H12.2954C12.1028 17.2713 11.9468 17.1153 11.9468 16.9228V15.9087C11.9468 15.7161 12.1028 15.5601 12.2954 15.5601Z"
+            fill="currentColor" stroke="currentColor" stroke-width="0.0633813" />
+          <path
+            d="M9.93343 16.3937C9.93343 16.7087 9.76317 16.9641 9.55314 16.9641C9.34311 16.9641 9.17285 16.7087 9.17285 16.3937C9.17285 16.0786 9.34311 15.8232 9.55314 15.8232C9.76317 15.8232 9.93343 16.0786 9.93343 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M16.9688 16.3937C16.9688 16.7087 17.139 16.9641 17.3491 16.9641C17.5591 16.9641 17.7293 16.7087 17.7293 16.3937C17.7293 16.0786 17.5591 15.8232 17.3491 15.8232C17.139 15.8232 16.9688 16.0786 16.9688 16.3937Z"
+            fill="currentColor" />
+          <path
+            d="M14.2758 20.1016C13.642 20.6086 12.7863 20.3551 12.5645 20.1016C12.6278 20.4185 12.8687 20.8622 13.4518 20.8622C14.0349 20.8622 14.2441 20.3551 14.2758 20.1016Z"
+            fill="currentColor" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.1312 22.411C12.1575 22.2914 12.2759 22.2157 12.3956 22.2421L14.6347 22.735C14.7544 22.7614 14.83 22.8797 14.8036 22.9994C14.7773 23.119 14.659 23.1947 14.5393 23.1683L12.3002 22.6753C12.1805 22.649 12.1049 22.5307 12.1312 22.411Z"
+            fill="currentColor" />
+          <path
+            d="M13.4203 27.6754C9.00897 27.7261 5.77228 23.6613 4.70536 21.6225C4.54691 21.3197 4.42016 21.2739 4.32509 21.3373C4.17297 21.4387 4.28282 21.6437 4.32507 21.7493C4.85747 22.9916 5.58213 24.0416 5.87791 24.4113C4.83846 26.1353 4.49409 27.855 4.45183 28.4994C6.1758 26.8008 7.91668 26.8832 8.57162 27.1367C13.7055 29.7987 16.5577 27.929 18.1739 27.1367C19.4669 26.5029 21.4803 27.7388 22.3254 28.436C22.224 26.8642 21.3747 25.1402 20.9627 24.4747C21.6282 23.5873 22.1669 22.5099 22.4522 21.9711C22.6803 21.5401 22.6106 21.369 22.5472 21.3373C22.3951 21.2613 22.2092 21.4958 22.1353 21.6225C21.6599 22.4148 18.9345 27.6121 13.4203 27.6754Z"
+            fill="currentColor" />
+          <text x="32" y="21" font-family="Arial, sans-serif" font-weight="bold" font-size="22"
+            fill="currentColor">Jiny</text>
+        </svg>
+      </a>
+
+      <!-- Mobile: Right Toggle (Menu) -->
+      <div class="d-flex d-lg-none ms-auto">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+            viewBox="0 0 16 16">
+            <path
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- OffCanvas -->
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar"
+        aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        <!-- OffCanver Header -->
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">Jiny</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"
+            data-bs-target="#bdNavbar">
+          </button>
+        </div>
+
+        <!-- OffCanver Body -->
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-column flex-lg-row bd-navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link py-2 px-0 px-lg-2 active"
+                href="/">Statistical</a>
+            </li>
+            
+          </ul>
+
+          <hr class="d-lg-none text-white-50">
+
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://github.com/jinydev/datas" target="_blank"
+                rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 512 499.36" role="img">
+                  <title>GitHub</title>
+                  <path fill="currentColor" fill-rule="evenodd"
+                    d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z">
+                  </path>
+                </svg>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
+            </li>
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" href="https://jiny.dev" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="navbar-nav-svg"
+                  viewBox="0 0 16 16" role="img">
+                  <title>Home</title>
+                  <path fill="currentColor"
+                    d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+                </svg>
+                <small class="d-lg-none ms-2">Home</small>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container bd-gutter mt-3 my-md-4 bd-layout">
+    <aside class="bd-sidebar scrollBar">
+        <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar"
+            aria-labelledby="bdSidebarOffcanvasLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel">학습목차</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                    data-bs-target="#bdSidebar"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <!-- 네비게이션 -->
+                <nav class="bd-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+  <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+    <li class="bd-links-group py-2">
+      <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+        강의 목차
+      </strong>
+      <ul class="list-unstyled fw-normal pb-2 small">
+        
+        <li>
+          
+          <a href="/"
+            class="bd-links-link d-inline-block rounded ">
+            Home
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c01/"
+            class="bd-links-link d-inline-block rounded ">
+            01. Introduction
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c02/"
+            class="bd-links-link d-inline-block rounded ">
+            02. Statistical Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c03/"
+            class="bd-links-link d-inline-block rounded ">
+            03. Linear Regression
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c04/"
+            class="bd-links-link d-inline-block rounded ">
+            04. Classification
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c05/"
+            class="bd-links-link d-inline-block rounded ">
+            05. Resampling Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c06/"
+            class="bd-links-link d-inline-block rounded ">
+            06. Linear Model Selection
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c07/"
+            class="bd-links-link d-inline-block rounded ">
+            07. Moving Beyond Linearity
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c08/"
+            class="bd-links-link d-inline-block rounded ">
+            08. Tree-Based Methods
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c09/"
+            class="bd-links-link d-inline-block rounded ">
+            09. Support Vector Machines
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c10/"
+            class="bd-links-link d-inline-block rounded ">
+            10. Deep Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c11/"
+            class="bd-links-link d-inline-block rounded ">
+            11. Survival Analysis
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c12/"
+            class="bd-links-link d-inline-block rounded ">
+            12. Unsupervised Learning
+          </a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/book/c13/"
+            class="bd-links-link d-inline-block rounded ">
+            13. Multiple Testing
+          </a>
+          
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        </div>
+    </aside>
+
+    <main class="bd-main order-1">
+        <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/">Book</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c04/">04. Classification</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c04/4_7_lab_logistic_regression_lda_qda_and_knn/">4 7 lab logistic regression lda qda and knn</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c04/4_7_lab_logistic_regression_lda_qda_and_knn/4_7_2_logistic_regression/">4 7 2 logistic regression</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item"><a href="/book/c04/4_7_lab_logistic_regression_lda_qda_and_knn/4_7_2_logistic_regression/4_7_2_1_in_8_results.params/">4 7 2 1 in 8 results.params</a></li>
+        
+        
+        
+        
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">trans2</li>
+        
+        
+        
+    </ol>
+</nav>
+
+        <div class="bd-content ps-lg-4">
+            <table>
+  <tbody>
+    <tr>
+      <td><a href="../trans2.html">&lt; 4.7.2 Logistic Regression</a></td>
+      <td><a href="../../4_7_3_linear_discriminant_analysis/trans2.html">4.7.3 Linear Discriminant Analysis &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>학습 팁:</strong> 문법과 코드가 낯설고 어렵다면? 튜터와 함께 실습하듯 쉽게 풀어쓴 <a href="./trans2.html">📖 파이썬 랩(Lab) 해설판보기</a>를 추천합니다! (직역본은 <a href="./trans1.html">📖 직역본 보기</a> 메뉴를 활용하세요!)</p>
+</blockquote>
+
+<h1 id="in-8-resultsparams"><strong><code class="language-plaintext highlighter-rouge">In [8]:</code></strong> <code class="language-plaintext highlighter-rouge">results.params</code></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong><code class="language-plaintext highlighter-rouge">Out[8]:</code></strong></th>
+      <th><code class="language-plaintext highlighter-rouge">intercept</code></th>
+      <th><code class="language-plaintext highlighter-rouge">-0.126000</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">Lag1</code></td>
+      <td><code class="language-plaintext highlighter-rouge">-0.073074</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">Lag2</code></td>
+      <td><code class="language-plaintext highlighter-rouge">-0.042301</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">Lag3</code></td>
+      <td><code class="language-plaintext highlighter-rouge">0.011085</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">Lag4</code></td>
+      <td><code class="language-plaintext highlighter-rouge">0.009359</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">Lag5</code></td>
+      <td><code class="language-plaintext highlighter-rouge">0.010313</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">Volume</code></td>
+      <td><code class="language-plaintext highlighter-rouge">0.135441</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">dtype: float64</code></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Likewise we can use the <code class="language-plaintext highlighter-rouge">pvalues</code> attribute to access the <em>p</em>-values for the coefficients (not shown). 
+이와 똑같은 야매 해킹 스킬로, 엑기스 계수 파편들인 <code class="language-plaintext highlighter-rouge">params</code> 대신 아예 그 계수들의 통계적 목숨 신용등급인 <em>p</em>-value 수치들만 쏙 빼먹고 싶다면 <code class="language-plaintext highlighter-rouge">pvalues</code> 속성을 때려 박으면 됩니다. (너무 뻔해서 화면엔 생략했습니다).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">results</span><span class="p">.</span><span class="n">pvalues</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">predict()</code> method of <code class="language-plaintext highlighter-rouge">results</code> can be used to predict the probability that the market will go up, given values of the predictors. This method returns predictions on the probability scale. If no data set is supplied to the <code class="language-plaintext highlighter-rouge">predict()</code> function, then the probabilities are computed for the training data that was used to fit the logistic regression model. Here we have printed only the first ten probabilities.
+자, 이제 피팅을 마친 결과물 <code class="language-plaintext highlighter-rouge">results</code> 깡통에다가 <code class="language-plaintext highlighter-rouge">predict()</code> 라는 살벌한 미래 예언 마법 주문을 스킬로 꽂아 넣으면, 컴퓨터가 알아서 과연 “내일 시장 호가가 상승 폭발(Up) 할 것인가?” 에 대한 배팅 확률 결과를 도출해 냅니다. 이 도구는 기본적으로 0부터 1 사이를 요동치는 ‘당첨 로또 확률 도수(probability scale)’ 모드로 숫자를 뱉어냅니다. 만약 <code class="language-plaintext highlighter-rouge">predict()</code> 함수 부품 안에다 “새로운 내일의 $X$ 데이터” 를 우겨 넣지 않고 그냥 무식하게 뻥 빈 괄호로 때리면, 모델은 훈련하며 씹어 먹었던 과거 자신이 학습용으로 썼던 오리지널 훈련용 과거 데이터들을 그대로 재활용해 자기 확신성 확률 채점으로 뱉어버립니다. 맛보기로 딱 앞쪽 주가 10일 치의 떡상 확률 예측 스코어들만 출력해 보았습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">predict</span><span class="p">()</span>
+<span class="n">probs</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="nf">array</span><span class="p">([</span><span class="mf">0.5070841</span><span class="p">,</span> <span class="mf">0.4814679</span><span class="p">,</span> <span class="mf">0.4811388</span><span class="p">,</span> <span class="mf">0.5152223</span><span class="p">,</span> <span class="mf">0.5107812</span><span class="p">,</span>
+                <span class="mf">0.5069565</span><span class="p">,</span> <span class="mf">0.4926509</span><span class="p">,</span> <span class="mf">0.5092292</span><span class="p">,</span> <span class="mf">0.5176135</span><span class="p">,</span> <span class="mf">0.4888378</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>In order to make a prediction as to whether the market will go up or down on a particular day, we must convert these predicted probabilities into class labels, <code class="language-plaintext highlighter-rouge">Up</code> or <code class="language-plaintext highlighter-rouge">Down</code>. The following two commands create a vector of class predictions based on whether the predicted probability of a market increase is greater than or less than 0.5. 
+하지만 결국 우리가 손에 쥐어야 할 진짜 대박 과실은 저런 애매모호한 0.507 같은 확률 숫자가 아니라, 그래서 “오늘 살까(<code class="language-plaintext highlighter-rouge">Up</code>) 팔까(<code class="language-plaintext highlighter-rouge">Down</code>)?” 를 결정짓는 확실한 이분법 막도장 지시 레이블(Class Label)입니다. 이걸 쟁취하기 위해, 다음의 단 2줄짜리 파이썬 칼날 명령어 코딩으로 우리는 저 흐리멍덩한 확률 게이지가 <strong>“50% (0.5) 반반 무 많이” 커트라인</strong> 위를 아슬아슬하게 넘겼느냐, 아니면 밑으로 꺼졌느냐를 기계적으로 판단하여 강제로 <code class="language-plaintext highlighter-rouge">Up</code> 과 <code class="language-plaintext highlighter-rouge">Down</code> 이란 과녁 문자 벡터판으로 변환 수술을 갈겨버립니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="sh">'</span><span class="s">Down</span><span class="sh">'</span><span class="p">]</span><span class="o">*</span><span class="mi">1250</span><span class="p">)</span>
+<span class="n">labels</span><span class="p">[</span><span class="n">probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Up</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">confusion_table()</code> function from the <code class="language-plaintext highlighter-rouge">ISLP</code> package summarizes these predictions, showing how many observations were correctly or incorrectly classified. The <code class="language-plaintext highlighter-rouge">confusion_table()</code> function takes as first argument the predicted labels, and second argument the true labels.
+자 이제 진짜 잔인한 채점 시간입니다. 우리가 방금 전 <code class="language-plaintext highlighter-rouge">ISLP</code> 특급 보급품 무기고에서 쌔벼온 <code class="language-plaintext highlighter-rouge">confusion_table()</code> (혼동 행렬표) 심판 함수를 작동시키면, 그동안 우리 모델이 얼마나 헛발질을 하고 얼마나 뒷걸음질 치다 쥐를 잡았는지(올바른 분류와 틀린 분류 횟수)를 낱낱이 표로 박제해 요약해 줍니다. 이 <code class="language-plaintext highlighter-rouge">confusion_table()</code> 심판관 녀석은 첫 번째 입력 아가리에 “기계가 예측한 팻말” 을 물리고, 두 번째 투입구엔 세상에 숨길 수 없는 진짜 정답인 “해딩 날 주가의 찐 성적 팻말” 을 집어넣어 구동시킵니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="nf">confusion_table</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">Direction</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong><code class="language-plaintext highlighter-rouge">Out[12]:</code></strong></th>
+      <th><code class="language-plaintext highlighter-rouge">Truth</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Down</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Up</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">Predicted</code></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">Down</code></td>
+      <td><code class="language-plaintext highlighter-rouge">145</code></td>
+      <td><code class="language-plaintext highlighter-rouge">141</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">Up</code></td>
+      <td><code class="language-plaintext highlighter-rouge">457</code></td>
+      <td><code class="language-plaintext highlighter-rouge">507</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The diagonal elements of the confusion matrix indicate correct predictions, while the off-diagonals represent incorrect predictions. Hence our model correctly predicted that the market would go up on 507 days and that it would go down on 145 days, for a total of 507 + 145 = 652 correct predictions. The <code class="language-plaintext highlighter-rouge">np.mean()</code> function can be used to compute the fraction of days for which the prediction was correct. In this case, logistic regression correctly predicted the movement of the market 52.2% of the time. 
+출력된 এই 기괴한 ‘혼동 행렬(confusion matrix)’ 십자가 표의 한가운데 대각선 조각 숫자들이 바로 “야호 빙고! 정답!” 을 외치는 극강의 승리 횟수 타점이며, 가장자리 대각선 바깥(off-diagonals) 에 널린 지뢰 숫자들은 예측이 삐끗해서 빗나가 헛발 폭망한 횟수 타격 오답을 의미합니다. 결론적으로 우리 로지스틱 확률 머신은, 주식이 떡상(<code class="language-plaintext highlighter-rouge">Up</code>) 할 거란걸 507일 날짜 동안 정확히 저격 예측했고, 주식이 나락(<code class="language-plaintext highlighter-rouge">Down</code>) 으로 갈 거란 걸 145일 날짜 동안 귀신같이 때려 맞춰서, 도합 <strong>507 + 145 = 총 652번의 정답 홈런 타격</strong>을 쳐냈습니다! 이 복잡한 타율 계산을 파이썬 깡패 무기 <code class="language-plaintext highlighter-rouge">np.mean()</code> 함수에 맡기면 자기가 알아서 정답 명중률 게이지를 분수율로 산출 뻥튀기해 줍니다. 결과적으로 까보니, 이 대단하신 로지스틱 회귀 모델의 족집게 확률 점수는 시장 방향을 찍어 맞춘 역대 승률 타율 <strong>절반을 아주 쥐꼬리만큼 넘긴 52.2%</strong> 의 승률 적중 파워를 내뿜었습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="p">(</span><span class="mi">507</span><span class="o">+</span><span class="mi">145</span><span class="p">)</span><span class="o">/</span><span class="mi">1250</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">Direction</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="out13-05216-05216"><strong><code class="language-plaintext highlighter-rouge">Out[13]:</code></strong> <code class="language-plaintext highlighter-rouge">(0.5216, 0.5216)</code></h1>
+
+<p>At first glance, it appears that the logistic regression model is working a little better than random guessing. However, this result is misleading because we trained and tested the model on the same set of 1,250 observations. In other words, 100 − 52.2 = 47.8% is the <em>training</em> error rate. As we have seen previously, the training error rate is often overly optimistic — it tends to underestimate the test error rate. In order to better assess the accuracy of the logistic regression model in this setting, we can fit the model using part of the data, and then examine how well it predicts the <em>held out</em> data. 
+언뜻 속아 넘어가기 쉬운 겉모습! “오? 아무것도 모르고 눈감고 50% 확률 동전 던지기로 찍는 것보단 52.2% 니까 모델 스킬 쓰길 훨씬 낫네 ㅋ” 라고 혹해서 기뻐할지 모릅니다. 하지만 명심하십시오! 이것은 통계판의 끔찍한 조작 환상 극의 기만(misleading) 함정 거미줄 늪입니다!! 왜냐고요? 우린 방금 전 이 모델 멍청이에게 <strong>시험문제(1,250개 과거치)를 갖다 바치며 가르친(Train) 뒤, 평가할 때(Test) 놀랍게도 같은 시험문제를 그대로 또 던져줘서 오픈북 컨닝</strong>을 시켰기 때문입니다! 다시 말하자면 지금 계산된 100 - 52.2 = 47.8% 오답률 불량 지표 수치는 실전 야생 모의고사인 테스트 폭망 점수가 아니라, 답안지 다 외운 연습장 <strong>‘훈련(Training)’ 오차율 점수</strong>에 불과합니다. 우리가 전에도 뼈저리게 뒤통수 맞았듯 겪었지만, 이 연습장 훈련 에러 점수는 항상 우릴 꼬시기 위해 세상 편한 장밋빛 초-긍정 낙관 망상에 빠진 뻥카 수치일 뿐입니다 — 늘 진짜로 겪게 될 야생 수능 당일 실전인 “테스트 에러율(Test Error)” 거탑의 매운맛 난이도를 아주 한참 깎아내려 무시하고 과소평가(underestimate) 하는 교활한 사기꾼 치부 경향이 있죠. 우린 이제 이런 사기극을 뒤집어엎고, 진짜 피비린내 나는 주식판 세팅에서 모델 실력을 멱살 잡고 털기 위해! 과감하게 주어진 데이터의 생살을 찢어 발라 훈련용 일부분으로만 빡세게 공부 세팅 피팅 시킨 뒤, 모델이 태어나 단 한 번도 본 적 없는 철저히 창고에 감춰둔 뒷주머니 비밀 무기 데이터(held out) 를 시험지로 던져줘 얼마나 기가 막히게 내일의 미래를 예언하는지 그 실전 야생 적중력 타격 감각 성능을 시험 극렬 테스트할 것입니다!</p>
+
+<p>To implement this strategy, we first create a Boolean vector corresponding to the observations from 2001 through 2004. We then use this vector to create a held out data set of observations from 2005.
+이 악랄한 살 떨리는 실전 테스트 분리 찢기 전략을 수행 구현하기 위해, 우린 파이썬 코딩 흑마법을 써서 우선 2001년 초부터 2004년 연말 구역까지의 훈련 전용 과거 잡동사니 일자 기록 조각들만 쏙쏙 타겟 추출하는 스위치 제어 불리언(Boolean <code class="language-plaintext highlighter-rouge">True/False</code>) 기폭장치 벡터를 빚어냅니다. 그런 다음, 이 스위치 조작 벡터 방패를 방패막이 분단 트리거로 역 이용 발동시켜서, 기계가 결코 곁눈질할 수 없었던 최신 따끈따끈한 <strong>2005년 미래판 신상 데이터 파편들</strong>만을 싹 긁어 분리 보류 인양 격리(held out)하여 모의고사용 살육 시험대 데이터 장치판 타격 진입 세팅을 준비 조작해 구축해 무장시켜 버립니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">train</span> <span class="o">=</span> <span class="p">(</span><span class="n">Smarket</span><span class="p">.</span><span class="n">Year</span> <span class="o">&lt;</span> <span class="mi">2005</span><span class="p">)</span>
+<span class="n">Smarket_train</span> <span class="o">=</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">]</span>
+<span class="n">Smarket_test</span> <span class="o">=</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+<span class="n">Smarket_test</span><span class="p">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<h1 id="out14-252-9"><strong><code class="language-plaintext highlighter-rouge">Out[14]:</code></strong> <code class="language-plaintext highlighter-rouge">(252, 9)</code></h1>
+
+<p>The object <code class="language-plaintext highlighter-rouge">train</code> is a boolean array, since its elements are <code class="language-plaintext highlighter-rouge">True</code> and <code class="language-plaintext highlighter-rouge">False</code>. Therefore, <code class="language-plaintext highlighter-rouge">Smarket.loc[~train]</code> yields a subset of the rows of the data frame of the stock market data containing only the observations for which <code class="language-plaintext highlighter-rouge">train</code> is <code class="language-plaintext highlighter-rouge">False</code>. The output above indicates that there are 252 such observations. 
+방금 선언해 조작한 <code class="language-plaintext highlighter-rouge">train</code> 객체판 덩이는 조각 속살이 온통 오직 예/아니오 두 편 가르기 표식 <code class="language-plaintext highlighter-rouge">True(참)</code> 랑 <code class="language-plaintext highlighter-rouge">False(거짓)</code> 꼬리표 딱지로만 뒤집어 씌워진 스위치 불리언 지뢰 배열판입니다. 따라서 저기 판다스 킬러 인덱싱 <code class="language-plaintext highlighter-rouge">Smarket.loc[~train]</code> 물결 <code class="language-plaintext highlighter-rouge">~</code> 부정 폭탄 무기 꺾기 조작은 곧, “그 기조 조건이 <code class="language-plaintext highlighter-rouge">train</code> 이 절대 뒤집어진 완전 개방구 <code class="language-plaintext highlighter-rouge">False(아니다)</code> 에 결박 타격 기표되는 나머지 찌꺼기 몫” 이란 기상천외 반전 스위치 색출 추출을 선언 폭발 타격하며, 결과적으로 Smarket 몸통 구조에서 순전히 시험대에 오를 불쌍한 영혼 파편들만 잔인 조작 추출 찢어서 새로운 쪼그라든 부분집합 데이터 표 덩이를 짜 맞추어 발 굴 조 진 무마 창설하게 됩니다. 맨 마지막 위 뱉어진 무 조작 전리품 크기 수치를 보면 그 잔혹 발탁 모의고사 타깃 시험지 타깃 관측치 희생양 머릿수 몫이 <strong>정확히 252 마리 개수</strong> 분량만큼 남아 도 열해 진 배치 대기 탑재 전열 포진되어 있음을 지표 선 폭 타격 증명합니다.</p>
+
+<p>We now fit a logistic regression model using only the subset of the observations that correspond to dates before 2005. We then obtain predicted probabilities of the stock market going up for each of the days in our test set — that is, for the days in 2005. 
+자, 이제 피의 훈련장이다! 우린 모델녀석의 머슬 메모리에 오직 딱 <strong>2005년 이전에 발생했던 먼지 쌓인 옛날 과거 훈련 일지 파편</strong> 쪼가리 데이터 부분집합 만을 가혹하게 먹여 단련 훈련 강제 주입 주입 억지 훈련 시켜 버립니다 (피팅 fit). 그리고 나선 그 훈련 뽕에 취한 기계에게 드디어 칼을 쥐여주고 우리가 뒷주머니에 꽁꽁 훔쳐 모셔 숨겨둔 “테스트 전장 전장 세트판”, 즉 미증유의 영역 <strong>2005년 미래 타겟</strong> 일자 하나하나를 표적으로 “내일 오를 거 같냐?”(확률) 예측 스코어를 무자비 단 전 폭 갈겨 타 투 투 하 방 터 무 찍어 뽑아 내 발사 강 제 획득 착수 진단 폭 취를 구 형 감 행 합니다 .</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">X</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+<span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">y</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+<span class="n">glm_train</span> <span class="o">=</span> <span class="n">sm</span><span class="p">.</span><span class="nc">GLM</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span>
+                   <span class="n">X_train</span><span class="p">,</span>
+                   <span class="n">family</span><span class="o">=</span><span class="n">sm</span><span class="p">.</span><span class="n">families</span><span class="p">.</span><span class="nc">Binomial</span><span class="p">())</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">glm_train</span><span class="p">.</span><span class="nf">fit</span><span class="p">()</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">exog</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Notice that we have trained and tested our model on two completely separate data sets: training was performed using only the dates before 2005, and testing was performed using only the dates in 2005.
+소름 돋는 분리 조작 기술력을 다시 한번 주목 각인 기 상 타 관 찰 돌 립 하십 시오: 지금 이 순간 우리는 불쌍한 로봇 기계 머신을 <strong>두 줄기 완전히 평행 우주처럼 철저히 동 떨 어 지 고 차 단 찢 기 폐 쇄 단 절 무결 전 단 된 분리 데이터 벽 영 역 공간 덩 어 리들 구 형 지 형 세트 판</strong> 에서 훈련 피를 뽑고 실전을 갈궜습니다! 즉, 땀 흘린 도장 ‘훈련 무 대’ 는 오직 무 조 전 2005년 문턱 이 십 전 파 편 과 거 력 옛 흔 적 사료 만 갈아 먹였고 반면 수능 모 의 고 사 심판 결계 “테 스트 타격 평가 도 마 형 장” 은 기계가 단 한 줄도 맛볼 여 지 수 결 무 차 부 무 허 참 당 무결 못 했 던 무 상 청 정 구 조 <strong>잔혹 실 전 미래 2005년 년 도 일 바 파편 무기</strong> 표 적 일 들 로만 기 무결 수 구 형 덮 타 단 조 타 집 결 지 단 전 참 돌 조 발 무 마 갈 통 수 타 격 포 단 구 돌 폭 도 막 구 기 형 정 차 형 동 타 부 전 집 구 시 무단 켰 답 통 니다!</p>
+
+<p>Finally, we compare the predictions for 2005 to the actual movements of the market over that time period. We will first store the test and training labels (recall <code class="language-plaintext highlighter-rouge">y_test</code> is binary).
+드디어 숨 막히는 마지막 채점의 장! 우린 저 기계 놈이 미친 듯 내뱉은 <strong>눈먼 2005년도 떡상 예측 스코어</strong>들과, 실제로 그 해 거대한 시장 판 덩어리가 피도 눈물도 없이 어떻게 널 뛰고 발작해 미쳐 돌아 움직였는지 ‘그 잔혹한 실제 진또배기 움직임 운명(실제 정답)’ 의 방향 곡선을 도마 위에 올려두고 처절 압 살 단 도 마 비교 피 튀 채점 결 과 폭 검 거 검증 을 관 전 거 전 결 수행 타 격 결 단 파 차 겠 구 수 발 습 다! 이 피 검사 형 전 작업 피 튀 교 조 사전 워밍업 예 비 로, 우리는 일단 시험판과 훈련판 과녁 표식 과 녁 정답 진 과녁판 표식 레 이블 판때기들을 창 고 안 구 통 무 도 창 고 로 임시 전 분 전 편 압 보 조 저장 수 기 갈 수 결 단 차 장 전 투 보 부 기 킵 해 다 거 조 모 두 조 포 겠 포 발 다 (아 참, 저기 정 답 타 깃 <code class="language-plaintext highlighter-rouge">y_test</code> 는 0 아 님 1 지 통 쪼 갈 무 거 부 전 타 쪼 개 던 저 거 거 단 극 단 적 이진(binary) 모 듈 총 전 포 발 로 구성 돼 도 투 전 장 단 포 파 되 전 있다는 사실 참 진 동 기 단 관 차 상 하 도 비 참 전 차 단 기 부 차 십 조 시 동 오 보).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">Smarket</span><span class="p">.</span><span class="n">Direction</span>
+<span class="n">L_train</span><span class="p">,</span> <span class="n">L_test</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">D</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Now we threshold the fitted probability at 50% to form our predicted labels.
+이제 드디어 컴퓨터가 애매모호하게 소수점으로 뱉싸지른 저 훈련 피팅 잔류 <strong>예측 ‘확률(probability)’ 조각 숫자</strong> 무더기 더미 들 위 에 다 가, 잔인한 단 두 동 강 토막 절 단 결 단 선 극악 커트라인 <strong>임계점(threshold) 작두 칼날 지표율 반반 50% 폭격 무 잣대 선</strong> 을 시 퍼 렇게 번 쩍 갈 폭 기 꽂 기 위 전 수 꽂 아 투 차 무결 발 탕 박 터 내려 찢 꽂 구 분 찍 보 구 무 다 결 정 타 어 넣 단 치 고, 최종적으로 이 쪽 “Up(떡상) 이냐 저쪽 “Down(나락) 이냐” 를 멱살 단 단 낙 전 찢 무 결 통 명 명 구 지 어 갈라 버린 <strong>“궁 극 기 조 명 포 진 압 참 포 구 예측 징 지 팻 말 레이블 딱 치(predicted labels)” 무 조 성 차 성 배 구 형 조 집 구 제 단 위 치 지 형 타 극 결 동 창 립 구 축 형 배 조 자 수 거</strong> 할 모 보 셋 돌 치 참 지 겠 습 치 파 다 니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="sh">'</span><span class="s">Down</span><span class="sh">'</span><span class="p">]</span><span class="o">*</span><span class="mi">252</span><span class="p">)</span>
+<span class="n">labels</span><span class="p">[</span><span class="n">probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Up</span><span class="sh">'</span>
+<span class="nf">confusion_table</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">L_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">Truth</span>      <span class="n">Down</span>  <span class="n">Up</span>
+<span class="n">Predicted</span>
+<span class="n">Down</span>         <span class="mi">77</span>    <span class="mi">97</span>
+<span class="n">Up</span>           <span class="mi">34</span>    <span class="mi">44</span>
+</code></pre></div></div>
+
+<p>The test accuracy is about 48% while the error rate is about 52%.
+야생 전투 실전 모의고사 수능 채점 결과, 승리 <strong>테스트 적중 정확도(test accuracy)</strong> 점수는 겨우 발 기 무 보 참 꼴 랑 찢 <strong>약 48%</strong> 선에서 짐 싸 추락 돌 다 나 락 부 구 단 참 결 고, 틀 려 먹 고 빗나가 오발 폭발 무 기 치 오 전 오 참 차 조 헛 치 결 나 폭 타 수 지 참 오 차 낸 삽 질 에러 오 답 율 폭 발 에 러 점 수 모 오 형(error rate) 기 참 수 는 <strong>빌 어 발 무 참 차 비 무 단 단 대 략 절 반 이 상 비 치 참 약 52%</strong> 의 비 부 수 타 부 참 전 무 지 진 무결 전 구 극 나 형 막 구 단 모 조 수 를 찍 나 지 구 모 내 참 참 터 발 구 뿜 었 지 진 습 부 다 단 니 냐 모 차 전다.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">!=</code> notation means <em>not equal to</em>, and so the last command computes the test set error rate. The results are rather disappointing: the test error rate is 52%, which is worse than random guessing! Of course this result is not all that surprising, given that one would not generally expect to be able to use previous days’ returns to predict future market performance. (After all, if it were possible to do so, then the authors of this book would be out striking it rich rather than writing a statistics textbook.)
+방금 윗 파이썬 코드에서 쓰인 <code class="language-plaintext highlighter-rouge">!=</code> 특수 기호는 <strong><em>결코 똑같지 않다(not equal to)! 틀렸다!</em></strong> 란 의미의 판정을 내립니다. 따라서 맨 마지막 시점의 명령줄은 이 모의고사(테스트 세트)가 얼마나 개판이었는지, 즉 오답을 낸 삑사리인 <strong>에러율(error rate)</strong> 을 뼈아프게 계산해 냅니다. 그 결과는 그야말로 처참하고 실망스럽습니다: 모의고사 폭구 오답률은 무려 <strong>52%</strong> 로, 이것은 아무 생각 없이 눈감고 50 대 50 동전 던지기로 찍는 무작위 찍기(random guessing) 방식보다도 훨씬 더 멍청한 바닥을 치는 성적입니다! 물론, 어제그제 주식 수익률 나부랭이 데이터 따위를 가지고 감히 내일의 거대한 주식 시장 떡상/떡락 방향성을 다 꿰뚫어 볼 수 있다고 거만하게 기대하는 것 자체가 미친 짓이므로, 이런 참담한 폭망 결과가 통계학적으로 그리 놀라운 일도 아닙니다. (솔직히 말해, 만약 그 옛날 주식 데이터 쪼가리로 미래의 황금 주가를 백발백중 족집게처럼 때려 맞추는 게 진짜 가능했다면, 이 책의 저자 양반들도 골치 아프게 통계학 교과서나 쓰고 앉아있지 않고 진작에 월스트리트 쌍끌이로 떼돈을 쓸어 담아 갑부가 되어 날아갔을 것입니다!)</p>
+
+<p>We recall that the logistic regression model had very underwhelming <em>p</em>-values associated with all of the predictors. Using predictors that have no relationship with the response tends to cause a deterioration in the test error rate, and so removing such predictors may in turn yield an improvement. Below we refit the logistic regression using just <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code>, which seemed to have the highest predictive power in the original model.
+정신을 챙기고 뼈 아픈 반성 타임을 가져봅시다! 아까 저 위쪽에서 우리가 간과했던 팩트 진실 하나를 서늘하게 끄집어 회상(recall) 해 봅시다. 그 잘났던 로지스틱 회귀 모델 머신이 왜 똥볼을 찼을까요? 당연합니다! 처음 모델 훈련 때 장착했던 힌트 부품(예측 변수)들이 몽땅 다 하나같이 <strong>터무니없이 불량한 <em>p</em>-value(p-값) 계급장</strong>을 달고 있었음을 우린 직시했습니다. 어차피 정답 과녁(반응 변수)과 실질적인 상관관계의 생명줄이 하나도 없는 이런 잡동사니 쓰레기 힌트 예측 변수들까지 좋다고 박박 긁어모아 기계에 쑤셔 넣으면, 그 노이즈 간섭 때문에 실전 모의고사 테스트 에러율이 미친 듯이 박살 나고 오염되어 저하(deterioration) 되는 끔찍한 부작용 병목 현상만 유발할 뿐입니다. 따라서 아예 이런 불량 파츠 변수들을 과감히 칼날로 도려내 제거해 버리는 것이 종종 모델의 컨디션을 확 끌어올려 성능 향상의 대박 결과(improvement) 를 낳습니다. 그리하여 바로 아래 파이썬 코드에서는, 그나마 아까 첫 번째 잡동사니 원본 모델에서 눈곱만큼이라도 제일 예측력 파워가 높아 보였던 에이스 후보 <code class="language-plaintext highlighter-rouge">Lag1</code> 과 <code class="language-plaintext highlighter-rouge">Lag2</code>, 단 두 놈의 정예 멤버만 차출해서 로지스틱 회귀 머신을 가볍고 날카롭게 다시 피팅 세팅(refit) 해 볼 것입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">model</span> <span class="o">=</span> <span class="nc">MS</span><span class="p">([</span><span class="sh">'</span><span class="s">Lag1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Lag2</span><span class="sh">'</span><span class="p">]).</span><span class="nf">fit</span><span class="p">(</span><span class="n">Smarket</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">Smarket</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">X</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">train</span><span class="p">]</span>
+<span class="n">glm_train</span> <span class="o">=</span> <span class="n">sm</span><span class="p">.</span><span class="nc">GLM</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span>
+                   <span class="n">X_train</span><span class="p">,</span>
+                   <span class="n">family</span><span class="o">=</span><span class="n">sm</span><span class="p">.</span><span class="n">families</span><span class="p">.</span><span class="nc">Binomial</span><span class="p">())</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">glm_train</span><span class="p">.</span><span class="nf">fit</span><span class="p">()</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">exog</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="sh">'</span><span class="s">Down</span><span class="sh">'</span><span class="p">]</span><span class="o">*</span><span class="mi">252</span><span class="p">)</span>
+<span class="n">labels</span><span class="p">[</span><span class="n">probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Up</span><span class="sh">'</span>
+<span class="nf">confusion_table</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">L_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">Truth</span>      <span class="n">Down</span>  <span class="n">Up</span>
+<span class="n">Predicted</span>
+<span class="n">Down</span>         <span class="mi">35</span>    <span class="mi">35</span>
+<span class="n">Up</span>           <span class="mi">76</span>   <span class="mi">106</span>
+</code></pre></div></div>
+
+<p>Let’s evaluate the overall accuracy as well as the accuracy within the days when logistic regression predicts an increase.
+과연 이번엔 로봇이 좀 쓸만해졌을까요? 로지스틱 회귀가 시장 상승세에 올라타 “가즈아, 오를 거다 떡상!” 을 예측한 날들의 핀포인트 적중도 명중률은 물론이고, 이런저런 것 다 합친 판 전체의 총 종합 명중 정확도 스펙(overall accuracy)까지 모조리 계산기로 탈탈 털어 해부 평가 폭격을 갈겨보겠습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="p">(</span><span class="mi">35</span><span class="o">+</span><span class="mi">106</span><span class="p">)</span><span class="o">/</span><span class="mi">252</span><span class="p">,</span> <span class="mi">106</span><span class="o">/</span><span class="p">(</span><span class="mi">106</span><span class="o">+</span><span class="mi">76</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="p">(</span><span class="mf">0.5595</span><span class="p">,</span> <span class="mf">0.5824</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now the results appear to be a little better: 56% of the daily movements have been correctly predicted. Hence, in terms of overall error rate, the logistic regression method is no better than the naive approach. However, the confusion matrix shows that on days when logistic regression predicts an increase in the market, it has a 58% accuracy rate. This suggests a possible trading strategy of buying on days when the model predicts an increasing market, and avoiding trades on days when a decrease is predicted.
+오호라, 드디어 피를 깎는 다이어트(변수 제거)의 쾌감! 결과가 전보다 약간 살아난 듯 보입니다! 매일 요동치는 야생 주가 널뛰기 무브먼트의 <strong>약 56%</strong> 나 되는 흐름을 기계 녀석이 올바르게 요격 예측해 잡아냈습니다. 하지만 잠깐, 이 판 전체의 총합 오답 에러율(overall error rate) 관점이라는 싸늘한 잣대로 다시 쑤셔보면, 56% 승률은 그저 반반 무 많이 찍기나 다름없는 뇌 빼기 동전 던지기식 나이브(naive) 전략보다 그닥 압도적으로 더 위대하다고 칭송할 수준은 결코 못 됩니다. 그러나! 우리의 채점판 표인 혼동 행렬(confusion matrix) 속살을 살짝 파헤쳐 보면 아주 구미가 당기는 기가 막힌 통계 하나가 숨어 있습니다: <strong>로지스틱 회귀 머신이 “오늘은 무조건 주식 시장이 떡상(increase) 한다!” 라고 신호를 뿜어낸 날짜들만 쏙쏙 골라서 채점해 보면, 그 적중 명중률이 무려 58% 까지 솟구친다는 꿀 팩트가 발굴됩니다.</strong> 이것은 우리에게 아주 짜릿하고 달콤한 작전 지시, 즉 “모델 녀석이 오를 거라고 신호를 깜빡이는 날에만 영혼을 끌어모아 베팅(buying) 해 매수하고, 이 자식이 떨어질 거라고 경고하는 찝찝한 날엔 주식 매매 거래를 싹 중단하고 관망 도피 피신하라!” 라는 승률 58% 짜리 실전 야생 트레이딩 전투 전략(trading strategy)을 강력히 속삭이며 설계 시사해 줍니다.</p>
+
+<p>Suppose that we want to predict the returns associated with particular values of <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code>. We want to predict <code class="language-plaintext highlighter-rouge">Direction</code> on a day when <code class="language-plaintext highlighter-rouge">Lag1</code> and <code class="language-plaintext highlighter-rouge">Lag2</code> equal 1.2 and 1.1, respectively, and on a day when they equal 1.5 and -0.8. We do this using the <code class="language-plaintext highlighter-rouge">predict()</code> function.
+이 기고만장해진 확률 머신에게 마지막 극한 킬러 테스트 상상 퀘스트를 하나 줘볼까요? 만약 우리가 특정 수치로 기이하게 비틀어 맞춘 <code class="language-plaintext highlighter-rouge">Lag1</code> 및 <code class="language-plaintext highlighter-rouge">Lag2</code> 의 가상의 돌연변이 수치 상황에서 터져 나올 수익 반응 타율을 조준 예측하고 싶다고 상상(Suppose) 해 보십시오. 구체적 작전 상황 세팅! 우리는 두 가지 완전히 다른 날의 미래 운명 방향(<code class="language-plaintext highlighter-rouge">Direction</code>)을 꿰뚫고 싶습니다: 하루는 어제(<code class="language-plaintext highlighter-rouge">Lag1</code>) 1.2%, 엊그제(<code class="language-plaintext highlighter-rouge">Lag2</code>) 1.1% 씩 양일 모두 상승 펌핑을 친 불장 훈훈한 날이고, 또 다른 날은 어젠 무려 1.5% 급등했지만 엊그젠 -0.8% 로 처박혀 널뛰기 발작을 한 기괴한 날입니다. 우리는 다시 한번 우리의 영특한 수정 구슬 도구인 <code class="language-plaintext highlighter-rouge">predict()</code> 예언 함수 마법을 소환 구동하여 이 두 가상 상황의 미래 스코어를 뽑아냅니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">'</span><span class="s">Lag1</span><span class="sh">'</span><span class="p">:[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
+<span class="sh">'</span><span class="s">Lag2</span><span class="sh">'</span><span class="p">:[</span><span class="mf">1.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">]});</span>
+<span class="n">newX</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+<span class="n">results</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">newX</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span>
+<span class="mi">0</span>    <span class="mf">0.4791</span>
+<span class="mi">1</span>    <span class="mf">0.4961</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="sub-chapters">Sub-Chapters</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="../trans2.html">&lt; 4.7.2 Logistic Regression</a></td>
+      <td><a href="../../4_7_3_linear_discriminant_analysis/trans2.html">4.7.3 Linear Discriminant Analysis &gt;</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+            <!-- 구글 애드센스 출력 -->
+            <div class="mt-5">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3321560028329475"
+    crossorigin="anonymous"></script>
+<!-- jinydev-java -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3321560028329475" data-ad-slot="9323221865"
+    data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+        </div>
+
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-body-secondary">
+
+  <button class="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none" type="button"
+    data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents">
+    서브목차
+    <svg class="bi d-md-none ms-2" aria-hidden="true">
+      <use xlink:href="#chevron-expand"></use>
+    </svg>
+  </button>
+
+  <strong class="d-none d-md-block h6 my-2">서브목차</strong>
+
+  <div class="collapse bd-toc-collapse" id="tocContents">
+    <nav id="TableOfContents">
+      <!--
+      <ul>
+        <li><a href="#quick-start">Quick start</a></li>
+        <li><a href="#cdn-links">CDN links</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
+        <li><a href="#js-components">JS components</a></li>
+        <li><a href="#important-globals">Important globals</a>
+          <ul>
+            <li><a href="#html5-doctype">HTML5 doctype</a></li>
+            <li><a href="#responsive-meta-tag">Responsive meta tag</a></li>
+            <li><a href="#box-sizing">Box-sizing</a></li>
+            <li><a href="#reboot">Reboot</a></li>
+          </ul>
+        </li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      -->
+    </nav>
+  </div>
+</div>
+    </main>
+</div>
+
+  <footer class="container">
+  <hr class="mt-5 mb-3">
+  <div class="row align-items-center pb-3">
+    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+      <p class="mb-0 text-secondary">Copyright 2017~2026 JinyDev. All Rights Reserved.</p>
+    </div>
+    <div class="col-md-6 text-center text-md-end">
+      <a href="mailto:infohojin@naver.com" class="text-decoration-none text-secondary">Contact</a>
+    </div>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    window.addEventListener('load', async function () {
+      mermaid.initialize({ startOnLoad: false });
+
+      const mermaidCodes = document.querySelectorAll('pre code.language-mermaid');
+      const mermaidDivs = [];
+
+      mermaidCodes.forEach(codeBlock => {
+        const mermaidDefinition = codeBlock.textContent.trim();
+        const container = codeBlock.closest('div.highlighter-rouge');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidDefinition;
+
+        if (container) {
+          container.replaceWith(mermaidDiv);
+        } else {
+          const pre = codeBlock.parentElement;
+          if (pre) pre.replaceWith(mermaidDiv);
+        }
+        mermaidDivs.push(mermaidDiv);
+      });
+
+      if (mermaidDivs.length > 0) {
+        await mermaid.run({ nodes: mermaidDivs });
+      }
+    });
+  </script>
+  <script src="/assets/js/toc.js"></script>
+
+</body>
+
+</html>

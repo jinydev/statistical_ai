@@ -3,42 +3,46 @@ layout: default
 title: "index"
 ---
 
-# _3.6.7 Qualitative Predictors_ 
+[< 3.6.6.1 In 33 Anovalmresults1 Results3](../3_6_6_non-linear_transformations_of_the_predictors/3_6_6_1_in_33_anovalmresults1_results3/index.html) | [3.7 Exercises >](../../3_7_exercises/index.html)
 
-Here we use the `Carseats` data, which is included in the `ISLP` package. We will attempt to predict `Sales` (child car seat sales) in 400 locations based on a number of predictors. 
+
+> 💡 **학습 팁:** 원문 해석이 어렵다면? 한 줄씩 나란히 번역된 [📖 직역본 보기](./trans1.html)를 추천합니다!
+
+# _3.6.7 Qualitative Predictors_
+
+Here we use the `Carseats` data, which is included in the `ISLP` package.
 
 ```
-In [35]:Carseats=load_data('Carseats')
+In [35]: Carseats = load_data('Carseats')
 Carseats.columns
 ```
 
 ```
-Out[35]:Index(['Sales','CompPrice','Income','Advertising',
-'Population','Price','ShelveLoc','Age','Education',
-'Urban','US'],
-dtype='object')
+Out[35]: Index(['Sales', 'CompPrice', 'Income', 'Advertising',
+       'Population', 'Price', 'ShelveLoc', 'Age', 'Education',
+       'Urban', 'US'],
+      dtype='object')
 ```
 
-The `Carseats` data includes qualitative predictors such as `ShelveLoc` , an indicator of the quality of the shelving location — that is, the space within a store in which the car seat is displayed. The predictor `ShelveLoc` takes on three possible values, `Bad` , `Medium` , and `Good` . Given a qualitative variable such as `ShelveLoc` , `ModelSpec()` generates dummy variables automatically. These variables are often referred to as a _one-hot encoding_ of the categorical one-hot feature. Their columns sum to one, so to avoid collinearity with an interencoding cept, the first column is dropped. Below we see the column `ShelveLoc[Bad]` has been dropped, since `Bad` is the first level of `ShelveLoc` . Below we fit a multiple regression model that includes some interaction terms. 
+The `Carseats` data includes qualitative predictors such as `ShelveLoc` , an indicator of the quality of the shelving location — that is, the space within a store in which the car seat is displayed.
 
-encoding 
+encoding
 
 ```
-In [36]:allvars=list(Carseats.columns.drop('Sales'))
-y=Carseats['Sales']
-final=allvars+[('Income','Advertising'),
-('Price','Age')]
-X=MS(final).fit_transform(Carseats)
-model=sm.OLS(y,X)
+In [36]: allvars = list(Carseats.columns.drop('Sales'))
+y = Carseats['Sales']
+final = allvars + [('Income', 'Advertising'),
+                   ('Price', 'Age')]
+X = MS(final).fit_transform(Carseats)
+model = sm.OLS(y, X)
 summarize(model.fit())
-Out[36]:coefstderrtP>|t|
-intercept6.57561.0096.5190.000
-```
 
-3.7 Exercises 
+Out[36]:             coef  std err       t  P>|t|
+intercept       6.5756   1.009   6.519  0.000
+```
 
 |`CompPrice`|`0.0929`|`0.004`|`22.567`|`0.000`|
-|---|---|---|---|---|
+
 |`Income`|`0.0109`|`0.003`|`4.183`|`0.000`|
 |`Advertising`|`0.0702`|`0.023`|`3.107`|`0.002`|
 |`Population`|`0.0002`|`0.000`|`0.433`|`0.665`|
@@ -52,6 +56,11 @@ intercept6.57561.0096.5190.000
 |`Income:Advertising`|`0.0008`|`0.000`|`2.698`|`0.007`|
 |`Price:Age`|`0.0001`|`0.000`|`0.801`|`0.424`|
 
+In the first line above, we made `allvars` a list, so that we could add the interaction terms two lines down.
+
+---
+
+## Sub-Chapters
 
 
-In the first line above, we made `allvars` a list, so that we could add the interaction terms two lines down. Our model-matrix builder has created a `ShelveLoc[Good]` dummy variable that takes on a value of 1 if the shelving location is good, and 0 otherwise. It has also created a `ShelveLoc[Medium]` dummy variable that equals 1 if the shelving location is medium, and 0 otherwise. A bad shelving location corresponds to a zero for each of the two dummy variables. The fact that the coefficient for `ShelveLoc[Good]` in the regression output is positive indicates that a good shelving location is associated with high sales (relative to a bad location). And `ShelveLoc[Medium]` has a smaller positive coefficient, indicating that a medium shelving location leads to higher sales than a bad shelving location, but lower sales than a good shelving location. 
+[< 3.6.6.1 In 33 Anovalmresults1 Results3](../3_6_6_non-linear_transformations_of_the_predictors/3_6_6_1_in_33_anovalmresults1_results3/index.html) | [3.7 Exercises >](../../3_7_exercises/index.html)

@@ -3,6 +3,9 @@ layout: default
 title: "index"
 ---
 
+[< 4.4.2 Linear Discriminant Analysis For P 1](../index.html) | [4.4.3 Quadratic Discriminant Analysis >](../../4_4_3_quadratic_discriminant_analysis/index.html)
+
+
 # **ROC Curve** 
 
 ![Figure 4.8](./img/4_8.png)
@@ -24,8 +27,6 @@ As we have seen above, varying the classifier threshold changes its true positiv
 ||_−_or Null<br>+ or Non-null|True Neg. (TN)<br>False Pos. (FP)|False Neg. (FN)<br>True Pos. (TP)|N~~_∗_~~<br>P_∗_|
 ||Total|N|P||
 
-
-
 **TABLE 4.6.** _Possible results when applying a classifier or diagnostic test to a population._ 
 
 |**ABLE 4.6.** _Possib_<br>_opulation._|_le results wh_<br>|_en applying a classifer or diagnostic test to _|
@@ -33,10 +34,15 @@ As we have seen above, varying the classifier threshold changes its true positiv
 |Name|Defnition|Synonyms<br>|
 |False Pos. rate<br>True Pos. rate<br>Pos. Pred. value<br>Neg. Pred. value|FP_/_N<br>TP_/_P<br>TP_/_P_∗_<br>TN_/_N_∗_|Type I error, 1_−_Specifcity<br>1_−_Type II error, power, sensitivity, recall<br>Precision, 1_−_false discovery proportion|
 
-
-
 **TABLE 4.7.** _Important measures for classification and diagnostic testing, derived from quantities in Table 4.6._ 
 
 alternative (non-null) hypothesis. In the context of the `Default` data, “+” indicates an individual who defaults, and “ _−_ ” indicates one who does not. 
 
-Table 4.7 lists many of the popular performance measures that are used in this context. The denominators for the false positive and true positive rates are the actual population counts in each class. In contrast, the denominators for the positive predictive value and the negative predictive value are the total predicted counts for each class. 
+Table 4.7 lists many of the popular performance measures that are used in this context. The denominators for the false positive and true positive rates are the actual population counts in each class. In contrast, the denominators for the positive predictive value and the negative predictive value are the total predicted counts for each class.
+
+---
+
+## Sub-Chapters
+
+
+[< 4.4.2 Linear Discriminant Analysis For P 1](../index.html) | [4.4.3 Quadratic Discriminant Analysis >](../../4_4_3_quadratic_discriminant_analysis/index.html)
